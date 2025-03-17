@@ -1,0 +1,45 @@
+/* --------------- Testimonials --------------- */
+.testimonials-ca {
+  background: #333333;
+  color: #fff; }
+  .testimonials-ca .sec-head .gl-rate {
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+    background: #151515;
+    border-radius: 60px;
+    padding: 10px 20px;
+    z-index: 3; }
+    .testimonials-ca .sec-head .gl-rate .icon {
+      width: 35px; }
+    .testimonials-ca .sec-head .gl-rate .cont {
+      padding-left: 30px; }
+      .testimonials-ca .sec-head .gl-rate .cont h6 {
+        line-height: 1;
+        font-size: 16px;
+        color: #FFA826; }
+        .testimonials-ca .sec-head .gl-rate .cont h6 span {
+          color: #fff;
+          margin-left: 10px; }
+          .testimonials-ca .sec-head .gl-rate .cont h6 span a {
+            text-decoration: underline; }
+  .testimonials-ca .item {
+    padding: 40px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2); }
+    .testimonials-ca .item .info .img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      overflow: hidden; }
+    .testimonials-ca .item .info .cont {
+      padding-left: 15px; }
+      .testimonials-ca .item .info .cont h6 {
+        font-size: 16px;
+        line-height: 1.3; }
+      .testimonials-ca .item .info .cont span {
+        font-size: 14px;
+        color: #b1b1b1; }
+    .testimonials-ca .item .text {
+      text-wrap: pretty; }
+  .testimonials-ca .butn-bord {
+    border-color: rgba(255, 255, 255, 0.2) !important; }
