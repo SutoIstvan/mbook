@@ -7,7 +7,7 @@
                             <div class="sec-head mb-40">
                                 <div class="row">
                                     <div class="col-lg-12 md-mb15 md-mt35">
-                                        <h4>Adatok szerkesztése</h4>
+                                        <h4>{{ __('Edit data') }}</h4>
                                     </div>
                                     <!-- <div class="col-lg-6">
                                         <div class="text">
@@ -75,7 +75,9 @@
                                 <div class="col-lg-6">
                                     <div class="mt-60">
                                         <button type="submit" class="butn butn-md butn-bord butn-rounded disabled">
-                                            <span class="text">Módosítások mentése</span>
+                                            <span class="text">
+                                                {{ __('Save changes') }}
+                                            </span>
 
                                             <span class="icon ">
                                                 <i class="fa-regular fa-save"></i>

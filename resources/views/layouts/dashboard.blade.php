@@ -21,11 +21,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 
     <!-- Plugins -->
-    <link rel="stylesheet" href="common/css/plugins.css">
+    <link rel="stylesheet" href="{{ asset('common/css/plugins.css') }}">
 
     <!-- Style for individual style contain common & this home style -->
-    <link rel="stylesheet" href="common/css/common_style.css">
-    <link rel="stylesheet" href="admin/css/style.css">
+    <link rel="stylesheet" href="{{ asset('common/css/common_style.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/css/style.css') }}">
 
     <!-- Style for combined style contain common & all pages styles -->
     <!-- <link rel="stylesheet" href="../common/css/combined_style.css"> -->
@@ -255,7 +255,7 @@
 
                                 <!-- Logo -->
                                 <a class="logo" href="#">
-                                    <img src="admin/imgs/Logo.svg" alt="logo">
+                                    <img src="{{ asset('admin/imgs/Logo.svg') }}" alt="logo">
                                 </a>
 
                                 <div class="topnav ml-auto">
@@ -267,7 +267,7 @@
 
                             <div class="info md-hide about-ca">
                                 <div class="d-flex justify-content-center">
-                                    <img src="admin/imgs/about/team3.png" style="height: 150px; width: 150px; border-radius: 160px;" alt="" class="img-fluid">
+                                    <img src="{{ asset('admin/imgs/about/team3.png') }}" style="height: 150px; width: 150px; border-radius: 160px;" alt="" class="img-fluid">
                                 </div>
                                 
                                 <div class="cont text-center mt-10">
@@ -276,61 +276,43 @@
                                     </ul>
                                     <div class="">
 
-                                        <!-- <a href="#" class="butn butn-md butn-bord butn-rounded">
-                                            <div class="d-flex align-items-center">
-                                                <span class="icon mr-10">
-                                                    <i class="fa-regular fa-envelope"></i>
-                                                </span>
-                                                <span>Work With Us</span>
-                                            </div>
-                                        </a>
-
-                                        <a href="#" class="butn butn-md butn-bord butn-rounded">
-                                            <div class="d-flex align-items-center">
-                                                <span class="icon mr-10">
-                                                    <i class="fa-regular fa-envelope"></i>
-                                                </span>
-                                                <span>Work With Us</span>
-                                            </div>
-                                        </a> -->
-
                                     </div>
                                 </div>
                             </div>
                             <div class="md-hide mt-20">
-                                <a href="#" class="butn butn-md butn-bord butn-rounded w-100 text-start active">
-                                    <span class="icon mr-10">
+                                <a href="{{ route('dashboard.edit') }}" class="butn butn-md butn-bord butn-rounded w-100 text-start {{ Route::currentRouteName() === 'dashboard.edit' ? 'active' : '' }}">
+                                    <span class="icon me-2">
                                         <i class="fa-solid fa-pen"></i>
                                     </span>
-                                    <span>Adatok szerkesztése</span>
+                                    <span>{{ __('Adatok szerkesztése') }}</span>
                                 </a>
                             
-                                <a href="#" class="butn butn-md butn-bord butn-rounded w-100 text-start">
+                                <a href="{{ route('dashboard.photos') }}" class="butn butn-md butn-bord butn-rounded w-100 text-start {{ Route::currentRouteName() === 'dashboard.photos' ? 'active' : '' }}">
                                     <span class="icon mr-10">
                                         <i class="fa-solid fa-image"></i>
                                     </span>
-                                    <span>Fényképek</span>
+                                    <span>{{ __('Photos') }}</span>
                                 </a>
                             
-                                <a href="#" class="butn butn-md butn-bord butn-rounded w-100 text-start">
+                                <a href="{{ route('dashboard.video') }}" class="butn butn-md butn-bord butn-rounded w-100 text-start {{ Route::currentRouteName() === 'dashboard.video' ? 'active' : '' }}">
                                     <span class="icon mr-10">
                                         <i class="fa-solid fa-video"></i>
                                     </span>
-                                    <span>Video</span>
+                                    <span>{{ __('Video') }}</span>
                                 </a>
                             
-                                <a href="#" class="butn butn-md butn-bord butn-rounded w-100 text-start">
+                                <a href="{{ route('dashboard.comments') }}" class="butn butn-md butn-bord butn-rounded w-100 text-start {{ Route::currentRouteName() === 'dashboard.comments' ? 'active' : '' }}">
                                     <span class="icon mr-10">
                                         <i class="fa-solid fa-comments"></i>
                                     </span>
-                                    <span>Hozzászólások</span>
+                                    <span>{{ __('Comments') }}</span>
                                 </a>
                             
-                                <a href="#" class="butn butn-md butn-bord butn-rounded w-100 text-start">
-                                    <span class="icon mr-10">
+                                <a href="{{ route('dashboard.settings') }}" class="butn butn-md butn-bord butn-rounded w-100 text-start {{ Route::currentRouteName() === 'dashboard.settings' ? 'active' : '' }}">
+                                    <span class="icon me-2">
                                         <i class="fa-solid fa-gear"></i>
                                     </span>
-                                    <span>Beállítások</span>
+                                    <span>{{ __('Settings') }}</span>
                                 </a>
 
                                 <a class="butn butn-md butn-bord butn-rounded w-100 text-start" href="{{ route('logout') }}"
@@ -339,8 +321,7 @@
                                     <span class="icon mr-10">
                                         <i class="fa-solid fa-arrow-right-from-bracket"></i>
                                     </span>
-                                    Kijelentkezés
-                                    {{-- {{ __('Logout') }} --}}
+                                    {{ __('Logout') }}
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -353,12 +334,12 @@
                         
 
                         <div class="md-hide">
-                            <a href="#" class="butn butn-md butn-bord butn-rounded">
+                            <a href="{{ route('dashboard.help') }}" class="butn butn-md butn-bord butn-rounded {{ Route::currentRouteName() === 'dashboard.help' ? 'active' : '' }}">
                                 <div class="d-flex align-items-center">
                                     <span class="icon mr-10">
                                         <i class="fa-regular fa-circle-question"></i>
                                     </span>
-                                    <span>Segítség</span>
+                                    <span>{{ __('Help') }}</span>
                                 </div>
                             </a>
                         </div>
@@ -387,25 +368,25 @@
 
 
     <!-- jQuery -->
-    <script src="common/js/lib/jquery-3.6.0.min.js"></script>
-    <script src="common/js/lib/jquery-migrate-3.4.0.min.js"></script>
+    <script src="{{ asset('common/js/lib/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('common/js/lib/jquery-migrate-3.4.0.min.js') }}"></script>
 
     <!-- plugins -->
-    <script src="common/js/lib/plugins.js"></script>
+    <script src="{{ asset('common/js/lib/plugins.js') }}"></script>
 
     <!-- GSAP -->
-    <script src="common/js/gsap_lib/gsap.min.js"></script>
-    <script src="common/js/gsap_lib/ScrollSmoother.min.js"></script>
-    <script src="common/js/gsap_lib/ScrollTrigger.min.js"></script>
-    <script src="common/js/gsap_lib/SplitText.min.js"></script>
-    <script src="common/js/gsap_lib/matter.js"></script>
-    <script src="common/js/gsap_lib/throwable.js"></script>
+    <script src="{{ asset('common/js/gsap_lib/gsap.min.js') }}"></script>
+    <script src="{{ asset('common/js/gsap_lib/ScrollSmoother.min.js') }}"></script>
+    <script src="{{ asset('common/js/gsap_lib/ScrollTrigger.min.js') }}"></script>
+    <script src="{{ asset('common/js/gsap_lib/SplitText.min.js') }}"></script>
+    <script src="{{ asset('common/js/gsap_lib/matter.js') }}"></script>
+    <script src="{{ asset('common/js/gsap_lib/throwable.js') }}"></script>
 
     <!-- common scripts -->
-    <script src="common/js/common_scripts.js"></script>
+    <script src="{{ asset('common/js/common_scripts.js') }}"></script>
 
     <!-- custom scripts -->
-    <script src="admin/js/scripts.js"></script>
+    <script src="{{ asset('admin/js/scripts.js') }}"></script>
 
 </body>
 
