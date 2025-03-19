@@ -2,38 +2,45 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Memorial;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        return view('dashboard.index');
+        $user = Auth::user();
+
+        $memorials = Memorial::where('admin_id', $user->id)->get();
+
+        return view('dashboard.index', compact('memorials'));
     }
 
-    public function edit()
+    public function edit(Memorial $memorial)
     {
-        return view('dashboard.index');
+        // dd($memorial);
+        return view('dashboard.edit', compact('memorial'));
     }
 
-    public function settings()
+    public function settings(Memorial $memorial)
     {
-        return view('dashboard.settings');
+        return view('dashboard.settings', compact('memorial'));
     }
 
-    public function comments()
+    public function comments(Memorial $memorial)
     {
-        return view('dashboard.comments');
+        return view('dashboard.comments', compact('memorial'));
     }
 
-    public function video()
+    public function video(Memorial $memorial)
     {
-        return view('dashboard.video');
+        return view('dashboard.video', compact('memorial'));
     }
 
-    public function photos()
+    public function photos(Memorial $memorial)
     {
-        return view('dashboard.photos');
+        return view('dashboard.photos', compact('memorial'));
     }
 
     public function help()
