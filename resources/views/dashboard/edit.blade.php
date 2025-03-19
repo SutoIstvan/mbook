@@ -137,7 +137,7 @@
 
 
         .dropzone .dz-preview.dz-image-preview {
-            background: #212529 !important;
+            background: #5b5b5b !important;
         }
 
         .dropzone .dz-preview .dz-remove {
@@ -148,7 +148,7 @@
         .drag-area {
             position: relative;
             height: 290px;
-            border: 1.4px dashed #6c757d;
+            border: 1.4px dashed #afb3b6;
             border-radius: 4px;
             display: flex;
             align-items: center;
@@ -165,7 +165,7 @@
         .drag-area .header {
             font-size: 18px;
             font-weight: 500;
-            color: #a4a4a4;
+            color: #696969;
         }
 
         .drag-area .support {
@@ -280,7 +280,7 @@
 
                                 <div class="container mt-25">
                                     <label for="photo" class="form-label">Fő emlékkép feltöltése</label>
-                                    <div class="drag-area bg-dark text-white border-secondary">
+                                    <div class="drag-area">
                                         <!-- Если фото существует, отображаем его -->
                                         @if(isset($memorial->photo) && $memorial->photo)
                                             <img src="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photo) }}" alt="Фото">

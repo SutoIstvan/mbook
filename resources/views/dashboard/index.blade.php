@@ -292,7 +292,8 @@
 
         .pricing-pg .item {
             padding: 45px;
-            background: var(--bg-color);
+            background: #ffffff8c;
+            border-radius: 14px;
         }
 
         .fit-img img {

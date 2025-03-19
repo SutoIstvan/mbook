@@ -22,6 +22,9 @@ Route::middleware(['auth', UserAccess::class . ':user'])->group(function () {
     Route::get('/dashboard/{memorial}/photos', [DashboardController::class, 'photos'])->name('dashboard.photos');
     Route::get('/dashboard/help', [DashboardController::class, 'help'])->name('dashboard.help');
 
+
+    Route::get('/create', [MemorialController::class, 'create'])->name('memorials.create');
+    Route::post('/store', [MemorialController::class, 'store'])->name('memorial.store');
 });
 
 // Для админов
@@ -34,5 +37,4 @@ Route::middleware(['auth', UserAccess::class . ':admin'])->group(function () {
 
 
 Route::get('/memorial/{memorial}', [MemorialController::class, 'show'])->name('memorials.show');
-Route::get('/create', [MemorialController::class, 'create'])->name('memorials.create');
-Route::post('/store', [MemorialController::class, 'store'])->name('memorial.store');
+

@@ -1,6 +1,10 @@
 <?php
 return [
     'required' => 'A(z) :attribute mező kitöltése kötelező.',
+    
+    'min' => [
+        'string' => 'A(z) :attribute legalább :min karakter hosszú kell legyen.',
+    ],
 
     'attributes' => [
         'name' => 'név',
@@ -9,4 +13,5 @@ return [
         'biography' => 'életrajz',
         'photo' => 'emlékkép',
     ],
+
 ];
