@@ -19,4 +19,7 @@ Route::middleware(['auth', UserAccess::class . ':admin'])->group(function () {
 // Для админов
 Route::middleware(['auth', UserAccess::class . ':admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+    Route::get('/users', [AdminController::class, 'users'])->name('users');
+    Route::get('/settings', [AdminController::class, 'settings'])->name('settings');
+
 });

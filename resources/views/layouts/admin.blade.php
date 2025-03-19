@@ -298,11 +298,11 @@
                                 </div>
                             </div>
                             <div class="md-hide mt-20">
-                                <a href="#" class="butn butn-md butn-bord butn-rounded w-100 text-start active">
-                                    <span class="icon mr-10">
+                                <a href="{{ route('users') }}" class="butn butn-md butn-bord butn-rounded w-100 text-start {{ Route::currentRouteName() === 'users' ? 'active' : '' }}">
+                                    <span class="icon me-2">
                                         <i class="fa-solid fa-pen"></i>
                                     </span>
-                                    <span>Felhasználói lista</span>
+                                    <span>{{ __('User List') }}</span>
                                 </a>
                             
                                 <a href="#" class="butn butn-md butn-bord butn-rounded w-100 text-start">
@@ -326,11 +326,11 @@
                                     <span>Emlékoldal szerkesztése</span>
                                 </a>
                             
-                                <a href="#" class="butn butn-md butn-bord butn-rounded w-100 text-start">
-                                    <span class="icon mr-10">
+                                <a href="{{ route('settings') }}" class="butn butn-md butn-bord butn-rounded w-100 text-start {{ Route::currentRouteName() === 'settings' ? 'active' : '' }}">
+                                    <span class="icon me-2">
                                         <i class="fa-solid fa-gear"></i>
                                     </span>
-                                    <span>Beállítások</span>
+                                    <span>{{ __('Settings') }}</span>
                                 </a>
 
                                 <a class="butn butn-md butn-bord butn-rounded w-100 text-start" href="{{ route('logout') }}"
@@ -339,8 +339,7 @@
                                     <span class="icon mr-10">
                                         <i class="fa-solid fa-arrow-right-from-bracket"></i>
                                     </span>
-                                    Kijelentkezés
-                                    {{-- {{ __('Logout') }} --}}
+                                    {{ __('Logout') }}
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

@@ -1,0 +1,13 @@
+{
+    "Full Name": "Teljes név",
+    "Date of Birth": "Születés dátuma",
+    "Date of Death": "Elhalálozás dátuma",
+    "Biography": "Életrajz",
+    "Users" : "Felhasználók",
+    "No users found." : "Nem található felhasználó.",
+    "ID" : "Azonosító",
+    "Role" : "Szerep",
+    "User List" : "Felhasználói lista",
+    "Settings" : "Beállítások",
+    "Logout" : "Kijelentkezés"
+}

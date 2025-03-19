@@ -18,38 +18,48 @@
                                     </div> -->
                                 </div>
                             </div>
-                            <div class="row">
+
+                            <div class="row mb-3">
+                                <div class="col-md-12">
+                                    <label for="name" class="col-form-label text-md-end">{{ __('Full Name') }}</label>
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                    @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
                             
-                                <div class="col-12 mb-3">
-                                    <label for="email" class="form-label">Teljes név</label>
-                                    <input type="email" class="form-control" id="email" placeholder="Teljes név">
-                                    <div class="invalid-feedback">
-                                      Please enter a valid email address for shipping updates.
-                                    </div>
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <label for="birth_date" class="col-form-label text-md-end">{{ __('Date of Birth') }}</label>
+                                    <input id="birth_date" type="date" class="form-control @error('birth_date') is-invalid @enderror" name="birth_date" value="{{ old('birth_date') }}" required>
+                                    @error('birth_date')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
-
-                                <div class="col-12 mb-3">
-                                    <label for="email" class="form-label">Születési dátum</label>
-                                    <input type="email" class="form-control" id="email" placeholder="you@example.com">
-                                    <div class="invalid-feedback">
-                                      Please enter a valid email address for shipping updates.
-                                    </div>
+                            
+                                <div class="col-md-12 mb-3">
+                                    <label for="death_date" class="col-form-label text-md-end">{{ __('Date of Death') }}</label>
+                                    <input id="death_date" type="date" class="form-control @error('death_date') is-invalid @enderror" name="death_date" value="{{ old('death_date') }}">
+                                    @error('death_date')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
-
-                                <div class="col-12 mb-3">
-                                    <label for="email" class="form-label">Elhalálozás dátuma</label>
-                                    <input type="email" class="form-control" id="email" placeholder="you@example.com">
-                                    <div class="invalid-feedback">
-                                      Please enter a valid email address for shipping updates.
-                                    </div>
-                                </div>
-
-                                <div class="col-12">
-                                    <label for="bio" class="form-label">Életrajz</label>
-                                    <textarea type="text" class="form-control" id="bio" rows="7" ></textarea>
-                                    <div class="invalid-feedback">
-                                      Please enter a valid email address for shipping updates.
-                                    </div>
+                            
+                                <div class="col-md-12">
+                                    <label for="bio" class="col-form-label text-md-end">{{ __('Biography') }}</label>
+                                    <textarea id="bio" class="form-control @error('bio') is-invalid @enderror" name="bio" rows="7">{{ old('bio') }}</textarea>
+                                    @error('bio')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                         </section>
