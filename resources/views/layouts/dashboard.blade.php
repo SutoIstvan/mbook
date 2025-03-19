@@ -288,28 +288,28 @@
                                     <span>{{ __('Adatok szerkesztése') }}</span>
                                 </a>
                             
-                                <a href="{{ route('dashboard.photos', ['memorial' => $memorial->id]) }}" class="butn butn-md butn-bord butn-rounded w-100 text-start {{ Route::currentRouteName() === 'dashboard.photos' ? 'active' : '' }}">
+                                <a href="{{ route('dashboard.photos', ['memorial' => $memorial->slug]) }}" class="butn butn-md butn-bord butn-rounded w-100 text-start {{ Route::currentRouteName() === 'dashboard.photos' ? 'active' : '' }}">
                                     <span class="icon mr-10">
                                         <i class="fa-solid fa-image"></i>
                                     </span>
                                     <span>{{ __('Photos') }}</span>
                                 </a>
                             
-                                <a href="{{ route('dashboard.video', ['memorial' => $memorial->id]) }}" class="butn butn-md butn-bord butn-rounded w-100 text-start {{ Route::currentRouteName() === 'dashboard.video' ? 'active' : '' }}">
+                                <a href="{{ route('dashboard.video', ['memorial' => $memorial->slug]) }}" class="butn butn-md butn-bord butn-rounded w-100 text-start {{ Route::currentRouteName() === 'dashboard.video' ? 'active' : '' }}">
                                     <span class="icon mr-10">
                                         <i class="fa-solid fa-video"></i>
                                     </span>
                                     <span>{{ __('Video') }}</span>
                                 </a>
                             
-                                <a href="{{ route('dashboard.comments', ['memorial' => $memorial->id]) }}" class="butn butn-md butn-bord butn-rounded w-100 text-start {{ Route::currentRouteName() === 'dashboard.comments' ? 'active' : '' }}">
+                                <a href="{{ route('dashboard.comments', ['memorial' => $memorial->slug]) }}" class="butn butn-md butn-bord butn-rounded w-100 text-start {{ Route::currentRouteName() === 'dashboard.comments' ? 'active' : '' }}">
                                     <span class="icon mr-10">
                                         <i class="fa-solid fa-comments"></i>
                                     </span>
                                     <span>{{ __('Comments') }}</span>
                                 </a>
                             
-                                <a href="{{ route('dashboard.settings', ['memorial' => $memorial->id]) }}" class="butn butn-md butn-bord butn-rounded w-100 text-start {{ Route::currentRouteName() === 'dashboard.settings' ? 'active' : '' }}">
+                                <a href="{{ route('dashboard.settings', ['memorial' => $memorial->slug]) }}" class="butn butn-md butn-bord butn-rounded w-100 text-start {{ Route::currentRouteName() === 'dashboard.settings' ? 'active' : '' }}">
                                     <span class="icon me-2">
                                         <i class="fa-solid fa-gear"></i>
                                     </span>

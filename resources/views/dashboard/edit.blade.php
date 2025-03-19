@@ -268,7 +268,7 @@
                             
                                 <div class="col-md-12">
                                     <label for="biography" class="col-form-label text-md-end">{{ __('Biography') }}</label>
-                                    <textarea id="biography" class="form-control @error('biography') is-invalid @enderror" name="biography" rows="7">{{ old('name', $memorial->biography) }}</textarea>
+                                    <textarea id="biography" class="form-control @error('biography') is-invalid @enderror" name="biography" rows="10">{{ old('name', $memorial->biography) }}</textarea>
                                     @error('biography')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -278,7 +278,7 @@
 
 
 
-                                <div class="container">
+                                <div class="container mt-25">
                                     <label for="photo" class="form-label">Fő emlékkép feltöltése</label>
                                     <div class="drag-area bg-dark text-white border-secondary">
                                         <!-- Если фото существует, отображаем его -->
@@ -314,7 +314,7 @@
 
                         <!-- ==================== Start Numbers ==================== -->
 
-                        <section class="numbers-ca">
+                        <section class="numbers-ca mb-20">
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="mt-60">

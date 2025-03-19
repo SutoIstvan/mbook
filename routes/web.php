@@ -15,11 +15,11 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 // Для обычных пользователей
 Route::middleware(['auth', UserAccess::class . ':user'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/dashboard/edit/{memorial}', [DashboardController::class, 'edit'])->name('dashboard.edit');
-    Route::get('/dashboard/settings/{memorial}', [DashboardController::class, 'settings'])->name('dashboard.settings');
-    Route::get('/dashboard/comments/{memorial}', [DashboardController::class, 'comments'])->name('dashboard.comments');
-    Route::get('/dashboard/video/{memorial}', [DashboardController::class, 'video'])->name('dashboard.video');
-    Route::get('/dashboard/photos/{memorial}', [DashboardController::class, 'photos'])->name('dashboard.photos');
+    Route::get('/dashboard/{memorial}/edit', [DashboardController::class, 'edit'])->name('dashboard.edit');
+    Route::get('/dashboard/{memorial}/settings', [DashboardController::class, 'settings'])->name('dashboard.settings');
+    Route::get('/dashboard/{memorial}/comments', [DashboardController::class, 'comments'])->name('dashboard.comments');
+    Route::get('/dashboard/{memorial}/video', [DashboardController::class, 'video'])->name('dashboard.video');
+    Route::get('/dashboard/{memorial}/photos', [DashboardController::class, 'photos'])->name('dashboard.photos');
     Route::get('/dashboard/help', [DashboardController::class, 'help'])->name('dashboard.help');
 
 });
