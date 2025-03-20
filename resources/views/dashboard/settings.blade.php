@@ -50,7 +50,7 @@
                 <div class="col-md-12">
                     <label class="col-form-label text-md-end">{{ __('Theme') }}</label>
                     <div class="d-flex justify-content-between mt-2">
-                        <!-- Светлая тема -->
+
                         <div class="col-5">
                             <label class="theme-option">
                                 <img src="{{ asset('light.png') }}" style="border-radius: 15px" alt="Light Theme" class="theme-thumbnail">

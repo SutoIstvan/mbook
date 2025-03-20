@@ -1,7 +1,6 @@
 @extends('layouts.dashboard')
 
 @section('css')
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.0/min/dropzone.min.css">
@@ -197,7 +196,8 @@
             position: absolute;
             top: 10px;
             right: 10px;
-            background: rgba(255, 0, 0, 0.7); /* Полупрозрачный красный фон */
+            background: rgba(255, 0, 0, 0.7);
+            /* Полупрозрачный красный фон */
             color: white;
             border: none;
             padding: 5px 10px;
@@ -212,126 +212,149 @@
 @section('content')
 
 
+    <form action="{{ route('memorial.update', $memorial->id) }}" method="POST" enctype="multipart/form-data" id="form">
+        @csrf
+        @method('PUT')
+        <!-- ==================== Start Process ==================== -->
+        <section class="process-ca section-padding bg-light radius-20 mt-15 ontop">
+            <div class="sec-head mb-40">
+                <div class="row">
+                    <div class="col-lg-12 md-mb15 md-mt35">
+                        <h4>{{ __('Edit data') }}</h4>
+                    </div>
+                    <!-- <div class="col-lg-6">
+                                            <div class="text">
+                                                <p>Business challenges are tough but we.
 
-                        <!-- ==================== Start Process ==================== -->
-                        <section class="process-ca section-padding bg-light radius-20 mt-15 ontop">
-                            <div class="sec-head mb-40">
-                                <div class="row">
-                                    <div class="col-lg-12 md-mb15 md-mt35">
-                                        <h4>{{ __('Edit data') }}</h4>
-                                    </div>
-                                    <!-- <div class="col-lg-6">
-                                        <div class="text">
-                                            <p>Business challenges are tough but we.
-
-                                            </p>
-                                        </div>
-                                    </div> -->
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col-md-12">
-                                    <label for="name" class="col-form-label text-md-end">{{ __('Full Name') }}</label>
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $memorial->name) }}" required autocomplete="name">
-                                    @error('name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            
-                            <div class="row">
-                                <div class="col-md-12 mb-3">
-                                    <label for="birth_date" class="col-form-label text-md-end">{{ __('Date of Birth') }}</label>
-                                    <input id="birth_date" type="date" class="form-control @error('birth_date') is-invalid @enderror" name="birth_date" value="{{ old('name', $memorial->birth_date) }}" required>
-                                    @error('birth_date')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            
-                                <div class="col-md-12 mb-3">
-                                    <label for="death_date" class="col-form-label text-md-end">{{ __('Date of Death') }}</label>
-                                    <input id="death_date" type="date" class="form-control @error('death_date') is-invalid @enderror" name="death_date" value="{{ old('name', $memorial->death_date) }}">
-                                    @error('death_date')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-
-
-
-                            
-                                <div class="col-md-12">
-                                    <label for="biography" class="col-form-label text-md-end">{{ __('Biography') }}</label>
-                                    <textarea id="biography" class="form-control @error('biography') is-invalid @enderror" name="biography" rows="10">{{ old('name', $memorial->biography) }}</textarea>
-                                    @error('biography')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-
-
-
-                                <div class="container mt-25">
-                                    <label for="photo" class="form-label">Fő emlékkép feltöltése</label>
-                                    <div class="drag-area">
-                                        <!-- Если фото существует, отображаем его -->
-                                        @if(isset($memorial->photo) && $memorial->photo)
-                                            <img src="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photo) }}" alt="Фото">
-                                            <button type="button" class="deleteBtn butn butn-md butn-danger butn-rounded">
-                                                Kép törlése
-                                            </button>
-                                        @else
-                                            <!-- Если фото нет, показываем стандартную форму загрузки -->
-                                            <div class="icon">
-                                                <i class="fas fa-images"></i>
+                                                </p>
                                             </div>
-                                            <span class="header">Húzza ide a fényképet</span>
-                                            <span class="header">vagy nyissa meg a </span>
-                                            <div class="text-center mb-10 mt-10">
-                                                <span class="button butn butn-md butn-bord butn-rounded">böngészőben</span>
-                                            </div>
-                                            <span class="support">Fényképformátum: JPEG, JPG, PNG</span>
-                                        @endif
-                                        <input name="photo" type="file" hidden />
-    
-                                    </div>
-                                </div>
+                                        </div> -->
+                </div>
+            </div>
+
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
 
 
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <label for="name" class="col-form-label text-md-end">{{ __('Full Name') }}</label>
+                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
+                        name="name" value="{{ old('name', $memorial->name) }}" required autocomplete="name">
+                    @error('name')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <label for="birth_date" class="col-form-label text-md-end">{{ __('Date of Birth') }}</label>
+                    <input id="birth_date" type="date" class="form-control @error('birth_date') is-invalid @enderror"
+                        name="birth_date" value="{{ old('name', $memorial->birth_date) }}" required>
+                    @error('birth_date')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="col-md-12 mb-3">
+                    <label for="death_date" class="col-form-label text-md-end">{{ __('Date of Death') }}</label>
+                    <input id="death_date" type="date" class="form-control @error('death_date') is-invalid @enderror"
+                        name="death_date" value="{{ old('name', $memorial->death_date) }}">
+                    @error('death_date')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+
+
+
+                <div class="col-md-12">
+                    <label for="biography" class="col-form-label text-md-end">{{ __('Biography') }}</label>
+                    <textarea id="biography" class="form-control @error('biography') is-invalid @enderror" name="biography" rows="10">{{ old('name', $memorial->biography) }}</textarea>
+                    @error('biography')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+
+
+                <div class="container mt-25">
+                    <label for="photo" class="form-label">{{ __('Main image') }}</label>
+                    <div class="drag-area">
+                        <!-- Если фото существует, отображаем его -->
+                        @if (isset($memorial->photo) && $memorial->photo)
+                            <img src="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photo) }}"
+                                alt="Фото">
+                            <button type="button" class="deleteBtn butn butn-md butn-danger butn-rounded">
+                                {{ __('Delete image') }}
+                            </button>
+                        @else
+                            <!-- Если фото нет, показываем стандартную форму загрузки -->
+                            <div class="icon">
+                                <i class="fas fa-images"></i>
                             </div>
-                        </section>
+                            <span class="header">Húzza ide a fényképet</span>
+                            <span class="header">vagy nyissa meg a </span>
+                            <div class="text-center mb-10 mt-10">
+                                <span class="button butn butn-md butn-bord butn-rounded">böngészőben</span>
+                            </div>
+                            <span class="support">Fényképformátum: JPEG, JPG, PNG</span>
+                        @endif
+                        <input name="photo" type="file" hidden />
 
-                        <!-- ==================== End Process ==================== -->
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+
+        <!-- ==================== End Process ==================== -->
 
 
 
-                        <!-- ==================== Start Numbers ==================== -->
+        <!-- ==================== Start Numbers ==================== -->
 
-                        <section class="numbers-ca mb-20">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="mt-60">
-                                        <button type="submit" class="butn butn-md butn-bord butn-rounded disabled">
-                                            <span class="text">
-                                                {{ __('Save changes') }}
-                                            </span>
+        <section class="numbers-ca mb-20">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="mt-60">
+                        <button type="submit" class="butn butn-md butn-bord butn-rounded disabled">
+                            <span class="text">
+                                {{ __('Save changes') }}
+                            </span>
 
-                                            <span class="icon ">
-                                                <i class="fa-regular fa-save"></i>
-                                            </span>
+                            <span class="icon ">
+                                <i class="fa-regular fa-save"></i>
+                            </span>
 
-                                        </button>
-                                    </div>
-                                </div>
+                        </button>
+                    </div>
+                </div>
 
-                                {{-- <div class="col-lg-6">
+                {{-- <div class="col-lg-6">
                                     <div class="mt-60">
                                         <button type="submit" class="butn butn-md butn-bord butn-rounded disabled">
                                             <span class="text">Cancel</span>
@@ -341,16 +364,16 @@
                                         </button>
                                     </div>
                                 </div> --}}
-                            </div>
-                        </section>
+            </div>
+        </section>
 
-                        <!-- ==================== End Numbers ==================== -->
+        <!-- ==================== End Numbers ==================== -->
 
 
 
-                        <!-- ==================== Start Testimonials ==================== -->
+        <!-- ==================== Start Testimonials ==================== -->
 
-                        {{-- <section class="testimonials-ca section-padding radius-20 mt-15">
+        {{-- <section class="testimonials-ca section-padding radius-20 mt-15">
                             <div class="sec-head mb-80">
                                 <div class="row">
                                     <div class="col-lg-6 md-mb15">
@@ -495,12 +518,12 @@
                             </div>
                         </section> --}}
 
-                        <!-- ==================== End Testimonials ==================== -->
+        <!-- ==================== End Testimonials ==================== -->
 
 
-                        <!-- ==================== Start Blog ==================== -->
+        <!-- ==================== Start Blog ==================== -->
 
-                        {{-- <section class="blog-ca section-padding bg-light radius-20 mt-15">
+        {{-- <section class="blog-ca section-padding bg-light radius-20 mt-15">
                             <div class="sec-head mb-80">
                                 <div class="row">
                                     <div class="col-lg-6">
@@ -584,13 +607,13 @@
                             </div>
                         </section> --}}
 
-                        <!-- ==================== End Blog ==================== -->
+        <!-- ==================== End Blog ==================== -->
 
 
 
-                        <!-- ==================== Start Contact ==================== -->
+        <!-- ==================== Start Contact ==================== -->
 
-                        {{-- <section class="contact-ca section-padding radius-20 mt-15 mb-15">
+        {{-- <section class="contact-ca section-padding radius-20 mt-15 mb-15">
                             <div class="sec-head mb-80">
                                 <div class="row">
                                     <div class="col-lg-6">
@@ -666,78 +689,78 @@
                                 </form>
                             </div>
                         </section> --}}
-
-                        <!-- ==================== End Contact ==================== -->
+    </form>
+    <!-- ==================== End Contact ==================== -->
 @endsection
 
 @section('js')
-<script>
-    const dropArea = document.querySelector('.drag-area');
-    const dragText = document.querySelector('.header');
-    let button = dropArea.querySelector('.button');
-    let input = dropArea.querySelector('input');
-    let file;
+    <script>
+        const dropArea = document.querySelector('.drag-area');
+        const dragText = document.querySelector('.header');
+        let button = dropArea.querySelector('.button');
+        let input = dropArea.querySelector('input');
+        let file;
 
-    // Функция инициализации всех обработчиков событий
-    function initializeEventListeners() {
-        button = dropArea.querySelector('.button');
-        input = dropArea.querySelector('input');
+        // Функция инициализации всех обработчиков событий
+        function initializeEventListeners() {
+            button = dropArea.querySelector('.button');
+            input = dropArea.querySelector('input');
 
-        // Если кнопка загрузки существует, назначаем обработчик
-        if (button) {
-            button.onclick = () => {
-                input.click();
-            };
-        }
+            // Если кнопка загрузки существует, назначаем обработчик
+            if (button) {
+                button.onclick = () => {
+                    input.click();
+                };
+            }
 
-        // Обработчик для выбора файла
-        input.addEventListener('change', function() {
-            file = this.files[0];
-            dropArea.classList.add('active');
-            displayFile();
-        });
-
-        // Обработчики для drag-and-drop
-        dropArea.addEventListener('dragover', (event) => {
-            event.preventDefault();
-            dropArea.classList.add('active');
-            dragText.textContent = 'Release to Upload';
-        });
-
-        dropArea.addEventListener('dragleave', () => {
-            dropArea.classList.remove('active');
-            dragText.textContent = 'Drag & Drop';
-        });
-
-        dropArea.addEventListener('drop', (event) => {
-            event.preventDefault();
-            file = event.dataTransfer.files[0];
-            displayFile();
-        });
-
-        // Обработчик для кнопки удаления фото
-        const deleteBtn = dropArea.querySelector('.deleteBtn');
-        if (deleteBtn) {
-            deleteBtn.addEventListener('click', () => {
-                resetDropArea();
+            // Обработчик для выбора файла
+            input.addEventListener('change', function() {
+                file = this.files[0];
+                dropArea.classList.add('active');
+                displayFile();
             });
+
+            // Обработчики для drag-and-drop
+            dropArea.addEventListener('dragover', (event) => {
+                event.preventDefault();
+                dropArea.classList.add('active');
+                dragText.textContent = 'Release to Upload';
+            });
+
+            dropArea.addEventListener('dragleave', () => {
+                dropArea.classList.remove('active');
+                dragText.textContent = 'Drag & Drop';
+            });
+
+            dropArea.addEventListener('drop', (event) => {
+                event.preventDefault();
+                file = event.dataTransfer.files[0];
+                displayFile();
+            });
+
+            // Обработчик для кнопки удаления фото
+            const deleteBtn = dropArea.querySelector('.deleteBtn');
+            if (deleteBtn) {
+                deleteBtn.addEventListener('click', () => {
+                    resetDropArea();
+                });
+            }
         }
-    }
 
-    // Инициализируем обработчики при загрузке страницы
-    initializeEventListeners();
+        // Инициализируем обработчики при загрузке страницы
+        initializeEventListeners();
 
-    // Функция для отображения загруженного файла
-    function displayFile() {
-        let fileType = file.type;
-        let validExtensions = ['image/jpeg', 'image/jpg', 'image/png'];
+        // Функция для отображения загруженного файла
+        function displayFile() {
+            let fileType = file.type;
+            let validExtensions = ['image/jpeg', 'image/jpg', 'image/png'];
 
-        if (validExtensions.includes(fileType)) {
-            let fileReader = new FileReader();
+            if (validExtensions.includes(fileType)) {
+                let fileReader = new FileReader();
 
-            fileReader.onload = () => {
-                let fileURL = fileReader.result;
-                dropArea.innerHTML = `
+                fileReader.onload = () => {
+                    let fileURL = fileReader.result;
+                    dropArea.innerHTML = `
                     <img src="${fileURL}" alt="">
                     <button type="button" class="deleteBtn butn butn-md butn-danger butn-rounded">
                         Kép törlése
@@ -746,36 +769,36 @@
                     <input name="photo" type="file" hidden />
                 `;
 
-                // Переназначаем элементы
-                button = dropArea.querySelector('.button');
-                input = dropArea.querySelector('input');
+                    // Переназначаем элементы
+                    button = dropArea.querySelector('.button');
+                    input = dropArea.querySelector('input');
 
-                // Обработчик для кнопки удаления
-                const deleteBtn = dropArea.querySelector('.deleteBtn');
-                deleteBtn.addEventListener('click', () => {
-                    resetDropArea();
-                });
+                    // Обработчик для кнопки удаления
+                    const deleteBtn = dropArea.querySelector('.deleteBtn');
+                    deleteBtn.addEventListener('click', () => {
+                        resetDropArea();
+                    });
 
-                // Восстанавливаем обработчик для кнопки выбора файла
-                button.onclick = () => {
-                    input.click();
+                    // Восстанавливаем обработчик для кнопки выбора файла
+                    button.onclick = () => {
+                        input.click();
+                    };
+
+                    // Устанавливаем файл в input
+                    const dataTransfer = new DataTransfer();
+                    dataTransfer.items.add(file);
+                    input.files = dataTransfer.files;
                 };
-
-                // Устанавливаем файл в input
-                const dataTransfer = new DataTransfer();
-                dataTransfer.items.add(file);
-                input.files = dataTransfer.files;
-            };
-            fileReader.readAsDataURL(file);
-        } else {
-            alert('This is not an Image File');
-            dropArea.classList.remove('active');
+                fileReader.readAsDataURL(file);
+            } else {
+                alert('This is not an Image File');
+                dropArea.classList.remove('active');
+            }
         }
-    }
 
-    // Функция для сброса dropArea
-    function resetDropArea() {
-        dropArea.innerHTML = `
+        // Функция для сброса dropArea
+        function resetDropArea() {
+            dropArea.innerHTML = `
             <div class="icon">
                 <i class="fas fa-images"></i>
             </div>
@@ -788,21 +811,20 @@
             <span class="support">Fényképformátum: JPEG, JPG, PNG</span>
         `;
 
-        // Переназначаем элементы после сброса
-        button = dropArea.querySelector('.button');
-        input = dropArea.querySelector('input');
+            // Переназначаем элементы после сброса
+            button = dropArea.querySelector('.button');
+            input = dropArea.querySelector('input');
 
-        // Восстанавливаем обработчик клика для кнопки выбора файла
-        button.onclick = () => {
-            input.click();
-        };
+            // Восстанавливаем обработчик клика для кнопки выбора файла
+            button.onclick = () => {
+                input.click();
+            };
 
-        // Удаляем класс active
-        dropArea.classList.remove('active');
+            // Удаляем класс active
+            dropArea.classList.remove('active');
 
-        // Заново инициализируем все обработчики событий
-        initializeEventListeners();
-    }
-</script>
-
+            // Заново инициализируем все обработчики событий
+            initializeEventListeners();
+        }
+    </script>
 @endsection

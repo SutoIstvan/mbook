@@ -23,7 +23,9 @@ Route::middleware(['auth', UserAccess::class . ':user'])->group(function () {
     Route::get('/dashboard/help', [DashboardController::class, 'help'])->name('dashboard.help');
 
 
-    Route::get('/create', [MemorialController::class, 'create'])->name('memorials.create');
+    Route::get('/create', [MemorialController::class, 'create'])->name('memorial.create');
+    Route::put('/dashboard/memorial/{id}', [MemorialController::class, 'update'])->name('memorial.update');
+
     Route::post('/store', [MemorialController::class, 'store'])->name('memorial.store');
 });
 

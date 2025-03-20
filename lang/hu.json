@@ -21,7 +21,9 @@
     "Address on Map": "Cím a térképen",
     "Delete Page": "Oldal törlése",
     "Are you sure you want to delete this page?": "Biztos, hogy el akarja törölni ezt az oldalt?",
-
+    "Main image": "Fő emlékkép feltöltése",
+    "Update success": "Adatok sikeresen frissítve!",
+    "Delete image": "Kép törlése",
     "Theme": "Téma",
     "Light Theme": "Világos téma",
     "Dark Theme": "Sötét téma"

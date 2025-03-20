@@ -104,6 +104,58 @@ class MemorialController extends Controller
                          ->with('success', 'Мемориал успешно создан и QR-код сгенерирован');
     }
 
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|min:3|max:255',
+            'birth_date' => 'required|string|min:3|max:255',
+            'death_date' => 'required|string|min:3|max:255',
+            'biography' => 'required|string|min:3|max:2255',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $memorial = Memorial::findOrFail($id);
+        // $memorial->slug = $request->slug;
+        // if ($request->filled('slug') && $request->slug !== $memorial->slug) {
+        //     $memorial->slug = $request->slug;
+        // }
+        $memorial->name = $request->name;
+        $memorial->birth_date = $request->birth_date;
+        $memorial->death_date = $request->death_date;
+        $memorial->biography = $request->biography;
+        $memorial->video = $request->video;
+
+        // Обновление фото, если загружен новый файл
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            $originalName = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
+            $slugName = Str::slug($originalName); // Делаем имя безопасным
+            $filename = $slugName . '_' . time() . '.webp'; // Устанавливаем WebP
+
+            // Создаем путь с ID мемориала
+            $path = 'images/memorials/' . $memorial->id;
+
+            $image = Image::read($photo)
+            ->scale(width: 1300)
+            ->toWebp(90);
+
+            // Удаляем старое фото, если оно есть
+            if ($memorial->photo) {
+                Storage::disk('public')->delete($path . '/' . $memorial->photo);
+            }
+
+            // Сохраняем новое фото
+            Storage::disk('public')->put($path . '/' . $filename, $image->toString());
+
+
+            $memorial->photo = $filename;
+        }
+
+        $memorial->save();
+
+        return redirect()->route('dashboard.edit', $memorial)->with('success', __('Update success'));
+    }
+
     protected function generateUniqueToken()
     {
         $maxAttempts = 10; // Максимальное количество попыток для избежания вечного цикла
