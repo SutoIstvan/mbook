@@ -21,11 +21,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 
     <!-- Plugins -->
-    <link rel="stylesheet" href="common/css/plugins.css">
+    <link rel="stylesheet" href="{{ asset('common/css/plugins.css') }}">
 
     <!-- Style for individual style contain common & this home style -->
-    <link rel="stylesheet" href="common/css/common_style.css">
-    <link rel="stylesheet" href="admin/css/style.css">
+    <link rel="stylesheet" href="{{ asset('common/css/common_style.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/css/style.css') }}">
 
     <!-- Style for combined style contain common & all pages styles -->
     <!-- <link rel="stylesheet" href="../common/css/combined_style.css"> -->
@@ -271,25 +271,25 @@
 
 
     <!-- jQuery -->
-    <script src="common/js/lib/jquery-3.6.0.min.js"></script>
-    <script src="common/js/lib/jquery-migrate-3.4.0.min.js"></script>
+    <script src="{{ asset('common/js/lib/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('common/js/lib/jquery-migrate-3.4.0.min.js') }}"></script>
 
     <!-- plugins -->
-    <script src="common/js/lib/plugins.js"></script>
+    <script src="{{ asset('common/js/lib/plugins.js') }}"></script>
 
     <!-- GSAP -->
-    <script src="common/js/gsap_lib/gsap.min.js"></script>
-    <script src="common/js/gsap_lib/ScrollSmoother.min.js"></script>
-    <script src="common/js/gsap_lib/ScrollTrigger.min.js"></script>
-    <script src="common/js/gsap_lib/SplitText.min.js"></script>
-    <script src="common/js/gsap_lib/matter.js"></script>
-    <script src="common/js/gsap_lib/throwable.js"></script>
+    <script src="{{ asset('common/js/gsap_lib/gsap.min.js') }}"></script>
+    <script src="{{ asset('common/js/gsap_lib/ScrollSmoother.min.js') }}"></script>
+    <script src="{{ asset('common/js/gsap_lib/ScrollTrigger.min.js') }}"></script>
+    <script src="{{ asset('common/js/gsap_lib/SplitText.min.js') }}"></script>
+    <script src="{{ asset('common/js/gsap_lib/matter.js') }}"></script>
+    <script src="{{ asset('common/js/gsap_lib/throwable.js') }}"></script>
 
     <!-- common scripts -->
-    <script src="common/js/common_scripts.js"></script>
+    <script src="{{ asset('common/js/common_scripts.js') }}"></script>
 
     <!-- custom scripts -->
-    <script src="admin/js/scripts.js"></script>
+    <script src="{{ asset('admin/js/scripts.js') }}"></script>
 
     @yield('js')
 

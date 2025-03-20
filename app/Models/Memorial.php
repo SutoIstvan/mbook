@@ -50,4 +50,14 @@ class Memorial extends Model
 
         return $slug;
     }
+
+    public function memorialimages()
+    {
+        return $this->hasMany(Image::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

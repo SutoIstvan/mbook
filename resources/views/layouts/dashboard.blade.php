@@ -316,18 +316,26 @@
                                     <span>{{ __('Settings') }}</span>
                                 </a>
 
-                                <a class="butn butn-md butn-bord butn-rounded w-100 text-start" href="{{ route('logout') }}"
+
+                                <a href="{{ route('dashboard') }}" class="butn butn-md butn-bord butn-rounded w-100 text-start">
+                                    <span class="icon me-2">
+                                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                    </span>
+                                    <span>{{ __('Logout') }}</span>
+                                </a>
+
+                                {{-- <a class="butn butn-md butn-bord butn-rounded w-100 text-start" href="{{ route('dashboard') }}"
                                     onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">
                                     <span class="icon mr-10">
                                         <i class="fa-solid fa-arrow-right-from-bracket"></i>
                                     </span>
                                     {{ __('Logout') }}
-                                </a>
+                                </a> --}}
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                {{-- <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
-                                </form>
+                                </form> --}}
 
                             </div>
                         </div>

@@ -28,9 +28,18 @@ class DashboardController extends Controller
         return view('dashboard.settings', compact('memorial'));
     }
 
+
     public function comments(Memorial $memorial)
     {
-        return view('dashboard.comments', compact('memorial'));
+        $memorial = Memorial::where('id', $memorial->id)->firstOrFail();
+        $comments = $memorial->comments()
+            ->orderBy('created_at', 'desc')
+            ->paginate(20);
+
+        return view('dashboard.comments', [
+            'memorial' => $memorial,
+            'comments' => $comments
+        ]);
     }
 
     public function video(Memorial $memorial)

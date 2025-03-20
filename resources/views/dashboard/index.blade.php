@@ -392,7 +392,7 @@
                                 <div class="text-center mt-40">
                                     <a href="" class="butn butn-md butn-bord butn-rounded mt-30 mb-10">
                                         <div class="d-flex align-items-center">
-                                            <span>Új emlékoldal hozzáadása</span>
+                                            <span>Új emlékoldal vásárlása</span>
                                         </div>
                                     </a>
                                 </div>
@@ -412,7 +412,7 @@
 
                                 <a href="" class="butn butn-md butn-bord butn-rounded mt-30 mb-10">
                                     <div class="d-flex align-items-center">
-                                        <span>Új emlékoldal hozzáadása</span>
+                                        <span>Új emlékoldal vásárlása</span>
                                     </div>
                                 </a>
                             </div>

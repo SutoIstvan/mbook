@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MemorialController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ImageController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\UserAccess;
@@ -27,6 +29,15 @@ Route::middleware(['auth', UserAccess::class . ':user'])->group(function () {
     Route::put('/dashboard/memorial/{id}', [MemorialController::class, 'update'])->name('memorial.update');
 
     Route::post('/store', [MemorialController::class, 'store'])->name('memorial.store');
+
+
+    Route::post('/dashboard/{memorial}/photos', [ImageController::class, 'uploadImages'])->name('memorial.images.upload');
+    Route::post('/dashboard/{memorial}/photos/update', [ImageController::class, 'updateImages'])->name('memorial.images.update');
+
+    Route::patch('/comments/{comment}/approve', [CommentController::class, 'approve'])->name('comments.approve');
+    Route::patch('/comments/{comment}/reject', [CommentController::class, 'reject'])->name('comments.reject');
+    Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+
 });
 
 // Для админов
