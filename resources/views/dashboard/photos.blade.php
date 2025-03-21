@@ -281,6 +281,9 @@
         </div>
     </section>
 
+
+    @if ($memorial->memorialimages->isNotEmpty())
+
     <form action="{{ route('memorial.images.update', $memorial->id) }}" method="POST">
         @csrf
         <section class="process-ca section-padding bg-light radius-20 mt-15 ontop">
@@ -372,12 +375,7 @@
                                 @endforeach
                             </div>
                         </div>
-                        @if ($memorial->memorialimages->isNotEmpty())
-                            {{-- <div class="text-center ">
-                                <button type="submit" class="butn butn-md butn-bord butn-rounded">Módosítások
-                                    mentése</button>
-                            </div> --}}
-                        @endif
+
 
 
 
@@ -415,5 +413,6 @@
         </section>
 
     </form>
+    @endif
 
 @endsection
