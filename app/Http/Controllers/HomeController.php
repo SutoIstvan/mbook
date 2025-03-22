@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Memorial;
 
 class HomeController extends Controller
 {
@@ -22,16 +23,16 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Memorial $memorial)
     {
         if (Auth::check()) { // Проверяем, авторизован ли пользователь
             if (Auth::user()->role === 'admin') {
                 return redirect()->route('admin');
             } else {
-                return view('dashboard.index');
+                return view('dashboard.index', compact('memorial'));
             }
         }
     
-        return view('dashboard.index'); 
+        return view('dashboard.index', compact('memorial')); 
     }
 }

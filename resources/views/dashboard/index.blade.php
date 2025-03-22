@@ -348,19 +348,25 @@
                                 </div>
                             </div>
 
-                            <div class="text-center mt-40">
+                            <div class="text-center ">
                                 <a href="{{ route('dashboard.edit', $memorial) }}"
                                     class="butn butn-md butn-bord butn-rounded me-3 mt-30 mb-10">
                                     <div class="d-flex align-items-center">
                                         <span>Szerkesztes</span>
+                                        <span class="icon ms-2">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </span>
                                     </div>
                                 </a>
-                                {{-- <a href="{{ route('memorial.show', $memorial->slug) }}" target="_blank"
+                                <a href="{{ route('memorial.show', $memorial->slug) }}" target="_blank"
                                     class="butn butn-md butn-bord butn-rounded mt-30 mb-10">
                                     <div class="d-flex align-items-center">
-                                        <span>Megnyitom</span>
+                                        <span>Előnézet</span>
+                                        <span class="icon ms-2">
+                                            <i class="fa-solid fa-up-right-from-square"></i>
+                                        </span>
                                     </div>
-                                </a> --}}
+                                </a>
                                 {{-- <form action="{{ route('memorial.destroy', $memorial->id) }}" method="POST"
                                     class="d-inline">
                                     @csrf
@@ -389,7 +395,7 @@
                                     </div>
                                 </div>
 
-                                <div class="text-center mt-40">
+                                <div class="text-center mt-70">
                                     <a href="" class="butn butn-md butn-bord butn-rounded mt-30 mb-10">
                                         <div class="d-flex align-items-center">
                                             <span>Új emlékoldal vásárlása</span>
@@ -408,7 +414,7 @@
                                 </div>
                             </div>
 
-                            <div class="text-center mt-40">
+                            <div class="text-center mt-70">
 
                                 <a href="" class="butn butn-md butn-bord butn-rounded mt-30 mb-10">
                                     <div class="d-flex align-items-center">

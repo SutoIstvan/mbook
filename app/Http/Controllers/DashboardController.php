@@ -31,6 +31,29 @@ class DashboardController extends Controller
         return view('dashboard.settings', compact('memorial'));
     }
 
+    public function updateSettings(Request $request, Memorial $memorial)
+    {
+        // dd($request);
+        $request->validate([
+            'private' => 'nullable|string|max:255',
+            'theme' => 'required|in:light,dark',
+            'map_address' => 'nullable|string|max:255',
+            'slug' => 'required|string|alpha_dash|unique:memorials,slug,' . $memorial->id,
+        ]);
+
+        $memorial->update([
+            'history' => $request->has('private'),
+            'testimonials' => $request->input('theme'),
+            'story' => $request->input('map_address'),
+            'slug' => $request->input('slug'),
+        ]);
+
+        // return redirect()->back()->with('success', __('Settings saved successfully!'));
+        return redirect()->route('dashboard.settings', $memorial->slug)->with('success', __('Settings saved successfully!'));
+
+    }
+
+
 
     public function comments(Memorial $memorial)
     {
@@ -55,7 +78,7 @@ class DashboardController extends Controller
         // dd($request);
         $request->validate([
             'video_photos' => 'image|mimes:jpeg,png,jpg,gif|max:22048',
-            'video' => 'nullable|string|max:2255',
+            'video' => 'nullable|string|max:255',
         ]);
 
         $memorial = Memorial::findOrFail($memorial->id);
