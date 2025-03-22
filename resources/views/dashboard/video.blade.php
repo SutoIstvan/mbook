@@ -125,6 +125,8 @@
 @endsection
 
 @section('content')
+<form action="{{ route('dashboard.video.upload', $memorial->id) }}" method="POST" enctype="multipart/form-data">
+    @csrf
     <section class="process-ca section-padding bg-light radius-20 mt-15 ontop">
         <div class="sec-head mb-40">
             <div class="row">
@@ -145,69 +147,67 @@
             <!-- ==================== Start Intro-vid ==================== -->
             <section class="intro-vid mt-100 pt-50">
                 <div class="container col-9 mt-30">
-
-                    {{-- <div class="bg-img" data-background="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photo) }}"> --}}
-                    @if (!empty($memorial->video_img))
-                        <div class="bg-img" style="height: 400px" data-background="{{ $memorial->video_img }}">
-                        @else
+                            @if (!empty($memorial->photos))
+                        <div class="bg-img" style="height: 400px" data-background="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photos) }}">
+                            @else
                             <div class="bg-img" style="height: 400px"
-                                data-background="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photo) }}">
-                    @endif
-                    <div class="play-button">
-                        <a href="{{ $memorial->video }}" class="vid">
-                            <i class="fas fa-play fa-inverse"></i>
-                        </a>
-                    </div>
+                                    data-background="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photos) }}">
+                            @endif
+                            <div class="play-button">
+                                <a href="{{ $memorial->video }}" class="vid">
+                                    <i class="fas fa-play fa-inverse"></i>
+                                </a>
+                            </div>
+                        </div>
                 </div>
-        </div>
-    </section>
-    <!-- ==================== End Intro-vid ==================== -->
+            </section>
+            <!-- ==================== End Intro-vid ==================== -->
 
 
-    <div class="container">
-        <div class="row d-flex justify-content-center">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
 
-            <div class="col-12 col-md-12 p-3">
-                <div class="container">
-                    <div class="row">
-                        <div class="mt-50">
-                            <label for="video" class="form-label ">Videó egyedi URL</label>
-                            <input type="text" name="video" id="video" class="form-control py-2"
-                                value="{{ $memorial->video }}">
-                            <small class="text-muted">Ha üresen hagyja, akkor a videó nem lesz megjelenítve</small>
+                    <div class="col-12 col-md-12 p-3">
+                        <div class="container">
+                            <div class="row">
+                                <div class="mt-50">
+                                    <label for="video" class="form-label ">Videó egyedi URL</label>
+                                    <input type="text" name="video" id="video" class="form-control py-2"
+                                        value="{{ $memorial->video }}">
+                                    <small class="text-muted">Ha üresen hagyja, akkor a videó nem lesz megjelenítve</small>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div class="container">
-        <div class="row d-flex justify-content-center">
-
-
-            <div class="col-12 col-md-12 p-3">
-                <div class="container">
-                    <div class="row">
-                        <div class="mt-50">
-                            <label for="video" class="form-label ">Videó kép (opcionális)</label>
-                            <input type="text" name="video" id="video" class="form-control py-2" value="">
-                            <small class="text-muted">Alapértelmezés szerint a videó blokk háttérképe az emlékoldal fő képe.
-                                Itt külön képet tölthetsz fel a videó előnézetéhez, ha szeretnéd testreszabni.</small>
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-12 col-md-12 p-3">
+                        <div class="container">
+                            <div class="row">
+                                <div class="mt-50">
+                                    <label for="video_photos" class="form-label">Videó kép (opcionális)</label>
+                                    <input type="file" name="video_photos" id="video_photos" class="form-control py-2">
+                                    <small class="text-muted">
+                                        Alapértelmezés szerint a videó blokk háttérképe az emlékoldal fő képe.
+                                        Itt külön képet tölthetsz fel a videó előnézetéhez, ha szeretnéd testreszabni.
+                                    </small>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    </div>
 
+        </div>
 
     </section>
 
     <!-- ==================== SAVE BUTTON ==================== -->
 
-    <section class="numbers-ca">
+    <section class="numbers-ca mb-20">
         <div class="row">
             <div class="col-lg-6">
                 <div class="mt-60">
@@ -225,4 +225,5 @@
             </div>
         </div>
     </section>
+</form>
 @endsection

@@ -95,7 +95,7 @@
 
     <!-- ==================== SAVE BUTTON ==================== -->
 
-    <section class="numbers-ca">
+    {{-- <section class="numbers-ca">
         <div class="row">
             <div class="col-lg-6">
                 <div class="mt-60">
@@ -112,5 +112,5 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 @endsection

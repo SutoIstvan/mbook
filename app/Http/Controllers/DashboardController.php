@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Memorial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Intervention\Image\Laravel\Facades\Image;
 
 class DashboardController extends Controller
 {
@@ -47,13 +50,48 @@ class DashboardController extends Controller
         return view('dashboard.video', compact('memorial'));
     }
 
+    public function VideoBackground(Request $request, Memorial $memorial)
+    {
+        // dd($request);
+        $request->validate([
+            'video_photos' => 'image|mimes:jpeg,png,jpg,gif|max:22048',
+            'video' => 'nullable|string|max:2255',
+        ]);
+
+        $memorial = Memorial::findOrFail($memorial->id);
+        $memorial->video = $request->video;
+
+            if ($request->hasFile('video_photos')) {
+                $photo = $request->file('video_photos');
+                $originalName = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
+                $slugName = Str::slug($originalName);
+                $filename = $slugName . '_' . time() . '.png';
+                
+                // Создаем путь с ID мемориала
+                $path = 'images/memorials/' . $memorial->id;
+                
+                $image = Image::read($photo)
+                    ->scale(width: 1300)
+                    ->toWebp(90);
+                
+                // Сохраняем новое фото
+                Storage::disk('public')->put($path . '/' . $filename, $image->toString());
+                
+                $memorial->photos = $filename;
+                $memorial->save();
+            }
+        $memorial->save();
+
+        return redirect()->back()->with('success', 'A videó módosítások sikeresen frissítve!');
+    }
+
     public function photos(Memorial $memorial)
     {
         return view('dashboard.photos', compact('memorial'));
     }
 
-    public function help()
+    public function help(Memorial $memorial)
     {
-        return view('dashboard.help');
+        return view('dashboard.help', compact('memorial'));
     }
 }

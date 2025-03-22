@@ -123,7 +123,6 @@ class MemorialController extends Controller
         $memorial->birth_date = $request->birth_date;
         $memorial->death_date = $request->death_date;
         $memorial->biography = $request->biography;
-        $memorial->video = $request->video;
 
         // Обновление фото, если загружен новый файл
         if ($request->hasFile('photo')) {

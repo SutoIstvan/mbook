@@ -306,8 +306,9 @@
         margin-right: 80px; }
       .process-ca .accordion-item .accordion-header button:after {
         background-image: url(../imgs/plus-solid.svg);
-        -webkit-filter: invert(1);
-        filter: invert(1); }
+        /* -webkit-filter: invert(1); */
+        /* filter: invert(1);  */
+      }
       .process-ca .accordion-item .accordion-header button:not(.collapsed):after {
         background-image: url(../imgs/minus-solid.svg); }
   .process-ca .accordion-item .accordion-body {

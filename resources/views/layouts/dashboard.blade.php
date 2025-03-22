@@ -343,7 +343,7 @@
                         
 
                         <div class="md-hide">
-                            <a href="{{ route('dashboard.help') }}" class="butn butn-md butn-bord butn-rounded {{ Route::currentRouteName() === 'dashboard.help' ? 'active' : '' }}">
+                            <a href="{{ route('dashboard.help', ['memorial' => $memorial->slug]) }}" class="butn butn-md butn-bord butn-rounded {{ Route::currentRouteName() === 'dashboard.help' ? 'active' : '' }}">
                                 <div class="d-flex align-items-center">
                                     <span class="icon mr-10">
                                         <i class="fa-regular fa-circle-question"></i>

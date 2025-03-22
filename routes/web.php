@@ -21,8 +21,10 @@ Route::middleware(['auth', UserAccess::class . ':user'])->group(function () {
     Route::get('/dashboard/{memorial}/settings', [DashboardController::class, 'settings'])->name('dashboard.settings');
     Route::get('/dashboard/{memorial}/comments', [DashboardController::class, 'comments'])->name('dashboard.comments');
     Route::get('/dashboard/{memorial}/video', [DashboardController::class, 'video'])->name('dashboard.video');
+    Route::post('/dashboard/{memorial}/video', [DashboardController::class, 'VideoBackground'])->name('dashboard.video.upload');
+
     Route::get('/dashboard/{memorial}/photos', [DashboardController::class, 'photos'])->name('dashboard.photos');
-    Route::get('/dashboard/help', [DashboardController::class, 'help'])->name('dashboard.help');
+    Route::get('/dashboard/{memorial}/help', [DashboardController::class, 'help'])->name('dashboard.help');
 
 
     Route::get('/create', [MemorialController::class, 'create'])->name('memorial.create');

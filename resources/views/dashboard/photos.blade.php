@@ -270,7 +270,7 @@
                         enctype="multipart/form-data" class="p-4 rounded shadow mb-40" style="width: 500px;">
                         @csrf
                         {{-- <label for="images" class="form-label ">Képek feltöltése</label> --}}
-                        <input type="file" name="images[]" multiple class="form-control bg-secondary  border-0">
+                        <input type="file" name="images[]" multiple class="form-control bg-secondary  border-0" required>
 
                         <button type="submit" class="btn btn-secondary mt-3 w-100">Feltöltés</button>
 
@@ -393,7 +393,7 @@
 
         <!-- ==================== SAVE BUTTON ==================== -->
 
-        <section class="numbers-ca">
+        <section class="numbers-ca mb-20">
             <div class="row">
                 <div class="col-lg-6">
                     <div class="mt-60">
