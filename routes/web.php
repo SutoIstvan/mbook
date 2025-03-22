@@ -12,7 +12,12 @@ use App\Http\Middleware\UserAccess;
 
 Auth::routes();
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', function () {
+    return redirect('/dashboard');
+});
+
+
+Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
 
 // Для обычных пользователей
 Route::middleware(['auth', UserAccess::class . ':user'])->group(function () {

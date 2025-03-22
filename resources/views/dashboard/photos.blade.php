@@ -267,13 +267,30 @@
             <div class="container">
                 <div class="row d-flex justify-content-center">
                     <form action="{{ route('memorial.images.upload', $memorial->id) }}" method="POST"
-                        enctype="multipart/form-data" class="p-4 rounded shadow mb-40" style="width: 500px;">
+                        enctype="multipart/form-data" class="px-3 rounded" >
                         @csrf
                         {{-- <label for="images" class="form-label ">Képek feltöltése</label> --}}
-                        <input type="file" name="images[]" multiple class="form-control bg-secondary  border-0" required>
+                        <input type="file" name="images[]" multiple class="form-control" required>
 
-                        <button type="submit" class="btn btn-secondary mt-3 w-100">Feltöltés</button>
-
+                        {{-- <button type="submit" class="btn btn-secondary mt-3 w-100">Feltöltés</button> --}}
+                        <section class="text-center">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="mt-40">
+                                        <button type="submit" class="butn butn-md butn-bord butn-rounded disabled">
+                                            <span class="text">
+                                                {{ __('Feltöltés') }}
+                                            </span>
+                
+                                            <span class="icon ">
+                                                <i class="fa-regular fa-save"></i>
+                                            </span>
+                
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
 
                     </form>
                 </div>
