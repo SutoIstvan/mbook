@@ -161,7 +161,7 @@
                         <div class="bg-img" style="height: 400px" data-background="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photos) }}">
                             @else
                             <div class="bg-img" style="height: 400px"
-                                    data-background="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photos) }}">
+                                    data-background="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photo) }}">
                             @endif
                             <div class="play-button">
                                 <a href="{{ $memorial->video }}" class="vid">

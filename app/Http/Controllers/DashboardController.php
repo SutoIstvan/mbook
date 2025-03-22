@@ -45,7 +45,8 @@ class DashboardController extends Controller
             'history' => $request->has('private'),
             'testimonials' => $request->input('theme'),
             'story' => $request->input('map_address'),
-            'slug' => $request->input('slug'),
+            // 'slug' => $request->input('slug'),
+            'slug' => Str::slug($request->input('slug')),
         ]);
 
         // return redirect()->back()->with('success', __('Settings saved successfully!'));

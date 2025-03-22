@@ -361,8 +361,7 @@
                                 <a href="{{ route('memorial.show', $memorial->slug) }}" target="_blank"
                                     class="butn butn-md butn-bord butn-rounded mt-30 mb-10">
                                     <div class="d-flex align-items-center">
-                                        <span>Előnézet</span>
-                                        <span class="icon ms-2">
+                                        <span class="icon">
                                             <i class="fa-solid fa-up-right-from-square"></i>
                                         </span>
                                     </div>
