@@ -118,4 +118,17 @@ class DashboardController extends Controller
     {
         return view('dashboard.help', compact('memorial'));
     }
+
+    public function destroy(Memorial $memorial)
+    {
+        // Проверяем, принадлежит ли мемориал пользователю
+        // if ($memorial->admin_id !== Auth::id()) {
+        //     abort(403, 'У вас нет прав для удаления этого мемориала.');
+        // }
+
+        // Удаляем мемориал
+        $memorial->delete();
+
+        return redirect()->route('dashboard')->with('success', 'Мемориал успешно удален.');
+    }
 }

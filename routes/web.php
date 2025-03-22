@@ -43,7 +43,8 @@ Route::middleware(['auth', UserAccess::class . ':user'])->group(function () {
     Route::post('/dashboard/{memorial}/photos/update', [ImageController::class, 'updateImages'])->name('memorial.images.update');
 
     Route::get('/dashboard/{memorial}/help', [DashboardController::class, 'help'])->name('dashboard.help');
-
+    
+    Route::delete('/dashboard/delete/{memorial}', [DashboardController::class, 'destroy'])->name('dashboard.destroy')->middleware('auth');
 });
 
 // Для админов

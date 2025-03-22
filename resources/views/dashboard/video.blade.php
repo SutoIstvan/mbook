@@ -197,9 +197,9 @@
                     <div class="col-12 col-md-12 p-3">
                         <div class="container">
                             <div class="row">
-                                <div class="mt-50">
+                                <div class="mt-20">
                                     <label for="video_photos" class="form-label">Videó kép (opcionális)</label>
-                                    <input type="file" name="video_photos" id="video_photos" class="form-control py-2">
+                                    <input type="file" name="video_photos" id="video_photos" class="form-control">
                                     <small class="text-muted">
                                         Alapértelmezés szerint a videó blokk háttérképe az emlékoldal fő képe.
                                         Itt külön képet tölthetsz fel a videó előnézetéhez, ha szeretnéd testreszabni.

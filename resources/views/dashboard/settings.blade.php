@@ -146,9 +146,23 @@
                     </button>
                 </div>
             </div>
+
+
+
+
         </div>
     </section>
 </form>
 
+
+<div class="row mb-3 mt-30 mb-30">
+    <div class="col-md-12">
+        <form action="{{ route('dashboard.destroy', $memorial) }}" method="POST" onsubmit="return confirm('{{ __('Are you sure you want to delete this page?') }}')">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger w-100">{{ __('Delete Page') }}</button>
+        </form>
+    </div>
+</div>
 
 @endsection
