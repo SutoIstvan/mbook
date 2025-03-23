@@ -2,7 +2,7 @@
 
 @section('css')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    {{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.0/min/dropzone.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.0/dropzone.js"></script>
 
@@ -155,8 +155,8 @@
             @endif
 
             <!-- ==================== Start Intro-vid ==================== -->
-            <section class="intro-vid mt-100 pt-50">
-                <div class="container col-9 mt-30">
+            <section class="intro-vid mt-100 pt-50 d-flex justify-content-center">
+                <div class="col-12 col-md-9 mt-30">
                             @if (!empty($memorial->photos))
                         <div class="bg-img" style="height: 400px" data-background="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photos) }}">
                             @else
@@ -174,11 +174,11 @@
             <!-- ==================== End Intro-vid ==================== -->
 
 
-            <div class="container">
+            <div class="">
                 <div class="row d-flex justify-content-center">
 
                     <div class="col-12 col-md-12 p-3">
-                        <div class="container">
+                        <div class="">
                             <div class="row">
                                 <div class="mt-50">
                                     <label for="video" class="form-label ">Videó egyedi URL</label>
@@ -186,13 +186,21 @@
                                         value="{{ $memorial->video }}">
                                     <small class="text-muted">Ha üresen hagyja, akkor a videó nem lesz megjelenítve</small>
                                 </div>
+                                <div class="mt-50">
+                                    <label for="video_photos" class="form-label">Videó kép (opcionális)</label>
+                                    <input type="file" name="video_photos" id="video_photos" class="form-control">
+                                    <small class="text-muted">
+                                        Alapértelmezés szerint a videó blokk háttérképe az emlékoldal fő képe.
+                                        Itt külön képet tölthetsz fel a videó előnézetéhez, ha szeretnéd testreszabni.
+                                    </small>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="container">
+            {{-- <div class="container">
                 <div class="row d-flex justify-content-center">
                     <div class="col-12 col-md-12 p-3">
                         <div class="container">
@@ -209,7 +217,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
         </div>
 

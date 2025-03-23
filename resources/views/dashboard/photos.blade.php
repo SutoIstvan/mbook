@@ -2,7 +2,7 @@
 
 @section('css')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    {{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.0/min/dropzone.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.0/dropzone.js"></script>
 
@@ -350,46 +350,37 @@
 
 
                         <div class="container">
-                            <div class="row xlg-marg">
+                            <div class="row">
                                 @foreach ($memorial->memorialimages as $image)
-                                    <input type="hidden" name="images[{{ $loop->index }}][id]"
-                                        value="{{ $image->id }}">
-                                    <div class="col-lg-4 bord mt-20">
-                                        <div class="item">
-                                            <div class="info d-flex align-items-center"></div>
-                                            <div class="img fit-img mt-30">
-                                                <img src="{{ asset('storage/' . $image->image_path) }}" alt="">
-                                            </div>
-                                            <div class="cont mt-30">
-                                                {{-- <div class="date ml-auto d-flex align-items-center">
-                                                    <i class="fa-regular fa-clock mr-15 opacity-7"></i>
+                                <input type="hidden" name="images[{{ $loop->index }}][id]" value="{{ $image->id }}">
+                                <div class="col-lg-4 bord mt-20">
+                                    <div class="item">
+
+                                        <div class="img fit-img mt-30">
+                                            <img src="{{ asset('storage/' . $image->image_path) }}" alt="">
+                                        </div>
+                                        <div class="cont mt-30">
+                                            <div class="">
+                                                <div class="search-container">
                                                     <input name="images[{{ $loop->index }}][image_date]" type="text"
-                                                        value="{{ $image->image_date }}"
-                                                        class="form-control bg-dark text-white border-secondary py-2"
-                                                        placeholder="A fénykép dátuma">
-                                                </div> --}}
-                                                {{-- ------------------------------------------------------------------ --}}
-
-                                                <div class="">
-                                                    <div class="search-container">
-                                                        <input name="images[{{ $loop->index }}][image_date]" type="text"
-                                                            class="w-100 py-2 search-input"
-                                                            placeholder="A fénykép dátuma"
-                                                            value="{{ $image->image_date }}">
-                                                        <i class="fa-regular fa-clock search-icon"></i>
-                                                    </div>
+                                                        class="w-100 py-2 search-input"
+                                                        placeholder="A fénykép dátuma"
+                                                        value="{{ $image->image_date }}">
+                                                    <i class="fa-regular fa-clock search-icon"></i>
                                                 </div>
-
-                                                <h6 class="mt-3">
-                                                    <input name="images[{{ $loop->index }}][image_description]"
-                                                        type="text" value="{{ $image->image_description }}"
-                                                        class="form-control py-2"
-                                                        placeholder="A fénykép leírása">
-                                                </h6>
                                             </div>
+                            
+                                            <h6 class="mt-3">
+                                                <input name="images[{{ $loop->index }}][image_description]"
+                                                    type="text" value="{{ $image->image_description }}"
+                                                    class="form-control py-2"
+                                                    placeholder="A fénykép leírása">
+                                            </h6>
                                         </div>
                                     </div>
-                                @endforeach
+                                </div>
+                            @endforeach
+                            
                             </div>
                         </div>
 

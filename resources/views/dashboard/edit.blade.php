@@ -2,7 +2,7 @@
 
 @section('css')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    {{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.0/min/dropzone.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.0/dropzone.js"></script>
 
@@ -317,7 +317,7 @@
                 </div>
 
                 <div class="container mt-25 col-12 col-lg-8">
-                    <label for="photo" class="form-label">{{ __('Main image') }}</label>
+                    <label class="form-label">{{ __('Main image') }}</label>
                     <div class="drag-area">
                         <!-- Если фото существует, отображаем его -->
                         @if (isset($memorial->photo) && $memorial->photo)
@@ -345,8 +345,8 @@
                 </div>
 
                 <div class="container mt-25 col-12 col-lg-4">
-                    <label for="photo" class="form-label">{{ __('QR-Code letöltése') }}</label>
-                    <div>
+                    <label class="form-label">{{ __('QR-Code letöltése') }}</label>
+                    <div class="text-center">
                         <img src="{{ asset('storage/qrcodes/' . $memorial->id . '.png') }}" 
                              style="height: 293px !important; width: 293px !important; border-radius: 20px;">
                     </div>
