@@ -25,7 +25,14 @@ class MemorialController extends Controller
             return redirect()->route('memorials.show', $memorial->slug);
         }
 
-        return view('memorial.show', compact('memorial'));
+        $images = $memorial->memorialimages;
+
+        $comments = $memorial->comments()
+            ->where('status', 'approved')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('memorial.show', compact('memorial', 'images', 'comments'));
     }
 
     public function create()
