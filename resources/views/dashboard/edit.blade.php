@@ -316,7 +316,7 @@
                     </div>
                 </div>
 
-                <div class="container mt-25 col-8">
+                <div class="container mt-25 col-12 col-lg-8">
                     <label for="photo" class="form-label">{{ __('Main image') }}</label>
                     <div class="drag-area">
                         <!-- Если фото существует, отображаем его -->
@@ -344,7 +344,7 @@
                     </div>
                 </div>
 
-                <div class="container mt-25 col-4">
+                <div class="container mt-25 col-12 col-lg-4">
                     <label for="photo" class="form-label">{{ __('QR-Code letöltése') }}</label>
                     <div>
                         <img src="{{ asset('storage/qrcodes/' . $memorial->id . '.png') }}" 

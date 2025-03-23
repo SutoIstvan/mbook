@@ -724,4 +724,10 @@ p {
     font-size: 65px;
     line-height: 65px; }
   .about-ca .main-box {
-    height: 700px; } }
+    height: 700px; } 
+  .section-padding {
+    padding: 60px 10px;
+  }
+  }
+
+  
