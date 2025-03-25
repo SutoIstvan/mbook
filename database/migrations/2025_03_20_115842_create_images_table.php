@@ -16,12 +16,8 @@ return new class extends Migration
             $table->string('image_path');
             $table->string('image_date')->nullable();
             $table->string('image_description')->nullable();
-            $table->string('memorial_id')->nullable();
+            $table->foreignId('memorial_id')->nullable()->constrained('memorials');
             $table->timestamps();
-            $table->foreign('memorial_id')
-                  ->references('id')
-                  ->on('memorials')
-                  ->onDelete('cascade');
         });
     }
 

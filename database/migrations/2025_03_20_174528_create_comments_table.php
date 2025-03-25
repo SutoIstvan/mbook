@@ -16,12 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->text('content');
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
-            $table->string('memorial_id')->nullable();
+            $table->foreignId('memorial_id')->nullable()->constrained('memorials');
             $table->timestamps();
-            $table->foreign('memorial_id')
-                  ->references('id')
-                  ->on('memorials')
-                  ->onDelete('cascade');
         });
     }
 
