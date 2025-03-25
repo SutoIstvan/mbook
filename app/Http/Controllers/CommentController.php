@@ -21,6 +21,33 @@ class CommentController extends Controller
         ]);
     }
 
+    public function create(Memorial $memorial)
+    {
+        $memorial = Memorial::where('id', $memorial->id)->firstOrFail();
+        return view('memorial.addcomments', [
+            'memorial' => $memorial
+        ]);
+    }
+
+    public function store(Memorial $memorial, Request $request)
+    {
+        $memorial = Memorial::where('id', $memorial->id)->firstOrFail();
+        
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'content' => 'required|string|max:1000',
+        ]);
+
+        $comment = Comment::create([
+            'name' => $validated['name'],
+            'content' => $validated['content'],
+            'memorial_id' => $memorial->id,
+            'status' => 'pending'
+        ]);
+
+        return redirect()->back()->with('success', 'A megjegyzést sikeresen hozzáadtuk, és moderálásra vár.');
+    }
+
     public function approve(Comment $comment)
     {
         // $this->authorize('moderate', Comment::class);

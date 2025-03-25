@@ -352,43 +352,37 @@
                         <div class="container">
                             <div class="row">
                                 @foreach ($memorial->memorialimages as $image)
-                                <input type="hidden" name="images[{{ $loop->index }}][id]" value="{{ $image->id }}">
-                                <div class="col-lg-4 bord mt-20">
-                                    <div class="item">
+                                    <input type="hidden" name="images[{{ $loop->index }}][id]" value="{{ $image->id }}">
+                                    <div class="col-lg-4 bord mt-20">
+                                        <div class="item">
 
-                                        <div class="img fit-img mt-30">
-                                            <img src="{{ asset('storage/' . $image->image_path) }}" alt="">
-                                        </div>
-                                        <div class="cont mt-30">
-                                            <div class="">
-                                                <div class="search-container">
-                                                    <input name="images[{{ $loop->index }}][image_date]" type="text"
-                                                        class="w-100 py-2 search-input"
-                                                        placeholder="A fénykép dátuma"
-                                                        value="{{ $image->image_date }}">
-                                                    <i class="fa-regular fa-clock search-icon"></i>
-                                                </div>
+                                            <div class="img fit-img mt-30">
+                                                <img src="{{ asset('storage/' . $image->image_path) }}" alt="">
                                             </div>
-                            
-                                            <h6 class="mt-3">
-                                                <input name="images[{{ $loop->index }}][image_description]"
-                                                    type="text" value="{{ $image->image_description }}"
-                                                    class="form-control py-2"
-                                                    placeholder="A fénykép leírása">
-                                            </h6>
+                                            <div class="cont mt-30">
+                                                <div class="">
+                                                    <div class="search-container">
+                                                        <input name="images[{{ $loop->index }}][image_date]" type="text"
+                                                            class="w-100 py-2 search-input"
+                                                            placeholder="A fénykép dátuma"
+                                                            value="{{ $image->image_date }}">
+                                                        <i class="fa-regular fa-clock search-icon"></i>
+                                                    </div>
+                                                </div>
+                                
+                                                <h6 class="mt-3">
+                                                    <input name="images[{{ $loop->index }}][image_description]"
+                                                        type="text" value="{{ $image->image_description }}"
+                                                        class="form-control py-2"
+                                                        placeholder="A fénykép leírása">
+                                                </h6>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endforeach
+                                @endforeach
                             
                             </div>
                         </div>
-
-
-
-
-
-
 
 
                     </div>

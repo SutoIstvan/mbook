@@ -86,6 +86,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="mimg fit-img">
 
                 {{-- <div class="mimg fit-img" style="filter: grayscale(100%);"> --}}
@@ -141,7 +142,7 @@
             </div>
             @if (strlen($memorial->biography) > 800)
                 <div class="text-center mt-80">
-                    <a href="#" class="butn butn-md butn-bord butn-rounded">
+                    <a href="{{ route('memorial.biography', $memorial) }}" class="butn butn-md butn-bord butn-rounded">
                         <div class="d-flex align-items-center">
                             <span>Bővebben az életrajzról</span>
                             <span class="icon pe-7s-angle-right ml-10 fz-30"></span>
@@ -154,7 +155,7 @@
 
 
 
-    <!-- ==================== Start Portfolio ==================== -->
+    <!-- ==================== Start Photos ==================== -->
 
 
     <section class="works-dm section-padding">
@@ -233,7 +234,7 @@
 
                     <!-- Остальные картинки (начиная со второй) -->
                     @if ($images->count() > 1)
-                        @foreach ($images->slice(1) as $image)
+                        @foreach ($images->slice(1)->take(3) as $image)
                             <div class="items col-lg-6 order-md-2">
                                 <div class="item">
                                     <div class="img">
@@ -261,7 +262,7 @@
                             <div class="d-flex">
                                 {{-- <a href="{{ route('comments.create', $memorial->id) }}" class="butn butn-md butn-bord butn-rounded"> --}}
 
-                                <a href="#" class="butn butn-md butn-bord butn-rounded">
+                                <a href="{{ route('memorial.photos', $memorial) }}" class="butn butn-md butn-bord butn-rounded">
                                     <div class="d-flex align-items-center">
                                         <span>Tekintse meg az összes fényképet</span>
                                         <span class="icon pe-7s-angle-right ml-10 fz-30"></span>
@@ -319,11 +320,6 @@
 
     <!-- ==================== Start Testimonials ==================== -->
 
-
-
-
-
-
     <section class="testimonials-dm section-padding pb-80 ">
         <div class="container">
             <div class="sec-head mb-100">
@@ -366,7 +362,9 @@
                             </div>
                         </div>
                     @empty
-                        <p class="text-gray-500">Még nincsenek hozzászólások</p>
+                        <div class="text-center">
+                            <p class="text-gray-500">Még nincsenek hozzászólások. Legyen Ön az első!</p>
+                        </div>
                     @endforelse
 
 
@@ -379,7 +377,7 @@
             <div class="text-center mt-40">
 
                 <div class="text-center mt-80">
-                    {{-- <a href="{{ route('comments.create', $memorial->id) }}" class="butn butn-md butn-bord butn-rounded">
+                    <a href="{{ route('comments.create', $memorial->id) }}" class="butn butn-md butn-bord butn-rounded">
                         <div class="d-flex align-items-center">
                             <span>Szólj hozzá</span>
                             <span class="icon pe-7s-angle-right ml-10 fz-30"></span>
@@ -391,7 +389,7 @@
                             <span>{{ $memorial->comments()->count() }}</span>
                             <span class="icon pe-7s-chat ml-10 fz-30"></span>
                         </div>
-                    </a> --}}
+                    </a>
                 </div>
 
 

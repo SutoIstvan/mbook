@@ -22,7 +22,7 @@ class MemorialController extends Controller
     {
         // Если запись найдена по id, но есть slug, редиректим на slug (опционально)
         if (request()->segment(2) != $memorial->slug && $memorial->slug) {
-            return redirect()->route('memorials.show', $memorial->slug);
+            return redirect()->route('memorial.show', $memorial->slug);
         }
 
         $images = $memorial->memorialimages;
@@ -117,7 +117,7 @@ class MemorialController extends Controller
             'name' => 'required|string|min:3|max:255',
             'birth_date' => 'required|string|min:3|max:255',
             'death_date' => 'required|string|min:3|max:255',
-            'biography' => 'required|string|min:3|max:2255',
+            'biography' => 'required|string|min:3|max:22255',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -239,4 +239,57 @@ class MemorialController extends Controller
 
         return $filePath;
     }
+
+
+    public function biography(Memorial $memorial)
+    {
+        // Если запись найдена по id, но есть slug, редиректим на slug (опционально)
+        if (request()->segment(2) != $memorial->slug && $memorial->slug) {
+            return redirect()->route('memorial.biography', $memorial->slug);
+        }
+
+        $images = $memorial->memorialimages;
+
+        return view('memorial.biography', compact('memorial', 'images'));
+    }
+
+    public function photos(Memorial $memorial)
+    {
+        // Если запись найдена по id, но есть slug, редиректим на slug (опционально)
+        if (request()->segment(2) != $memorial->slug && $memorial->slug) {
+            return redirect()->route('memorial.photos', $memorial->slug);
+        }
+
+        $images = $memorial->memorialimages;
+
+        return view('memorial.photos', compact('memorial', 'images'));
+    }
+
+    public function videos(Memorial $memorial)
+    {
+        // Если запись найдена по id, но есть slug, редиректим на slug (опционально)
+        if (request()->segment(2) != $memorial->slug && $memorial->slug) {
+            return redirect()->route('memorial.videos', $memorial->slug);
+        }
+
+        $images = $memorial->memorialimages;
+
+        return view('memorial.videos', compact('memorial', 'images'));
+    }
+
+    public function comments(Memorial $memorial)
+    {
+        // Если запись найдена по id, но есть slug, редиректим на slug (опционально)
+        if (request()->segment(2) != $memorial->slug && $memorial->slug) {
+            return redirect()->route('memorial.comments', $memorial->slug);
+        }
+
+        $comments = $memorial->comments()
+        ->where('status', 'approved')
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+        return view('memorial.comments', compact('memorial', 'comments'));
+    }
+
 }

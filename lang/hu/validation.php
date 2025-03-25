@@ -6,6 +6,10 @@ return [
         'string' => 'A(z) :attribute legalább :min karakter hosszú kell legyen.',
     ],
 
+    'max' => [
+        'string' => 'A(z) Megjegyzés nem lehet hosszabb, mint :max karakter.',
+    ],
+
     'attributes' => [
         'name' => 'név',
         'birth_date' => 'születési dátum',

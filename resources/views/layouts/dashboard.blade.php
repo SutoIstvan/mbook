@@ -231,7 +231,7 @@
                                     <span class="icon me-2">
                                         <i class="fa-solid fa-arrow-right-from-bracket"></i>
                                     </span>
-                                    <span>{{ __('Logout') }}</span>
+                                    <span>{{ __('Dashboard') }}</span>
                                 </a>
 
                                 {{-- <a class="butn butn-md butn-bord butn-rounded w-100 text-start" href="{{ route('dashboard') }}"

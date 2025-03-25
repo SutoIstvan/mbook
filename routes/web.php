@@ -57,4 +57,10 @@ Route::middleware(['auth', UserAccess::class . ':admin'])->group(function () {
 
 
 Route::get('/memorial/{memorial}', [MemorialController::class, 'show'])->name('memorial.show');
+Route::get('/memorial/{memorial}/biography', [MemorialController::class, 'biography'])->name('memorial.biography');
+Route::get('/memorial/{memorial}/photos', [MemorialController::class, 'photos'])->name('memorial.photos');
+Route::get('/memorial/{memorial}/videos', [MemorialController::class, 'videos'])->name('memorial.videos');
+Route::get('/memorial/{memorial}/comments', [MemorialController::class, 'comments'])->name('memorial.comments');
 
+Route::get('/memorial/{memorial}/comments/create', [CommentController::class, 'create'])->name('comments.create');
+Route::post('/memorial/{memorial}/comments', [CommentController::class, 'store'])->name('comments.store');

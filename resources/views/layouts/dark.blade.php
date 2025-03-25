@@ -92,19 +92,24 @@
             <div class="topnav d-none d-lg-flex align-items-center">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('admin') ? 'active' : '' }}" href="{{ route('admin') }}">Címlap</a>
+                        <a class="nav-link {{ request()->routeIs('memorial.show') ? 'active' : '' }}" href="{{ route('memorial.show', $memorial) }}">Címlap</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('users') ? 'active' : '' }}" href="{{ route('users') }}">Életrajz</a>
+                        <a class="nav-link {{ request()->routeIs('memorial.biography') ? 'active' : '' }}" href="{{ route('memorial.biography', $memorial) }}">Életrajz</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('users') ? 'active' : '' }}" href="{{ route('users') }}">Fényképek</a>
+                        <a class="nav-link {{ request()->routeIs('memorial.photos') ? 'active' : '' }}" href="{{ route('memorial.photos', $memorial) }}">Fényképek</a>
                     </li>
+
+                    @if (!empty($memorial->video))
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('memorial.videos') ? 'active' : '' }}" 
+                            href="{{ route('memorial.videos', $memorial) }}">Videó</a>
+                        </li>
+                    @endif
+                
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('users') ? 'active' : '' }}" href="{{ route('users') }}">Videó</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('users') ? 'active' : '' }}" href="{{ route('users') }}">Hozzászólások</a>
+                        <a class="nav-link {{ request()->routeIs('memorial.comments') ? 'active' : '' }}" href="{{ route('memorial.comments', $memorial) }}">Hozzászólások</a>
                     </li>
                     <li class="nav-item">
                         @auth
@@ -198,7 +203,67 @@
 
             <!-- ==================== Start Footer ==================== -->
 
-            {{-- @include('layouts.partials.footer') --}}
+            <footer class="footer-sa">
+                <div class="container section-padding">
+                    <div class="sec-head mb-80">
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <a href="#" class="logo md-mb80">
+                                    MBook.hu
+                                </a>
+                            </div>
+                            <div class="col-lg-6">
+                                <h3 class="text-indent">Oszd meg az emlékoldalra mutató hivatkozást.
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <div class="row">
+                            {{-- <div class="col-lg-12 text-center mb-50">
+                                Oszd meg az emlékoldalra mutató hivatkozást
+                            </div> --}}
+                            <div class="col-lg-12 text-center">
+                                <div class="social-icon">
+                                    <a href="#0">
+                                        <i class="fa-brands fa-x-twitter"></i>
+                                    </a>
+                                    <a href="#0">
+                                        <i class="fa-brands fa-instagram"></i>
+                                    </a>
+                                    <!-- <a href="#0">
+                                        <i class="fa-brands fa-dribbble"></i>
+                                    </a> -->
+                                    <a href="#0">
+                                        <i class="fa-brands fa-behance"></i>
+                                    </a>
+                                    <a href="#0">
+                                        <i class="fa-brands fa-github"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{-- <div class="sub-footer">
+                    <div class="container bord-thin-top-light pt-50">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="copy sub-color md-mb50">
+                                    <p>© 2024 <a href="#0">MBook.hu</a></p>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 d-flex justify-content-end">
+                                <div class="links sub-color d-flex justify-content-between">
+                                    <a href="#">Kezdőlap</a>
+                                    <a href="#">Kapcsolatok</a>
+                                    <a href="#">Hírek</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> --}}
+            </footer>
 
             <!-- ==================== End Footer ==================== -->
 
