@@ -190,7 +190,7 @@ class MemorialController extends Controller
         $qrImage = QrCode::format('png')
             ->size(340)
             ->margin(1)
-            ->generate(url("/memorial/{$memorial->slug}"));
+            ->generate(url("/memorial/{$memorial->id}"));
 
         // Создаем объект Imagick для QR-кода
         $image = new Imagick();
