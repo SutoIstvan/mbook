@@ -264,28 +264,51 @@
 
         <div class="">
 
+
+            <div class="container mb-4">
+
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+            </div>
+
             <div class="container">
                 <div class="row d-flex justify-content-center">
-                    <form action="{{ route('memorial.images.upload', $memorial->id) }}" method="POST"
-                        enctype="multipart/form-data" class="px-3 rounded" >
+                    <form id="form" action="{{ route('memorial.images.upload', $memorial->id) }}" method="POST"
+                        enctype="multipart/form-data" class="px-3 rounded">
                         @csrf
                         {{-- <label for="images" class="form-label ">Képek feltöltése</label> --}}
                         <input type="file" name="images[]" multiple class="form-control" required>
+                        <small class="text-muted">Maximum 30 kép tölthető fel egy emlékoldalhoz. Fényképformátum: JPEG, JPG,
+                            PNG</small>
 
                         {{-- <button type="submit" class="btn btn-secondary mt-3 w-100">Feltöltés</button> --}}
                         <section class="text-center">
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="mt-40">
-                                        <button type="submit" class="butn butn-md butn-bord butn-rounded disabled">
+                                        <button type="submit" id="submitBtn" class="butn butn-md butn-bord butn-rounded">
                                             <span class="text">
                                                 {{ __('Feltöltés') }}
                                             </span>
-                
-                                            <span class="icon ">
+                                            <span id="btnIcon" class="icon">
                                                 <i class="fa-regular fa-save"></i>
                                             </span>
-                
+                                            <span id="btnSpinner" class="icon d-none">
+                                                <i class="fa-solid fa-spinner fa-spin"></i>
+                                            </span>
                                         </button>
                                     </div>
                                 </div>
@@ -300,26 +323,27 @@
 
 
     @if ($memorial->memorialimages->isNotEmpty())
+        <form action="{{ route('memorial.images.update', $memorial->id) }}" method="POST">
+            @csrf
+            <section class="process-ca section-padding bg-light radius-20 mt-15 ontop">
+                <div class="sec-head mb-40">
+                    <div class="row">
+                        <div class="col-lg-12 md-mb15 md-mt35">
+                            <h4>{{ __('Photos') }} <small>{{ $photoCount = $memorial->memorialimages()->count() }} /
+                                    30</small></h4>
 
-    <form action="{{ route('memorial.images.update', $memorial->id) }}" method="POST">
-        @csrf
-        <section class="process-ca section-padding bg-light radius-20 mt-15 ontop">
-            <div class="sec-head mb-40">
-                <div class="row">
-                    <div class="col-lg-12 md-mb15 md-mt35">
-                        <h4>{{ __('Photos') }}</h4>
+                        </div>
                     </div>
                 </div>
-            </div>
 
 
 
-            <div class="">
+                <div class="">
 
-                <div class="container">
-                    <div class="row d-flex justify-content-center">
+                    <div class="container">
+                        <div class="row d-flex justify-content-center">
 
-                        {{-- <form action="{{ route('memorial.images.upload', $memorial->id) }}" method="POST"
+                            {{-- <form action="{{ route('memorial.images.upload', $memorial->id) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         <input type="file" name="images[]" multiple>
@@ -329,92 +353,104 @@
 
 
 
-                        {{-- <h2>images list</h2> --}}
-
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-
-                        @if (session('success'))
-                            <div class="alert alert-success mt-3">
-                                {{ session('success') }}
-                            </div>
-                        @endif
+                            {{-- <h2>images list</h2> --}}
 
 
 
-                        <div class="container">
-                            <div class="row">
-                                @foreach ($memorial->memorialimages as $image)
-                                    <input type="hidden" name="images[{{ $loop->index }}][id]" value="{{ $image->id }}">
-                                    <div class="col-lg-4 bord mt-20">
-                                        <div class="item">
 
-                                            <div class="img fit-img mt-30">
-                                                <img src="{{ asset('storage/' . $image->image_path) }}" alt="">
-                                            </div>
-                                            <div class="cont mt-30">
-                                                <div class="">
-                                                    <div class="search-container">
-                                                        <input name="images[{{ $loop->index }}][image_date]" type="text"
-                                                            class="w-100 py-2 search-input"
-                                                            placeholder="A fénykép dátuma"
-                                                            value="{{ $image->image_date }}">
-                                                        <i class="fa-regular fa-clock search-icon"></i>
-                                                    </div>
+
+                            <div class="container">
+                                <div class="row">
+
+                                    
+                                    @foreach ($memorial->memorialimages as $image)
+                                        <input type="hidden" name="images[{{ $loop->index }}][id]"
+                                            value="{{ $image->id }}">
+                                        <div class="col-lg-4 bord mt-20">
+                                            <div class="item">
+
+                                                <div class="img fit-img mt-10">
+                                                    <img src="{{ asset('storage/' . $image->image_path) }}" alt="">
                                                 </div>
-                                
-                                                <h6 class="mt-3">
-                                                    <input name="images[{{ $loop->index }}][image_description]"
-                                                        type="text" value="{{ $image->image_description }}"
-                                                        class="form-control py-2"
-                                                        placeholder="A fénykép leírása">
-                                                </h6>
+                                                <div class="cont mt-10">
+                                                    <div class="">
+                                                        <input id="death_date" type="date"
+                                                            class="form-control @error('death_date') is-invalid @enderror"
+                                                            name="images[{{ $loop->index }}][image_date]"
+                                                            value="{{ old('name', $image->image_date) }}">
+                                                    </div>
+
+                                                    <h6 class="mt-10">
+                                                        <input name="images[{{ $loop->index }}][image_description]"
+                                                            type="text" value="{{ $image->image_description }}"
+                                                            class="form-control " placeholder="A fénykép leírása">
+                                                    </h6>
+
+                                                    <form action="{{ route('memorial.images.destroy', [$memorial, $image]) }}" method="POST" class="d-inline">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger btn-sm mt-10" 
+                                                                onclick="return confirm('{{ __('Are you sure you want to delete this image?') }}')">
+                                                            {{ __('Delete') }}
+                                                        </button>
+                                                    </form>
+
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                @endforeach
-                            
+                                    @endforeach
+
+                                </div>
                             </div>
+
+
                         </div>
-
-
                     </div>
+
                 </div>
 
-            </div>
 
+            </section>
 
-        </section>
+            <!-- ==================== SAVE BUTTON ==================== -->
 
-        <!-- ==================== SAVE BUTTON ==================== -->
+            <section class="numbers-ca mb-20">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="mt-60">
+                            <button type="submit" class="butn butn-md butn-bord butn-rounded disabled">
+                                <span class="text">
+                                    {{ __('Save changes') }}
+                                </span>
 
-        <section class="numbers-ca mb-20">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="mt-60">
-                        <button type="submit" class="butn butn-md butn-bord butn-rounded disabled">
-                            <span class="text">
-                                {{ __('Save changes') }}
-                            </span>
+                                <span class="icon ">
+                                    <i class="fa-regular fa-save"></i>
+                                </span>
 
-                            <span class="icon ">
-                                <i class="fa-regular fa-save"></i>
-                            </span>
-
-                        </button>
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-    </form>
+        </form>
     @endif
 
+@endsection
+
+@section('js')
+    <script>
+        document.getElementById("form").addEventListener("submit", function(event) {
+            let button = document.getElementById("submitBtn");
+            let btnIcon = document.getElementById("btnIcon");
+            let btnSpinner = document.getElementById("btnSpinner");
+
+            // Отключаем кнопку
+            button.disabled = true;
+
+            // Скрываем иконку сохранения, показываем спиннер
+            btnIcon.classList.add("d-none");
+            btnSpinner.classList.remove("d-none");
+        });
+    </script>
 @endsection

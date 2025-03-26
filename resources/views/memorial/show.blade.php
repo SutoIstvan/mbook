@@ -300,9 +300,11 @@
         <section class="intro-vid ontop">
             <div class="container">
 
+                
+
                 {{-- <div class="bg-img" data-background="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photo) }}"> --}}
-                @if (!empty($memorial->video_img))
-                    <div class="bg-img" data-background="{{ $memorial->video_img }}">
+                @if (!empty($memorial->photos))
+                    <div class="bg-img" data-background="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photos) }}">
                     @else
                     <div class="bg-img" data-background="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photo) }}">
                 @endif
@@ -383,10 +385,10 @@
                             <span class="icon pe-7s-angle-right ml-10 fz-30"></span>
                         </div>
                     </a>
-                    <a href="{{ route('comments.create', $memorial->id) }}"
+                    <a href="{{ route('memorial.comments', $memorial->id) }}"
                         class="butn butn-md butn-bord butn-rounded me-3 mt-30 mb-10">
                         <div class="d-flex align-items-center">
-                            <span>{{ $memorial->comments()->count() }}</span>
+                            <span>{{ $memorial->comments()->where('status', 'approved')->count() }}</span>
                             <span class="icon pe-7s-chat ml-10 fz-30"></span>
                         </div>
                     </a>

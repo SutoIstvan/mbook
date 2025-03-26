@@ -41,6 +41,7 @@ Route::middleware(['auth', UserAccess::class . ':user'])->group(function () {
     Route::get('/dashboard/{memorial}/photos', [DashboardController::class, 'photos'])->name('dashboard.photos');
     Route::post('/dashboard/{memorial}/photos', [ImageController::class, 'uploadImages'])->name('memorial.images.upload');
     Route::post('/dashboard/{memorial}/photos/update', [ImageController::class, 'updateImages'])->name('memorial.images.update');
+    Route::delete('/dashboard/{memorial}/photos/{image}', [ImageController::class, 'destroy'])->name('memorial.images.destroy');
 
     Route::get('/dashboard/{memorial}/help', [DashboardController::class, 'help'])->name('dashboard.help');
     

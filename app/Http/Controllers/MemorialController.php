@@ -74,6 +74,7 @@ class MemorialController extends Controller
         $memorial->biography = $request->biography;
         $memorial->qr_code = $token;
         $memorial->admin_id = $admin_id;
+        $memorial->testimonials = 'dark';
         $memorial->save();
 
         // Обрабатываем фотографию

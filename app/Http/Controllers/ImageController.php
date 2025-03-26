@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Memorial;
+use App\Models\Image;
 
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Laravel\Facades\Image;
+// use Intervention\Image\Laravel\Facades\Image;
+use Intervention\Image\Laravel\Facades\Image as ImageFacade;
 
 class ImageController extends Controller
 {
@@ -15,13 +17,13 @@ class ImageController extends Controller
     {
         // dd($request);
         // Проверяем общий размер всех файлов (10MB максимум)
-        $totalSize = array_sum(array_map(function ($file) {
-            return $file->getSize();
-        }, $request->file('images')));
+        // $totalSize = array_sum(array_map(function ($file) {
+        //     return $file->getSize();
+        // }, $request->file('images')));
 
-        if ($totalSize > 10 * 1024 * 1024) {
-            return back()->with('error', 'Общий размер файлов не должен превышать 10MB');
-        }
+        // if ($totalSize > 10 * 1024 * 1024) {
+        //     return back()->with('error', 'Общий размер файлов не должен превышать 10MB');
+        // }
 
         $request->validate([
             'images' => 'required|array',
@@ -29,6 +31,13 @@ class ImageController extends Controller
         ]);
 
         $memorial = Memorial::findOrFail($id);
+
+        $maxImages = 30; // Максимальное количество фото
+
+        // Проверяем текущее количество изображений
+        if ($memorial->memorialimages()->count() >= $maxImages) {
+            return redirect()->back()->withErrors(['image' => __('You cannot upload more than :max images.', ['max' => $maxImages])]);
+        }
 
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $photo) {
@@ -41,7 +50,7 @@ class ImageController extends Controller
                 $path = 'images/memorials/' . $memorial->id;
 
                 // Обрабатываем изображение
-                $image = Image::read($photo)
+                $image = ImageFacade::read($photo)
                     ->scale(width: 1300)
                     ->toWebp(90);
 
@@ -82,5 +91,20 @@ class ImageController extends Controller
         }
 
         return redirect()->back()->with('success', 'A képek leírása frissítve!');
+    }
+
+    public function destroy(Memorial $memorial, Image $image)
+    {
+        
+        // Проверяем, принадлежит ли изображение этому мемориалу
+        if ($image->memorial_id !== $memorial->id) {
+            return redirect()->back()->withErrors(['image' => __('This image does not belong to the memorial.')]);
+        }
+
+        Storage::disk('public')->delete($image->image_path);
+
+        $image->delete();
+
+        return redirect()->back()->with('success', __('Image deleted successfully.'));
     }
 }
