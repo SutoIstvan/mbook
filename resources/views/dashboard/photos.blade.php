@@ -343,26 +343,9 @@
                     <div class="container">
                         <div class="row d-flex justify-content-center">
 
-                            {{-- <form action="{{ route('memorial.images.upload', $memorial->id) }}" method="POST"
-                        enctype="multipart/form-data">
-                        @csrf
-                        <input type="file" name="images[]" multiple>
-                        <button type="submit">Upload</button>
-                    </form> --}}
-
-
-
-
-                            {{-- <h2>images list</h2> --}}
-
-
-
-
-
                             <div class="container">
                                 <div class="row">
 
-                                    
                                     @foreach ($memorial->memorialimages as $image)
                                         <input type="hidden" name="images[{{ $loop->index }}][id]"
                                             value="{{ $image->id }}">
@@ -386,14 +369,20 @@
                                                             class="form-control " placeholder="A fénykép leírása">
                                                     </h6>
 
-                                                    <form action="{{ route('memorial.images.destroy', [$memorial, $image]) }}" method="POST" class="d-inline">
+                                                    {{-- <form action="{{ route('memorial.images.destroy', [$memorial, $image]) }}" method="POST" class="d-inline">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger btn-sm mt-10" 
                                                                 onclick="return confirm('{{ __('Are you sure you want to delete this image?') }}')">
                                                             {{ __('Delete') }}
                                                         </button>
-                                                    </form>
+                                                    </form> --}}
+
+                                                    <button type="button" class="btn btn-danger btn-sm mt-10 delete-btn"
+                                                        data-url="{{ route('memorial.images.destroy', [$memorial, $image]) }}">
+                                                        {{ __('Delete') }}
+                                                    </button>
+
 
                                                 </div>
                                             </div>
@@ -418,7 +407,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="mt-60">
-                            <button type="submit" class="butn butn-md butn-bord butn-rounded disabled">
+                            <button type="submit" class="butn butn-md butn-bord butn-rounded">
                                 <span class="text">
                                     {{ __('Save changes') }}
                                 </span>
@@ -436,10 +425,29 @@
         </form>
     @endif
 
+    <form id="delete-form" action="{{ route('memorial.images.destroy', [$memorial, $image]) }}" method="POST"
+        style="display: none;">
+        @csrf
+        @method('DELETE')
+    </form>
+
 @endsection
 
 @section('js')
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".delete-btn").forEach(button => {
+                button.addEventListener("click", function() {
+                    if (confirm("{{ __('Are you sure you want to delete this image?') }}")) {
+                        let form = document.getElementById("delete-form");
+                        form.action = this.getAttribute("data-url");
+                        form.submit();
+                    }
+                });
+            });
+        });
+
+
         document.getElementById("form").addEventListener("submit", function(event) {
             let button = document.getElementById("submitBtn");
             let btnIcon = document.getElementById("btnIcon");
