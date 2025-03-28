@@ -369,15 +369,6 @@
                                                             class="form-control " placeholder="A fénykép leírása">
                                                     </h6>
 
-                                                    {{-- <form action="{{ route('memorial.images.destroy', [$memorial, $image]) }}" method="POST" class="d-inline">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger btn-sm mt-10" 
-                                                                onclick="return confirm('{{ __('Are you sure you want to delete this image?') }}')">
-                                                            {{ __('Delete') }}
-                                                        </button>
-                                                    </form> --}}
-
                                                     <button type="button" class="btn btn-danger btn-sm mt-10 delete-btn"
                                                         data-url="{{ route('memorial.images.destroy', [$memorial, $image]) }}">
                                                         {{ __('Delete') }}
@@ -425,11 +416,13 @@
         </form>
     @endif
 
-    <form id="delete-form" action="{{ route('memorial.images.destroy', [$memorial, $image]) }}" method="POST"
-        style="display: none;">
-        @csrf
-        @method('DELETE')
-    </form>
+    @if(isset($image))
+        <form id="delete-form" action="{{ route('memorial.images.destroy', [$memorial, $image]) }}" method="POST"
+            style="display: none;">
+            @csrf
+            @method('DELETE')
+        </form>
+    @endif
 
 @endsection
 

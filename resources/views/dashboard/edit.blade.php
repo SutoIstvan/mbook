@@ -6,7 +6,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.0/min/dropzone.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.0/dropzone.js"></script>
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet">
     <style>
+        .cropper-modal {
+            background-color: rgb(0, 0, 0) !important;
+            opacity: 1 !important;
+        }
+
         :before,
         :after {
             margin: 0;
@@ -192,20 +198,50 @@
             object-fit: cover;
         }
 
-        .deleteBtn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(255, 0, 0, 0.7);
-            /* Полупрозрачный красный фон */
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            font-size: 14px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: background 0.3s;
+        .existing-photo img {
+            width: 100%;
+            height: 100%;
+            border-radius: 4px;
+            object-fit: cover;
         }
+
+        .dexisting-photo {
+            position: relative;
+            height: 290px;
+            border: 1.4px dashed #afb3b6;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            margin: 1px auto;
+        }
+
+        .deleteBtn:hover {
+            background-color: #212121 !important;
+            color: #fafafa;
+        }
+
+        /* .deleteBtn {
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    background: rgba(255, 0, 0, 0.7);
+                    color: white;
+                    border: none;
+                    padding: 5px 10px;
+                    font-size: 14px;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    transition: background 0.3s;
+                } */
+
+                .deleteBtn {
+                    background-color: #f8f9fa; /* Установить одинаковый цвет фона */
+                    border: 1px solid #adaeaf; /* Убедиться, что граница установлена */
+                    box-shadow: none; /* Удалить тень */
+                }
+
     </style>
 @endsection
 
@@ -223,12 +259,12 @@
                         <h4>{{ __('Edit data') }}</h4>
                     </div>
                     <!-- <div class="col-lg-6">
-                                            <div class="text">
-                                                <p>Business challenges are tough but we.
+                                                            <div class="text">
+                                                                <p>Business challenges are tough but we.
 
-                                                </p>
-                                            </div>
-                                        </div> -->
+                                                                </p>
+                                                            </div>
+                                                        </div> -->
                 </div>
             </div>
 
@@ -301,14 +337,15 @@
                 <div class="col-lg-12 text-end">
                     <div class="mt-15">
 
-                        <a  class="butn butn-md butn-bord butn-rounded disabled">
+                        <a class="butn butn-md butn-bord butn-rounded disabled">
                             <span class="text">
                                 {{ __('AI életrajz generator') }}
                             </span>
 
                             <span class="icon ">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320">
-                                    <path d="m297.06 130.97c7.26-21.79 4.76-45.66-6.85-65.48-17.46-30.4-52.56-46.04-86.84-38.68-15.25-17.18-37.16-26.95-60.13-26.81-35.04-.08-66.13 22.48-76.91 55.82-22.51 4.61-41.94 18.7-53.31 38.67-17.59 30.32-13.58 68.54 9.92 94.54-7.26 21.79-4.76 45.66 6.85 65.48 17.46 30.4 52.56 46.04 86.84 38.68 15.24 17.18 37.16 26.95 60.13 26.8 35.06.09 66.16-22.49 76.94-55.86 22.51-4.61 41.94-18.7 53.31-38.67 17.57-30.32 13.55-68.51-9.94-94.51zm-120.28 168.11c-14.03.02-27.62-4.89-38.39-13.88.49-.26 1.34-.73 1.89-1.07l63.72-36.8c3.26-1.85 5.26-5.32 5.24-9.07v-89.83l26.93 15.55c.29.14.48.42.52.74v74.39c-.04 33.08-26.83 59.9-59.91 59.97zm-128.84-55.03c-7.03-12.14-9.56-26.37-7.15-40.18.47.28 1.3.79 1.89 1.13l63.72 36.8c3.23 1.89 7.23 1.89 10.47 0l77.79-44.92v31.1c.02.32-.13.63-.38.83l-64.41 37.19c-28.69 16.52-65.33 6.7-81.92-21.95zm-16.77-139.09c7-12.16 18.05-21.46 31.21-26.29 0 .55-.03 1.52-.03 2.2v73.61c-.02 3.74 1.98 7.21 5.23 9.06l77.79 44.91-26.93 15.55c-.27.18-.61.21-.91.08l-64.42-37.22c-28.63-16.58-38.45-53.21-21.95-81.89zm221.26 51.49-77.79-44.92 26.93-15.54c.27-.18.61-.21.91-.08l64.42 37.19c28.68 16.57 38.51 53.26 21.94 81.94-7.01 12.14-18.05 21.44-31.2 26.28v-75.81c.03-3.74-1.96-7.2-5.2-9.06zm26.8-40.34c-.47-.29-1.3-.79-1.89-1.13l-63.72-36.8c-3.23-1.89-7.23-1.89-10.47 0l-77.79 44.92v-31.1c-.02-.32.13-.63.38-.83l64.41-37.16c28.69-16.55 65.37-6.7 81.91 22 6.99 12.12 9.52 26.31 7.15 40.1zm-168.51 55.43-26.94-15.55c-.29-.14-.48-.42-.52-.74v-74.39c.02-33.12 26.89-59.96 60.01-59.94 14.01 0 27.57 4.92 38.34 13.88-.49.26-1.33.73-1.89 1.07l-63.72 36.8c-3.26 1.85-5.26 5.31-5.24 9.06l-.04 89.79zm14.63-31.54 34.65-20.01 34.65 20v40.01l-34.65 20-34.65-20z"/>
+                                    <path
+                                        d="m297.06 130.97c7.26-21.79 4.76-45.66-6.85-65.48-17.46-30.4-52.56-46.04-86.84-38.68-15.25-17.18-37.16-26.95-60.13-26.81-35.04-.08-66.13 22.48-76.91 55.82-22.51 4.61-41.94 18.7-53.31 38.67-17.59 30.32-13.58 68.54 9.92 94.54-7.26 21.79-4.76 45.66 6.85 65.48 17.46 30.4 52.56 46.04 86.84 38.68 15.24 17.18 37.16 26.95 60.13 26.8 35.06.09 66.16-22.49 76.94-55.86 22.51-4.61 41.94-18.7 53.31-38.67 17.57-30.32 13.55-68.51-9.94-94.51zm-120.28 168.11c-14.03.02-27.62-4.89-38.39-13.88.49-.26 1.34-.73 1.89-1.07l63.72-36.8c3.26-1.85 5.26-5.32 5.24-9.07v-89.83l26.93 15.55c.29.14.48.42.52.74v74.39c-.04 33.08-26.83 59.9-59.91 59.97zm-128.84-55.03c-7.03-12.14-9.56-26.37-7.15-40.18.47.28 1.3.79 1.89 1.13l63.72 36.8c3.23 1.89 7.23 1.89 10.47 0l77.79-44.92v31.1c.02.32-.13.63-.38.83l-64.41 37.19c-28.69 16.52-65.33 6.7-81.92-21.95zm-16.77-139.09c7-12.16 18.05-21.46 31.21-26.29 0 .55-.03 1.52-.03 2.2v73.61c-.02 3.74 1.98 7.21 5.23 9.06l77.79 44.91-26.93 15.55c-.27.18-.61.21-.91.08l-64.42-37.22c-28.63-16.58-38.45-53.21-21.95-81.89zm221.26 51.49-77.79-44.92 26.93-15.54c.27-.18.61-.21.91-.08l64.42 37.19c28.68 16.57 38.51 53.26 21.94 81.94-7.01 12.14-18.05 21.44-31.2 26.28v-75.81c.03-3.74-1.96-7.2-5.2-9.06zm26.8-40.34c-.47-.29-1.3-.79-1.89-1.13l-63.72-36.8c-3.23-1.89-7.23-1.89-10.47 0l-77.79 44.92v-31.1c-.02-.32.13-.63.38-.83l64.41-37.16c28.69-16.55 65.37-6.7 81.91 22 6.99 12.12 9.52 26.31 7.15 40.1zm-168.51 55.43-26.94-15.55c-.29-.14-.48-.42-.52-.74v-74.39c.02-33.12 26.89-59.96 60.01-59.94 14.01 0 27.57 4.92 38.34 13.88-.49.26-1.33.73-1.89 1.07l-63.72 36.8c-3.26 1.85-5.26 5.31-5.24 9.06l-.04 89.79zm14.63-31.54 34.65-20.01 34.65 20v40.01l-34.65 20-34.65-20z" />
                                 </svg>
                             </span>
 
@@ -318,28 +355,65 @@
 
                 <div class="container mt-25 col-12 col-lg-8">
                     <label class="form-label">{{ __('Main image') }}</label>
-                    <div class="drag-area">
-                        <!-- Если фото существует, отображаем его -->
+                    <div class="">
+                        <!-- Отображение текущего фото из базы данных -->
                         @if (isset($memorial->photo) && $memorial->photo)
-                            <img src="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photo) }}"
-                                alt="Фото">
-                            <button type="button" class="deleteBtn butn butn-md butn-danger butn-rounded">
-                                {{ __('Delete image') }}
+                            <div class="existing-photo mb-3">
+                                <div class="drag-area">
+                                    <img src="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photo) }}"
+                                        alt="Фото" style="max-width: 100%;">
 
-                            </button>
-                        @else
-                            <!-- Если фото нет, показываем стандартную форму загрузки -->
-                            <div class="icon">
-                                <i class="fas fa-images " style="color: gray; opacity: 0.7;"></i>
+                                        
+
+                                </div>
+                                <div class="col-lg-12 mt-15 text-end">
+                                    <button type="button" class="deleteBtn butn butn-md butn-danger butn-rounded mt-1" >
+                                        <span class="text">
+                                            {{ __('Delete image') }}
+                                        </span>
+                                        <span class="icon">
+                                            <i class="fa-regular fa-trash-can"></i>
+                                        </span>
+                                    </button>
+                                </div>
                             </div>
-                            <span class="header">Húzza ide a fényképet</span>
-                            <span class="header">vagy nyissa meg a </span>
-                            <div class="text-center mb-10 mt-10">
-                                <span class="button butn butn-md butn-bord butn-rounded">böngészőben</span>
-                            </div>
-                            <span class="support">Fényképformátum: JPEG, JPG, PNG</span>
                         @endif
-                        <input name="photo" type="file" hidden />
+
+                        <!-- Область для загрузки и обрезки нового фото -->
+                        <div class="drag-area text-white border-secondary" id="imageContainer"
+                            style="{{ isset($memorial->photo) && $memorial->photo ? 'display: none;' : '' }}">
+                            <div class="default-content text-center">
+                                <div class="icon">
+                                    <i class="fas fa-images"></i>
+                                </div>
+                                <span class="header">{{ __('Drag your photo here') }}</span>
+                                <span class="header">{{ __('or open it in') }}</span>
+                                <div class="text-center mb-10 mt-10">
+                                    <span class="button butn butn-md butn-bord butn-rounded"
+                                        id="fileTrigger">{{ __('browser') }}</span>
+                                </div>
+                                <span class="support">{{ __('Photo formats: JPEG, JPG, PNG') }}</span>
+                            </div>
+                            <img id="image" src="" alt="Photo to crop" style="max-width: 100%; display: none;">
+                            <input id="photoInput" name="photo" type="file" hidden
+                                accept="image/jpeg, image/jpg, image/png" />
+                            <input type="hidden" name="crop_x" id="cropX">
+                            <input type="hidden" name="crop_y" id="cropY">
+                            <input type="hidden" name="crop_width" id="cropWidth">
+                            <input type="hidden" name="crop_height" id="cropHeight">
+                        </div>
+
+                        <!-- Контейнер для описания и кнопки замены -->
+                        <div class="crop-controls mt-2" style="display: none;">
+                            <span class="crop-instruction text-dark me-2">
+                                <small>
+                                    Húzza a vágási területet úgy, hogy a kép középre kerüljön.
+                                </small>
+                            </span>
+                            <button type="button" id="removePhoto" class="btn btn-danger btn-sm">
+                                <span class="icon"><i class="fa-solid fa-trash"></i></span>
+                            </button>
+                        </div>
 
                     </div>
                 </div>
@@ -347,14 +421,13 @@
                 <div class="container mt-25 col-12 col-lg-4">
                     <label class="form-label">{{ __('QR-Code letöltése') }}</label>
                     <div class="text-center">
-                        <img src="{{ asset('storage/qrcodes/' . $memorial->id . '.png') }}" 
-                             style="height: 293px !important; width: 293px !important; border-radius: 20px;">
+                        <img src="{{ asset('storage/qrcodes/' . $memorial->id . '.png') }}"
+                            style="height: 293px !important; width: 293px !important; border-radius: 20px;">
                     </div>
                     <div class="col-lg-12 text-end">
                         <div class="mt-15">
-                            <a href="{{ asset('storage/qrcodes/' . $memorial->id . '.png') }}" 
-                               download="qrcode_{{ $memorial->id }}.png" 
-                               class="butn butn-md butn-bord butn-rounded">
+                            <a href="{{ asset('storage/qrcodes/' . $memorial->id . '.png') }}"
+                                download="qrcode_{{ $memorial->id }}.png" class="butn butn-md butn-bord butn-rounded">
                                 <span class="text">
                                     {{ __('QR-Code letöltése') }}
                                 </span>
@@ -365,8 +438,8 @@
                         </div>
                     </div>
                 </div>
-                
-            
+
+
 
             </div>
         </section>
@@ -734,137 +807,147 @@
 @endsection
 
 @section('js')
+    <!-- Cropper.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
     <script>
-        const dropArea = document.querySelector('.drag-area');
-        const dragText = document.querySelector('.header');
-        let button = dropArea.querySelector('.button');
-        let input = dropArea.querySelector('input');
-        let file;
+        let cropper;
+        let originalFile;
 
-        // Функция инициализации всех обработчиков событий
-        function initializeEventListeners() {
-            button = dropArea.querySelector('.button');
-            input = dropArea.querySelector('input');
+        const form = document.getElementById('uploadForm');
+        const dragArea = document.getElementById('imageContainer');
+        const fileInput = document.getElementById('photoInput');
+        const fileTrigger = document.getElementById('fileTrigger');
+        const image = document.getElementById('image');
+        const defaultContent = dragArea.querySelector('.default-content');
+        const cropControls = document.querySelector('.crop-controls');
+        const removePhotoBtn = document.getElementById('removePhoto');
+        const deleteBtn = document.querySelector('.deleteBtn');
+        const existingPhoto = document.querySelector('.existing-photo');
+        const cropX = document.getElementById('cropX');
+        const cropY = document.getElementById('cropY');
+        const cropWidth = document.getElementById('cropWidth');
+        const cropHeight = document.getElementById('cropHeight');
 
-            // Если кнопка загрузки существует, назначаем обработчик
-            if (button) {
-                button.onclick = () => {
-                    input.click();
-                };
-            }
+        fileTrigger.addEventListener('click', () => fileInput.click());
 
-            // Обработчик для выбора файла
-            input.addEventListener('change', function() {
-                file = this.files[0];
-                dropArea.classList.add('active');
-                displayFile();
-            });
+        function handleFile(file) {
+            if (file && file.type.startsWith('image/')) {
+                originalFile = file;
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    image.src = event.target.result;
+                    image.style.display = 'block';
+                    defaultContent.style.display = 'none';
+                    cropControls.style.display = 'flex'; // Показываем описание и кнопку
+                    if (existingPhoto) existingPhoto.style.display = 'none'; // Скрываем текущее фото
 
-            // Обработчики для drag-and-drop
-            dropArea.addEventListener('dragover', (event) => {
-                event.preventDefault();
-                dropArea.classList.add('active');
-                dragText.textContent = 'Release to Upload';
-            });
+                    if (cropper) {
+                        cropper.destroy();
+                    }
 
-            dropArea.addEventListener('dragleave', () => {
-                dropArea.classList.remove('active');
-                dragText.textContent = 'Drag & Drop';
-            });
-
-            dropArea.addEventListener('drop', (event) => {
-                event.preventDefault();
-                file = event.dataTransfer.files[0];
-                displayFile();
-            });
-
-            // Обработчик для кнопки удаления фото
-            const deleteBtn = dropArea.querySelector('.deleteBtn');
-            if (deleteBtn) {
-                deleteBtn.addEventListener('click', () => {
-                    resetDropArea();
-                });
-            }
-        }
-
-        // Инициализируем обработчики при загрузке страницы
-        initializeEventListeners();
-
-        // Функция для отображения загруженного файла
-        function displayFile() {
-            let fileType = file.type;
-            let validExtensions = ['image/jpeg', 'image/jpg', 'image/png'];
-
-            if (validExtensions.includes(fileType)) {
-                let fileReader = new FileReader();
-
-                fileReader.onload = () => {
-                    let fileURL = fileReader.result;
-                    dropArea.innerHTML = `
-                    <img src="${fileURL}" alt="">
-                    <button type="button" class="deleteBtn butn butn-md butn-danger butn-rounded">
-                        Kép törlése
-                    </button>
-                    <span class="button"></span>
-                    <input name="photo" type="file" hidden />
-                `;
-
-                    // Переназначаем элементы
-                    button = dropArea.querySelector('.button');
-                    input = dropArea.querySelector('input');
-
-                    // Обработчик для кнопки удаления
-                    const deleteBtn = dropArea.querySelector('.deleteBtn');
-                    deleteBtn.addEventListener('click', () => {
-                        resetDropArea();
+                    cropper = new Cropper(image, {
+                        aspectRatio: 1 / 1,
+                        viewMode: 1,
+                        autoCropArea: 0.97,
+                        scalable: false,
+                        zoomable: false,
+                        movable: true,
+                        cropBoxResizable: true,
+                        crop: function(event) {
+                            const cropData = cropper.getData();
+                            cropX.value = Math.round(cropData.x);
+                            cropY.value = Math.round(cropData.y);
+                            cropWidth.value = Math.round(cropData.width);
+                            cropHeight.value = Math.round(cropData.height);
+                        }
                     });
-
-                    // Восстанавливаем обработчик для кнопки выбора файла
-                    button.onclick = () => {
-                        input.click();
-                    };
-
-                    // Устанавливаем файл в input
-                    const dataTransfer = new DataTransfer();
-                    dataTransfer.items.add(file);
-                    input.files = dataTransfer.files;
                 };
-                fileReader.readAsDataURL(file);
-            } else {
-                alert('This is not an Image File');
-                dropArea.classList.remove('active');
+                reader.readAsDataURL(file);
             }
         }
 
-        // Функция для сброса dropArea
-        function resetDropArea() {
-            dropArea.innerHTML = `
-            <div class="icon">
-                <i class="fas fa-images"></i>
-            </div>
-            <span class="header">Húzza ide a fényképet</span>
-            <span class="header">vagy nyissa meg a </span>
-            <div class="text-center mb-10 mt-10">
-                <span class="button butn butn-md butn-bord butn-rounded">böngészőben</span>
-            </div>
-            <input name="photo" type="file" hidden/>
-            <span class="support">Fényképformátum: JPEG, JPG, PNG</span>
-        `;
+        // Удаление нового фото из формы
+        removePhotoBtn.addEventListener('click', () => {
+            if (cropper) {
+                cropper.destroy();
+            }
+            image.src = '';
+            image.style.display = 'none';
+            defaultContent.style.display = 'block';
+            cropControls.style.display = 'none';
+            fileInput.value = '';
+            cropX.value = '';
+            cropY.value = '';
+            cropWidth.value = '';
+            cropHeight.value = '';
+            if (existingPhoto) existingPhoto.style.display = 'block'; // Показываем текущее фото, если оно есть
+        });
 
-            // Переназначаем элементы после сброса
-            button = dropArea.querySelector('.button');
-            input = dropArea.querySelector('input');
-
-            // Восстанавливаем обработчик клика для кнопки выбора файла
-            button.onclick = () => {
-                input.click();
-            };
-
-            // Удаляем класс active
-            dropArea.classList.remove('active');
-
-            // Заново инициализируем все обработчики событий
-            initializeEventListeners();
+        // Удаление фото из базы данных
+        if (deleteBtn) {
+            deleteBtn.addEventListener('click', () => {
+                if (confirm('{{ __('Are you sure you want to delete this image?') }}')) {
+                    fetch('{{ route('photo.delete', $memorial->id) }}', {
+                            method: 'DELETE',
+                            headers: {
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json'
+                            }
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                return response.text().then(text => {
+                                    throw new Error(`Server error ${response.status}: ${text}`);
+                                });
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            if (data.success) {
+                                existingPhoto.remove();
+                                dragArea.style.display = 'block';
+                            } else {
+                                alert(data.message || 'Error deleting photo');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Failed to delete photo: ' + error.message);
+                        });
+                }
+            });
         }
+
+        dragArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dragArea.classList.add('active');
+        });
+
+        dragArea.addEventListener('dragleave', () => {
+            dragArea.classList.remove('active');
+        });
+
+        dragArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dragArea.classList.remove('active');
+            const file = e.dataTransfer.files[0];
+            handleFile(file);
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            handleFile(file);
+        });
+
+        // form.addEventListener('submit', (e) => {
+        //     if (cropper) {
+        //         const cropData = cropper.getData();
+        //         cropX.value = Math.round(cropData.x);
+        //         cropY.value = Math.round(cropData.y);
+        //         cropWidth.value = Math.round(cropData.width);
+        //         cropHeight.value = Math.round(cropData.height);
+        //     }
+        // });
     </script>
 @endsection

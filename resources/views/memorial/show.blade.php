@@ -4,6 +4,22 @@
 
 @section('css')
 <style>
+.google-map {
+  height: 340px;
+  width: 100%;
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  border-radius: 15px;
+  overflow: hidden; }
+ .google-map iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; 
+}
+
+
     .butn-vid .vid {
         width: 55px;
         height: 55px;
@@ -166,8 +182,10 @@
                     <div class="items col-lg-6 order-md-2">
                         <div class="item">
                             <div class="img">
-                                <img src="{{ asset('storage/' . $images->first()->image_path) }}"
-                                    alt="Изображение мемориала">
+                                <a href="{{ asset('storage/' . $images->first()->image_path) }}" class="glightbox">
+                                    <img src="{{ asset('storage/' . $images->first()->image_path) }}" alt="{{ $images->first()->image_description ?? 'Gallery Image' }}">
+                                </a>
+
                             </div>
                             <div class="cont mt-30">
                                 <div class="info sub-color mb-10">
@@ -238,7 +256,9 @@
                             <div class="items col-lg-6 order-md-2">
                                 <div class="item">
                                     <div class="img">
-                                        <img src="{{ asset('storage/' . $image->image_path) }}">
+                                        <a href="{{ asset('storage/' . $image->image_path) }}" class="glightbox">
+                                            <img src="{{ asset('storage/' . $image->image_path) }}" alt="{{ $image->image_description ?? 'Gallery Image' }}">
+                                        </a>
                                     </div>
                                     <div class="cont mt-30">
                                         <div class="info sub-color mb-10">
@@ -401,6 +421,39 @@
     </section>
 
     <!-- ==================== End Testimonials ==================== -->
+
+    @if(!empty($memorial->story))
+
+        <section class="awards-sa ">
+            <div class="container">
+                <div class="sec-head mb-100">
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <h6 class="sub-head">Térkép</h6>
+                        </div>
+                        <div class="col-lg-7">
+
+                            <h4>A térkép:
+                                <span class="sub-color inline">segít könnyen megtalálni a síremléket a temetőben.</span>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <div class="mb-100">
+                        <div class="google-map">
+                            <iframe id="gmap_canvas"
+                                src="https://maps.google.com/maps?q={{ urlencode($memorial->story) }}&t=&z=14&ie=UTF8&iwloc=&output=embed">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    @endif
+
+
 @endsection
 
 @section('js')

@@ -32,7 +32,15 @@ class MemorialController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('memorial.show', compact('memorial', 'images', 'comments'));
+        $theme = $memorial->testimonials ?? 'light';
+
+        if ($theme === 'dark') {
+            return view('memorial.show', compact('memorial', 'images', 'comments'));
+        } else {
+            return view('memorial.create', compact('memorial'));
+        }
+
+        return view('memorial.show', compact('memorial', 'images', 'comments', 'theme'));
     }
 
     public function create()
@@ -48,7 +56,11 @@ class MemorialController extends Controller
             'birth_date' => 'required|string|min:3|max:255',
             'death_date' => 'required|string|min:3|max:255',
             'biography' => 'required|string|min:3|max:2255',
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:22048',
+            'photo' => 'required|image|mimes:jpeg,jpg,png',
+            'crop_x' => 'nullable|numeric',
+            'crop_y' => 'nullable|numeric',
+            'crop_width' => 'nullable|numeric',
+            'crop_height' => 'nullable|numeric',
         ]);
 
         $admin_id = Auth::user()->id;
@@ -77,26 +89,62 @@ class MemorialController extends Controller
         $memorial->testimonials = 'dark';
         $memorial->save();
 
-        // Обрабатываем фотографию
         if ($request->hasFile('photo')) {
             $photo = $request->file('photo');
             $originalName = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
             $slugName = Str::slug($originalName);
             $filename = $slugName . '_' . time() . '.webp';
-            
+
             // Создаем путь с ID мемориала
             $path = 'images/memorials/' . $memorial->id;
-            
-            $image = Image::read($photo)
-                ->scale(width: 1300)
-                ->toWebp(90);
-            
+
+            // Загружаем изображение
+            $image = Image::read($photo);
+
+            // Применяем обрезку, если указаны координаты
+            if ($request->filled('crop_width') && $request->filled('crop_height')) {
+                $image->crop(
+                    $request->input('crop_width'),
+                    $request->input('crop_height'),
+                    $request->input('crop_x', 0),
+                    $request->input('crop_y', 0)
+                );
+            }
+
+            // Масштабируем и конвертируем в WebP
+            $image->scale(width: 1300)->toWebp(90);
+
             // Сохраняем новое фото
-            Storage::disk('public')->put($path . '/' . $filename, $image->toString());
-            
+            Storage::disk('public')->put(
+                $path . '/' . $filename, 
+                $image->encode()->__toString()
+            );
+
+            // Сохраняем имя файла в модели
             $memorial->photo = $filename;
             $memorial->save();
         }
+
+                // Обрабатываем фотографию
+                // if ($request->hasFile('photo')) {
+                //     $photo = $request->file('photo');
+                //     $originalName = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
+                //     $slugName = Str::slug($originalName);
+                //     $filename = $slugName . '_' . time() . '.webp';
+                    
+                //     // Создаем путь с ID мемориала
+                //     $path = 'images/memorials/' . $memorial->id;
+                    
+                //     $image = Image::read($photo)
+                //         ->scale(width: 1300)
+                //         ->toWebp(90);
+                    
+                //     // Сохраняем новое фото
+                //     Storage::disk('public')->put($path . '/' . $filename, $image->toString());
+                    
+                //     $memorial->photo = $filename;
+                //     $memorial->save();
+                // }
 
         // Генерируем и сохраняем QR-код
         $this->generateQRCode($token, $memorial);
@@ -119,7 +167,11 @@ class MemorialController extends Controller
             'birth_date' => 'required|string|min:3|max:255',
             'death_date' => 'required|string|min:3|max:255',
             'biography' => 'required|string|min:3|max:22255',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'photo' => 'image|mimes:jpeg,jpg,png',
+            'crop_x' => 'nullable|numeric',
+            'crop_y' => 'nullable|numeric',
+            'crop_width' => 'nullable|numeric',
+            'crop_height' => 'nullable|numeric',
         ]);
 
         $memorial = Memorial::findOrFail($id);
@@ -136,25 +188,35 @@ class MemorialController extends Controller
         if ($request->hasFile('photo')) {
             $photo = $request->file('photo');
             $originalName = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
-            $slugName = Str::slug($originalName); // Делаем имя безопасным
-            $filename = $slugName . '_' . time() . '.webp'; // Устанавливаем WebP
+            $slugName = Str::slug($originalName);
+            $filename = $slugName . '_' . time() . '.webp';
 
             // Создаем путь с ID мемориала
             $path = 'images/memorials/' . $memorial->id;
 
-            $image = Image::read($photo)
-            ->scale(width: 1300)
-            ->toWebp(90);
+            // Загружаем изображение
+            $image = Image::read($photo);
 
-            // Удаляем старое фото, если оно есть
-            if ($memorial->photo) {
-                Storage::disk('public')->delete($path . '/' . $memorial->photo);
+            // Применяем обрезку, если указаны координаты
+            if ($request->filled('crop_width') && $request->filled('crop_height')) {
+                $image->crop(
+                    $request->input('crop_width'),
+                    $request->input('crop_height'),
+                    $request->input('crop_x', 0),
+                    $request->input('crop_y', 0)
+                );
             }
 
+            // Масштабируем и конвертируем в WebP
+            $image->scale(width: 1300)->toWebp(90);
+
             // Сохраняем новое фото
-            Storage::disk('public')->put($path . '/' . $filename, $image->toString());
+            Storage::disk('public')->put(
+                $path . '/' . $filename, 
+                $image->encode()->__toString()
+            );
 
-
+            // Сохраняем имя файла в модели
             $memorial->photo = $filename;
         }
 
@@ -291,6 +353,30 @@ class MemorialController extends Controller
         ->get();
 
         return view('memorial.comments', compact('memorial', 'comments'));
+    }
+
+
+    public function deletePhoto(Request $request, $id)
+    {
+        try {
+            $memorial = Memorial::findOrFail($id);
+
+            if ($memorial->photo) {
+                $filePath = 'images/memorials/' . $memorial->id . '/' . $memorial->photo;
+                if (Storage::disk('public')->exists($filePath)) {
+                    Storage::disk('public')->delete($filePath);
+                }
+                $memorial->photo = null;
+                $memorial->save();
+            }
+
+            return response()->json(['success' => true, 'message' => 'Photo deleted successfully']);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to delete photo: ' . $e->getMessage()
+            ], 500);
+        }
     }
 
 }

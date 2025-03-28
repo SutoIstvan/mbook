@@ -2,28 +2,10 @@
 
 @section('css')
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet">
     <style>
-        .cropper-modal {
-            background-color: rgb(0, 0, 0) !important;
-            opacity: 1 !important;
-        }
-
-        .image-container {
-            max-width: 100%;
-            margin-top: 20px;
-            display: none;
-        }
-
-        #image {
-            display: block;
-            max-width: 100%;
-        }
-
-        body {
+        body{
             background-color: #d9d9d9 !important;
         }
-
         :before,
         :after {
             margin: 0;
@@ -164,7 +146,6 @@
         .drag-area {
             position: relative;
             height: 290px;
-            width: 102%;
             border: 1.4px dashed #6c757d;
             border-radius: 4px;
             display: flex;
@@ -457,7 +438,7 @@
 
     <form action="{{ route('memorial.store') }}" method="POST" enctype="multipart/form-data" id="form">
         {{-- <form action="{{ route('memorial.create-with-qr') }}" method="POST" enctype="multipart/form-data" id="form"> --}}
-        @csrf
+            @csrf
 
         <div class="container">
             <div class="row d-flex justify-content-center">
@@ -472,13 +453,68 @@
                 <div class="col-12 col-md-7 p-3">
                     <div class="container">
                         <div class="row">
+                            {{-- <div class="mb-35">
+                                <label for="fullName" class="form-label ">Teljes név</label>
+                                <input name="name" type="text"
+                                    class="form-control  text-white border-secondary py-2" id="fullName"
+                                    placeholder="Teljes név"
+                                    value="{{ old('name')}}">
+                            </div> --}}
+                            {{-- <div class="col-12 col-md-6 mb-3">
+                                <label for="birth_date" class="form-label text-white">Születési dátum</label>
+                                <input name="birth_date" type="text"
+                                    class="form-control bg-dark text-white border-secondary py-2 datepicker" id="birth_date"
+                                    placeholder="00.00.0000">
+                            </div>
+                            <div class="col-12 col-md-6 mb-3">
+                                <label for="death_date" class="form-label text-white">Elhalálozás dátuma</label>
+                                <input name="death_date" type="text"
+                                    class="form-control bg-dark text-white border-secondary py-2" id="death_date"
+                                    placeholder="nn.hh.eeee">
+                            </div> --}}
+
+
+                            {{-- <div class="col-12 col-md-6 mb-3">
+                                <div class="form-group" data-bs-theme="dark">
+                                    <label for="birth_date" class="form-label text-white">Születési dátum</label>
+
+                                    <div class="input-group date" id="datetimepicker10" data-target-input="nearest">
+                                        <input name="birth_date" type="text"
+                                            value="{{ old('birth_date')}}"
+                                            class="form-control datetimepicker-input bg-dark text-white border-secondary py-2 datepicker"
+                                            data-target="#datetimepicker10" placeholder="éééé-hh-nn" />
+                                        <div class="input-group-append" data-target="#datetimepicker10"
+                                            data-toggle="datetimepicker">
+                                            <div class="input-group-text"><i class="fa fa-calendar"
+                                                    style="line-height: 1.8 !important;"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6 mb-3">
+                                <div class="form-group" data-bs-theme="dark">
+                                    <label for="death_date" class="form-label text-white">Elhalálozás dátuma</label>
+
+                                    <div class="input-group date" id="datetimepicker11" data-target-input="nearest">
+                                        <input name="death_date" type="text"
+                                            value="{{ old('death_date')}}"
+                                            class="form-control datetimepicker-input bg-dark text-white border-secondary py-2 datepicker"
+                                            data-target="#datetimepicker11" placeholder="éééé-hh-nn" />
+                                        <div class="input-group-append" data-target="#datetimepicker11"
+                                            data-toggle="datetimepicker">
+                                            <div class="input-group-text"><i class="fa fa-calendar"
+                                                    style="line-height: 1.8 !important;"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> --}}
+
 
                             <div class="mb-3">
                                 <div class="col-md-12">
                                     <label for="name" class="col-form-label text-md-end">{{ __('Full Name') }}</label>
-                                    <input id="name" type="text"
-                                        class="form-control @error('name') is-invalid @enderror" name="name"
-                                        value="{{ old('name') }}" required autocomplete="name" required>
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" required>
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -489,21 +525,17 @@
 
                             <div class="col-md-12 mb-3">
                                 <label for="birth_date" class="col-form-label text-md-end">{{ __('Date of Birth') }}</label>
-                                <input id="birth_date" type="date"
-                                    class="form-control @error('birth_date') is-invalid @enderror" name="birth_date"
-                                    value="{{ old('birth_date') }}" required>
+                                <input id="birth_date" type="date" class="form-control @error('birth_date') is-invalid @enderror" name="birth_date" value="{{ old('birth_date') }}" required>
                                 @error('birth_date')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
-
+                        
                             <div class="col-md-12 mb-3">
                                 <label for="death_date" class="col-form-label text-md-end">{{ __('Date of Death') }}</label>
-                                <input id="death_date" type="date"
-                                    class="form-control @error('death_date') is-invalid @enderror" name="death_date"
-                                    value="{{ old('death_date') }}">
+                                <input id="death_date" type="date" class="form-control @error('death_date') is-invalid @enderror" name="death_date" value="{{ old('death_date') }}">
                                 @error('death_date')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -511,15 +543,28 @@
                                 @enderror
                             </div>
 
+                            {{-- <input id="datepicker" class="form-control bg-dark text-white border-secondary py-2 datepicker" data-bs-theme="dark" placeholder="nn.hh.éééé"/> --}}
+
+
+
+
+                            {{-- <div class="mt-30">
+                                <label for="story" class="form-label text-white">Emlékezés, tiszteletadás</label>
+                                <textarea name="story" class="form-control bg-dark text-white border-secondary" id="story" rows="3"></textarea>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
+
+
+
             </div>
         </div>
 
 
         <div class="container">
             <div class="row d-flex justify-content-center">
+
 
                 <div class="col-12 col-md-3 p-4 mt-50">
                     <h3>Fő emlékkép</h3>
@@ -530,36 +575,21 @@
                     <div class="container">
                         <div class="row">
                             <div class="container">
-                                <label class="form-label">{{ __('Main Memory Image Upload') }}</label>
-                                <div class="drag-area text-white border-secondary" id="imageContainer">
-                                    <div class="default-content text-center">
-                                        <div class="icon">
-                                            <i class="fas fa-images"></i>
-                                        </div>
-                                        <span class="header">{{ __('Drag your photo here') }}</span>
-                                        <span class="header">{{ __('or open it in') }}</span>
-                                        <div class="text-center mb-10 mt-10">
-                                            <span class="button butn butn-md butn-bord butn-rounded" id="fileTrigger">{{ __('browser') }}</span>
-                                        </div>
-                                        <span class="support">{{ __('Photo formats: JPEG, JPG, PNG') }}</span>
+                                <label class="form-label">Fő emlékkép feltöltése</label>
+                                <div class="drag-area  text-white border-secondary">
+                                    <div class="icon">
+                                        <i class="fas fa-images"></i>
                                     </div>
-                                    <img id="image" src="" alt="Photo to crop" style="max-width: 100%; display: none;">
-                                    <input id="photoInput" name="photo" type="file" hidden accept="image/jpeg, image/jpg, image/png" />
-                                    <input type="hidden" name="crop_x" id="cropX">
-                                    <input type="hidden" name="crop_y" id="cropY">
-                                    <input type="hidden" name="crop_width" id="cropWidth">
-                                    <input type="hidden" name="crop_height" id="cropHeight">
-                                </div>
-                                <!-- Контейнер для описания и кнопки -->
-                                <div class="crop-controls mt-2" style="display: none;">
-                                    <span class="crop-instruction text-dark me-2">
-                                        <small>
-                                            {{ __('Drag the crop area to adjust the selection') }}
-                                        </small>
-                                    </span>
-                                    <button type="button" id="removePhoto" class="btn btn-danger btn-sm">
-                                        {{ __('Remove Photo') }}
-                                    </button>
+
+                                    <span class="header">Húzza ide a fényképet</span>
+                                    <span class="header">vagy nyissa meg a </span>
+
+                                    <div class="text-center mb-10 mt-10">
+                                        <span class="button butn butn-md butn-bord butn-rounded">böngészőben</span>
+                                    </div>
+
+                                    <input name="photo" type="file" hidden />
+                                    <span class="support">Fényképformátum: JPEG, JPG, PNG</span>
                                 </div>
                             </div>
                         </div>
@@ -568,7 +598,6 @@
 
             </div>
         </div>
-
 
 
         <div class="container">
@@ -582,11 +611,18 @@
                 </div>
 
                 <div class="col-12 col-md-7 p-3">
+                    {{-- <div class="container">
+                        <div class="row">
+                            <div class="mt-30">
+                                <label for="biography" class="form-label text-white">Életrajz</label>
+                                <textarea name="biography" class="form-control bg-dark text-white border-secondary" id="biography" rows="12">{{ old('biography')}}</textarea>
+                            </div>
+                        </div>
+                    </div> --}}
 
                     <div class="container mt-50">
                         <label for="biography" class="col-form-label text-md-end">{{ __('Biography') }}</label>
-                        <textarea id="biography" class="form-control @error('biography') is-invalid @enderror" name="biography"
-                            rows="7">{{ old('biography') }}</textarea>
+                        <textarea id="biography" class="form-control @error('biography') is-invalid @enderror" name="biography" rows="7">{{ old('biography') }}</textarea>
                         @error('biography')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -595,8 +631,59 @@
                     </div>
 
                 </div>
+
+
+
+
             </div>
         </div>
+
+        {{-- <input name="token" value="{{ $token }}" hidden> --}}
+
+
+
+
+
+        {{-- <div class="container mt-100 mb-50">
+
+            <!--Avatar-->
+            <div>
+                <div class="d-flex justify-content-center mt-100 mb-50">
+                    <img id="selectedAvatar" src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
+                        class="rounded-circle" style="width: 200px; height: 200px; object-fit: cover;"
+                        alt="example placeholder" />
+                </div>
+                <div class="d-flex justify-content-center">
+                    <div data-mdb-ripple-init class="btn btn-primary btn-rounded">
+                        <label class="form-label text-white m-1" for="customFile2">Choose file</label>
+                        <input name="photo" type="file" class="form-control d-none" id="customFile2"
+                            onchange="displaySelectedImage(event, 'selectedAvatar')" />
+                    </div>
+                </div>
+            </div>
+
+        </div> --}}
+
+        {{-- <div class="container">
+        <div class="row d-flex justify-content-center mt-4 mb-50">
+            <div class="col-12 col-md-3 p-4">
+                <h3 class="text-white">Fényképek</h3>
+                <p class="mt-2 text-white-50">Töltsön fel néhány fényképet, később dátumot és további adatokat is megadhat.</p>
+            </div>
+
+            <div class="col-12 col-md-7 p-3 ">
+                <div class="container">
+                    <div class="card bg-dark border-warning">
+                        <form method="post" action="{{url('images/store')}}" enctype="multipart/form-data"
+                            class="dropzone bg-dark text-white" id="dropzone">
+                            @csrf
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> --}}
+
 
         <div class="text-center pb-55 mt-40">
             <button type="submit" class="butn butn-md butn-bord butn-rounded" id="submitBtn">
@@ -610,118 +697,179 @@
 
     </form>
 
-
-
-
     </html>
 
 
 @endsection
 
 @section('js')
-
-    <!-- Cropper.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
     <script>
-    let cropper;
-    let originalFile;
+        // const picker = new tempusDominus.TempusDominus(document.getElementById('datepicker'), {
+        //     display: {
+        //         theme: 'dark'  // Устанавливает тёмную тему
+        //     }
+        // });
 
-    const form = document.getElementById('uploadForm');
-    const dragArea = document.getElementById('imageContainer');
-    const fileInput = document.getElementById('photoInput');
-    const fileTrigger = document.getElementById('fileTrigger');
-    const image = document.getElementById('image');
-    const defaultContent = dragArea.querySelector('.default-content');
-    const cropControls = document.querySelector('.crop-controls');
-    const removePhotoBtn = document.getElementById('removePhoto');
-    const cropX = document.getElementById('cropX');
-    const cropY = document.getElementById('cropY');
-    const cropWidth = document.getElementById('cropWidth');
-    const cropHeight = document.getElementById('cropHeight');
-
-    fileTrigger.addEventListener('click', () => fileInput.click());
-
-    function handleFile(file) {
-        if (file && file.type.startsWith('image/')) {
-            originalFile = file;
-            const reader = new FileReader();
-            reader.onload = function (event) {
-                image.src = event.target.result;
-                image.style.display = 'block';
-                defaultContent.style.display = 'none';
-                cropControls.style.display = 'flex'; // Показываем описание и кнопку
-
-                if (cropper) {
-                    cropper.destroy();
+        $(function() {
+            $('#datetimepicker10').datetimepicker({
+                viewMode: 'years',
+                format: 'YYYY-MM-DD',
+                display: {
+                    theme: 'dark' // Устанавливает тёмную тему
                 }
+            });
+        });
 
-                cropper = new Cropper(image, {
-                    aspectRatio: 1 / 1,
-                    viewMode: 1,
-                    autoCropArea: 0.97,
-                    scalable: false,
-                    zoomable: false,
-                    movable: true,
-                    cropBoxResizable: true,
-                    crop: function(event) {
-                        const cropData = cropper.getData();
-                        cropX.value = Math.round(cropData.x);
-                        cropY.value = Math.round(cropData.y);
-                        cropWidth.value = Math.round(cropData.width);
-                        cropHeight.value = Math.round(cropData.height);
-                    }
-                });
+        $(function() {
+            $('#datetimepicker11').datetimepicker({
+                viewMode: 'years',
+                format: 'YYYY-MM-DD',
+                display: {
+                    theme: 'dark' // Устанавливает тёмную тему
+                }
+            });
+        });
+
+        // gj.core.messages['hu-hu'] = {
+        //     monthNames: ['Január', 'Február', 'Március', 'Április', 'Május', 'Június', 'Július', 'Augusztus', 'Szeptember', 'Október', 'November', 'December'],
+        //     monthShortNames: ['Jan', 'Feb', 'Már', 'Ápr', 'Máj', 'Jún', 'Júl', 'Aug', 'Szept', 'Okt', 'Nov', 'Dec'],
+        //     weekDaysMin: ['V', 'H', 'K', 'Sz', 'Cs', 'P', 'Szo'],
+        //     weekDaysShort: ['Vas', 'Hét', 'Ked', 'Sze', 'Csü', 'Pén', 'Szo'],
+        //     weekDays: ['Vasárnap', 'Hétfő', 'Kedd', 'Szerda', 'Csütörtök', 'Péntek', 'Szombat'],
+        //     am: 'de.',
+        //     pm: 'du.',
+        //     ok: 'OK',
+        //     cancel: 'Mégse',
+        //     titleFormat: 'yyyy'
+        // };
+
+        // $('#datepicker').datepicker({
+        //     uiLibrary: 'bootstrap5',
+        //     format: 'yyyy-mm-dd',
+        //     weekStartDay: 1,
+        //     iconsLibrary: 'fontawesome',
+        //     locale: 'hu-hu',
+        //     showRightIcon: false
+        // });
+
+
+
+        const dropArea = document.querySelector('.drag-area');
+        const dragText = document.querySelector('.header');
+
+        let button = dropArea.querySelector('.button');
+        let input = dropArea.querySelector('input');
+
+        let file;
+
+        // Функция инициализации всех обработчиков событий
+        function initializeEventListeners() {
+            button = dropArea.querySelector('.button');
+            input = dropArea.querySelector('input');
+
+            button.onclick = () => {
+                input.click();
             };
-            reader.readAsDataURL(file);
+
+            input.addEventListener('change', function() {
+                file = this.files[0];
+                dropArea.classList.add('active');
+                displayFile();
+            });
+
+            dropArea.addEventListener('dragover', (event) => {
+                event.preventDefault();
+                dropArea.classList.add('active');
+                dragText.textContent = 'Release to Upload';
+            });
+
+            dropArea.addEventListener('dragleave', () => {
+                dropArea.classList.remove('active');
+                dragText.textContent = 'Drag & Drop';
+            });
+
+            dropArea.addEventListener('drop', (event) => {
+                event.preventDefault();
+                file = event.dataTransfer.files[0];
+                displayFile();
+            });
         }
-    }
 
-    // Удаление фото
-    removePhotoBtn.addEventListener('click', () => {
-        if (cropper) {
-            cropper.destroy(); // Уничтожаем Cropper.js
+        // Инициализируем обработчики при загрузке страницы
+        initializeEventListeners();
+
+        function displayFile() {
+            let fileType = file.type;
+            let validExtensions = ['image/jpeg', 'image/jpg', 'image/png'];
+
+            if (validExtensions.includes(fileType)) {
+                let fileReader = new FileReader();
+
+                fileReader.onload = () => {
+                    let fileURL = fileReader.result;
+                    dropArea.innerHTML = `
+                        <img src="${fileURL}" alt="">
+                            <button type="button" class="deleteBtn butn butn-md butn-danger butn-rounded">
+                                Kép törlése
+                            </button>
+                        <span class="button"></span>
+                        <input name="photo" type="file" hidden />
+                    `;
+
+                    // Переназначаем элементы
+                    button = dropArea.querySelector('.button');
+                    input = dropArea.querySelector('input');
+                    const deleteBtn = dropArea.querySelector('.deleteBtn');
+
+                    // Обработчик для кнопки удаления
+                    deleteBtn.addEventListener('click', () => {
+                        // Возвращаем начальный HTML для drag-area
+                        dropArea.innerHTML = `
+                            <div class="icon">
+                                <i class="fas fa-images"></i>
+                            </div>
+                            <span class="header">Húzza ide a fényképet</span>
+                            <span class="header">vagy nyissa meg a </span>
+                            <div class="text-center mb-10 mt-10">
+                                <span class="button butn butn-md butn-bord butn-rounded">böngészőben</span>
+                            </div>
+                            <input name="photo" type="file" hidden/>
+                            <span class="support">Fényképformátum: JPEG, JPG, PNG</span>
+                        `;
+
+                        // Переназначаем элементы после сброса
+                        button = dropArea.querySelector('.button');
+                        input = dropArea.querySelector('input');
+
+                        // Восстанавливаем обработчик клика для кнопки выбора файла
+                        button.onclick = () => {
+                            input.click();
+                        };
+
+                        // Удаляем класс active
+                        dropArea.classList.remove('active');
+
+                        // Заново инициализируем все обработчики событий
+                        initializeEventListeners();
+                    });
+
+                    // Восстанавливаем обработчик для кнопки выбора файла
+                    button.onclick = () => {
+                        input.click();
+                    };
+
+                    // Устанавливаем файл в input
+                    const dataTransfer = new DataTransfer();
+                    dataTransfer.items.add(file);
+                    input.files = dataTransfer.files;
+                };
+                fileReader.readAsDataURL(file);
+            } else {
+                alert('This is not an Image File');
+                dropArea.classList.remove('active');
+            }
         }
-        image.src = ''; // Очищаем изображение
-        image.style.display = 'none'; // Скрываем изображение
-        defaultContent.style.display = 'block'; // Показываем исходный контент
-        cropControls.style.display = 'none'; // Скрываем описание и кнопку
-        fileInput.value = ''; // Сбрасываем input для новой загрузки
-        cropX.value = ''; // Очищаем координаты
-        cropY.value = '';
-        cropWidth.value = '';
-        cropHeight.value = '';
-    });
 
-    dragArea.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        dragArea.classList.add('active');
-    });
-
-    dragArea.addEventListener('dragleave', () => {
-        dragArea.classList.remove('active');
-    });
-
-    dragArea.addEventListener('drop', (e) => {
-        e.preventDefault();
-        dragArea.classList.remove('active');
-        const file = e.dataTransfer.files[0];
-        handleFile(file);
-    });
-
-    fileInput.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        handleFile(file);
-    });
-
-    form.addEventListener('submit', (e) => {
-        if (cropper) {
-            const cropData = cropper.getData();
-            cropX.value = Math.round(cropData.x);
-            cropY.value = Math.round(cropData.y);
-            cropWidth.value = Math.round(cropData.width);
-            cropHeight.value = Math.round(cropData.height);
-        }
-    });
 
         document.getElementById("form").addEventListener("submit", function(event) {
             let button = document.getElementById("submitBtn");

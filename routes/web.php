@@ -26,6 +26,7 @@ Route::middleware(['auth', UserAccess::class . ':user'])->group(function () {
     Route::post('/store', [MemorialController::class, 'store'])->name('memorial.store');
     Route::get('/dashboard/{memorial}/edit', [DashboardController::class, 'edit'])->name('dashboard.edit');
     Route::put('/dashboard/memorial/{id}', [MemorialController::class, 'update'])->name('memorial.update');
+    Route::delete('/photo/delete/{id}', [MemorialController::class, 'deletePhoto'])->name('photo.delete');
 
     Route::get('/dashboard/{memorial}/settings', [DashboardController::class, 'settings'])->name('dashboard.settings');
     Route::post('/dashboard/{memorial}/settings', [DashboardController::class, 'updateSettings'])->name('dashboard.settings.update');
@@ -46,6 +47,7 @@ Route::middleware(['auth', UserAccess::class . ':user'])->group(function () {
     Route::get('/dashboard/{memorial}/help', [DashboardController::class, 'help'])->name('dashboard.help');
     
     Route::delete('/dashboard/delete/{memorial}', [DashboardController::class, 'destroy'])->name('dashboard.destroy')->middleware('auth');
+
 });
 
 // Для админов

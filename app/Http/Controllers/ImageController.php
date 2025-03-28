@@ -164,4 +164,6 @@ class ImageController extends Controller
 
         return redirect()->back()->with('success', __('Image deleted successfully.'));
     }
+
+
 }
