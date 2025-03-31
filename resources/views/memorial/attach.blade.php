@@ -34,7 +34,7 @@
         }
 
         .holder {
-            background-image: url('../circle.png');
+            background-image: url('../../circle.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -454,11 +454,11 @@
         </div>
     </div>
 
-
     <form action="{{ route('memorial.store') }}" method="POST" enctype="multipart/form-data" id="uploadForm">
         {{-- <form action="{{ route('memorial.create-with-qr') }}" method="POST" enctype="multipart/form-data" id="form"> --}}
         @csrf
 
+        <input  name="qrtoken" value="{{ $token }}">
         <div class="container">
             <div class="row d-flex justify-content-center">
 

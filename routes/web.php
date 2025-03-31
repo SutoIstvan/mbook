@@ -17,7 +17,7 @@ Route::get('/', function () {
 });
 
 
-Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
+// Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
 
 // Для обычных пользователей
 Route::middleware(['auth', UserAccess::class . ':user'])->group(function () {
@@ -43,6 +43,7 @@ Route::middleware(['auth', UserAccess::class . ':user'])->group(function () {
     Route::post('/dashboard/{memorial}/photos', [ImageController::class, 'uploadImages'])->name('memorial.images.upload');
     Route::post('/dashboard/{memorial}/photos/update', [ImageController::class, 'updateImages'])->name('memorial.images.update');
     Route::delete('/dashboard/{memorial}/photos/{image}', [ImageController::class, 'destroy'])->name('memorial.images.destroy');
+    Route::delete('/dashboard/{memorial}/photos', [ImageController::class, 'destroyAllImages'])->name('memorials.images.destroyAll');
 
     Route::get('/dashboard/{memorial}/help', [DashboardController::class, 'help'])->name('dashboard.help');
     
@@ -53,11 +54,26 @@ Route::middleware(['auth', UserAccess::class . ':user'])->group(function () {
 // Для админов
 Route::middleware(['auth', UserAccess::class . ':admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
-    Route::get('/users', [AdminController::class, 'users'])->name('users');
-    Route::get('/settings', [AdminController::class, 'settings'])->name('settings');
+    Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
+    Route::get('/admin/settings', [AdminController::class, 'settings'])->name('admin.settings');
+    Route::get('/admin/memorials', [AdminController::class, 'memorials'])->name('admin.memorials');
+    Route::get('/admin/codeattach', [AdminController::class, 'codeattach'])->name('admin.codeattach');
+    Route::get('/admin/codegenerate', [AdminController::class, 'codegenerate'])->name('admin.codegenerate');
+
+    Route::post('/generate-qrcodes', [AdminController::class, 'generateUniqueToken'])->name('generate.qrcodes');
+    Route::post('/codelink', [AdminController::class, 'codelink'])->name('admin.codelink');
+
+    Route::get('/qrcodes/{filename}', function ($filename) {
+        $filePath = storage_path('app/qrcodes/' . $filename);
+        if (file_exists($filePath)) {
+            return response()->download($filePath);
+        }
+        return redirect()->back()->with('error', 'File not found');
+    })->name('download.qrcodes');
 
 });
 
+Route::get('/memorial/attach/{token}', [MemorialController::class, 'showAttachForm'])->name('memorial.attach.form')->middleware('auth');
 
 Route::get('/memorial/{memorial}', [MemorialController::class, 'show'])->name('memorial.show');
 Route::get('/memorial/{memorial}/biography', [MemorialController::class, 'biography'])->name('memorial.biography');

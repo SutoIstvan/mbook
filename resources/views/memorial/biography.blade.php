@@ -66,11 +66,11 @@
                             <div class="img fit-img radius-30 mt-50">
                                 @if ($images->isNotEmpty())
                                     <!-- Используем первую картинку из массива $images -->
-                                    <img src="{{ asset('storage/' . $images->first()->image_path) }}"
+                                    <img src="{{ asset('memorial/' . $images->first()->image_path) }}"
                                         alt="Изображение мемориала">
                                 @elseif ($memorial->photo)
                                     <!-- Если массив $images пустой, используем изображение из $memorial->photo -->
-                                    <img src="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photo) }}"
+                                    <img src="{{ asset('memorial/' . $memorial->slug . '/' . $memorial->photo) }}"
                                         alt="Изображение мемориала">
                                 @else
                                     <!-- Если нет ни одной картинки, выводим заглушку -->
@@ -89,7 +89,7 @@
             <div class="mimg fit-img">
 
                 {{-- <div class="mimg fit-img" style="filter: grayscale(100%);"> --}}
-                <img src="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photo) }}" alt="">
+                <img src="{{ asset('memorial/' . $memorial->slug . '/' . $memorial->photo) }}" alt="">
                 <div class="text">
                     <span class="fz-14 text-u mb-10">{{ $memorial->birth_date }} - {{ $memorial->death_date }}</span>
                     <p style="margin-left: 25px;">Míg éltél szerettünk<br> míg élünk nem feledünk!</p>

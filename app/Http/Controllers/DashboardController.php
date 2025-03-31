@@ -11,14 +11,24 @@ use Intervention\Image\Laravel\Facades\Image;
 
 class DashboardController extends Controller
 {
+
+
     public function index()
     {
-        $user = Auth::user();
-
-        $memorials = Memorial::where('admin_id', $user->id)->get();
-
-        return view('dashboard.index', compact('memorials'));
+        if (Auth::check()) {
+            if (Auth::user()->role === 'admin') {
+                return redirect()->route('admin');
+            } 
+            
+            $user = Auth::user();
+            $memorials = Memorial::where('admin_id', $user->id)->get();
+            return view('dashboard.index', ['memorials' => $memorials]);
+        }
+        
+        return redirect()->route('login');
     }
+    
+    
 
     public function edit(Memorial $memorial)
     {
@@ -37,16 +47,16 @@ class DashboardController extends Controller
         $request->validate([
             'private' => 'nullable|string|max:255',
             'theme' => 'required|in:light,dark',
-            'map_address' => 'nullable|string|max:255',
-            'slug' => 'required|string|alpha_dash|unique:memorials,slug,' . $memorial->id,
+            'coordinates' => 'nullable|string|max:255',
+            // 'slug' => 'required|string|alpha_dash|unique:memorials,slug,' . $memorial->id,
         ]);
 
         $memorial->update([
-            'history' => $request->has('private'),
-            'testimonials' => $request->input('theme'),
-            'story' => $request->input('map_address'),
+            'private' => $request->has('private'),
+            'theme' => $request->input('theme'),
+            'coordinates' => $request->input('coordinates'),
             // 'slug' => $request->input('slug'),
-            'slug' => Str::slug($request->input('slug')),
+            // 'slug' => Str::slug($request->input('slug')),
         ]);
 
         // return redirect()->back()->with('success', __('Settings saved successfully!'));
@@ -78,31 +88,31 @@ class DashboardController extends Controller
     {
         // dd($request);
         $request->validate([
-            'video_photos' => 'image|mimes:jpeg,png,jpg,gif|max:22048',
+            'video_thumbnail' => 'image|mimes:jpeg,png,jpg,gif|max:22048',
             'video' => 'nullable|string|max:255',
         ]);
 
         $memorial = Memorial::findOrFail($memorial->id);
         $memorial->video = $request->video;
 
-            if ($request->hasFile('video_photos')) {
-                $photo = $request->file('video_photos');
-                $originalName = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
-                $slugName = Str::slug($originalName);
-                $filename = $slugName . '_' . time() . '.png';
-                
-                // Создаем путь с ID мемориала
-                $path = 'images/memorials/' . $memorial->id;
-                
-                $image = Image::read($photo)
-                    ->scale(width: 1300)
-                    ->toWebp(90);
-                
-                // Сохраняем новое фото
-                Storage::disk('public')->put($path . '/' . $filename, $image->toString());
-                
-                $memorial->photos = $filename;
-                $memorial->save();
+            if ($request->hasFile('video_thumbnail')) {
+                Storage::disk('memorial')->delete($memorial->slug . '/' . $memorial->video_thumbnail);
+
+                $videoThumbnail = $request->file('video_thumbnail');
+                $filename = $memorial->slug . '-' . substr(time(), -6) . '-video' . '.webp';// Имя файла: memorial-slug_timestamp.webp
+
+                // Загружаем изображение
+                $image = Image::read($videoThumbnail);
+
+                // Масштабируем и конвертируем в WebP
+                $image->scale(width: 1300)->toWebp(90);
+
+                Storage::disk('memorial')->put(
+                    $memorial->slug . '/' . $filename,
+                    $image->encode()->__toString()
+                );                
+                // Сохраняем новое фото                
+                $memorial->video_thumbnail = $filename;
             }
         $memorial->save();
 

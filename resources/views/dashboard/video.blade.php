@@ -157,11 +157,11 @@
             <!-- ==================== Start Intro-vid ==================== -->
             <section class="intro-vid mt-100 pt-50 d-flex justify-content-center">
                 <div class="col-12 col-md-9 mt-30">
-                            @if (!empty($memorial->photos))
-                        <div class="bg-img" style="height: 400px" data-background="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photos) }}">
+                            @if (!empty($memorial->video_thumbnail))
+                        <div class="bg-img" style="height: 400px" data-background="{{ asset('memorial/' . $memorial->slug . '/' . $memorial->video_thumbnail) }}">
                             @else
                             <div class="bg-img" style="height: 400px"
-                                    data-background="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photo) }}">
+                                    data-background="{{ asset('memorial/' . $memorial->slug . '/' . $memorial->photo) }}">
                             @endif
                             <div class="play-button">
                                 <a href="{{ $memorial->video }}" class="vid">
@@ -187,8 +187,8 @@
                                     <small class="text-muted">Ha üresen hagyja, akkor a videó nem lesz megjelenítve</small>
                                 </div>
                                 <div class="mt-50">
-                                    <label for="video_photos" class="form-label">Videó kép (opcionális)</label>
-                                    <input type="file" name="video_photos" id="video_photos" class="form-control">
+                                    <label for="video_thumbnail" class="form-label">Videó kép (opcionális)</label>
+                                    <input type="file" name="video_thumbnail" id="video_thumbnail" class="form-control">
                                     <small class="text-muted">
                                         Alapértelmezés szerint a videó blokk háttérképe az emlékoldal fő képe.
                                         Itt külön képet tölthetsz fel a videó előnézetéhez, ha szeretnéd testreszabni.
@@ -199,26 +199,6 @@
                     </div>
                 </div>
             </div>
-
-            {{-- <div class="container">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-12 col-md-12 p-3">
-                        <div class="container">
-                            <div class="row">
-                                <div class="mt-20">
-                                    <label for="video_photos" class="form-label">Videó kép (opcionális)</label>
-                                    <input type="file" name="video_photos" id="video_photos" class="form-control">
-                                    <small class="text-muted">
-                                        Alapértelmezés szerint a videó blokk háttérképe az emlékoldal fő képe.
-                                        Itt külön képet tölthetsz fel a videó előnézetéhez, ha szeretnéd testreszabni.
-                                    </small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
-
         </div>
 
     </section>

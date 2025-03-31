@@ -16,6 +16,11 @@
             scroll-behavior: smooth;
         }
 
+        .progress-wrap {
+            display: none !important;
+            /* или visibility: hidden !important; */
+        }
+
         .holder {
             background-image: url('../../circle.png');
             background-size: cover;
@@ -248,6 +253,14 @@
             transform: translateY(-50%);
             color: #888;
         }
+
+        .position-relative {
+            position: relative;
+        }
+
+        .position-absolute {
+            position: absolute;
+        }
     </style>
 @endsection
 
@@ -352,9 +365,20 @@
                                         <div class="col-lg-4 bord mt-20">
                                             <div class="item">
 
-                                                <div class="img fit-img mt-10">
-                                                    <img src="{{ asset('storage/' . $image->image_path) }}" alt="">
+                                                <div class="img fit-img mt-10 position-relative">
+                                                    <img src="{{ asset('memorial/' . $image->image_path) }}"
+                                                        alt="">
+
+                                                    <button type="button"
+                                                        class="btn btn-danger btn-sm delete-btn position-absolute"
+                                                        style="top: 10px; right: 10px;"
+                                                        data-url="{{ route('memorial.images.destroy', [$memorial, $image]) }}">
+                                                        <span class="icon ">
+                                                            <i class="fa fa-trash"></i>
+                                                        </span>
+                                                    </button>
                                                 </div>
+
                                                 <div class="cont mt-10">
                                                     <div class="">
                                                         <input id="death_date" type="date"
@@ -369,10 +393,7 @@
                                                             class="form-control " placeholder="A fénykép leírása">
                                                     </h6>
 
-                                                    <button type="button" class="btn btn-danger btn-sm mt-10 delete-btn"
-                                                        data-url="{{ route('memorial.images.destroy', [$memorial, $image]) }}">
-                                                        {{ __('Delete') }}
-                                                    </button>
+
 
 
                                                 </div>
@@ -396,7 +417,7 @@
 
             <section class="numbers-ca mb-20">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-6 col-lg-6">
                         <div class="mt-60">
                             <button type="submit" class="butn butn-md butn-bord butn-rounded">
                                 <span class="text">
@@ -410,17 +431,40 @@
                             </button>
                         </div>
                     </div>
+                    <div class="col-6 col-lg-6">
+                        <div class="mt-60 text-end">
+                            <button type="button" class="butn btn-danger butn-md butn-bord butn-rounded deleteall-btn"
+                                data-url="{{ route('memorials.images.destroyAll', $memorial) }}">
+                                <span class="text">
+                                    {{ __('Delete All Image') }}
+                                </span>
+
+                                <span class="icon ">
+                                    <i class="fa fa-trash"></i>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </section>
 
         </form>
     @endif
 
-    @if(isset($image))
+    @if (isset($image))
         <form id="delete-form" action="{{ route('memorial.images.destroy', [$memorial, $image]) }}" method="POST"
             style="display: none;">
             @csrf
             @method('DELETE')
+        </form>
+    @endif
+
+    @if (isset($image))
+        <form id="deleteall-form" action="{{ route('memorials.images.destroyAll', $memorial) }}" method="POST"
+            onsubmit="return confirm('Are you sure you want to delete all images?');" style="display: none;">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger">Delete All Images</button>
         </form>
     @endif
 
@@ -433,6 +477,18 @@
                 button.addEventListener("click", function() {
                     if (confirm("{{ __('Are you sure you want to delete this image?') }}")) {
                         let form = document.getElementById("delete-form");
+                        form.action = this.getAttribute("data-url");
+                        form.submit();
+                    }
+                });
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".deleteall-btn").forEach(button => {
+                button.addEventListener("click", function() {
+                    if (confirm("{{ __('Are you sure you want to delete this image?') }}")) {
+                        let form = document.getElementById("deleteall-form");
                         form.action = this.getAttribute("data-url");
                         form.submit();
                     }

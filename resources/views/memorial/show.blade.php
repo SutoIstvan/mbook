@@ -3,58 +3,64 @@
 @section('title', $memorial->name . ' - mbook.hu')
 
 @section('css')
-<style>
-.google-map {
-  height: 340px;
-  width: 100%;
-  -webkit-filter: grayscale(100%);
-  filter: grayscale(100%);
-  border-radius: 15px;
-  overflow: hidden; }
- .google-map iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%; 
-}
+    <style>
+        .google-map {
+            height: 340px;
+            width: 100%;
+            -webkit-filter: grayscale(100%);
+            filter: grayscale(100%);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .google-map iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
 
 
-    .butn-vid .vid {
-        width: 55px;
-        height: 55px;
-        line-height: 55px;
-        text-align: center;
-        border-radius: 50%;
-        background: #fff;
-        color: #212121;
-        position: relative;
-    }
-    .butn-vid .vid:after {
-        content: '';
-        position: absolute;
-        top: -8px;
-        left: -8px;
-        right: -8px;
-        bottom: -8px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 50%;
-    }
-    .cont {
-        padding-left: 20px;
-    }
-    .play-button {
-        cursor: pointer; /* Добавляем указатель при наведении */
-    }
+        .butn-vid .vid {
+            width: 55px;
+            height: 55px;
+            line-height: 55px;
+            text-align: center;
+            border-radius: 50%;
+            background: #fff;
+            color: #212121;
+            position: relative;
+        }
 
-    .glightbox-clean .gclose {
-        width: 35px;
-        height: 35px;
-        top: 65px !important;
-        right: 60px !important;
-        position: absolute;
-    }
-</style>
+        .butn-vid .vid:after {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .cont {
+            padding-left: 20px;
+        }
+
+        .play-button {
+            cursor: pointer;
+            /* Добавляем указатель при наведении */
+        }
+
+        .glightbox-clean .gclose {
+            width: 35px;
+            height: 35px;
+            top: 65px !important;
+            right: 60px !important;
+            position: absolute;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -82,12 +88,12 @@
                             <div class="img fit-img radius-30 mt-50">
                                 @if ($images->isNotEmpty())
                                     <!-- Используем первую картинку из массива $images -->
-                                    <img src="{{ asset('storage/' . $images->first()->image_path) }}"
-                                        alt="Изображение мемориала">
+                                    <img src="{{ asset('memorial/' . $images->first()->image_path) }}"
+                                        alt="Memorial photo">
                                 @elseif ($memorial->photo)
                                     <!-- Если массив $images пустой, используем изображение из $memorial->photo -->
-                                    <img src="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photo) }}"
-                                        alt="Изображение мемориала">
+                                    <img src="{{ asset('memorial/' . $memorial->slug . '/' . $memorial->photo) }}"
+                                        alt="Memorial photo">
                                 @else
                                     <!-- Если нет ни одной картинки, выводим заглушку -->
                                     <img src="{{ asset('path/to/default/image.jpg') }}" alt="">
@@ -106,7 +112,7 @@
             <div class="mimg fit-img">
 
                 {{-- <div class="mimg fit-img" style="filter: grayscale(100%);"> --}}
-                <img src="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photo) }}" alt="">
+                <img src="{{ asset('memorial/' . $memorial->slug . '/' . $memorial->photo) }}" alt="">
                 <div class="text">
                     <span class="fz-14 text-u mb-10">{{ $memorial->birth_date }} - {{ $memorial->death_date }}</span>
                     <p style="margin-left: 25px;">Míg éltél szerettünk<br> míg élünk nem feledünk!</p>
@@ -182,8 +188,9 @@
                     <div class="items col-lg-6 order-md-2">
                         <div class="item">
                             <div class="img">
-                                <a href="{{ asset('storage/' . $images->first()->image_path) }}" class="glightbox">
-                                    <img src="{{ asset('storage/' . $images->first()->image_path) }}" alt="{{ $images->first()->image_description ?? 'Gallery Image' }}">
+                                <a href="{{ asset('memorial/' . $images->first()->image_path) }}" class="glightbox">
+                                    <img src="{{ asset('memorial/' . $images->first()->image_path) }}"
+                                        alt="{{ $images->first()->image_description ?? 'Gallery Image' }}">
                                 </a>
 
                             </div>
@@ -243,7 +250,8 @@
                             <!-- Скрытые ссылки для GLightbox -->
                             <div id="gallery" style="display: none;">
                                 @foreach ($images as $image)
-                                    <a href="{{ asset('storage/' . $image->image_path) }}" class="glightbox" data-gallery="memorial-gallery"></a>
+                                    <a href="{{ asset('memorial/' . $image->image_path) }}" class="glightbox"
+                                        data-gallery="memorial-gallery"></a>
                                 @endforeach
                             </div>
                             {{-- <h2 class="fz-50">Vessen egy pillantást<br> a fényképekre</h2> --}}
@@ -256,8 +264,9 @@
                             <div class="items col-lg-6 order-md-2">
                                 <div class="item">
                                     <div class="img">
-                                        <a href="{{ asset('storage/' . $image->image_path) }}" class="glightbox">
-                                            <img src="{{ asset('storage/' . $image->image_path) }}" alt="{{ $image->image_description ?? 'Gallery Image' }}">
+                                        <a href="{{ asset('memorial/' . $image->image_path) }}" class="glightbox">
+                                            <img src="{{ asset('memorial/' . $image->image_path) }}"
+                                                alt="{{ $image->image_description ?? 'Gallery Image' }}">
                                         </a>
                                     </div>
                                     <div class="cont mt-30">
@@ -282,7 +291,8 @@
                             <div class="d-flex">
                                 {{-- <a href="{{ route('comments.create', $memorial->id) }}" class="butn butn-md butn-bord butn-rounded"> --}}
 
-                                <a href="{{ route('memorial.photos', $memorial) }}" class="butn butn-md butn-bord butn-rounded">
+                                <a href="{{ route('memorial.photos', $memorial) }}"
+                                    class="butn butn-md butn-bord butn-rounded">
                                     <div class="d-flex align-items-center">
                                         <span>Tekintse meg az összes fényképet</span>
                                         <span class="icon pe-7s-angle-right ml-10 fz-30"></span>
@@ -320,13 +330,15 @@
         <section class="intro-vid ontop">
             <div class="container">
 
-                
+
 
                 {{-- <div class="bg-img" data-background="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photo) }}"> --}}
-                @if (!empty($memorial->photos))
-                    <div class="bg-img" data-background="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photos) }}">
+                @if (!empty($memorial->video_thumbnail))
+                    <div class="bg-img"
+                        data-background="{{ asset('memorial/' . $memorial->slug . '/' . $memorial->video_thumbnail) }}">
                     @else
-                    <div class="bg-img" data-background="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photo) }}">
+                        <div class="bg-img"
+                            data-background="{{ asset('memorial/' . $memorial->slug . '/' . $memorial->photo) }}">
                 @endif
                 <div class="play-button">
                     <a href="{{ $memorial->video }}" class="vid">
@@ -367,8 +379,7 @@
                                     <div class="img">
                                         {{-- <div class="fit-img"> --}}
                                         <div class="fit-img">
-                                            <img src="{{ asset('dark/imgs/header/circle-badge4.png') }}"
-                                                alt="">
+                                            <img src="{{ asset('dark/imgs/header/circle-badge4.png') }}" alt="">
                                         </div>
                                     </div>
                                     <div class="ml-auto">
@@ -422,8 +433,7 @@
 
     <!-- ==================== End Testimonials ==================== -->
 
-    @if(!empty($memorial->story))
-
+    @if (!empty($memorial->coordinates))
         <section class="awards-sa ">
             <div class="container">
                 <div class="sec-head mb-100">
@@ -443,7 +453,7 @@
                     <div class="mb-100">
                         <div class="google-map">
                             <iframe id="gmap_canvas"
-                                src="https://maps.google.com/maps?q={{ urlencode($memorial->story) }}&t=&z=14&ie=UTF8&iwloc=&output=embed">
+                                src="https://maps.google.com/maps?q={{ urlencode($memorial->coordinates) }}&t=&z=14&ie=UTF8&iwloc=&output=embed">
                             </iframe>
                         </div>
                     </div>
@@ -457,42 +467,42 @@
 @endsection
 
 @section('js')
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
-<script src="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/js/glightbox.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/js/glightbox.min.js"></script>
 
-<script type="text/javascript">
-    // Инициализируем GLightbox один раз
-    const lightbox = GLightbox({
-        selector: '.glightbox',
-        touchNavigation: true,
-        loop: true,
-        slideEffect: 'slide'
-    });
+    <script type="text/javascript">
+        // Инициализируем GLightbox один раз
+        const lightbox = GLightbox({
+            selector: '.glightbox',
+            touchNavigation: true,
+            loop: true,
+            slideEffect: 'slide'
+        });
 
-    // Переменная для управления интервалом
-    let slideInterval;
+        // Переменная для управления интервалом
+        let slideInterval;
 
-    // Функция запуска автопроигрывания
-    function startAutoplay() {
-        slideInterval = setInterval(() => {
-            lightbox.nextSlide(); // Переключаем на следующий слайд
-        }, 3000); // Интервал 3 секунды
-    }
+        // Функция запуска автопроигрывания
+        function startAutoplay() {
+            slideInterval = setInterval(() => {
+                lightbox.nextSlide(); // Переключаем на следующий слайд
+            }, 3000); // Интервал 3 секунды
+        }
 
-    // Функция остановки автопроигрывания
-    function stopAutoplay() {
-        clearInterval(slideInterval);
-    }
+        // Функция остановки автопроигрывания
+        function stopAutoplay() {
+            clearInterval(slideInterval);
+        }
 
-    // Обработчик нажатия кнопки
-    document.getElementById('openSlideshow').addEventListener('click', function() {
-        lightbox.open(); // Открываем лайтбокс
-        startAutoplay(); // Запускаем автопроигрывание
-    });
+        // Обработчик нажатия кнопки
+        document.getElementById('openSlideshow').addEventListener('click', function() {
+            lightbox.open(); // Открываем лайтбокс
+            startAutoplay(); // Запускаем автопроигрывание
+        });
 
-    // Останавливаем автопроигрывание при закрытии
-    lightbox.on('close', () => {
-        stopAutoplay();
-    });
-</script>
+        // Останавливаем автопроигрывание при закрытии
+        lightbox.on('close', () => {
+            stopAutoplay();
+        });
+    </script>
 @endsection

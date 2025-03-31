@@ -69,7 +69,7 @@
                     <div class="items col-lg-6 order-md-2">
                         <div class="item">
                             <div class="img">
-                                <img src="{{ asset('storage/' . $images->first()->image_path) }}"
+                                <img src="{{ asset('memorial/' . $images->first()->image_path) }}"
                                     alt="">
                             </div>
                             <div class="cont mt-30">
@@ -128,7 +128,7 @@
                             <!-- Скрытые ссылки для GLightbox -->
                             <div id="gallery" style="display: none;">
                                 @foreach ($images as $image)
-                                    <a href="{{ asset('storage/' . $image->image_path) }}" class="glightbox" data-gallery="memorial-gallery"></a>
+                                    <a href="{{ asset('memorial/' . $image->image_path) }}" class="glightbox" data-gallery="memorial-gallery"></a>
                                 @endforeach
                             </div>
                             {{-- <h2 class="fz-50">Vessen egy pillantást<br> a fényképekre</h2> --}}
@@ -141,7 +141,10 @@
                             <div class="items col-lg-6 order-md-2">
                                 <div class="item">
                                     <div class="img">
-                                        <img src="{{ asset('storage/' . $image->image_path) }}">
+                                        <a href="{{ asset('memorial/' . $image->image_path) }}" class="glightbox">
+                                            <img src="{{ asset('memorial/' . $image->image_path) }}"
+                                                alt="{{ $image->image_description ?? 'Gallery Image' }}">
+                                        </a>
                                     </div>
                                     <div class="cont mt-30">
                                         <div class="info sub-color mb-10">

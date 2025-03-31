@@ -11,9 +11,22 @@ class Memorial extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'slug', 'name', 'birth_date', 'death_date', 'photo', 'photos', 'video', 
-        'biography', 'history', 'story', 'testimonials', 'comments', 'gift', 
-        'qr_code', 'virtual_code', 'admin_id'
+        'slug',
+        'name',
+        'birth_date',
+        'death_date',
+        'photo',
+        'video_thumbnail',
+        'video',
+        'biography',
+        'private',
+        'coordinates',
+        'theme',
+        'comments',
+        'gift',
+        'qr_code',
+        'virtual_code',
+        'admin_id'
     ];
 
     // Указываем, что для маршрутов используется slug
@@ -26,16 +39,16 @@ class Memorial extends Model
     public function resolveRouteBinding($value, $field = null)
     {
         return $this->where('slug', $value)
-                    ->orWhere('id', $value)
-                    ->firstOrFail();
+            ->orWhere('id', $value)
+            ->firstOrFail();
     }
 
     // Автоматическая генерация slug при установке name (опционально)
-    public function setNameAttribute($value)
-    {
-        $this->attributes['name'] = $value;
-        $this->attributes['slug'] = $this->generateUniqueSlug($value);
-    }
+    // public function setNameAttribute($value)
+    // {
+    //     $this->attributes['name'] = $value;
+    //     $this->attributes['slug'] = $this->generateUniqueSlug($value);
+    // }
 
     // Генерация уникального slug
     protected function generateUniqueSlug($name)
@@ -52,6 +65,11 @@ class Memorial extends Model
     }
 
     public function memorialimages()
+    {
+        return $this->hasMany(Image::class);
+    }
+    
+    public function images()
     {
         return $this->hasMany(Image::class);
     }

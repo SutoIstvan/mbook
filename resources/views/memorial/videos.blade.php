@@ -82,10 +82,10 @@
             <div class="container">
 
                 {{-- <div class="bg-img" data-background="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photo) }}"> --}}
-                @if (!empty($memorial->video_img))
-                    <div class="bg-img" data-background="{{ $memorial->video_img }}">
+                @if (!empty($memorial->video_thumbnail))
+                    <div class="bg-img" data-background="{{ $memorial->video_thumbnail }}">
                     @else
-                    <div class="bg-img" data-background="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photo) }}">
+                    <div class="bg-img" data-background="{{ asset('memorial/' . $memorial->slug . '/' . $memorial->photo) }}">
                 @endif
                 <div class="play-button">
                     <a href="{{ $memorial->video }}" class="vid">

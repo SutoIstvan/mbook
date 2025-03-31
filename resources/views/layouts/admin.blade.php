@@ -15,17 +15,17 @@
     <title>Admin</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="admin/imgs/favicon.ico">
+    <link rel="shortcut icon" href="{{ asset('admin/imgs/favicon.ico') }}">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 
     <!-- Plugins -->
-    <link rel="stylesheet" href="common/css/plugins.css">
+    <link rel="stylesheet" href="{{ asset('common/css/plugins.css') }}">
 
     <!-- Style for individual style contain common & this home style -->
-    <link rel="stylesheet" href="common/css/common_style.css">
-    <link rel="stylesheet" href="admin/css/style.css">
+    <link rel="stylesheet" href="{{ asset('common/css/common_style.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/css/style.css') }}">
 
     <!-- Style for combined style contain common & all pages styles -->
     <!-- <link rel="stylesheet" href="../common/css/combined_style.css"> -->
@@ -266,9 +266,9 @@
                             </nav>
 
                             <div class="info md-hide about-ca">
-                                <div class="d-flex justify-content-center">
-                                    <img src="admin/imgs/about/team3.png" style="height: 150px; width: 150px; border-radius: 160px;" alt="" class="img-fluid">
-                                </div>
+                                {{-- <div class="d-flex justify-content-center">
+                                    <img src="{{ asset('admin/imgs/about/team3.png') }}" style="height: 150px; width: 150px; border-radius: 160px;" alt="" class="img-fluid">
+                                </div> --}}
                                 
                                 <div class="cont text-center mt-10">
                                     <ul class="rest">
@@ -276,71 +276,60 @@
                                     </ul>
                                     <div class="">
 
-                                        <!-- <a href="#" class="butn butn-md butn-bord butn-rounded">
-                                            <div class="d-flex align-items-center">
-                                                <span class="icon mr-10">
-                                                    <i class="fa-regular fa-envelope"></i>
-                                                </span>
-                                                <span>Work With Us</span>
-                                            </div>
-                                        </a>
-
-                                        <a href="#" class="butn butn-md butn-bord butn-rounded">
-                                            <div class="d-flex align-items-center">
-                                                <span class="icon mr-10">
-                                                    <i class="fa-regular fa-envelope"></i>
-                                                </span>
-                                                <span>Work With Us</span>
-                                            </div>
-                                        </a> -->
-
                                     </div>
                                 </div>
                             </div>
                             <div class="md-hide mt-20">
-                                <a href="{{ route('users') }}" class="butn butn-md butn-bord butn-rounded w-100 text-start {{ Route::currentRouteName() === 'users' ? 'active' : '' }}">
+                                <a href="{{ route('admin.users') }}" class="butn butn-md butn-bord butn-rounded w-100 text-start {{ Route::currentRouteName() === 'admin.users' ? 'active' : '' }}">
                                     <span class="icon me-2">
-                                        <i class="fa-solid fa-pen"></i>
+                                        <i class="fa-solid fa-users"></i>
                                     </span>
                                     <span>{{ __('User List') }}</span>
                                 </a>
-                            
-                                <a href="#" class="butn butn-md butn-bord butn-rounded w-100 text-start">
-                                    <span class="icon mr-10">
-                                        <i class="fa-solid fa-image"></i>
+
+                                <a href="{{ route('admin.memorials') }}" class="butn butn-md butn-bord butn-rounded w-100 text-start {{ Route::currentRouteName() === 'admin.memorials' ? 'active' : '' }}">
+                                    <span class="icon me-2">
+                                        <i class="fa-solid fa-list"></i>
                                     </span>
-                                    <span>QR kód lista</span>
+                                    <span>{{ __('Memorial List') }}</span>
                                 </a>
                             
-                                <a href="#" class="butn butn-md butn-bord butn-rounded w-100 text-start">
+                                <a href="{{ route('admin.codegenerate') }}" class="butn butn-md butn-bord butn-rounded w-100 text-start {{ Route::currentRouteName() === 'admin.codegenerate' ? 'active' : '' }}">
                                     <span class="icon mr-10">
-                                        <i class="fa-solid fa-video"></i>
+                                        <i class="fa-solid fa-qrcode"></i>
+                                    </span>
+                                    <span>QR kód generalas</span>
+                                </a>
+                            
+                                <a href="{{ route('admin.codeattach') }}" class="butn butn-md butn-bord butn-rounded w-100 text-start {{ Route::currentRouteName() === 'admin.codeattach' ? 'active' : '' }}">
+                                    <span class="icon mr-10">
+                                        <i class="fa-solid fa-link"></i>
                                     </span>
                                     <span>QR kód csatolása</span>
                                 </a>
                             
-                                <a href="#" class="butn butn-md butn-bord butn-rounded w-100 text-start">
+                                {{-- <a href="#" class="butn butn-md butn-bord butn-rounded w-100 text-start">
                                     <span class="icon mr-10">
                                         <i class="fa-solid fa-comments"></i>
                                     </span>
                                     <span>Emlékoldal szerkesztése</span>
-                                </a>
+                                </a> --}}
                             
-                                <a href="{{ route('settings') }}" class="butn butn-md butn-bord butn-rounded w-100 text-start {{ Route::currentRouteName() === 'settings' ? 'active' : '' }}">
+                                <a href="{{ route('admin.settings') }}" class="butn butn-md butn-bord butn-rounded w-100 text-start {{ Route::currentRouteName() === 'admin.settings' ? 'active' : '' }}">
                                     <span class="icon me-2">
                                         <i class="fa-solid fa-gear"></i>
                                     </span>
                                     <span>{{ __('Settings') }}</span>
                                 </a>
 
-                                <a class="butn butn-md butn-bord butn-rounded w-100 text-start" href="{{ route('logout') }}"
+                                {{-- <a class="butn butn-md butn-bord butn-rounded w-100 text-start" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">
                                     <span class="icon mr-10">
                                         <i class="fa-solid fa-arrow-right-from-bracket"></i>
                                     </span>
                                     {{ __('Logout') }}
-                                </a>
+                                </a> --}}
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
@@ -352,14 +341,24 @@
                         
 
                         <div class="md-hide">
-                            <a href="#" class="butn butn-md butn-bord butn-rounded">
+
+                            <a class="butn butn-md butn-bord butn-rounded w-100 text-start" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                                <span class="icon mr-10">
+                                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                </span>
+                                {{ __('Logout') }}
+                            </a>
+                            
+                            {{-- <a href="#" class="butn butn-md butn-bord butn-rounded">
                                 <div class="d-flex align-items-center">
                                     <span class="icon mr-10">
                                         <i class="fa-regular fa-circle-question"></i>
                                     </span>
                                     <span>Segítség</span>
                                 </div>
-                            </a>
+                            </a> --}}
                         </div>
                     </div>
                     <div class="right-side">

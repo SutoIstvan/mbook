@@ -360,7 +360,7 @@
                         @if (isset($memorial->photo) && $memorial->photo)
                             <div class="existing-photo mb-3">
                                 <div class="drag-area">
-                                    <img src="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photo) }}"
+                                    <img src="{{ asset('memorial/' . $memorial->slug . '/' . $memorial->photo) }}"
                                         alt="Фото" style="max-width: 100%;">
 
                                         

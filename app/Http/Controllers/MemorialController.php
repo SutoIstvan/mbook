@@ -32,7 +32,7 @@ class MemorialController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        $theme = $memorial->testimonials ?? 'light';
+        $theme = $memorial->theme ?? 'light';
 
         if ($theme === 'dark') {
             return view('memorial.show', compact('memorial', 'images', 'comments'));
@@ -43,6 +43,41 @@ class MemorialController extends Controller
         return view('memorial.show', compact('memorial', 'images', 'comments', 'theme'));
     }
 
+    public function showAttachForm(string $token)
+    {
+        // Ищем QR-код по токену
+        $qr = QrCodes::where('token', $token)->firstOrFail();
+        
+        // Если QR-код уже привязан к мемориалу
+        if ($qr->memorial_id) {
+            // Находим мемориал
+            $memorial = Memorial::findOrFail($qr->memorial_id);
+            
+            // Если у мемориала есть slug, делаем редирект на страницу со slug
+            if ($memorial->slug) {
+                // return redirect()->route('memorial.show', $memorial->slug, 301);
+
+                return redirect()->route('memorial.show', $memorial->slug)->setStatusCode(301);
+            }
+            
+            // Если slug нет, редиректим по ID
+            return redirect()->route('memorial.show', $qr->memorial_id);
+        }
+        
+        // Если QR-код еще не привязан
+        if (!Auth::check()) {
+            // Сохраняем токен QR-кода в сессии
+            session(['qr_token' => $token]);
+            
+            return redirect()
+                ->route('login')
+                ->with('message', 'Kérjük, jelentkezzen be a QR-kód összekapcsolásához');
+        }
+        
+        // Показываем форму привязки
+        return view('memorial.attach', compact('token'));
+    }
+
     public function create()
     {
         return view('memorial.create');
@@ -50,6 +85,7 @@ class MemorialController extends Controller
 
     public function store(Request $request)
     {
+        //  dd($request);
         // Валидация запроса
         $request->validate([
             'name' => 'required|string|min:3|max:255',
@@ -61,6 +97,7 @@ class MemorialController extends Controller
             'crop_y' => 'nullable|numeric',
             'crop_width' => 'nullable|numeric',
             'crop_height' => 'nullable|numeric',
+            'qrtoken' => 'nullable|string|min:3|max:255'
         ]);
 
         $admin_id = Auth::user()->id;
@@ -70,33 +107,48 @@ class MemorialController extends Controller
 
         // Создаем запись QR-кода в БД
         $qrCode = QrCodes::create([
-            'token' => $token
-        ]);
+            'token' => $token,
+        ]); 
 
         // Создаем мемориал
         $memorial = new Memorial();
         $memorial->id = $token;
         $memorial->name = $request->name;
+
+        // Генерируем начальный slug
         $slug = Str::slug($request->name);
-        $count = Memorial::where('slug', 'LIKE', "{$slug}%")->count();
-        $memorial->slug = $count ? "{$slug}-{$count}" : $slug;
+
+        // Проверяем, существует ли slug
+        $originalSlug = $slug; // Сохраняем оригинальный slug
+        $count = 1;
+        // $exists = Memorial::where('slug', $slug)->exists();
+        while (Memorial::where('slug', $slug)->exists()) {
+            \Log::info("Слаг {$slug} уже существует, пробуем {$originalSlug}-{$count}");
+            $slug = "{$originalSlug}-{$count}";
+            $count++;
+
+            // Защита от бесконечного цикла
+            if ($count > 100) {
+                \Log::error("Достигнут лимит попыток создания уникального слага");
+                break;
+            }
+        }
+
+        $memorial->slug = $slug;
         $memorial->birth_date = $request->birth_date;
         $memorial->death_date = $request->death_date;
-        $memorial->story = $request->story ?? '';
+        // $memorial->coordinates = $request->coordinates ?? '';
         $memorial->biography = $request->biography;
         $memorial->qr_code = $token;
         $memorial->admin_id = $admin_id;
-        $memorial->testimonials = 'dark';
+        $memorial->theme = 'dark';
         $memorial->save();
+
+
 
         if ($request->hasFile('photo')) {
             $photo = $request->file('photo');
-            $originalName = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
-            $slugName = Str::slug($originalName);
-            $filename = $slugName . '_' . time() . '.webp';
-
-            // Создаем путь с ID мемориала
-            $path = 'images/memorials/' . $memorial->id;
+            $filename = $slug . '-' . substr(time(), -6) . '-main' . '.webp';// Имя файла: memorial-slug_timestamp.webp
 
             // Загружаем изображение
             $image = Image::read($photo);
@@ -115,8 +167,8 @@ class MemorialController extends Controller
             $image->scale(width: 1300)->toWebp(90);
 
             // Сохраняем новое фото
-            Storage::disk('public')->put(
-                $path . '/' . $filename, 
+            Storage::disk('memorial')->put(
+                $slug . '/' . $filename,
                 $image->encode()->__toString()
             );
 
@@ -124,27 +176,6 @@ class MemorialController extends Controller
             $memorial->photo = $filename;
             $memorial->save();
         }
-
-                // Обрабатываем фотографию
-                // if ($request->hasFile('photo')) {
-                //     $photo = $request->file('photo');
-                //     $originalName = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
-                //     $slugName = Str::slug($originalName);
-                //     $filename = $slugName . '_' . time() . '.webp';
-                    
-                //     // Создаем путь с ID мемориала
-                //     $path = 'images/memorials/' . $memorial->id;
-                    
-                //     $image = Image::read($photo)
-                //         ->scale(width: 1300)
-                //         ->toWebp(90);
-                    
-                //     // Сохраняем новое фото
-                //     Storage::disk('public')->put($path . '/' . $filename, $image->toString());
-                    
-                //     $memorial->photo = $filename;
-                //     $memorial->save();
-                // }
 
         // Генерируем и сохраняем QR-код
         $this->generateQRCode($token, $memorial);
@@ -156,8 +187,25 @@ class MemorialController extends Controller
             'qr_code' => "qrcodes/{$memorial->id}.png",
         ]);
 
-        return redirect()->route('dashboard', ['id' => $memorial->id])
-                         ->with('success', 'Мемориал успешно создан и QR-код сгенерирован');
+        // Находим QR-код по токену
+        $qrtoken = $request->input('qrtoken');
+        $qrToken = QrCodes::where('token', $qrtoken)->first();
+
+        // Проверяем, найден ли QR-код
+        if ($qrToken) {
+            // Обновляем memorial_id
+            $qrToken->update([
+                'memorial_id' => $memorial->id,
+            ]);
+        } else {
+            // Если QR-код не найден, возвращаем ошибку или выполняем другое действие
+            //throw new Exception("QR Code with token {$qrtoken} not found");
+            // Или, например, можно вернуть сообщение:
+            // return redirect()->back()->with('error', "QR Code with token {$qrtoken} not found");
+        }
+
+        return redirect()->route('dashboard')
+            ->with('success', 'Мемориал успешно создан и QR-код сгенерирован');
     }
 
     public function update(Request $request, $id)
@@ -175,24 +223,14 @@ class MemorialController extends Controller
         ]);
 
         $memorial = Memorial::findOrFail($id);
-        // $memorial->slug = $request->slug;
-        // if ($request->filled('slug') && $request->slug !== $memorial->slug) {
-        //     $memorial->slug = $request->slug;
-        // }
         $memorial->name = $request->name;
         $memorial->birth_date = $request->birth_date;
         $memorial->death_date = $request->death_date;
         $memorial->biography = $request->biography;
 
-        // Обновление фото, если загружен новый файл
         if ($request->hasFile('photo')) {
             $photo = $request->file('photo');
-            $originalName = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
-            $slugName = Str::slug($originalName);
-            $filename = $slugName . '_' . time() . '.webp';
-
-            // Создаем путь с ID мемориала
-            $path = 'images/memorials/' . $memorial->id;
+            $filename = $memorial->slug . '-' . substr(time(), -6) . '-main' . '.webp';// Имя файла: memorial-slug_timestamp.webp
 
             // Загружаем изображение
             $image = Image::read($photo);
@@ -211,8 +249,8 @@ class MemorialController extends Controller
             $image->scale(width: 1300)->toWebp(90);
 
             // Сохраняем новое фото
-            Storage::disk('public')->put(
-                $path . '/' . $filename, 
+            Storage::disk('memorial')->put(
+                $memorial->slug . '/' . $filename,
                 $image->encode()->__toString()
             );
 
@@ -227,23 +265,36 @@ class MemorialController extends Controller
 
     protected function generateUniqueToken()
     {
-        $maxAttempts = 10; // Максимальное количество попыток для избежания вечного цикла
+        $maxAttempts = 10; // Максимальное количество попыток
         $attempts = 0;
-        
+    
+        // Получаем текущий год (последние 2 цифры) и неделю
+        $year = date('y'); // Например, "25" для 2025
+        $week = str_pad(date('W'), 2, '0', STR_PAD_LEFT); // Например, "13" для 13-й недели
+        $myNumber = 7;
+        // Формируем первые 4 цифры (год + неделя)
+        $prefix = $year . $week . $myNumber;
+    
         do {
-            $token = str_pad(rand(0, 999999999999), 12, '0', STR_PAD_LEFT);
+            // Генерируем случайное число для оставшихся 8 цифр (от 0 до 99999999)
+            $randomPart = str_pad(rand(1, 9999999), 7, '0', STR_PAD_LEFT);
+            
+            // Собираем полный токен: 2513 + 8 случайных цифр
+            $token = $prefix . $randomPart;
+            
             $exists = QrCodes::where('token', $token)->exists();
             $attempts++;
         } while ($exists && $attempts < $maxAttempts);
-        
-        // Если после всех попыток не найден уникальный токен, используем timestamp и random
+    
+        // Если уникальный токен не найден, добавляем timestamp и случайное число
         if ($exists) {
-            $token = str_pad(time() . rand(0, 999999), 12, '0', STR_PAD_LEFT);
+            $randomPart = str_pad(rand(0, 99999999), 7, '0', STR_PAD_LEFT);
+            $token = $prefix . $randomPart; // Всё равно используем префикс, но с другой логикой можно добавить time()
         }
-        
+    
         return $token;
     }
-    
+
     protected function generateQRCode($token, $memorial)
     {
         // Убедимся, что директория существует
@@ -264,7 +315,7 @@ class MemorialController extends Controller
 
         // Центрируем QR-код на фоне
         $background->compositeImage(
-            $image, 
+            $image,
             Imagick::COMPOSITE_DEFAULT,
             ($background->getImageWidth() - $image->getImageWidth()) / 2,
             ($background->getImageHeight() - $image->getImageHeight()) / 2
@@ -289,7 +340,7 @@ class MemorialController extends Controller
         // Сохраняем готовое изображение
         $filePath = "qrcodes/{$token}.png";
         Storage::disk('public')->put(
-            $filePath, 
+            $filePath,
             $background->getImageBlob()
         );
 
@@ -348,9 +399,9 @@ class MemorialController extends Controller
         }
 
         $comments = $memorial->comments()
-        ->where('status', 'approved')
-        ->orderBy('created_at', 'desc')
-        ->get();
+            ->where('status', 'approved')
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return view('memorial.comments', compact('memorial', 'comments'));
     }
@@ -362,10 +413,12 @@ class MemorialController extends Controller
             $memorial = Memorial::findOrFail($id);
 
             if ($memorial->photo) {
-                $filePath = 'images/memorials/' . $memorial->id . '/' . $memorial->photo;
-                if (Storage::disk('public')->exists($filePath)) {
-                    Storage::disk('public')->delete($filePath);
-                }
+                Storage::disk('memorial')->delete($memorial->slug . '/' . $memorial->photo);
+
+                // $filePath = 'memorial/' . $memorial->slag . '/' . $memorial->photo;
+                // if (Storage::disk('public')->exists($filePath)) {
+                //     Storage::disk('public')->delete($filePath);
+                // }
                 $memorial->photo = null;
                 $memorial->save();
             }
@@ -378,5 +431,4 @@ class MemorialController extends Controller
             ], 500);
         }
     }
-
 }

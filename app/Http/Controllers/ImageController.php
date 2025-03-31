@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 // use Intervention\Image\Laravel\Facades\Image;
 use Intervention\Image\Laravel\Facades\Image as ImageFacade;
+use DateTime;
 
 class ImageController extends Controller
 {
@@ -69,61 +70,141 @@ class ImageController extends Controller
     //         ->with('success', 'A képek sikeresen feltöltve!');
     // }
 
-    public function uploadImages(Request $request, $id)
-    {
-        $request->validate([
-            'images' => 'required|array',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:20048',
+    // public function uploadImages(Request $request, $id)
+    // {
+    //     $request->validate([
+    //         'images' => 'required|array',
+    //         'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:20048',
+    //     ]);
+
+    //     $memorial = Memorial::findOrFail($id);
+    //     $maxImages = 30; // Максимальное количество фото
+    //     $currentImageCount = $memorial->memorialimages()->count();
+
+    //     // Проверяем, можем ли добавить хотя бы одно фото
+    //     if ($currentImageCount >= $maxImages) {
+    //         return redirect()->back()->withErrors([
+    //             'image' => __('You cannot upload more than :max images. You already have :current images.', [
+    //                 'max' => $maxImages,
+    //                 'current' => $currentImageCount
+    //             ])
+    //         ]);
+    //     }
+
+    //     $uploadedCount = 0; // Счетчик добавленных фото
+
+    //     foreach ($request->file('images') as $photo) {
+    //         if ($currentImageCount + $uploadedCount >= $maxImages) {
+    //             break; // Останавливаем загрузку, если достигли лимита
+    //         }
+
+    //         $originalName = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
+    //         $slugName = Str::slug($originalName); // Делаем имя безопасным
+    //         $filename = $slugName . '_' . time() . '.webp'; // Устанавливаем WebP
+
+    //         $path = 'images/memorials/' . $memorial->id; // Папка для сохранения
+
+    //         // Обрабатываем изображение
+    //         $image = ImageFacade::read($photo)
+    //             ->scale(width: 1300)
+    //             ->toWebp(90);
+
+    //         // Сохраняем обработанное изображение
+    //         Storage::disk('public')->put($path . '/' . $filename, $image->toString());
+
+    //         // Создаем запись в базе данных
+    //         $memorial->memorialimages()->create([
+    //             'image_path' => $path . '/' . $filename
+    //         ]);
+
+    //         $uploadedCount++; // Увеличиваем счетчик загруженных фото
+    //     }
+
+    //     return redirect()->back()->with('success', __('Uploaded :count images. Total images: :total', [
+    //         'count' => $uploadedCount,
+    //         'total' => $currentImageCount + $uploadedCount
+    //     ]));
+    // }
+
+public function uploadImages(Request $request, $id)
+{
+    $request->validate([
+        'images' => 'required|array',
+        'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:20048',
+    ]);
+
+    $memorial = Memorial::findOrFail($id);
+    $maxImages = 30; // Максимальное количество фото
+    $currentImageCount = $memorial->memorialimages()->count();
+
+    // Проверяем, можем ли добавить хотя бы одно фото
+    if ($currentImageCount >= $maxImages) {
+        return redirect()->back()->withErrors([
+            'image' => __('You cannot upload more than :max images. You already have :current images.', [
+                'max' => $maxImages,
+                'current' => $currentImageCount
+            ])
         ]);
-
-        $memorial = Memorial::findOrFail($id);
-        $maxImages = 30; // Максимальное количество фото
-        $currentImageCount = $memorial->memorialimages()->count();
-
-        // Проверяем, можем ли добавить хотя бы одно фото
-        if ($currentImageCount >= $maxImages) {
-            return redirect()->back()->withErrors([
-                'image' => __('You cannot upload more than :max images. You already have :current images.', [
-                    'max' => $maxImages,
-                    'current' => $currentImageCount
-                ])
-            ]);
-        }
-
-        $uploadedCount = 0; // Счетчик добавленных фото
-
-        foreach ($request->file('images') as $photo) {
-            if ($currentImageCount + $uploadedCount >= $maxImages) {
-                break; // Останавливаем загрузку, если достигли лимита
-            }
-
-            $originalName = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
-            $slugName = Str::slug($originalName); // Делаем имя безопасным
-            $filename = $slugName . '_' . time() . '.webp'; // Устанавливаем WebP
-
-            $path = 'images/memorials/' . $memorial->id; // Папка для сохранения
-
-            // Обрабатываем изображение
-            $image = ImageFacade::read($photo)
-                ->scale(width: 1300)
-                ->toWebp(90);
-
-            // Сохраняем обработанное изображение
-            Storage::disk('public')->put($path . '/' . $filename, $image->toString());
-
-            // Создаем запись в базе данных
-            $memorial->memorialimages()->create([
-                'image_path' => $path . '/' . $filename
-            ]);
-
-            $uploadedCount++; // Увеличиваем счетчик загруженных фото
-        }
-
-        return redirect()->back()->with('success', __('Uploaded :count images. Total images: :total', [
-            'count' => $uploadedCount,
-            'total' => $currentImageCount + $uploadedCount
-        ]));
     }
+
+    $uploadedCount = 0; // Счетчик добавленных фото
+
+    foreach ($request->file('images') as $photo) {
+        if ($currentImageCount + $uploadedCount >= $maxImages) {
+            break; // Останавливаем загрузку, если достигли лимита
+        }
+    
+        // Получаем slug мемориала
+        $memorialSlug = Str::slug($memorial->slug);
+        $path = $memorialSlug; // Папка для сохранения
+    
+        // Начинаем с номера 1
+        $number = 1;
+    
+        // Генерируем имя файла
+        do {
+            $filename = "{$memorialSlug}-{$number}.webp";
+    
+            // Проверяем, есть ли уже такое имя в базе
+            $exists = $memorial->memorialimages()->where('image_path', $path . '/' . $filename)->exists();
+    
+            // Если файл уже есть, увеличиваем номер
+            $number++;
+        } while ($exists);
+    
+        // Извлекаем дату из EXIF
+        $imageDate = null;
+        $exif = @exif_read_data($photo->getRealPath(), 'EXIF', true);
+        if ($exif && isset($exif['EXIF']['DateTimeOriginal'])) {
+            $imageDate = DateTime::createFromFormat('Y:m:d H:i:s', $exif['EXIF']['DateTimeOriginal']);
+        } elseif ($exif && isset($exif['IFD0']['DateTime'])) {
+            $imageDate = DateTime::createFromFormat('Y:m:d H:i:s', $exif['IFD0']['DateTime']);
+        }
+        $imageDate = $imageDate ? $imageDate->format('Y-m-d') : now()->format('Y-m-d');
+    
+        // Обрабатываем изображение
+        $image = ImageFacade::read($photo)
+            ->scale(width: 1300)
+            ->toWebp(90);
+    
+        // Сохраняем обработанное изображение
+        Storage::disk('memorial')->put($path . '/' . $filename, $image->toString());
+    
+        // Создаем запись в базе данных с датой
+        $memorial->memorialimages()->create([
+            'image_path' => $path . '/' . $filename,
+            'image_date' => $imageDate,
+        ]);
+    
+        $uploadedCount++; // Увеличиваем счетчик загруженных фото
+    }
+    
+
+    return redirect()->back()->with('success', __('Uploaded :count images. Total images: :total', [
+        'count' => $uploadedCount,
+        'total' => $currentImageCount + $uploadedCount
+    ]));
+}
 
 
     public function updateImages(Request $request, Memorial $memorial)
@@ -132,7 +213,6 @@ class ImageController extends Controller
         $request->validate([
             'images' => 'array',
             'images.*.id' => 'required|exists:images,id',
-            // 'images.*.image_date' => 'nullable|date',
             'images.*.image_date' => 'nullable|string|max:255',
             'images.*.image_description' => 'nullable|string|max:255',
         ]);
@@ -158,12 +238,30 @@ class ImageController extends Controller
             return redirect()->back()->withErrors(['image' => __('This image does not belong to the memorial.')]);
         }
 
-        Storage::disk('public')->delete($image->image_path);
+        Storage::disk('memorial')->delete($image->image_path);
 
         $image->delete();
 
         return redirect()->back()->with('success', __('Image deleted successfully.'));
     }
 
-
+    public function destroyAllImages(Memorial $memorial)
+    {
+        // Получаем все изображения, связанные с мемориалом
+        $images = $memorial->images; // Предполагается, что у модели Memorial есть отношение "images"
+    
+        if ($images->isEmpty()) {
+            return redirect()->back()->with('info', __('No images to delete.'));
+        }
+    
+        // Удаляем все файлы из хранилища
+        foreach ($images as $image) {
+            Storage::disk('memorial')->delete($image->image_path);
+        }
+    
+        // Удаляем все записи из базы данных
+        $memorial->images()->delete();
+    
+        return redirect()->back()->with('success', __('All images deleted successfully.'));
+    }
 }

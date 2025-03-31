@@ -317,7 +317,6 @@
 @section('title', 'Irányítópult - mbook.hu')
 
 @section('content')
-
     <div class="container">
         <div class="section-padding text-secondary text-center">
             <div class="">
@@ -343,7 +342,7 @@
                             <div class="head text-center">
                                 <h6 class="text-u fz-20 mb-40">{{ $memorial->name }}</h6>
                                 <div class="img img-fit">
-                                    <img src="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photo) }}"
+                                    <img src="{{ asset('memorial/' . $memorial->slug . '/' . $memorial->photo) }}"
                                         class="img img-fit">
                                 </div>
                             </div>

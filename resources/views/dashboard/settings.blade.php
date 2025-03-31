@@ -47,7 +47,7 @@
                 <div class="col-md-12">
                     <label class="col-form-label text-md-end">{{ __('Private') }}</label>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="private" name="private" {{ old('private', $memorial->history) ? 'checked' : '' }}>
+                        <input class="form-check-input" type="checkbox" id="private" name="private" {{ old('private', $memorial->private) ? 'checked' : '' }}>
                         <label class="form-check-label" for="private">{{ __('Private') }}</label>
                     </div>
                     <small class="text-muted">
@@ -56,7 +56,7 @@
                 </div>
             </div>
 
-            <div class="row mb-3">
+            {{-- <div class="row mb-3">
                 <div class="col-md-12">
                     <label for="slug" class="col-form-label text-md-end">{{ __('Slug') }}</label>
                     <input id="slug" type="text" class="form-control @error('slug') is-invalid @enderror" name="slug" value="{{ old('slug', $memorial->slug) }}" required>
@@ -69,15 +69,15 @@
                         Egyedi URL az emlékoldalhoz. Csak kisbetűket, számokat és kötőjeleket használj. Ha üresen hagyod, automatikusan generálódik
                     </small>
                 </div>
-            </div>
+            </div> --}}
             
 
             
             <div class="row mb-3">
                 <div class="col-md-12">
-                    <label for="map_address" class="col-form-label text-md-end">{{ __('Address on Map') }}</label>
-                    <input id="map_address" type="text" class="form-control @error('map_address') is-invalid @enderror" name="map_address" value="{{ old('map_address', $memorial->story) }}">
-                    @error('map_address')
+                    <label for="coordinates" class="col-form-label text-md-end">{{ __('Address on Map') }}</label>
+                    <input id="coordinates" type="text" class="form-control @error('coordinates') is-invalid @enderror" name="coordinates" value="{{ old('coordinates', $memorial->coordinates) }}">
+                    @error('coordinates')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -97,7 +97,7 @@
                             <label class="theme-option">
                                 <img src="{{ asset('light.png') }}" style="border-radius: 15px" alt="Light Theme" class="theme-thumbnail">
                                 <span class="mt-2">
-                                    <input type="radio" name="theme" value="light" id="lightTheme" {{ $memorial->testimonials === 'light' ? 'checked' : '' }}>
+                                    <input type="radio" name="theme" value="light" id="lightTheme" {{ $memorial->theme === 'light' ? 'checked' : '' }}>
                                     {{ __('Light Theme') }}
                                 </span>
                             </label>
@@ -107,7 +107,7 @@
                             <label class="theme-option">
                                 <img src="{{ asset('dark.png') }}" style="border-radius: 15px" alt="Dark Theme" class="theme-thumbnail">
                                 <span class="mt-2">
-                                    <input type="radio" name="theme" value="dark" id="darkTheme" {{ $memorial->testimonials === 'dark' ? 'checked' : '' }}>
+                                    <input type="radio" name="theme" value="dark" id="darkTheme" {{ $memorial->theme === 'dark' ? 'checked' : '' }}>
                                     {{ __('Dark Theme') }}
                                 </span>
                             </label>

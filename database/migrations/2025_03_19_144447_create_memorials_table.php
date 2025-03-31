@@ -18,12 +18,12 @@ return new class extends Migration
             $table->date('birth_date')->nullable();
             $table->date('death_date')->nullable();
             $table->string('photo')->nullable();
-            $table->text('photos')->nullable();
             $table->text('video')->nullable();
+            $table->text('video_thumbnail')->nullable();
             $table->text('biography')->nullable();
-            $table->text('history')->nullable();
-            $table->text('story')->nullable();
-            $table->text('testimonials')->nullable();
+            $table->text('private')->nullable();
+            $table->text('coordinates')->nullable();
+            $table->text('theme')->nullable();
             $table->text('comments')->nullable();
             $table->text('gift')->nullable();
             $table->string('qr_code')->unique();

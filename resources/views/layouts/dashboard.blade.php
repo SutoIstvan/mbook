@@ -178,7 +178,7 @@
 
                             <div class="info md-hide about-ca">
                                 <div class="d-flex justify-content-center">
-                                    <img src="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photo) }}" style="height: 150px; width: 150px; border-radius: 50%; object-fit: cover;" alt="" class="img-fluid">
+                                    <img src="{{ asset('memorial/' . $memorial->slug . '/' . $memorial->photo) }}" style="height: 150px; width: 150px; border-radius: 50%; object-fit: cover;" alt="" class="img-fluid">
                                 </div>
                                 
                                 <div class="cont text-center mt-10">
