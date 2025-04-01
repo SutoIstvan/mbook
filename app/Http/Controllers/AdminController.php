@@ -104,9 +104,11 @@ class AdminController extends Controller
         $fileName = 'qrcodes_' . $prefix . '_' . time() . '.txt';
         Storage::disk('public')->put('qrcodes/' . $fileName, $fileContent);
 
+        $fileUrl = 'https://app.rememus.com/storage/qrcodes/' . $fileName;
+
         return redirect()->back()
             ->with('success', "Generated {$quantity} QR codes successfully")
-            ->with('file_path', '/storage/qrcodes/' . $fileName);
+            ->with('file_path', $fileUrl);
     }
 
     public function codelink(Request $request)
