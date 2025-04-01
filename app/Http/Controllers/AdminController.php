@@ -102,7 +102,7 @@ class AdminController extends Controller
 
         // Сохранение в текстовый файл
         $fileName = 'qrcodes_' . $prefix . '_' . time() . '.txt';
-        Storage::disk('memorial')->put('qrcodes/' . $fileName, $fileContent);
+        Storage::disk('public')->put('qrcodes/' . $fileName, $fileContent);
 
         return redirect()->back()
             ->with('success', "Generated {$quantity} QR codes successfully")
