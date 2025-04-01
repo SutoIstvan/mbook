@@ -106,7 +106,7 @@ class AdminController extends Controller
 
         return redirect()->back()
             ->with('success', "Generated {$quantity} QR codes successfully")
-            ->with('file_path', 'qrcodes/' . $fileName);
+            ->with('file_path', 'storage/qrcodes/' . $fileName);
     }
 
     public function codelink(Request $request)
