@@ -63,8 +63,8 @@ Route::middleware(['auth', UserAccess::class . ':admin'])->group(function () {
     Route::post('/generate-qrcodes', [AdminController::class, 'generateUniqueToken'])->name('generate.qrcodes');
     Route::post('/codelink', [AdminController::class, 'codelink'])->name('admin.codelink');
 
-    Route::get('/qrcodes/{filename}', function ($filename) {
-        $filePath = storage_path('app/qrcodes/' . $filename);
+    Route::get('/storage/qrcodes/{filename}', function ($filename) {
+        $filePath = storage_path('app/storage/qrcodes/' . $filename);
         if (file_exists($filePath)) {
             return response()->download($filePath);
         }
