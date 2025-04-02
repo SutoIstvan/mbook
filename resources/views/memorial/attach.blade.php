@@ -458,7 +458,7 @@
         {{-- <form action="{{ route('memorial.create-with-qr') }}" method="POST" enctype="multipart/form-data" id="form"> --}}
         @csrf
 
-        <input  name="qrtoken" value="{{ $token }}">
+        <input name="qrtoken" value="{{ $token }}" hidden readonly>
         <div class="container">
             <div class="row d-flex justify-content-center">
 
