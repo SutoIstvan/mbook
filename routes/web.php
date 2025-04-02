@@ -75,7 +75,7 @@ Route::middleware(['auth', UserAccess::class . ':admin'])->group(function () {
 
 Route::get('/memorial/attach/{token}', [MemorialController::class, 'showAttachForm'])->name('memorial.attach.form')->middleware('auth');
 
-Route::get('/memoria/{memorial}', [MemorialController::class, 'show'])->name('memorial.show');
+Route::get('/{memorial}', [MemorialController::class, 'show'])->name('memorial.show');
 Route::get('/memorial/{memorial}/biography', [MemorialController::class, 'biography'])->name('memorial.biography');
 Route::get('/memorial/{memorial}/photos', [MemorialController::class, 'photos'])->name('memorial.photos');
 Route::get('/memorial/{memorial}/videos', [MemorialController::class, 'videos'])->name('memorial.videos');
