@@ -76,10 +76,10 @@ Route::middleware(['auth', UserAccess::class . ':admin'])->group(function () {
 Route::get('/memorial/attach/{token}', [MemorialController::class, 'showAttachForm'])->name('memorial.attach.form')->middleware('auth');
 
 Route::get('/{memorial}', [MemorialController::class, 'show'])->name('memorial.show');
-Route::get('/memorial/{memorial}/biography', [MemorialController::class, 'biography'])->name('memorial.biography');
-Route::get('/memorial/{memorial}/photos', [MemorialController::class, 'photos'])->name('memorial.photos');
-Route::get('/memorial/{memorial}/videos', [MemorialController::class, 'videos'])->name('memorial.videos');
-Route::get('/memorial/{memorial}/comments', [MemorialController::class, 'comments'])->name('memorial.comments');
+Route::get('/{memorial}/biography', [MemorialController::class, 'biography'])->name('memorial.biography');
+Route::get('/{memorial}/photos', [MemorialController::class, 'photos'])->name('memorial.photos');
+Route::get('/{memorial}/videos', [MemorialController::class, 'videos'])->name('memorial.videos');
+Route::get('/{memorial}/comments', [MemorialController::class, 'comments'])->name('memorial.comments');
 
-Route::get('/memorial/{memorial}/comments/create', [CommentController::class, 'create'])->name('comments.create');
-Route::post('/memorial/{memorial}/comments', [CommentController::class, 'store'])->name('comments.store');
+Route::get('/{memorial}/comments/create', [CommentController::class, 'create'])->name('comments.create');
+Route::post('/{memorial}/comments', [CommentController::class, 'store'])->name('comments.store');
