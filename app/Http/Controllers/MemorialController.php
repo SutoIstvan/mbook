@@ -21,12 +21,10 @@ class MemorialController extends Controller
     public function show(Memorial $memorial)
     {
         // Если запись найдена по id, но есть slug, редиректим на slug (опционально)
-        // if (request()->segment(2) != $memorial->slug && $memorial->slug) {
-        //     return redirect()->route('memorial.show', $memorial->slug);
-        // }
-        // if (request()->segment(2) != $memorial->slug && $memorial->slug) {
-        //     return redirect()->to('/memorial/' . $memorial->slug, 301);
-        // }
+        if (request()->segment(2) != $memorial->slug && $memorial->slug) {
+            return redirect()->route('memorial.show', $memorial->slug);
+        }
+
         
         $images = $memorial->memorialimages;
 
