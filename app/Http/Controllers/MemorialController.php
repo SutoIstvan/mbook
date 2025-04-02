@@ -24,10 +24,8 @@ class MemorialController extends Controller
         // if (request()->segment(2) != $memorial->slug && $memorial->slug) {
         //     return redirect()->route('memorial.show', $memorial->slug);
         // }
-        if (request()->segment(2) != $memorial->slug && $memorial->slug) {
-            // Вместо использования route() создаем URL вручную без слеша
-            return redirect('/memorial/' . $memorial->slug, 301);
-        }
+        $slug = $memorial->get('slug');
+        $memorial = Memorial::where('slug', $slug)->firstOrFail();
         
         $images = $memorial->memorialimages;
 
