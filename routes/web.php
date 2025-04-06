@@ -14,7 +14,19 @@ Auth::routes();
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
+
+Route::get('/prices', function () {
+    return view('price');
+})->name('price');
+
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
+
+Route::get('/demo', function () {
+    return view('demo');
+})->name('demo');
 
 
 // Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
