@@ -13,7 +13,7 @@ use App\Http\Middleware\UserAccess;
 Auth::routes();
 
 Route::get('/', function () {
-    return redirect('/dashboard');
+    return view('welcome');
 });
 
 

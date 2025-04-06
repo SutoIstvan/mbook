@@ -358,9 +358,9 @@ class MemorialController extends Controller
     public function biography(Memorial $memorial)
     {
         // Если запись найдена по id, но есть slug, редиректим на slug (опционально)
-        if (request()->segment(2) != $memorial->slug && $memorial->slug) {
-            return redirect()->route('memorial.biography', $memorial->slug);
-        }
+        // if (request()->segment(2) != $memorial->slug && $memorial->slug) {
+        //     return redirect()->route('memorial.biography', $memorial->slug);
+        // }
 
         $images = $memorial->memorialimages;
 
@@ -370,9 +370,9 @@ class MemorialController extends Controller
     public function photos(Memorial $memorial)
     {
         // Если запись найдена по id, но есть slug, редиректим на slug (опционально)
-        if (request()->segment(2) != $memorial->slug && $memorial->slug) {
-            return redirect()->route('memorial.photos', $memorial->slug);
-        }
+        // if (request()->segment(2) != $memorial->slug && $memorial->slug) {
+        //     return redirect()->route('memorial.photos', $memorial->slug);
+        // }
 
         $images = $memorial->memorialimages;
 
@@ -382,9 +382,9 @@ class MemorialController extends Controller
     public function videos(Memorial $memorial)
     {
         // Если запись найдена по id, но есть slug, редиректим на slug (опционально)
-        if (request()->segment(2) != $memorial->slug && $memorial->slug) {
-            return redirect()->route('memorial.videos', $memorial->slug);
-        }
+        // if (request()->segment(2) != $memorial->slug && $memorial->slug) {
+        //     return redirect()->route('memorial.videos', $memorial->slug);
+        // }
 
         $images = $memorial->memorialimages;
 
@@ -394,9 +394,9 @@ class MemorialController extends Controller
     public function comments(Memorial $memorial)
     {
         // Если запись найдена по id, но есть slug, редиректим на slug (опционально)
-        if (request()->segment(2) != $memorial->slug && $memorial->slug) {
-            return redirect()->route('memorial.comments', $memorial->slug);
-        }
+        // if (request()->segment(2) != $memorial->slug && $memorial->slug) {
+        //     return redirect()->route('memorial.comments', $memorial->slug);
+        // }
 
         $comments = $memorial->comments()
             ->where('status', 'approved')
