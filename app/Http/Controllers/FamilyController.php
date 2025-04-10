@@ -50,6 +50,7 @@ class FamilyController extends Controller
     $family->memorial_id = $memorial->id;
     $family->name = $data['name'] ?? null;
     $family->role = $data['role'] ?? null;
+    $family->qr_code = $data['qr_code'] ?? null;
     $family->birth_date = $data['birth_date'] ?? null;
 
     // Обработка фото

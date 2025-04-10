@@ -487,7 +487,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-12 mb-3">
+                            <div class="col-12 col-md-6 mb-3">
                                 <label for="birth_date" class="col-form-label text-md-end">{{ __('Date of Birth') }}</label>
                                 <input id="birth_date" type="date"
                                     class="form-control @error('birth_date') is-invalid @enderror" name="birth_date"
@@ -499,8 +499,22 @@
                                 @enderror
                             </div>
 
-                            <div class="col-md-12 mb-3">
-                                <label for="death_date" class="col-form-label text-md-end">{{ __('Date of Death') }}</label>
+                            <div class="col-12 col-md-6 mb-3">
+                                <label for="birth_date"
+                                    class="col-form-label text-md-end">{{ __('Születés helye') }}</label>
+                                <input id="birth_date" type="text"
+                                    class="form-control @error('birth_date') is-invalid @enderror" name="birth_date"
+                                    value="{{ old('birth_date') }}">
+                                @error('birth_date')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="col-12 col-md-6 mb-3">
+                                <label for="death_date"
+                                    class="col-form-label text-md-end">{{ __('Date of Death') }}</label>
                                 <input id="death_date" type="date"
                                     class="form-control @error('death_date') is-invalid @enderror" name="death_date"
                                     value="{{ old('death_date') }}">
@@ -510,6 +524,37 @@
                                     </span>
                                 @enderror
                             </div>
+
+                            <div class="col-12 col-md-6 mb-3">
+                                <label for="birth_date"
+                                    class="col-form-label text-md-end">{{ __('Elhalálozás helye') }}</label>
+                                <input id="birth_date" type="text"
+                                    class="form-control @error('birth_date') is-invalid @enderror" name="birth_date"
+                                    value="{{ old('birth_date') }}">
+                                @error('birth_date')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                        </div>
+
+
+                        <div class="text-end pb-8 mt-8">
+
+
+                            <button type="button"class="butn butn-md butn-bord butn-rounded" onclick="window.location.href='http://mbook.test/dashboard/teljes-nev/family/create'">
+                                <span class="text">
+                                    {{ __('További adatok megadása') }}
+                                </span>
+                                <span id="btnIcon" class="icon">
+                                    <i class="fa-regular fa-save"></i>
+                                </span>
+                                <span id="btnSpinner" class="icon d-none">
+                                    <i class="fa-solid fa-spinner fa-spin"></i>
+                                </span>
+                            </button>
 
                         </div>
                     </div>
@@ -539,12 +584,15 @@
                                         <span class="header">{{ __('Drag your photo here') }}</span>
                                         <span class="header">{{ __('or open it in') }}</span>
                                         <div class="text-center mb-10 mt-10">
-                                            <span class="button butn butn-md butn-bord butn-rounded" id="fileTrigger">{{ __('browser') }}</span>
+                                            <span class="button butn butn-md butn-bord butn-rounded"
+                                                id="fileTrigger">{{ __('browser') }}</span>
                                         </div>
                                         <span class="support">{{ __('Photo formats: JPEG, JPG, PNG') }}</span>
                                     </div>
-                                    <img id="image" src="" alt="Photo to crop" style="max-width: 100%; display: none;">
-                                    <input id="photoInput" name="photo" type="file" hidden accept="image/jpeg, image/jpg, image/png" />
+                                    <img id="image" src="" alt="Photo to crop"
+                                        style="max-width: 100%; display: none;">
+                                    <input id="photoInput" name="photo" type="file" hidden
+                                        accept="image/jpeg, image/jpg, image/png" />
                                     <input type="hidden" name="crop_x" id="cropX">
                                     <input type="hidden" name="crop_y" id="cropY">
                                     <input type="hidden" name="crop_width" id="cropWidth">
@@ -630,119 +678,119 @@
     <!-- Cropper.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
     <script>
-    let cropper;
-    let originalFile;
+        let cropper;
+        let originalFile;
 
-    const form = document.getElementById('uploadForm');
-    const dragArea = document.getElementById('imageContainer');
-    const fileInput = document.getElementById('photoInput');
-    const fileTrigger = document.getElementById('fileTrigger');
-    const image = document.getElementById('image');
-    const defaultContent = dragArea.querySelector('.default-content');
-    const cropControls = document.querySelector('.crop-controls');
-    const removePhotoBtn = document.getElementById('removePhoto');
-    const cropX = document.getElementById('cropX');
-    const cropY = document.getElementById('cropY');
-    const cropWidth = document.getElementById('cropWidth');
-    const cropHeight = document.getElementById('cropHeight');
+        const form = document.getElementById('uploadForm');
+        const dragArea = document.getElementById('imageContainer');
+        const fileInput = document.getElementById('photoInput');
+        const fileTrigger = document.getElementById('fileTrigger');
+        const image = document.getElementById('image');
+        const defaultContent = dragArea.querySelector('.default-content');
+        const cropControls = document.querySelector('.crop-controls');
+        const removePhotoBtn = document.getElementById('removePhoto');
+        const cropX = document.getElementById('cropX');
+        const cropY = document.getElementById('cropY');
+        const cropWidth = document.getElementById('cropWidth');
+        const cropHeight = document.getElementById('cropHeight');
 
-    fileTrigger.addEventListener('click', () => fileInput.click());
+        fileTrigger.addEventListener('click', () => fileInput.click());
 
-    function handleFile(file) {
-        if (file && file.type.startsWith('image/')) {
-            originalFile = file;
-            const reader = new FileReader();
-            reader.onload = function (event) {
-                image.src = event.target.result;
-                image.style.display = 'block';
-                defaultContent.style.display = 'none';
-                cropControls.style.display = 'flex'; // Показываем описание и кнопку
+        function handleFile(file) {
+            if (file && file.type.startsWith('image/')) {
+                originalFile = file;
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    image.src = event.target.result;
+                    image.style.display = 'block';
+                    defaultContent.style.display = 'none';
+                    cropControls.style.display = 'flex'; // Показываем описание и кнопку
 
-                if (cropper) {
-                    cropper.destroy();
-                }
-
-                cropper = new Cropper(image, {
-                    aspectRatio: 1 / 1,
-                    viewMode: 1,
-                    autoCropArea: 0.97,
-                    scalable: false,
-                    zoomable: false,
-                    movable: true,
-                    cropBoxResizable: true,
-                    crop: function(event) {
-                        const cropData = cropper.getData();
-                        cropX.value = Math.round(cropData.x);
-                        cropY.value = Math.round(cropData.y);
-                        cropWidth.value = Math.round(cropData.width);
-                        cropHeight.value = Math.round(cropData.height);
+                    if (cropper) {
+                        cropper.destroy();
                     }
-                });
-            };
-            reader.readAsDataURL(file);
+
+                    cropper = new Cropper(image, {
+                        aspectRatio: 1 / 1,
+                        viewMode: 1,
+                        autoCropArea: 0.97,
+                        scalable: false,
+                        zoomable: false,
+                        movable: true,
+                        cropBoxResizable: true,
+                        crop: function(event) {
+                            const cropData = cropper.getData();
+                            cropX.value = Math.round(cropData.x);
+                            cropY.value = Math.round(cropData.y);
+                            cropWidth.value = Math.round(cropData.width);
+                            cropHeight.value = Math.round(cropData.height);
+                        }
+                    });
+                };
+                reader.readAsDataURL(file);
+            }
         }
-    }
 
-    // Удаление фото
-    removePhotoBtn.addEventListener('click', () => {
-        if (cropper) {
-            cropper.destroy(); // Уничтожаем Cropper.js
-        }
-        image.src = ''; // Очищаем изображение
-        image.style.display = 'none'; // Скрываем изображение
-        defaultContent.style.display = 'block'; // Показываем исходный контент
-        cropControls.style.display = 'none'; // Скрываем описание и кнопку
-        fileInput.value = ''; // Сбрасываем input для новой загрузки
-        cropX.value = ''; // Очищаем координаты
-        cropY.value = '';
-        cropWidth.value = '';
-        cropHeight.value = '';
-    });
+        // Удаление фото
+        removePhotoBtn.addEventListener('click', () => {
+            if (cropper) {
+                cropper.destroy(); // Уничтожаем Cropper.js
+            }
+            image.src = ''; // Очищаем изображение
+            image.style.display = 'none'; // Скрываем изображение
+            defaultContent.style.display = 'block'; // Показываем исходный контент
+            cropControls.style.display = 'none'; // Скрываем описание и кнопку
+            fileInput.value = ''; // Сбрасываем input для новой загрузки
+            cropX.value = ''; // Очищаем координаты
+            cropY.value = '';
+            cropWidth.value = '';
+            cropHeight.value = '';
+        });
 
-    dragArea.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        dragArea.classList.add('active');
-    });
+        dragArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dragArea.classList.add('active');
+        });
 
-    dragArea.addEventListener('dragleave', () => {
-        dragArea.classList.remove('active');
-    });
+        dragArea.addEventListener('dragleave', () => {
+            dragArea.classList.remove('active');
+        });
 
-    dragArea.addEventListener('drop', (e) => {
-        e.preventDefault();
-        dragArea.classList.remove('active');
-        const file = e.dataTransfer.files[0];
-        handleFile(file);
-    });
+        dragArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dragArea.classList.remove('active');
+            const file = e.dataTransfer.files[0];
+            handleFile(file);
+        });
 
-    fileInput.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        handleFile(file);
-    });
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            handleFile(file);
+        });
 
-    form.addEventListener('submit', (e) => {
-    // Cropper данные
-    if (cropper) {
-        const cropData = cropper.getData();
-        cropX.value = Math.round(cropData.x);
-        cropY.value = Math.round(cropData.y);
-        cropWidth.value = Math.round(cropData.width);
-        cropHeight.value = Math.round(cropData.height);
-    }
+        form.addEventListener('submit', (e) => {
+            // Cropper данные
+            if (cropper) {
+                const cropData = cropper.getData();
+                cropX.value = Math.round(cropData.x);
+                cropY.value = Math.round(cropData.y);
+                cropWidth.value = Math.round(cropData.width);
+                cropHeight.value = Math.round(cropData.height);
+            }
 
-    // Кнопка и спиннер
-    let button = document.getElementById("submitBtn");
-    let btnIcon = document.getElementById("btnIcon");
-    let btnSpinner = document.getElementById("btnSpinner");
+            // Кнопка и спиннер
+            let button = document.getElementById("submitBtn");
+            let btnIcon = document.getElementById("btnIcon");
+            let btnSpinner = document.getElementById("btnSpinner");
 
-    if (button && btnIcon && btnSpinner) {
-        button.disabled = true;
-        btnIcon.classList.add("d-none");
-        btnSpinner.classList.remove("d-none");
-    } else {
-        console.error("Один из элементов (submitBtn, btnIcon, btnSpinner) не найден");
-    }
-});
+            if (button && btnIcon && btnSpinner) {
+                button.disabled = true;
+                btnIcon.classList.add("d-none");
+                btnSpinner.classList.remove("d-none");
+            } else {
+                console.error("Один из элементов (submitBtn, btnIcon, btnSpinner) не найден");
+            }
+        });
     </script>
 
 @endsection
