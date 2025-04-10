@@ -64,7 +64,10 @@ class DashboardController extends Controller
 
     }
 
-
+    public function family(Memorial $memorial)
+    {
+        return view('dashboard.family', compact('memorial'));
+    }
 
     public function comments(Memorial $memorial)
     {

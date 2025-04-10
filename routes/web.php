@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FamilyController;
 use App\Http\Controllers\MemorialController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImageController;
@@ -61,6 +62,10 @@ Route::middleware(['auth', UserAccess::class . ':user'])->group(function () {
     
     Route::delete('/dashboard/delete/{memorial}', [DashboardController::class, 'destroy'])->name('dashboard.destroy')->middleware('auth');
 
+    Route::get('/dashboard/{memorial}/family', [DashboardController::class, 'family'])->name('dashboard.family');
+
+    Route::get('/dashboard/{memorial}/family/create', [FamilyController::class, 'create'])->name('family.create');
+    Route::post('/dashboard/{memorial}/family', [FamilyController::class, 'store'])->name('family.store');
 });
 
 // Для админов
