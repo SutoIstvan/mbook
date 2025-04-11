@@ -73,6 +73,7 @@ Route::middleware(['auth', UserAccess::class . ':user'])->group(function () {
 
     Route::get('/dashboard/{memorial}/timeline/create', [TimelineController::class, 'create'])->name('timeline.create');
     Route::post('/dashboard/timelines/store', [TimelineController::class, 'store'])->name('timelines.store');
+    Route::post('/dashboard/timelines/marriage/store', [TimelineController::class, 'storeMarriage'])->name('timelines.storeMarriage');
 
 });
 

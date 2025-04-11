@@ -576,11 +576,11 @@
         .step-vertical:not(:last-child)::after {
             content: '';
             /* position: absolute;
-                             left: 25px;
-                             top: 60px;
-                             bottom: 0;
-                             width: 2px;
-                             background: #e9ecef; */
+                                         left: 25px;
+                                         top: 60px;
+                                         bottom: 0;
+                                         width: 2px;
+                                         background: #e9ecef; */
         }
 
         .step-vertical-icon {
@@ -624,6 +624,42 @@
         /* Interactive buttons */
         .controls {
             text-align: center;
+        }
+
+        ul.timeline-3 {
+            list-style-type: none;
+            position: relative;
+        }
+
+        ul.timeline-3:before {
+            content: " ";
+            background: #d4d9df;
+            display: inline-block;
+            position: absolute;
+            left: 29px;
+            width: 2px;
+            height: 300%;
+            margin-top: 5px;
+            z-index: 400;
+        }
+
+        ul.timeline-3>li {
+            margin: 0px 0;
+            padding-left: 20px;
+        }
+
+        ul.timeline-3>li:before {
+            content: " ";
+            background: white;
+            display: inline-block;
+            position: absolute;
+            border-radius: 50%;
+            border: 3px solid #22c0e8;
+            left: 23px;
+            width: 15px;
+            height: 15px;
+            margin-top: 5px;
+            z-index: 400;
         }
     </style>
 @endsection
@@ -836,12 +872,10 @@
 
                 <div class="container">
 
-                    <form action="{{ route('timelines.store') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
 
-                        <div class="row mb-3">
-                            {{-- <div class="form-group col-12 col-md-12 mt-1">
+
+                    <div class="row mb-3">
+                        {{-- <div class="form-group col-12 col-md-12 mt-1">
                                 <select name="role" class="form-select" required>
                                     <option value="">{{ __('Select a life event') }}</option>
                                     <option value="father">{{ __('Father') }}</option>
@@ -852,87 +886,125 @@
                                     <option value="pets">{{ __('Pets') }}</option>
                                 </select>
                             </div> --}}
-                            {{-- <div class="form-group col-12 col-md-6 mt-1">
+                        {{-- <div class="form-group col-12 col-md-6 mt-1">
                                 <label>{{ __('Name') }}</label>
                                 <input type="text" name="name" class="form-control" placeholder="{{ __('Name') }}"
                                     required>
                             </div> --}}
 
-                            @dump($children)
+                        {{-- @dump($children) --}}
 
 
-                                <select id="eventType" class="form-select">
-                                    <option value="">Válassz</option>
-                                    <option value="child_birth">Gyermek születése</option>
-                                    <option value="marriage">Házasság</option>
-                                    <!-- и другие -->
-                                    {{--                                            
-                                        -	Iskola neve, idelye, Iskola hozzáadása
-                                        -	foglalkozása, 
-                                        -	Munkahely neve, idelye, további hozzáadása
-                                        -	Házzasságkötés idelye, további hozzáadása
-                                        -	Hobbija, kedvenc szabadidős foglalkozása
-                                        -	Kedvenc zenéi, (youtube link)
-                                        -	Egyéb tulajdonságai, jellemzői 
-                                    --}}
+                        <select id="eventType" class="form-select">
+                            <option value="">Válassz</option>
+                            <option value="child_birth">Gyermek születése</option>
+                            <option value="marriage">Házasság</option>
+                            <option value="school">Iskola</option>
+                            <option value="work">Munkahely</option>
+                            <option value="hobby">Hobbija</option>
+                            <option value="favorite_music">Kedvenc zenéi</option>
+                            <option value="other_properties">Egyéb tulajdonságai</option>
+                        </select>
 
+                        <form action="{{ route('timelines.store') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
 
-                                </select>
+                            <div id="childrenInputs" class="mt-3" style="display: none;">
+                                <div id="existingChildren mt-4">
+                                    @foreach ($children as $child)
+                                        <input type="hidden" name="children[{{ $loop->index }}][id]"
+                                            value="{{ $child->id }}">
 
-                                <div id="childrenInputs" class="mt-3" style="display: none;">
-                                    <h5>Gyermekek</h5>
-                                    <div id="existingChildren">
-                                        <!-- сюда подгружаем детей из базы -->
-                                        @foreach ($children as $child)
-
-                                            <input type="hidden" name="children[{{ $loop->index }}][id]" value="{{ $child->id }}">
-
-                                            <div class="row mb-2">
-                                                <div class="col-md-6">
-                                                    <input type="text" class="form-control"
-                                                        name="children[{{ $loop->index }}][name]"
-                                                        value="{{ $child->name }}" readonly>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <input type="date" class="form-control"
-                                                        name="children[{{ $loop->index }}][birth_date]"
-                                                        value="{{ $child->birth_date }}">
-                                                </div>
+                                        <div class="row mb-2">
+                                            <div class="col-md-6">
+                                                <input type="text" class="form-control"
+                                                    name="children[{{ $loop->index }}][name]" value="{{ $child->name }}"
+                                                    readonly>
                                             </div>
-                                        @endforeach
+                                            <div class="col-md-6">
+                                                <input type="date" class="form-control"
+                                                    name="children[{{ $loop->index }}][birth_date]"
+                                                    value="{{ $child->birth_date }}">
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+
+                                <div id="newChildren"></div>
+
+                                <button type="button" class="btn btn-outline-primary mt-2" id="addChild">+ Új gyermek
+                                    hozzáadása</button>
+
+                                <button type="submit" class="btn btn-outline-primary mt-2">Save</button>
+                        </form>
+
+
+
+
+                    </div>
+
+                    <form action="{{ route('timelines.storeMarriage') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
+
+                        <div id="partnerInputs" class="mt-3" style="display: none;">
+                            <h5>Esküvő datum</h5>
+                            <div id="existingPartner">
+                                @foreach ($partners as $partner)
+                                    <input type="hidden" name="marriage[{{ $loop->index }}][id]"
+                                        value="{{ $partner->id }}">
+
+                                    <div class="row mb-2">
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control"
+                                                name="marriage[{{ $loop->index }}][name]" value="{{ $partner->name }}"
+                                                readonly>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="date" class="form-control"
+                                                name="marriage[{{ $loop->index }}][date]"
+                                                value="{{ $partner->birth_date }}">
+                                        </div>
                                     </div>
+                                @endforeach
+                            </div>
 
-                                    <div id="newChildren"></div>
+                            <div id="newMarriage"></div>
 
-                                    <button type="button" class="btn btn-outline-primary mt-2" id="addChild">+ Új gyermek
-                                        hozzáadása</button>
+                            <button type="button" class="btn btn-outline-primary mt-2" id="addMarriage">+ Új esküvő
+                                hozzáadása</button>
 
-                                    <button type="submit" class="btn btn-outline-primary mt-2">Save</button>
-                        </div>
-
-
-
+                            <button type="submit" class="btn btn-outline-primary mt-2">Save</button>
+                    </form>
                 </div>
-                {{-- <div class="form-group col-12 col-md-2 mt-1">
-                            <button type="submit" class="btn btn-outline-primary mb-4 w-100">
-                                <i class="fa fa-plus"></i> {{ __('Add') }}</button>
-                        </div> --}}
-                </form>
-
-
             </div>
 
 
-
-            <div class="d-flex justify-content-between mt-50">
-                <button href="#" class="btn btn-secondary">{{ __('Skip') }}</button>
-                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>
-                    {{ __('Next') }}</button>
+            <div class="container">
+                <div class="d-flex justify-content-between mt-50">
+                    <button href="#" class="btn btn-secondary">{{ __('Skip') }}</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>
+                        {{ __('Next') }}</button>
+                </div>
             </div>
+
 
             <br><br>
-            @foreach ( $timelines as $timeline )
-                {{ $timeline->title }} <br>
+            @foreach ($timelines as $timeline)
+                <div class="container">
+                    <div class="row">
+                        <div class="col-10 col-md-10">
+                            <ul class="timeline-3">
+                                <li>
+                                    <a>{{ $timeline->title }}</a>
+                                    <a class="float-end"><small>{{ $timeline->date }}</small></a>
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             @endforeach
         @endsection
 
@@ -942,15 +1014,27 @@
                 document.addEventListener('DOMContentLoaded', function() {
                     const eventType = document.getElementById('eventType');
                     const childrenInputs = document.getElementById('childrenInputs');
+                    const partnerInputs = document.getElementById('partnerInputs');
+
                     const addChildBtn = document.getElementById('addChild');
                     const newChildrenContainer = document.getElementById('newChildren');
                     let newChildIndex = 0;
 
+
+                    
                     eventType.addEventListener('change', function() {
                         if (this.value === 'child_birth') {
                             childrenInputs.style.display = 'block';
                         } else {
                             childrenInputs.style.display = 'none';
+                        }
+                    });
+
+                    eventType.addEventListener('change', function() {
+                        if (this.value === 'marriage') {
+                            partnerInputs.style.display = 'block';
+                        } else {
+                            partnerInputs.style.display = 'none';
                         }
                     });
 
