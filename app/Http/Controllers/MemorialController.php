@@ -182,7 +182,7 @@ class MemorialController extends Controller
         }
 
         // Генерируем и сохраняем QR-код
-        $this->generateQRCode($token, $memorial);
+        // $this->generateQRCode($token, $memorial);
 
         // Обновляем связь QR-кода с мемориалом
         $qrCode->update([

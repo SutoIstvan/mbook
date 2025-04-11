@@ -21,7 +21,8 @@
         }
 
         body {
-            background-color: #d9d9d9 !important;
+            background-color: #f7f7f7 !important;
+            /* background-color: #d9d9d9 !important; */
         }
 
         :before,
@@ -544,7 +545,7 @@
                         <div class="text-end pb-8 mt-8">
 
 
-                            <button type="submit" name="action" value="add_details" id="additionalDetailsBtn" class="butn butn-md butn-bord butn-rounded">
+                            <button type="submit" name="action" value="add_details" id="additionalDetails" class="butn butn-md butn-bord butn-rounded">
                                 <span class="text">
                                     {{ __('Add Additional Details') }}
                                 </span>

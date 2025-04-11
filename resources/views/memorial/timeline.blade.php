@@ -576,11 +576,11 @@
         .step-vertical:not(:last-child)::after {
             content: '';
             /* position: absolute;
-             left: 25px;
-             top: 60px;
-             bottom: 0;
-             width: 2px;
-             background: #e9ecef; */
+                             left: 25px;
+                             top: 60px;
+                             bottom: 0;
+                             width: 2px;
+                             background: #e9ecef; */
         }
 
         .step-vertical-icon {
@@ -704,17 +704,17 @@
     <div class="container mt-70">
         <div class="row d-flex justify-content-center">
             <div class="steps-horizontal">
-                <div class="step-horizontal active">
+                <div class="step-horizontal complete">
                     <div class="step-icon">
                         {{-- <i class="fas fa-user"></i> --}}
 
-                        <i class="fas fa-user"></i>
+                        <i class="fas fa-check"></i>
                     </div>
                     <div class="step-title">Step 1</div>
                     <div class="step-description">Személyes adatok</div>
                 </div>
 
-                <div class="step-horizontal">
+                <div class="step-horizontal active">
                     <div class="step-icon">
                         <i class="fas fa-clock"></i>
                     </div>
@@ -817,32 +817,16 @@
 
     <div class="container">
         <div class=" text-secondary text-center">
-
             <div class="pt-30">
-
-                {{-- <h1 class="display-5 fw-bold text-white mt-15">Fogadja őszinte részvétünket a veszteségért.</h1> --}}
                 <div class="col-lg-8 mx-auto">
                     <p class="fs-5 mt-4 ">
-                        Ezen az oldalon megadhatod a közeli hozzátartozóid nevét, hogy
-                        segítsenek az életrajz elkészítésében. Válaszd ki a hozzátartozó 
-                        típusát, írd be a nevét, majd kattints a "Hozzáadás" gombra.
+                        Ezen az oldalon megadhatod a fontos eseményeit az időskálán. Válaszd ki az esemény
+                        típusát, írd be a részleteket és a dátumot, majd kattints a 'Hozzáadás' gombra.
                     </p>
                 </div>
             </div>
         </div>
     </div>
-
-    {{-- <div class="container">
-        <div class="d-flex justify-content-center">
-            <div class="col-12 col-md-8 mt-80">
-                <p class="text-center mt-2">
-                    Ezen az oldalon megadhatod a közeli hozzátartozóid nevét, hogy
-                    segítsenek az életrajz elkészítésében. Válaszd ki a hozzátartozó 
-                    típusát, írd be a nevét, majd kattints a "Hozzáadás" gombra.
-                </p>
-            </div>
-        </div>
-    </div> --}}
 
 
 
@@ -852,15 +836,14 @@
 
                 <div class="container">
 
-                    <form action="{{ route('family.store') }}" method="POST">
+                    <form action="{{ route('timelines.store') }}" method="POST">
                         @csrf
                         <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
 
                         <div class="row mb-3">
-                            <div class="form-group col-12 col-md-5 mt-1">
-                                {{-- <label>{{ __('My loved ones') }}</label> --}}
+                            {{-- <div class="form-group col-12 col-md-12 mt-1">
                                 <select name="role" class="form-select" required>
-                                    <option value="">{{ __('Select my loved ones') }}</option>
+                                    <option value="">{{ __('Select a life event') }}</option>
                                     <option value="father">{{ __('Father') }}</option>
                                     <option value="mother">{{ __('Mother') }}</option>
                                     <option value="partner">{{ __('Partner') }}</option>
@@ -868,188 +851,113 @@
                                     <option value="siblings">{{ __('Siblings') }}</option>
                                     <option value="pets">{{ __('Pets') }}</option>
                                 </select>
-                            </div>
-                            <div class="form-group col-12 col-md-5 mt-1">
-                                {{-- <label>{{ __('Name') }}</label> --}}
+                            </div> --}}
+                            {{-- <div class="form-group col-12 col-md-6 mt-1">
+                                <label>{{ __('Name') }}</label>
                                 <input type="text" name="name" class="form-control" placeholder="{{ __('Name') }}"
                                     required>
-                            </div>
+                            </div> --}}
 
-                            {{-- <div class="form-group col-12 col-md-2 mt-30"> --}}
-                                <div class="form-group col-12 col-md-2 mt-1">
-                                    <button type="submit" class="btn btn-outline-primary mb-4 w-100">
-                                        <i class="fa fa-plus"></i> {{ __('Add') }}</button>
-                                </div>
+                            @dump($children)
 
-                        </div>
 
-                    </form>
+                                <select id="eventType" class="form-select">
+                                    <option value="">Válassz</option>
+                                    <option value="child_birth">Gyermek születése</option>
+                                    <option value="marriage">Házasság</option>
+                                    <!-- и другие -->
+                                </select>
 
-                    <!-- Row 1 -->
-                    <div class="row mb-4 mt-40">
-                        <div class="col-md-6 d-flex flex-column">
-                            <h6 class="text-secondary border-bottom pb-2 text-center fs-6">
-                                {{ __('Father') }}</h6>
-                            <ul class="list-group">
-                                @foreach ($familyMembers['father'] ?? [] as $member)
-                                    <li class="mt-2 ms-1">
-                                        {{ $member->name }}
-                                        <button class="btn btn-sm btn-outline-danger float-end"
-                                            onclick="event.preventDefault(); document.getElementById('delete-form-{{ $member->id }}').submit();">×</button>
-                                        <form id="delete-form-{{ $member->id }}"
-                                            action="{{ route('family.delete', $member->id) }}" method="POST"
-                                            style="display: none;">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
+                                <div id="childrenInputs" class="mt-3" style="display: none;">
+                                    <h5>Gyermekek</h5>
+                                    <div id="existingChildren">
+                                        <!-- сюда подгружаем детей из базы -->
+                                        @foreach ($children as $child)
 
-                        <div class="col-md-6 d-flex flex-column">
-                            <h6 class="text-secondary border-bottom pb-2 text-center fs-6">
-                                {{ __('Mother') }}</h6>
-                            <ul class="list-group">
-                                @foreach ($familyMembers['mother'] ?? [] as $member)
-                                    <li class="mt-2 ms-1">
-                                        {{ $member->name }}
-                                        <button class="btn btn-sm btn-outline-danger float-end"
-                                            onclick="event.preventDefault(); document.getElementById('delete-form-{{ $member->id }}').submit();">×</button>
-                                        <form id="delete-form-{{ $member->id }}"
-                                            action="{{ route('family.delete', $member->id) }}" method="POST"
-                                            style="display: none;">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
-                                    </li>
-                                @endforeach
-                            </ul>
+                                            <input type="hidden" name="children[{{ $loop->index }}][id]" value="{{ $child->id }}">
+
+                                            <div class="row mb-2">
+                                                <div class="col-md-6">
+                                                    <input type="text" class="form-control"
+                                                        name="children[{{ $loop->index }}][name]"
+                                                        value="{{ $child->name }}" readonly>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <input type="date" class="form-control"
+                                                        name="children[{{ $loop->index }}][birth_date]"
+                                                        value="{{ $child->birth_date }}">
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+
+                                    <div id="newChildren"></div>
+
+                                    <button type="button" class="btn btn-outline-primary mt-2" id="addChild">+ Új gyermek
+                                        hozzáadása</button>
+
+                                    <button type="submit" class="btn btn-outline-primary mt-2">Save</button>
                         </div>
 
 
-                    </div>
-
-                    <!-- Row 2 -->
-                    <div class="row mb-4">
-                        <div class="col-md-6 d-flex flex-column">
-                            <h6 class="text-secondary border-bottom pb-2 text-center fs-6">
-                                {{ __('Partner') }}</h6>
-                            <ul class="list-group">
-                                @foreach ($familyMembers['partner'] ?? [] as $member)
-                                    <li class="mt-2 ms-1">
-                                        {{ $member->name }}
-                                        <button class="btn btn-sm btn-outline-danger float-end"
-                                            onclick="event.preventDefault(); document.getElementById('delete-form-{{ $member->id }}').submit();">×</button>
-                                        <form id="delete-form-{{ $member->id }}"
-                                            action="{{ route('family.delete', $member->id) }}" method="POST"
-                                            style="display: none;">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
-                                    </li>
-                                @endforeach
-
-                                {{-- @if ($familyMembers['child']->isEmpty())
-                                    <li class="mt-2 ms-1 text-muted">{{ __('No family members added') }}</li>
-                                @endif --}}
-                            </ul>
-                        </div>
-
-                        <div class="col-md-6 d-flex flex-column">
-                            <h6 class="text-secondary border-bottom pb-2 text-center fs-6">
-                                {{ __('Children') }}</h6>
-                            <ul class="list-group">
-                                @foreach ($familyMembers['children'] ?? [] as $member)
-                                    <li class="mt-2 ms-1">
-                                        {{ $member->name }}
-                                        <button class="btn btn-sm btn-outline-danger float-end"
-                                            onclick="event.preventDefault(); document.getElementById('delete-form-{{ $member->id }}').submit();">×</button>
-                                        <form id="delete-form-{{ $member->id }}"
-                                            action="{{ route('family.delete', $member->id) }}" method="POST"
-                                            style="display: none;">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
-                                    </li>
-                                @endforeach
-
-                                {{-- @if ($familyMembers['spouse']->isEmpty())
-                                    <li class="mt-2 ms-1 text-muted">{{ __('No family members added') }}</li>
-                                @endif --}}
-                            </ul>
-                        </div>
-
-
-                    </div>
-
-
-
-                    <!-- Row 3 -->
-                    <div class="row mb-4">
-                        <div class="col-md-6 d-flex flex-column">
-                            <h6 class="text-secondary border-bottom pb-2 text-center fs-6">
-                                {{ __('Siblings') }}</h6>
-                            <ul class="list-group">
-                                @foreach ($familyMembers['siblings'] ?? [] as $member)
-                                    <li class="mt-2 ms-1">
-                                        {{ $member->name }}
-                                        <button class="btn btn-sm btn-outline-danger float-end"
-                                            onclick="event.preventDefault(); document.getElementById('delete-form-{{ $member->id }}').submit();">×</button>
-                                        <form id="delete-form-{{ $member->id }}"
-                                            action="{{ route('family.delete', $member->id) }}" method="POST"
-                                            style="display: none;">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
-                                    </li>
-                                @endforeach
-
-                                {{-- @if ($familyMembers['cousins']->isEmpty())
-                                    <li class="mt-2 ms-1 text-muted">{{ __('No family members added') }}</li>
-                                @endif --}}
-                            </ul>
-                        </div>
-
-                        <div class="col-md-6 d-flex flex-column">
-                            <h6 class="text-secondary border-bottom pb-2 text-center fs-6">
-                                {{ __('Pets') }}</h6>
-                            <ul class="list-group">
-                                @foreach ($familyMembers['pets'] ?? [] as $member)
-                                    <li class="mt-2 ms-1">
-                                        {{ $member->name }}
-                                        <button class="btn btn-sm btn-outline-danger float-end"
-                                            onclick="event.preventDefault(); document.getElementById('delete-form-{{ $member->id }}').submit();">×</button>
-                                        <form id="delete-form-{{ $member->id }}"
-                                            action="{{ route('family.delete', $member->id) }}" method="POST"
-                                            style="display: none;">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
-                                    </li>
-                                @endforeach
-
-                                {{-- @if ($familyMembers['pets']->isEmpty())
-                                    <li class="list-group-item text-muted">{{ __('No family members added') }}</li>
-                                @endif --}}
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="d-flex justify-content-between mt-50">
-                        <button href="#" class="btn btn-secondary">{{ __('Skip') }}</button>
-                        <a href="{{ route('timeline.create', $memorial) }}" class="btn btn-primary">
-                            <i class="fa fa-save"></i> {{ __('Next') }}
-                        </a>
-                        
-                    </div>
 
                 </div>
+                {{-- <div class="form-group col-12 col-md-2 mt-1">
+                            <button type="submit" class="btn btn-outline-primary mb-4 w-100">
+                                <i class="fa fa-plus"></i> {{ __('Add') }}</button>
+                        </div> --}}
+                </form>
 
-            @endsection
 
-            @section('js')
-
+            </div>
 
 
-            @endsection
+
+            <div class="d-flex justify-content-between mt-50">
+                <button href="#" class="btn btn-secondary">{{ __('Skip') }}</button>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>
+                    {{ __('Next') }}</button>
+            </div>
+
+            <br><br>
+            @foreach ( $timelines as $timeline )
+                {{ $timeline->title }} <br>
+            @endforeach
+        @endsection
+
+        @section('js')
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const eventType = document.getElementById('eventType');
+                    const childrenInputs = document.getElementById('childrenInputs');
+                    const addChildBtn = document.getElementById('addChild');
+                    const newChildrenContainer = document.getElementById('newChildren');
+                    let newChildIndex = 0;
+
+                    eventType.addEventListener('change', function() {
+                        if (this.value === 'child_birth') {
+                            childrenInputs.style.display = 'block';
+                        } else {
+                            childrenInputs.style.display = 'none';
+                        }
+                    });
+
+                    addChildBtn.addEventListener('click', function() {
+                        const row = document.createElement('div');
+                        row.classList.add('row', 'mb-2');
+                        row.innerHTML = `
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="new_children[${newChildIndex}][name]" placeholder="Gyermek neve">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="date" class="form-control" name="new_children[${newChildIndex}][birth_date]">
+                            </div>
+                        `;
+                        newChildrenContainer.appendChild(row);
+                        newChildIndex++;
+                    });
+                });
+            </script>
+
+        @endsection

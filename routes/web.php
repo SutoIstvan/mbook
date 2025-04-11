@@ -7,6 +7,7 @@ use App\Http\Controllers\FamilyController;
 use App\Http\Controllers\MemorialController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\TimelineController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\UserAccess;
@@ -65,10 +66,14 @@ Route::middleware(['auth', UserAccess::class . ':user'])->group(function () {
 
     Route::get('/dashboard/{memorial}/family', [DashboardController::class, 'family'])->name('dashboard.family');
 
-    Route::get('/dashboard/{memorial}/family/create', [FamilyController::class, 'create'])->name('family.create');
 
+    Route::get('/dashboard/{memorial}/family/create', [FamilyController::class, 'create'])->name('family.create');
     Route::post('/dashboard/family/store', [FamilyController::class, 'store'])->name('family.store');
     Route::delete('/dashboard/family/delete/{id}', [FamilyController::class, 'delete'])->name('family.delete');
+
+    Route::get('/dashboard/{memorial}/timeline/create', [TimelineController::class, 'create'])->name('timeline.create');
+    Route::post('/dashboard/timelines/store', [TimelineController::class, 'store'])->name('timelines.store');
+
 });
 
 // Для админов
