@@ -500,12 +500,12 @@
                             </div>
 
                             <div class="col-12 col-md-6 mb-3">
-                                <label for="birth_date"
+                                <label for="birth_place"
                                     class="col-form-label text-md-end">{{ __('Születés helye') }}</label>
-                                <input id="birth_date" type="text"
-                                    class="form-control @error('birth_date') is-invalid @enderror" name="birth_date"
-                                    value="{{ old('birth_date') }}">
-                                @error('birth_date')
+                                <input id="birth_place" type="text"
+                                    class="form-control @error('birth_place') is-invalid @enderror" name="birth_place"
+                                    value="{{ old('birth_place') }}">
+                                @error('birth_place')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -526,12 +526,12 @@
                             </div>
 
                             <div class="col-12 col-md-6 mb-3">
-                                <label for="birth_date"
+                                <label for="grave_location"
                                     class="col-form-label text-md-end">{{ __('Elhalálozás helye') }}</label>
-                                <input id="birth_date" type="text"
-                                    class="form-control @error('birth_date') is-invalid @enderror" name="birth_date"
-                                    value="{{ old('birth_date') }}">
-                                @error('birth_date')
+                                <input id="grave_location" type="text"
+                                    class="form-control @error('grave_location') is-invalid @enderror" name="grave_location"
+                                    value="{{ old('grave_location') }}">
+                                @error('grave_location')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -544,7 +544,16 @@
                         <div class="text-end pb-8 mt-8">
 
 
-                            <button type="button"class="butn butn-md butn-bord butn-rounded" onclick="window.location.href='http://mbook.test/dashboard/teljes-nev/family/create'">
+                            <button type="submit" name="action" value="add_details" id="additionalDetailsBtn" class="butn butn-md butn-bord butn-rounded">
+                                <span class="text">
+                                    {{ __('Add Additional Details') }}
+                                </span>
+                                <span id="btnIcon" class="icon">
+                                    <i class="fa-regular fa-plus"></i>
+                                </span>
+                            </button>
+
+                            {{-- <button type="button" class="butn butn-md butn-bord butn-rounded" onclick="window.location.href=''">
                                 <span class="text">
                                     {{ __('További adatok megadása') }}
                                 </span>
@@ -554,7 +563,7 @@
                                 <span id="btnSpinner" class="icon d-none">
                                     <i class="fa-solid fa-spinner fa-spin"></i>
                                 </span>
-                            </button>
+                            </button> --}}
 
                         </div>
                     </div>

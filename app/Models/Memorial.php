@@ -25,6 +25,8 @@ class Memorial extends Model
         'comments',
         'gift',
         'qr_code',
+        'birth_place',
+        'grave_location',
         'virtual_code',
         'admin_id'
     ];

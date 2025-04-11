@@ -37,6 +37,7 @@ Route::middleware(['auth', UserAccess::class . ':user'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/create', [MemorialController::class, 'create'])->name('memorial.create');
     Route::post('/store', [MemorialController::class, 'store'])->name('memorial.store');
+
     Route::get('/dashboard/{memorial}/edit', [DashboardController::class, 'edit'])->name('dashboard.edit');
     Route::put('/dashboard/memorial/{id}', [MemorialController::class, 'update'])->name('memorial.update');
     Route::delete('/photo/delete/{id}', [MemorialController::class, 'deletePhoto'])->name('photo.delete');
@@ -65,7 +66,9 @@ Route::middleware(['auth', UserAccess::class . ':user'])->group(function () {
     Route::get('/dashboard/{memorial}/family', [DashboardController::class, 'family'])->name('dashboard.family');
 
     Route::get('/dashboard/{memorial}/family/create', [FamilyController::class, 'create'])->name('family.create');
-    Route::post('/dashboard/{memorial}/family', [FamilyController::class, 'store'])->name('family.store');
+
+    Route::post('/dashboard/family/store', [FamilyController::class, 'store'])->name('family.store');
+    Route::delete('/dashboard/family/delete/{id}', [FamilyController::class, 'delete'])->name('family.delete');
 });
 
 // Для админов

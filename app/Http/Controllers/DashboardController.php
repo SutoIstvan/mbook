@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Family;
 use App\Models\Memorial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -66,7 +67,9 @@ class DashboardController extends Controller
 
     public function family(Memorial $memorial)
     {
-        return view('dashboard.family', compact('memorial'));
+        $familyMembers = Family::where('memorial_id', $memorial->id)->get()->groupBy('role');
+
+        return view('dashboard.family', compact('memorial', 'familyMembers'));
     }
 
     public function comments(Memorial $memorial)

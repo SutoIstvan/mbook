@@ -564,26 +564,6 @@
         </div>
     </div>
 
-    {{-- <div class="container">
-        <div class=" text-secondary text-center">
-
-
-            <div class="py-5">
-
-                <h4>
-                    <span class="sub-color inline">Új emlékoldal hozzáadása.</span>
-                </h4>
-
-                <div class="col-lg-6 mx-auto">
-                    <p class="fs-5 mt-4 mb-4">
-                        Az alábbiakban rögzítheti az elhunyt adatait, amelyeket később bármikor módosíthat vagy
-                        kiegészíthet.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
     @if ($errors->any())
         <div class="container">
             <div class="row d-flex justify-content-center">
@@ -613,279 +593,296 @@
     </div>
 
 
+
     <div class="container">
         <div class="row d-flex justify-content-center">
             <div class="col-12 col-md-10 p-4 mt-30">
 
-                <form action="{{ route('family.store', $memorial->id) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
+                <div class="container">
 
-                    {{-- Отец --}}
-                    {{-- <div class="row mb-4">
+                    <form action="{{ route('family.store') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
 
-                        <div class="fs-5 text-center mb-3">{{ __('Parents') }}</div>
-                        <div class="form-group col-12 col-md-3 mt-5">
-                            <label>{{ __('Father name') }}</label>
-                            <input type="text" name="family[father][name]" class="form-control">
-                        </div>
-                        <div class="form-group col-12 col-md-3 mt-5">
-                            <label>{{ __('Birth date') }}</label>
-                            <input type="date" name="family[father][birth_date]" class="form-control">
-                        </div>
-                        <div class="form-group col-12 col-md-3 mt-5">
-                            <label>{{ __('Link to the memorial page') }}</label>
-                            <input type="text" name="family[father][qr_code]" class="form-control">
-                        </div>
-                        <div class="form-group col-12 col-md-3 mt-5">
-                            <label>{{ __('Photo') }}</label>
-                            <input type="file" name="family[father][photo]" class="form-control" accept="image/*">
-                        </div>
-                        <input type="hidden" name="family[father][role]" value="father">
-                    </div> --}}
-
-                    {{-- Мать --}}
-                    {{-- <div class="row mb-4 mt-30">
-                        <div class="form-group col-12 col-md-3 mt-5">
-                            <label>{{ __('Mother name') }}</label>
-                            <input type="text" name="family[mother][name]" class="form-control">
-                        </div>
-                        <div class="form-group col-12 col-md-3 mt-5">
-                            <label>{{ __('Birth date') }}</label>
-                            <input type="date" name="family[mother][birth_date]" class="form-control">
-                        </div>
-                        <div class="form-group col-12 col-md-3 mt-5">
-                            <label>{{ __('Link to the memorial page') }}</label>
-                            <input type="text" name="family[mother][qr_code]" class="form-control">
-                        </div>
-                        <div class="form-group col-12 col-md-3 mt-5">
-                            <label>{{ __('Photo') }}</label>
-                            <input type="file" name="family[mother][photo]" class="form-control" accept="image/*">
-                        </div>
-                        <input type="hidden" name="family[mother][role]" value="mother">
-                    </div> --}}
-
-
-
-                    {{-- Один партнёр по умолчанию --}}
-                    <div id="partners-container">
-                        <div class="row mb-60">
-                            {{-- <div class="fs-5 text-center mb-3 mt-20">{{ __('Partners') }}</div> --}}
-
+                        <div class="row mb-3">
                             <div class="form-group col-12 col-md-5 mt-1">
-                                <label for="partner_role_0">{{ __('Kapcsolat') }}</label>
-                                <select name="family[partners][0][role]" id="partner_role_0" class="form-select">
-                                    <option value="">{{ __('Select Kapcsolat') }}</option>
-                                    <option value="husband">{{ __('Husband') }}</option>
-                                    <option value="wife">{{ __('Wife') }}</option>
-                                    <option value="partner">{{ __('Partner') }}</option>
-                                    <option value="ex_partner">{{ __('Ex partner') }}</option>
+                                <label>{{ __('Relationship') }}</label>
+                                <select name="role" class="form-select" required>
+                                    <option value="">{{ __('Select relationship') }}</option>
+                                    <option value="parents">{{ __('SZÜLŐK') }}</option>
+                                    <option value="spouse">{{ __('HÁZASTÁRS') }}</option>
+                                    <option value="children">{{ __('GYERMEKEK') }}</option>
+                                    <option value="grandchildren">{{ __('UNOKÁK') }}</option>
+                                    <option value="grandparents">{{ __('NAGYSZÜLŐK') }}</option>
+                                    <option value="siblings">{{ __('TESTVÉREK') }}</option>
+                                    <option value="cousins">{{ __('UNOKATESTVÉREK') }}</option>
+                                    <option value="pets">{{ __('HÁZIÁLLAT') }}</option>
                                     <option value="other">{{ __('Other') }}</option>
                                 </select>
                             </div>
-
                             <div class="form-group col-12 col-md-5 mt-1">
-                                <label>{{ __('Partners name') }}</label>
-                                <input type="text" name="family[partners][0][name]" class="form-control">
+                                <label>{{ __('Name') }}</label>
+                                <input type="text" name="name" class="form-control" required>
                             </div>
-                            {{-- <div class="form-group col-12 col-md-3 mt-5">
-                                <label>{{ __('Birth date') }}</label>
-                                <input type="date" name="family[partners][0][birth_date]" class="form-control">
+                            {{-- <div class="col-md-2">
+                                <button type="submit" class="btn btn-primary mt-4 w-100">{{ __('Add') }}</button>
                             </div> --}}
 
-
-                            {{-- <div class="form-group col-12 col-md-2 mt-5">
-                                <label>{{ __('Qr code Link') }}</label>
-                                <input type="text" name="family[partners][qr_code]" class="form-control">
-                            </div> --}}
                             <div class="form-group col-12 col-md-2 mt-30">
-                                <button type="button" class="btn btn-outline-primary mb-4 w-100" onclick="addPartner()"><i
-                                        class="fa fa-plus"></i> {{ __('Add family') }}</button>
+                                <button type="submit" class="btn btn-outline-primary mb-4 w-100">
+                                    <i class="fa fa-plus"></i> {{ __('Add') }}</button>
                             </div>
                         </div>
-                    </div>
-                    {{-- <div class="text-center">
-                        <button type="button" class="btn btn-outline-primary mb-4" onclick="addPartner()"><i
-                                class="fa fa-plus"></i> {{ __('Add another partners') }}</button>
-                    </div> --}}
+                    </form>
 
-
-                    {{-- Один ребёнок по умолчанию --}}
-                    {{-- <div id="children-container">
-                        <div class="row mb-3">
-                            <div class="fs-5 text-center mb-3 mt-20">{{ __('Children') }}</div>
-
-                            <div class="form-group col-12 col-md-3 mt-5">
-                                <label>{{ __('Children name') }}</label>
-                                <input type="text" name="family[children][0][name]" class="form-control">
-                            </div>
-                            <div class="form-group col-12 col-md-3 mt-5">
-                                <label>{{ __('Birth date') }}</label>
-                                <input type="date" name="family[children][0][birth_date]" class="form-control">
-                            </div>
-                            <div class="form-group col-12 col-md-3 mt-5">
-                                <label>{{ __('Link to the memorial page') }}</label>
-                                <input type="text" name="family[children][0][qr_code]" class="form-control">
-                            </div>
-                            <div class="form-group col-12 col-md-3 mt-5">
-                                <label>{{ __('Photo') }}</label>
-                                <input type="file" name="family[children][0][photo]" class="form-control"
-                                    accept="image/*">
-                            </div>
-                            <input type="hidden" name="family[children][0][role]" value="child">
+                    <!-- Вывод списка родственников -->
+                    <div class="row mt-80">
+                        <!-- Row 1: SZÜLŐK & HÁZASTÁRS(OK) -->
+                        <div class="col-md-6 d-flex flex-column">
+                            <h6 class="text-secondary border-bottom border-secondary pb-2 text-center fs-6">{{ __('SZÜLŐK') }}</h6>
+                            <ul class="list-group">
+                                @foreach($familyMembers['parents'] ?? [] as $member)
+                                    <li class="mt-2 ms-1">
+                                        {{ $member->name }}
+                                        <button class="btn btn-sm btn-outline-danger float-end" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $member->id }}').submit();">×</button>
+                                        <form id="delete-form-{{ $member->id }}" action="{{ route('family.delete', $member->id) }}" method="POST" style="display: none;">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+                                    </li>
+                                @endforeach
+                
+                                {{-- @if ($familyMembers['parents']->isEmpty())
+                                    <li class="list-group-item text-muted">{{ __('No family members added') }}</li>
+                                @endif --}}
+                            </ul>
+                        </div>
+                
+                        <div class="col-md-6 d-flex flex-column">
+                            <h6 class="text-secondary border-bottom border-secondary pb-2 text-center fs-6">{{ __('HÁZASTÁRS') }}</h6>
+                            <ul class="list-group">
+                                @foreach($familyMembers['spouse'] ?? [] as $member)
+                                    <li class="mt-2 ms-1">
+                                        {{ $member->name }}
+                                        <button class="btn btn-sm btn-outline-danger float-end" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $member->id }}').submit();">×</button>
+                                        <form id="delete-form-{{ $member->id }}" action="{{ route('family.delete', $member->id) }}" method="POST" style="display: none;">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+                                    </li>
+                                @endforeach
+                
+                                {{-- @if ($familyMembers['spouse']->isEmpty())
+                                    <li class="mt-2 ms-1 text-muted">{{ __('No family members added') }}</li>
+                                @endif --}}
+                            </ul>
                         </div>
                     </div>
-                    <div class="text-center">
-                        <button type="button" class="btn btn-outline-primary mb-4" onclick="addChild()"><i
-                                class="fa fa-plus"></i> {{ __('Add another children') }}</button>
-                    </div> --}}
+                
+                    <!-- Row 2: GYERMEKEK & UNOKÁK -->
+                    <div class="row mb-4">
+                        <div class="col-md-6 d-flex flex-column">
+                            <h6 class="text-secondary border-bottom border-secondary pb-2 text-center fs-6">{{ __('GYERMEKEK') }}</h6>
+                            <ul class="list-group">
+                                @foreach($familyMembers['child'] ?? [] as $member)
+                                    <li class="mt-2 ms-1">
+                                        {{ $member->name }}
+                                        <button class="btn btn-sm btn-outline-danger float-end" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $member->id }}').submit();">×</button>
+                                        <form id="delete-form-{{ $member->id }}" action="{{ route('family.delete', $member->id) }}" method="POST" style="display: none;">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+                                    </li>
+                                @endforeach
+                
+                                {{-- @if ($familyMembers['child']->isEmpty())
+                                    <li class="mt-2 ms-1 text-muted">{{ __('No family members added') }}</li>
+                                @endif --}}
+                            </ul>
+                        </div>
+                
+                        <div class="col-md-6 d-flex flex-column">
+                            <h6 class="text-secondary border-bottom border-secondary pb-2 text-center fs-6">{{ __('UNOKÁK') }}</h6>
+                            <ul class="list-group">
+                                @foreach($familyMembers['grandchildren'] ?? [] as $member)
+                                    <li class="mt-2 ms-1">
+                                        {{ $member->name }}
+                                        <button class="btn btn-sm btn-outline-danger float-end" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $member->id }}').submit();">×</button>
+                                        <form id="delete-form-{{ $member->id }}" action="{{ route('family.delete', $member->id) }}" method="POST" style="display: none;">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+                                    </li>
+                                @endforeach
+                
+                                {{-- @if ($familyMembers['grandchildren']->isEmpty())
+                                    <li class="mt-2 ms-1 text-muted">{{ __('No family members added') }}</li>
+                                @endif --}}
+                            </ul>
+                        </div>
+                    </div>
+                
+                    <!-- Row 3: NAGYSZÜLŐK & TESTVÉREK -->
+                    <div class="row mb-4">
+                        <div class="col-md-6 d-flex flex-column">
+                            <h6 class="text-secondary border-bottom border-secondary pb-2 text-center fs-6">{{ __('NAGYSZÜLŐK') }}</h6>
+                            <ul class="list-group">
+                                @foreach($familyMembers['grandparents'] ?? [] as $member)
+                                    <li class="mt-2 ms-1">
+                                        {{ $member->name }}
+                                        <button class="btn btn-sm btn-outline-danger float-end" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $member->id }}').submit();">×</button>
+                                        <form id="delete-form-{{ $member->id }}" action="{{ route('family.delete', $member->id) }}" method="POST" style="display: none;">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+                                    </li>
+                                @endforeach
+                
+                                {{-- @if ($familyMembers['grandparents']->isEmpty())
+                                    <li class="mt-2 ms-1 text-muted">{{ __('No family members added') }}</li>
+                                @endif --}}
+                            </ul>
+                        </div>
+                
+                        <div class="col-md-6 d-flex flex-column">
+                            <h6 class="text-secondary border-bottom border-secondary pb-2 text-center fs-6">{{ __('TESTVÉREK') }}</h6>
+                            <ul class="list-group">
+                                @foreach($familyMembers['siblings'] ?? [] as $member)
+                                    <li class="mt-2 ms-1">
+                                        {{ $member->name }}
+                                        <button class="btn btn-sm btn-outline-danger float-end" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $member->id }}').submit();">×</button>
+                                        <form id="delete-form-{{ $member->id }}" action="{{ route('family.delete', $member->id) }}" method="POST" style="display: none;">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+                                    </li>
+                                @endforeach
+                
+                                {{-- @if ($familyMembers['siblings']->isEmpty())
+                                    <li class="mt-2 ms-1 text-muted">{{ __('No family members added') }}</li>
+                                @endif --}}
+                            </ul>
+                        </div>
+                    </div>
+                
+                    <!-- Row 4: UNOKATESTVÉREK & HÁZIÁLLAT(OK) -->
+                    <div class="row mb-4">
+                        <div class="col-md-6 d-flex flex-column">
+                            <h6 class="text-secondary border-bottom border-secondary pb-2 text-center fs-6">{{ __('UNOKATESTVÉREK') }}</h6>
+                            <ul class="list-group">
+                                @foreach($familyMembers['cousins'] ?? [] as $member)
+                                    <li class="mt-2 ms-1">
+                                        {{ $member->name }}
+                                        <button class="btn btn-sm btn-outline-danger float-end" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $member->id }}').submit();">×</button>
+                                        <form id="delete-form-{{ $member->id }}" action="{{ route('family.delete', $member->id) }}" method="POST" style="display: none;">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+                                    </li>
+                                @endforeach
+                
+                                {{-- @if ($familyMembers['cousins']->isEmpty())
+                                    <li class="mt-2 ms-1 text-muted">{{ __('No family members added') }}</li>
+                                @endif --}}
+                            </ul>
+                        </div>
+                
+                        <div class="col-md-6 d-flex flex-column">
+                            <h6 class="text-secondary border-bottom border-secondary pb-2 text-center fs-6">{{ __('HÁZIÁLLAT') }}</h6>
+                            <ul class="list-group">
+                                @foreach($familyMembers['pets'] ?? [] as $member)
+                                    <li class="mt-2 ms-1">
+                                        {{ $member->name }}
+                                        <button class="btn btn-sm btn-outline-danger float-end" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $member->id }}').submit();">×</button>
+                                        <form id="delete-form-{{ $member->id }}" action="{{ route('family.delete', $member->id) }}" method="POST" style="display: none;">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+                                    </li>
+                                @endforeach
+                
+                                {{-- @if ($familyMembers['pets']->isEmpty())
+                                    <li class="list-group-item text-muted">{{ __('No family members added') }}</li>
+                                @endif --}}
+                            </ul>
+                        </div>
+                    </div>
+                    
                     <div class="d-flex justify-content-between">
                         <button href="#" class="btn btn-secondary">{{ __('Skip') }}</button>
                         <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>
                             {{ __('Next') }}</button>
                     </div>
 
-                </form>
-
-
-                <div class="container mt-50">
+                </div>
+                {{-- <div class="container mt-50">
                     <!-- Row 1: SZÜLŐK & HÁZASTÁRS(OK) -->
                     <div class="row mb-4 ">
-                      <div class="col-md-6 d-flex flex-column">
-                        <h6 class="text-secondary border-bottom border-secondary pb-2  text-center fs-6">SZÜLŐK</h6>
+                        <div class="col-md-6 d-flex flex-column">
+                            <h6 class="text-secondary border-bottom border-secondary pb-2  text-center fs-6">SZÜLŐK</h6>
 
-                        <div class="bg-light p-2 mb-1 d-flex justify-content-between">
-                          <div>Magdolna <small class="text-muted">SZÜLŐ</small></div>
-                          <button class="btn btn-sm btn-outline-dark">×</button>
+                            <div class="bg-light p-2 mb-1 d-flex justify-content-between">
+                                <div>Magdolna <small class="text-muted">SZÜLŐ</small></div>
+                                <button class="btn btn-sm btn-outline-dark">×</button>
+                            </div>
                         </div>
-                      </div>
-                  
-                      <div class="col-md-6 d-flex flex-column">
-                        <h6 class="text-secondary border-bottom border-secondary pb-2 text-center fs-6">HÁZASTÁRS</h6>
-                        <!-- Пустой список -->
-                      </div>
+
+                        <div class="col-md-6 d-flex flex-column">
+                            <h6 class="text-secondary border-bottom border-secondary pb-2 text-center fs-6">HÁZASTÁRS</h6>
+                            <!-- Пустой список -->
+                        </div>
                     </div>
-                  
+
                     <!-- Row 2: GYERMEKEK & UNOKÁK -->
                     <div class="row mb-4">
-                      <div class="col-md-6 d-flex flex-column">
-                        <h6 class="text-secondary border-bottom border-secondary pb-2 text-center fs-6">GYERMEKEK</h6>
+                        <div class="col-md-6 d-flex flex-column">
+                            <h6 class="text-secondary border-bottom border-secondary pb-2 text-center fs-6">GYERMEKEK</h6>
 
-                        {{-- <div class="bg-light p-2 mb-1 d-flex justify-content-between">
-                          <div>Anasztázia <small class="text-muted">GYERMEK</small></div>
-                          <button class="btn btn-sm btn-outline-dark">×</button>
-                        </div> --}}
-                      </div>
-                  
-                      <div class="col-md-6 d-flex flex-column">
-                        <h6 class="text-secondary border-bottom border-secondary pb-2 text-center fs-6">UNOKÁK</h6>
-                        <!-- Пустой список -->
-                      </div>
+
+                        </div>
+
+                        <div class="col-md-6 d-flex flex-column">
+                            <h6 class="text-secondary border-bottom border-secondary pb-2 text-center fs-6">UNOKÁK</h6>
+                            <!-- Пустой список -->
+                        </div>
                     </div>
-                  
+
                     <!-- Row 3: NAGYSZÜLŐK & TESTVÉREK -->
                     <div class="row mb-4">
-                      <div class="col-md-6 d-flex flex-column">
-                        <h6 class="text-secondary border-bottom border-secondary pb-2 text-center fs-6">NAGYSZÜLŐK</h6>
-                        <!-- Пустой список -->
-                      </div>
-                  
-                      <div class="col-md-6 d-flex flex-column">
-                        <h6 class="text-secondary border-bottom border-secondary pb-2 text-center fs-6">TESTVÉREK</h6>
-                        <!-- Пустой список -->
-                      </div>
-                    </div>
-                  
+                        <div class="col-md-6 d-flex flex-column">
+                            <h6 class="text-secondary border-bottom border-secondary pb-2 text-center fs-6">NAGYSZÜLŐK</h6>
+                            <!-- Пустой список -->
+                        </div>
 
-                  
+                        <div class="col-md-6 d-flex flex-column">
+                            <h6 class="text-secondary border-bottom border-secondary pb-2 text-center fs-6">TESTVÉREK</h6>
+                            <!-- Пустой список -->
+                        </div>
+                    </div>
+
+
+
                     <!-- Row 5: UNOKATESTVÉREK & HÁZIÁLLAT(OK) -->
                     <div class="row mb-4">
-                      <div class="col-md-6 d-flex flex-column">
-                        <h6 class="text-secondary border-bottom border-secondary pb-2 text-center fs-6">UNOKATESTVÉREK</h6>
-                        <!-- Пустой список -->
-                      </div>
-                  
-                      <div class="col-md-6 d-flex flex-column">
-                        <h6 class="text-secondary border-bottom border-secondary pb-2 text-center fs-6">HÁZIÁLLAT</h6>
-                        <!-- Пустой список -->
-                      </div>
+                        <div class="col-md-6 d-flex flex-column">
+                            <h6 class="text-secondary border-bottom border-secondary pb-2 text-center fs-6">UNOKATESTVÉREK
+                            </h6>
+                            <!-- Пустой список -->
+                        </div>
+
+                        <div class="col-md-6 d-flex flex-column">
+                            <h6 class="text-secondary border-bottom border-secondary pb-2 text-center fs-6">HÁZIÁLLAT</h6>
+                            <!-- Пустой список -->
+                        </div>
                     </div>
-                  </div>
-                  
+                </div> --}}
 
 
-@endsection
 
-@section('js')
+            @endsection
 
-    <script>
-        let partnerIndex = 1;
-        let childIndex = 1;
+            @section('js')
 
-        function addPartner() {
-            const container = document.getElementById('partners-container');
-            container.insertAdjacentHTML('beforeend', `
-                        <div class="row mb-3">
-                            <div class="form-group col-12 col-md-6 mt-5">
-                                <label>{{ __('Partners name') }}</label>
-                                <input type="text" name="family[partners][${partnerIndex}][name]" class="form-control">
-                            </div>
-                            <div class="form-group col-12 col-md-6 mt-5">
-                                <label>{{ __('Birth date') }}</label>
-                                <input type="date" name="family[partners][${partnerIndex}][birth_date]" class="form-control">
-                            </div>
 
-                            <div class="form-group col-12 col-md-4 mt-5">
-                                <label for="partner_role_0">{{ __('Role') }}</label>
-                                <select name="family[partners][${partnerIndex}][role]" id="partner_role_0" class="form-select">
-                                    <option value="">{{ __('Select role') }}</option>
-                                    <option value="husband">{{ __('Husband') }}</option>
-                                    <option value="wife">{{ __('Wife') }}</option>
-                                    <option value="partner">{{ __('Partner') }}</option>
-                                    <option value="ex_partner">{{ __('Ex partner') }}</option>
-                                    <option value="other">{{ __('Other') }}</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-4 mt-5">
-                                <label>{{ __('Link to the memorial page') }}</label>
-                                <input type="text" name="family[partners][${partnerIndex}][qr_code]" class="form-control">
-                            </div>
-                            <div class="form-group col-4 mt-5">
-                                <label>{{ __('Photo') }}</label>
-                                <input type="file" name="family[partners][${partnerIndex}][photo]" class="form-control"
-                                    accept="image/*">
-                            </div>
-                        </div>
 
-            `);
-            partnerIndex++;
-        }
-
-        function addChild() {
-            const container = document.getElementById('children-container');
-            container.insertAdjacentHTML('beforeend', `
-                        <div class="row mb-3">
-                            <div class="form-group col-12 col-md-6 mt-5">
-                                <label>{{ __('Children name') }}</label>
-                                <input type="text" name="family[children][${childIndex}][name]" class="form-control">
-                            </div>
-                            <div class="form-group col-12 col-md-6 mt-5">
-                                <label>{{ __('Birth date') }}</label>
-                                <input type="date" name="family[children][${childIndex}][birth_date]" class="form-control">
-                            </div>
-                            <div class="form-group col-12 col-md-6 mt-5">
-                                <label>{{ __('Link to the memorial page') }}</label>
-                                <input type="text" name="family[children][${childIndex}][qr_code]" class="form-control">
-                            </div>
-                            <div class="form-group col-12 col-md-6 mt-5">
-                                <label>{{ __('Photo') }}</label>
-                                <input type="file" name="family[children][${childIndex}][photo]" class="form-control"
-                                    accept="image/*">
-                            </div>
-                            <input type="hidden" name="family[children][${childIndex}][role]" value="child">
-                        </div>
-            `);
-            childIndex++;
-        }
-    </script>
-
-@endsection
+            @endsection

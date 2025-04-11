@@ -97,7 +97,9 @@ class MemorialController extends Controller
             'crop_y' => 'nullable|numeric',
             'crop_width' => 'nullable|numeric',
             'crop_height' => 'nullable|numeric',
-            'qrtoken' => 'nullable|string|min:3|max:255'
+            'qrtoken' => 'nullable|string|min:3|max:255',
+            'birth_place' => 'nullable|string|min:3|max:255',
+            'grave_location' => 'nullable|string|min:3|max:255'
         ]);
 
         $admin_id = Auth::user()->id;
@@ -139,6 +141,8 @@ class MemorialController extends Controller
         $memorial->death_date = $request->death_date;
         // $memorial->coordinates = $request->coordinates ?? '';
         $memorial->biography = $request->biography;
+        $memorial->birth_place = $request->birth_place;
+        $memorial->grave_location = $request->grave_location;
         $memorial->qr_code = $token;
         $memorial->admin_id = $admin_id;
         $memorial->theme = 'dark';
@@ -202,6 +206,12 @@ class MemorialController extends Controller
             //throw new Exception("QR Code with token {$qrtoken} not found");
             // Или, например, можно вернуть сообщение:
             // return redirect()->back()->with('error', "QR Code with token {$qrtoken} not found");
+        }
+
+
+        if ($request->input('action') === 'add_details') {
+            // Перенаправление на другую страницу для ввода дополнительных данных
+            return redirect()->route('family.create', ['memorial' => $memorial->id]);
         }
 
         return redirect()->route('dashboard')

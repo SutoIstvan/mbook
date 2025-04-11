@@ -26,6 +26,8 @@ return new class extends Migration
             $table->text('theme')->nullable();
             $table->text('comments')->nullable();
             $table->text('gift')->nullable();
+            $table->string('birth_place')->nullable();
+            $table->string('grave_location')->nullable();
             $table->string('qr_code')->unique();
             $table->string('virtual_code')->nullable()->unique();
             $table->foreignId('admin_id')->constrained('users');
