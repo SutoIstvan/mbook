@@ -866,6 +866,17 @@
                                     <option value="child_birth">Gyermek születése</option>
                                     <option value="marriage">Házasság</option>
                                     <!-- и другие -->
+                                    {{--                                            
+                                        -	Iskola neve, idelye, Iskola hozzáadása
+                                        -	foglalkozása, 
+                                        -	Munkahely neve, idelye, további hozzáadása
+                                        -	Házzasságkötés idelye, további hozzáadása
+                                        -	Hobbija, kedvenc szabadidős foglalkozása
+                                        -	Kedvenc zenéi, (youtube link)
+                                        -	Egyéb tulajdonságai, jellemzői 
+                                    --}}
+
+
                                 </select>
 
                                 <div id="childrenInputs" class="mt-3" style="display: none;">
