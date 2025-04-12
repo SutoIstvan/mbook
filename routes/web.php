@@ -74,6 +74,11 @@ Route::middleware(['auth', UserAccess::class . ':user'])->group(function () {
     Route::get('/dashboard/{memorial}/timeline/create', [TimelineController::class, 'create'])->name('timeline.create');
     Route::post('/dashboard/timelines/store', [TimelineController::class, 'store'])->name('timelines.store');
     Route::post('/dashboard/timelines/marriage/store', [TimelineController::class, 'storeMarriage'])->name('timelines.storeMarriage');
+    Route::delete('/timelines/{id}', [TimelineController::class, 'destroy'])->name('timelines.destroy');
+    Route::post('/timelines/add-school', [TimelineController::class, 'addSchool'])->name('timelines.addSchool');
+
+    Route::get('/dashboard/{memorial}/timeline/gallery', [TimelineController::class, 'gallery'])->name('timeline.gallery');
+
 
 });
 

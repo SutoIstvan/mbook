@@ -576,11 +576,11 @@
         .step-vertical:not(:last-child)::after {
             content: '';
             /* position: absolute;
-                                         left: 25px;
-                                         top: 60px;
-                                         bottom: 0;
-                                         width: 2px;
-                                         background: #e9ecef; */
+                     left: 25px;
+                     top: 60px;
+                     bottom: 0;
+                     width: 2px;
+                     background: #e9ecef; */
         }
 
         .step-vertical-icon {
@@ -624,42 +624,6 @@
         /* Interactive buttons */
         .controls {
             text-align: center;
-        }
-
-        ul.timeline-3 {
-            list-style-type: none;
-            position: relative;
-        }
-
-        ul.timeline-3:before {
-            content: " ";
-            background: #d4d9df;
-            display: inline-block;
-            position: absolute;
-            left: 29px;
-            width: 2px;
-            height: 150%;
-            margin-top: 5px;
-            z-index: 400;
-        }
-
-        ul.timeline-3>li {
-            margin: 0px 0;
-            padding-left: 20px;
-        }
-
-        ul.timeline-3>li:before {
-            content: " ";
-            background: white;
-            display: inline-block;
-            position: absolute;
-            border-radius: 50%;
-            border: 3px solid #22c0e8;
-            left: 23px;
-            width: 15px;
-            height: 15px;
-            margin-top: 5px;
-            z-index: 400;
         }
     </style>
 @endsection
@@ -740,17 +704,17 @@
     <div class="container mt-70">
         <div class="row d-flex justify-content-center">
             <div class="steps-horizontal">
-                <div class="step-horizontal complete">
+                <div class="step-horizontal active">
                     <div class="step-icon">
                         {{-- <i class="fas fa-user"></i> --}}
 
-                        <i class="fas fa-check"></i>
+                        <i class="fas fa-user"></i>
                     </div>
                     <div class="step-title">Step 1</div>
                     <div class="step-description">Személyes adatok</div>
                 </div>
 
-                <div class="step-horizontal active">
+                <div class="step-horizontal">
                     <div class="step-icon">
                         <i class="fas fa-clock"></i>
                     </div>
@@ -853,11 +817,15 @@
 
     <div class="container">
         <div class=" text-secondary text-center">
+
             <div class="pt-30">
+
+                {{-- <h1 class="display-5 fw-bold text-white mt-15">Fogadja őszinte részvétünket a veszteségért.</h1> --}}
                 <div class="col-lg-8 mx-auto">
                     <p class="fs-5 mt-4 ">
-                        Ezen az oldalon megadhatod a fontos eseményeit az időskálán. Válaszd ki az esemény
-                        típusát, írd be a részleteket és a dátumot, majd kattints a 'Hozzáadás' gombra.
+                        Válaszd ki a megfelelő fület (Képek, Videók vagy Linkek), majd töltsd fel vagy illeszd be a kívánt
+                        tartalmat. A feltöltött anyagok segítenek megőrizni az emlékeket és bemutatni az elhunyt életének
+                        fontos pillanatait.
                     </p>
                 </div>
             </div>
@@ -866,296 +834,92 @@
 
 
 
-    <div class="container">
-        <div class="row d-flex justify-content-center">
-            <div class="col-12 col-md-10 p-4 mt-30">
-
-                <div class="container">
 
 
 
-                    <div class="row mb-3">
-                        {{-- <div class="form-group col-12 col-md-12 mt-1">
-                                <select name="role" class="form-select" required>
-                                    <option value="">{{ __('Select a life event') }}</option>
-                                    <option value="father">{{ __('Father') }}</option>
-                                    <option value="mother">{{ __('Mother') }}</option>
-                                    <option value="partner">{{ __('Partner') }}</option>
-                                    <option value="children">{{ __('Children') }}</option>
-                                    <option value="siblings">{{ __('Siblings') }}</option>
-                                    <option value="pets">{{ __('Pets') }}</option>
-                                </select>
-                            </div> --}}
-                        {{-- <div class="form-group col-12 col-md-6 mt-1">
-                                <label>{{ __('Name') }}</label>
-                                <input type="text" name="name" class="form-control" placeholder="{{ __('Name') }}"
-                                    required>
-                            </div> --}}
+    <div class="container col-8 mt-30">
 
-                        {{-- @dump($children) --}}
-
-
-                        <select id="eventType" class="form-select">
-                            <option value="">Válassz</option>
-                            <option value="child_birth">Gyermek születése</option>
-                            <option value="marriage">Házasság</option>
-                            <option value="school">Iskola</option>
-                            <option value="work">Munkahely</option>
-                            <option value="hobby">Hobbija</option>
-                            <option value="favorite_music">Kedvenc zenéi</option>
-                            <option value="other_properties">Egyéb tulajdonságai</option>
-                        </select>
-
-                        <form action="{{ route('timelines.store') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
-
-                            <div id="childrenInputs" class="mt-3" style="display: none;">
-                                <div id="existingChildren mt-4">
-                                    @foreach ($children as $child)
-                                        <input type="hidden" name="children[{{ $loop->index }}][id]"
-                                            value="{{ $child->id }}">
-
-                                        <div class="row mb-2">
-                                            <div class="col-md-6">
-                                                <input type="text" class="form-control"
-                                                    name="children[{{ $loop->index }}][name]" value="{{ $child->name }}"
-                                                    readonly>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <input type="date" class="form-control"
-                                                    name="children[{{ $loop->index }}][birth_date]"
-                                                    value="{{ $child->birth_date }}">
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-
-                                <div id="newChildren"></div>
-
-                                <button type="button" class="btn btn-outline-primary mt-2" id="addChild">+ Új gyermek
-                                    hozzáadása</button>
-
-                                <button type="submit" class="btn btn-outline-primary mt-2">Save</button>
-                        </form>
-
-
-
-
-                    </div>
-
-                    <form action="{{ route('timelines.storeMarriage') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
-                    
-                        <div id="marriageInputs" class="mt-3" style="display: none;">
-                            <div id="existingMarriages" class="mt-4">
-                                @foreach ($partners as $marriage)
-                                    <input type="hidden" name="marriages[{{ $loop->index }}][id]" value="{{ $marriage->id }}">
-                        
-                                    <div class="row mb-2">
-                                        <div class="col-md-6">
-                                            <input type="text" class="form-control"
-                                                name="marriages[{{ $loop->index }}][name]"
-                                                value="{{ $marriage->name }}" readonly>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <input type="date" class="form-control"
-                                                name="marriages[{{ $loop->index }}][marriage_date]"
-                                                value="{{ $marriage->birth_date }}">
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                    
-                            <div id="newMarriages"></div>
-                    
-                            <button type="button" class="btn btn-outline-primary mt-2" id="addMarriage">+ Új házasság hozzáadása</button>
-                            <button type="submit" class="btn btn-outline-primary mt-2">Save</button>
-                        </div>
-                    </form>
-
-<!-- Форма школы (по умолчанию скрыта) -->
-<div id="schoolForm" class="event-form" style="display: none;">
-    <form action="{{ route('timelines.addSchool') }}" method="POST" class="mt-3">
-        @csrf
-        <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
-
-        <div class="row">
-            <div class="col-md-6 mb-2">
-                <input type="text" name="school_name" class="form-control" placeholder="Iskola neve" required>
+        <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home"
+                    type="button" role="tab" aria-controls="pills-home" aria-selected="true">Images</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile"
+                    type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Video</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact"
+                    type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Music</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-disabled-tab" data-bs-toggle="pill" data-bs-target="#pills-disabled"
+                    type="button" role="tab" aria-controls="pills-disabled" aria-selected="false">Link</button>
+            </li>
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"
+                tabindex="0">
+                Images
             </div>
-            <div class="col-md-4 mb-2">
-                <input type="date" name="school_date" class="form-control" required>
+            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"
+                tabindex="0">
+                Video
             </div>
-            <div class="col-md-2 mb-2">
-                <button type="submit" class="btn btn-outline-success w-100">Mentés</button>
+            <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab"
+                tabindex="0">
+                Music
+            </div>
+            <div class="tab-pane fade" id="pills-disabled" role="tabpanel" aria-labelledby="pills-disabled-tab"
+                tabindex="0">
+                Link
             </div>
         </div>
-    </form>
-</div>
 
-
-
+            <nav>
+                <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
+                    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
+                        type="button" role="tab" aria-controls="nav-home" aria-selected="true">Képek</button>
+                    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
+                        type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Videók</button>
+                    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact"
+                        type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Zene</button>
+                    <button class="nav-link" id="nav-disabled-tab" data-bs-toggle="tab" data-bs-target="#nav-disabled"
+                        type="button" role="tab" aria-controls="nav-disabled" aria-selected="false">Linkek</button>
                 </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="card" style="border-radius: .375rem; border-width: 1px; background-color: #ffffff00">
+
+                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"
+                        tabindex="0">...</div>
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab"
+                        tabindex="0">...</div>
+                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab"
+                        tabindex="0">...</div>
+                    <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab"
+                        tabindex="0">...</div>
+                </div>
+
             </div>
 
 
 
-            <br><br>
-            @foreach ($timelines as $timeline)
-                <div class="container">
-                    <div class="row d-flex justify-content-center">
 
-                        
+        <div class="d-flex justify-content-between mt-50">
+            <button href="#" class="btn btn-secondary">{{ __('Skip') }}</button>
+            <a href="{{ route('timeline.create', $memorial) }}" class="btn btn-primary">
+                <i class="fa fa-save"></i> {{ __('Next') }}
+            </a>
 
-                        <div class="col-10 col-md-10">
+        </div>
 
-                            <ul class="timeline-3">
-                                <li class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <small>{{ $timeline->date }}</small>
+    </div>
 
-                                        <a>{{ $timeline->title }}</a>
-                                    </div>
-            
-                                    <form action="{{ route('timelines.destroy', $timeline->id) }}" method="POST" onsubmit="return confirm('Biztosan törölni szeretnéd ezt az eseményt?');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-outline-danger">Törlés</button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
+@endsection
 
-            <div class="container">
-                <div class="d-flex justify-content-between mt-50">
-                    <button href="#" class="btn btn-secondary">{{ __('Skip') }}</button>
-                    <a href="{{ route('timeline.gallery', $memorial) }}" class="btn btn-primary">
-                        <i class="fa fa-save"></i> {{ __('Next') }}
-                    </a>
-                </div>
-            </div>
+@section('js')
 
-        
-        @endsection
 
-        @section('js')
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const eventType = document.getElementById('eventType');
-                const childrenInputs = document.getElementById('childrenInputs');
-                const addChildBtn = document.getElementById('addChild');
-                const newChildrenContainer = document.getElementById('newChildren');
-                let newChildIndex = 0;
-        
-                const marriageInputs = document.getElementById('marriageInputs');
-                const addMarriageBtn = document.getElementById('addMarriage');
-                const newMarriagesContainer = document.getElementById('newMarriages');
-                let marriageIndex = 0;
-
-                const schoolForm = document.getElementById('schoolForm'); // Форма для школы
-                const schoolInputs = document.getElementById('schoolInputs');
-                const addSchoolBtn = document.getElementById('addSchool');
-                const newSchoolContainer = document.getElementById('newSchool');
-                let schoolIndex = 0;
-        
-                const hobbyInputs = document.getElementById('hobbyInputs');
-                const addHobbyBtn = document.getElementById('addHobby');
-                const newHobbyContainer = document.getElementById('newHobby');
-                let hobbyIndex = 0;
-        
-                // Слушатель для изменения значения в селекте
-                eventType.addEventListener('change', function () {
-                    const selected = this.value;
-
-                    console.log("Selected event type:", selected);  // Тест для проверки, что срабатывает
-
-                    // Скрытие или отображение форм в зависимости от выбора
-                    childrenInputs.style.display = selected === 'child_birth' ? 'block' : 'none';
-                    marriageInputs.style.display = selected === 'marriage' ? 'block' : 'none';
-                    schoolForm.style.display = selected === 'school' ? 'block' : 'none'; // Отображение формы школы
-
-                    // schoolInputs.style.display = selected === 'school' ? 'block' : 'none';
-                    hobbyInputs.style.display = selected === 'hobby' ? 'block' : 'none';
-                });
-        
-                // Добавление новой записи о ребенке
-                addChildBtn.addEventListener('click', function() {
-                    const row = document.createElement('div');
-                    row.classList.add('row', 'mb-2');
-                    row.innerHTML = `
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" name="new_children[${newChildIndex}][name]" placeholder="Gyermek neve">
-                        </div>
-                        <div class="col-md-6">
-                            <input type="date" class="form-control" name="new_children[${newChildIndex}][birth_date]">
-                        </div>
-                    `;
-                    newChildrenContainer.appendChild(row);
-                    newChildIndex++;
-                });
-        
-                // Добавление новой записи о браке
-                if (addMarriageBtn) {
-                    addMarriageBtn.addEventListener('click', function () {
-                        const row = document.createElement('div');
-                        row.classList.add('row', 'mb-2');
-                        row.innerHTML = `
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="new_marriages[${marriageIndex}][partner_name]" placeholder="Partner neve">
-                            </div>
-                            <div class="col-md-6">
-                                <input type="date" class="form-control" name="new_marriages[${marriageIndex}][marriage_date]">
-                            </div>
-                        `;
-                        newMarriagesContainer.appendChild(row);
-                        marriageIndex++;
-                    });
-                }
-        
-                // Добавление новой записи о школе
-                if (addSchoolBtn) {
-                    addSchoolBtn.addEventListener('click', function () {
-                        const row = document.createElement('div');
-                        row.classList.add('row', 'mb-2');
-                        row.innerHTML = `
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="new_schools[${schoolIndex}][school_name]" placeholder="Iskola neve">
-                            </div>
-                            <div class="col-md-6">
-                                <input type="date" class="form-control" name="new_schools[${schoolIndex}][start_date]">
-                            </div>
-                        `;
-                        newSchoolContainer.appendChild(row);
-                        schoolIndex++;
-                    });
-                }
-        
-                // Добавление новой записи о хобби
-                if (addHobbyBtn) {
-                    addHobbyBtn.addEventListener('click', function () {
-                        const row = document.createElement('div');
-                        row.classList.add('row', 'mb-2');
-                        row.innerHTML = `
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="new_hobbies[${hobbyIndex}][hobby_name]" placeholder="Hobbi neve">
-                            </div>
-                            <div class="col-md-6">
-                                <input type="date" class="form-control" name="new_hobbies[${hobbyIndex}][start_date]">
-                            </div>
-                        `;
-                        newHobbyContainer.appendChild(row);
-                        hobbyIndex++;
-                    });
-                }
-        
-            });
-        </script>
-        
-
-        @endsection
+@endsection
