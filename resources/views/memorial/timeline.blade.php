@@ -1033,7 +1033,7 @@
 
             <div class="container">
                 <div class="d-flex justify-content-between mt-50">
-                    <button href="#" class="btn btn-secondary">{{ __('Skip') }}</button>
+                    <a href="{{ route('family.create', $memorial) }}" class="btn btn-secondary">{{ __('Back') }}</a>
                     <a href="{{ route('timeline.gallery', $memorial) }}" class="btn btn-primary">
                         <i class="fa fa-save"></i> {{ __('Next') }}
                     </a>

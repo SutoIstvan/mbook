@@ -1,9 +1,30 @@
 @extends('layouts.memorial')
 
 @section('css')
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/formstone/dist/css/upload.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet">
     <style>
+
+        .item .img {
+            border-radius: 15px;
+            height: 175px;
+            overflow: hidden;
+        }
+
+        .fit-img img {
+            width: 100%;
+            height: 100%;
+            -o-object-fit: cover;
+            object-fit: cover;
+            -o-object-position: center center;
+            object-position: center center;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+
         .cropper-modal {
             background-color: rgb(0, 0, 0) !important;
             opacity: 1 !important;
@@ -704,7 +725,7 @@
     <div class="container mt-70">
         <div class="row d-flex justify-content-center">
             <div class="steps-horizontal">
-                <div class="step-horizontal active">
+                <div class="step-horizontal complete">
                     <div class="step-icon">
                         {{-- <i class="fas fa-user"></i> --}}
 
@@ -714,14 +735,14 @@
                     <div class="step-description">Személyes adatok</div>
                 </div>
 
-                <div class="step-horizontal">
+                <div class="step-horizontal complete">
                     <div class="step-icon">
                         <i class="fas fa-clock"></i>
                     </div>
                     <div class="step-title">Step 2</div>
                     <div class="step-description">Életesemények időpontjai</div>
                 </div>
-                <div class="step-horizontal">
+                <div class="step-horizontal active">
                     <div class="step-icon">
                         <i class="fas fa-image"></i>
                     </div>
@@ -858,56 +879,223 @@
             </li>
         </ul>
         <div class="tab-content" id="pills-tabContent">
-            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"
-                tabindex="0">
-                Images
+            <!-- Images Tab -->
+            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+                {{-- <form action="" method="POST" enctype="multipart/form-data" class="mt-3">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="imageFile" class="form-label">Fénykép feltöltése</label>
+                        <input class="form-control" type="file" name="image" id="imageFile" accept="image/*" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="imageDescription" class="form-label">Leírás (nem kötelező)</label>
+                        <input class="form-control" type="text" name="description" id="imageDescription" placeholder="Pl. családi nyaralás 1998-ban">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Feltöltés</button>
+                </form> --}}
+
+
+
+                
+
+
+                <div class="mt-30">
+                    <div class="row d-flex justify-content-center">
+                        <form id="form" action="{{ route('memorial.images.upload', $memorial->id) }}" method="POST"
+                            enctype="multipart/form-data" class="px-3 rounded">
+                            @csrf
+                            {{-- <label for="images" class="form-label ">Képek feltöltése</label> --}}
+                            <div class="d-flex justify-content-center">
+                                <div class="col-8 mt-20">
+                                    <input type="file" name="images[]" multiple class="form-control" required>
+                                    <small class="text-muted">
+                                        Maximum 30 kép tölthető fel egy emlékoldalhoz. Fényképformátum: JPEG, JPG, PNG
+                                    </small>
+                                </div>
+                            </div>
+                            
+
+    
+                            {{-- <button type="submit" class="btn btn-secondary mt-3 w-100">Feltöltés</button> --}}
+                            <section class="text-center">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="mt-30 mb-20">
+                                            <button type="submit" id="submitBtn" class="butn butn-md butn-bord butn-rounded">
+                                                <span class="text">
+                                                    {{ __('Feltöltés') }}
+                                                </span>
+                                                <span id="btnIcon" class="icon">
+                                                    <i class="fa-regular fa-save"></i>
+                                                </span>
+                                                <span id="btnSpinner" class="icon d-none">
+                                                    <i class="fa-solid fa-spinner fa-spin"></i>
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+    
+                        </form>
+                    </div>
+                </div>
+                @if ($memorial->memorialimages->isNotEmpty())
+                <form action="{{ route('memorial.images.update', $memorial->id) }}" method="POST">
+                    @csrf
+                    <section class="process-ca bg-light radius-20 ontop">
+                        <div class="sec-head">
+                            <div class="row">
+                                <div class="col-lg-12 md-mb15 md-mt35">
+                                    <h6>{{ __('Photos') }} <small>{{ $photoCount = $memorial->memorialimages()->count() }} /
+                                            30</small></h6>
+        
+                                </div>
+                            </div>
+                        </div>
+        
+        
+        
+                        <div class="">
+        
+                            <div class="container">
+                                <div class="row d-flex justify-content-center">
+        
+                                    <div class="">
+                                        <div class="row">
+        
+                                            @foreach ($memorial->memorialimages as $image)
+                                                <input type="hidden" name="images[{{ $loop->index }}][id]"
+                                                    value="{{ $image->id }}">
+                                                <div class="col-lg-3 bord mt-20">
+                                                    <div class="item">
+        
+                                                        <div class="img fit-img mt-10 position-relative">
+                                                            <img src="{{ asset('memorial/' . $image->image_path) }}"
+                                                                alt="">
+        
+                                                            <button type="button"
+                                                                class="btn btn-danger btn-sm delete-btn position-absolute"
+                                                                style="top: 10px; right: 10px;"
+                                                                data-url="{{ route('memorial.images.destroy', [$memorial, $image]) }}">
+                                                                <span class="icon ">
+                                                                    <i class="fa fa-trash"></i>
+                                                                </span>
+                                                            </button>
+                                                        </div>
+        
+                                                        <div class="cont mt-10">
+                                                            <div class="">
+                                                                <input id="death_date" type="date"
+                                                                    class="form-control @error('death_date') is-invalid @enderror"
+                                                                    name="images[{{ $loop->index }}][image_date]"
+                                                                    value="{{ old('name', $image->image_date) }}">
+                                                            </div>
+        
+                                                            <h6 class="mt-10">
+                                                                <input name="images[{{ $loop->index }}][image_description]"
+                                                                    type="text" value="{{ $image->image_description }}"
+                                                                    class="form-control " placeholder="A fénykép leírása">
+                                                            </h6>
+        
+        
+        
+        
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+        
+                                        </div>
+                                    </div>
+        
+        
+                                </div>
+                            </div>
+        
+                        </div>
+        
+        
+                    </section>
+        
+
+        
+                </form>
+            @endif
+                
+
             </div>
-            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"
-                tabindex="0">
-                Video
+        
+            <!-- Video Tab (YouTube link) -->
+            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+                <form action="" method="POST" class="mt-3">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="youtubeLink" class="form-label">YouTube videó linkje</label>
+                        <input class="form-control" type="url" name="youtube_link" id="youtubeLink" placeholder="https://www.youtube.com/watch?v=..." required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="videoDescription" class="form-label">Leírás (nem kötelező)</label>
+                        <input class="form-control" type="text" name="description" id="videoDescription" placeholder="Pl. születésnapi videó 2005-ből">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Hozzáadás</button>
+                </form>
             </div>
-            <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab"
-                tabindex="0">
-                Music
+        
+            <!-- Music Tab – You can customize later -->
+            <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">
+                <form action="" method="POST" class="mt-3">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="youtubeLink" class="form-label">YouTube videó linkje</label>
+                        <input class="form-control" type="url" name="youtube_link" id="youtubeLink" placeholder="https://www.youtube.com/watch?v=..." required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="videoDescription" class="form-label">Leírás (nem kötelező)</label>
+                        <input class="form-control" type="text" name="description" id="videoDescription" placeholder="Pl. születésnapi videó 2005-ből">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Hozzáadás</button>
+                </form>
             </div>
-            <div class="tab-pane fade" id="pills-disabled" role="tabpanel" aria-labelledby="pills-disabled-tab"
-                tabindex="0">
-                Link
+        
+            <!-- Link Tab (Other site links) -->
+            <div class="tab-pane fade" id="pills-disabled" role="tabpanel" aria-labelledby="pills-disabled-tab" tabindex="0">
+                <form action="" method="POST" class="mt-3">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="externalLink" class="form-label">Weboldal linkje</label>
+                        <input class="form-control" type="url" name="external_link" id="externalLink" placeholder="https://..." required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="linkDescription" class="form-label">Leírás (nem kötelező)</label>
+                        <input class="form-control" type="text" name="description" id="linkDescription" placeholder="Pl. életrajz másik oldalról">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Link hozzáadása</button>
+                </form>
             </div>
         </div>
+        
 
-            <nav>
-                <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
-                    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
-                        type="button" role="tab" aria-controls="nav-home" aria-selected="true">Képek</button>
-                    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
-                        type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Videók</button>
-                    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact"
-                        type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Zene</button>
-                    <button class="nav-link" id="nav-disabled-tab" data-bs-toggle="tab" data-bs-target="#nav-disabled"
-                        type="button" role="tab" aria-controls="nav-disabled" aria-selected="false">Linkek</button>
-                </div>
-            </nav>
-            <div class="tab-content" id="nav-tabContent">
-                <div class="card" style="border-radius: .375rem; border-width: 1px; background-color: #ffffff00">
-
-                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"
-                        tabindex="0">...</div>
-                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab"
-                        tabindex="0">...</div>
-                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab"
-                        tabindex="0">...</div>
-                    <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab"
-                        tabindex="0">...</div>
-                </div>
-
+        {{-- <nav>
+            <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
+              <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Home</button>
+              <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</button>
+              <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
+              <button class="nav-link" id="nav-disabled-tab" data-bs-toggle="tab" data-bs-target="#nav-disabled" type="button" role="tab" aria-controls="nav-disabled" aria-selected="false" disabled>Disabled</button>
             </div>
+          </nav>
+          <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">...</div>
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">...</div>
+            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">...</div>
+            <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">...</div>
+          </div> --}}
 
 
 
 
-        <div class="d-flex justify-content-between mt-50">
-            <button href="#" class="btn btn-secondary">{{ __('Skip') }}</button>
+        <div class="d-flex justify-content-between mt-50 pb-50">
+            <a href="{{ route('timeline.create', $memorial) }}" class="btn btn-secondary">{{ __('Back') }}</a>
             <a href="{{ route('timeline.create', $memorial) }}" class="btn btn-primary">
                 <i class="fa fa-save"></i> {{ __('Next') }}
             </a>
@@ -919,7 +1107,16 @@
 @endsection
 
 @section('js')
+<script>
+    $(document).ready(function () {
+        $(".upload").upload({
+            allow: "*", // или "image/*" — только картинки
+            maxSize: 5242880, // 5MB в байтах
+        });
+    });
+</script>
 
 
-
+<script src="https://cdn.jsdelivr.net/npm/formstone/dist/js/core.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/formstone/dist/js/upload.js"></script>
 @endsection
