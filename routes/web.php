@@ -7,6 +7,7 @@ use App\Http\Controllers\FamilyController;
 use App\Http\Controllers\MemorialController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\LinkController;
 use App\Http\Controllers\TimelineController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -64,7 +65,7 @@ Route::middleware(['auth', UserAccess::class . ':user'])->group(function () {
     
     Route::delete('/dashboard/delete/{memorial}', [DashboardController::class, 'destroy'])->name('dashboard.destroy')->middleware('auth');
 
-    Route::get('/dashboard/{memorial}/family', [DashboardController::class, 'family'])->name('dashboard.family');
+    // Route::get('/dashboard/{memorial}/family', [DashboardController::class, 'family'])->name('dashboard.family');
 
 
     Route::get('/dashboard/{memorial}/family/create', [FamilyController::class, 'create'])->name('family.create');
@@ -77,8 +78,14 @@ Route::middleware(['auth', UserAccess::class . ':user'])->group(function () {
     Route::delete('/timelines/{id}', [TimelineController::class, 'destroy'])->name('timelines.destroy');
     Route::post('/timelines/add-school', [TimelineController::class, 'addSchool'])->name('timelines.addSchool');
 
-    Route::get('/dashboard/{memorial}/timeline/gallery', [TimelineController::class, 'gallery'])->name('timeline.gallery');
+    Route::get('/dashboard/{memorial}/media', [TimelineController::class, 'gallery'])->name('timeline.gallery');
 
+    Route::post('/video', [LinkController::class, 'storevideo'])->name('video.store');
+    Route::post('/music', [LinkController::class, 'storemusic'])->name('music.store');
+    Route::post('/link', [LinkController::class, 'storelink'])->name('link.store');
+
+    Route::get('/dashboard/{memorial}/place', [LinkController::class, 'place'])->name('place');
+    Route::post('/place', [LinkController::class, 'storeplace'])->name('place.store');
 
 });
 

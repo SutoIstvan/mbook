@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Family;
+use App\Models\Link;
 use App\Models\Memorial;
 use App\Models\Timeline;
 use Illuminate\Http\Request;
@@ -31,7 +32,40 @@ class TimelineController extends Controller
     {
         $familyMembers = Family::where('memorial_id', $memorial->id)->get()->groupBy('role');
 
-        return view('memorial.gallery', compact('memorial', 'familyMembers'));
+        $link = Link::where('memorial_id', $memorial->id)
+              ->where('type', 'link')
+              ->get();
+
+        $videos = Link::where('memorial_id', $memorial->id)
+            ->where('type', 'video')
+            ->get()
+            ->map(function ($video) {
+                preg_match('/(?:youtu\.be\/|v=)([\w\-]+)/', $video->url, $matches);
+                $youtubeId = $matches[1] ?? null;
+
+                return [
+                    'title' => $video->title,
+                    'description' => $video->description,
+                    'url' => $youtubeId ? "https://www.youtube.com/embed/{$youtubeId}" : null,
+                ];
+            })->filter(fn($video) => $video['url']);
+
+            $music = Link::where('memorial_id', $memorial->id)
+            ->where('type', 'music')
+            ->get()
+            ->map(function ($music) {
+                preg_match('/(?:youtu\.be\/|v=)([\w\-]+)/', $music->url, $matches);
+                $youtubeId = $matches[1] ?? null;
+
+                return [
+                    'title' => $music->title,
+                    'description' => $music->description,
+                    'url' => $youtubeId ? "https://www.youtube.com/embed/{$youtubeId}" : null,
+                ];
+            })->filter(fn($video) => $video['url']);
+
+
+        return view('memorial.gallery', compact('memorial', 'familyMembers', 'videos', 'music', 'link'));
     }
 
     public function store(Request $request)
