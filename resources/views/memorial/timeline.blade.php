@@ -576,11 +576,11 @@
         .step-vertical:not(:last-child)::after {
             content: '';
             /* position: absolute;
-                                         left: 25px;
-                                         top: 60px;
-                                         bottom: 0;
-                                         width: 2px;
-                                         background: #e9ecef; */
+                                             left: 25px;
+                                             top: 60px;
+                                             bottom: 0;
+                                             width: 2px;
+                                             background: #e9ecef; */
         }
 
         .step-vertical-icon {
@@ -902,7 +902,7 @@
                             <option value="school">Iskola</option>
                             <option value="work">Munkahely</option>
                             <option value="hobby">Hobbija</option>
-                            <option value="favorite_music">Kedvenc zenéi</option>
+                            {{-- <option value="favorite_music">Kedvenc zenéi</option> --}}
                             <option value="other_properties">Egyéb tulajdonságai</option>
                         </select>
 
@@ -947,12 +947,13 @@
                     <form action="{{ route('timelines.storeMarriage') }}" method="POST">
                         @csrf
                         <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
-                    
+
                         <div id="marriageInputs" class="mt-3" style="display: none;">
                             <div id="existingMarriages" class="mt-4">
                                 @foreach ($partners as $marriage)
-                                    <input type="hidden" name="marriages[{{ $loop->index }}][id]" value="{{ $marriage->id }}">
-                        
+                                    <input type="hidden" name="marriages[{{ $loop->index }}][id]"
+                                        value="{{ $marriage->id }}">
+
                                     <div class="row mb-2">
                                         <div class="col-md-6">
                                             <input type="text" class="form-control"
@@ -967,34 +968,68 @@
                                     </div>
                                 @endforeach
                             </div>
-                    
+
                             <div id="newMarriages"></div>
-                    
-                            <button type="button" class="btn btn-outline-primary mt-2" id="addMarriage">+ Új házasság hozzáadása</button>
+
+                            <button type="button" class="btn btn-outline-primary mt-2" id="addMarriage">+ Új házasság
+                                hozzáadása</button>
                             <button type="submit" class="btn btn-outline-primary mt-2">Save</button>
                         </div>
                     </form>
 
-<!-- Форма школы (по умолчанию скрыта) -->
-<div id="schoolForm" class="event-form" style="display: none;">
-    <form action="{{ route('timelines.addSchool') }}" method="POST" class="mt-3">
-        @csrf
-        <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
+                    <!-- Форма школы (по умолчанию скрыта) -->
+                    <div id="schoolForm" class="event-form" style="display: none;">
+                        <form action="{{ route('timelines.addSchool') }}" method="POST" class="mt-3">
+                            @csrf
+                            <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
 
-        <div class="row">
-            <div class="col-md-6 mb-2">
-                <input type="text" name="school_name" class="form-control" placeholder="Iskola neve" required>
-            </div>
-            <div class="col-md-4 mb-2">
-                <input type="date" name="school_date" class="form-control" required>
-            </div>
-            <div class="col-md-2 mb-2">
-                <button type="submit" class="btn btn-outline-success w-100">Mentés</button>
-            </div>
-        </div>
-    </form>
-</div>
+                            <div class="row">
+                                <div class="col-md-12 mb-2">
+                                    <input type="text" name="school_name" class="form-control"
+                                        placeholder="Iskola neve" required>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <label for="school_date">School date from</label>
 
+                                    <input type="date" name="school_date" class="form-control" required>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <label for="school_date_to">School date to</label>
+                                    <input type="date" name="school_date_to" class="form-control" required>
+                                </div>
+                                <div class="col-md-12 mb-3 mt-3 text-center">
+                                    <button type="submit" class="btn btn-outline-primary">Mentés</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Форма work (по умолчанию скрыта) -->
+                    <div id="workForm" class="event-form" style="display: none;">
+                        <form action="{{ route('timelines.addWork') }}" method="POST" class="mt-3">
+                            @csrf
+                            <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
+
+                            <div class="row">
+                                <div class="col-md-12 mb-2">
+                                    <input type="text" name="work_name" class="form-control"
+                                        placeholder="Munka neve" required>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <label for="work_date">Work date from</label>
+
+                                    <input type="date" name="work_date" class="form-control" required>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <label for="work_date_to">Work date to</label>
+                                    <input type="date" name="work_date_to" class="form-control" required>
+                                </div>
+                                <div class="col-md-12 mb-3 mt-3 text-center">
+                                    <button type="submit" class="btn btn-outline-primary">Mentés</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
 
 
                 </div>
@@ -1006,20 +1041,22 @@
             @foreach ($timelines as $timeline)
                 <div class="container">
                     <div class="row d-flex justify-content-center">
-
-                        
-
                         <div class="col-10 col-md-10">
-
                             <ul class="timeline-3">
                                 <li class="d-flex justify-content-between align-items-center">
                                     <div>
-                                        <small>{{ $timeline->date }}</small>
-
+                                        <small>{{ $timeline->date }} </small>
+                                        @if ($timeline->date_to)
+                                            <small>- {{ $timeline->date_to }}</small>
+                                        @endif
+                                        @if ($timeline->type)
+                                            - {{ __('aigenerate.timeline_types.' . $timeline->type) }}
+                                        @endif
                                         <a>{{ $timeline->title }}</a>
                                     </div>
-            
-                                    <form action="{{ route('timelines.destroy', $timeline->id) }}" method="POST" onsubmit="return confirm('Biztosan törölni szeretnéd ezt az eseményt?');">
+
+                                    <form action="{{ route('timelines.destroy', $timeline->id) }}" method="POST"
+                                        onsubmit="return confirm('Biztosan törölni szeretnéd ezt az eseményt?');">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-outline-danger">Törlés</button>
@@ -1040,55 +1077,62 @@
                 </div>
             </div>
 
-        
+
         @endsection
 
         @section('js')
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const eventType = document.getElementById('eventType');
-                const childrenInputs = document.getElementById('childrenInputs');
-                const addChildBtn = document.getElementById('addChild');
-                const newChildrenContainer = document.getElementById('newChildren');
-                let newChildIndex = 0;
-        
-                const marriageInputs = document.getElementById('marriageInputs');
-                const addMarriageBtn = document.getElementById('addMarriage');
-                const newMarriagesContainer = document.getElementById('newMarriages');
-                let marriageIndex = 0;
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const eventType = document.getElementById('eventType');
+                    const childrenInputs = document.getElementById('childrenInputs');
+                    const addChildBtn = document.getElementById('addChild');
+                    const newChildrenContainer = document.getElementById('newChildren');
+                    let newChildIndex = 0;
 
-                const schoolForm = document.getElementById('schoolForm'); // Форма для школы
-                const schoolInputs = document.getElementById('schoolInputs');
-                const addSchoolBtn = document.getElementById('addSchool');
-                const newSchoolContainer = document.getElementById('newSchool');
-                let schoolIndex = 0;
-        
-                const hobbyInputs = document.getElementById('hobbyInputs');
-                const addHobbyBtn = document.getElementById('addHobby');
-                const newHobbyContainer = document.getElementById('newHobby');
-                let hobbyIndex = 0;
-        
-                // Слушатель для изменения значения в селекте
-                eventType.addEventListener('change', function () {
-                    const selected = this.value;
+                    const marriageInputs = document.getElementById('marriageInputs');
+                    const addMarriageBtn = document.getElementById('addMarriage');
+                    const newMarriagesContainer = document.getElementById('newMarriages');
+                    let marriageIndex = 0;
 
-                    console.log("Selected event type:", selected);  // Тест для проверки, что срабатывает
+                    const schoolForm = document.getElementById('schoolForm'); // Форма для школы
+                    const schoolInputs = document.getElementById('schoolInputs');
+                    const addSchoolBtn = document.getElementById('addSchool');
+                    const newSchoolContainer = document.getElementById('newSchool');
+                    let schoolIndex = 0;
 
-                    // Скрытие или отображение форм в зависимости от выбора
-                    childrenInputs.style.display = selected === 'child_birth' ? 'block' : 'none';
-                    marriageInputs.style.display = selected === 'marriage' ? 'block' : 'none';
-                    schoolForm.style.display = selected === 'school' ? 'block' : 'none'; // Отображение формы школы
+                    const workForm = document.getElementById('workForm'); // Форма для школы
+                    const workInputs = document.getElementById('workInputs');
+                    const addWorkBtn = document.getElementById('addWork');
+                    const newWorkContainer = document.getElementById('newWork');
+                    let workIndex = 0;
 
-                    // schoolInputs.style.display = selected === 'school' ? 'block' : 'none';
-                    hobbyInputs.style.display = selected === 'hobby' ? 'block' : 'none';
-                });
-        
-                // Добавление новой записи о ребенке
-                addChildBtn.addEventListener('click', function() {
-                    const row = document.createElement('div');
-                    row.classList.add('row', 'mb-2');
-                    row.innerHTML = `
+                    const hobbyInputs = document.getElementById('hobbyInputs');
+                    const addHobbyBtn = document.getElementById('addHobby');
+                    const newHobbyContainer = document.getElementById('newHobby');
+                    let hobbyIndex = 0;
+
+                    // Слушатель для изменения значения в селекте
+                    eventType.addEventListener('change', function() {
+                        const selected = this.value;
+
+                        console.log("Selected event type:", selected); // Тест для проверки, что срабатывает
+
+                        // Скрытие или отображение форм в зависимости от выбора
+                        childrenInputs.style.display = selected === 'child_birth' ? 'block' : 'none';
+                        marriageInputs.style.display = selected === 'marriage' ? 'block' : 'none';
+                        schoolForm.style.display = selected === 'school' ? 'block' : 'none'; // Отображение формы школы
+
+                        workForm.style.display = selected === 'work' ? 'block' : 'none'; //
+                        // schoolInputs.style.display = selected === 'school' ? 'block' : 'none';
+                        hobbyInputs.style.display = selected === 'hobby' ? 'block' : 'none';
+                    });
+
+                    // Добавление новой записи о ребенке
+                    addChildBtn.addEventListener('click', function() {
+                        const row = document.createElement('div');
+                        row.classList.add('row', 'mb-2');
+                        row.innerHTML = `
                         <div class="col-md-6">
                             <input type="text" class="form-control" name="new_children[${newChildIndex}][name]" placeholder="Gyermek neve">
                         </div>
@@ -1096,16 +1140,16 @@
                             <input type="date" class="form-control" name="new_children[${newChildIndex}][birth_date]">
                         </div>
                     `;
-                    newChildrenContainer.appendChild(row);
-                    newChildIndex++;
-                });
-        
-                // Добавление новой записи о браке
-                if (addMarriageBtn) {
-                    addMarriageBtn.addEventListener('click', function () {
-                        const row = document.createElement('div');
-                        row.classList.add('row', 'mb-2');
-                        row.innerHTML = `
+                        newChildrenContainer.appendChild(row);
+                        newChildIndex++;
+                    });
+
+                    // Добавление новой записи о браке
+                    if (addMarriageBtn) {
+                        addMarriageBtn.addEventListener('click', function() {
+                            const row = document.createElement('div');
+                            row.classList.add('row', 'mb-2');
+                            row.innerHTML = `
                             <div class="col-md-6">
                                 <input type="text" class="form-control" name="new_marriages[${marriageIndex}][partner_name]" placeholder="Partner neve">
                             </div>
@@ -1113,17 +1157,17 @@
                                 <input type="date" class="form-control" name="new_marriages[${marriageIndex}][marriage_date]">
                             </div>
                         `;
-                        newMarriagesContainer.appendChild(row);
-                        marriageIndex++;
-                    });
-                }
-        
-                // Добавление новой записи о школе
-                if (addSchoolBtn) {
-                    addSchoolBtn.addEventListener('click', function () {
-                        const row = document.createElement('div');
-                        row.classList.add('row', 'mb-2');
-                        row.innerHTML = `
+                            newMarriagesContainer.appendChild(row);
+                            marriageIndex++;
+                        });
+                    }
+
+                    // Добавление новой записи о школе
+                    if (addSchoolBtn) {
+                        addSchoolBtn.addEventListener('click', function() {
+                            const row = document.createElement('div');
+                            row.classList.add('row', 'mb-2');
+                            row.innerHTML = `
                             <div class="col-md-6">
                                 <input type="text" class="form-control" name="new_schools[${schoolIndex}][school_name]" placeholder="Iskola neve">
                             </div>
@@ -1131,17 +1175,17 @@
                                 <input type="date" class="form-control" name="new_schools[${schoolIndex}][start_date]">
                             </div>
                         `;
-                        newSchoolContainer.appendChild(row);
-                        schoolIndex++;
-                    });
-                }
-        
-                // Добавление новой записи о хобби
-                if (addHobbyBtn) {
-                    addHobbyBtn.addEventListener('click', function () {
-                        const row = document.createElement('div');
-                        row.classList.add('row', 'mb-2');
-                        row.innerHTML = `
+                            newSchoolContainer.appendChild(row);
+                            schoolIndex++;
+                        });
+                    }
+
+                    // Добавление новой записи о хобби
+                    if (addHobbyBtn) {
+                        addHobbyBtn.addEventListener('click', function() {
+                            const row = document.createElement('div');
+                            row.classList.add('row', 'mb-2');
+                            row.innerHTML = `
                             <div class="col-md-6">
                                 <input type="text" class="form-control" name="new_hobbies[${hobbyIndex}][hobby_name]" placeholder="Hobbi neve">
                             </div>
@@ -1149,13 +1193,13 @@
                                 <input type="date" class="form-control" name="new_hobbies[${hobbyIndex}][start_date]">
                             </div>
                         `;
-                        newHobbyContainer.appendChild(row);
-                        hobbyIndex++;
-                    });
-                }
-        
-            });
-        </script>
-        
+                            newHobbyContainer.appendChild(row);
+                            hobbyIndex++;
+                        });
+                    }
+
+                });
+            </script>
+
 
         @endsection

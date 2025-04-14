@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('qr_code')->unique();
             $table->string('virtual_code')->nullable()->unique();
             $table->foreignId('admin_id')->constrained('users');
+            $table->unsignedTinyInteger('generation_attempts_left')->default(1);
             $table->softDeletes();
             $table->timestamps();
         });

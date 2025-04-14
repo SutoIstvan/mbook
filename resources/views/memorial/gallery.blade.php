@@ -875,8 +875,8 @@
                     type="button" role="tab" aria-controls="pills-music" aria-selected="false">Music</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="pills-disabled-tab" data-bs-toggle="pill" data-bs-target="#pills-disabled"
-                    type="button" role="tab" aria-controls="pills-disabled" aria-selected="false">Link</button>
+                <button class="nav-link" id="pills-link-tab" data-bs-toggle="pill" data-bs-target="#pills-link"
+                    type="button" role="tab" aria-controls="pills-link" aria-selected="false">Link</button>
             </li>
         </ul>
         <div class="tab-content" id="pills-tabContent">
@@ -1130,7 +1130,7 @@
             </div>
         
             <!-- Link Tab (Other site links) -->
-            <div class="tab-pane fade" id="pills-disabled" role="tabpanel" aria-labelledby="pills-disabled-tab" tabindex="0">
+            <div class="tab-pane fade" id="pills-link" role="tabpanel" aria-labelledby="pills-link-tab" tabindex="0">
 
                     <form action="{{ route('link.store') }}" method="POST" class="mt-3">
                         @csrf

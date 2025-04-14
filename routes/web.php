@@ -8,6 +8,7 @@ use App\Http\Controllers\MemorialController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\LinkController;
+use App\Http\Controllers\OpenAIController;
 use App\Http\Controllers\TimelineController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -78,6 +79,9 @@ Route::middleware(['auth', UserAccess::class . ':user'])->group(function () {
     Route::delete('/timelines/{id}', [TimelineController::class, 'destroy'])->name('timelines.destroy');
     Route::post('/timelines/add-school', [TimelineController::class, 'addSchool'])->name('timelines.addSchool');
 
+    Route::post('/timelines/add-work', [TimelineController::class, 'addWork'])->name('timelines.addWork');
+
+
     Route::get('/dashboard/{memorial}/media', [TimelineController::class, 'gallery'])->name('timeline.gallery');
 
     Route::post('/video', [LinkController::class, 'storevideo'])->name('video.store');
@@ -86,6 +90,9 @@ Route::middleware(['auth', UserAccess::class . ':user'])->group(function () {
 
     Route::get('/dashboard/{memorial}/place', [LinkController::class, 'place'])->name('place');
     Route::post('/place', [LinkController::class, 'storeplace'])->name('place.store');
+    Route::get('/dashboard/{memorial}/preview', [LinkController::class, 'preview'])->name('createpreview');
+
+    Route::get('/dashboard/{memorial}/generate-biography', [OpenAIController::class, 'generateBiography'])->name('generate.biography');
 
 });
 

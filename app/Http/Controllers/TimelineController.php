@@ -14,7 +14,10 @@ class TimelineController extends Controller
     {
         $familyMembers = Family::where('memorial_id', $memorial->id)->get()->groupBy('role');
 
-        $timelines = Timeline::where('memorial_id', $memorial->id)->get();
+        // $timelines = Timeline::where('memorial_id', $memorial->id)->get();
+        $timelines = Timeline::where('memorial_id', $memorial->id)
+            ->orderBy('date', 'asc')
+            ->get();
 
         $children = Family::where('memorial_id', $memorial->id)
             ->where('role', 'children')
@@ -99,8 +102,8 @@ class TimelineController extends Controller
                         'related_person' => $child->name, // можно привязать по имени
                     ],
                     [
-                        'title' => 'Gyermek születése: ' . $child->name,
-                        'description' => 'A gyermek neve: ' . $child->name,
+                        'title' => $child->name,
+                        'description' => $child->name,
                         'date' => $childData['birth_date'],
                         'order' => 1,
                     ]
@@ -114,8 +117,8 @@ class TimelineController extends Controller
                 // Создаём запись в Timeline
                 Timeline::create([
                     'memorial_id' => $request->memorial_id,
-                    'title' => 'Új gyermek: ' . $newChildData['name'],
-                    'description' => 'A gyermek neve: ' . $newChildData['name'],
+                    'title' => $newChildData['name'],
+                    'description' => $newChildData['name'],
                     'type' => 'child_birth',
                     'date' => $newChildData['birth_date'],
                     'order' => 1,
@@ -167,12 +170,11 @@ class TimelineController extends Controller
                 Timeline::updateOrCreate(
                     [
                         'memorial_id' => $request->memorial_id,
-                        'type' => 'child_birth',
+                        'type' => 'marriage',
                         'related_person' => $partner->name, // можно привязать по имени
                     ],
                     [
-                        'title' => 'Esküvő. Feleseg neve: ' . $partner->name,
-                        'description' => 'A gyermek neve: ' . $partner->name,
+                        'title' => $partner->name,
                         'date' => $marriage['marriage_date'],
                         'order' => 1,
                     ]
@@ -187,8 +189,8 @@ class TimelineController extends Controller
                 // dd($newMarriagesData);
                 Timeline::create([
                     'memorial_id' => $request->memorial_id,
-                    'title' => 'Esküvő. Feleseg neve: ' . $newMarriagesData['partner_name'],
-                    'description' => 'Feleseg neve: ' . $newMarriagesData['partner_name'],
+                    'title' => $newMarriagesData['partner_name'],
+                    'description' => $newMarriagesData['partner_name'],
                     'type' => 'marriage',
                     'date' => $newMarriagesData['marriage_date'],
                     'order' => 1,
@@ -217,14 +219,39 @@ class TimelineController extends Controller
             'memorial_id' => 'required|exists:memorials,id',
             'school_name' => 'required|string|max:255',
             'school_date' => 'required|date',
+            'school_date_to' => 'required|date',
         ]);
 
         Timeline::create([
             'memorial_id' => $validated['memorial_id'],
-            'title' => 'Iskola: ' . $validated['school_name'],
-            'description' => 'Iskolai tanulmányok: ' . $validated['school_name'],
+            'title' => $validated['school_name'],
+            'description' => $validated['school_name'],
             'type' => 'school',
             'date' => $validated['school_date'],
+            'date_to' => $validated['school_date_to'],
+            'order' => 1,
+        ]);
+
+        return back()->with('success', 'Iskola sikeresen hozzáadva a timeline-hoz.');
+    }
+
+    public function addWork(Request $request)
+    {
+        // dd($request);
+        $validated = $request->validate([
+            'memorial_id' => 'required|exists:memorials,id',
+            'work_name' => 'required|string|max:255',
+            'work_date' => 'required|date',
+            'work_date_to' => 'required|date',
+        ]);
+
+        Timeline::create([
+            'memorial_id' => $validated['memorial_id'],
+            'title' => $validated['work_name'],
+            'description' => $validated['work_name'],
+            'type' => 'work',
+            'date' => $validated['work_date'],
+            'date_to' => $validated['work_date_to'],
             'order' => 1,
         ]);
 

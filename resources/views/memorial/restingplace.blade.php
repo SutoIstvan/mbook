@@ -874,23 +874,20 @@
                 <div class="">
 
                     <div class="row mb-3">
-                        <form action="" method="POST">
+                        <form action="{{ route('place.store') }}" method="POST">
                             @csrf
+                            <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
+
                             <div class="mb-3">
-                                <label for="cemetery_address" class="form-label">Temető címe</label>
-                                <input type="text" class="form-control" id="cemetery_address" name="cemetery_address"
-                                    placeholder="Pl. Kossuth Lajos utca 1, Budapest" required>
+                                <label for="grave_location" class="form-label">Temető címe</label>
+                                <input type="text" class="form-control" id="grave_location" name="grave_location"
+                                    placeholder="Pl. Kossuth Lajos utca 1, Budapest" value="{{ $memorial->grave_location }}" required>
                             </div>
                             <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="latitude" class="form-label">Szélesség (Latitude)</label>
-                                    <input type="number" step="any" class="form-control" id="latitude" name="latitude"
-                                        placeholder="Pl. 47.497912" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="longitude" class="form-label">Hosszúság (Longitude)</label>
-                                    <input type="number" step="any" class="form-control" id="longitude"
-                                        name="longitude" placeholder="Pl. 19.040235" required>
+                                <div class="col-md-12 mb-3">
+                                    <label for="coordinates" class="form-label">Coordinates</label>
+                                    <input type="text" step="any" class="form-control" id="coordinates" name="coordinates"
+                                        placeholder="Pl. 47.497912, 42.458989" value="{{ $memorial->coordinates }}" required>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center mt-3">
@@ -910,7 +907,7 @@
         <div class="container col-9">
             <div class="d-flex justify-content-between mt-30">
                 <a href="{{ route('timeline.gallery', $memorial) }}" class="btn btn-secondary">{{ __('Back') }}</a>
-                <a href="{{ route('timeline.gallery', $memorial) }}" class="btn btn-primary">
+                <a href="{{ route('generate.biography', $memorial) }}" class="btn btn-primary">
                     <i class="fa fa-save"></i> {{ __('Next') }}
                 </a>
             </div>

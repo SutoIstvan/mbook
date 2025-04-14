@@ -69,19 +69,21 @@ class LinkController extends Controller
     {
         $validated = $request->validate([
             'memorial_id' => 'required|exists:memorials,id',
-            'youtube_link' => 'required|url',
-            'description' => 'nullable|string|max:1000',
+            'grave_location' => 'nullable|string|max:1000',
+            'coordinates' => 'nullable|string|max:1000',
         ]);
 
-        Link::create([
-            'memorial_id' => $validated['memorial_id'],
-            'title' => 'website link',
-            'description' => $validated['description'] ?? null,
-            'type' => 'link',
-            'url' => $validated['youtube_link'],
+
+        // Находим запись по memorial_id
+        $memorial = Memorial::findOrFail($validated['memorial_id']);
+
+        // Обновляем запись
+        $memorial->update([
+            'grave_location' => $validated['grave_location'],
+            'coordinates' => $validated['coordinates'],
         ]);
 
-        return redirect()->back()->with('success', 'A videó sikeresen hozzá lett adva.')->with('tab', 'link');
+        return redirect()->back()->with('success', 'A nyughely adata sikeresen hozzá lett adva.');
     }
 
     public function place(Memorial $memorial)
@@ -91,5 +93,11 @@ class LinkController extends Controller
 
 
         return view('memorial.restingplace', compact('memorial'));
+    } 
+
+    public function preview(Memorial $memorial)
+    {
+
+        return view('memorial.createpreview', compact('memorial'));
     } 
 }

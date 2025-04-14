@@ -85,4 +85,14 @@ class Memorial extends Model
     {
         return $this->hasMany(Timeline::class);
     }
+
+    public function family()
+    {
+        return $this->hasMany(Family::class);
+    }
+
+    public function timeline()
+    {
+        return $this->hasMany(Timeline::class);
+    }
 }
