@@ -64,7 +64,7 @@ class OpenAIController extends Controller
         }
 
 
-        dd($prompt);
+        // dd($prompt);
 
         // Отправка запроса в OpenAI
         if ($memorial->generation_attempts_left > 0) {

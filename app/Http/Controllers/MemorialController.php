@@ -91,7 +91,7 @@ class MemorialController extends Controller
             'name' => 'required|string|min:3|max:255',
             'birth_date' => 'required|string|min:3|max:255',
             'death_date' => 'required|string|min:3|max:255',
-            'biography' => 'required|string|min:3|max:2255',
+            'biography' => 'string|max:2255',
             'photo' => 'required|image|mimes:jpeg,jpg,png',
             'crop_x' => 'nullable|numeric',
             'crop_y' => 'nullable|numeric',
