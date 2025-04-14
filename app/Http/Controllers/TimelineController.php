@@ -258,6 +258,28 @@ class TimelineController extends Controller
         return back()->with('success', 'Iskola sikeresen hozzáadva a timeline-hoz.');
     }
 
+    public function addHobby(Request $request)
+    {
+        // dd($request);
+        $validated = $request->validate([
+            'memorial_id' => 'required|exists:memorials,id',
+            'hobby_name' => 'required|string|max:255',
+            'hobby_date' => 'required|date',
+            'hobby_date_to' => 'required|date',
+        ]);
+
+        Timeline::create([
+            'memorial_id' => $validated['memorial_id'],
+            'title' => $validated['hobby_name'],
+            'description' => $validated['hobby_name'],
+            'type' => 'hobby',
+            'date' => $validated['hobby_date'],
+            'date_to' => $validated['hobby_date_to'],
+            'order' => 1,
+        ]);
+
+        return back()->with('success', 'Iskola sikeresen hozzáadva a timeline-hoz.');
+    }
 
     public function destroy($id)
     {

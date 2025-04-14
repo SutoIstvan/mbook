@@ -80,6 +80,7 @@ Route::middleware(['auth', UserAccess::class . ':user'])->group(function () {
     Route::post('/timelines/add-school', [TimelineController::class, 'addSchool'])->name('timelines.addSchool');
 
     Route::post('/timelines/add-work', [TimelineController::class, 'addWork'])->name('timelines.addWork');
+    Route::post('/timelines/add-hobby', [TimelineController::class, 'addHobby'])->name('timelines.addHobby');
 
 
     Route::get('/dashboard/{memorial}/media', [TimelineController::class, 'gallery'])->name('timeline.gallery');
