@@ -36,7 +36,7 @@ Route::get('/demo', function () {
 // Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
 
 // Для обычных пользователей
-Route::middleware(['auth', UserAccess::class . ':user'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/create', [MemorialController::class, 'create'])->name('memorial.create');
     Route::post('/store', [MemorialController::class, 'store'])->name('memorial.store');

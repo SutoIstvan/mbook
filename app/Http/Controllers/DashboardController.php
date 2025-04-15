@@ -33,12 +33,36 @@ class DashboardController extends Controller
 
     public function edit(Memorial $memorial)
     {
+        // dd([
+        //     'user_id' => Auth::user()->id,
+        //     'memorial_admin_id' => $memorial->admin_id,
+        //     'user_role' => Auth::user()->role,
+        //     'is_admin' => Auth::user()->role === 'admin',
+        //     'is_owner' => Auth::user()->id === $memorial->admin_id
+        // ]);
+
+        if (Auth::user()->id !== $memorial->admin_id && Auth::user()->role !== 'admin') {
+            abort(403);
+        }
+
+
+        // $user = Auth::user();
+        // $isOwner = ($user->id === $memorial->admin_id);
+        // $isAdmin = ($user->role === 'admin');
+        
+        // // Если пользователь НЕ владелец И НЕ админ
+        // if (!$isOwner && !$isAdmin) {
+        //     abort(403, 'Access Denied');
+        // }
         // dd($memorial);
         return view('dashboard.edit', compact('memorial'));
     }
 
     public function settings(Memorial $memorial)
     {
+        if (Auth::user()->id !== $memorial->admin_id && Auth::user()->role !== 'admin') {
+            abort(403);
+        }
         return view('dashboard.settings', compact('memorial'));
     }
 
@@ -74,6 +98,10 @@ class DashboardController extends Controller
 
     public function comments(Memorial $memorial)
     {
+        if (Auth::user()->id !== $memorial->admin_id && Auth::user()->role !== 'admin') {
+            abort(403);
+        }
+        
         $memorial = Memorial::where('id', $memorial->id)->firstOrFail();
         $comments = $memorial->comments()
             ->orderBy('created_at', 'desc')
@@ -87,6 +115,10 @@ class DashboardController extends Controller
 
     public function video(Memorial $memorial)
     {
+        if (Auth::user()->id !== $memorial->admin_id && Auth::user()->role !== 'admin') {
+            abort(403);
+        }
+
         return view('dashboard.video', compact('memorial'));
     }
 
@@ -127,6 +159,10 @@ class DashboardController extends Controller
 
     public function photos(Memorial $memorial)
     {
+        if (Auth::user()->id !== $memorial->admin_id && Auth::user()->role !== 'admin') {
+            abort(403);
+        }
+
         return view('dashboard.photos', compact('memorial'));
     }
 

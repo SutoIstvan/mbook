@@ -85,7 +85,7 @@ class MemorialController extends Controller
 
     public function store(Request $request)
     {
-        //  dd($request);
+        //   dd($request);
         // Валидация запроса
         $request->validate([
             'name' => 'required|string|min:3|max:255',
@@ -180,8 +180,7 @@ class MemorialController extends Controller
             $memorial->save();
         }
 
-        // Генерируем и сохраняем QR-код
-        $this->generateQRCode($token, $memorial);
+
 
         // Обновляем связь QR-кода с мемориалом
         $qrCode->update([
@@ -206,7 +205,9 @@ class MemorialController extends Controller
             // Или, например, можно вернуть сообщение:
             // return redirect()->back()->with('error', "QR Code with token {$qrtoken} not found");
         }
-
+        
+        // Генерируем и сохраняем QR-код
+        $this->generateQRCode($token, $memorial);
 
         if ($request->input('action') === 'add_details') {
             // Перенаправление на другую страницу для ввода дополнительных данных

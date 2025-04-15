@@ -19,7 +19,7 @@
                                 </div>
                             </div>
 
-                            <div class="row mb-3">
+                            {{-- <div class="row mb-3">
                                 <div class="col-md-12">
                                     <label for="name" class="col-form-label text-md-end">{{ __('Full Name') }}</label>
                                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -61,7 +61,7 @@
                                         </span>
                                     @enderror
                                 </div>
-                            </div>
+                            </div> --}}
                         </section>
 
                         <!-- ==================== End Process ==================== -->
@@ -70,33 +70,7 @@
 
                         <!-- ==================== Start Numbers ==================== -->
 
-                        <section class="numbers-ca">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="mt-60">
-                                        <button type="submit" class="butn butn-md butn-bord butn-rounded disabled">
-                                            <span class="text">Módosítások mentése</span>
 
-                                            <span class="icon ">
-                                                <i class="fa-regular fa-save"></i>
-                                            </span>
-
-                                        </button>
-                                    </div>
-                                </div>
-
-                                {{-- <div class="col-lg-6">
-                                    <div class="mt-60">
-                                        <button type="submit" class="butn butn-md butn-bord butn-rounded disabled">
-                                            <span class="text">Cancel</span>
-                                            <span class="icon invert ml-10">
-                                                <img src="common/imgs/icons/arrow-top-right.svg" alt="">
-                                            </span>
-                                        </button>
-                                    </div>
-                                </div> --}}
-                            </div>
-                        </section>
 
                         <!-- ==================== End Numbers ==================== -->
 
