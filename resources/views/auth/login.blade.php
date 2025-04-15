@@ -25,7 +25,7 @@
                             <div>
 
                             </div>
-                            <p class="px-4 mt-2">
+                            <p class="px-1 mt-2">
                                 {{ __('If you have never registred a rememus sing before, please register first.') }}
                             </p>
                         </div>
