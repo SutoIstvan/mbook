@@ -55,11 +55,13 @@
 
         <div class="loader-wrap-heading">
             <div class="load-text">
+                <span>R</span>
+                <span>E</span>
                 <span>M</span>
-                <span>B</span>
-                <span>o</span>
-                <span>o</span>
-                <span>k</span>
+                <span>E</span>
+                <span>M</span>
+                <span>U</span>
+                <span>S</span>
             </div>
         </div>
     </div>
@@ -84,7 +86,7 @@
         <div class="container">
     
             <!-- Logo -->
-            <a class="logo" href="{{ route('admin') }}">
+            <a class="logo" href="{{ route('welcome') }}">
                 <img src="{{ asset('dark/imgs/logo-mbook.png') }}" alt="logo" style="height: 18px;">
             </a>
     
