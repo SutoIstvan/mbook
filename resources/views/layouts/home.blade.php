@@ -114,13 +114,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('welcome') ? 'active' : '' }}" href="{{ route('welcome') }}">Címlap</a>
+                            <a class="nav-link {{ request()->routeIs('welcome') ? 'active' : '' }}"
+                                href="{{ route('welcome') }}">Címlap</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('price') ? 'active' : '' }}" href="{{ route('price') }}">Árak</a>
+                            <a class="nav-link {{ request()->routeIs('price') ? 'active' : '' }}"
+                                href="{{ route('price') }}">Árak</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Kapcsolatok</a>
+                            <a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}"
+                                href="{{ route('contact') }}">Kapcsolatok</a>
                         </li>
 
 
@@ -134,8 +137,8 @@
                     </ul>
                 </div>
 
-                <div class="menu-icon cursor-pointer " >
-                    <span class="icon ti-align-right d-block d-lg-none" ></span>
+                <div class="menu-icon cursor-pointer ">
+                    <span class="icon ti-align-right d-block d-lg-none"></span>
                 </div>
             </div>
         </div>
@@ -148,16 +151,14 @@
                 <ul class="main-menu rest">
                     <li>
                         <div class="o-hidden">
-                            <a href="#" class="link"><span class="fill-text"
-                                    data-text="Címlap">Címlap</span>
+                            <a href="#" class="link"><span class="fill-text" data-text="Címlap">Címlap</span>
                             </a>
                         </div>
                     </li>
 
                     <li>
                         <div class="o-hidden">
-                            <a href="#" class="link"><span class="fill-text"
-                                    data-text="Árak">Árak</span>
+                            <a href="#" class="link"><span class="fill-text" data-text="Árak">Árak</span>
                             </a>
                         </div>
                     </li>
@@ -222,34 +223,37 @@
                     <div class="row">
 
 
-                    <div class="sub-footer pt-30 pb-30 mt-30 ">
-                        <div class="row">
-                            <div class="col-lg-8">
-                                <div class="copy sub-color md-mb30">
-                                    <p>© 2024 rememus.com</p>
+                        <div class="sub-footer pt-30 pb-30 mt-30 ">
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div class="copy sub-color md-mb30 sm-hide">
+                                        <p>© 2024 rememus.com</p>
+                                    </div>
+                                    <div class="copy sub-color md-mb30 text-center d-block d-sm-none">
+                                        <p>© 2024 rememus.com</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-4 d-flex justify-content-end">
-                                <div class="ml-auto ml-none">
-                                    <div class="social-icon">
-                                        <a href="#0">
-                                            <i class="fa-brands fa-x-twitter"></i>
-                                        </a>
-                                        <a href="#0">
-                                            <i class="fa-brands fa-instagram"></i>
-                                        </a>
-                                        <a href="#0">
-                                            <i class="fa-brands fa-dribbble"></i>
-                                        </a>
-                                        <a href="#0">
-                                            <i class="fa-brands fa-behance"></i>
-                                        </a>
+                                <div class="col-lg-4 d-flex justify-content-end sm-hide">
+                                    <div class="ml-auto ml-none">
+                                        <div class="social-icon">
+                                            <a href="#0">
+                                                <i class="fa-brands fa-x-twitter"></i>
+                                            </a>
+                                            <a href="#0">
+                                                <i class="fa-brands fa-instagram"></i>
+                                            </a>
+                                            <a href="#0">
+                                                <i class="fa-brands fa-dribbble"></i>
+                                            </a>
+                                            <a href="#0">
+                                                <i class="fa-brands fa-behance"></i>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
             </footer>
 
             <!-- ==================== End Footer ==================== -->
