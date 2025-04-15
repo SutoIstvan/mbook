@@ -46,7 +46,6 @@ return [
 
         'memorial' => [
             'driver' => 'local',
-            // 'root' => public_path('memorial'),
             'root' => storage_path('app/public/memorial'),
             'url' => env('APP_URL').'/memorial',
             'visibility' => 'public',
@@ -80,7 +79,7 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
-        public_path('memorial') => storage_path('app/public/memorial'),
+        // public_path('memorial') => storage_path('app/public/memorial'),
     ],
 
 ];

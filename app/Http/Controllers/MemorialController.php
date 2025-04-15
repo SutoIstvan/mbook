@@ -91,7 +91,7 @@ class MemorialController extends Controller
             'name' => 'required|string|min:3|max:255',
             'birth_date' => 'required|string|min:3|max:255',
             'death_date' => 'required|string|min:3|max:255',
-            'biography' => 'string|max:2255',
+            'biography' => 'required|string|min:3|max:2255',
             'photo' => 'required|image|mimes:jpeg,jpg,png',
             'crop_x' => 'nullable|numeric',
             'crop_y' => 'nullable|numeric',
@@ -139,7 +139,6 @@ class MemorialController extends Controller
         $memorial->slug = $slug;
         $memorial->birth_date = $request->birth_date;
         $memorial->death_date = $request->death_date;
-        // $memorial->coordinates = $request->coordinates ?? '';
         $memorial->biography = $request->biography;
         $memorial->birth_place = $request->birth_place;
         $memorial->grave_location = $request->grave_location;
@@ -182,7 +181,7 @@ class MemorialController extends Controller
         }
 
         // Генерируем и сохраняем QR-код
-        // $this->generateQRCode($token, $memorial);
+        $this->generateQRCode($token, $memorial);
 
         // Обновляем связь QR-кода с мемориалом
         $qrCode->update([
@@ -287,7 +286,7 @@ class MemorialController extends Controller
     
         do {
             // Генерируем случайное число для оставшихся 8 цифр (от 0 до 99999999)
-            $randomPart = str_pad(rand(1, 9999999), 7, '0', STR_PAD_LEFT);
+            $randomPart = str_pad(rand(1, 9999), 4, '0', STR_PAD_LEFT);
             
             // Собираем полный токен: 2513 + 8 случайных цифр
             $token = $prefix . $randomPart;
