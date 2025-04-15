@@ -4,7 +4,9 @@
 <style>
 .navbar {
     mix-blend-mode: difference !important;
-
+}
+.icon {
+    color: #fff;
 }
 </style>
 
@@ -18,7 +20,7 @@
                     {{-- <div class="card-header">{{ __('Login') }}</div> --}}
 
                     <div class="card-body">
-                        <div class="mt-100 text-center">
+                        <div class="mt-120 text-center">
                             <h5>{{ __('Register account') }}</h5>
                             <div>
 

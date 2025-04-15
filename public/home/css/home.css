@@ -157,13 +157,13 @@
       }
 
       .faqs-ds .accordion-item .accordion-header button:after {
-          background-image: url(../../assets/imgs/price/plus-solid.svg);
+          background-image: url(/home/imgs/price/plus-solid.svg);
           -webkit-filter: invert(1);
           filter: invert(1);
       }
 
       .faqs-ds .accordion-item .accordion-header button:not(.collapsed):after {
-          background-image: url(../../assets/imgs/price/minus-solid.svg);
+          background-image: url(/home/imgs/price/minus-solid.svg);
       }
 
       .faqs-ds .accordion-item .accordion-body {

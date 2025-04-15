@@ -121,7 +121,7 @@
             <h2>18</h2>
         </div> -->
         <div class="curve">
-            <img src="imgs/intro/Curve.svg" alt="">
+            <img src="home/imgs/intro/Curve.svg" alt="">
         </div>
     </section>
 

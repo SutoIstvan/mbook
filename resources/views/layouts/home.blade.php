@@ -18,7 +18,7 @@
     <title>@yield('title', 'Rememus.com')</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{ asset('home/imgs/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
@@ -35,7 +35,7 @@
     <!-- Core Style Css -->
     <link rel="stylesheet" href="{{ asset('common/css/common_style.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('home/css/home12-style.css') }}">
+    <link rel="stylesheet" href="{{ asset('home/css/home.css') }}">
 
     <!-- CSS -->
     <link rel="stylesheet"
@@ -95,8 +95,8 @@
         <div class="container">
 
             <!-- Logo -->
-            <a class="logo" href="#">
-                <img src="{{ asset('home/imgs/logo-mbook.png') }}" style="height: 19px;" alt="logo">
+            <a class="logo" href="{{ route('welcome') }}">
+                <img src="{{ asset('home/imgs/logo-mbook.png') }}" style="height: 16px;" alt="logo">
             </a>
 
             <!-- navbar links -->
