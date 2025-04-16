@@ -91,7 +91,10 @@
         <div class="container pt-50 pb-50">
             <div class="row">
                 <div class="col-lg-4 offset-lg-1 md-mb80">
-                    <div class="img fit-img">
+                    <div class="img fit-img d-none d-md-block">
+                        <img src="home/imgs/intro/1.jpg" alt="">
+                    </div>
+                    <div class="fit-img d-block d-md-none">
                         <img src="home/imgs/intro/1.jpg" alt="">
                     </div>
                 </div>
@@ -307,8 +310,11 @@
                 <!-- <h6 class="sub-title main-color mb-15">Our Blog</h6> -->
                 <h3 class="text-u">Hogyan működik</h3>
             </div>
-            
-            <div class="row xlg-marg">
+
+
+            {{-- <div class="row xlg-marg"> --}}
+
+            <div class="row">
                 <div class="col-lg-4 bord">
                     <div class="item md-mb50">
                         <div class="info d-flex align-items-center">
