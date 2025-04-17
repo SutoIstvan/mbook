@@ -85,7 +85,7 @@ class AdminController extends Controller
     $fileContent = "Generated QR Codes - " . now()->toDateTimeString() . "\n";
     $fileContent .= "Country: $country\n";
     $fileContent .= "Quantity: $quantity\n";
-    $fileContent .= "https://app.rememus.com/memorial/attach/\n";
+    $fileContent .= "https://rememus.com/memorial/attach/\n";
     $fileContent .= "------------------------\n";
 
     foreach ($usedTokens as $token) {
