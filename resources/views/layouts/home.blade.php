@@ -131,7 +131,7 @@
                             @auth
                                 <a class="nav-link" href="{{ route('dashboard') }}">Irányítópult</a>
                             @else
-                                <a class="nav-link" href="{{ route('login') }}">Bejelentkezés</a>
+                                <a class="nav-link" href="{{ route('dashboard') }}">Bejelentkezés</a>
                             @endauth
                         </li>
                     </ul>
