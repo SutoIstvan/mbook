@@ -31,6 +31,16 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
+        $referer = $request->headers->get('referer');
+
+        if ($referer && (
+            $referer == url('/') || 
+            // $referer == route('home') || 
+            $referer == url('/login')
+        )) {
+            return redirect()->route('dashboard');
+        }
+
         // Перенаправляем на предыдущую страницу или на /dashboard по умолчанию
         return redirect()->intended($this->redirectTo);
     }
