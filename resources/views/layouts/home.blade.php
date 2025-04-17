@@ -137,7 +137,7 @@
                     </ul>
                 </div>
 
-                <div class="menu-icon cursor-pointer ">
+                <div class="menu-icon cursor-pointer" style="    color: #ffffff !important;">
                     <span class="icon ti-align-right d-block d-lg-none"></span>
                 </div>
             </div>
