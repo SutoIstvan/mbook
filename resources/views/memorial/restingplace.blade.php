@@ -1,6 +1,7 @@
 @extends('layouts.memorial')
 
 @section('css')
+<script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google.maps_key') }}&libraries=places"></script>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet">
     <style>
@@ -923,37 +924,42 @@
 @endsection
 
 @section('js')
-<script
-  src="https://maps.googleapis.com/maps/api/js?
-       key={{ config('services.google.maps_key') }}
-       &libraries=places
-       &language=hu">
-</script>
+
+
 
 <script>
-    // Используем event listener для корректной загрузки API
-    google.maps.event.addDomListener(window, 'load', function() {
-        const input = document.getElementById('place-input');
-        if (!input) return;
-
-        const autocomplete = new google.maps.places.Autocomplete(input, {
-            types: ['establishment'],
-            componentRestrictions: { country: 'hu' }
-        });
-
-        autocomplete.addListener('place_changed', function() {
-            const place = autocomplete.getPlace();
+    document.addEventListener('DOMContentLoaded', function() {
+        // Инициализация Google Places Autocomplete
+        function initAutocomplete() {
+            const input = document.getElementById('autocomplete');
+            const options = {
+                types: ['geocode'] // Можно настроить типы результатов
+                // componentRestrictions: {country: 'ru'} // Опционально: ограничение по странам
+            };
             
-            if (!place.geometry) return;
-
-            // Получаем координаты места
-            const lat = place.geometry.location.lat();
-            const lng = place.geometry.location.lng();
-
-            // Записываем координаты в скрытые поля
-            document.getElementById('latitude').value = lat;
-            document.getElementById('longitude').value = lng;
-        });
+            const autocomplete = new google.maps.places.Autocomplete(input, options);
+            
+            // Слушатель события выбора места
+            autocomplete.addListener('place_changed', function() {
+                const place = autocomplete.getPlace();
+                
+                if (!place.geometry) {
+                    console.log("Выбранное место не содержит геометрической информации");
+                    return;
+                }
+                
+                // Заполнение скрытых полей данными о местоположении
+                document.getElementById('latitude').value = place.geometry.location.lat();
+                document.getElementById('longitude').value = place.geometry.location.lng();
+                document.getElementById('place_id').value = place.place_id;
+                
+                console.log('Выбрано место:', place.formatted_address);
+                console.log('Координаты:', place.geometry.location.lat(), place.geometry.location.lng());
+            });
+        }
+        
+        // Вызов функции инициализации
+        initAutocomplete();
     });
 </script>
 @endsection
