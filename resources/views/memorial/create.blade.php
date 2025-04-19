@@ -533,7 +533,7 @@
 
                                 <input type="text" id="grave_location" value="{{ old('grave_location') }}" class="form-control @error('grave_location') is-invalid @enderror" placeholder="Adja meg a hely nevét (pl. „Budapest Budafoki temető”)" name="grave_location">
                                 
-                                <input type="" name="grave_coordinates" id="grave_coordinates">
+                                <input type="hidden" name="grave_coordinates" id="grave_coordinates">
 
                                 @error('grave_location')
                                     <span class="invalid-feedback" role="alert">

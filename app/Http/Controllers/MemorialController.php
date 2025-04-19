@@ -99,7 +99,8 @@ class MemorialController extends Controller
             'crop_height' => 'nullable|numeric',
             'qrtoken' => 'nullable|string|min:3|max:255',
             'birth_place' => 'nullable|string|min:3|max:255',
-            'grave_location' => 'nullable|string|min:3|max:255'
+            'grave_location' => 'nullable|string|min:3|max:255',
+            'grave_coordinates' => 'nullable|string|max:255'
         ]);
 
         $admin_id = Auth::user()->id;
@@ -142,6 +143,7 @@ class MemorialController extends Controller
         $memorial->biography = $request->biography;
         $memorial->birth_place = $request->birth_place;
         $memorial->grave_location = $request->grave_location;
+        $memorial->grave_coordinates = $request->grave_coordinates;
         $memorial->qr_code = $token;
         $memorial->admin_id = $admin_id;
         $memorial->theme = 'dark';
