@@ -885,11 +885,11 @@
 
                             <div class="container mt-5">
                                 <div class="row">
-                                    <div class="col-md-12 offset-md-2">
+                                    <div class="col-md-12">
 
                                         <div class="form-group mt-3">
                                             <label for="autocomplete">Temető címe:</label>
-                                            <input type="text" id="autocomplete" class="form-control" placeholder="Введите название места (напр. 'кладбище пушкаша')" name="place">
+                                            <input type="text" id="autocomplete" class="form-control" placeholder="Adja meg a hely nevét (pl. „Budapest Budafoki temető”)" name="place">
                                         </div>
                                         
                                         <!-- Скрытые поля для хранения данных о местоположении -->
