@@ -506,7 +506,7 @@
                                     class="col-form-label text-md-end">{{ __('Születés helye') }}</label>
                                 <input id="birth_place" type="text"
                                     class="form-control @error('birth_place') is-invalid @enderror" name="birth_place"
-                                    value="{{ old('birth_place') }}">
+                                    value="{{ old('birth_place') }}" placeholder="Város">
                                 @error('birth_place')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
