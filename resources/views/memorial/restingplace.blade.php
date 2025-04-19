@@ -879,23 +879,24 @@
                             @csrf
                             <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
 
-                            <input type="hidden" name="latitude" id="latitude">
-                            <input type="hidden" name="longitude" id="longitude">
+                            {{-- <input type="hidden" name="latitude" id="latitude">
+                            <input type="hidden" name="longitude" id="longitude"> --}}
 
 
                             <div class="container mt-5">
                                 <div class="row">
                                     <div class="col-md-8 offset-md-2">
-                                        <h2>Выбор местоположения</h2>
+                                        <h2>Поиск места</h2>
                                         <div class="form-group mt-3">
-                                            <label for="autocomplete">Адрес:</label>
-                                            <input type="text" id="autocomplete" class="form-control" placeholder="Введите адрес" name="address">
+                                            <label for="autocomplete">Место (например, кладбище):</label>
+                                            <input type="text" id="autocomplete" class="form-control" placeholder="Введите название места" name="place">
                                         </div>
                                         
                                         <!-- Скрытые поля для хранения дополнительных данных о местоположении -->
-                                        <input type="hidden" id="latitude" name="latitude">
-                                        <input type="hidden" id="longitude" name="longitude">
-                                        <input type="hidden" id="place_id" name="place_id">
+                                        <input  id="latitude" name="latitude">
+                                        <input  id="longitude" name="longitude">
+                                        <input  id="place_id" name="place_id">
+                                        <input  id="place_type" name="place_type">
                                     </div>
                                 </div>
                             </div>
@@ -947,8 +948,11 @@
         function initAutocomplete() {
             const input = document.getElementById('autocomplete');
             const options = {
-                types: ['geocode'] // Можно настроить типы результатов
-                // componentRestrictions: {country: 'ru'} // Опционально: ограничение по странам
+                // Используем ['establishment'] для поиска мест, или можно использовать ['cemetery'] 
+                // для ограничения только кладбищами, но это может быть слишком ограничивающим
+                types: ['establishment', 'point_of_interest'], 
+                // Можно убрать ограничение по странам или оставить для более точных результатов
+                // componentRestrictions: {country: 'ru'} 
             };
             
             const autocomplete = new google.maps.places.Autocomplete(input, options);
@@ -967,7 +971,13 @@
                 document.getElementById('longitude').value = place.geometry.location.lng();
                 document.getElementById('place_id').value = place.place_id;
                 
-                console.log('Выбрано место:', place.formatted_address);
+                // Сохраняем типы места
+                if (place.types && place.types.length > 0) {
+                    document.getElementById('place_type').value = place.types.join(',');
+                }
+                
+                console.log('Выбрано место:', place.name, place.formatted_address);
+                console.log('Типы места:', place.types);
                 console.log('Координаты:', place.geometry.location.lat(), place.geometry.location.lng());
             });
         }
