@@ -883,8 +883,22 @@
                             <input type="hidden" name="longitude" id="longitude">
 
 
-                            <input id="place-input" name="place_name" type="text" class="form-control" placeholder="Írja be a hely nevét">
-
+                            <div class="container mt-5">
+                                <div class="row">
+                                    <div class="col-md-8 offset-md-2">
+                                        <h2>Выбор местоположения</h2>
+                                        <div class="form-group mt-3">
+                                            <label for="autocomplete">Адрес:</label>
+                                            <input type="text" id="autocomplete" class="form-control" placeholder="Введите адрес" name="address">
+                                        </div>
+                                        
+                                        <!-- Скрытые поля для хранения дополнительных данных о местоположении -->
+                                        <input type="hidden" id="latitude" name="latitude">
+                                        <input type="hidden" id="longitude" name="longitude">
+                                        <input type="hidden" id="place_id" name="place_id">
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="mb-3">
                                 <label for="grave_location" class="form-label">Temető címe</label>
