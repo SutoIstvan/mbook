@@ -885,10 +885,10 @@
 
                             <div class="container mt-5">
                                 <div class="row">
-                                    <div class="col-md-8 offset-md-2">
-                                        <h2>Поиск мест</h2>
+                                    <div class="col-md-12 offset-md-2">
+
                                         <div class="form-group mt-3">
-                                            <label for="autocomplete">Найти место (например, кладбище):</label>
+                                            <label for="autocomplete">Temető címe:</label>
                                             <input type="text" id="autocomplete" class="form-control" placeholder="Введите название места (напр. 'кладбище пушкаша')" name="place">
                                         </div>
                                         
@@ -900,7 +900,7 @@
                                         
                                         <!-- Добавляем дополнительный div для советов -->
                                         <div class="mt-2 text-muted small">
-                                            Совет: для поиска кладбища, начните ввод с названия "кладбище" и добавьте его название
+                                            Tipp: Egy temető kereséséhez kezdje el beírni a „temető” szót, és adja hozzá a nevét.
                                         </div>
                                     </div>
                                 </div>
