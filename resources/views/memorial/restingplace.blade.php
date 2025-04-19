@@ -892,12 +892,6 @@
                                             <input type="text" id="autocomplete" class="form-control" placeholder="Adja meg a hely nevét (pl. „Budapest Budafoki temető”)" name="place">
                                         </div>
                                         
-                                        <!-- Скрытые поля для хранения данных о местоположении -->
-                                        <input type="" id="latitude" name="latitude">
-                                        <input type="" id="longitude" name="longitude">
-                                        <input type="" id="place_id" name="place_id">
-                                        <input type="" id="place_type" name="place_type">
-                                        
                                         <!-- Добавляем дополнительный div для советов -->
                                         <div class="mt-2 text-muted small">
                                             Tipp: Egy temető kereséséhez kezdje el beírni a „temető” szót, és adja hozzá a nevét.
@@ -912,20 +906,20 @@
                                     placeholder="Pl. Kossuth Lajos utca 1, Budapest" value="{{ $memorial->grave_location }}" required>
                             </div>
 
-                            <div class="mb-3">
-                                <label for="grave_parcel" class="form-label">Temető címe</label>
+                            <div class="mb-3 col-12 col-md-4">
+                                <label for="grave_parcel" class="form-label">Parcella</label>
                                 <input type="text" class="form-control" id="grave_parcel" name="grave_parcel"
-                                    placeholder="Pl. Kossuth Lajos utca 1, Budapest" value="{{ $memorial->grave_parcel }}" required>
+                                    placeholder="Parcella" value="{{ $memorial->grave_parcel }}" required>
                             </div>
-                            <div class="mb-3">
-                                <label for="grave_line" class="form-label">Temető címe</label>
+                            <div class="mb-3 col-12 col-md-4">
+                                <label for="grave_line" class="form-label">Sor</label>
                                 <input type="text" class="form-control" id="grave_line" name="grave_line"
-                                    placeholder="Pl. Kossuth Lajos utca 1, Budapest" value="{{ $memorial->grave_line }}" required>
+                                    placeholder="Sor" value="{{ $memorial->grave_line }}" required>
                             </div>
-                            <div class="mb-3">
-                                <label for="grave_number" class="form-label">Temető címe</label>
+                            <div class="mb-3 col-12 col-md-4">
+                                <label for="grave_number" class="form-label">Sorszám</label>
                                 <input type="text" class="form-control" id="grave_number" name="grave_number"
-                                    placeholder="Pl. Kossuth Lajos utca 1, Budapest" value="{{ $memorial->grave_number }}" required>
+                                    placeholder="Sorszám" value="{{ $memorial->grave_number }}" required>
                             </div>
 
                             <div class="row">
@@ -989,28 +983,18 @@
             const place = autocomplete.getPlace();
             
             if (!place.geometry) {
-                console.log("Выбранное место не содержит геометрической информации");
+                console.log("The selected location does not contain geometric information");
                 return;
             }
             
-            // Заполнение скрытых полей
-            document.getElementById('latitude').value = place.geometry.location.lat();
-            document.getElementById('longitude').value = place.geometry.location.lng();
-            document.getElementById('place_id').value = place.place_id;
-            
             // Сохраняем типы места
-            if (place.types && place.types.length > 0) {
-                document.getElementById('place_type').value = place.types.join(',');
-            }
-            
-            console.log('Выбрано место:', place.name, place.formatted_address);
-            console.log('Типы места:', place.types);
-            console.log('Координаты:', place.geometry.location.lat(), place.geometry.location.lng());
+
+
         });
         
         // Добавляем обработчик для фокуса, чтобы подсказать пользователю
         input.addEventListener('focus', function() {
-            if (!this.value.toLowerCase().includes('кладбище')) {
+            if (!this.value.toLowerCase().includes('cementry')) {
                 // Можно оставить поле пустым или предложить подсказку
                 // this.value = 'кладбище ';
             }
