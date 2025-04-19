@@ -67,11 +67,14 @@ class LinkController extends Controller
 
     public function storeplace(Request $request)
     {
-        dd($request);
+        // dd($request);
         $validated = $request->validate([
             'memorial_id' => 'required|exists:memorials,id',
             'grave_location' => 'nullable|string|max:1000',
             'coordinates' => 'nullable|string|max:1000',
+            'grave_parcel' => 'nullable|string|max:1000',
+            'grave_line' => 'nullable|string|max:1000',
+            'grave_number' => 'nullable|string|max:1000',
         ]);
 
 
@@ -81,6 +84,9 @@ class LinkController extends Controller
         // Обновляем запись
         $memorial->update([
             'grave_location' => $validated['grave_location'],
+            'grave_parcel' => $validated['grave_parcel'],
+            'grave_line' => $validated['grave_line'],
+            'grave_number' => $validated['grave_number'],
             'coordinates' => $validated['coordinates'],
         ]);
 
