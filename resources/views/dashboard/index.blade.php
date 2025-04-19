@@ -1,4 +1,4 @@
-@extends('layouts.memorial')
+@extends('layouts.home')
 
 @section('css')
 
@@ -8,55 +8,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.0/dropzone.js"></script>
 
     <style>
-        /*
-                        @import url('https://fonts.googleapis.com/css?family=Ubuntu:400,400i,700,700i');
+        body {
+            background-color: #f7f7f7 !important;
+        }
 
+        .butn.butn-bord {
+            border: 1px solid rgba(0, 0, 0, 0.3);
+        }
 
-                        *,
-                        *:before,
-                        *:after {
-                          margin: 0;
-                          padding: 0;
-                          word-break: break-all;
-                          box-sizing: border-box;
-                          scroll-behavior: smooth;
-                        } */
+        .butn.butn-bord:hover {
+            background: var(--bg-color);
+            color: #000000;
+        }
 
-        /* html {
-                          font-size: 10px;
-                        } */
+        .navbar {
+            mix-blend-mode: difference !important;
+        }
 
-        /* body {
-                          font-family: 'Ubuntu', sans-serif;
-                          color: #6e6e6e;
-                          font-size: 1.6rem;
-                          background: black;
-                        } */
-
-        /* header,
-                        footer {
-                          display: block;
-                        }
-
-                        a,
-                        a:link,
-                        a:visited {
-                          text-decoration: none;
-                        }
-
-                        img {
-                          border: 0;
-                        }
-
-                        ul {
-                          list-style: none;
-                        } */
-
-        /* .center {
-                          width: 1170px;
-                          margin: 20px auto 0;
-                        } */
-
+        .icon {
+            color: #fff;
+        }
 
         :before,
         :after {
@@ -248,51 +219,33 @@
         }
 
         /* .btn {
-                    margin: 30px 15px;
-                    background: #7ce3ff;
-                    padding: 10px 25px;
-                    border-radius: 3px;
-                    border: 1px solid #7ce3ff;
-                    font-weight: bold;
-                    font-family: Montserrat;
-                    cursor: pointer;
-                    color: #222;
-                    transition: 0.2s;
-                } */
+                        margin: 30px 15px;
+                        background: #7ce3ff;
+                        padding: 10px 25px;
+                        border-radius: 3px;
+                        border: 1px solid #7ce3ff;
+                        font-weight: bold;
+                        font-family: Montserrat;
+                        cursor: pointer;
+                        color: #222;
+                        transition: 0.2s;
+                    } */
 
         /* .btn:last-of-type {
-                    background: transparent;
-                    border-color: #7ce3ff;
-                    color: #7ce3ff;
-                }
+                        background: transparent;
+                        border-color: #7ce3ff;
+                        color: #7ce3ff;
+                    }
 
-                .btn:hover {
-                    background: #7ce3ff;
-                    color: #222;
-                } */
+                    .btn:hover {
+                        background: #7ce3ff;
+                        color: #222;
+                    } */
 
-        /* .icons {
-                    width: 180px;
-                    margin: 0 auto 10px;
-                    display: flex;
-                    justify-content: space-between;
-                    gap: 15px;
-                }
-
-                .icons i {
-                    cursor: pointer;
-                    padding: 5px;
-                    font-size: 18px;
-                    transition: 0.2s;
-                }
-
-                .icons i:hover {
-                    color: #7ce3ff;
-                } */
 
         .pricing-pg .item {
             padding: 45px;
-            background: #ffffff8c;
+            background: #e8e8e8;;
             border-radius: 14px;
         }
 
@@ -353,7 +306,7 @@
                                     <div class="d-flex align-items-center">
                                         <span>Szerkesztes</span>
                                         <span class="icon ms-2">
-                                            <i class="fa-solid fa-pen"></i>
+                                            <i class="fa-solid fa-pen text-secondary"></i>
                                         </span>
                                     </div>
                                 </a>
@@ -361,7 +314,7 @@
                                     class="butn butn-md butn-bord butn-rounded mt-30 mb-10">
                                     <div class="d-flex align-items-center">
                                         <span class="icon">
-                                            <i class="fa-solid fa-up-right-from-square"></i>
+                                            <i class="fa-solid fa-up-right-from-square text-secondary"></i>
                                         </span>
                                     </div>
                                 </a>
@@ -386,7 +339,7 @@
                 @if ($memorials->isEmpty())
                     <div class="d-flex justify-content-center">
                         <div class="col-lg-4 mb-30">
-                            <div class="item md-mb50" >
+                            <div class="item md-mb50">
                                 <div class="head text-center">
                                     <div class="img img-fit">
                                         <img src="{{ asset('logo-add.png') }}" class="img img-fit">
@@ -394,9 +347,13 @@
                                 </div>
 
                                 <div class="text-center mt-70">
-                                    <a href="{{ route('memorial.create') }}" class="butn butn-md butn-bord butn-rounded mt-30 mb-10">
+                                    <a href="{{ route('memorial.create') }}"
+                                        class="butn butn-md butn-bord butn-rounded mt-30 mb-10">
                                         <div class="d-flex align-items-center">
                                             <span>Új emlékoldal vásárlása</span>
+                                            <span class="icon ms-2">
+                                                <i class="fa-solid fa-basket-shopping text-secondary"></i>
+                                            </span>
                                         </div>
                                     </a>
                                 </div>
@@ -405,7 +362,7 @@
                     </div>
                 @else
                     <div class="col-lg-4 mb-30">
-                        <div class="item md-mb50" >
+                        <div class="item md-mb50">
                             <div class="head text-center">
                                 <div class="img img-fit">
                                     <img src="{{ asset('logo-add.png') }}" class="img img-fit">
@@ -414,9 +371,13 @@
 
                             <div class="text-center mt-70">
 
-                                <a href="{{ route('memorial.create') }}" class="butn butn-md butn-bord butn-rounded mt-30 mb-10">
+                                <a href="{{ route('memorial.create') }}"
+                                    class="butn butn-md butn-bord butn-rounded mt-30 mb-10">
                                     <div class="d-flex align-items-center">
                                         <span>Új emlékoldal vásárlása</span>
+                                        <span class="icon ms-2">
+                                            <i class="fa-solid fa-basket-shopping text-secondary"></i>
+                                        </span>
                                     </div>
                                 </a>
                             </div>
@@ -439,4 +400,3 @@
 @section('js')
 
 @endsection
-

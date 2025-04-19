@@ -1,6 +1,6 @@
 @extends('layouts.home')
 
-@section('title', 'rememus.com')
+@section('title', 'Címlap - rememus.com')
 
 @section('css')
 

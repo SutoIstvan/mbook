@@ -96,7 +96,7 @@
 
             <!-- Logo -->
             <a class="logo" href="{{ route('welcome') }}">
-                <img src="{{ asset('home/imgs/logo-mbook.png') }}" style="height: 16px;" alt="logo">
+                <img src="{{ asset('home/imgs/logo-rememus.png') }}" style="height: 16px;" alt="logo">
             </a>
 
             <!-- navbar links -->
@@ -151,21 +151,21 @@
                 <ul class="main-menu rest">
                     <li>
                         <div class="o-hidden">
-                            <a href="#" class="link"><span class="fill-text" data-text="Címlap">Címlap</span>
+                            <a href="{{ route('welcome') }}" class="link"><span class="fill-text" data-text="Címlap">Címlap</span>
                             </a>
                         </div>
                     </li>
 
                     <li>
                         <div class="o-hidden">
-                            <a href="#" class="link"><span class="fill-text" data-text="Árak">Árak</span>
+                            <a href="{{ route('price') }}" class="link"><span class="fill-text" data-text="Árak">Árak</span>
                             </a>
                         </div>
                     </li>
 
                     <li>
                         <div class="o-hidden">
-                            <a href="#" class="link"><span class="fill-text"
+                            <a href="{{ route('contact') }}" class="link"><span class="fill-text"
                                     data-text="Kapcsolatok">Kapcsolatok</span>
                             </a>
                         </div>
@@ -173,7 +173,7 @@
 
                     <li>
                         <div class="o-hidden">
-                            <a href="#" class="link"><span class="fill-text"
+                            <a href="{{ route('dashboard') }}" class="link"><span class="fill-text"
                                     data-text="Bejelentkezés">Bejelentkezés</span>
                             </a>
                         </div>
@@ -183,7 +183,7 @@
             <div class="cont-info valign">
                 <div class="text-center full-width">
                     <div class="logo">
-                        <img src="../common/imgs/Logo-light.svg" alt="">
+                        <img src="{{ asset('home/imgs/logo-rememus.png') }}" alt="">
                     </div>
                     <div class="social-icon mt-40">
                         <a href="#"> <i class="fab fa-facebook-f"></i> </a>

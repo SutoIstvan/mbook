@@ -1,10 +1,19 @@
-@extends('layouts.memorial')
+@extends('layouts.home')
 
 @section('css')
-    <script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google.maps_key') }}&libraries=places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google.maps_key') }}&libraries=places">
+    </script>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet">
     <style>
+        .navbar {
+            mix-blend-mode: difference !important;
+        }
+
+        .icon {
+            color: #fff;
+        }
+
         .cropper-modal {
             background-color: rgb(0, 0, 0) !important;
             opacity: 1 !important;
@@ -531,8 +540,11 @@
                                 <label for="grave_location"
                                     class="col-form-label text-md-end">{{ __('Elhalálozás helye') }}</label>
 
-                                <input type="text" id="grave_location" value="{{ old('grave_location') }}" class="form-control @error('grave_location') is-invalid @enderror" placeholder="Adja meg a hely nevét (pl. „Budapest Budafoki temető”)" name="grave_location">
-                                
+                                <input type="text" id="grave_location" value="{{ old('grave_location') }}"
+                                    class="form-control @error('grave_location') is-invalid @enderror"
+                                    placeholder="Adja meg a hely nevét (pl. „Budapest Budafoki temető”)"
+                                    name="grave_location">
+
                                 <input type="hidden" name="grave_coordinates" id="grave_coordinates">
 
                                 @error('grave_location')
@@ -548,7 +560,8 @@
                         <div class="text-end pb-8 mt-8">
 
 
-                            <button type="submit" name="action" value="add_details" id="additionalDetails" class="butn butn-md butn-bord butn-rounded">
+                            <button type="submit" name="action" value="add_details" id="additionalDetails"
+                                class="butn butn-md butn-bord butn-rounded">
                                 <span class="text">
                                     {{ __('Add Additional Details') }}
                                 </span>
@@ -805,64 +818,63 @@
             }
         });
 
-    function initMap() {
-        initAutocomplete();
-    }
-    
-    // Инициализация автозаполнения мест
-    function initAutocomplete() {
-        const input = document.getElementById('grave_location');
-        
-        // Используем только один тип для предотвращения ошибки "establishment cannot be mixed with other types"
-        // 'establishment' подходит для разных учреждений и мест, включая кладбища
-        const options = {
-            types: ['establishment'], 
-            language: 'hu',
-            // Можно добавить ограничение по стране, если нужно
-            // componentRestrictions: {country: 'ru'}
-        };
-        
-        // Создаем экземпляр Autocomplete
-        const autocomplete = new google.maps.places.Autocomplete(input, options);
-        
-        // Слушатель события выбора места
-        autocomplete.addListener('place_changed', function() {
-            const place = autocomplete.getPlace();
-            
-            if (!place.geometry) {
-                console.log("The selected location does not contain geometric information");
-                return;
-            }
-            
+        function initMap() {
+            initAutocomplete();
+        }
+
+        // Инициализация автозаполнения мест
+        function initAutocomplete() {
+            const input = document.getElementById('grave_location');
+
+            // Используем только один тип для предотвращения ошибки "establishment cannot be mixed with other types"
+            // 'establishment' подходит для разных учреждений и мест, включая кладбища
+            const options = {
+                types: ['establishment'],
+                language: 'hu',
+                // Можно добавить ограничение по стране, если нужно
+                // componentRestrictions: {country: 'ru'}
+            };
+
+            // Создаем экземпляр Autocomplete
+            const autocomplete = new google.maps.places.Autocomplete(input, options);
+
+            // Слушатель события выбора места
+            autocomplete.addListener('place_changed', function() {
+                const place = autocomplete.getPlace();
+
+                if (!place.geometry) {
+                    console.log("The selected location does not contain geometric information");
+                    return;
+                }
+
                 // Получаем координаты
-            const lat = place.geometry.location.lat();
-            const lng = place.geometry.location.lng();
-            
-            // Форматируем координаты как строку "широта, долгота" и вставляем в скрытое поле
-            document.getElementById('grave_coordinates').value = `${lat}, ${lng}`;
-            
-            // Также можно сохранить отдельно latitude и longitude, если нужно
-            document.getElementById('latitude').value = lat;
-            document.getElementById('longitude').value = lng;
-            // Сохраняем типы места
+                const lat = place.geometry.location.lat();
+                const lng = place.geometry.location.lng();
+
+                // Форматируем координаты как строку "широта, долгота" и вставляем в скрытое поле
+                document.getElementById('grave_coordinates').value = `${lat}, ${lng}`;
+
+                // Также можно сохранить отдельно latitude и longitude, если нужно
+                document.getElementById('latitude').value = lat;
+                document.getElementById('longitude').value = lng;
+                // Сохраняем типы места
 
 
-        });
-        
-        // Добавляем обработчик для фокуса, чтобы подсказать пользователю
-        input.addEventListener('focus', function() {
-            if (!this.value.toLowerCase().includes('cementry')) {
-                // Можно оставить поле пустым или предложить подсказку
-                // this.value = 'кладбище ';
-            }
-        });
-    }
-    
-    // Если API загружен до того, как DOM будет готов, мы обрабатываем это
-    if (window.google && window.google.maps) {
-        document.addEventListener('DOMContentLoaded', initMap);
-    }
+            });
 
+            // Добавляем обработчик для фокуса, чтобы подсказать пользователю
+            input.addEventListener('focus', function() {
+                if (!this.value.toLowerCase().includes('cementry')) {
+                    // Можно оставить поле пустым или предложить подсказку
+                    // this.value = 'кладбище ';
+                }
+            });
+        }
+
+        // Если API загружен до того, как DOM будет готов, мы обрабатываем это
+        if (window.google && window.google.maps) {
+            document.addEventListener('DOMContentLoaded', initMap);
+        }
     </script>
 
 @endsection
