@@ -27,6 +27,10 @@ class Memorial extends Model
         'qr_code',
         'birth_place',
         'grave_location',
+        'grave_coordinates',
+        'grave_parcel',
+        'grave_line',
+        'grave_number',
         'virtual_code',
         'admin_id'
     ];

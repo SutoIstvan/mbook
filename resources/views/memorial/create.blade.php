@@ -533,6 +533,8 @@
 
                                 <input type="text" id="grave_location" value="{{ old('grave_location') }}" class="form-control @error('grave_location') is-invalid @enderror" placeholder="Adja meg a hely nevét (pl. „Budapest Budafoki temető”)" name="grave_location">
                                 
+                                <input type="" name="grave_coordinates" id="grave_coordinates">
+
                                 @error('grave_location')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -832,6 +834,16 @@
                 return;
             }
             
+                // Получаем координаты
+            const lat = place.geometry.location.lat();
+            const lng = place.geometry.location.lng();
+            
+            // Форматируем координаты как строку "широта, долгота" и вставляем в скрытое поле
+            document.getElementById('grave_coordinates').value = `${lat}, ${lng}`;
+            
+            // Также можно сохранить отдельно latitude и longitude, если нужно
+            document.getElementById('latitude').value = lat;
+            document.getElementById('longitude').value = lng;
             // Сохраняем типы места
 
 

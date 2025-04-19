@@ -28,6 +28,10 @@ return new class extends Migration
             $table->text('gift')->nullable();
             $table->string('birth_place')->nullable();
             $table->string('grave_location')->nullable();
+            $table->string('grave_parcel')->nullable();
+            $table->string('grave_line')->nullable();
+            $table->string('grave_number')->nullable();
+            $table->string('grave_coordinates')->nullable();
             $table->string('qr_code')->unique();
             $table->string('virtual_code')->nullable()->unique();
             $table->foreignId('admin_id')->constrained('users');

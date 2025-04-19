@@ -880,10 +880,10 @@
                             <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
 
                             {{-- <input type="hidden" name="latitude" id="latitude">
-                            <input type="hidden" name="longitude" id="longitude"> --}}
+                            <input type="hidden" name="grave_coordinates" id="grave_coordinates"> --}}
 
 
-                            <div class="container mt-5">
+                            {{-- <div class="container mt-5">
                                 <div class="row">
                                     <div class="col-md-12">
 
@@ -898,7 +898,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="mb-3">
                                 <label for="grave_location" class="form-label">Temető címe</label>
