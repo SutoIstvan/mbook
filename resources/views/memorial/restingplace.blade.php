@@ -886,17 +886,22 @@
                             <div class="container mt-5">
                                 <div class="row">
                                     <div class="col-md-8 offset-md-2">
-                                        <h2>Поиск места</h2>
+                                        <h2>Поиск мест</h2>
                                         <div class="form-group mt-3">
-                                            <label for="autocomplete">Место (например, кладбище):</label>
-                                            <input type="text" id="autocomplete" class="form-control" placeholder="Введите название места" name="place">
+                                            <label for="autocomplete">Найти место (например, кладбище):</label>
+                                            <input type="text" id="autocomplete" class="form-control" placeholder="Введите название места (напр. 'кладбище пушкаша')" name="place">
                                         </div>
                                         
-                                        <!-- Скрытые поля для хранения дополнительных данных о местоположении -->
-                                        <input  id="latitude" name="latitude">
-                                        <input  id="longitude" name="longitude">
-                                        <input  id="place_id" name="place_id">
-                                        <input  id="place_type" name="place_type">
+                                        <!-- Скрытые поля для хранения данных о местоположении -->
+                                        <input type="" id="latitude" name="latitude">
+                                        <input type="" id="longitude" name="longitude">
+                                        <input type="" id="place_id" name="place_id">
+                                        <input type="" id="place_type" name="place_type">
+                                        
+                                        <!-- Добавляем дополнительный div для советов -->
+                                        <div class="mt-2 text-muted small">
+                                            Совет: для поиска кладбища, начните ввод с названия "кладбище" и добавьте его название
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -940,52 +945,66 @@
 
 @section('js')
 
-
-
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Инициализация Google Places Autocomplete
-        function initAutocomplete() {
-            const input = document.getElementById('autocomplete');
-            const options = {
-                // Используем ['establishment'] для поиска мест, или можно использовать ['cemetery'] 
-                // для ограничения только кладбищами, но это может быть слишком ограничивающим
-                types: ['establishment', 'point_of_interest'], 
-                // Можно убрать ограничение по странам или оставить для более точных результатов
-                // componentRestrictions: {country: 'ru'} 
-            };
-            
-            const autocomplete = new google.maps.places.Autocomplete(input, options);
-            
-            // Слушатель события выбора места
-            autocomplete.addListener('place_changed', function() {
-                const place = autocomplete.getPlace();
-                
-                if (!place.geometry) {
-                    console.log("Выбранное место не содержит геометрической информации");
-                    return;
-                }
-                
-                // Заполнение скрытых полей данными о местоположении
-                document.getElementById('latitude').value = place.geometry.location.lat();
-                document.getElementById('longitude').value = place.geometry.location.lng();
-                document.getElementById('place_id').value = place.place_id;
-                
-                // Сохраняем типы места
-                if (place.types && place.types.length > 0) {
-                    document.getElementById('place_type').value = place.types.join(',');
-                }
-                
-                console.log('Выбрано место:', place.name, place.formatted_address);
-                console.log('Типы места:', place.types);
-                console.log('Координаты:', place.geometry.location.lat(), place.geometry.location.lng());
-            });
-        }
-        
-        // Вызов функции инициализации
+    // Глобальная функция, которая будет вызвана после загрузки API
+    function initMap() {
         initAutocomplete();
-    });
+    }
+    
+    // Инициализация автозаполнения мест
+    function initAutocomplete() {
+        const input = document.getElementById('autocomplete');
+        
+        // Используем только один тип для предотвращения ошибки "establishment cannot be mixed with other types"
+        // 'establishment' подходит для разных учреждений и мест, включая кладбища
+        const options = {
+            types: ['establishment'], 
+            // Можно добавить ограничение по стране, если нужно
+            // componentRestrictions: {country: 'ru'}
+        };
+        
+        // Создаем экземпляр Autocomplete
+        const autocomplete = new google.maps.places.Autocomplete(input, options);
+        
+        // Слушатель события выбора места
+        autocomplete.addListener('place_changed', function() {
+            const place = autocomplete.getPlace();
+            
+            if (!place.geometry) {
+                console.log("Выбранное место не содержит геометрической информации");
+                return;
+            }
+            
+            // Заполнение скрытых полей
+            document.getElementById('latitude').value = place.geometry.location.lat();
+            document.getElementById('longitude').value = place.geometry.location.lng();
+            document.getElementById('place_id').value = place.place_id;
+            
+            // Сохраняем типы места
+            if (place.types && place.types.length > 0) {
+                document.getElementById('place_type').value = place.types.join(',');
+            }
+            
+            console.log('Выбрано место:', place.name, place.formatted_address);
+            console.log('Типы места:', place.types);
+            console.log('Координаты:', place.geometry.location.lat(), place.geometry.location.lng());
+        });
+        
+        // Добавляем обработчик для фокуса, чтобы подсказать пользователю
+        input.addEventListener('focus', function() {
+            if (!this.value.toLowerCase().includes('кладбище')) {
+                // Можно оставить поле пустым или предложить подсказку
+                // this.value = 'кладбище ';
+            }
+        });
+    }
+    
+    // Если API загружен до того, как DOM будет готов, мы обрабатываем это
+    if (window.google && window.google.maps) {
+        document.addEventListener('DOMContentLoaded', initMap);
+    }
 </script>
+
 @endsection
 
 
