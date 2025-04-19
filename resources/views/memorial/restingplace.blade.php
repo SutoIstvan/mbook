@@ -922,13 +922,13 @@
     </div>
 @endsection
 
+@section('js')
 <script
   src="https://maps.googleapis.com/maps/api/js?
-       key={{ env('GOOGLE_MAPS_API_KEY') }}
+       key={{ config('services.google.maps_key') }}
        &libraries=places
        &language=hu">
 </script>
-
 
 <script>
     // Используем event listener для корректной загрузки API
@@ -956,5 +956,7 @@
         });
     });
 </script>
+@endsection
+
 
 
