@@ -1,6 +1,7 @@
 @extends('layouts.memorial')
 
 @section('css')
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google.maps_key') }}&libraries=places"></script>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet">
     <style>
@@ -529,9 +530,9 @@
                             <div class="col-12 col-md-6 mb-3">
                                 <label for="grave_location"
                                     class="col-form-label text-md-end">{{ __('Elhalálozás helye') }}</label>
-                                <input id="grave_location" type="text"
-                                    class="form-control @error('grave_location') is-invalid @enderror" name="grave_location"
-                                    value="{{ old('grave_location') }}">
+
+                                <input type="text" id="grave_location" value="{{ old('grave_location') }}" class="form-control @error('grave_location') is-invalid @enderror" placeholder="Adja meg a hely nevét (pl. „Budapest Budafoki temető”)" name="grave_location">
+                                
                                 @error('grave_location')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -801,6 +802,55 @@
                 console.error("Один из элементов (submitBtn, btnIcon, btnSpinner) не найден");
             }
         });
+
+    function initMap() {
+        initAutocomplete();
+    }
+    
+    // Инициализация автозаполнения мест
+    function initAutocomplete() {
+        const input = document.getElementById('grave_location');
+        
+        // Используем только один тип для предотвращения ошибки "establishment cannot be mixed with other types"
+        // 'establishment' подходит для разных учреждений и мест, включая кладбища
+        const options = {
+            types: ['establishment'], 
+            language: 'hu',
+            // Можно добавить ограничение по стране, если нужно
+            // componentRestrictions: {country: 'ru'}
+        };
+        
+        // Создаем экземпляр Autocomplete
+        const autocomplete = new google.maps.places.Autocomplete(input, options);
+        
+        // Слушатель события выбора места
+        autocomplete.addListener('place_changed', function() {
+            const place = autocomplete.getPlace();
+            
+            if (!place.geometry) {
+                console.log("The selected location does not contain geometric information");
+                return;
+            }
+            
+            // Сохраняем типы места
+
+
+        });
+        
+        // Добавляем обработчик для фокуса, чтобы подсказать пользователю
+        input.addEventListener('focus', function() {
+            if (!this.value.toLowerCase().includes('cementry')) {
+                // Можно оставить поле пустым или предложить подсказку
+                // this.value = 'кладбище ';
+            }
+        });
+    }
+    
+    // Если API загружен до того, как DOM будет готов, мы обрабатываем это
+    if (window.google && window.google.maps) {
+        document.addEventListener('DOMContentLoaded', initMap);
+    }
+
     </script>
 
 @endsection
