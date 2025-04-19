@@ -976,7 +976,7 @@
         // 'establishment' подходит для разных учреждений и мест, включая кладбища
         const options = {
             types: ['establishment'], 
-            language: '{{ $locale }}',
+            language: '{{ app()->getLocale() }}',
             // Можно добавить ограничение по стране, если нужно
             // componentRestrictions: {country: 'ru'}
         };
