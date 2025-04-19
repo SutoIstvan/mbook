@@ -206,8 +206,8 @@ class MemorialController extends Controller
             // return redirect()->back()->with('error', "QR Code with token {$qrtoken} not found");
         }
         
-        // Генерируем и сохраняем QR-код
-        $this->generateQRCode($token, $memorial);
+        // Генерируем и сохраняем QR-код удалить коммент перед пушом на github не будет генерировать картинку qr code
+         $this->generateQRCode($token, $memorial);
 
         if ($request->input('action') === 'add_details') {
             // Перенаправление на другую страницу для ввода дополнительных данных

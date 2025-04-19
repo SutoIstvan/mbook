@@ -67,6 +67,7 @@ class LinkController extends Controller
 
     public function storeplace(Request $request)
     {
+        dd($request);
         $validated = $request->validate([
             'memorial_id' => 'required|exists:memorials,id',
             'grave_location' => 'nullable|string|max:1000',

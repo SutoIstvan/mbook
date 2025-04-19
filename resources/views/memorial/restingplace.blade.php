@@ -878,6 +878,13 @@
                             @csrf
                             <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
 
+                            <input type="hidden" name="latitude" id="latitude">
+                            <input type="hidden" name="longitude" id="longitude">
+
+
+                            <input id="place-input" name="place_name" type="text" class="form-control" placeholder="Írja be a hely nevét">
+
+
                             <div class="mb-3">
                                 <label for="grave_location" class="form-label">Temető címe</label>
                                 <input type="text" class="form-control" id="grave_location" name="grave_location"
@@ -915,6 +922,38 @@
     </div>
 @endsection
 
-@section('js')
+<script
+  src="https://maps.googleapis.com/maps/api/js?
+       key={{ config('services.google.maps_key') }}
+       &libraries=places
+       &language=hu">
+</script>
 
-@endsection
+<script>
+    // Используем event listener для корректной загрузки API
+    google.maps.event.addDomListener(window, 'load', function() {
+        const input = document.getElementById('place-input');
+        if (!input) return;
+
+        const autocomplete = new google.maps.places.Autocomplete(input, {
+            types: ['establishment'],
+            componentRestrictions: { country: 'hu' }
+        });
+
+        autocomplete.addListener('place_changed', function() {
+            const place = autocomplete.getPlace();
+            
+            if (!place.geometry) return;
+
+            // Получаем координаты места
+            const lat = place.geometry.location.lat();
+            const lng = place.geometry.location.lng();
+
+            // Записываем координаты в скрытые поля
+            document.getElementById('latitude').value = lat;
+            document.getElementById('longitude').value = lng;
+        });
+    });
+</script>
+
+
