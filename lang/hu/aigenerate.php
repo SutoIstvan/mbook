@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'prompt' => 'Kérlek, írj egy részletes, megható és személyes hangvételű életrajzot az alábbi információk alapján. Használj természetes, emberi stílust, mintha egy közeli hozzátartozó írta volna.',
+    'prompt' => 'Kérlek, írj egy részletes, megható és személyes hangvételű életrajzot az alábbi információk alapján. Használj természetes, emberi stílust.',
     'family_members' => 'Családtagok:',
     'birth_date' => 'Születési dátum:',
     'death_date' => 'Halálozási dátum:',

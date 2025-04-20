@@ -85,14 +85,14 @@ class MemorialController extends Controller
 
     public function store(Request $request)
     {
-        //   dd($request);
+        // dd($request);
         // Валидация запроса
         $request->validate([
             'name' => 'required|string|min:3|max:255',
             'birth_date' => 'required|string|min:3|max:255',
             'death_date' => 'required|string|min:3|max:255',
-            'biography' => 'required|string|min:3|max:2255',
-            'photo' => 'required|image|mimes:jpeg,jpg,png',
+            'biography' => 'nullable|string|max:5000',
+            'photo' => 'required|image|max:6120|mimes:jpeg,jpg,png',
             'crop_x' => 'nullable|numeric',
             'crop_y' => 'nullable|numeric',
             'crop_width' => 'nullable|numeric',

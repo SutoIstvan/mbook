@@ -20,6 +20,10 @@ class OpenAIController extends Controller
         $prompt .= __("aigenerate.birth_date") . ": {$memorial->birth_date}\n";
         $prompt .= __("aigenerate.death_date") . ": {$memorial->death_date}\n";
 
+        if (!empty($memorial->biography)) {
+            $prompt .= __("aigenerate.biography") . ": {$memorial->biography}\n";
+        }
+
         // Получаем членов семьи и их роли
         $familyMembers = $memorial->family;
 
@@ -73,10 +77,11 @@ class OpenAIController extends Controller
                 'Authorization' => 'Bearer ' . env('OPENAI_API_KEY'),
                 'Content-Type' => 'application/json',
             ])->post('https://api.openai.com/v1/chat/completions', [
-                'model' => 'gpt-3.5-turbo',
+                'model' => 'gpt-4o',
                 'messages' => [
                     ['role' => 'user', 'content' => $prompt],
                 ],
+                'temperature' => 0.7,
             ]);
         
             if ($response->successful()) {

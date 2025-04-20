@@ -264,8 +264,8 @@ class TimelineController extends Controller
         $validated = $request->validate([
             'memorial_id' => 'required|exists:memorials,id',
             'hobby_name' => 'required|string|max:255',
-            'hobby_date' => 'required|date',
-            'hobby_date_to' => 'required|date',
+            // 'hobby_date' => 'required|date',
+            // 'hobby_date_to' => 'required|date',
         ]);
 
         Timeline::create([
@@ -273,8 +273,8 @@ class TimelineController extends Controller
             'title' => $validated['hobby_name'],
             'description' => $validated['hobby_name'],
             'type' => 'hobby',
-            'date' => $validated['hobby_date'],
-            'date_to' => $validated['hobby_date_to'],
+            // 'date' => $validated['hobby_date'],
+            // 'date_to' => $validated['hobby_date_to'],
             'order' => 1,
         ]);
 

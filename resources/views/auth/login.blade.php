@@ -35,6 +35,15 @@
                             </a>
                         </div>
 
+                        <div class="form-group row mb-0 mt-4 text-center">
+                            <div class="col-md-12 ">
+                                <a href="{{ route('auth.google') }}" class="btn btn-primary">
+                                    <i class="fab fa-google"></i>
+                                    Google
+                                </a>
+                            </div>
+                        </div>
+
                         <div class="mt-50 text-center">
                             <h5>{{ __('Login to account') }}</h5>
                             <p class="px-4 mt-2">

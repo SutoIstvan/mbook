@@ -906,20 +906,23 @@
                                     placeholder="Pl. Kossuth Lajos utca 1, Budapest" value="{{ $memorial->grave_location }}" required>
                             </div>
 
-                            <div class="mb-3 col-12 col-md-4">
-                                <label for="grave_parcel" class="form-label">Parcella</label>
-                                <input type="text" class="form-control" id="grave_parcel" name="grave_parcel"
-                                    placeholder="Parcella" value="{{ $memorial->grave_parcel }}" required>
-                            </div>
-                            <div class="mb-3 col-12 col-md-4">
-                                <label for="grave_line" class="form-label">Sor</label>
-                                <input type="text" class="form-control" id="grave_line" name="grave_line"
-                                    placeholder="Sor" value="{{ $memorial->grave_line }}" required>
-                            </div>
-                            <div class="mb-3 col-12 col-md-4">
-                                <label for="grave_number" class="form-label">Sorszám</label>
-                                <input type="text" class="form-control" id="grave_number" name="grave_number"
-                                    placeholder="Sorszám" value="{{ $memorial->grave_number }}" required>
+                            <div class="row">
+
+                                <div class="mb-3 col-12 col-md-4">
+                                    <label for="grave_parcel" class="form-label">Parcella</label>
+                                    <input type="text" class="form-control" id="grave_parcel" name="grave_parcel"
+                                        placeholder="Parcella" value="{{ $memorial->grave_parcel }}" required>
+                                </div>
+                                <div class="mb-3 col-12 col-md-4">
+                                    <label for="grave_line" class="form-label">Sor</label>
+                                    <input type="text" class="form-control" id="grave_line" name="grave_line"
+                                        placeholder="Sor" value="{{ $memorial->grave_line }}" required>
+                                </div>
+                                <div class="mb-3 col-12 col-md-4">
+                                    <label for="grave_number" class="form-label">Sorszám</label>
+                                    <input type="text" class="form-control" id="grave_number" name="grave_number"
+                                        placeholder="Sorszám" value="{{ $memorial->grave_number }}" required>
+                                </div>
                             </div>
 
                             <div class="row">

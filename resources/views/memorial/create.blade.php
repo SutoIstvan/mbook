@@ -6,6 +6,19 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet">
     <style>
+        body {
+            background-color: #f7f7f7 !important;
+        }
+
+        .butn.butn-bord {
+            border: 1px solid rgba(0, 0, 0, 0.3);
+        }
+
+        .butn.butn-bord:hover {
+            background: var(--bg-color);
+            color: #000000;
+        }
+
         .navbar {
             mix-blend-mode: difference !important;
         }
@@ -561,12 +574,15 @@
 
 
                             <button type="submit" name="action" value="add_details" id="additionalDetails"
-                                class="butn butn-md butn-bord butn-rounded">
+                                class="butn butn-md butn-bord butn-rounded mt-15">
                                 <span class="text">
                                     {{ __('Add Additional Details') }}
                                 </span>
-                                <span id="btnIcon" class="icon">
-                                    <i class="fa-regular fa-plus"></i>
+                                <span id="btnIcon2" class="icon">
+                                    <i class="fa-regular fa-plus text-secondary"></i>
+                                </span>
+                                <span id="btnSpinner2" class="icon d-none">
+                                    <i class="fa-solid fa-spinner fa-spin text-secondary"></i>
                                 </span>
                             </button>
 
@@ -605,7 +621,7 @@
                                 <div class="drag-area text-white border-secondary" id="imageContainer">
                                     <div class="default-content text-center">
                                         <div class="icon">
-                                            <i class="fas fa-images"></i>
+                                            <i class="fas fa-images text-secondary"></i>
                                         </div>
                                         <span class="header">{{ __('Drag your photo here') }}</span>
                                         <span class="header">{{ __('or open it in') }}</span>
@@ -659,8 +675,11 @@
 
                     <div class="container mt-50">
                         <label for="biography" class="col-form-label text-md-end">{{ __('Biography') }}</label>
-                        <textarea id="biography" class="form-control @error('biography') is-invalid @enderror" name="biography"
+                        <textarea id="biography" oninput="updateCharCount()" maxlength="5000" class="form-control @error('biography') is-invalid @enderror" name="biography"
                             rows="7">{{ old('biography') }}</textarea>
+                        <div class="form-text text-end" id="charCount">
+                            {{ __('Characters left:') }} 5000
+                        </div>
                         @error('biography')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -669,6 +688,8 @@
                     </div>
 
                 </div>
+               
+
             </div>
         </div>
 
@@ -680,10 +701,10 @@
                     {{ __('Adatok mentése') }}
                 </span>
                 <span id="btnIcon" class="icon">
-                    <i class="fa-regular fa-save"></i>
+                    <i class="fa-regular fa-save text-secondary"></i>
                 </span>
                 <span id="btnSpinner" class="icon d-none">
-                    <i class="fa-solid fa-spinner fa-spin"></i>
+                    <i class="fa-solid fa-spinner fa-spin text-secondary"></i>
                 </span>
             </button>
 
@@ -809,10 +830,22 @@
             let btnIcon = document.getElementById("btnIcon");
             let btnSpinner = document.getElementById("btnSpinner");
 
+            let additionalDetailsBtn = document.getElementById("additionalDetails");
+            let btnIcon2 = document.getElementById("btnIcon2");
+            let btnSpinner2 = document.getElementById("btnSpinner2");
+
             if (button && btnIcon && btnSpinner) {
                 button.disabled = true;
                 btnIcon.classList.add("d-none");
                 btnSpinner.classList.remove("d-none");
+            } else {
+                console.error("Один из элементов (submitBtn, btnIcon, btnSpinner) не найден");
+            }
+
+            if (additionalDetailsBtn && btnIcon2 && btnSpinner2) {
+                // additionalDetailsBtn.disabled = true;
+                btnIcon2.classList.add("d-none");
+                btnSpinner2.classList.remove("d-none");
             } else {
                 console.error("Один из элементов (submitBtn, btnIcon, btnSpinner) не найден");
             }
@@ -875,6 +908,22 @@
         if (window.google && window.google.maps) {
             document.addEventListener('DOMContentLoaded', initMap);
         }
+
+
+
+        function updateCharCount() {
+            const textarea = document.getElementById('biography');
+            const charCount = document.getElementById('charCount');
+            const maxLength = textarea.getAttribute('maxlength');
+            const currentLength = textarea.value.length;
+
+            charCount.textContent = `{{ __('Characters left:') }} ${maxLength - currentLength}`;
+        }
+
+        // Чтобы сразу показать актуальное значение при загрузке страницы
+        document.addEventListener('DOMContentLoaded', updateCharCount);
+
+
     </script>
 
 @endsection

@@ -108,9 +108,18 @@
                                 </div>
                             </div>
 
+                            <div class="row my-3">
+                                <div class="col-12 d-flex align-items-center">
+                                    <hr class="flex-grow-1">
+                                    <span class="mx-2 text-muted">or</span>
+                                    <hr class="flex-grow-1">
+                                </div>
+                            </div>
+
                             <div class="form-group row mb-0 mt-4">
                                 <div class="col-md-12 ">
                                     <a href="{{ route('auth.google') }}" class="btn btn-primary w-100">
+                                        <i class="fab fa-google"></i>
                                         Google
                                     </a>
                                 </div>
