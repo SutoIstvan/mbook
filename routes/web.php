@@ -10,6 +10,7 @@ use App\Http\Controllers\ImageController;
 use App\Http\Controllers\LinkController;
 use App\Http\Controllers\OpenAIController;
 use App\Http\Controllers\TimelineController;
+use App\Http\Controllers\Auth\GoogleController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\UserAccess;
@@ -118,6 +119,9 @@ Route::middleware(['auth', UserAccess::class . ':admin'])->group(function () {
     })->name('download.qrcodes');
 
 });
+
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('auth.google');
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
 Route::get('/memorial/attach/{token}', [MemorialController::class, 'showAttachForm'])->name('memorial.attach.form')->middleware('auth');
 

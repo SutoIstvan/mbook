@@ -8,6 +8,7 @@
         "php": "^8.2",
         "intervention/image-laravel": "^1.5",
         "laravel/framework": "^11.0",
+        "laravel/socialite": "^5.19",
         "laravel/tinker": "^2.9",
         "laravel/ui": "^4.6",
         "simplesoftwareio/simple-qrcode": "^4.2"

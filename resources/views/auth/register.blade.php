@@ -107,6 +107,15 @@
                                     </button>
                                 </div>
                             </div>
+
+                            <div class="form-group row mb-0 mt-4">
+                                <div class="col-md-12 ">
+                                    <a href="{{ route('auth.google') }}" class="btn btn-primary w-100">
+                                        Google
+                                    </a>
+                                </div>
+                            </div>
+
                         </form>
                     </div>
                 </div>
