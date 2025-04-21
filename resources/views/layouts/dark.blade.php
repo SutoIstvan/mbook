@@ -100,6 +100,9 @@
                         <a class="nav-link {{ request()->routeIs('memorial.biography') ? 'active' : '' }}" href="{{ route('memorial.biography', $memorial) }}">Életrajz</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('timeline.show') ? 'active' : '' }}" href="{{ route('timeline.show', $memorial) }}">Idővonal</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('memorial.photos') ? 'active' : '' }}" href="{{ route('memorial.photos', $memorial) }}">Fényképek</a>
                     </li>
 

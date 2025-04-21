@@ -795,6 +795,10 @@ p {
 
 
 @media screen and (max-width: 768px) {
+  .section-padding {
+    padding-top: 70px !important;
+    padding-bottom: 70px !important;
+  }
   .header-mst .caption h1 {
     font-size: 60px; }
   .hero-mst .exp {

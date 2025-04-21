@@ -1,6 +1,6 @@
 @extends('layouts.home')
 
-@section('title', 'Címlap - rememus.com')
+@section('title', 'Címlap - Rememus.com')
 
 @section('css')
 
@@ -15,8 +15,14 @@
             <div class="row">
                 <div class="col-lg-7">
                     <div class="caption">
-                        <h2>Mesélj el egy történetet<br> és őrizd meg örökre<br> az emlékeidet</h2>
-                        <!-- <h1>We Invest <br> In Big Ideas</h1> -->
+                        <h2 class="d-none d-md-block">
+                            Rememus.com <br> ahol emlékeid örökre megmaradnak.
+                          </h2>
+                          
+                          <h5 class="d-block d-md-none">
+                            Rememus.com <br> ahol emlékeid örökre megmaradnak.
+                          </h5>
+                                                  <!-- <h1>We Invest <br> In Big Ideas</h1> -->
                     </div>
                 </div>
             </div>
@@ -100,8 +106,16 @@
                 </div>
                 <div class="col-lg-5 offset-lg-2 valign">
                     <div class="cont">
-                        <h3 class="mb-15">A rememus.com egy <br>QR-kóddal elérhető emlékoldal</h3>
-                        <!-- <p>Az Mbook.hu egy QR-kóddal elérhető emlékoldal, amely életrajzokat, fényképeket, videókat és személyes emlékeket tartalmaz. Tökéletes megoldás sírkövekre és urnákra.</p> -->
+
+                        <h3 class="d-none d-md-block mb-3">
+                            A rememus.com egy <br>QR-kóddal elérhető emlékoldal
+                          </h3>
+                          
+                          <h5 class="d-block d-md-none mb-3">
+                            A rememus.com egy <br>QR-kóddal elérhető emlékoldal
+                          </h5>
+
+                          <!-- <p>Az Mbook.hu egy QR-kóddal elérhető emlékoldal, amely életrajzokat, fényképeket, videókat és személyes emlékeket tartalmaz. Tökéletes megoldás sírkövekre és urnákra.</p> -->
                         <p>
                             Könnyedén összegyűjtheti és megőrizheti szerettei emlékét generációkon át.
                             Élje át újra a dédelgetett pillanatokat fényképeken, videókon és történeteken keresztül, QR-kódos emlékműveink minden egyes beolvasásával.
@@ -668,7 +682,15 @@
         <div class="container">
             <div class="sec-head text-center">
                 <!-- <h6 class="sub-title main-color mb-15">Testimonials</h6> -->
-                <h3 class="text-u">Mit tartalmaz egy emlékoldal?</h3>
+                {{-- <h3 class="text-u">Mit tartalmaz egy emlékoldal?</h3> --}}
+                <h3 class="d-none d-md-block mb-3">
+                    Mit tartalmaz egy emlékoldal?
+                  </h3>
+                  
+                  <h5 class="d-block d-md-none mb-3">
+                    Mit tartalmaz egy emlékoldal?
+                  </h5>
+                  
             </div>
 
             <!-- <div class="row">
@@ -1172,7 +1194,14 @@
             <section class="faqs-ds pt-0">
                 <div class="container">
                     <div class="sec-head text-center mb-70">
-                        <h2>Gyakran Ismételt Kérdések</h2>
+                        {{-- <h2>Gyakran Ismételt Kérdések</h2> --}}
+                        <h3 class="d-none d-md-block mb-3">
+                            Gyakran Ismételt Kérdések
+                          </h3>
+                          
+                          <h5 class="d-block d-md-none mb-3">
+                            Gyakran Ismételt Kérdések
+                          </h5>
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-lg-10">

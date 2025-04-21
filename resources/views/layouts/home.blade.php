@@ -227,10 +227,10 @@
                             <div class="row">
                                 <div class="col-lg-8">
                                     <div class="copy sub-color md-mb30 sm-hide">
-                                        <p>© 2024 rememus.com</p>
+                                        <p>© 2025 rememus.com</p>
                                     </div>
                                     <div class="copy sub-color md-mb30 text-center d-block d-sm-none">
-                                        <p>© 2024 rememus.com</p>
+                                        <p>© 2025 rememus.com</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 d-flex justify-content-end sm-hide">

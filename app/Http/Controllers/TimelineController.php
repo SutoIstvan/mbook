@@ -6,6 +6,8 @@ use App\Models\Family;
 use App\Models\Link;
 use App\Models\Memorial;
 use App\Models\Timeline;
+use App\Models\Image;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TimelineController extends Controller
@@ -36,8 +38,8 @@ class TimelineController extends Controller
         $familyMembers = Family::where('memorial_id', $memorial->id)->get()->groupBy('role');
 
         $link = Link::where('memorial_id', $memorial->id)
-              ->where('type', 'link')
-              ->get();
+            ->where('type', 'link')
+            ->get();
 
         $videos = Link::where('memorial_id', $memorial->id)
             ->where('type', 'video')
@@ -53,7 +55,7 @@ class TimelineController extends Controller
                 ];
             })->filter(fn($video) => $video['url']);
 
-            $music = Link::where('memorial_id', $memorial->id)
+        $music = Link::where('memorial_id', $memorial->id)
             ->where('type', 'music')
             ->get()
             ->map(function ($music) {
@@ -287,5 +289,71 @@ class TimelineController extends Controller
         $timeline->delete();
 
         return back()->with('success', 'Az esemény sikeresen törölve lett.');
+    }
+
+    public function showTimeline(Memorial $memorial)
+    {
+
+        // dd($memorial->name);
+        // Загружаем все события и фото по мемориалу
+        $events = Timeline::where('memorial_id', $memorial->id)
+            ->orderBy('date', 'asc')
+            ->get();
+
+        // $events = Timeline::where('memorial_id', $memorial->id)->get();
+        $images = Image::where('memorial_id', $memorial->id)->get();
+
+        // Соберем всё в одну коллекцию
+        $items = collect();
+
+        $items->push([
+            'date' => $memorial->birth_date,
+            'title' => $memorial->name . ' ' . Carbon::parse($memorial->birth_date)->format('Y.d.m') . ' született' .
+                ($memorial->birth_place ? ' ' . $memorial->birth_place . 'ban' : ''),
+
+            'description' => '',
+            'type' => 'event',
+        ]);
+
+        foreach ($events as $event) {
+            $items->push([
+                'date' => $event->date ?? null, // для события
+                'date_to' => $event->date_to ?? null, // для события
+                'type' => 'event',
+                'title' => $this->getEventTitle($event->type),
+                'description' => $event->description,
+                'media' => $event->media,
+                'related_person' => $event->related_person,
+            ]);
+        }
+
+        foreach ($images as $image) {
+            $items->push([
+                'date' => $image->image_date,
+                'type' => 'image',
+                'title' => $image->image_description,
+                'image_path' => $image->image_path,
+            ]);
+        }
+
+        // Сортируем по дате
+        $items = $items->sortBy('date');
+
+        // dd($items);
+        return view('memorial.timelineshow', compact('items', 'memorial'));
+    }
+
+    // Функция для перевода типа события в красивое название
+    private function getEventTitle($type)
+    {
+        return match ($type) {
+            'birth' => 'Gyermek születése',
+            'marriage' => 'Házasság',
+            'school' => 'Iskola',
+            'work' => 'Munkahely',
+            'death' => 'Elhunyt',
+            'сhild_birth' => 'Gyermek születése',
+            default => ucfirst($type),
+        };
     }
 }

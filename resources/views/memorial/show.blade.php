@@ -1,6 +1,6 @@
 @extends('layouts.dark')
 
-@section('title', $memorial->name . ' - mbook.hu')
+@section('title', $memorial->name . ' - Rememus.com')
 
 @section('css')
     <style>

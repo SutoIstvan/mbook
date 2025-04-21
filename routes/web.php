@@ -131,5 +131,8 @@ Route::get('/{memorial}/photos', [MemorialController::class, 'photos'])->name('m
 Route::get('/{memorial}/videos', [MemorialController::class, 'videos'])->name('memorial.videos');
 Route::get('/{memorial}/comments', [MemorialController::class, 'comments'])->name('memorial.comments');
 
+Route::get('/{memorial}/timeline', [TimelineController::class, 'showTimeline'])->name('timeline.show');
+
+
 Route::get('/{memorial}/comments/create', [CommentController::class, 'create'])->name('comments.create');
 Route::post('/{memorial}/comments', [CommentController::class, 'store'])->name('comments.store');
