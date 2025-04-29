@@ -4,6 +4,32 @@
 
 @section('css')
     <style>
+        .timeline {
+            border-left: 1px solid hsl(0, 0%, 90%);
+            position: relative;
+            list-style: none;
+        }
+
+        .timeline .timeline-item {
+            position: relative;
+        }
+
+        .timeline .timeline-item:after {
+            position: absolute;
+            display: block;
+            top: 0;
+        }
+
+        .timeline .timeline-item:after {
+            background-color: hsl(0, 0%, 90%);
+            left: -38px;
+            border-radius: 50%;
+            height: 11px;
+            width: 11px;
+            content: "";
+            top: 10px;
+        }
+
         .google-map {
             height: 340px;
             width: 100%;
@@ -86,58 +112,97 @@
                             </div> --}}
 
                             <div class="img fit-img radius-30 mt-50">
-                                @if ($images->isNotEmpty())
-                                    <!-- Используем первую картинку из массива $images -->
-                                    <img src="{{ asset('memorial/' . $images->first()->image_path) }}"
-                                        alt="Memorial photo">
-                                @elseif ($memorial->photo)
-                                    <!-- Если массив $images пустой, используем изображение из $memorial->photo -->
-                                    <img src="{{ asset('memorial/' . $memorial->slug . '/' . $memorial->photo) }}"
-                                        alt="Memorial photo">
-                                @else
-                                    <!-- Если нет ни одной картинки, выводим заглушку -->
-                                    <img src="{{ asset('path/to/default/image.jpg') }}" alt="">
-                                @endif
-                            </div>
 
-                            {{-- @if ($memorial->photo)
+                                @if ($timelines->isNotEmpty())
+
+                                    <!-- Section: Timeline -->
+                                    <section class="px-2 py-3">
+                                        <ul class="timeline">
+                                            @foreach ($timelines as $timeline)
+                                                <li class="timeline-item mb-5">
+                                                    <h6 class="fw-bold">
+                                                        {{ $timeline->date }}
+                                                        @if ($timeline->date_to)
+                                                            – {{ $timeline->date_to }}
+                                                        @endif
+                                                        {{-- {{ $timeline->title }} --}}
+                                                    </h6>
+                                                    <p class="text-muted mb-2 fw-bold">
+
+                                                        @if ($timeline->type)
+                                                            • {{ __('aigenerate.timeline_types.' . $timeline->type) }}
+
+                                                            {{ $timeline->description }}
+                                                        @endif
+                                                    </p>
+                                                    {{-- @if (!empty($timeline->description))
+                                                                        <p class="text-muted">
+                                                                        {{ $timeline->description }}
+                                                                        </p>
+                                                                    @endif --}}
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </section>
+                                @elseif ($images->isNotEmpty() || $memorial->photo)
+                                    <div class="container text-center">
+                                        @if ($images->isNotEmpty())
+                                            @foreach ($images as $image)
+                                                <img src="{{ asset('memorial/' . $image->image_path) }}"
+                                                    alt="Memorial photo" class="img-fluid mb-3">
+                                            @endforeach
+                                        @else
+                                            <img src="{{ asset('memorial/' . $memorial->slug . '/' . $memorial->photo) }}"
+                                                alt="Memorial photo" class="img-fluid">
+                                        @endif
+                                    </div>
+                                @else
+                                    <div class="text-center text-muted">
+                                        <p>Nincs elérhető esemény vagy kép.</p>
+                                    </div>
+                                @endif
+
+
+                                {{-- @if ($memorial->photo)
                             <img src="{{ asset('storage/' . $memorial->photo) }}" alt="Фото">
                         @endif --}}
 
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="mimg fit-img">
+                <div class="mimg fit-img">
 
-                {{-- <div class="mimg fit-img" style="filter: grayscale(100%);"> --}}
-                <img src="{{ asset('memorial/' . $memorial->slug . '/' . $memorial->photo) }}" alt="">
-                <div class="text">
-                    <span class="fz-14 text-u mb-10">{{ $memorial->birth_date }} - {{ $memorial->death_date }}</span>
-                    <p style="margin-left: 25px;">Míg éltél szerettünk<br> míg élünk nem feledünk!</p>
-                    <div class="shaps bottom">
-                        <div class="shap-left-top">
-                            <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11">
-                                <path
-                                    d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z"
-                                    fill="#0e0f11"></path>
-                            </svg>
-                        </div>
-                        <div class="shap-right-bottom">
-                            <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11">
-                                <path
-                                    d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z"
-                                    fill="#0e0f11"></path>
-                            </svg>
+                    {{-- <div class="mimg fit-img" style="filter: grayscale(100%);"> --}}
+                    <img src="{{ asset('memorial/' . $memorial->slug . '/' . $memorial->photo) }}" alt="">
+                    <div class="text">
+                        <span class="fz-14 text-u mb-10">{{ $memorial->birth_date }} - {{ $memorial->death_date }}</span>
+                        <p style="margin-left: 25px;">Míg éltél szerettünk<br> míg élünk nem feledünk!</p>
+                        <div class="shaps bottom">
+                            <div class="shap-left-top">
+                                <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg"
+                                    class="w-11 h-11">
+                                    <path
+                                        d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z"
+                                        fill="#0e0f11"></path>
+                                </svg>
+                            </div>
+                            <div class="shap-right-bottom">
+                                <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg"
+                                    class="w-11 h-11">
+                                    <path
+                                        d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z"
+                                        fill="#0e0f11"></path>
+                                </svg>
+                            </div>
                         </div>
                     </div>
-                </div>
-                {{-- <div class="absolute" style="position: absolute; top: 387px; left: 350px;">
+                    {{-- <div class="absolute" style="position: absolute; top: 387px; left: 350px;">
                     <img src="assets/imgs/header/circle-badge4.png" style="width: 180px;" alt="Иконка">
                 </div> --}}
+                </div>
             </div>
-        </div>
     </header>
 
     <!-- ==================== End Header ==================== -->

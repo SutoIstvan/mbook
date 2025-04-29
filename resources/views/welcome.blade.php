@@ -66,7 +66,7 @@
                             </span>                        </a>
                     </div>
                 </div>
-                <div class="col-lg-4 order-md-1">
+                {{-- <div class="col-lg-4 order-md-1">
                     <div class="cont md-mb50">
                         <div class="d-flex align-items-center mb-15">
 
@@ -82,7 +82,28 @@
                         </div>
                         <p>Itt kereshetsz az emlékoldalak között név alapján.</p>
                     </div>
+                </div> --}}
+
+                <div class="col-lg-4 order-md-1">
+                    <div class="cont md-mb50">
+                        <div class="d-flex align-items-center mb-15">
+                
+                            <input id="qr-input" type="text" placeholder="qr code" class="text-light border placeholder-gray"> 
+                
+                            <div>
+                                <button onclick="redirectWithCode()" class="ms-2 p-0 border-0 bg-transparent" style="width: 45px; height: 45px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24" fill="none">
+                                      <circle cx="12" cy="12" r="12" fill="white"/>
+                                      <path d="M10 6L16 12L10 18" stroke="#000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                  </button>
+                                  
+                            </div>
+                        </div>
+                        <p>Itt válthatod be a QR-kódot.</p>
+                    </div>
                 </div>
+
             </div>
         </div>
     </header>
@@ -1299,4 +1320,17 @@
 
     <!-- ==================== End Blog ==================== -->
 
+@endsection
+
+@section('js')
+    <script>
+            function redirectWithCode() {
+        const code = document.getElementById('qr-input').value.trim();
+        if (code) {
+            window.location.href = `https://rememus.com/memorial/attach/${encodeURIComponent(code)}`;
+        } else {
+            alert('Kérlek, adj meg egy QR-kódot!');
+        }
+    }
+    </script>
 @endsection

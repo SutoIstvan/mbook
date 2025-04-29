@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Memorial;
 use App\Models\QrCodes;
+use App\Models\Timeline;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -34,8 +35,12 @@ class MemorialController extends Controller
 
         $theme = $memorial->theme ?? 'light';
 
+        $timelines = Timeline::where('memorial_id', $memorial->id)
+        ->orderBy('date', 'asc')
+        ->get();
+
         if ($theme === 'dark') {
-            return view('memorial.show', compact('memorial', 'images', 'comments'));
+            return view('memorial.show', compact('memorial', 'images', 'comments', 'timelines'));
         } else {
             return view('memorial.create', compact('memorial'));
         }
