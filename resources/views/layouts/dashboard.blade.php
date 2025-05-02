@@ -112,6 +112,13 @@
 
                     <li>
                         <div class="o-hidden">
+                            <a href="{{ route('dashboard.family', $memorial) }}" class="link"><span class="fill-text"
+                                    data-text="{{ __('Family') }}">{{ __('Family') }}</span></a>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="o-hidden">
                             <a href="{{ route('dashboard.settings', $memorial) }}" class="link"><span class="fill-text"
                                     data-text="{{ __('Settings') }}">{{ __('Settings') }}</span></a>
                         </div>
@@ -218,6 +225,13 @@
                                     </span>
                                     <span>{{ __('Comments') }}</span>
                                 </a>
+
+                                <a href="{{ route('dashboard.family', ['memorial' => $memorial->slug]) }}" class="butn butn-md butn-bord butn-rounded w-100 text-start {{ Route::currentRouteName() === 'dashboard.comments' ? 'active' : '' }}">
+                                    <span class="icon mr-10">
+                                        <i class="fa-solid fa-users"></i>
+                                    </span>
+                                    <span>{{ __('Family') }}</span>
+                                </a>
                             
                                 <a href="{{ route('dashboard.settings', ['memorial' => $memorial->slug]) }}" class="butn butn-md butn-bord butn-rounded w-100 text-start {{ Route::currentRouteName() === 'dashboard.settings' ? 'active' : '' }}">
                                     <span class="icon me-2">
@@ -225,7 +239,6 @@
                                     </span>
                                     <span>{{ __('Settings') }}</span>
                                 </a>
-
 
                                 <a href="{{ route('dashboard') }}" class="butn butn-md butn-bord butn-rounded w-100 text-start">
                                     <span class="icon me-2">

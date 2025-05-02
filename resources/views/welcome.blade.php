@@ -100,7 +100,7 @@
                                   
                             </div>
                         </div>
-                        <p>Itt válthatod be a QR-kódot.</p>
+                        <p class="ms-3">Itt válthatod be a QR-kódot.</p>
                     </div>
                 </div>
 

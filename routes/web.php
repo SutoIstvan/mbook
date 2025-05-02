@@ -67,7 +67,7 @@ Route::middleware(['auth'])->group(function () {
     
     Route::delete('/dashboard/delete/{memorial}', [DashboardController::class, 'destroy'])->name('dashboard.destroy')->middleware('auth');
 
-    // Route::get('/dashboard/{memorial}/family', [DashboardController::class, 'family'])->name('dashboard.family');
+    Route::get('/dashboard/{memorial}/family', [DashboardController::class, 'family'])->name('dashboard.family');
 
 
     Route::get('/dashboard/{memorial}/family/create', [FamilyController::class, 'create'])->name('family.create');
