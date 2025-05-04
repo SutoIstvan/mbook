@@ -226,13 +226,20 @@
                                     <span>{{ __('Comments') }}</span>
                                 </a>
 
-                                <a href="{{ route('dashboard.family', ['memorial' => $memorial->slug]) }}" class="butn butn-md butn-bord butn-rounded w-100 text-start {{ Route::currentRouteName() === 'dashboard.comments' ? 'active' : '' }}">
+                                <a href="{{ route('dashboard.family', ['memorial' => $memorial->slug]) }}" class="butn butn-md butn-bord butn-rounded w-100 text-start {{ Route::currentRouteName() === 'dashboard.family' ? 'active' : '' }}">
                                     <span class="icon mr-10">
                                         <i class="fa-solid fa-users"></i>
                                     </span>
                                     <span>{{ __('Family') }}</span>
                                 </a>
                             
+                                <a href="{{ route('dashboard.timeline', ['memorial' => $memorial->slug]) }}" class="butn butn-md butn-bord butn-rounded w-100 text-start {{ Route::currentRouteName() === 'dashboard.timeline' ? 'active' : '' }}">
+                                    <span class="icon mr-10">
+                                        <i class="fa-solid fa-users"></i>
+                                    </span>
+                                    <span>{{ __('Timeline') }}</span>
+                                </a>
+
                                 <a href="{{ route('dashboard.settings', ['memorial' => $memorial->slug]) }}" class="butn butn-md butn-bord butn-rounded w-100 text-start {{ Route::currentRouteName() === 'dashboard.settings' ? 'active' : '' }}">
                                     <span class="icon me-2">
                                         <i class="fa-solid fa-gear"></i>

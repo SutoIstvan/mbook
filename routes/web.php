@@ -72,7 +72,11 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/dashboard/{memorial}/family/create', [FamilyController::class, 'create'])->name('family.create');
     Route::post('/dashboard/family/store', [FamilyController::class, 'store'])->name('family.store');
+    Route::post('/dashboard/family/store', [FamilyController::class, 'dashboardstore'])->name('dashboard.family.store');
     Route::delete('/dashboard/family/delete/{id}', [FamilyController::class, 'delete'])->name('family.delete');
+    Route::post('/dashboard/family/update', [FamilyController::class, 'update'])->name('family.update');
+
+    Route::get('/dashboard/{memorial}/timeline', [DashboardController::class, 'timeline'])->name('dashboard.timeline');
 
     Route::get('/dashboard/{memorial}/timeline/create', [TimelineController::class, 'create'])->name('timeline.create');
     Route::post('/dashboard/timelines/store', [TimelineController::class, 'store'])->name('timelines.store');

@@ -26,6 +26,7 @@ class FamilyController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request);
         $validated = $request->validate([
             'memorial_id' => 'required|exists:memorials,id',
             'name' => 'required|string',
@@ -37,7 +38,37 @@ class FamilyController extends Controller
         return redirect()->route('family.create', $request->memorial_id)->with('success', 'Family member added successfully.');
     }
     
+    public function dashboardstore(Request $request)
+    {
+        // dd($request);
+        $validated = $request->validate([
+            'memorial_id' => 'required|exists:memorials,id',
+            'name' => 'required|string',
+            'role' => 'required|string',
+        ]);
 
+        Family::create($validated);
+
+        return redirect()->route('dashboard.family', $request->memorial_id)->with('success', 'Family member added successfully.');
+    }
+
+    public function update(Request $request)
+    {
+        $request->validate([
+            'names' => 'required|array',
+            'names.*' => 'required|string|max:255',
+        ]);
+
+        foreach ($request->input('names', []) as $id => $name) {
+            $member = Family::find($id);
+            if ($member) {
+                $member->name = $name;
+                $member->save();
+            }
+        }
+
+        return redirect()->back()->with('success', 'Family members updated successfully');
+    }
 
     public function list(Memorial $memorial)
     {

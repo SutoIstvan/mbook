@@ -576,11 +576,11 @@
         .step-vertical:not(:last-child)::after {
             content: '';
             /* position: absolute;
-                                             left: 25px;
-                                             top: 60px;
-                                             bottom: 0;
-                                             width: 2px;
-                                             background: #e9ecef; */
+                                                 left: 25px;
+                                                 top: 60px;
+                                                 bottom: 0;
+                                                 width: 2px;
+                                                 background: #e9ecef; */
         }
 
         .step-vertical-icon {
@@ -1012,8 +1012,8 @@
 
                             <div class="row">
                                 <div class="col-md-12 mb-2">
-                                    <input type="text" name="work_name" class="form-control"
-                                        placeholder="Munka neve" required>
+                                    <input type="text" name="work_name" class="form-control" placeholder="Munka neve"
+                                        required>
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <label for="work_date">Work date from</label>
@@ -1031,18 +1031,18 @@
                         </form>
                     </div>
 
-                                        <!-- Форма Hobby (по умолчанию скрыта) -->
-                                        <div id="hobbyForm" class="event-form" style="display: none;">
-                                            <form action="{{ route('timelines.addHobby') }}" method="POST" class="mt-3">
-                                                @csrf
-                                                <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
-                    
-                                                <div class="row">
-                                                    <div class="col-md-12 mb-2">
-                                                        <input type="text" name="hobby_name" class="form-control"
-                                                            placeholder="Munka neve" required>
-                                                    </div>
-                                                    {{-- <div class="col-md-6 mb-2">
+                    <!-- Форма Hobby (по умолчанию скрыта) -->
+                    <div id="hobbyForm" class="event-form" style="display: none;">
+                        <form action="{{ route('timelines.addHobby') }}" method="POST" class="mt-3">
+                            @csrf
+                            <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
+
+                            <div class="row">
+                                <div class="col-md-12 mb-2">
+                                    <input type="text" name="hobby_name" class="form-control"
+                                        placeholder="Munka neve" required>
+                                </div>
+                                {{-- <div class="col-md-6 mb-2">
                                                         <label for="hobby_date">hobby date from</label>
                     
                                                         <input type="date" name="hobby_date" class="form-control" required>
@@ -1051,12 +1051,12 @@
                                                         <label for="hobby_date_to">hobby date to</label>
                                                         <input type="date" name="hobby_date_to" class="form-control" required>
                                                     </div> --}}
-                                                    <div class="col-md-12 mb-3 mt-3 text-center">
-                                                        <button type="submit" class="btn btn-outline-primary">Mentés</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
+                                <div class="col-md-12 mb-3 mt-3 text-center">
+                                    <button type="submit" class="btn btn-outline-primary">Mentés</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
 
                 </div>
             </div>
@@ -1102,11 +1102,11 @@
                     </a>
                 </div>
             </div>
+        
 
+ @endsection
 
-        @endsection
-
-        @section('js')
+@section('js')
 
             <script>
                 document.addEventListener('DOMContentLoaded', function() {
@@ -1147,7 +1147,8 @@
                         // Скрытие или отображение форм в зависимости от выбора
                         childrenInputs.style.display = selected === 'child_birth' ? 'block' : 'none';
                         marriageInputs.style.display = selected === 'marriage' ? 'block' : 'none';
-                        schoolForm.style.display = selected === 'school' ? 'block' : 'none'; // Отображение формы школы
+                        schoolForm.style.display = selected === 'school' ? 'block' :
+                        'none'; // Отображение формы школы
 
                         workForm.style.display = selected === 'work' ? 'block' : 'none'; //
                         // schoolInputs.style.display = selected === 'school' ? 'block' : 'none';
@@ -1230,4 +1231,4 @@
             </script>
 
 
-        @endsection
+@endsection

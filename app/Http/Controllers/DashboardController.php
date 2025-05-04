@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Family;
 use App\Models\Memorial;
+use App\Models\Timeline;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -94,6 +95,26 @@ class DashboardController extends Controller
         $familyMembers = Family::where('memorial_id', $memorial->id)->get()->groupBy('role');
 
         return view('dashboard.family', compact('memorial', 'familyMembers'));
+    }
+
+    public function timeline(Memorial $memorial)
+    {
+        $familyMembers = Family::where('memorial_id', $memorial->id)->get()->groupBy('role');
+
+        // $timelines = Timeline::where('memorial_id', $memorial->id)->get();
+        $timelines = Timeline::where('memorial_id', $memorial->id)
+            ->orderBy('date', 'asc')
+            ->get();
+
+        $children = Family::where('memorial_id', $memorial->id)
+            ->where('role', 'children')
+            ->get();
+
+        $partners = Family::where('memorial_id', $memorial->id)
+            ->where('role', 'partner')
+            ->get();
+
+        return view('dashboard.timeline', compact('memorial', 'familyMembers', 'children', 'timelines', 'partners'));
     }
 
     public function comments(Memorial $memorial)

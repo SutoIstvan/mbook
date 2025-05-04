@@ -7,6 +7,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.0/dropzone.js"></script>
 
     <style>
+        .custom-input {
+            border: none;
+            /* Убираем все бордеры */
+            border-bottom: 1px solid black;
+            /* Добавляем бордер только снизу */
+            background-color: transparent;
+            /* Прозрачный фон */
+            outline: none;
+            /* Убираем обводку при фокусе (опционально) */
+            padding: 5px;
+            /* Для удобства ввода */
+        }
+
         .item .img {
             border-radius: 15px;
             height: 255px;
@@ -125,8 +138,7 @@
 @endsection
 
 @section('content')
-<form action="{{ route('dashboard.video.upload', $memorial->id) }}" method="POST" enctype="multipart/form-data">
-    @csrf
+
     <section class="process-ca section-padding bg-light radius-20 mt-15 ontop">
         <div class="sec-head mb-40">
             <div class="row">
@@ -137,7 +149,7 @@
         </div>
 
         <div class="">
-            
+
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -168,176 +180,169 @@
                     <div class="col-12 col-md-12 p-3">
                         <div class="">
                             <div class="row">
-                                <div class="mt-50">
+                                <form action="{{ route('dashboard.family.store') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
+
+                                    <div class="row mb-3">
+                                        <div class="form-group col-12 col-md-5 mt-1">
+                                            {{-- <label>{{ __('My loved ones') }}</label> --}}
+                                            <select name="role" class="form-select" required>
+                                                <option value="">{{ __('Select my loved ones') }}</option>
+                                                <option value="father">{{ __('Father') }}</option>
+                                                <option value="mother">{{ __('Mother') }}</option>
+                                                <option value="partner">{{ __('Partner') }}</option>
+                                                <option value="children">{{ __('Children') }}</option>
+                                                <option value="siblings">{{ __('Siblings') }}</option>
+                                                <option value="pets">{{ __('Pets') }}</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-12 col-md-5 mt-1">
+                                            {{-- <label>{{ __('Name') }}</label> --}}
+                                            <input type="text" name="name" class="form-control"
+                                                placeholder="{{ __('Name') }}" required>
+                                        </div>
+
+                                        {{-- <div class="form-group col-12 col-md-2 mt-30"> --}}
+                                        <div class="form-group col-12 col-md-2 mt-1">
+                                            <button type="submit" class="btn btn-outline-primary mb-4 w-100">
+                                                <i class="fa fa-plus"></i> {{ __('Add') }}</button>
+                                        </div>
+
+                                    </div>
+
+                                </form>
+
+                                {{-- <div class="mt-50">
                                     <label for="video" class="form-label ">Videó egyedi URL</label>
                                     <input type="text" name="video" id="video" class="form-control py-2"
                                         value="{{ $memorial->video }}">
                                     <small class="text-muted">Ha üresen hagyja, akkor a videó nem lesz megjelenítve</small>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
                 </div>
 
-
-                <div class="row d-flex justify-content-center">
-                    <div class="col-12 col-md-12 p-3">
-                        <div class="">
-                    <!-- Row 1 -->
-                    <div class="row mb-4 mt-40">
-                        <div class="col-md-6 d-flex flex-column">
-                            <h6 class="text-secondary border-bottom pb-2 text-center fs-6">
-                                {{ __('Father') }}</h6>
-                            <ul class="list-group">
-                                @foreach ($familyMembers['father'] ?? [] as $member)
-                                    <li class="mt-2 ms-1">
-                                        {{ $member->name }}
-                                        <button class="btn btn-sm btn-outline-danger float-end"
-                                            onclick="event.preventDefault(); document.getElementById('delete-form-{{ $member->id }}').submit();">×</button>
-                                        <form id="delete-form-{{ $member->id }}"
-                                            action="{{ route('family.delete', $member->id) }}" method="POST"
-                                            style="display: none;">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-
-                        <div class="col-md-6 d-flex flex-column">
-                            <h6 class="text-secondary border-bottom pb-2 text-center fs-6">
-                                {{ __('Mother') }}</h6>
-                            <ul class="list-group">
-                                @foreach ($familyMembers['mother'] ?? [] as $member)
-                                    <li class="mt-2 ms-1">
-                                        {{ $member->name }}
-                                        <button class="btn btn-sm btn-outline-danger float-end"
-                                            onclick="event.preventDefault(); document.getElementById('delete-form-{{ $member->id }}').submit();">×</button>
-                                        <form id="delete-form-{{ $member->id }}"
-                                            action="{{ route('family.delete', $member->id) }}" method="POST"
-                                            style="display: none;">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
+                <form action="{{ route('family.update') }}" method="POST">
+                    @csrf
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-12 col-md-12 p-3">
 
 
-                    </div>
+                            <div class="">
+                                <!-- Row 1 -->
+                                <div class="row mb-4">
+                                    <div class="col-md-6 d-flex flex-column">
+                                        <h6 class="text-secondary border-bottom pb-2 text-center fs-6">
+                                            {{ __('Father') }}</h6>
+                                        <ul class="list-group">
+                                            @foreach ($familyMembers['father'] ?? [] as $member)
+                                                <li class="mt-2 ms-1 d-flex align-items-center">
+                                                    <input class="form-control me-2" type="text"
+                                                        name="names[{{ $member->id }}]" value="{{ $member->name }}"
+                                                        required>
+                                                    <button class="btn btn-sm btn-outline-danger"
+                                                        onclick="event.preventDefault(); document.getElementById('delete-form-{{ $member->id }}').submit();">×</button>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
 
-                    <!-- Row 2 -->
-                    <div class="row mb-4">
-                        <div class="col-md-6 d-flex flex-column">
-                            <h6 class="text-secondary border-bottom pb-2 text-center fs-6">
-                                {{ __('Partner') }}</h6>
-                            <ul class="list-group">
-                                @foreach ($familyMembers['partner'] ?? [] as $member)
-                                    <li class="mt-2 ms-1">
-                                        {{ $member->name }}
-                                        <button class="btn btn-sm btn-outline-danger float-end"
-                                            onclick="event.preventDefault(); document.getElementById('delete-form-{{ $member->id }}').submit();">×</button>
-                                        <form id="delete-form-{{ $member->id }}"
-                                            action="{{ route('family.delete', $member->id) }}" method="POST"
-                                            style="display: none;">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
-                                    </li>
-                                @endforeach
+                                    <div class="col-md-6 d-flex flex-column">
+                                        <h6 class="text-secondary border-bottom pb-2 text-center fs-6">
+                                            {{ __('Mother') }}</h6>
+                                        <ul class="list-group">
+                                            @foreach ($familyMembers['mother'] ?? [] as $member)
+                                                <li class="mt-2 ms-1 d-flex align-items-center">
+                                                    <input class="form-control me-2" type="text"
+                                                        name="names[{{ $member->id }}]" value="{{ $member->name }}"
+                                                        required>
+                                                    <button class="btn btn-sm btn-outline-danger"
+                                                        onclick="event.preventDefault(); document.getElementById('delete-form-{{ $member->id }}').submit();">×</button>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
 
-                                {{-- @if ($familyMembers['child']->isEmpty())
-                                    <li class="mt-2 ms-1 text-muted">{{ __('No family members added') }}</li>
-                                @endif --}}
-                            </ul>
-                        </div>
+                                <!-- Row 2 -->
+                                <div class="row mb-4">
+                                    <div class="col-md-6 d-flex flex-column">
+                                        <h6 class="text-secondary border-bottom pb-2 text-center fs-6">
+                                            {{ __('Partner') }}</h6>
+                                        <ul class="list-group">
+                                            @foreach ($familyMembers['partner'] ?? [] as $member)
+                                                <li class="mt-2 ms-1 d-flex align-items-center">
+                                                    <input class="form-control me-2" type="text"
+                                                        name="names[{{ $member->id }}]" value="{{ $member->name }}"
+                                                        required>
+                                                    <button class="btn btn-sm btn-outline-danger"
+                                                        onclick="event.preventDefault(); document.getElementById('delete-form-{{ $member->id }}').submit();">×</button>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
 
-                        <div class="col-md-6 d-flex flex-column">
-                            <h6 class="text-secondary border-bottom pb-2 text-center fs-6">
-                                {{ __('Children') }}</h6>
-                            <ul class="list-group">
-                                @foreach ($familyMembers['children'] ?? [] as $member)
-                                    <li class="mt-2 ms-1">
-                                        <input class="w-90" type="text" value="{{ $member->name }}">
-                                        {{-- {{ $member->name }} --}}
-                                        <button class="btn btn-sm btn-outline-danger float-end"
-                                            onclick="event.preventDefault(); document.getElementById('delete-form-{{ $member->id }}').submit();">×</button>
-                                        <form id="delete-form-{{ $member->id }}"
-                                            action="{{ route('family.delete', $member->id) }}" method="POST"
-                                            style="display: none;">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
-                                    </li>
-                                @endforeach
+                                    <div class="col-md-6 d-flex flex-column">
+                                        <h6 class="text-secondary border-bottom pb-2 text-center fs-6">
+                                            {{ __('Children') }}</h6>
+                                        <ul class="list-group">
+                                            @foreach ($familyMembers['children'] ?? [] as $member)
+                                                <li class="mt-2 ms-1 d-flex align-items-center">
+                                                    <input class="form-control me-2" type="text"
+                                                        name="names[{{ $member->id }}]" value="{{ $member->name }}"
+                                                        required>
+                                                    <button class="btn btn-sm btn-outline-danger"
+                                                        onclick="event.preventDefault(); document.getElementById('delete-form-{{ $member->id }}').submit();">×</button>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
 
-                                {{-- @if ($familyMembers['spouse']->isEmpty())
-                                    <li class="mt-2 ms-1 text-muted">{{ __('No family members added') }}</li>
-                                @endif --}}
-                            </ul>
-                        </div>
+                                <!-- Row 3 -->
+                                <div class="row mb-4">
+                                    <div class="col-md-6 d-flex flex-column">
+                                        <h6 class="text-secondary border-bottom pb-2 text-center fs-6">
+                                            {{ __('Siblings') }}</h6>
+                                        <ul class="list-group">
+                                            @foreach ($familyMembers['siblings'] ?? [] as $member)
+                                                <li class="mt-2 ms-1 d-flex align-items-center">
+                                                    <input class="form-control me-2" type="text"
+                                                        name="names[{{ $member->id }}]" value="{{ $member->name }}"
+                                                        required>
+                                                    <button class="btn btn-sm btn-outline-danger"
+                                                        onclick="event.preventDefault(); document.getElementById('delete-form-{{ $member->id }}').submit();">×</button>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+
+                                    <div class="col-md-6 d-flex flex-column">
+                                        <h6 class="text-secondary border-bottom pb-2 text-center fs-6">
+                                            {{ __('Pets') }}</h6>
+                                        <ul class="list-group">
+                                            @foreach ($familyMembers['pets'] ?? [] as $member)
+                                                <li class="mt-2 ms-1 d-flex align-items-center">
+                                                    <input class="form-control me-2" type="text"
+                                                        name="names[{{ $member->id }}]" value="{{ $member->name }}"
+                                                        required>
+                                                    <button class="btn btn-sm btn-outline-danger"
+                                                        onclick="event.preventDefault(); document.getElementById('delete-form-{{ $member->id }}').submit();">×</button>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
 
 
-                    </div>
+                            </div>
 
 
 
-                    <!-- Row 3 -->
-                    <div class="row mb-4">
-                        <div class="col-md-6 d-flex flex-column">
-                            <h6 class="text-secondary border-bottom pb-2 text-center fs-6">
-                                {{ __('Siblings') }}</h6>
-                            <ul class="list-group">
-                                @foreach ($familyMembers['siblings'] ?? [] as $member)
-                                    <li class="mt-2 ms-1">
-                                        {{ $member->name }}
-                                        <button class="btn btn-sm btn-outline-danger float-end"
-                                            onclick="event.preventDefault(); document.getElementById('delete-form-{{ $member->id }}').submit();">×</button>
-                                        <form id="delete-form-{{ $member->id }}"
-                                            action="{{ route('family.delete', $member->id) }}" method="POST"
-                                            style="display: none;">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
-                                    </li>
-                                @endforeach
-
-                                {{-- @if ($familyMembers['cousins']->isEmpty())
-                                    <li class="mt-2 ms-1 text-muted">{{ __('No family members added') }}</li>
-                                @endif --}}
-                            </ul>
-                        </div>
-
-                        <div class="col-md-6 d-flex flex-column">
-                            <h6 class="text-secondary border-bottom pb-2 text-center fs-6">
-                                {{ __('Pets') }}</h6>
-                            <ul class="list-group">
-                                @foreach ($familyMembers['pets'] ?? [] as $member)
-                                    <li class="mt-2 ms-1">
-                                        {{ $member->name }}
-                                        <button class="btn btn-sm btn-outline-danger float-end"
-                                            onclick="event.preventDefault(); document.getElementById('delete-form-{{ $member->id }}').submit();">×</button>
-                                        <form id="delete-form-{{ $member->id }}"
-                                            action="{{ route('family.delete', $member->id) }}" method="POST"
-                                            style="display: none;">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
-                                    </li>
-                                @endforeach
-
-                                {{-- @if ($familyMembers['pets']->isEmpty())
-                                    <li class="list-group-item text-muted">{{ __('No family members added') }}</li>
-                                @endif --}}
-                            </ul>
                         </div>
                     </div>
-                        </div>
-                    </div>
-                </div>
-
 
             </div>
         </div>
@@ -364,5 +369,18 @@
             </div>
         </div>
     </section>
-</form>
+    </form>
+
+
+    <!-- Формы удаления -->
+    @foreach ($familyMembers as $role => $members)
+        @foreach ($members as $member)
+            <form id="delete-form-{{ $member->id }}" action="{{ route('family.delete', $member->id) }}"
+                method="POST" style="display: none;">
+                @csrf
+                @method('DELETE')
+            </form>
+        @endforeach
+    @endforeach
+
 @endsection
