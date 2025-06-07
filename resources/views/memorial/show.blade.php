@@ -121,9 +121,9 @@
                                             @foreach ($timelines as $timeline)
                                                 <li class="timeline-item mb-5">
                                                     <h6 class="fw-bold">
-                                                        {{ $timeline->date }}
+                                                        {{ \Carbon\Carbon::parse($timeline->date)->format('Y') }}
                                                         @if ($timeline->date_to)
-                                                            – {{ $timeline->date_to }}
+                                                            – {{ \Carbon\Carbon::parse($timeline->date_to)->format('Y') }}
                                                         @endif
                                                         {{-- {{ $timeline->title }} --}}
                                                     </h6>
@@ -132,7 +132,7 @@
                                                         @if ($timeline->type)
                                                             • {{ __('aigenerate.timeline_types.' . $timeline->type) }}
 
-                                                            {{ $timeline->description }}
+                                                            {{ $timeline->title }}
                                                         @endif
                                                     </p>
                                                     {{-- @if (!empty($timeline->description))
@@ -177,8 +177,12 @@
                     {{-- <div class="mimg fit-img" style="filter: grayscale(100%);"> --}}
                     <img src="{{ asset('memorial/' . $memorial->slug . '/' . $memorial->photo) }}" alt="">
                     <div class="text">
-                        <span class="fz-14 text-u mb-10">{{ $memorial->birth_date }} - {{ $memorial->death_date }}</span>
-                        <p style="margin-left: 25px;">Míg éltél szerettünk<br> míg élünk nem feledünk!</p>
+                        <span class="fz-40 mb-10 ms-3">
+                            {{ \Carbon\Carbon::parse($memorial->birth_date)->format('Y') }}
+                            -
+                            {{ \Carbon\Carbon::parse($memorial->death_date)->format('Y') }}
+                        </span>
+                        {{-- <p style="margin-left: 25px;">Míg éltél szerettünk<br> míg élünk nem feledünk!</p> --}}
                         <div class="shaps bottom">
                             <div class="shap-left-top">
                                 <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -231,7 +235,7 @@
                 <div class="text-center mt-80">
                     <a href="{{ route('memorial.biography', $memorial) }}" class="butn butn-md butn-bord butn-rounded">
                         <div class="d-flex align-items-center">
-                            <span>Bővebben az életrajzról</span>
+                            <span>Bővebben</span>
                             <span class="icon pe-7s-angle-right ml-10 fz-30"></span>
                         </div>
                     </a>
@@ -338,9 +342,10 @@
                                         <div class="info sub-color mb-10">
                                             @if ($image->image_date)
                                                 <span>{{ $image->image_date }}</span>
-                                                <span class="dot"></span>
                                             @endif
                                             @if ($image->image_description)
+                                                <span class="dot"></span>
+
                                                 <span>{{ $image->image_description }}</span>
                                             @endif
                                         </div>
@@ -359,7 +364,7 @@
                                 <a href="{{ route('memorial.photos', $memorial) }}"
                                     class="butn butn-md butn-bord butn-rounded">
                                     <div class="d-flex align-items-center">
-                                        <span>Tekintse meg az összes fényképet</span>
+                                        <span>Összes fénykép</span>
                                         <span class="icon pe-7s-angle-right ml-10 fz-30"></span>
                                     </div>
                                 </a>
@@ -424,11 +429,11 @@
             <div class="sec-head mb-100">
                 <div class="row">
                     <div class="col-lg-5">
-                        <h6 class="sub-head">Amit a család mond</h6>
+                        <h6 class="sub-head">Oszd meg Te is a közös pillanatokat, érzéseket, gondolatokat</h6>
                     </div>
                     <div class="col-lg-7">
-                        <h3 class="text-indent">Legfrissebb megjegyzések <br>rokonoktól és szeretteinktől
-                        </h3>
+                        {{-- <h4 class="text-indent">Oszd meg Te is a közös <br>pillanatokat, érzéseket, gondolatokat
+                        </h4> --}}
 
                     </div>
                 </div>
@@ -461,7 +466,7 @@
                         </div>
                     @empty
                         <div class="text-center">
-                            <p class="text-gray-500">Még nincsenek hozzászólások. Legyen Ön az első!</p>
+                            <p class="text-gray-500">Még senki sem írt emlékező üzenetet. Légy te az első.</p>
                         </div>
                     @endforelse
 
@@ -477,7 +482,7 @@
                 <div class="text-center mt-80">
                     <a href="{{ route('comments.create', $memorial->id) }}" class="butn butn-md butn-bord butn-rounded">
                         <div class="d-flex align-items-center">
-                            <span>Szólj hozzá</span>
+                            <span>Néhány szó tőled</span>
                             <span class="icon pe-7s-angle-right ml-10 fz-30"></span>
                         </div>
                     </a>

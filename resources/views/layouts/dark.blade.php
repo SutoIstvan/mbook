@@ -94,16 +94,16 @@
             <div class="topnav d-none d-lg-flex align-items-center">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('memorial.show') ? 'active' : '' }}" href="{{ route('memorial.show', $memorial) }}">Címlap</a>
+                        <a class="nav-link {{ request()->routeIs('memorial.show') ? 'active' : '' }}" href="{{ route('memorial.show', $memorial) }}">Főoldal</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('memorial.biography') ? 'active' : '' }}" href="{{ route('memorial.biography', $memorial) }}">Életrajz</a>
+                        <a class="nav-link {{ request()->routeIs('memorial.biography') ? 'active' : '' }}" href="{{ route('memorial.biography', $memorial) }}">Története</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('timeline.show') ? 'active' : '' }}" href="{{ route('timeline.show', $memorial) }}">Idővonal</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('memorial.photos') ? 'active' : '' }}" href="{{ route('memorial.photos', $memorial) }}">Fényképek</a>
+                        <a class="nav-link {{ request()->routeIs('memorial.photos') ? 'active' : '' }}" href="{{ route('memorial.photos', $memorial) }}">Galéria</a>
                     </li>
 
                     @if (!empty($memorial->video))
@@ -114,11 +114,11 @@
                     @endif
                 
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('memorial.comments') ? 'active' : '' }}" href="{{ route('memorial.comments', $memorial) }}">Hozzászólások</a>
+                        <a class="nav-link {{ request()->routeIs('memorial.comments') ? 'active' : '' }}" href="{{ route('memorial.comments', $memorial) }}">Megemlékezések</a>
                     </li>
                     <li class="nav-item">
                         @auth
-                            <a class="nav-link" href="{{ route('dashboard') }}">Irányítópult</a>
+                            <a class="nav-link" href="{{ route('dashboard') }}">Kezelés</a>
                         @else
                             <a class="nav-link" href="{{ route('login') }}">Belépés</a>
                         @endauth
@@ -212,14 +212,17 @@
                 <div class="container section-padding">
                     <div class="sec-head mb-80">
                         <div class="row">
-                            <div class="col-lg-5">
+                            <div class="col-lg-4">
                                 <a href="#" class="logo md-mb80">
-                                    MBook.hu
+                                    Rememus.com
                                 </a>
                             </div>
-                            <div class="col-lg-6">
-                                <h3 class="text-indent">Oszd meg az emlékoldalra mutató hivatkozást.
-                                </h3>
+                            <div class="col-lg-8">
+                                <h4 class="text-indent">Segíts, hogy mások is emlékezhessenek.
+                                </h4>
+
+                                <h4 class="sub-color inline">Küldd tovább, oszd meg a közösségi médiában vagy üzenetben.
+                                </h4>
                             </div>
                         </div>
                     </div>
@@ -240,10 +243,10 @@
                                         <i class="fa-brands fa-dribbble"></i>
                                     </a> -->
                                     <a href="#0">
-                                        <i class="fa-brands fa-behance"></i>
+                                        <i class="fa-brands fa-facebook"></i>
                                     </a>
                                     <a href="#0">
-                                        <i class="fa-brands fa-github"></i>
+                                        <i class="fa-brands fa-viber"></i>
                                     </a>
                                 </div>
                             </div>

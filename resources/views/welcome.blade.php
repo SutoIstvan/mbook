@@ -15,12 +15,21 @@
             <div class="row">
                 <div class="col-lg-7">
                     <div class="caption">
-                        <h2 class="d-none d-md-block">
-                            Rememus.com <br> ahol emlékeid örökre megmaradnak.
-                          </h2>
+                        <h3 class="d-none d-md-block">
+                            Rememus.com <br>
+                        </h3>
+
+                        <h4 class="mt-2 mb-2">
+                            Emlékhely, ahol a szeretteink örökké élnek.
+                        </h4>
+
+                        <h7>
+                            Hozz létre egy méltó emlékoldalt elhunyt szeretteid számára.
+                            Elmeséljük a történetüket, emléküket megőrizzük az idők végezetéig.
+                        </h7>
                           
                           <h5 class="d-block d-md-none">
-                            Rememus.com <br> ahol emlékeid örökre megmaradnak.
+                            Rememus.com <br> Emlékhely, ahol a szeretteink örökké élnek.
                           </h5>
                                                   <!-- <h1>We Invest <br> In Big Ideas</h1> -->
                     </div>
@@ -30,7 +39,7 @@
                 <div class="col-lg-6 order-md-2">
                     <div class="butons">
                         <a href="/prices" class="bg">
-                            <span>QR-kód  <br> vásárlása</span>
+                            <span>Emlékoldal  <br> létrehozása</span>
                         </a>
                         <a href="/prices" class="bord">
                             <span class="icon invert ml-5 mb-1">
@@ -86,9 +95,9 @@
 
                 <div class="col-lg-4 order-md-1">
                     <div class="cont md-mb50">
-                        <div class="d-flex align-items-center mb-15">
+                        <div class="d-flex align-items-center mb-15 mt-35">
                 
-                            <input id="qr-input" type="text" placeholder="qr code" class="text-light border placeholder-gray"> 
+                            <input id="qr-input" type="text" placeholder="QR-kód beváltása" class="text-light border placeholder-gray"> 
                 
                             <div>
                                 <button onclick="redirectWithCode()" class="ms-2 p-0 border-0 bg-transparent" style="width: 45px; height: 45px;">
@@ -100,7 +109,7 @@
                                   
                             </div>
                         </div>
-                        <p class="ms-3">Itt válthatod be a QR-kódot.</p>
+                        {{-- <p class="ms-3">Itt válthatod be a QR-kódot.</p> --}}
                     </div>
                 </div>
 
@@ -339,6 +348,204 @@
 
     <!-- ==================== Start Blog ==================== -->
 
+                    <section class="testim-sm section-padding bg-gray">
+                    <div class="container">
+                        <div class="sec-head text-center mb-100">
+                            <h6 class="sub-title main-color mb-15">Testimonials</h6>
+                            <h3 class="text-u">What Our Clients Say?</h3>
+                        </div>
+                        <div class="swiper testim-swiper swiper-container">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="item">
+                                        <div class="mb-70">
+                                            <div class="info d-flex align-items-center pt-30 mb-15">
+                                                <div>
+                                                    <div class="img-author">
+                                                        <img src="assets/imgs/testim/avatar1.jpg" alt="">
+                                                    </div>
+                                                </div>
+                                                <div class="info-text">
+                                                    <span>Bradley Gordon</span>
+                                                    <p>CEO & Founder, Archin Studio</p>
+                                                </div>
+                                            </div>
+                                            <h3>“Excellent</h3>
+                                        </div>
+                                        <div>
+                                            <div class="rate">
+                                                <h5>5.0
+                                                    <span class="stars">
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                    </span>
+                                                </h5>
+                                            </div>
+                                            <div class="mt-15">
+                                                <h6 class="fz-16">A studio with passionate, professional and full
+                                                    creativity. Much
+                                                    more than i’m expect. Great services, high quality products &
+                                                    affordable prices. I’m extremly satisfied!.</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="item">
+                                        <div class="mb-70">
+                                            <div class="info d-flex align-items-center pt-30 mb-15">
+                                                <div>
+                                                    <div class="img-author">
+                                                        <img src="assets/imgs/testim/avatar1.jpg" alt="">
+                                                    </div>
+                                                </div>
+                                                <div class="info-text">
+                                                    <span>Bradley Gordon</span>
+                                                    <p>CEO & Founder, Archin Studio</p>
+                                                </div>
+                                            </div>
+                                            <h3>“Excellent</h3>
+                                        </div>
+                                        <div>
+                                            <div class="rate">
+                                                <h5>5.0
+                                                    <span class="stars">
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                    </span>
+                                                </h5>
+                                            </div>
+                                            <div class="mt-15">
+                                                <h6 class="fz-16">A studio with passionate, professional and full
+                                                    creativity. Much
+                                                    more than i’m expect. Great services, high quality products &
+                                                    affordable prices. I’m extremly satisfied!.</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="item">
+                                        <div class="mb-70">
+                                            <div class="info d-flex align-items-center pt-30 mb-15">
+                                                <div>
+                                                    <div class="img-author">
+                                                        <img src="assets/imgs/testim/avatar1.jpg" alt="">
+                                                    </div>
+                                                </div>
+                                                <div class="info-text">
+                                                    <span>Bradley Gordon</span>
+                                                    <p>CEO & Founder, Archin Studio</p>
+                                                </div>
+                                            </div>
+                                            <h3>“Excellent</h3>
+                                        </div>
+                                        <div>
+                                            <div class="rate">
+                                                <h5>5.0
+                                                    <span class="stars">
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                    </span>
+                                                </h5>
+                                            </div>
+                                            <div class="mt-15">
+                                                <h6 class="fz-16">A studio with passionate, professional and full
+                                                    creativity. Much
+                                                    more than i’m expect. Great services, high quality products &
+                                                    affordable prices. I’m extremly satisfied!.</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="item">
+                                        <div class="mb-70">
+                                            <div class="info d-flex align-items-center pt-30 mb-15">
+                                                <div>
+                                                    <div class="img-author">
+                                                        <img src="assets/imgs/testim/avatar1.jpg" alt="">
+                                                    </div>
+                                                </div>
+                                                <div class="info-text">
+                                                    <span>Bradley Gordon</span>
+                                                    <p>CEO & Founder, Archin Studio</p>
+                                                </div>
+                                            </div>
+                                            <h3>“Excellent</h3>
+                                        </div>
+                                        <div>
+                                            <div class="rate">
+                                                <h5>5.0
+                                                    <span class="stars">
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                    </span>
+                                                </h5>
+                                            </div>
+                                            <div class="mt-15">
+                                                <h6 class="fz-16">A studio with passionate, professional and full
+                                                    creativity. Much
+                                                    more than i’m expect. Great services, high quality products &
+                                                    affordable prices. I’m extremly satisfied!.</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="item">
+                                        <div class="mb-70">
+                                            <div class="info d-flex align-items-center pt-30 mb-15">
+                                                <div>
+                                                    <div class="img-author">
+                                                        <img src="assets/imgs/testim/avatar1.jpg" alt="">
+                                                    </div>
+                                                </div>
+                                                <div class="info-text">
+                                                    <span>Bradley Gordon</span>
+                                                    <p>CEO & Founder, Archin Studio</p>
+                                                </div>
+                                            </div>
+                                            <h3>“Excellent</h3>
+                                        </div>
+                                        <div>
+                                            <div class="rate">
+                                                <h5>5.0
+                                                    <span class="stars">
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                    </span>
+                                                </h5>
+                                            </div>
+                                            <div class="mt-15">
+                                                <h6 class="fz-16">A studio with passionate, professional and full
+                                                    creativity. Much
+                                                    more than i’m expect. Great services, high quality products &
+                                                    affordable prices. I’m extremly satisfied!.</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+    
     <div class="blog-mp section-padding bg-gray">
         <div class="container">
             <div class="sec-head text-center mb-100">
