@@ -253,8 +253,11 @@
                         </div>
                     </div>
                 </div>
-                {{-- <div class="sub-footer">
-                    <div class="container bord-thin-top-light pt-50">
+                <div class="sub-footer">
+                                <div class="copy sub-color md-mb50 pb-30 text-center">
+                                    <p>Copyright © 2025 <a href="#0">Paksi Informatika.</a> Minden jog fenntartva! <a href="#0">ÁSZF Adatkezelési tájékoztató</a></p>
+                                </div>
+                    {{-- <div class="container bord-thin-top-light pt-50">
                         <div class="row">
                             <div class="col-lg-8">
                                 <div class="copy sub-color md-mb50">
@@ -269,8 +272,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div> --}}
+                    </div> --}}
+                </div>
             </footer>
 
             <!-- ==================== End Footer ==================== -->

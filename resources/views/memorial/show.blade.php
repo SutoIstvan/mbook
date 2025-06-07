@@ -428,11 +428,26 @@
             <div class="sec-head mb-100">
                 <div class="row">
                     <div class="col-lg-5">
-                        <h6 class="sub-head">Oszd meg Te is a közös pillanatokat, érzéseket, gondolatokat</h6>
+                        <h6 class="sub-head mt-30">Oszd meg Te is a közös pillanatokat, érzéseket, gondolatokat</h6>
                     </div>
-                    <div class="col-lg-7">
+                    <div class="col-lg-7 text-end">
                         {{-- <h4 class="text-indent">Oszd meg Te is a közös <br>pillanatokat, érzéseket, gondolatokat
                         </h4> --}}
+
+                        <a href="{{ route('comments.create', $memorial->id) }}" class="butn butn-md butn-bord butn-rounded">
+                            <div class="d-flex align-items-center">
+                                <span>Néhány szó tőled</span>
+                                <span class="icon pe-7s-angle-right ml-10 fz-30"></span>
+                            </div>
+                        </a>
+                        <a href="{{ route('memorial.comments', $memorial->id) }}"
+                            class="butn butn-md butn-bord butn-rounded me-3 mt-30 mb-10">
+                            <div class="d-flex align-items-center">
+                                <span>{{ $memorial->comments()->where('status', 'approved')->count() }}</span>
+                                <span class="icon pe-7s-chat ml-10 fz-30"></span>
+                            </div>
+                        </a>
+
 
                     </div>
                 </div>
@@ -476,7 +491,7 @@
                 <div class="swiper-pagination"></div>
             </div>
 
-            <div class="text-center mt-40">
+            {{-- <div class="text-center mt-40">
 
                 <div class="text-center mt-80">
                     <a href="{{ route('comments.create', $memorial->id) }}" class="butn butn-md butn-bord butn-rounded">
@@ -495,7 +510,7 @@
                 </div>
 
 
-            </div>
+            </div> --}}
 
         </div>
     </section>
