@@ -215,13 +215,12 @@
         <div class="container">
             <div class="sec-head mb-100">
                 <div class="row">
-                    <div class="col-lg-5">
+                    {{-- <div class="col-lg-5">
                         <h6 class="sub-head">Életrajz</h6>
-                    </div>
-                    <div class="col-lg-7">
+                    </div> --}}
+                    <div class="col-lg-12 text-center">
 
-                        <h4>Az élet utolsó fejezete:
-                            <span class="sub-color inline">Egy személyes történet, amely örökre megmarad.</span>
+                        <h4>Az élet utolsó fejezete: Egy személyes történet, amely örökre megmarad.
                         </h4>
                     </div>
                 </div>
