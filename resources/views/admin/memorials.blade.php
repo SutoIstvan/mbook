@@ -27,9 +27,21 @@
                     @foreach ($memorials as $memorial)
                         <tr>
                             <td>{{ $memorial->id }}</td>
-                            <td>{{ $memorial->name }}</td>
+                            <td><a href="{{ route('memorial.show', $memorial->slug) }}">{{ $memorial->name }}</a></td>
                             <td>{{ $memorial->birth_date }}</td>
-                            <td><a href="{{ route('dashboard.edit', $memorial->slug) }}">{{ __('Edit') }}</a></td>
+                            <td>
+                                <a href="{{ route('dashboard.edit', $memorial->slug) }}" class="btn btn-sm btn-primary" title="{{ __('Edit') }}">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <form action="{{ route('dashboard.destroy', $memorial->slug) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('{{ __('Are you sure you want to delete this memorial?') }}')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger" title="{{ __('Delete') }}">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </td>
+
                         </tr>
                     @endforeach
                 </tbody>

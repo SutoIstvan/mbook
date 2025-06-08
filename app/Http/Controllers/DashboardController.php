@@ -202,6 +202,8 @@ class DashboardController extends Controller
         // Удаляем мемориал
         $memorial->delete();
 
+        return redirect()->back()->with('success', __('Memorial deleted successfully'));
+
         return redirect()->route('dashboard')->with('success', 'Мемориал успешно удален.');
     }
 }

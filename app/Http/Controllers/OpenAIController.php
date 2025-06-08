@@ -67,6 +67,7 @@ class OpenAIController extends Controller
             }
         }
 
+        $prompt .= "\n" . __("aigenerate.motto_request") . "\n";
 
         // dd($prompt);
 
@@ -77,7 +78,7 @@ class OpenAIController extends Controller
                 'Authorization' => 'Bearer ' . env('OPENAI_API_KEY'),
                 'Content-Type' => 'application/json',
             ])->post('https://api.openai.com/v1/chat/completions', [
-                'model' => 'gpt-4o',
+                'model' => 'gpt-4.1-mini',
                 'messages' => [
                     ['role' => 'user', 'content' => $prompt],
                 ],
@@ -86,10 +87,26 @@ class OpenAIController extends Controller
         
             if ($response->successful()) {
                 $biography = $response['choices'][0]['message']['content'];
-        
-                $memorial->biography = $biography;
+
+                preg_match('/\[MOTTO\](.*?)\[\/MOTTO\]/s', $biography, $matches);
+
+                $motto = isset($matches[1]) ? trim($matches[1]) : null;
+
+                // Убираем тег девиза из биографии, если надо
+                $biographyCleaned = preg_replace('/\[MOTTO\].*?\[\/MOTTO\]/s', '', $biography);
+
+                // Сохраняем в модель
+                $memorial->biography = trim($biographyCleaned);
+                $memorial->motto = $motto;
                 $memorial->generation_attempts_left = max(0, $memorial->generation_attempts_left - 1);
                 $memorial->save();
+
+
+                // $biography = $response['choices'][0]['message']['content'];
+        
+                // $memorial->biography = $biography;
+                // $memorial->generation_attempts_left = max(0, $memorial->generation_attempts_left - 1);
+                // $memorial->save();
         
                 return view('memorial.createpreview', compact('memorial'));
             } else {

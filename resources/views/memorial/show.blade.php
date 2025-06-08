@@ -220,7 +220,8 @@
                     </div> --}}
                     <div class="col-lg-12 text-center">
 
-                        <h4>Az élet utolsó fejezete: Egy személyes történet, amely örökre megmarad.
+                        <h4>
+                            {{ ($memorial->motto) }}
                         </h4>
                     </div>
                 </div>

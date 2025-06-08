@@ -3,35 +3,35 @@ $(function () {
 
     "use strict";
 
-    var testim = new Swiper(".testim-sm .testim-swiper", {
-        slidesPerView: 3,
-        spaceBetween: 30,
-        centeredSlides: true,
-        loop: true,
-        speed: 1500,
-        autoplay: {
-            delay: 5000,
+var testim = new Swiper(".testim-swiper", {
+    slidesPerView: 5,
+    spaceBetween: 30,
+    centeredSlides: true,
+    loop: true,
+    speed: 1500,
+    autoplay: {
+        delay: 5000,
+    },
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+    },
+    breakpoints: {
+        0: {
+            slidesPerView: 1,
         },
-        loop: true,
-        pagination: {
-            el: ".testim-sm .swiper-pagination",
-            clickable: true,
+        640: {
+            slidesPerView: 2,
         },
-        breakpoints: {
-            0: {
-                slidesPerView: 1,
-            },
-            640: {
-                slidesPerView: 1,
-            },
-            768: {
-                slidesPerView: 2,
-            },
-            1024: {
-                slidesPerView: 3,
-            },
-        }
-    });
+        768: {
+            slidesPerView: 3,
+        },
+        1024: {
+            slidesPerView: 5,
+        },
+    }
+});
+
 
 });
 

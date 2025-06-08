@@ -322,6 +322,18 @@
                 </div>
 
 
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <label for="motto" class="col-form-label text-md-end">{{ __('Full motto') }}</label>
+                        <input id="motto" type="text" class="form-control @error('motto') is-invalid @enderror"
+                            name="motto" value="{{ old('motto', $memorial->motto) }}" required autocomplete="motto">
+                        @error('motto')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
 
 
                 <div class="col-md-12">

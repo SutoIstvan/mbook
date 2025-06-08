@@ -232,6 +232,7 @@ class MemorialController extends Controller
             'birth_date' => 'required|string|min:3|max:255',
             'death_date' => 'required|string|min:3|max:255',
             'biography' => 'required|string|min:3|max:22255',
+            'motto' => 'required|string|min:3|max:255',
             'photo' => 'image|mimes:jpeg,jpg,png',
             'crop_x' => 'nullable|numeric',
             'crop_y' => 'nullable|numeric',
@@ -241,6 +242,7 @@ class MemorialController extends Controller
 
         $memorial = Memorial::findOrFail($id);
         $memorial->name = $request->name;
+        $memorial->motto = $request->motto;
         $memorial->birth_date = $request->birth_date;
         $memorial->death_date = $request->death_date;
         $memorial->biography = $request->biography;

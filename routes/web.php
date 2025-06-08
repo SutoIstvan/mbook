@@ -14,11 +14,13 @@ use App\Http\Controllers\Auth\GoogleController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\UserAccess;
+use App\Models\Memorial;
 
 Auth::routes();
 
 Route::get('/', function () {
-    return view('welcome');
+    $memorials = Memorial::all();
+    return view('welcome', compact('memorials'));
 })->name('welcome');
 
 Route::get('/prices', function () {

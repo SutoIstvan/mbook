@@ -405,7 +405,7 @@
     height: auto; }
   .testim-sm .item {
     background: var(--bg-color);
-    padding: 40px;
+    padding: 20px;
     border-radius: 10px;
     display: -webkit-box;
     display: -ms-flexbox;
