@@ -122,6 +122,14 @@
                                 href="{{ route('price') }}">Árak</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link butn-scroll"
+                                href="{{ url('/')}}#howitworks">Hogyan működik</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link butn-q-scroll"
+                                href="{{ url('/')}}#faqs">Kérdések</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}"
                                 href="{{ route('contact') }}">Kapcsolatok</a>
                         </li>
@@ -129,7 +137,7 @@
 
                         <li class="nav-item">
                             @auth
-                                <a class="nav-link" href="{{ route('dashboard') }}">Irányítópult</a>
+                                <a class="nav-link" href="{{ route('dashboard') }}">Kezelés</a>
                             @else
                                 <a class="nav-link" href="{{ route('dashboard') }}">Bejelentkezés</a>
                             @endauth
@@ -218,11 +226,69 @@
             <!-- ==================== Start Footer ==================== -->
 
             {{-- @include('layouts.partials.footer') --}}
-            <footer class="footer-mp  pb-0">
+
+
+            <footer class="footer-mp section-padding pt-60 pb-0">
                 <div class="container">
                     <div class="row">
+                        <div class="col-lg-4">
+                            <div class="info-item md-mb30">
+                                <span class="fz-12 text-u sub-color mb-10">Telefon</span>
+                                <h6>+36 70 702 1252</h6>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="info-item md-mb30">
+                                <span class="fz-12 text-u sub-color mb-10">Email</span>
+                                <h6>info@rememus.hu</h6>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 d-flex">
+                            <div class="ml-auto ml-none">
+                                <div class="social-icon">
+                                    <a href="#0">
+                                        <i class="fa-brands fa-x-twitter"></i>
+                                    </a>
+                                    <a href="#0">
+                                        <i class="fa-brands fa-instagram"></i>
+                                    </a>
+                                    <a href="#0">
+                                        <i class="fa-brands fa-facebook"></i>
+                                    </a>
+                                    <a href="#0">
+                                        <i class="fa-brands fa-viber"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sub-footer pt-30 pb-30 mt-30 bord-thin-top">
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="copy sub-color md-mb30">
+                                    <p>Copyright © 2025 <a href="#0">Paksi Informatika.</a> Minden jog fenntartva.</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-7 d-flex justify-content-end">
+                                <div class="links sub-color d-flex justify-content-between">
+                                {{-- <a href="#" class="active">Impresszum</a> --}}
+                                <a href="#">Impresszum</a>
+                                <a href="#">Adatvédelmi tájékoztató</a>
+                                <a href="#">Általános szerződési feltételek</a>
+                                <a href="#">Cookie beállítások</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
 
 
+
+            {{-- <footer class="footer-mp  pb-0">
+                <div class="container">
+                    <div class="row">
                         <div class="sub-footer pt-30 pb-30 mt-30 ">
                             <div class="row">
                                 <div class="col-lg-8">
@@ -254,7 +320,7 @@
                             </div>
                         </div>
                     </div>
-            </footer>
+            </footer> --}}
 
             <!-- ==================== End Footer ==================== -->
 

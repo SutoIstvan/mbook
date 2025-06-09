@@ -1,6 +1,6 @@
 @extends('layouts.home')
 
-@section('title', 'Kapcsolat - rememus.com')
+@section('title', 'Kapcsolat - Rememus.com')
 
 @section('css')
     <style>

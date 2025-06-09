@@ -116,34 +116,47 @@
                                 @if ($timelines->isNotEmpty())
 
                                     <!-- Section: Timeline -->
-                                    <section class="px-2 py-3">
-                                        <ul class="timeline">
-                                            @foreach ($timelines as $timeline)
-                                                <li class="timeline-item mb-5">
-                                                    <h6 class="fw-bold">
-                                                        {{ \Carbon\Carbon::parse($timeline->date)->format('Y') }}
-                                                        @if ($timeline->date_to)
-                                                            – {{ \Carbon\Carbon::parse($timeline->date_to)->format('Y') }}
-                                                        @endif
-                                                        {{-- {{ $timeline->title }} --}}
-                                                    </h6>
-                                                    <p class="text-muted mb-2 fw-bold">
+                            <section class="px-2 py-3">
+                                <ul class="timeline">
+                                    @foreach ($timelines->take(4) as $timeline) {{-- Выводим только первые 5 --}}
+                                        <li class="timeline-item mb-5">
+                                            <h6 class="fw-bold">
+                                                @if ($timeline->date)
+                                                    {{ \Carbon\Carbon::parse($timeline->date)->format('Y') }}
+                                                    @if ($timeline->date_to)
+                                                        – {{ \Carbon\Carbon::parse($timeline->date_to)->format('Y') }}
+                                                    @endif
+                                                @endif
+                                            </h6>
+                                            <p class="text-muted mb-2 fw-bold">
+                                                @if ($timeline->type)
+                                                    • {{ __('aigenerate.timeline_types.' . $timeline->type) }}
+                                                    {{ $timeline->title }}
+                                                @endif
+                                            </p>
+                                        </li>
+                                    @endforeach
+                                </ul>
 
-                                                        @if ($timeline->type)
-                                                            • {{ __('aigenerate.timeline_types.' . $timeline->type) }}
+                                @if ($timelines->count() > 4)
+                                    <div class="text-center mt-3">
 
-                                                            {{ $timeline->title }}
-                                                        @endif
-                                                    </p>
-                                                    {{-- @if (!empty($timeline->description))
-                                                                        <p class="text-muted">
-                                                                        {{ $timeline->description }}
-                                                                        </p>
-                                                                    @endif --}}
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </section>
+                                    <a href="{{ route('timeline.show', $memorial) }}" class="butn butn-md butn-bord butn-rounded">
+                                        <div class="d-flex align-items-center">
+                                            <span>Összes esemény megjelenítése</span>
+                                            <span class="icon pe-7s-angle-right ml-10 fz-30"></span>
+                                        </div>
+                                    </a>
+
+                                    {{-- <a href="">
+                                        {{ __('Show all events') }}
+                                    </a> --}}
+
+                                    </div>
+                                @endif
+                            </section>
+
+
                                 @elseif ($images->isNotEmpty() || $memorial->photo)
                                     <div class="container text-center">
                                         @if ($images->isNotEmpty())

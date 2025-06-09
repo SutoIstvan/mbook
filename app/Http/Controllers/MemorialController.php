@@ -36,8 +36,10 @@ class MemorialController extends Controller
         $theme = $memorial->theme ?? 'light';
 
         $timelines = Timeline::where('memorial_id', $memorial->id)
-        ->orderBy('date', 'asc')
-        ->get();
+            ->orderByRaw('date IS NULL')
+            ->orderBy('date', 'asc')
+            ->get();
+
 
         if ($theme === 'dark') {
             return view('memorial.show', compact('memorial', 'images', 'comments', 'timelines'));
