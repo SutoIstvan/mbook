@@ -404,7 +404,7 @@
   .testim-sm .swiper-slide {
     height: auto; }
   .testim-sm .item {
-    background: var(--bg-color);
+    background: #f4f4f4;
     padding: 20px;
     border-radius: 10px;
     display: -webkit-box;

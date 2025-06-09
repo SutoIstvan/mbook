@@ -182,7 +182,7 @@
             </div>
             <div class="cont-info valign">
                 <div class="text-center full-width">
-                    <div class="logo">
+                    <div class="logo mb-2">
                         <img src="{{ asset('home/imgs/logo-rememus.png') }}" alt="">
                     </div>
                     <div class="social-icon mt-40">
@@ -227,7 +227,7 @@
                             <div class="row">
                                 <div class="col-lg-8">
                                     <div class="copy sub-color md-mb30 sm-hide">
-                                        <p>© 2025 rememus.com</p>
+                                        <p>Copyright © 2025 Paksi Informatika. Minden jog fenntartva! ÁSZF Adatkezelési tájékoztató</p>
                                     </div>
                                     <div class="copy sub-color md-mb30 text-center d-block d-sm-none">
                                         <p>© 2025 rememus.com</p>
@@ -243,10 +243,10 @@
                                                 <i class="fa-brands fa-instagram"></i>
                                             </a>
                                             <a href="#0">
-                                                <i class="fa-brands fa-dribbble"></i>
+                                                <i class="fa-brands fa-facebook"></i>
                                             </a>
                                             <a href="#0">
-                                                <i class="fa-brands fa-behance"></i>
+                                                <i class="fa-brands fa-viber"></i>
                                             </a>
                                         </div>
                                     </div>

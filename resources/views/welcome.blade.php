@@ -3,7 +3,9 @@
 @section('title', 'Címlap - Rememus.com')
 
 @section('css')
+<style>
 
+</style>
 @endsection
 
 @section('content')
@@ -16,10 +18,10 @@
                 <div class="col-lg-7">
                     <div class="caption">
                         <h3 class="d-none d-md-block">
-                            Rememus.com <br>
+                            <br>
                         </h3>
 
-                        <h4 class="mt-2 mb-2">
+                        <h4 class="mt-4 mb-2">
                             Emlékhely, ahol a szeretteink örökké élnek.
                         </h4>
 
@@ -38,7 +40,7 @@
             <div class="row justify-content-between mt-80">
                 <div class="col-lg-6 order-md-2">
                     <div class="butons">
-                        <a href="/prices" class="bg">
+                        <a href="/create" class="bg">
                             <span>Emlékoldal <br> létrehozása</span>
                         </a>
                         <a href="/prices" class="bord">
@@ -142,12 +144,12 @@
                         <img src="home/imgs/intro/1.jpg" alt="">
                     </div>
                 </div>
-                <div class="col-lg-5 offset-lg-2 valign">
+                <div class="col-lg-5 offset-lg-1 valign">
                     <div class="cont">
 
-                        <h3 class="d-none d-md-block mb-3">
-                            A rememus.com egy <br>QR-kóddal elérhető emlékoldal
-                        </h3>
+                        <h4 class="d-none d-md-block mb-3">
+                            Rememus.com – A szeretet örök nyoma, emlék, amely túlél minket
+                        </h4>
 
                         <h5 class="d-block d-md-none mb-3">
                             A rememus.com egy <br>QR-kóddal elérhető emlékoldal
@@ -155,11 +157,16 @@
 
                         <!-- <p>Az Mbook.hu egy QR-kóddal elérhető emlékoldal, amely életrajzokat, fényképeket, videókat és személyes emlékeket tartalmaz. Tökéletes megoldás sírkövekre és urnákra.</p> -->
                         <p>
-                            Könnyedén összegyűjtheti és megőrizheti szerettei emlékét generációkon át.
-                            Élje át újra a dédelgetett pillanatokat fényképeken, videókon és történeteken keresztül,
-                            QR-kódos emlékműveink minden egyes beolvasásával.
+
+                            A Rememus emlékoldalai lehetőséget adnak arra, hogy szeretteink története, fényképei, videói és közös pillanatai méltó módon fennmaradjanak – akár generációkon át.
+                            Az emlékoldal egy diszkréten elhelyezett QR-kóddal válik elérhetővé a sírhelyen vagy urnán, így egyetlen beolvasással bármikor felidézhetők az emlékek – akár a temetőben, akár otthon.
+
                         </p>
-                        <a href="#" class="butn butn-md butn-rounded bg-light mt-30">
+                        <br>
+                        <p>
+                            A megemlékező oldal QR-kód nélkül is látogatható, megosztható a családtagokkal, barátokkal. Az adatok időtállóságát és hitelességét blokklánc-technológia biztosítja, így az emlék nemcsak személyes, hanem megbízható és megőrizhető is – örökre.
+                        </p>
+                        <a href="#" class="butn-scroll butn butn-md butn-rounded bg-light mt-30">
                             <div class="d-flex align-items-center">
                                 <span>Nézze meg, hogyan működik</span>
                                 <span class="icon ml-10">
@@ -356,11 +363,11 @@
 
     <!-- ==================== Start Blog ==================== -->
 
-    <section class="testim-sm section-padding bg-gray">
+    <section class="testim-sm pb-100 pt-100 bg-gray" style="    background-color: #ffffff;">
         <div class="container">
             <div class="sec-head text-center mb-100">
                 {{-- <h6 class="sub-title main-color mb-15">Testimonials</h6> --}}
-                <h3 class="text-u">Emlékoldalak listája</h3>
+                <h3 class="text-u">Emlékoldalak</h3>
             </div>
             <div class="swiper testim-swiper swiper-container">
                 <div class="swiper-wrapper">
@@ -402,7 +409,7 @@
         </div>
     </section>
 
-    <div class="blog-mp section-padding bg-gray">
+    <div id="howitworks" class="section-padding bg-gray">
         <div class="container">
             <div class="sec-head text-center mb-100">
                 <!-- <h6 class="sub-title main-color mb-15">Our Blog</h6> -->
@@ -418,8 +425,8 @@
                         <div class="info d-flex align-items-center">
                             <div class="d-flex align-items-center">
                                 <h6>
-                                    QR-kód <br>
-                                    Szkennelés
+                                    Olvassa be a <br>
+                                    QR kódot
                                 </h6>
                             </div>
                             <div class="date ml-auto">
@@ -432,9 +439,9 @@
                             <img src="home/imgs/blog/1.png" alt="">
                         </div>
                         <div class="cont mt-30">
-                            <h6>
-                                Olvassa be a QR-kódot, miután kicsomagolta.
-                            </h6>
+                            <h7>
+                                Miután kézhez kapta az emlékplakettet, egyszerűen olvassa be a rajta lévő QR-kódot okostelefonjával vagy rögzítse a számítógépén.
+                            </h7>
                         </div>
                     </div>
                 </div>
@@ -457,9 +464,9 @@
                             <img src="home/imgs/blog/2.png" alt="">
                         </div>
                         <div class="cont mt-30">
-                            <h6>
-                                Adjon hozzá fényképeket, videókat és egyebeket!
-                            </h6>
+                            <h7>
+                                Adja meg az elhunyt adatait, töltsön fel képeket, videókat, kedves történeteket – mindezt okostelefonról vagy számítógépről, a többit elvégzi a mesterséges Intelligencia
+                            </h7>
                         </div>
                     </div>
                 </div>
@@ -469,8 +476,7 @@
                         <div class="info d-flex align-items-center">
                             <div class="d-flex align-items-center">
                                 <h6>
-                                    Helyezzen el <br>
-                                    bárhová
+                                    Ossza meg majd <br>rögzítse az emlékpakettet
                                 </h6>
                             </div>
                             <div class="date ml-auto">
@@ -483,9 +489,9 @@
                             <img src="home/imgs/blog/3.png" alt="">
                         </div>
                         <div class="cont mt-30">
-                            <h6>
-                                Helyezze QR-kódját bárhová, ahol csak akarja!
-                            </h6>
+                            <h7>
+                                Ossza meg az oldalt családtagokkal, barátokkal, akik szintén megoszthatják saját gondolataikat, fotóikat vagy búcsúzó soraikat. Rögzítse a plakettet a sírhelyre, urnára vagy emlékhelyre, így az emlékoldal bármikor elérhető marad – akár a helyszínen, akár online.
+                            </h7>
                         </div>
                     </div>
                 </div>
@@ -498,7 +504,7 @@
 
     <!-- ==================== Start about ==================== -->
 
-    <section class="about-smt section-padding pb-0">
+    {{-- <section class="about-smt section-padding pb-0">
         <div class="container">
             <div class="row">
                 <div class="col-lg-7">
@@ -551,7 +557,7 @@
         <div class="main-img fit-img">
             <img src="home/imgs/intro/2.jpg" alt="">
         </div>
-    </section>
+    </section> --}}
 
     <!-- ==================== End about ==================== -->
 
@@ -866,11 +872,11 @@
                 <!-- <h6 class="sub-title main-color mb-15">Testimonials</h6> -->
                 {{-- <h3 class="text-u">Mit tartalmaz egy emlékoldal?</h3> --}}
                 <h3 class="d-none d-md-block mb-3">
-                    Mit tartalmaz egy emlékoldal?
+                    Az emlékoldal fő pillérei
                 </h3>
 
                 <h5 class="d-block d-md-none mb-3">
-                    Mit tartalmaz egy emlékoldal?
+                    Az emlékoldal fő pillérei
                 </h5>
 
             </div>
@@ -1245,34 +1251,7 @@
                     <div class="col-lg-8 col-md-10">
                         <div class="row">
                             <div class="col-lg-6">
-                                <div class="item">
-                                    <div class="mb-20">
-                                        <div class="d-flex align-items-center">
-                                            <div>
-                                                <h6>Fényképek és videók</h6>
-                                            </div>
-                                            <div class="ml-auto">
-                                                <div class="">
-                                                    <span class="iconcir pe-7s-photo ml-10 fz-20"></span>
-                                                </div>
-                                            </div>
-                                        </div>
 
-                                    </div>
-                                    <div>
-                                        <div class="mt-15">
-                                            <h6 class="fz-16">
-                                                Könnyedén feltöltheti saját fényképeit és videóit, hogy örökre megőrzésre
-                                                kerüljenek az emlékoldalon. Lehetőséget adhat barátoknak és családtagoknak
-                                                is, hogy megosszák saját emlékeiket.
-
-                                            </h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 mt-lg-0 mt-4">
                                 <div class="item">
                                     <div class="mb-20">
                                         <div class="d-flex align-items-center">
@@ -1290,21 +1269,22 @@
                                     <div>
                                         <div class="mt-15">
                                             <h6 class="fz-16">
-                                                Másolja be a gyászjelentést, élettörténetet vagy bármilyen emléket, amelyet
-                                                meg szeretne őrizni a jövő generációi számára, hogy megismerhessék és
-                                                inspirációt meríthessenek belőle.
+                                                Adja meg a fontos mérföldköveket – legyen az a gyászjelentés, egy részletes élettörténet vagy néhány emlékezetes esemény-pont. Mi ezekből automatikusan felépítjük a kronológiai idővonalat, majd mesterséges intelligencia segítségével gördülékeny, inspiráló történetté szerkesztjük, hogy a jövő generációi is megismerhessék és példát meríthessenek belőle.
                                             </h6>
                                         </div>
                                     </div>
                                 </div>
+
+
+
                             </div>
 
                             <div class="col-lg-6 mt-lg-0 mt-4">
-                                <div class="item mt-30">
+                                <div class="item ">
                                     <div class=" ">
                                         <div class="d-flex align-items-center">
                                             <div>
-                                                <h6>Elérhető</h6>
+                                                <h6>Elérhető és emlékeztet.</h6>
                                             </div>
                                             <div class="ml-auto">
                                                 <div class="">
@@ -1317,10 +1297,34 @@
                                     <div>
                                         <div class="mt-15">
                                             <h6 class="fz-16">
-                                                Célunk, hogy szeretteink emlékének megőrzése egyszerű és elérhető legyen
-                                                mindenki számára. Hiszünk abban, hogy minden sírkövön QR-kódnak kell lennie,
-                                                hogy senki se merüljön feledésbe.
+                                                Célunk, hogy szeretteink emlékének megőrzése egyszerű, bárki számára hozzáférhető legyen. Hiszünk abban, hogy minden sírkőn helye van egy QR-kódnak, hogy senki se merüljön feledésbe. A rendszer emlékeztet a fontos évfordulókra – például születésnapra vagy halálozási évfordulóra –, így a családtagok és barátok időben értesülnek, és az emlékoldalon virággal, jókívánsággal vagy meghitt üzenettel róhatják le tiszteletüket.
 
+                                            </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                            <div class="col-lg-6 mt-lg-0 mt-4">
+                                <div class="item mt-30">
+                                    <div class="">
+                                        <div class="d-flex align-items-center">
+                                            <div>
+                                                <h6>Fényképek és videók</h6>
+                                            </div>
+                                            <div class="ml-auto">
+                                                <div class="">
+                                                    <span class="iconcir pe-7s-photo ml-10 fz-20"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div>
+                                        <div class="">
+                                            <h6 class="fz-16">
+                                                Töltsön fel kedvenc fotókat és videókat, hogy az emlékek méltó módon örökre fennmaradjanak. Barátait és családtagjait is meghívhatja, hogy saját felvételeikkel, közös pillanataikkal gazdagítsák az emlékoldalt.
                                             </h6>
                                         </div>
                                     </div>
@@ -1347,9 +1351,7 @@
                                     <div>
                                         <div class="">
                                             <h6 class="fz-16">
-                                                Gyűjtsön össze történeteket és fényképeket családtagoktól vagy barátoktól.
-                                                Ossza meg szerette emlékoldalának linkjét közösségi médiában, e-mailben vagy
-                                                üzenetben.
+                                                Gyűjtse össze a családtagok és barátok történeteit, fényképeit és személyes üzeneteit. Ossza meg az emlékoldal linkjét közösségi médiában, e-mailben vagy üzenetben, hogy bárki könnyedén hozzátehesse saját emlékeit.
                                             </h6>
                                         </div>
                                     </div>
@@ -1547,5 +1549,16 @@
                 alert('Kérlek, adj meg egy QR-kódot!');
             }
         }
+
+        $(document).ready(function () {
+            $('.butn-scroll').on('click', function (e) {
+                e.preventDefault();
+                $('html, body').animate({
+                    scrollTop: $('#howitworks').offset().top
+                }, 800); // 800 мс = плавная прокрутка
+            });
+        });
+
+
     </script>
 @endsection
