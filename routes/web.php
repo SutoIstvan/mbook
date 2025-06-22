@@ -27,6 +27,10 @@ Route::get('/prices', function () {
     return view('price');
 })->name('price');
 
+Route::get('/aszf', function () {
+    return view('aszf');
+})->name('aszf');
+
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
