@@ -309,6 +309,78 @@
         </div>
     </section>
     <!--Some Feature ends-->
+
+    <!-- Gallery -->
+<section id="gallery" class="bglight position-relative padding_top">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center wow fadeIn top15" data-wow-delay="300ms">
+                <h2 class="heading bottom45 darkcolor font-light2">Our <span class="font-normal">Gallery</span>
+                    <span class="divider-center"></span>
+                </h2>
+                <div class="col-md-8 offset-md-2 bottom40">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A dolores explicabo laudantium, omnis provident quam reiciendis voluptatum?</p>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div id="mosaic-filter" class="cbp-l-filters bottom30 wow fadeIn text-center" data-wow-delay="350ms">
+                    <div data-filter="*" class="cbp-filter-item">
+                        <span>All</span>
+                    </div>
+                    <div data-filter=".digital" class="cbp-filter-item">
+                        <span>Digital</span>
+                    </div>
+                    <div data-filter=".design" class="cbp-filter-item">
+                        <span>Design</span>
+                    </div>
+                    <div data-filter=".brand" class="cbp-filter-item">
+                        <span>Brand</span>
+                    </div>
+                    <div data-filter=".graphics" class="cbp-filter-item">
+                        <span>Graphics</span>
+                    </div>
+                </div>
+            </div>
+<div class="col-lg-12">
+    <div id="grid-mosaic" class="cbp cbp-l-grid-mosaic-flat">
+        @foreach ($images as $image)
+            <div class="cbp-item brand graphics" style="margin: 10px;">
+                <img src="{{ asset('memorial/' . $image->image_path) }}"
+                     alt="{{ $image->image_description ?? 'Gallery Image' }}">
+                <div class="gallery-hvr whitecolor">
+                    <div class="center-box">
+                        <a href="{{ asset('memorial/' . $image->image_path) }}" class="opens glightbox"
+                           data-fancybox="gallery" 
+                           title="{{ $image->image_description ?? 'Zoom In' }}">
+                            <i class="fa fa-search-plus"></i>
+                        </a>
+                        <h4 class="w-100">{{ $image->image_description ?? '' }}</h4>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+</div>
+
+
+                <div class="col-lg-12 mb-4">
+                    <!--Load more itema from another html file using ajax-->
+                    <div id="js-loadMore-mosaic" class="cbp-l-loadMore-button ">
+                        <a href="load-more.html" class="cbp-l-loadMore-link button py-1 button gradient-btn whitecolor transition-3" rel="nofollow">
+                            <span class="cbp-l-loadMore-defaultText">LOAD MORE (<span class="cbp-l-loadMore-loadItems">13</span>)</span>
+                            <span class="cbp-l-loadMore-loadingText">LOADING <i class="fas fa-spinner fa-spin"></i></span>
+                            <span class="cbp-l-loadMore-noMoreLoading d-none">NO MORE WORKS</span>
+                        </a>
+                    </div>
+                </div>
+
+
+        </div>
+    </div>
+</section>
+<!-- Gallery ends -->
+
+
     <!-- WOrk Process-->
     <section id="our-process" class="padding bgdark">
         <div class="container">
