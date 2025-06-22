@@ -44,7 +44,7 @@ class MemorialController extends Controller
         if ($theme === 'dark') {
             return view('memorial.show', compact('memorial', 'images', 'comments', 'timelines'));
         } else {
-            return view('memorial.create', compact('memorial'));
+            return view('memorial.white', compact('memorial', 'images', 'comments', 'timelines'));
         }
 
         return view('memorial.show', compact('memorial', 'images', 'comments', 'theme'));
