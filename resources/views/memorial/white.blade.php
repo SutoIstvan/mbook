@@ -19,11 +19,7 @@
     <link rel="stylesheet" href="white/css/style.css">
 
     <style type="text/css" media="screen">
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+
 
         .tree ul {
             padding-top: 20px;
@@ -176,6 +172,56 @@
         .parent-pair:hover::after {
             border-color: #94a0b4;
         }
+
+        
+        .tree li.down::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            top: auto;
+            border-top: none;
+            border-bottom: 1px solid #ccc;
+            width: 50%;
+            height: 20px;
+            z-index: -1;
+        }
+
+        .tree li.up::before {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            top: auto;
+            border-top: none;
+            border-bottom: 1px solid #ccc;
+            width: 50%;
+            height: 20px;
+            z-index: -1;
+        }
+
+        .tree li.down::before {
+            right: 50%;
+        }
+
+        .tree li.up::before {
+            border-right: 1px solid #ccc;
+            border-radius: 0 0 5px 0;
+            transform: translateX(1px);
+        }
+
+        .tree li.down::after {
+            left: 50%;
+            right: auto;
+            border-left: 1px solid #ccc;
+            border-radius: 0 0 0 5px;
+
+        }
+        /* .tree li.down::after {
+            right: auto;
+            left: 50%;
+            border-left: 1px solid #ccc;
+        } */
+
+
     </style>
 
 
@@ -462,7 +508,7 @@
                                         d="M5 15.2161C4.35254 13.5622 4 11.8013 4 10.1433C4 5.64588 7.58172 2 12 2C16.4183 2 20 5.64588 20 10.1433C20 14.6055 17.4467 19.8124 13.4629 21.6744C12.5343 22.1085 11.4657 22.1085 10.5371 21.6744C9.26474 21.0797 8.13831 20.1439 7.19438 19"
                                         stroke="#24cdd5" stroke-width="1.5" stroke-linecap="round" />
                                 </svg>
-                                {{ $memorial->grave_location }}
+                                {{ $memorial->grave_location }} San Francisco
                             </p>
                             {{-- <p class="bottom15 top90">We have a number of different teams within our agency that specialise in different areas of business so you can be sure that you won’t receive a generic service and although we boast a years and years of service.</p> --}}
                             {{-- <span class="d-inline-block test-star">
@@ -496,40 +542,70 @@
     <!--Some Feature ends-->
 
     <!-- Gallery -->
-    <section id="gallery" class="position-relative padding_top">
+    <section id="gallery" class="position-relative padding_bottom" >
 
-        <div class="tree">
-            <ul>
-                {{-- <li>
+        <div class="tree wow fadeIn" data-wow-delay="300ms">
+            {{-- <ul class="down"> 
+                <!-- My Children -->
+                <li class="down">
                     <a href="#">
-                        <img src="https://randomuser.me/api/portraits/women/4.jpg" class="img-fluid rounded-circle"
-                            width="80" height="80"><br>
-                        Я
+                        <img src="https://randomuser.me/api/portraits/men/5.jpg"
+                            class="img-fluid rounded-circle" width="80" height="80"><br>
+                        Fater
                     </a>
-                    <ul>
-                        <!-- My Children -->
-                        <li>
-                            <a href="#">
-                                <img src="https://randomuser.me/api/portraits/men/5.jpg"
-                                    class="img-fluid rounded-circle" width="80" height="80"><br>
-                                Ребёнок 1
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="https://randomuser.me/api/portraits/women/5.jpg"
-                                    class="img-fluid rounded-circle" width="80" height="80"><br>
-                                Ребёнок 2
-                            </a>
-                        </li>
-                    </ul>
-                </li> --}}
+                </li>
+                <li class="up">
+                    <a href="#">
+                        <img src="https://randomuser.me/api/portraits/women/5.jpg"
+                            class="img-fluid rounded-circle" width="80" height="80"><br>
+                        Mother
+                    </a>
+                </li>
+                                <li class="down">
+                    <a href="#">
+                        <img src="https://randomuser.me/api/portraits/men/5.jpg"
+                            class="img-fluid rounded-circle" width="80" height="80"><br>
+                        Fater
+                    </a>
+                </li>
+                <li class="up">
+                    <a href="#">
+                        <img src="https://randomuser.me/api/portraits/women/5.jpg"
+                            class="img-fluid rounded-circle" width="80" height="80"><br>
+                        Mother
+                    </a>
+                </li>
+            </ul> --}}
+            <ul class="down"> 
+                <!-- My Children -->
+                <li class="down">
+                    <a href="#">
+                        <img src="https://randomuser.me/api/portraits/men/5.jpg"
+                            class="img-fluid rounded-circle" width="80" height="80"><br>
+                        Apa
+                    </a>
+                </li>
+                <li class="up">
+                    <a href="#">
+                        <img src="https://randomuser.me/api/portraits/women/5.jpg"
+                            class="img-fluid rounded-circle" width="80" height="80"><br>
+                        Anya
+                    </a>
+                </li>
+            </ul>
+                
+
+            <ul>
+
                 <ul>
+
+
+
                     <li>
                         <a href="#">
-                            <img src="https://randomuser.me/api/portraits/women/4.jpg"
+                            <img src="http://mbook.test/memorial/davis-green/davis-green-260853-main.webp"
                                 class="img-fluid rounded-circle" width="80" height="80"><br>
-                            Я
+                            Davis Green
                         </a>
                         <ul>
                             <!-- My Children -->
@@ -537,30 +613,30 @@
                                 <a href="#">
                                     <img src="https://randomuser.me/api/portraits/men/5.jpg"
                                         class="img-fluid rounded-circle" width="80" height="80"><br>
-                                    Ребёнок 1
+                                    Gyermek
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
                                     <img src="https://randomuser.me/api/portraits/women/5.jpg"
                                         class="img-fluid rounded-circle" width="80" height="80"><br>
-                                    Ребёнок 2
+                                    Gyermek
                                 </a>
-
+                            </li>
                         </ul>
                     </li>
                     <li>
                         <a href="#">
                             <img src="https://randomuser.me/api/portraits/women/6.jpg"
                                 class="img-fluid rounded-circle" width="80" height="80"><br>
-                            Сестра
+                            Nővér
                         </a>
                     </li>
                     <li>
                         <a href="#">
                             <img src="https://randomuser.me/api/portraits/men/6.jpg" class="img-fluid rounded-circle"
                                 width="80" height="80"><br>
-                            Брат
+                            Testvér
                         </a>
                     </li>
                     </li>
@@ -1194,7 +1270,7 @@
                                         <!-- <i class="fas fa-circle"></i> -->
                                     </div>
 
-                                    <div class="tracking-date defaultcolor fs-4">
+                                    <div class="tracking-date defaultcolor fs-4 wow fadeIn" data-wow-delay="300ms">
                                         {{ \Carbon\Carbon::parse($timeline->date)->format('Y') }}<span
                                             class="fs-6">{{ \Carbon\Carbon::parse($timeline->date)->format('M d') }}</span>
                                     </div>
@@ -1280,7 +1356,7 @@
                         <div class="comments-list">
 
                             @forelse($comments as $comment)
-                                <div class="comment-box">
+                                <div class="comment-box wow fadeIn" data-wow-delay="300ms">
 
                                     <div class="d-flex gap-3 mb-4">
                                         <img src="{{ asset('dark/imgs/header/circle-badge4.png') }}"
