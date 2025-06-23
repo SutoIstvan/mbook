@@ -1260,10 +1260,10 @@ jQuery($=> {
         gridAdjustment: 'responsive',
         mediaQueries: [{
             width: 1500,
-            cols: 3,
+            cols: 4,
         }, {
             width: 1100,
-            cols: 3,
+            cols: 4,
         }, {
             width: 767,
             cols: 2,

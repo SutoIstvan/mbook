@@ -33,7 +33,15 @@
             <div class="container">
                 <a class="navbar-brand" href="index.html">
                     <img src="white/logo-rememus-qr-3.png" alt="logo" class="logo-default">
-                    <img src="white/logo-rememus-qr-3.png" alt="logo" class="logo-scrolled">
+                    {{-- <img src="white/logo-rememus-qr-3.png" alt="logo" class="logo-scrolled"> --}}
+                    <div class="logo-scrolled">
+                        <div class="d-flex align-items-center ">
+                            <img src="{{ asset('memorial/' . $memorial->slug . '/' . $memorial->photo) }}"
+                                        alt="" height="40px" style="border-radius: 3px"> 
+                            <h1 class="darkcolor ms-4 fs-2">{{ $memorial->name }}</h1> 
+                        </div>                    
+                    </div>
+                    
                 </a>
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav ms-auto">
@@ -358,7 +366,7 @@
                 <div class="col-lg-12">
                     <div id="grid-mosaic" class="cbp cbp-l-grid-mosaic-flat">
                         @foreach ($images as $image)
-                            <div class="cbp-item brand graphics" style="margin: 10px;">
+                            <div class="cbp-item brand graphics" style="border-radius: 4px;">
                                 <img src="{{ asset('memorial/' . $image->image_path) }}"
                                     alt="{{ $image->image_description ?? 'Gallery Image' }}">
                                 <div class="gallery-hvr whitecolor">
