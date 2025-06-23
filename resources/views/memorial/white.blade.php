@@ -17,6 +17,169 @@
     <link rel="stylesheet" href="white/css/revolution/navigation.css">
     <link rel="stylesheet" href="white/css/revolution/settings.css">
     <link rel="stylesheet" href="white/css/style.css">
+
+    <style type="text/css" media="screen">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .tree ul {
+            padding-top: 20px;
+            position: relative;
+            transition: all 0.5s;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .tree li {
+            text-align: center;
+            list-style-type: none;
+            position: relative;
+            padding: 20px 10px 0 10px;
+            transition: all 0.5s;
+        }
+
+        /* Connectors */
+        .tree li::before,
+        .tree li::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 50%;
+            border-top: 1px solid #ccc;
+            width: 50%;
+            height: 20px;
+            z-index: -1;
+        }
+
+        .tree li::after {
+            right: auto;
+            left: 50%;
+            border-left: 1px solid #ccc;
+        }
+
+        /* Remove connectors for elements without siblings */
+        .tree li:only-child::after,
+        .tree li:only-child::before {
+            display: none;
+        }
+
+        /* Remove space from the top of single children */
+        .tree li:only-child {
+            padding-top: 0;
+        }
+
+        /* Remove left connector from first child and right connector from last child */
+        .tree li:first-child::before,
+        .tree li:last-child::after {
+            border: 0 none;
+        }
+
+        /* Add back the vertical connector to the last nodes */
+        .tree li:last-child::before {
+            border-right: 1px solid #ccc;
+            border-radius: 0 5px 0 0;
+            transform: translateX(1px);
+        }
+
+        .tree li:first-child::after {
+            border-radius: 5px 0 0 0;
+        }
+
+        /* Downward connectors from parents */
+        .tree ul ul::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            border-left: 1px solid #ccc;
+            width: 0;
+            height: 20px;
+            z-index: -1;
+        }
+
+        /* Style for <a> elements */
+        .tree li a {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-decoration: none;
+            color: #666;
+            font-family: arial, verdana, tahoma;
+            font-size: 14px;
+            display: inline-block;
+            background: white;
+            border-radius: 5px;
+            transition: all 0.5s;
+            width: 120px;
+            text-align: center;
+        }
+
+        /* Adjust image size and alignment */
+        .tree li a img {
+            display: block;
+            margin: 0 auto 5px;
+            border-radius: 50%;
+        }
+
+        /* Parent pair styling */
+        .parent-pair {
+            display: flex;
+            justify-content: center;
+            position: relative;
+            padding-top: 0 !important;
+            margin-bottom: 20px;
+        }
+
+        .parent-pair li {
+            padding: 0 10px;
+        }
+
+        /* Connector between parents */
+        .parent-pair li:first-child a::after {
+            content: '';
+            position: absolute;
+            border-top: 1px solid #ccc;
+            top: 50%;
+            left: 100%;
+            width: 20px;
+            z-index: -1;
+        }
+
+        /* Connector from parents to children */
+        .parent-pair::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            border-left: 1px solid #ccc;
+            width: 0;
+            height: 20px;
+            z-index: -1;
+        }
+
+        /* Hover effects */
+        .tree li a:hover,
+        .tree li a:hover~ul li a {
+            background: #c8e4f8;
+            color: #000;
+            border: 1px solid #94a0b4;
+        }
+
+        /* Connector styles on hover */
+        .tree li a:hover~ul li::after,
+        .tree li a:hover~ul li::before,
+        .tree li a:hover~ul::before,
+        .tree li a:hover~ul ul::before,
+        .parent-pair:hover::after {
+            border-color: #94a0b4;
+        }
+    </style>
+
+
+
 </head>
 
 <body>
@@ -37,11 +200,11 @@
                     <div class="logo-scrolled">
                         <div class="d-flex align-items-center ">
                             <img src="{{ asset('memorial/' . $memorial->slug . '/' . $memorial->photo) }}"
-                                        alt="" height="40px" style="border-radius: 3px"> 
-                            <h1 class="darkcolor ms-4 fs-2">{{ $memorial->name }}</h1> 
-                        </div>                    
+                                alt="" height="40px" style="border-radius: 3px">
+                            <h1 class="darkcolor ms-4 fs-2">{{ $memorial->name }}</h1>
+                        </div>
                     </div>
-                    
+
                 </a>
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav ms-auto">
@@ -224,8 +387,10 @@
                     <div class="col-lg-6 offset-lg-6 col-md-12 text-center text-lg-end">
                         <div class="heading-title wow fadeInUp padding_testi" data-wow-delay="300ms">
                             {{-- <h1 style="font-size: 90px; color: #ffffff76">{{ $memorial->name }}</h2> --}}
-                            <h1 class="d-none d-md-block" style="font-size: 90px; color: #ffffff76">{{ $memorial->name }}</h1>
-                            <h1 class="d-block d-md-none mt-5" style="font-size: 30px; color: #ffffff76">{{ $memorial->name }}</h1>
+                            <h1 class="d-none d-md-block" style="font-size: 90px; color: #ffffff76">
+                                {{ $memorial->name }}</h1>
+                            <h1 class="d-block d-md-none mt-5" style="font-size: 30px; color: #ffffff76">
+                                {{ $memorial->name }}</h1>
                             {{-- <span class="whitecolor">
                                 {{ \Carbon\Carbon::parse($memorial->birth_date)->format('Y') }}
                                 -
@@ -331,6 +496,85 @@
     <!--Some Feature ends-->
 
     <!-- Gallery -->
+    <section id="gallery" class="position-relative padding_top">
+
+        <div class="tree">
+            <ul>
+                {{-- <li>
+                    <a href="#">
+                        <img src="https://randomuser.me/api/portraits/women/4.jpg" class="img-fluid rounded-circle"
+                            width="80" height="80"><br>
+                        Я
+                    </a>
+                    <ul>
+                        <!-- My Children -->
+                        <li>
+                            <a href="#">
+                                <img src="https://randomuser.me/api/portraits/men/5.jpg"
+                                    class="img-fluid rounded-circle" width="80" height="80"><br>
+                                Ребёнок 1
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="https://randomuser.me/api/portraits/women/5.jpg"
+                                    class="img-fluid rounded-circle" width="80" height="80"><br>
+                                Ребёнок 2
+                            </a>
+                        </li>
+                    </ul>
+                </li> --}}
+                <ul>
+                    <li>
+                        <a href="#">
+                            <img src="https://randomuser.me/api/portraits/women/4.jpg"
+                                class="img-fluid rounded-circle" width="80" height="80"><br>
+                            Я
+                        </a>
+                        <ul>
+                            <!-- My Children -->
+                            <li>
+                                <a href="#">
+                                    <img src="https://randomuser.me/api/portraits/men/5.jpg"
+                                        class="img-fluid rounded-circle" width="80" height="80"><br>
+                                    Ребёнок 1
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img src="https://randomuser.me/api/portraits/women/5.jpg"
+                                        class="img-fluid rounded-circle" width="80" height="80"><br>
+                                    Ребёнок 2
+                                </a>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="https://randomuser.me/api/portraits/women/6.jpg"
+                                class="img-fluid rounded-circle" width="80" height="80"><br>
+                            Сестра
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="https://randomuser.me/api/portraits/men/6.jpg" class="img-fluid rounded-circle"
+                                width="80" height="80"><br>
+                            Брат
+                        </a>
+                    </li>
+                    </li>
+                </ul>
+
+
+            </ul>
+
+        </div>
+
+
+    </section>
+
+
     <section id="gallery" class="bglight position-relative padding_top">
         <div class="container">
             <div class="row">
@@ -872,77 +1116,101 @@
                 <div class="col-md-12 col-sm-12">
                     <div id=""></div>
                     <div id="tracking">
-                <div class="col-md-12 text-center wow fadeIn top15" data-wow-delay="300ms">
-                    <h2 class="heading bottom45 darkcolor font-light2">Our <span class="font-normal">Timeline</span>
+                        <div class="col-md-12 text-center wow fadeIn top15" data-wow-delay="300ms">
+                            <h2 class="heading bottom45 darkcolor font-light2">Our <span
+                                    class="font-normal">Timeline</span>
 
-                    </h2>
-                    <div class="col-md-8 offset-md-2 bottom40">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A dolores explicabo laudantium,
-                            omnis provident quam reiciendis voluptatum?</p>
-                    </div>
-                </div>
+                            </h2>
+                            <div class="col-md-8 offset-md-2 bottom40">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A dolores explicabo
+                                    laudantium,
+                                    omnis provident quam reiciendis voluptatum?</p>
+                            </div>
+                        </div>
                         <div class="">
 
 
-                                    @foreach ($timelines->take(6) as $timeline)
-                                    
-                                        <div class="tracking-item ">
+                            @foreach ($timelines->take(6) as $timeline)
+                                <div class="tracking-item ">
 
-                                            <div class="tracking-icon status-intransit">
+                                    <div class="tracking-icon status-intransit">
 
-                                                    @if ($timeline->type == 'marriage')
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 24 24" fill="none">
-                                                        <path d="M8.96173 18.9109L9.42605 18.3219L8.96173 18.9109ZM12 5.50063L11.4596 6.02073C11.601 6.16763 11.7961 6.25063 12 6.25063C12.2039 6.25063 12.399 6.16763 12.5404 6.02073L12 5.50063ZM15.0383 18.9109L15.5026 19.4999L15.0383 18.9109ZM7.00061 16.4209C6.68078 16.1577 6.20813 16.2036 5.94491 16.5234C5.68169 16.8432 5.72758 17.3159 6.04741 17.5791L7.00061 16.4209ZM2.34199 13.4115C2.54074 13.7749 2.99647 13.9084 3.35988 13.7096C3.7233 13.5108 3.85677 13.0551 3.65801 12.6917L2.34199 13.4115ZM2.75 9.1371C2.75 6.98623 3.96537 5.18252 5.62436 4.42419C7.23607 3.68748 9.40166 3.88258 11.4596 6.02073L12.5404 4.98053C10.0985 2.44352 7.26409 2.02539 5.00076 3.05996C2.78471 4.07292 1.25 6.42503 1.25 9.1371H2.75ZM8.49742 19.4999C9.00965 19.9037 9.55954 20.3343 10.1168 20.6599C10.6739 20.9854 11.3096 21.25 12 21.25V19.75C11.6904 19.75 11.3261 19.6293 10.8736 19.3648C10.4213 19.1005 9.95208 18.7366 9.42605 18.3219L8.49742 19.4999ZM15.5026 19.4999C16.9292 18.3752 18.7528 17.0866 20.1833 15.4758C21.6395 13.8361 22.75 11.8026 22.75 9.1371H21.25C21.25 11.3345 20.3508 13.0282 19.0617 14.4798C17.7469 15.9603 16.0896 17.1271 14.574 18.3219L15.5026 19.4999ZM22.75 9.1371C22.75 6.42503 21.2153 4.07292 18.9992 3.05996C16.7359 2.02539 13.9015 2.44352 11.4596 4.98053L12.5404 6.02073C14.5983 3.88258 16.7639 3.68748 18.3756 4.42419C20.0346 5.18252 21.25 6.98623 21.25 9.1371H22.75ZM14.574 18.3219C14.0479 18.7366 13.5787 19.1005 13.1264 19.3648C12.6739 19.6293 12.3096 19.75 12 19.75V21.25C12.6904 21.25 13.3261 20.9854 13.8832 20.6599C14.4405 20.3343 14.9903 19.9037 15.5026 19.4999L14.574 18.3219ZM9.42605 18.3219C8.63014 17.6945 7.82129 17.0963 7.00061 16.4209L6.04741 17.5791C6.87768 18.2624 7.75472 18.9144 8.49742 19.4999L9.42605 18.3219ZM3.65801 12.6917C3.0968 11.6656 2.75 10.5033 2.75 9.1371H1.25C1.25 10.7746 1.66995 12.1827 2.34199 13.4115L3.65801 12.6917Z" fill="#24cdd5"/>
-                                                        </svg>
-                                                        
-                                                    @endif
+                                        @if ($timeline->type == 'marriage')
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px"
+                                                viewBox="0 0 24 24" fill="none">
+                                                <path
+                                                    d="M8.96173 18.9109L9.42605 18.3219L8.96173 18.9109ZM12 5.50063L11.4596 6.02073C11.601 6.16763 11.7961 6.25063 12 6.25063C12.2039 6.25063 12.399 6.16763 12.5404 6.02073L12 5.50063ZM15.0383 18.9109L15.5026 19.4999L15.0383 18.9109ZM7.00061 16.4209C6.68078 16.1577 6.20813 16.2036 5.94491 16.5234C5.68169 16.8432 5.72758 17.3159 6.04741 17.5791L7.00061 16.4209ZM2.34199 13.4115C2.54074 13.7749 2.99647 13.9084 3.35988 13.7096C3.7233 13.5108 3.85677 13.0551 3.65801 12.6917L2.34199 13.4115ZM2.75 9.1371C2.75 6.98623 3.96537 5.18252 5.62436 4.42419C7.23607 3.68748 9.40166 3.88258 11.4596 6.02073L12.5404 4.98053C10.0985 2.44352 7.26409 2.02539 5.00076 3.05996C2.78471 4.07292 1.25 6.42503 1.25 9.1371H2.75ZM8.49742 19.4999C9.00965 19.9037 9.55954 20.3343 10.1168 20.6599C10.6739 20.9854 11.3096 21.25 12 21.25V19.75C11.6904 19.75 11.3261 19.6293 10.8736 19.3648C10.4213 19.1005 9.95208 18.7366 9.42605 18.3219L8.49742 19.4999ZM15.5026 19.4999C16.9292 18.3752 18.7528 17.0866 20.1833 15.4758C21.6395 13.8361 22.75 11.8026 22.75 9.1371H21.25C21.25 11.3345 20.3508 13.0282 19.0617 14.4798C17.7469 15.9603 16.0896 17.1271 14.574 18.3219L15.5026 19.4999ZM22.75 9.1371C22.75 6.42503 21.2153 4.07292 18.9992 3.05996C16.7359 2.02539 13.9015 2.44352 11.4596 4.98053L12.5404 6.02073C14.5983 3.88258 16.7639 3.68748 18.3756 4.42419C20.0346 5.18252 21.25 6.98623 21.25 9.1371H22.75ZM14.574 18.3219C14.0479 18.7366 13.5787 19.1005 13.1264 19.3648C12.6739 19.6293 12.3096 19.75 12 19.75V21.25C12.6904 21.25 13.3261 20.9854 13.8832 20.6599C14.4405 20.3343 14.9903 19.9037 15.5026 19.4999L14.574 18.3219ZM9.42605 18.3219C8.63014 17.6945 7.82129 17.0963 7.00061 16.4209L6.04741 17.5791C6.87768 18.2624 7.75472 18.9144 8.49742 19.4999L9.42605 18.3219ZM3.65801 12.6917C3.0968 11.6656 2.75 10.5033 2.75 9.1371H1.25C1.25 10.7746 1.66995 12.1827 2.34199 13.4115L3.65801 12.6917Z"
+                                                    fill="#24cdd5" />
+                                            </svg>
+                                        @endif
 
-                                                    @if ($timeline->type == 'school')
+                                        @if ($timeline->type == 'school')
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px"
+                                                viewBox="0 0 24 24" fill="none">
+                                                <path
+                                                    d="M9.78272 3.49965C11.2037 2.83345 12.7962 2.83345 14.2172 3.49965L20.9084 6.63664C22.3639 7.31899 22.3639 9.68105 20.9084 10.3634L14.2173 13.5003C12.7963 14.1665 11.2038 14.1665 9.78281 13.5003L3.0916 10.3634C1.63613 9.68101 1.63614 7.31895 3.0916 6.63659L6 5.27307"
+                                                    stroke="#24cdd5" stroke-width="1.5" stroke-linecap="round" />
+                                                <path d="M2 8.5V14" stroke="#24cdd5" stroke-width="1.5"
+                                                    stroke-linecap="round" />
+                                                <path
+                                                    d="M12 21C10.204 21 7.8537 19.8787 6.38533 19.0656C5.5035 18.5772 5 17.6334 5 16.6254V11.5M19 11.5V16.6254C19 17.6334 18.4965 18.5772 17.6147 19.0656C17.0843 19.3593 16.4388 19.6932 15.7459 20"
+                                                    stroke="#24cdd5" stroke-width="1.5" stroke-linecap="round" />
+                                            </svg>
+                                        @endif
 
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 24 24" fill="none">
-                                                        <path d="M9.78272 3.49965C11.2037 2.83345 12.7962 2.83345 14.2172 3.49965L20.9084 6.63664C22.3639 7.31899 22.3639 9.68105 20.9084 10.3634L14.2173 13.5003C12.7963 14.1665 11.2038 14.1665 9.78281 13.5003L3.0916 10.3634C1.63613 9.68101 1.63614 7.31895 3.0916 6.63659L6 5.27307" stroke="#24cdd5" stroke-width="1.5" stroke-linecap="round"/>
-                                                        <path d="M2 8.5V14" stroke="#24cdd5" stroke-width="1.5" stroke-linecap="round"/>
-                                                        <path d="M12 21C10.204 21 7.8537 19.8787 6.38533 19.0656C5.5035 18.5772 5 17.6334 5 16.6254V11.5M19 11.5V16.6254C19 17.6334 18.4965 18.5772 17.6147 19.0656C17.0843 19.3593 16.4388 19.6932 15.7459 20" stroke="#24cdd5" stroke-width="1.5" stroke-linecap="round"/>
-                                                        </svg>
-                                                    @endif
+                                        @if ($timeline->type == 'child_birth')
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px"
+                                                viewBox="0 0 24 24" fill="none">
+                                                <path
+                                                    d="M8.00012 16.6066C9.1493 17.4664 10.5185 17.9874 12 17.9998C16.142 18.0343 19.5937 14.0798 19.5603 9.8043C19.5268 5.52875 16.142 2.03476 12 2.00026C7.858 1.96576 4.52734 5.4038 4.56077 9.67936C4.56976 10.8295 4.81252 11.9605 5.24326 13"
+                                                    stroke="#24cdd5" stroke-width="1.5" stroke-linecap="round" />
+                                                <path d="M15.5 9C15.4867 7.35641 14.1436 6.01326 12.5 6"
+                                                    stroke="#24cdd5" stroke-width="1.5" stroke-linecap="round" />
+                                                <path
+                                                    d="M12 20.3502C12.3212 20.3502 12.4818 20.3502 12.5933 20.3283C13.2466 20.1999 13.6441 19.5557 13.4511 18.9384C13.4181 18.833 13.342 18.6962 13.1896 18.4227M12 20.3502C11.6788 20.3502 11.5182 20.3502 11.4067 20.3283C10.7534 20.1999 10.3559 19.5557 10.5489 18.9384C10.5819 18.833 10.658 18.6962 10.8104 18.4227M12 20.3502V22.5"
+                                                    stroke="#24cdd5" stroke-width="1.5" stroke-linecap="round" />
+                                            </svg>
+                                        @endif
 
-                                                    @if ($timeline->type == 'child_birth')
+                                        @if ($timeline->type == 'work')
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px"
+                                                viewBox="0 0 24 24" fill="none">
+                                                <path
+                                                    d="M2 14C2 10.2288 2 8.34315 3.17157 7.17157C4.34315 6 6.22876 6 10 6H14C17.7712 6 19.6569 6 20.8284 7.17157C21.4816 7.82475 21.7706 8.69989 21.8985 10M22 14C22 17.7712 22 19.6569 20.8284 20.8284C19.6569 22 17.7712 22 14 22H10C6.22878 22 4.34314 22 3.17157 20.8284C2.51839 20.1752 2.22937 19.3001 2.10149 18"
+                                                    stroke="#24cdd5" stroke-width="1.5" stroke-linecap="round" />
+                                                <path
+                                                    d="M16 6C16 4.11438 16 3.17157 15.4142 2.58579C14.8284 2 13.8856 2 12 2C10.1144 2 9.17157 2 8.58579 2.58579C8 3.17157 8 4.11438 8 6"
+                                                    stroke="#24cdd5" stroke-width="1.5" />
+                                                <path
+                                                    d="M17 9C17 9.55228 16.5523 10 16 10C15.4477 10 15 9.55228 15 9C15 8.44772 15.4477 8 16 8C16.5523 8 17 8.44772 17 9Z"
+                                                    fill="#24cdd5" />
+                                                <path
+                                                    d="M9 9C9 9.55228 8.55228 10 8 10C7.44772 10 7 9.55228 7 9C7 8.44772 7.44772 8 8 8C8.55228 8 9 8.44772 9 9Z"
+                                                    fill="#24cdd5" />
+                                            </svg>
+                                        @endif
 
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 24 24" fill="none">
-                                                        <path d="M8.00012 16.6066C9.1493 17.4664 10.5185 17.9874 12 17.9998C16.142 18.0343 19.5937 14.0798 19.5603 9.8043C19.5268 5.52875 16.142 2.03476 12 2.00026C7.858 1.96576 4.52734 5.4038 4.56077 9.67936C4.56976 10.8295 4.81252 11.9605 5.24326 13" stroke="#24cdd5" stroke-width="1.5" stroke-linecap="round"/>
-                                                        <path d="M15.5 9C15.4867 7.35641 14.1436 6.01326 12.5 6" stroke="#24cdd5" stroke-width="1.5" stroke-linecap="round"/>
-                                                        <path d="M12 20.3502C12.3212 20.3502 12.4818 20.3502 12.5933 20.3283C13.2466 20.1999 13.6441 19.5557 13.4511 18.9384C13.4181 18.833 13.342 18.6962 13.1896 18.4227M12 20.3502C11.6788 20.3502 11.5182 20.3502 11.4067 20.3283C10.7534 20.1999 10.3559 19.5557 10.5489 18.9384C10.5819 18.833 10.658 18.6962 10.8104 18.4227M12 20.3502V22.5" stroke="#24cdd5" stroke-width="1.5" stroke-linecap="round"/>
-                                                        </svg>
-                                                    @endif
 
-                                                    @if ($timeline->type == 'work')
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 24 24" fill="none">
-                                                        <path d="M2 14C2 10.2288 2 8.34315 3.17157 7.17157C4.34315 6 6.22876 6 10 6H14C17.7712 6 19.6569 6 20.8284 7.17157C21.4816 7.82475 21.7706 8.69989 21.8985 10M22 14C22 17.7712 22 19.6569 20.8284 20.8284C19.6569 22 17.7712 22 14 22H10C6.22878 22 4.34314 22 3.17157 20.8284C2.51839 20.1752 2.22937 19.3001 2.10149 18" stroke="#24cdd5" stroke-width="1.5" stroke-linecap="round"/>
-                                                        <path d="M16 6C16 4.11438 16 3.17157 15.4142 2.58579C14.8284 2 13.8856 2 12 2C10.1144 2 9.17157 2 8.58579 2.58579C8 3.17157 8 4.11438 8 6" stroke="#24cdd5" stroke-width="1.5"/>
-                                                        <path d="M17 9C17 9.55228 16.5523 10 16 10C15.4477 10 15 9.55228 15 9C15 8.44772 15.4477 8 16 8C16.5523 8 17 8.44772 17 9Z" fill="#24cdd5"/>
-                                                        <path d="M9 9C9 9.55228 8.55228 10 8 10C7.44772 10 7 9.55228 7 9C7 8.44772 7.44772 8 8 8C8.55228 8 9 8.44772 9 9Z" fill="#24cdd5"/>
-                                                        </svg>
-                                                    @endif
+                                        <!-- <i class="fas fa-circle"></i> -->
+                                    </div>
 
+                                    <div class="tracking-date defaultcolor fs-4">
+                                        {{ \Carbon\Carbon::parse($timeline->date)->format('Y') }}<span
+                                            class="fs-6">{{ \Carbon\Carbon::parse($timeline->date)->format('M d') }}</span>
+                                    </div>
+                                    <div class="border">
+                                        <div class="tracking-content defaultcolor fs-6">
+                                            {{ __('aigenerate.timeline_types.' . $timeline->type) }}<span>
+                                                @if ($timeline->type)
+                                                    <span class="pt-2 fs-6">
+                                                        {{ $timeline->title }}
+                                                    </span>
+                                                @endif
+                                            </span></div>
 
-                                                <!-- <i class="fas fa-circle"></i> -->
-                                            </div>
-
-                                            <div class="tracking-date defaultcolor fs-4">{{ \Carbon\Carbon::parse($timeline->date)->format('Y') }}<span class="fs-6">{{ \Carbon\Carbon::parse($timeline->date)->format('M d') }}</span></div>
-                                            <div class="border">
-                                                <div class="tracking-content defaultcolor fs-6">{{ __('aigenerate.timeline_types.' . $timeline->type) }}<span>
-                                                    @if ($timeline->type)
-                                                        <span class="pt-2 fs-6">
-                                                            {{ $timeline->title }}
-                                                        </span>
-                                                        
-                                                    @endif
-                                                </span></div>
-
-                                            </div>
-                                        </div>
-
-                                    @endforeach
+                                    </div>
+                                </div>
+                            @endforeach
 
 
                             {{-- <div class="tracking-item ">
@@ -993,38 +1261,70 @@
 
 
 
-<div class="container">
-    <div class="">
-        <!-- New Comment Form -->
+    <section id="our-partners" class="padding bglight">
+        <div class="container">
+            <div class="row">
+                <h2 class="d-none">Partners Carousel</h2>
+                <div class="col-md-12 col-sm-12">
+                    <div id=""></div>
+                    <div id="tracking">
+                        <div class="col-md-12 text-center wow fadeIn top15" data-wow-delay="300ms">
+                            <h2 class="heading bottom45 darkcolor font-light2">Our <span
+                                    class="font-normal">Emlékfal</span>
 
-
-        <!-- Comments List -->
-        <div class="comments-list">
-            <!-- Comment 1 -->
-
-
-            <!-- Comment 2 -->
-            <div class="comment-box">
-                <div class="d-flex gap-3 mb-4">
-                    <img src="https://randomuser.me/api/portraits/men/9.jpg" alt="User Avatar" class="user-avatar">
-                    <div class="flex-grow-1">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <h6 class="mb-0">Mike Johnson</h6>
-                            <span class="comment-time">3 hours ago</span>
+                            </h2>
+                            <div class="col-md-8 offset-md-2 bottom40">
+                                <p>Oszd meg Te is a közös pillanatokat, érzéseket, gondolatokat</p>
+                            </div>
                         </div>
-                        <p class="mb-2">Great discussion everyone! I'd like to add that this topic has many
-                            interesting aspects we could explore further.</p>
-                        <div class="comment-actions">
-                            <a href="#"><i class="bi bi-heart"></i> Like</a>
-                            <a href="#"><i class="bi bi-reply"></i> Reply</a>
-                            <a href="#"><i class="bi bi-share"></i> Share</a>
+                        <div class="comments-list">
+
+                            @forelse($comments as $comment)
+                                <div class="comment-box">
+
+                                    <div class="d-flex gap-3 mb-4">
+                                        <img src="{{ asset('dark/imgs/header/circle-badge4.png') }}"
+                                            alt="User Avatar" class="user-avatar">
+                                        <div class="flex-grow-1">
+                                            <div class="mb-2">
+                                                <h6 class="mb-0 defaultcolor fs-4">{{ $comment->name }}</h6>
+                                                <span
+                                                    class="comment-time">{{ $comment->created_at->format('Y M d') }}</span>
+                                            </div>
+                                            <p class="mb-2">“{{ $comment->content }}”</p>
+                                            <div class="comment-actions">
+                                                <a href="#"><i class="bi bi-heart"></i> Like</a>
+                                                <a href="#"><i class="bi bi-reply"></i> Reply</a>
+                                                <a href="#"><i class="bi bi-share"></i> Share</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @empty
+                                <div class="text-center">
+                                    <p class="text-gray-500">Még senki sem írt emlékező üzenetet. Légy te az első.
+                                    </p>
+                                </div>
+                                <a href="{{ route('comments.create', $memorial->id) }}"
+                                    class="butn butn-md butn-bord butn-rounded">
+                                    <div class="d-flex align-items-center">
+                                        <span>Néhány szó tőled</span>
+                                        <span class="icon pe-7s-angle-right ml-10 fz-30"></span>
+                                    </div>
+                                </a>
                         </div>
+                        @endforelse
+
+
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+        </div>
+    </section>
+
+
+
 
 
     <!-- Partners ends-->
@@ -1192,8 +1492,7 @@
                         <div class="d-table w-100 address-item whitecolor bottom25">
                             <span class="d-table-cell align-middle"><i class="fas fa-mobile-alt"></i></span>
                             <p class="d-table-cell align-middle bottom0">
-                                +01 - 123 - 4567 <a class="d-block"
-                                    href="mailto:web@support.com">web@support.com</a>
+                                +01 - 123 - 4567 <a class="d-block" href="mailto:web@support.com">web@support.com</a>
                             </p>
                         </div>
                         <ul class="social-icons white wow fadeInUp" data-wow-delay="300ms">
