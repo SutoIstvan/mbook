@@ -47,7 +47,7 @@
             right: 50%;
             border-top: 1px solid #ccc;
             width: 50%;
-            height: 20px;
+            height: 168px;
             z-index: -1;
         }
 
@@ -215,13 +215,42 @@
             border-radius: 0 0 0 5px;
 
         }
-        /* .tree li.down::after {
-            right: auto;
+
+        .tree li a+a {
+            margin-left: 20px;
+            position: relative;
+        }
+        .tree li a+a::before {
+            content: '';
+            position: absolute;
+            border-top: 1px solid #ccc;
+            top: 50%;
+            left: -25px;
+            width: 25px;
+        }
+
+
+
+        li.up::after {
+            content: none !important;
+            /* Отменяет содержимое псевдоэлемента */
+            display: none !important;
+            /* Скрывает псевдоэлемент */
+        }
+        li.down::before {
+            content: none !important;
+            /* Отменяет содержимое псевдоэлемента */
+            display: none !important;
+            /* Скрывает псевдоэлемент */
+        }
+
+
+        li.mom::after {
             left: 50%;
-            border-left: 1px solid #ccc;
-        } */
-
-
+            right: auto;
+            border-left: 1px solid #9a0000;
+            border-radius: 0 0 0 5px;
+        }
     </style>
 
 
@@ -545,37 +574,37 @@
     <section id="gallery" class="position-relative padding_bottom" >
 
         <div class="tree wow fadeIn" data-wow-delay="300ms">
-            {{-- <ul class="down"> 
+            <ul class="down"> 
                 <!-- My Children -->
                 <li class="down">
                     <a href="#">
-                        <img src="https://randomuser.me/api/portraits/men/5.jpg"
+                        <img src="https://randomuser.me/api/portraits/men/75.jpg"
                             class="img-fluid rounded-circle" width="80" height="80"><br>
                         Fater
                     </a>
                 </li>
                 <li class="up">
                     <a href="#">
-                        <img src="https://randomuser.me/api/portraits/women/5.jpg"
+                        <img src="https://randomuser.me/api/portraits/women/72.jpg"
                             class="img-fluid rounded-circle" width="80" height="80"><br>
                         Mother
                     </a>
                 </li>
-                                <li class="down">
+                <li class="down">
                     <a href="#">
-                        <img src="https://randomuser.me/api/portraits/men/5.jpg"
+                        <img src="https://randomuser.me/api/portraits/men/21.jpg"
                             class="img-fluid rounded-circle" width="80" height="80"><br>
                         Fater
                     </a>
                 </li>
                 <li class="up">
                     <a href="#">
-                        <img src="https://randomuser.me/api/portraits/women/5.jpg"
+                        <img src="https://randomuser.me/api/portraits/women/49.jpg"
                             class="img-fluid rounded-circle" width="80" height="80"><br>
                         Mother
                     </a>
                 </li>
-            </ul> --}}
+            </ul>
             <ul class="down"> 
                 <!-- My Children -->
                 <li class="down">
@@ -585,9 +614,9 @@
                         Apa
                     </a>
                 </li>
-                <li class="up">
+                <li class="up mom">
                     <a href="#">
-                        <img src="https://randomuser.me/api/portraits/women/5.jpg"
+                        <img src="https://randomuser.me/api/portraits/women/3.jpg"
                             class="img-fluid rounded-circle" width="80" height="80"><br>
                         Anya
                     </a>
@@ -603,15 +632,26 @@
 
                     <li>
                         <a href="#">
-                            <img src="http://mbook.test/memorial/davis-green/davis-green-260853-main.webp"
+                            <img src="https://randomuser.me/api/portraits/women/26.jpg"
+                                class="img-fluid rounded-circle" width="80" height="80"><br>
+                            Feleség
+                        </a>
+
+                        <a href="#">
+                            <img src="https://randomuser.me/api/portraits/men/3.jpg"
                                 class="img-fluid rounded-circle" width="80" height="80"><br>
                             Davis Green
                         </a>
+                        {{-- <a href="#">
+                            <img src="https://randomuser.me/api/portraits/women/26.jpg"
+                                class="img-fluid rounded-circle" width="80" height="80"><br>
+                            Feleség
+                        </a> --}}
                         <ul>
                             <!-- My Children -->
                             <li>
                                 <a href="#">
-                                    <img src="https://randomuser.me/api/portraits/men/5.jpg"
+                                    <img src="https://randomuser.me/api/portraits/men/51.jpg"
                                         class="img-fluid rounded-circle" width="80" height="80"><br>
                                     Gyermek
                                 </a>
