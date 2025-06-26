@@ -245,12 +245,15 @@
         }
 
 
-        li.mom::after {
-            left: 50%;
-            right: auto;
-            border-left: 1px solid #9a0000;
-            border-radius: 0 0 0 5px;
+        .tree ul.down {
+            text-align: center;
+            list-style-type: none;
+            position: relative;
+            padding: 0px 10px 0 10px;
+            transition: all 0.5s;
         }
+
+        
     </style>
 
 
@@ -607,19 +610,25 @@
             </ul>
             <ul class="down"> 
                 <!-- My Children -->
+                
                 <li class="down">
+                    <ul>
                     <a href="#">
                         <img src="https://randomuser.me/api/portraits/men/5.jpg"
                             class="img-fluid rounded-circle" width="80" height="80"><br>
                         Apa
                     </a>
+                    </ul>
                 </li>
+                
                 <li class="up mom">
+                    <ul>
                     <a href="#">
                         <img src="https://randomuser.me/api/portraits/women/3.jpg"
                             class="img-fluid rounded-circle" width="80" height="80"><br>
                         Anya
                     </a>
+                    </ul>
                 </li>
             </ul>
                 
