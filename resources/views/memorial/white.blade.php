@@ -34,7 +34,7 @@
             text-align: center;
             list-style-type: none;
             position: relative;
-            padding: 20px 10px 0 10px;
+            padding: 20px 30px 0 30px;
             transition: all 0.5s;
         }
 
@@ -47,7 +47,7 @@
             right: 50%;
             border-top: 1px solid #ccc;
             width: 50%;
-            height: 168px;
+            height: 178px;
             z-index: -1;
         }
 
@@ -118,6 +118,8 @@
             display: block;
             margin: 0 auto 5px;
             border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0rem 0.4rem 0.6rem 0rem rgba(32, 46, 66, 0.08);
         }
 
         /* Parent pair styling */
@@ -157,21 +159,20 @@
         }
 
         /* Hover effects */
-        .tree li a:hover,
-        .tree li a:hover~ul li a {
+        .tree li a:hover {
             background: #c8e4f8;
             color: #000;
             border: 1px solid #94a0b4;
         }
 
         /* Connector styles on hover */
-        .tree li a:hover~ul li::after,
+        /* .tree li a:hover~ul li::after,
         .tree li a:hover~ul li::before,
         .tree li a:hover~ul::before,
         .tree li a:hover~ul ul::before,
         .parent-pair:hover::after {
             border-color: #94a0b4;
-        }
+        } */
 
         
         .tree li.down::after {
@@ -253,7 +254,16 @@
             transition: all 0.5s;
         }
 
-        
+        .tree ul ul.apa::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            border-left: 1px solid #ccc;
+            width: 0;
+            height: 40px;
+            z-index: -1;
+        }
     </style>
 
 
@@ -582,28 +592,28 @@
                 <li class="down">
                     <a href="#">
                         <img src="https://randomuser.me/api/portraits/men/75.jpg"
-                            class="img-fluid rounded-circle" width="80" height="80"><br>
+                            class="img-fluid rounded-circle" width="90" height="90"><br>
                         Fater
                     </a>
                 </li>
                 <li class="up">
                     <a href="#">
                         <img src="https://randomuser.me/api/portraits/women/72.jpg"
-                            class="img-fluid rounded-circle" width="80" height="80"><br>
+                            class="img-fluid rounded-circle" width="90" height="90"><br>
                         Mother
                     </a>
                 </li>
                 <li class="down">
                     <a href="#">
                         <img src="https://randomuser.me/api/portraits/men/21.jpg"
-                            class="img-fluid rounded-circle" width="80" height="80"><br>
+                            class="img-fluid rounded-circle" width="90" height="90"><br>
                         Fater
                     </a>
                 </li>
                 <li class="up">
                     <a href="#">
                         <img src="https://randomuser.me/api/portraits/women/49.jpg"
-                            class="img-fluid rounded-circle" width="80" height="80"><br>
+                            class="img-fluid rounded-circle" width="90" height="90"><br>
                         Mother
                     </a>
                 </li>
@@ -612,20 +622,20 @@
                 <!-- My Children -->
                 
                 <li class="down">
-                    <ul>
+                    <ul class="apa">
                     <a href="#">
                         <img src="https://randomuser.me/api/portraits/men/5.jpg"
-                            class="img-fluid rounded-circle" width="80" height="80"><br>
+                            class="img-fluid rounded-circle" width="90" height="90"><br>
                         Apa
                     </a>
                     </ul>
                 </li>
                 
                 <li class="up mom">
-                    <ul>
+                    <ul class="apa">
                     <a href="#">
                         <img src="https://randomuser.me/api/portraits/women/3.jpg"
-                            class="img-fluid rounded-circle" width="80" height="80"><br>
+                            class="img-fluid rounded-circle" width="90" height="90"><br>
                         Anya
                     </a>
                     </ul>
@@ -642,18 +652,18 @@
                     <li>
                         <a href="#">
                             <img src="https://randomuser.me/api/portraits/women/26.jpg"
-                                class="img-fluid rounded-circle" width="80" height="80"><br>
+                                class="img-fluid rounded-circle" width="90" height="90"><br>
                             Feleség
                         </a>
 
                         <a href="#">
                             <img src="https://randomuser.me/api/portraits/men/3.jpg"
-                                class="img-fluid rounded-circle" width="80" height="80"><br>
+                                class="img-fluid rounded-circle" width="90" height="90"><br>
                             Davis Green
                         </a>
                         {{-- <a href="#">
                             <img src="https://randomuser.me/api/portraits/women/26.jpg"
-                                class="img-fluid rounded-circle" width="80" height="80"><br>
+                                class="img-fluid rounded-circle" width="90" height="90"><br>
                             Feleség
                         </a> --}}
                         <ul>
@@ -661,14 +671,14 @@
                             <li>
                                 <a href="#">
                                     <img src="https://randomuser.me/api/portraits/men/51.jpg"
-                                        class="img-fluid rounded-circle" width="80" height="80"><br>
+                                        class="img-fluid rounded-circle" width="90" height="90"><br>
                                     Gyermek
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
                                     <img src="https://randomuser.me/api/portraits/women/5.jpg"
-                                        class="img-fluid rounded-circle" width="80" height="80"><br>
+                                        class="img-fluid rounded-circle" width="90" height="90"><br>
                                     Gyermek
                                 </a>
                             </li>
@@ -677,14 +687,14 @@
                     <li>
                         <a href="#">
                             <img src="https://randomuser.me/api/portraits/women/6.jpg"
-                                class="img-fluid rounded-circle" width="80" height="80"><br>
+                                class="img-fluid rounded-circle" width="90" height="90"><br>
                             Nővér
                         </a>
                     </li>
                     <li>
                         <a href="#">
                             <img src="https://randomuser.me/api/portraits/men/6.jpg" class="img-fluid rounded-circle"
-                                width="80" height="80"><br>
+                                width="90" height="90"><br>
                             Testvér
                         </a>
                     </li>
