@@ -146,3 +146,4 @@ Route::get('/{memorial}/timeline', [TimelineController::class, 'showTimeline'])-
 
 Route::get('/{memorial}/comments/create', [CommentController::class, 'create'])->name('comments.create');
 Route::post('/{memorial}/comments', [CommentController::class, 'store'])->name('comments.store');
+Route::post('/{memorial}/comments', [CommentController::class, 'storejs'])->name('comments.storejs');

@@ -4,6 +4,7 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{{ $memorial->name }} | Rememus.com</title>
     <link href="white/images/favicon.ico" rel="icon">
@@ -26,7 +27,7 @@
         .tree-container {
             overflow-x: auto;
             width: 100%;
-            
+
         }
 
         .tree ul {
@@ -376,7 +377,8 @@
                 </nav>
                 <div class="side-footer w-100">
                     <ul class="social-icons-simple white top40">
-                        <li><a href="javascript:void(0)" class="facebook"><i class="fab fa-facebook-f"></i> </a> </li>
+                        <li><a href="javascript:void(0)" class="facebook"><i class="fab fa-facebook-f"></i> </a>
+                        </li>
                         <li><a href="javascript:void(0)" class="twitter"><i class="fab fa-twitter"></i> </a> </li>
                         <li><a href="javascript:void(0)" class="insta"><i class="fab fa-instagram"></i> </a> </li>
                     </ul>
@@ -491,10 +493,10 @@
     <section id="biography" class="single-feature padding_bottom mt-5 pt-5">
         <div class="container">
             <div class="row d-flex align-items-center">
-                <div class="col-lg-12 col-md-12 col-sm-12 text-start wow fadeInLeft"
-                    data-wow-delay="300ms">
+                <div class="col-lg-12 col-md-12 col-sm-12 text-start wow fadeInLeft" data-wow-delay="300ms">
                     <div class="heading-title mb-4">
-                        <h2 class="darkcolor fs-2 font-xlight bottom30 text-center"><span class="defaultcolor">"</span>
+                        <h2 class="darkcolor fs-2 font-xlight bottom30 text-center"><span
+                                class="defaultcolor">"</span>
                             {{ $memorial->motto }}</h2>
                     </div>
                     <p class="bottom35">{{ $memorial->biography }}</p>
@@ -518,22 +520,18 @@
                     </h2>
                     <div class="col-md-8 offset-md-2 bottom40">
                         <p>
-                            A galéria egy gyűjtemény, amely {{ $memorial->name }} fotóit, videóit és egyéb vizuális emlékeit mutatja be. Lehetővé teszi a fontos pillanatok, események és családi történetek vizuális megőrzését és megosztását.
+                            A galéria egy gyűjtemény, amely {{ $memorial->name }} fotóit, videóit és egyéb vizuális
+                            emlékeit mutatja be. Lehetővé teszi a fontos pillanatok, események és családi történetek
+                            vizuális megőrzését és megosztását.
                         </p>
                     </div>
                 </div>
-                <div class="col-lg-12">
+                {{-- <div class="col-lg-12">
                     <div id="mosaic-filter" class="cbp-l-filters bottom30 wow fadeIn text-center"
                         data-wow-delay="350ms">
                         <div data-filter="*" class="cbp-filter-item">
                             <span>All</span>
                         </div>
-                        {{-- <div data-filter=".digital" class="cbp-filter-item">
-                            <span>Video</span>
-                        </div>
-                        <div data-filter=".design" class="cbp-filter-item">
-                            <span>Design</span>
-                        </div> --}}
 
                         <div data-filter=".graphics" class="cbp-filter-item">
                             <span>Video</span>
@@ -542,7 +540,7 @@
                             <span>Megemlékezések</span>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <div class="col-lg-12">
                     <div id="grid-mosaic" class="cbp cbp-l-grid-mosaic-flat">
                         @foreach ($images as $image)
@@ -647,7 +645,10 @@
 
                             </h2>
                             <div class="col-md-8 offset-md-2 bottom40">
-                                <p>Az idővonal {{ $memorial->name }} fontos életeseményeit ábrázolja időrendi sorrendben. Dátumokkal és leírásokkal mutatja be a kulcsfontosságú mozzanatokat, mint születések, házasságok vagy jelentős eredmények, segítve a családtörténet áttekintését</p>
+                                <p>Az idővonal {{ $memorial->name }} fontos életeseményeit ábrázolja időrendi
+                                    sorrendben. Dátumokkal és leírásokkal mutatja be a kulcsfontosságú mozzanatokat,
+                                    mint születések, házasságok vagy jelentős eredmények, segítve a családtörténet
+                                    áttekintését</p>
                             </div>
                         </div>
                         <div class="">
@@ -817,7 +818,8 @@
             </h2>
             <div class="col-md-8 offset-md-2 bottom40">
                 <p>
-                    Egy család rokonsági kapcsolatait ábrázoló diagram, amely bemutatja az ember felmenőit és leszármazottait, például szülőket, gyerekeket és nagyszülőket.
+                    Egy család rokonsági kapcsolatait ábrázoló diagram, amely bemutatja az ember felmenőit és
+                    leszármazottait, például szülőket, gyerekeket és nagyszülőket.
                 </p>
             </div>
         </div>
@@ -835,8 +837,8 @@
                     </li>
                     <li class="up">
                         <a href="#">
-                            <img src="https://randomuser.me/api/portraits/women/72.jpg" class="img-fluid rounded-circle"
-                                width="90" height="90"><br>
+                            <img src="https://randomuser.me/api/portraits/women/72.jpg"
+                                class="img-fluid rounded-circle" width="90" height="90"><br>
                             Mother
                         </a>
                     </li>
@@ -849,8 +851,8 @@
                     </li>
                     <li class="up">
                         <a href="#">
-                            <img src="https://randomuser.me/api/portraits/women/49.jpg" class="img-fluid rounded-circle"
-                                width="90" height="90"><br>
+                            <img src="https://randomuser.me/api/portraits/women/49.jpg"
+                                class="img-fluid rounded-circle" width="90" height="90"><br>
                             Mother
                         </a>
                     </li>
@@ -861,8 +863,8 @@
                     <li class="down">
                         <ul class="apa">
                             <a href="#">
-                                <img src="https://randomuser.me/api/portraits/men/5.jpg" class="img-fluid rounded-circle"
-                                    width="90" height="90"><br>
+                                <img src="https://randomuser.me/api/portraits/men/5.jpg"
+                                    class="img-fluid rounded-circle" width="90" height="90"><br>
                                 Apa
                             </a>
                         </ul>
@@ -894,8 +896,8 @@
                             </a>
 
                             <a href="#">
-                                <img src="https://randomuser.me/api/portraits/men/3.jpg" class="img-fluid rounded-circle"
-                                    width="90" height="90"><br>
+                                <img src="https://randomuser.me/api/portraits/men/3.jpg"
+                                    class="img-fluid rounded-circle" width="90" height="90"><br>
                                 Davis Green
                             </a>
                             {{-- <a href="#">
@@ -930,8 +932,8 @@
                         </li>
                         <li>
                             <a href="#">
-                                <img src="https://randomuser.me/api/portraits/men/6.jpg" class="img-fluid rounded-circle"
-                                    width="90" height="90"><br>
+                                <img src="https://randomuser.me/api/portraits/men/6.jpg"
+                                    class="img-fluid rounded-circle" width="90" height="90"><br>
                                 Testvér
                             </a>
                         </li>
@@ -1013,10 +1015,121 @@
 
         <div class="container text-center mt-5">
             <button type="button" class="btn gradient-btn" data-bs-toggle="modal" data-bs-target="#contactModal">
-                Open Contact Form
+                Néhány szó tőled
             </button>
         </div>
 
+        <!--contact us-->
+        <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    {{-- <div class="modal-header">
+                    <h5 class="modal-title darkcolor" id="contactModalLabel">Contact Us</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div> --}}
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    {{-- <span class="defaultcolor">Quisque tellus risus</span> --}}
+                                    <div class="heading-title bottom25 darkcolor">
+                                        <h2 class="font-normal darkcolor">Néhány szó tőled</h2>
+                                    </div>
+                                    <div class="col-md-6 offset-md-3 pb-3">
+                                        <p>Oszd meg Te is a közös pillanatokat, érzéseket, gondolatokat.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12 text-center text-md-start">
+                                    <div class="contact-meta pl-0 pl-sm-5">
+                                        <div class="heading-title heading_small">
+                                            <span class="defaultcolor mb-2">Trax Agency Worldwide</span>
+                                            <h3 class="darkcolor font-normal">Our London Agency</h3>
+                                        </div>
+                                        <div class="my-3">
+                                            <p class="bottom10">Address: 309, New Cavendish St, EC1Y 3WK</p>
+                                            {{-- <p class="bottom10">0800 214 5252</p> --}}
+                                            <p class="bottom10">0400 20778972</p>
+                                            <p class="bottom10"><a
+                                                    href="mailto:polpo@traxagency.co.au">polpo@traxagency.com</a></p>
+                                            {{-- <p class="bottom10">Mon-Fri: 9am-5pm</p> --}}
+                                        </div>
+                                        <ul class="social-icons no-border mb-4 mb-md-0">
+                                            <li><a href="javascript:void(0)" class="facebook"><i
+                                                        class="fab fa-facebook-f"></i></a></li>
+                                            <li><a href="javascript:void(0)" class="twitter"><i
+                                                        class="fab fa-twitter"></i></a></li>
+                                            <li><a href="javascript:void(0)" class="linkedin"><i
+                                                        class="fab fa-linkedin-in"></i></a></li>
+                                            <li><a href="javascript:void(0)" class="insta"><i
+                                                        class="fab fa-instagram"></i></a></li>
+                                            <li><a href="javascript:void(0)" class="whatsapp"><i
+                                                        class="fab fa-whatsapp"></i></a></li>
+                                            <li><a href="javascript:void(0)"><i class="far fa-envelope"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-sm-12">
+                                    <div class="heading-title">
+                                        <form class="getin_form" id="addcomment"
+                                            data-memorial-id="{{ $memorial->id }}">
+                                            @csrf
+
+                                            <div class="row px-2">
+                                                <div class="col-12" id="result1"></div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <input class="form-control" id="name1" type="text"
+                                                            placeholder="Név" required name="userName"
+                                                            style="border: 1px solid #d7d7d7;">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <textarea class="form-control" id="message1" placeholder="Üzenet" required name="message"
+                                                            style="border: 1px solid #d7d7d7;"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <button type="submit" id="submit_btn1"
+                                                        class="button gradient-btn w-100">Küldés</button>
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div> --}}
+                </div>
+            </div>
+        </div>
+
+        <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1055;">
+            <div id="successToast" class="toast align-items-center text-white bg-success border-0" role="alert">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        Komment sikeresen elküldve!
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                        data-bs-dismiss="toast"></button>
+                </div>
+            </div>
+            {{-- <div id="successToast" class="toast alert alert-success d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                <div>
+                    An example success alert with an icon
+                </div>
+            </div> --}}
+
+        </div>
+
+
+        <!--contact us end-->
 
     </section>
 
@@ -1131,100 +1244,7 @@
     <!--Testimonials Ends-->
 
 
-    <!--contact us-->
-    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title darkcolor" id="contactModalLabel">Contact Us</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-12 text-center">
-                                <span class="defaultcolor">Quisque tellus risus</span>
-                                <div class="heading-title bottom25 darkcolor">
-                                    <h2 class="font-normal darkcolor">Contact Us</h2>
-                                </div>
-                                <div class="col-md-6 offset-md-3 heading_space">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A dolores omnis
-                                        provident quam reiciendis voluptatum.</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-12 text-center text-md-start">
-                                <div class="contact-meta pl-0 pl-sm-5">
-                                    <div class="heading-title heading_small">
-                                        <span class="defaultcolor mb-2">Trax Agency Worldwide</span>
-                                        <h3 class="darkcolor font-normal">Our London Agency</h3>
-                                    </div>
-                                    <div class="my-3">
-                                        <p class="bottom10">Address: 309, New Cavendish St, EC1Y 3WK</p>
-                                        <p class="bottom10">0800 214 5252</p>
-                                        <p class="bottom10">0400 20778972</p>
-                                        <p class="bottom10"><a
-                                                href="mailto:polpo@traxagency.co.au">polpo@traxagency.com</a></p>
-                                        <p class="bottom10">Mon-Fri: 9am-5pm</p>
-                                    </div>
-                                    <ul class="social-icons no-border mb-4 mb-md-0">
-                                        <li><a href="javascript:void(0)" class="facebook"><i
-                                                    class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href="javascript:void(0)" class="twitter"><i
-                                                    class="fab fa-twitter"></i></a></li>
-                                        <li><a href="javascript:void(0)" class="linkedin"><i
-                                                    class="fab fa-linkedin-in"></i></a></li>
-                                        <li><a href="javascript:void(0)" class="insta"><i
-                                                    class="fab fa-instagram"></i></a></li>
-                                        <li><a href="javascript:void(0)" class="whatsapp"><i
-                                                    class="fab fa-whatsapp"></i></a></li>
-                                        <li><a href="javascript:void(0)"><i class="far fa-envelope"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-12">
-                                <div class="heading-title">
-                                    <form class="getin_form" onsubmit="return false;">
-                                        <div class="row px-2">
-                                            <div class="col-12" id="result1"></div>
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <label for="name1" class="d-none"></label>
-                                                    <input class="form-control" id="name1" type="text"
-                                                        placeholder="Name" required name="userName">
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <label for="email1" class="d-none"></label>
-                                                    <input class="form-control" type="email" id="email1"
-                                                        placeholder="Email" name="email">
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <label for="message1" class="d-none"></label>
-                                                    <textarea class="form-control" id="message1" placeholder="Message" required name="message"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <button type="submit" id="submit_btn1"
-                                                    class="button gradient-btn w-100">Send</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--contact us end-->
+
     <!-- map -->
     {{-- <div class="w-100">
     <div id="map" class="full-map"></div>
@@ -1297,37 +1317,37 @@
                     </div>
                 </div> --}}
                 <div class="col-lg-3 col-md-4 col-sm-12 mt-4  d-flex justify-content-center justify-content-md-start">
-                        <a href="index.html" class="footer_logo bottom25"><img src="white/logo-rememus-qr-4.png"
-                                alt="trax"></a>
+                    <a href="index.html" class="footer_logo bottom25"><img src="white/logo-rememus-qr-4.png"
+                            alt="trax"></a>
                 </div>
                 <div class="col-lg-9 col-md-8 col-sm-12 d-flex justify-content-end">
                     <div class="footer_panel padding_bottom_half bottom20 ps-0 ps-lg-5">
                         <h3 class="whitecolor bottom25"></h3>
                         <ul class="links nav nav-pills">
-                        <li class="nav-item">
-                            <a class="nav-link pagescroll scrollupto" href="#home">Története</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link pagescroll scrollupto" href="#home">Története</a>
+                            </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link pagescroll" href="#gallery">Galéria</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link pagescroll" href="#timeline">Idővonal</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link pagescroll" href="#gallery">Galéria</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pagescroll" href="#timeline">Idővonal</a>
+                            </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link pagescroll" href="#family-tree">Családfa</a>
-                        </li>
-                        {{-- <li class="nav-item">
+                            <li class="nav-item">
+                                <a class="nav-link pagescroll" href="#family-tree">Családfa</a>
+                            </li>
+                            {{-- <li class="nav-item">
                             <a class="nav-link pagescroll" href="#testimonials">Megemlékezések</a>
                         </li> --}}
-                        <li class="nav-item">
-                            @auth
-                                <a class="nav-link" href="{{ route('dashboard') }}">Kezelés</a>
-                            @else
-                                <a class="nav-link" href="{{ route('login') }}">Belépés</a>
-                            @endauth
-                        </li>
+                            <li class="nav-item">
+                                @auth
+                                    <a class="nav-link" href="{{ route('dashboard') }}">Kezelés</a>
+                                @else
+                                    <a class="nav-link" href="{{ route('login') }}">Belépés</a>
+                                @endauth
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -1382,6 +1402,61 @@
     <script src="white/js/revolution/extensions/revolution.extension.video.min.js"></script>
     <!--custom functions and script-->
     <script src="white/js/functions.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const commentForm = document.getElementById('addcomment');
+        if (!commentForm) return;
+
+        commentForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            const form = e.target;
+            const memorialId = form.dataset.memorialId;
+            const formData = new FormData(form);
+
+            fetch(`/${memorialId}/comments`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(err => { throw err; });
+                }
+                return response.json();
+            })
+            .then(data => {
+                form.reset();
+
+                // ✅ Закрытие Bootstrap-модального окна
+                const modalEl = document.getElementById('contactModal');
+                const modalInstance = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+                modalInstance.hide();
+
+                // ✅ Показ Bootstrap Toast
+                const toastEl = document.getElementById('successToast');
+                const toast = new bootstrap.Toast(toastEl);
+                toast.show();
+
+                // Очистка result блока (если есть)
+                document.getElementById('result1').innerHTML = '';
+            })
+            .catch(error => {
+                console.error(error);
+                document.getElementById('result1').innerHTML =
+                    `<div class="alert alert-danger">Hiba történt: ${error.message ?? 'érvénytelen adatok'}</div>`;
+            });
+        });
+    });
+</script>
+
+
+
+
 </body>
 
 </html>

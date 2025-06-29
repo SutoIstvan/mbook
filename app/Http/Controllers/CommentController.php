@@ -48,6 +48,26 @@ class CommentController extends Controller
         return redirect()->back()->with('success', 'A megjegyzést sikeresen hozzáadtuk, és moderálásra vár.');
     }
 
+    public function storejs(Memorial $memorial, Request $request)
+    {
+        $memorial = Memorial::where('id', $memorial->id)->firstOrFail();
+
+        $validated = $request->validate([
+            'userName' => 'required|string|max:255',
+            'message' => 'required|string',
+        ]);
+
+        Comment::create([
+            'name' => $validated['userName'],
+            'content' => $validated['message'],
+            'memorial_id' => $memorial->id,
+            'status' => 'pending'
+        ]);
+
+        return response()->json(['success' => true, 'message' => 'Comment saved']);
+    }
+
+
     public function approve(Comment $comment)
     {
         // $this->authorize('moderate', Comment::class);
