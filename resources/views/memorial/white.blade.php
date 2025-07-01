@@ -293,7 +293,7 @@
     <header class="site-header" id="header">
         <nav class="navbar navbar-expand-lg transparent-bg static-nav">
             <div class="container">
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="">
                     <img src="white/logo-rememus-qr-3.png" alt="logo" class="logo-default">
                     {{-- <img src="white/logo-rememus-qr-3.png" alt="logo" class="logo-scrolled"> --}}
                     <div class="logo-scrolled">
