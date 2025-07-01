@@ -29,64 +29,64 @@ jQuery($=> {
     $('[data-toggle="tooltip"]').tooltip();
 
     //contact us
-    $("#submit_btn1 , #submit_btn").on('click', function () {
-        let userName = $('#name1').val();
-        let userEmail = $('#email1').val();
-        let userMessage = $('#message1').val();
-        let result;
-        if(this.id === 'submit_btn'){
-            result = $('#result');
-            userMessage = $('#companyName').val();
-            userName = $('#userName').val();
-            userEmail = $('#email').val();
-        }
-        else{
-            result = $('#result1');
-        }
-        //simple validation at client's end
-        let postData, output;
-        let proceed = true;
-        if (userName === "") {
-            proceed = false;
-        }
-        if (userEmail === "") {
-            proceed = false;
-        }
-        if (userMessage === "") {
-            proceed = false;
-        }
-        //everything looks good! proceed...
-        if (proceed) {
+    // $("#submit_btn1 , #submit_btn").on('click', function () {
+    //     let userName = $('#name1').val();
+    //     let userEmail = $('#email1').val();
+    //     let userMessage = $('#message1').val();
+    //     let result;
+    //     if(this.id === 'submit_btn'){
+    //         result = $('#result');
+    //         userMessage = $('#companyName').val();
+    //         userName = $('#userName').val();
+    //         userEmail = $('#email').val();
+    //     }
+    //     else{
+    //         result = $('#result1');
+    //     }
+    //     //simple validation at client's end
+    //     let postData, output;
+    //     let proceed = true;
+    //     if (userName === "") {
+    //         proceed = false;
+    //     }
+    //     if (userEmail === "") {
+    //         proceed = false;
+    //     }
+    //     if (userMessage === "") {
+    //         proceed = false;
+    //     }
+    //     //everything looks good! proceed...
+    //     if (proceed) {
 
-            //data to be sent to server
-            postData = {
-                'userName': userName,
-                'userEmail': userEmail,
-                'userMessage': userMessage
-            };
+    //         //data to be sent to server
+    //         postData = {
+    //             'userName': userName,
+    //             'userEmail': userEmail,
+    //             'userMessage': userMessage
+    //         };
 
-            //Ajax post data to server
-            $.post('contact.php', postData, function (response) {
-                //load json data from server and output message
-                if (response.type === 'error') {
-                    output = '<div class="alert-danger" style="padding:10px; margin-bottom:25px;">' + response.text + '</div>';
-                } else {
-                    output = '<div class="alert-success" style="padding:10px; margin-bottom:25px;">' + response.text + '</div>';
-                    //reset values in all input fields
-                    $('.getin_form input').val('');
-                    $('.getin_form textarea').val('');
+    //         //Ajax post data to server
+    //         $.post('contact.php', postData, function (response) {
+    //             //load json data from server and output message
+    //             if (response.type === 'error') {
+    //                 output = '<div class="alert-danger" style="padding:10px; margin-bottom:25px;">' + response.text + '</div>';
+    //             } else {
+    //                 output = '<div class="alert-success" style="padding:10px; margin-bottom:25px;">' + response.text + '</div>';
+    //                 //reset values in all input fields
+    //                 $('.getin_form input').val('');
+    //                 $('.getin_form textarea').val('');
 
-                }
+    //             }
 
-                result.slideUp("fast").html(output).slideDown();
-            }, 'json');
+    //             result.slideUp("fast").html(output).slideDown();
+    //         }, 'json');
 
-        } else {
-            output = '<div class="alert-danger" style="padding:10px; margin-bottom:25px;">Please provide the missing fields.</div>';
-            result.slideUp("fast").html(output).slideDown();
-        }
+    //     } else {
+    //         output = '<div class="alert-danger" style="padding:10px; margin-bottom:25px;">Please provide the missing fields.</div>';
+    //         result.slideUp("fast").html(output).slideDown();
+    //     }
 
-    });
+    // });
     /*rating stars*/
     let fadeInStar = () => {
         let starItem = $('#rattingIcon .fa-star.fas');

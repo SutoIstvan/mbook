@@ -1014,7 +1014,7 @@
         </div>
 
         <div class="container text-center mt-5">
-            <button type="button" class="btn gradient-btn" data-bs-toggle="modal" data-bs-target="#contactModal">
+            <button type="button" class="button gradient-btn" data-bs-toggle="modal" data-bs-target="#contactModal">
                 Néhány szó tőled
             </button>
         </div>
@@ -1043,18 +1043,26 @@
                                 <div class="col-md-4 col-sm-12 text-center text-md-start">
                                     <div class="contact-meta pl-0 pl-sm-5">
                                         <div class="heading-title heading_small">
-                                            <span class="defaultcolor mb-2">Trax Agency Worldwide</span>
-                                            <h3 class="darkcolor font-normal">Our London Agency</h3>
+                                            {{-- <span class="defaultcolor mb-2">Fotó a Megemlékezéshez:</span> --}}
+                                            <h4 class="darkcolor font-normal">Fotó a Megemlékezéshez:</h4>
                                         </div>
                                         <div class="my-3">
-                                            <p class="bottom10">Address: 309, New Cavendish St, EC1Y 3WK</p>
-                                            {{-- <p class="bottom10">0800 214 5252</p> --}}
-                                            <p class="bottom10">0400 20778972</p>
-                                            <p class="bottom10"><a
-                                                    href="mailto:polpo@traxagency.co.au">polpo@traxagency.com</a></p>
-                                            {{-- <p class="bottom10">Mon-Fri: 9am-5pm</p> --}}
+                                            <p id="photo-description" class="bottom10">
+                                                Adj hozzá egy fotót a megjegyzésedhez, és lepd meg a rokonaidat egy egyedi képpel.
+                                            </p>
+
+                                            <div id="preview-container" class="mt-3" style="display: none;">
+                                                <img id="preview-image" src="#" alt="Előnézeti kép" class="img-fluid rounded" style="max-width: 250px; max-height: 170px;">
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="comment_photo" class="form-label">Fotó kiválasztása</label>
+                                                <input class="form-control" type="file" id="comment_photo" name="comment_photo" accept="image/*" onchange="previewImage(event)">
+                                            </div>
+
+
                                         </div>
-                                        <ul class="social-icons no-border mb-4 mb-md-0">
+                                        {{-- <ul class="social-icons no-border mb-4 mb-md-0">
                                             <li><a href="javascript:void(0)" class="facebook"><i
                                                         class="fab fa-facebook-f"></i></a></li>
                                             <li><a href="javascript:void(0)" class="twitter"><i
@@ -1066,7 +1074,7 @@
                                             <li><a href="javascript:void(0)" class="whatsapp"><i
                                                         class="fab fa-whatsapp"></i></a></li>
                                             <li><a href="javascript:void(0)"><i class="far fa-envelope"></i></a></li>
-                                        </ul>
+                                        </ul> --}}
                                     </div>
                                 </div>
                                 <div class="col-md-8 col-sm-12">
@@ -1087,7 +1095,7 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <textarea class="form-control" id="message1" placeholder="Üzenet" required name="message"
-                                                            style="border: 1px solid #d7d7d7;"></textarea>
+                                                            style="border: 1px solid #d7d7d7;     color: #373737;"></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
@@ -1113,7 +1121,7 @@
             <div id="successToast" class="toast align-items-center text-white bg-success border-0" role="alert">
                 <div class="d-flex">
                     <div class="toast-body">
-                        Komment sikeresen elküldve!
+                        Megemlékezésed sikeresen hozzáadtuk, és moderálásra vár.
                     </div>
                     <button type="button" class="btn-close btn-close-white me-2 m-auto"
                         data-bs-dismiss="toast"></button>
@@ -1339,8 +1347,8 @@
                                 <a class="nav-link pagescroll" href="#family-tree">Családfa</a>
                             </li>
                             {{-- <li class="nav-item">
-                            <a class="nav-link pagescroll" href="#testimonials">Megemlékezések</a>
-                        </li> --}}
+                                <a class="nav-link pagescroll" href="#testimonials">Megemlékezések</a>
+                            </li> --}}
                             <li class="nav-item">
                                 @auth
                                     <a class="nav-link" href="{{ route('dashboard') }}">Kezelés</a>
@@ -1432,12 +1440,12 @@
             .then(data => {
                 form.reset();
 
-                // ✅ Закрытие Bootstrap-модального окна
+                // Close Bootstrap-modal windows
                 const modalEl = document.getElementById('contactModal');
                 const modalInstance = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
                 modalInstance.hide();
 
-                // ✅ Показ Bootstrap Toast
+                // Scow Bootstrap Toast
                 const toastEl = document.getElementById('successToast');
                 const toast = new bootstrap.Toast(toastEl);
                 toast.show();
@@ -1452,6 +1460,29 @@
             });
         });
     });
+
+    function previewImage(event) {
+        const input = event.target;
+        const previewContainer = document.getElementById('preview-container');
+        const previewImage = document.getElementById('preview-image');
+        const description = document.getElementById('photo-description');
+
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                previewImage.src = e.target.result;
+                previewContainer.style.display = 'block';
+                description.style.display = 'none'; // Скрываем описание
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            previewContainer.style.display = 'none';
+            previewImage.src = '#';
+            description.style.display = 'block'; // Показываем описание обратно, если файл убрали
+        }
+    }
 </script>
 
 

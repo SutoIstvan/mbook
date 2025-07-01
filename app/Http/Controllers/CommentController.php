@@ -45,7 +45,7 @@ class CommentController extends Controller
             'status' => 'pending'
         ]);
 
-        return redirect()->back()->with('success', 'A megjegyzést sikeresen hozzáadtuk, és moderálásra vár.');
+        return redirect()->back()->with('success', 'Megemlékezésed sikeresen hozzáadtuk, és moderálásra vár.');
     }
 
     public function storejs(Memorial $memorial, Request $request)
@@ -64,7 +64,7 @@ class CommentController extends Controller
             'status' => 'pending'
         ]);
 
-        return response()->json(['success' => true, 'message' => 'Comment saved']);
+        return response()->json(['success' => true, 'message' => 'Megemlékezésed sikeresen hozzáadtuk, és moderálásra vár.']);
     }
 
 
@@ -74,7 +74,7 @@ class CommentController extends Controller
         
         $comment->update(['status' => 'approved']);
         
-        return redirect()->back()->with('success', 'A komment elfogadásra került');
+        return redirect()->back()->with('success', 'Megemlékezés elfogadásra került');
     }
 
     public function reject(Comment $comment)
@@ -83,7 +83,7 @@ class CommentController extends Controller
         
         $comment->update(['status' => 'rejected']);
         
-        return response()->json(['message' => 'Комментарий отклонен']);
+        return response()->json(['message' => 'Megemlékezés elutasítva']);
     }
 
     public function destroy(Comment $comment)
@@ -92,6 +92,6 @@ class CommentController extends Controller
         
         $comment->delete();
         
-        return redirect()->back()->with('success', 'A komment törölve');
+        return redirect()->back()->with('success', 'Megemlékezés törölve');
     }
 }
