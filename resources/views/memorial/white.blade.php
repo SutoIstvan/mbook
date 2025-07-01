@@ -996,13 +996,13 @@
                                     <p class="text-gray-500">Még senki sem írt emlékező üzenetet. Légy te az első.
                                     </p>
                                 </div>
-                                <a href="{{ route('comments.create', $memorial->id) }}"
+                                {{-- <a href="{{ route('comments.create', $memorial->id) }}"
                                     class="butn butn-md butn-bord butn-rounded">
                                     <div class="d-flex align-items-center">
                                         <span>Néhány szó tőled</span>
                                         <span class="icon pe-7s-angle-right ml-10 fz-30"></span>
                                     </div>
-                                </a>
+                                </a> --}}
                         </div>
                         @endforelse
 
