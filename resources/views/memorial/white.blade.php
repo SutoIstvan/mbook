@@ -788,21 +788,20 @@
     <section id="bg-counters" class="padding bg-counters parallax">
         <div class="container">
             <div class="row align-items-center text-center">
-                <div class="col-lg-4 col-md-4 col-sm-4 bottom10">
+                <div class="col-lg-3 col-md-3 col-sm-3 bottom10">
                     <div class="counters whitecolor  top10 bottom10">
-                        <span class="count_nums font-light" data-to="2010" data-speed="2500"> </span>
+                        <span class="count_nums font-light" data-to="{{ \Carbon\Carbon::parse($memorial->birth_date)->locale('hu')->translatedFormat('Y') }}" data-speed="2500"> </span>
                     </div>
-                    <h3 class="font-light whitecolor top20">Since We Started</h3>
+                    {{-- <h3 class="font-light whitecolor top20">Since We Started</h3> --}}
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-4">
-                    <p class="whitecolor top20 bottom20 font-light title">Lorem ipsum dolor sit amet, consectetur
-                        adipiscing elit. Nunc mauris arcu, lobortis id interdum vitae, interdum eget elit. </p>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <h3 class="whitecolor top20 bottom20 font-light title">{{ $memorial->motto }}</h3>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 bottom10">
+                <div class="col-lg-3 col-md-3 col-sm-3 bottom10">
                     <div class="counters whitecolor top10 bottom10">
-                        <span class="count_nums font-light" data-to="895" data-speed="2500"> </span>
+                        <span class="count_nums font-light" data-to="{{ \Carbon\Carbon::parse($memorial->death_date)->locale('hu')->translatedFormat('Y') }}" data-speed="2500"> </span>
                     </div>
-                    <h3 class="font-light whitecolor top20">Since We Started</h3>
+                    {{-- <h3 class="font-light whitecolor top20">Since We Started</h3> --}}
                 </div>
             </div>
         </div>
