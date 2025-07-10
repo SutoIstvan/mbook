@@ -12,7 +12,7 @@
 
     <!-- ==================== Start Header ==================== -->
 
-    <header class="header-mst bg-img" data-background="home/imgs/header/bg.jpg" data-overlay-dark="4">
+    <header class="header-mst bg-img d-none d-md-block" data-background="home/imgs/header/bg.jpg" data-overlay-dark="4">
         <div class="container">
             <div class="row">
                 <div class="col-lg-7">
@@ -48,7 +48,7 @@
                         <a href="/create" class="bg">
                             <span>Emlékoldal <br> létrehozása</span>
                         </a>
-                        <a href="/prices" class="bord">
+                        <a href="https://shop.rememus.com/Emlekplakettek" class="bord">
                             <span class="icon invert ml-5 mb-1">
                                 <svg fill="#ffffffa6" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                                     xmlns:xlink="http://www.w3.org/1999/xlink" width="34px" height="34px"
@@ -132,6 +132,126 @@
         </div>
     </header>
 
+
+        <header class="header-mst bg-img d-block d-md-none" style="padding: 130px 0 !important; background-position: left !important;" data-background="home/imgs/header/women.jpg" data-overlay-dark="4">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="caption">
+                        <h3 class="d-none d-md-block">
+                            <br>
+                        </h3>
+
+                        <h4 class="mt-4 mb-2 d-none d-md-block">
+                            Emlékhely, ahol a szeretteink örökké élnek.
+                        </h4>
+
+                        <h7 class="d-none d-md-block">
+                            Hozz létre egy méltó emlékoldalt elhunyt szeretteid számára.
+                            Elmeséljük a történetüket, emléküket megőrizzük az idők végezetéig.
+                        </h7>
+
+                        <h5 class="d-block d-md-none">
+                            Emlékhely, ahol a szeretteink örökké élnek.
+                        </h5>
+
+                        <h7 class="d-block d-md-none mt-50">
+                            Hozz létre egy méltó emlékoldalt elhunyt szeretteid számára.
+                            Elmeséljük a történetüket, emléküket megőrizzük az idők végezetéig.
+                        </h7>
+                        <!-- <h1>We Invest <br> In Big Ideas</h1> -->
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-between mt-40">
+                <div class="col-lg-6 order-md-2">
+                    <div class="butons">
+                        <a href="/create" class="bg">
+                            <span>Emlékoldal <br> létrehozása</span>
+                        </a>
+                        <a href="https://shop.rememus.com/Emlekplakettek" class="bord">
+                            <span class="icon invert ml-5 mb-1">
+                                <svg fill="#ffffffa6" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="34px" height="34px"
+                                    viewBox="0 0 490.875 490.875" xml:space="preserve">
+                                    <g>
+                                        <g>
+                                            <g>
+                                                <path d="M451.611,178.111h-31.244c3.668,20.593-5.14,42.301-23.979,53.957c-8.325,5.146-17.877,7.869-27.635,7.869
+                                                        c-18.359,0-35.082-9.312-44.729-24.912c-6.822-11.033-9.033-24.246-6.75-36.915h-143.67c2.273,12.669,0.063,25.881-6.758,36.922
+                                                        c-9.639,15.592-26.362,24.904-44.721,24.904c-9.765,0-19.316-2.723-27.646-7.869c-18.835-11.656-27.646-33.364-23.974-53.957
+                                                        H39.263C17.575,178.11,0,195.685,0,217.373c0,21.676,17.575,39.25,39.263,39.25h4.331l28.793,175.116
+                                                        c3.019,18.319,18.847,31.771,37.423,31.771h271.254c18.575,0,34.403-13.452,37.42-31.771l28.784-175.114h4.343
+                                                        c21.686,0,39.264-17.576,39.264-39.251C490.875,195.686,473.295,178.111,451.611,178.111z M167.419,418.083
+                                                        c-1.186,0.174-2.36,0.266-3.523,0.266c-11.459,0-21.503-8.391-23.269-20.069l-16.306-108.682
+                                                        c-1.931-12.87,6.931-24.861,19.801-26.792c12.886-1.875,24.853,6.931,26.792,19.793l16.31,108.692
+                                                        C189.155,404.157,180.289,416.151,167.419,418.083z M268.997,394.782c0,13.018-10.541,23.564-23.552,23.564
+                                                        c-13.016,0-23.552-10.549-23.552-23.564V286.093c0-13.004,10.537-23.553,23.552-23.553c13.011,0,23.552,10.549,23.552,23.553
+                                                        V394.782z M366.561,289.596l-16.317,108.682c-1.754,11.68-11.797,20.069-23.256,20.069c-1.168,0-2.338-0.091-3.527-0.266
+                                                        c-12.869-1.931-21.732-13.926-19.801-26.792l16.307-108.692c1.938-12.87,13.857-21.732,26.791-19.794
+                                                        C359.625,264.734,368.49,276.727,366.561,289.596z"></path>
+                                                <path
+                                                    d="M102.748,218.713c6.037,3.74,12.748,5.521,19.379,5.521c12.341,0,24.407-6.199,31.362-17.464
+                                                        c6.415-10.375,6.967-22.646,2.739-33.151l69.947-113.048c6.321-10.222,3.16-23.611-7.062-29.944
+                                                        c-3.566-2.203-7.522-3.263-11.423-3.263c-7.286,0-14.402,3.661-18.528,10.324l-69.924,113.048
+                                                        c-11.282,0.906-22.02,6.86-28.435,17.232C80.086,185.283,85.449,208.003,102.748,218.713z">
+                                                </path>
+                                                <path d="M334.652,173.619c-4.228,10.505-3.688,22.776,2.729,33.151c6.967,11.266,19.021,17.464,31.373,17.464
+                                                        c6.629,0,13.332-1.781,19.379-5.521c17.299-10.71,22.65-33.431,11.937-50.745c-6.398-10.372-17.146-16.326-28.418-17.232
+                                                        L301.7,37.688c-4.114-6.664-11.231-10.324-18.519-10.324c-3.899,0-7.855,1.06-11.427,3.263
+                                                        c-10.218,6.333-13.354,19.722-7.058,29.944L334.652,173.619z"></path>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </span> </a>
+                    </div>
+                </div>
+                {{-- <div class="col-lg-4 order-md-1">
+                    <div class="cont md-mb50">
+                        <div class="d-flex align-items-center mb-15">
+
+                            <input type="text" placeholder="keresés" class="text-light border placeholder-gray">
+                            <!-- <span>No Code No Limited</span> -->
+                            <div>
+                                <div class="arrow ms-2 ">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+                                        <path d="M15.5 14h-.79l-.28-.27a6.51 6.51 0 0 0 1.58-4.23c0-3.59-2.91-6.5-6.5-6.5S3 5.91 3 9.5s2.91 6.5 6.5 6.5c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" fill="#808080"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <p>Itt kereshetsz az emlékoldalak között név alapján.</p>
+                    </div>
+                </div> --}}
+
+                <div class="col-lg-4 order-md-1">
+                    <div class="cont md-mb50">
+                        <div class="d-flex align-items-center mb-15 mt-35">
+
+                            <input id="qr-input" type="text" placeholder="QR-kód beváltása"
+                                class="text-light border placeholder-gray">
+
+                            <div>
+                                <button onclick="redirectWithCode()" class="ms-2 p-0 border-0 bg-transparent"
+                                    style="width: 45px; height: 45px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45"
+                                        viewBox="0 0 24 24" fill="none">
+                                        <circle cx="12" cy="12" r="12" fill="white" />
+                                        <path d="M10 6L16 12L10 18" stroke="#000" stroke-width="1" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+
+                            </div>
+                        </div>
+                        {{-- <p class="ms-3">Itt válthatod be a QR-kódot.</p> --}}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
     <!-- ==================== End Header ==================== -->
 
 
@@ -145,7 +265,7 @@
                     <div class="img fit-img d-none d-md-block">
                         <img src="home/imgs/intro/1.jpg" alt="">
                     </div>
-                    <div class="fit-img d-block d-md-none">
+                    <div class="fit-img d-block d-md-none rounded-3">
                         <img src="home/imgs/intro/1.jpg" alt="">
                     </div>
                 </div>
@@ -631,7 +751,7 @@
                                 <li><span class="ti-check icon"></span> Megjegyzések korlátozás nélkül</li>
                             </ul>
                             <div class="text-center mt-40">
-                                <a href="#" class="butn butn-md butn-rounded"
+                                <a href="https://shop.rememus.com/Emlekplakettek" class="butn butn-md butn-rounded"
                                     style="border: 1px solid #2e2e2e !important;">
                                     <div class="d-flex align-items-center">
                                         <span>Vásárlás</span>
@@ -738,7 +858,7 @@
                                 <li><span class="ti-check icon"></span> Megjegyzések korlátozás nélkül</li>
                             </ul>
                             <div class="text-center mt-40">
-                                <a href="#" class="butn butn-md butn-rounded"
+                                <a href="https://shop.rememus.com/Emlekplakettek" class="butn butn-md butn-rounded"
                                     style="border: 1px solid #2e2e2e !important;">
                                     <div class="d-flex align-items-center">
                                         <span>Vásárlás</span>
@@ -823,7 +943,7 @@
                                     </a> -->
 
                             <div class="text-center mt-40">
-                                <a href="#" class="butn butn-md butn-bord butn-rounded">
+                                <a href="https://shop.rememus.com/Emlekplakettek" class="butn butn-md butn-bord butn-rounded">
                                     <div class="d-flex align-items-center">
                                         <span>Vásárlás</span>
                                         <span class="icon invert ml-10 mb-1">
@@ -1481,7 +1601,7 @@
                                         <button class="accordion-button collapsed" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false"
                                             aria-controls="collapse5">
-                                            Megajándékozhatom e a qr code a családomnak vagy a barátoknak?
+                                            Elajándékozhatom-e a QR kódot családomnak, vagy a barátoknak?
                                         </button>
                                     </h2>
                                     <div id="collapse5" class="accordion-collapse collapse" aria-labelledby="heading5"

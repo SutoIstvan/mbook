@@ -134,13 +134,17 @@
                                 href="{{ route('contact') }}">Kapcsolatok</a>
                         </li>
 
-
                         <li class="nav-item">
                             @auth
                                 <a class="nav-link" href="{{ route('dashboard') }}">Kezelés</a>
                             @else
                                 <a class="nav-link" href="{{ route('dashboard') }}">Bejelentkezés</a>
                             @endauth
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}"
+                                href="https://shop.rememus.com">Shop</a>
                         </li>
                     </ul>
                 </div>
@@ -186,6 +190,16 @@
                             </a>
                         </div>
                     </li>
+
+                    <li>
+                        <div class="o-hidden">
+                            <a href="https://shop.rememus.com" class="link"><span class="fill-text"
+                                    data-text="Shop">Shop</span>
+                            </a>
+                        </div>
+                    </li>
+
+                    
                 </ul>
             </div>
             <div class="cont-info valign">
