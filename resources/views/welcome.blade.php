@@ -1552,7 +1552,7 @@
 
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="heading3">
-                                        <button class="accordion-button collapsed" type="button"
+                                        <button class="accordion-button collapsed fs-5 fs-sm-6 fw-sm-light" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false"
                                             aria-controls="collapse3">
                                             Van-e folyamatos költsége a weboldal fenntartásának?
@@ -1574,7 +1574,7 @@
                                 </div>
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="heading4">
-                                        <button class="accordion-button collapsed" type="button"
+                                        <button class="accordion-button collapsed fs-5 fs-sm-6 fw-sm-light" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false"
                                             aria-controls="collapse4">
                                             Nem váltja fel végül a QR-kódokat egy másik technológia?
@@ -1598,7 +1598,7 @@
                                 </div>
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="heading5">
-                                        <button class="accordion-button collapsed" type="button"
+                                        <button class="accordion-button collapsed fs-5 fs-sm-6 fw-sm-light" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false"
                                             aria-controls="collapse5">
                                             Elajándékozhatom-e a QR kódot családomnak, vagy a barátoknak?
@@ -1620,7 +1620,7 @@
                                 </div>
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="heading6">
-                                        <button class="accordion-button collapsed" type="button"
+                                        <button class="accordion-button collapsed fs-5 fs-sm-6 fw-sm-light" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#collapse6" aria-expanded="false"
                                             aria-controls="collapse6">
                                             Használható-e egyetlen oldal 2 személyre, például egy párra?
@@ -1641,7 +1641,7 @@
                                 </div>
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="heading7">
-                                        <button class="accordion-button collapsed" type="button"
+                                        <button class="accordion-button collapsed fs-5 fs-sm-6 fw-sm-light" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#collapse7" aria-expanded="false"
                                             aria-controls="collapse7">
                                             A tábla megsérti vagy megrongálja a sírkövet? Mi van, ha később el kell

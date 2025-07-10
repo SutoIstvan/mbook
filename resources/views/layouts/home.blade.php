@@ -254,7 +254,7 @@
                         <div class="col-lg-4">
                             <div class="info-item md-mb30">
                                 <span class="fz-12 text-u sub-color mb-10">Email</span>
-                                <h6>info@rememus.hu</h6>
+                                <h6>info@rememus.com</h6>
                             </div>
                         </div>
                         <div class="col-lg-4 d-flex">
