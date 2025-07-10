@@ -288,8 +288,8 @@
                                 <div class="links sub-color d-flex justify-content-between">
                                 {{-- <a href="#" class="active">Impresszum</a> --}}
                                 <a href="#">Impresszum</a>
-                                <a href="#">Adatvédelmi tájékoztató</a>
-                                <a href="#">Általános szerződési feltételek</a>
+                                <a href="{{ route('aszf') }}">Adatvédelmi tájékoztató</a>
+                                <a href="{{ route('privacy') }}">Általános szerződési feltételek</a>
                                 <a href="#">Cookie beállítások</a>
                                 </div>
                             </div>

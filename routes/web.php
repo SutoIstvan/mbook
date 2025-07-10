@@ -31,6 +31,10 @@ Route::get('/aszf', function () {
     return view('aszf');
 })->name('aszf');
 
+Route::get('/privacy', function () {
+    return view('privacy');
+})->name('privacy');
+
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
