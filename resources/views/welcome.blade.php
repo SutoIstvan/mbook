@@ -48,7 +48,7 @@
                         <a href="/create" class="bg">
                             <span>Emlékoldal <br> létrehozása</span>
                         </a>
-                        <a href="https://shop.rememus.com/Emlekplakettek" class="bord">
+                        <a href="https://shop.rememus.com/Emlekplakettek" target="_blank" class="bord">
                             <span class="icon invert ml-5 mb-1">
                                 <svg fill="#ffffffa6" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                                     xmlns:xlink="http://www.w3.org/1999/xlink" width="34px" height="34px"
@@ -169,7 +169,7 @@
                         <a href="/create" class="bg">
                             <span>Emlékoldal <br> létrehozása</span>
                         </a>
-                        <a href="https://shop.rememus.com/Emlekplakettek" class="bord">
+                        <a href="https://shop.rememus.com/Emlekplakettek" target="_blank" class="bord">
                             <span class="icon invert ml-5 mb-1">
                                 <svg fill="#ffffffa6" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                                     xmlns:xlink="http://www.w3.org/1999/xlink" width="34px" height="34px"
@@ -505,7 +505,7 @@
 
                     @foreach ($memorials as $memorial)
                         <div class="swiper-slide">
-                            <a href="{{ route('memorial.show', $memorial->slug) }}">
+                            <a href="{{ route('memorial.show', $memorial->slug) }}" target="_blank">
                                 <div class="item">
                                     <div class="mb-10">
                                         <div class="img img-fit">
@@ -751,7 +751,7 @@
                                 <li><span class="ti-check icon"></span> Megjegyzések korlátozás nélkül</li>
                             </ul>
                             <div class="text-center mt-40">
-                                <a href="https://shop.rememus.com/Emlekplakettek" class="butn butn-md butn-rounded"
+                                <a href="https://shop.rememus.com/Emlekplakettek" target="_blank" class="butn butn-md butn-rounded"
                                     style="border: 1px solid #2e2e2e !important;">
                                     <div class="d-flex align-items-center">
                                         <span>Vásárlás</span>
@@ -858,7 +858,7 @@
                                 <li><span class="ti-check icon"></span> Megjegyzések korlátozás nélkül</li>
                             </ul>
                             <div class="text-center mt-40">
-                                <a href="https://shop.rememus.com/Emlekplakettek" class="butn butn-md butn-rounded"
+                                <a href="https://shop.rememus.com/Emlekplakettek" target="_blank" class="butn butn-md butn-rounded"
                                     style="border: 1px solid #2e2e2e !important;">
                                     <div class="d-flex align-items-center">
                                         <span>Vásárlás</span>
@@ -943,7 +943,7 @@
                                     </a> -->
 
                             <div class="text-center mt-40">
-                                <a href="https://shop.rememus.com/Emlekplakettek" class="butn butn-md butn-bord butn-rounded">
+                                <a href="https://shop.rememus.com/Emlekplakettek" target="_blank" class="butn butn-md butn-bord butn-rounded" >
                                     <div class="d-flex align-items-center">
                                         <span>Vásárlás</span>
                                         <span class="icon invert ml-10 mb-1">

@@ -14,6 +14,9 @@
 
     <link rel="canonical" href="{{ url()->current() }}">
 
+    <!-- og:image  -->
+    <meta property="og:image" content="{{ asset('home/imgs/intro/1.jpg') }}">
+
     <!-- Title  -->
     <title>@yield('title', 'Rememus.com')</title>
 
@@ -144,7 +147,7 @@
 
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}"
-                                href="https://shop.rememus.com">Shop</a>
+                                href="https://shop.rememus.com" target="_blank">Shop</a>
                         </li>
                     </ul>
                 </div>
@@ -193,7 +196,7 @@
 
                     <li>
                         <div class="o-hidden">
-                            <a href="https://shop.rememus.com" class="link"><span class="fill-text"
+                            <a href="https://shop.rememus.com" class="link" target="_blank"><span class="fill-text"
                                     data-text="Shop">Shop</span>
                             </a>
                         </div>

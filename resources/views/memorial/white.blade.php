@@ -6,7 +6,14 @@
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- og:image  -->
+    <meta property="og:image" content="{{ asset('memorial/' . $memorial->slug . '/' . $memorial->photo) }}">
+    <meta property="og:title" content="{{ $memorial->name }}">
+    <meta property="og:description" content="Rememus.com">
+
     <title>{{ $memorial->name }} | Rememus.com</title>
+
     <link href="white/images/favicon.ico" rel="icon">
     <link rel="stylesheet" href="white/css/bootstrap.min.css">
     <link rel="stylesheet" href="white/css/all.min.css">
