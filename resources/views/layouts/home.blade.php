@@ -14,6 +14,9 @@
 
     <link rel="canonical" href="{{ url()->current() }}">
 
+    <!-- google site verification  -->
+    <meta name="google-site-verification" content="otwiWjP_fMF2cpmCQb9NHFvy-8LMzuzUMeOAV-q90VA" />
+
     <!-- og:image  -->
     <meta property="og:image" content="{{ asset('home/imgs/intro/1.jpg') }}">
 
