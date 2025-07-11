@@ -9,7 +9,7 @@
 
     <!-- og:image  -->
     <meta property="og:image" content="{{ asset('memorial/' . $memorial->slug . '/' . $memorial->photo) }}">
-    <meta property="og:title" content="{{ $memorial->name }}">
+    <meta property="og:title" content="{{ $memorial->name }} - rememus.com">
     <meta property="og:description" content="Rememus.com">
 
     <title>{{ $memorial->name }} | Rememus.com</title>
