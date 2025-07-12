@@ -127,6 +127,8 @@
             transition: all 0.5s;
             width: 120px;
             text-align: center;
+            filter: drop-shadow(2px 1px 3px rgba(0, 0, 0, 0.1)) drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.01));
+
         }
 
         /* Adjust image size and alignment */
@@ -901,7 +903,7 @@
                                 Feleség
                             </a>
 
-                            <a href="#">
+                            <a href="#" style="background: #c8e4f8;">
                                 <img src="https://randomuser.me/api/portraits/men/3.jpg"
                                     class="img-fluid rounded-circle" width="90" height="90"><br>
                                 Davis Green
