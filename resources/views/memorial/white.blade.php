@@ -28,7 +28,7 @@
 
     <style type="text/css" media="screen">
         .tree {
-            min-width: 800px;
+            min-width: 1100px;
         }
 
         .tree-container {

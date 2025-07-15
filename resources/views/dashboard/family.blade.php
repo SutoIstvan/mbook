@@ -134,6 +134,288 @@
             border: 1px solid rgba(255, 255, 255, 0.7);
             background: rgba(255, 255, 255, 0.1);
         }
+
+
+
+
+
+
+        .tree {
+            min-width: 1200px;
+        }
+
+        .tree-container {
+            overflow-x: auto;
+            width: 100%;
+
+        }
+
+        .tree ul {
+            padding-top: 20px;
+            position: relative;
+            transition: all 0.5s;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .tree li {
+            text-align: center;
+            list-style-type: none;
+            position: relative;
+            padding: 20px 30px 0 30px;
+            transition: all 0.5s;
+        }
+
+        /* Connectors */
+        .tree li::before,
+        .tree li::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 50%;
+            border-top: 1px solid #ccc;
+            width: 50%;
+            height: 178px;
+            z-index: -1;
+        }
+
+        .tree li::after {
+            right: auto;
+            left: 50%;
+            border-left: 1px solid #ccc;
+        }
+
+        /* Remove connectors for elements without siblings */
+        .tree li:only-child::after,
+        .tree li:only-child::before {
+            display: none;
+        }
+
+        /* Remove space from the top of single children */
+        .tree li:only-child {
+            padding-top: 0;
+        }
+
+        /* Remove left connector from first child and right connector from last child */
+        .tree li:first-child::before,
+        .tree li:last-child::after {
+            border: 0 none;
+        }
+
+        /* Add back the vertical connector to the last nodes */
+        .tree li:last-child::before {
+            border-right: 1px solid #ccc;
+            border-radius: 0 5px 0 0;
+            transform: translateX(1px);
+        }
+
+        .tree li:first-child::after {
+            border-radius: 5px 0 0 0;
+        }
+
+        /* Downward connectors from parents */
+        .tree ul ul::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            border-left: 1px solid #ccc;
+            width: 0;
+            height: 20px;
+            z-index: -1;
+        }
+
+        /* Style for <a> elements */
+        .tree li a {
+            border: 1px solid #a9a9a9;
+            padding: 10px;
+            text-decoration: none;
+            color: #666;
+            font-family: arial, verdana, tahoma;
+            font-size: 14px;
+            display: inline-block;
+            background: white;
+            border-radius: 5px;
+            transition: all 0.5s;
+            width: 120px;
+            text-align: center;
+
+        }
+
+        /* Adjust image size and alignment */
+        .tree li a img {
+            display: block;
+            margin: 0 auto 5px;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0rem 0.4rem 0.6rem 0rem rgba(32, 46, 66, 0.08);
+        }
+
+        /* Parent pair styling */
+        .parent-pair {
+            display: flex;
+            justify-content: center;
+            position: relative;
+            padding-top: 0 !important;
+            margin-bottom: 20px;
+        }
+
+        .parent-pair li {
+            padding: 0 10px;
+        }
+
+        /* Connector between parents */
+        .parent-pair li:first-child a::after {
+            content: '';
+            position: absolute;
+            border-top: 1px solid #ccc;
+            top: 50%;
+            left: 100%;
+            width: 20px;
+            z-index: -1;
+        }
+
+        /* Connector from parents to children */
+        .parent-pair::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            border-left: 1px solid #ccc;
+            width: 0;
+            height: 20px;
+            z-index: -1;
+        }
+
+        /* Hover effects */
+        /* .tree li a:hover {
+                background: #c8e4f8;
+                color: #000;
+                border: 1px solid #94a0b4;
+            } */
+
+        /* Connector styles on hover */
+        /* .tree li a:hover~ul li::after,
+            .tree li a:hover~ul li::before,
+            .tree li a:hover~ul::before,
+            .tree li a:hover~ul ul::before,
+            .parent-pair:hover::after {
+                border-color: #94a0b4;
+            } */
+
+
+        .tree li.down::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            top: auto;
+            border-top: none;
+            border-bottom: 1px solid #ccc;
+            width: 50%;
+            height: 20px;
+            z-index: -1;
+        }
+
+        .tree li.up::before {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            top: auto;
+            border-top: none;
+            border-bottom: 1px solid #ccc;
+            width: 50%;
+            height: 20px;
+            z-index: -1;
+        }
+
+        .tree li.down::before {
+            right: 50%;
+        }
+
+        .tree li.up::before {
+            border-right: 1px solid #ccc;
+            border-radius: 0 0 5px 0;
+            transform: translateX(1px);
+        }
+
+        .tree li.down::after {
+            left: 50%;
+            right: auto;
+            border-left: 1px solid #ccc;
+            border-radius: 0 0 0 5px;
+
+        }
+
+        .tree li a+a {
+            margin-left: 20px;
+            position: relative;
+        }
+
+        .tree li a+a::before {
+            content: '';
+            position: absolute;
+            border-top: 1px solid #ccc;
+            top: 50%;
+            left: -25px;
+            width: 25px;
+        }
+
+
+
+        li.up::after {
+            content: none !important;
+            /* Отменяет содержимое псевдоэлемента */
+            display: none !important;
+            /* Скрывает псевдоэлемент */
+        }
+
+        li.down::before {
+            content: none !important;
+            /* Отменяет содержимое псевдоэлемента */
+            display: none !important;
+            /* Скрывает псевдоэлемент */
+        }
+
+
+        .tree ul.down {
+            text-align: center;
+            list-style-type: none;
+            position: relative;
+            padding: 0px 10px 0 42px;
+            transition: all 0.5s;
+        }
+
+        .tree ul ul.apa::before {
+            content: '';
+            position: absolute;
+            top: 0px;
+            left: 50%;
+            border-left: 1px solid #ccc;
+            width: 0;
+            height: 20px;
+            z-index: -1;
+        }
+
+        ul {
+            margin-top: 0;
+            margin-bottom: 0 !important;
+        }
+
+        .img-fluid {
+            height: 90px;
+            width: 90px;
+            object-fit: cover;
+        }
+        .icon-hover {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        label:hover .icon-hover {
+            opacity: 1;
+        }
+
     </style>
 @endsection
 
@@ -224,7 +506,7 @@
                     </div>
                 </div>
 
-                <form action="{{ route('family.update') }}" method="POST">
+                <form action="{{ route('family.update', $memorial->id) }}" method="POST">
                     @csrf
                     <div class="row d-flex justify-content-center">
                         <div class="col-12 col-md-12 p-3">
@@ -346,6 +628,204 @@
 
             </div>
 
+
+
+
+
+            <!-- Family tree -->
+            <section id="family-tree" class="position-relative padding_top">
+
+                <div class="col-md-12 text-center wow fadeIn top15" data-wow-delay="300ms">
+                    <h2 class="heading bottom45 darkcolor font-light2"> Családfa<span class="font-normal"></span>
+
+                    </h2>
+                    <div class="col-md-8 offset-md-2 bottom40">
+                        <p>
+                            Egy család rokonsági kapcsolatait ábrázoló diagram, amely bemutatja az ember felmenőit és
+                            leszármazottait, például szülőket, gyerekeket és nagyszülőket.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="tree-container padding_bottom">
+                    <div class="tree wow fadeIn" data-wow-delay="300ms">
+                        <ul class="down">
+                            <!-- My Children -->
+                            <li class="down">
+                                <a class="d-flex flex-column align-items-center text-decoration-none position-relative">
+
+                                    <img id="preview_grandfather_father"
+                                        src="{{ $grandfatherFather->image ?? asset('avatar/avatar-father.png') }}"
+                                        class="img-fluid rounded-circle" width="90" height="90">
+
+                                    <label for="image_grandfather_father" class="position-absolute" title="Fotó feltöltése" style="cursor: pointer; height: 85px; width: 85px; top: 40px;">
+                                        <i class="fa-solid fa-camera bg-light rounded-circle p-1 shadow icon-hover"></i>
+                                    </label>
+                                    
+                                    <input type="file" name="images[grandfather_father]" id="image_grandfather_father" class="d-none" accept="image/*"
+                                    onchange="previewImage(this, 'preview_grandfather_father')">
+
+                                    <input type="text" class="form-control mt-2 text-center"
+                                        name="names[grandfather_father]"
+                                        value="{{ $grandfatherFather->name ?? '' }}" placeholder="Nagyapa">
+                                </a>
+                            </li>
+
+                            <li class="up">
+                                <a class="d-flex flex-column align-items-center text-decoration-none">
+                                    <img src="{{ $grandfatherMother->image ?? asset('avatar/avatar-woman.png') }}"
+                                        class="img-fluid rounded-circle" width="90" height="90">
+
+                                    <input type="text" class="form-control mt-2 text-center"
+                                        name="names[grandmother_father]"
+                                        value="{{ $grandmotherFather->name ?? '' }}" placeholder="Nagymama">
+                                </a>
+                            </li>
+
+                            <li class="down">
+                                <a class="d-flex flex-column align-items-center text-decoration-none">
+                                    <img src="{{ $grandfatherMother->image ?? asset('avatar/avatar-father.png') }}"
+                                        class="img-fluid rounded-circle" width="90" height="90">
+
+                                    <input type="text" class="form-control mt-2 text-center"
+                                        name="names[grandfather_mother]"
+                                        value="{{ $grandfatherMother->name ?? '' }}" placeholder="Nagyapa">
+                                </a>
+                            </li>
+
+                            <li class="up">
+                                <a class="d-flex flex-column align-items-center text-decoration-none">
+                                    <img src="{{ $grandmotherMother->image_url ?? asset('avatar/avatar-woman.png') }}"
+                                        class="img-fluid rounded-circle" width="90" height="90">
+
+                                    <input type="text" class="form-control mt-2 text-center"
+                                        name="names[grandmother_mother]"
+                                        value="{{ $grandmotherMother->name ?? '' }}" placeholder="Nagymama">
+                                </a>
+                            </li>
+
+                        </ul>
+                        <ul class="down">
+                            <!-- My Children -->
+
+                            <li class="down">
+                                <ul class="apa">
+                                    <a>
+                                        <img src="{{ asset('avatar/avatar-man.png') }}"
+                                            class="img-fluid rounded-circle" width="90" height="90">
+
+                                        <input type="text" value="{{ $father->name }}" class="form-control mt-3">
+
+                                    </a>
+                                </ul>
+                            </li>
+
+                            <li class="up mom">
+                                <ul class="apa">
+                                    <a>
+                                        <img src="{{ asset('avatar/avatar-woman-3.png') }}"
+                                            class="img-fluid rounded-circle" width="90" height="90">
+
+                                        <input type="text" value="{{ $mother->name }}" class="form-control mt-3">
+                                    </a>
+                                </ul>
+                            </li>
+                        </ul>
+
+
+                        <ul>
+
+                            <ul>
+
+
+
+                                <li>
+                                    <a>
+                                        {{-- <img src="https://randomuser.me/api/portraits/women/26.jpg"
+                                            class="img-fluid rounded-circle" width="90" height="90"> --}}
+
+                                            <i class="fa-solid fa-plus rounded-circle fs-5 mt-3 mb-3"></i> <br>
+                                        add partner
+
+                                    </a>
+
+
+                                    @foreach ($familyMembers['partner'] ?? [] as $member)
+                                        <a>
+                                            <img src="{{ $member->image_url ?? asset('avatar/avatar-girl.png') }}"
+                                                class="img-fluid rounded-circle" width="90" height="90">
+
+                                            <input class="form-control mt-3" type="text"
+                                                name="names[{{ $member->id }}]" value="{{ $member->name }}"
+                                                placeholder="Feleség" required>
+
+                                        </a>
+                                    @endforeach
+
+
+
+                                    <a>
+                                        <img src="{{ asset('memorial/' . $memorial->slug . '/' . $memorial->photo) }}"
+                                            class="img-fluid rounded-circle" width="90" height="90">
+
+                                        <input class="form-control  mt-3" type="text" name=""
+                                            value="{{ $memorial->name }}" placeholder="{{ $memorial->name }}">
+                                    </a>
+                                    {{-- <a >
+                                <img src="https://randomuser.me/api/portraits/women/26.jpg"
+                                    class="img-fluid rounded-circle" width="90" height="90"><br>
+                                Feleség
+                            </a> --}}
+                                    <ul>
+                                        <!-- My Children -->
+                                        @foreach ($familyMembers['children'] ?? [] as $child)
+                                            <li class="mb-3">
+                                                <a class="d-flex flex-column align-items-center text-decoration-none">
+                                                    <img src="{{ $child->image_url ?? asset('avatar/avatar-boy.png') }}"
+                                                        class="img-fluid rounded-circle" width="90"
+                                                        height="90"><br>
+
+                                                    <input class="form-control mt-2 text-center" type="text"
+                                                        name="children[{{ $child->id }}]" value="{{ $child->name }}"
+                                                        placeholder="Gyermek" required>
+                                                </a>
+
+
+                                            </li>
+                                        @endforeach
+
+
+                                    </ul>
+                                </li>
+                                @foreach ($familyMembers['siblings'] ?? [] as $sibling)
+                                    <li class="mb-3">
+                                        <a class="d-flex flex-column align-items-center text-decoration-none">
+                                            <img src="{{ asset('avatar/avatar-man.png') }}"
+                                                class="img-fluid rounded-circle" width="90" height="90">
+
+                                            <input class="form-control mt-2 text-center" type="text"
+                                                name="siblings[{{ $sibling->id }}]" value="{{ $sibling->name }}"
+                                                placeholder="{{ $sibling->gender === 'male' ? 'Testvér' : 'Nővér' }}"
+                                                required>
+                                        </a>
+                                    </li>
+                                @endforeach
+
+                                </li>
+                            </ul>
+
+
+                        </ul>
+
+                    </div>
+                </div>
+
+            </section>
+
+            {{-- @dump($familyMembers) --}}
+
+            <!-- Family tree ends -->
+
     </section>
 
     <!-- ==================== SAVE BUTTON ==================== -->
@@ -382,4 +862,24 @@
         @endforeach
     @endforeach
 
+
+
+
+@endsection
+
+@section('js')
+    <script>
+        function previewImage(input, previewId) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    document.getElementById(previewId).src = e.target.result;
+                };
+
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
 @endsection

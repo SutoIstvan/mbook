@@ -26,7 +26,7 @@ class FamilyController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request);
+        //  dd($request);
         $validated = $request->validate([
             'memorial_id' => 'required|exists:memorials,id',
             'name' => 'required|string',
@@ -52,23 +52,41 @@ class FamilyController extends Controller
         return redirect()->route('dashboard.family', $request->memorial_id)->with('success', 'Family member added successfully.');
     }
 
-    public function update(Request $request)
+    public function update(Request $request, Memorial $memorial)
     {
+        // dd($request);
         $request->validate([
-            'names' => 'required|array',
-            'names.*' => 'required|string|max:255',
+            'names' => 'array',
+            'names.*' => 'nullable|string|max:255',
         ]);
 
-        foreach ($request->input('names', []) as $id => $name) {
-            $member = Family::find($id);
-            if ($member) {
-                $member->name = $name;
-                $member->save();
+        foreach ($request->input('names', []) as $key => $name) {
+            if (trim($name) === '') {
+                continue; // не сохраняем пустые имена
+            }
+
+            if (is_numeric($key)) {
+                $member = Family::find($key);
+                if ($member && $member->memorial_id === $memorial->id) {
+                    $member->name = $name;
+                    $member->save();
+                }
+            } else {
+                Family::updateOrCreate(
+                    [
+                        'memorial_id' => $memorial->id,
+                        'role' => $key,
+                    ],
+                    [
+                        'name' => $name,
+                    ]
+                );
             }
         }
 
-        return redirect()->back()->with('success', 'Family members updated successfully');
+        return redirect()->back()->with('success', 'Семья сохранена');
     }
+
 
     public function list(Memorial $memorial)
     {

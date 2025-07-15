@@ -94,7 +94,29 @@ class DashboardController extends Controller
     {
         $familyMembers = Family::where('memorial_id', $memorial->id)->get()->groupBy('role');
 
-        return view('dashboard.family', compact('memorial', 'familyMembers'));
+        $mother = Family::where('memorial_id', $memorial->id)
+                ->where('role', 'mother')
+                ->first();
+
+        $father = Family::where('memorial_id', $memorial->id)
+                ->where('role', 'father')
+                ->first();
+
+        $grandfatherFather = Family::where('memorial_id', $memorial->id)->where('role', 'grandfather_father')->first();
+        $grandmotherFather = Family::where('memorial_id', $memorial->id)->where('role', 'grandmother_father')->first();
+        $grandfatherMother = Family::where('memorial_id', $memorial->id)->where('role', 'grandfather_mother')->first();
+        $grandmotherMother = Family::where('memorial_id', $memorial->id)->where('role', 'grandmother_mother')->first();
+
+
+        return view('dashboard.family', compact('memorial',
+                                                'familyMembers', 
+                                                'mother', 
+                                                'father',
+                                                'grandfatherFather',
+                                                'grandmotherFather',
+                                                'grandfatherMother',
+                                                'grandmotherMother'
+                                            ));
     }
 
     public function timeline(Memorial $memorial)
