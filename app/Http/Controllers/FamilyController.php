@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Family;
 use App\Models\Memorial;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Laravel\Facades\Image;
 
 class FamilyController extends Controller
 {
@@ -55,10 +57,15 @@ class FamilyController extends Controller
     public function update(Request $request, Memorial $memorial)
     {
         // dd($request);
+
         $request->validate([
             'names' => 'array',
             'names.*' => 'nullable|string|max:255',
+            'images' => 'array',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
         ]);
+
+        
 
         foreach ($request->input('names', []) as $key => $name) {
             if (trim($name) === '') {
@@ -83,6 +90,39 @@ class FamilyController extends Controller
                 );
             }
         }
+
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $key => $imageFile) {
+                if (!$imageFile) continue;
+
+                // Генерация имени файла, например:
+                $filename = $memorial->slug . '/' . $key . '-' . time() . '.webp';
+
+                // Обработка изображения через Intervention/Image (как у тебя в коде)
+                $image = Image::read($imageFile)
+                    ->scale(width: 800)
+                    ->toWebp(90);
+
+                // Сохраняем в disk('memorial'), нужно чтобы в config/filesystems.php был диск 'memorial'
+                Storage::disk('memorial')->put($filename, $image);
+
+                // Теперь обновим запись family
+                if (is_numeric($key)) {
+                    // Ключ — это id
+                    $member = Family::find($key);
+                } else {
+                    // Ключ — это роль (grandfather_father, father и т.д.)
+                    $member = Family::where('memorial_id', $memorial->id)->where('role', $key)->first();
+                }
+
+                if ($member) {
+                    $member->photo = $filename;
+                    $member->save();
+                }
+            }
+        }
+
 
         return redirect()->back()->with('success', 'Семья сохранена');
     }

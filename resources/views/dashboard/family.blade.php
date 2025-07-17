@@ -290,19 +290,19 @@
 
         /* Hover effects */
         /* .tree li a:hover {
-                background: #c8e4f8;
-                color: #000;
-                border: 1px solid #94a0b4;
-            } */
+                            background: #c8e4f8;
+                            color: #000;
+                            border: 1px solid #94a0b4;
+                        } */
 
         /* Connector styles on hover */
         /* .tree li a:hover~ul li::after,
-            .tree li a:hover~ul li::before,
-            .tree li a:hover~ul::before,
-            .tree li a:hover~ul ul::before,
-            .parent-pair:hover::after {
-                border-color: #94a0b4;
-            } */
+                        .tree li a:hover~ul li::before,
+                        .tree li a:hover~ul::before,
+                        .tree li a:hover~ul ul::before,
+                        .parent-pair:hover::after {
+                            border-color: #94a0b4;
+                        } */
 
 
         .tree li.down::after {
@@ -407,6 +407,7 @@
             width: 90px;
             object-fit: cover;
         }
+
         .icon-hover {
             opacity: 0;
             transition: opacity 0.3s ease;
@@ -416,6 +417,26 @@
             opacity: 1;
         }
 
+        .image-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .image-wrapper .camera-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            padding: 5px;
+            display: none;
+            cursor: pointer;
+        }
+
+        .image-wrapper:hover .camera-icon {
+            display: block;
+        }
     </style>
 @endsection
 
@@ -506,9 +527,9 @@
                     </div>
                 </div>
 
-                <form action="{{ route('family.update', $memorial->id) }}" method="POST">
+                <form action="{{ route('family.update', $memorial->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="row d-flex justify-content-center">
+                    {{-- <div class="row d-flex justify-content-center">
                         <div class="col-12 col-md-12 p-3">
 
 
@@ -624,7 +645,7 @@
 
 
                         </div>
-                    </div>
+                    </div> --}}
 
             </div>
 
@@ -650,83 +671,137 @@
                 <div class="tree-container padding_bottom">
                     <div class="tree wow fadeIn" data-wow-delay="300ms">
                         <ul class="down">
-                            <!-- My Children -->
+                            {{-- Дедушка по отцовской линии --}}
                             <li class="down">
                                 <a class="d-flex flex-column align-items-center text-decoration-none position-relative">
-
-                                    <img id="preview_grandfather_father"
-                                        src="{{ $grandfatherFather->image ?? asset('avatar/avatar-father.png') }}"
-                                        class="img-fluid rounded-circle" width="90" height="90">
-
-                                    <label for="image_grandfather_father" class="position-absolute" title="Fotó feltöltése" style="cursor: pointer; height: 85px; width: 85px; top: 40px;">
-                                        <i class="fa-solid fa-camera bg-light rounded-circle p-1 shadow icon-hover"></i>
-                                    </label>
-                                    
-                                    <input type="file" name="images[grandfather_father]" id="image_grandfather_father" class="d-none" accept="image/*"
-                                    onchange="previewImage(this, 'preview_grandfather_father')">
-
+                                    <div class="image-wrapper position-relative" style="cursor: pointer;"
+                                        onclick="document.getElementById('image_grandfather_father').click()"
+                                        title="Загрузить фото">
+                                        <img id="preview_grandfather_father"
+                                            src="{{ $grandfatherFather->photo ? asset('memorial/' . $grandfatherFather->photo) : asset('avatar/avatar-father.png') }}"
+                                            {{-- src="{{ $grandfatherFather->photo ?? asset('avatar/avatar-father.png') }}" --}}
+                                            class="img-fluid rounded-circle" width="90" height="90"
+                                            alt="Фото">
+                                        <i class="fa-solid fa-camera camera-icon p-1 shadow"></i>
+                                    </div>
+                                    <input type="file" name="images[grandfather_father]" id="image_grandfather_father"
+                                        class="d-none" accept="image/*"
+                                        onchange="previewImage(this, 'preview_grandfather_father')">
                                     <input type="text" class="form-control mt-2 text-center"
-                                        name="names[grandfather_father]"
-                                        value="{{ $grandfatherFather->name ?? '' }}" placeholder="Nagyapa">
+                                        name="names[grandfather_father]" value="{{ $grandfatherFather->name ?? '' }}"
+                                        placeholder="Nagyapa">
                                 </a>
                             </li>
 
+                            {{-- Бабушка по отцовской линии --}}
                             <li class="up">
-                                <a class="d-flex flex-column align-items-center text-decoration-none">
-                                    <img src="{{ $grandfatherMother->image ?? asset('avatar/avatar-woman.png') }}"
-                                        class="img-fluid rounded-circle" width="90" height="90">
-
+                                <a class="d-flex flex-column align-items-center text-decoration-none position-relative">
+                                    <div class="image-wrapper position-relative" style="cursor: pointer;"
+                                        onclick="document.getElementById('image_grandmother_father').click()"
+                                        title="Загрузить фото">
+                                        <img id="preview_grandmother_father"
+                                            src="{{ $grandmotherFather->photo ? asset('memorial/' . $grandmotherFather->photo) : asset('avatar/avatar-woman.png') }}"
+                                            
+                                            class="img-fluid rounded-circle" width="90" height="90"
+                                            alt="Фото">
+                                        <i class="fa-solid fa-camera camera-icon p-1 shadow"></i>
+                                    </div>
+                                    <input type="file" name="images[grandmother_father]" id="image_grandmother_father"
+                                        class="d-none" accept="image/*"
+                                        onchange="previewImage(this, 'preview_grandmother_father')">
                                     <input type="text" class="form-control mt-2 text-center"
-                                        name="names[grandmother_father]"
-                                        value="{{ $grandmotherFather->name ?? '' }}" placeholder="Nagymama">
+                                        name="names[grandmother_father]" value="{{ $grandmotherFather->name ?? '' }}"
+                                        placeholder="Nagymama">
                                 </a>
                             </li>
 
+                            {{-- Дедушка по материнской линии --}}
                             <li class="down">
-                                <a class="d-flex flex-column align-items-center text-decoration-none">
-                                    <img src="{{ $grandfatherMother->image ?? asset('avatar/avatar-father.png') }}"
-                                        class="img-fluid rounded-circle" width="90" height="90">
-
+                                <a class="d-flex flex-column align-items-center text-decoration-none position-relative">
+                                    <div class="image-wrapper position-relative" style="cursor: pointer;"
+                                        onclick="document.getElementById('image_grandfather_mother').click()"
+                                        title="Загрузить фото">
+                                        <img id="preview_grandfather_mother"
+                                            src="{{ $grandfatherMother->photo ? asset('memorial/' . $grandfatherMother->photo) : asset('avatar/avatar-father.png') }}"
+                                            
+                                            class="img-fluid rounded-circle" width="90" height="90"
+                                            alt="Фото">
+                                        <i class="fa-solid fa-camera camera-icon p-1 shadow"></i>
+                                    </div>
+                                    <input type="file" name="images[grandfather_mother]" id="image_grandfather_mother"
+                                        class="d-none" accept="image/*"
+                                        onchange="previewImage(this, 'preview_grandfather_mother')">
                                     <input type="text" class="form-control mt-2 text-center"
-                                        name="names[grandfather_mother]"
-                                        value="{{ $grandfatherMother->name ?? '' }}" placeholder="Nagyapa">
+                                        name="names[grandfather_mother]" value="{{ $grandfatherMother->name ?? '' }}"
+                                        placeholder="Nagyapa">
                                 </a>
                             </li>
 
+                            {{-- Бабушка по материнской линии --}}
                             <li class="up">
-                                <a class="d-flex flex-column align-items-center text-decoration-none">
-                                    <img src="{{ $grandmotherMother->image_url ?? asset('avatar/avatar-woman.png') }}"
-                                        class="img-fluid rounded-circle" width="90" height="90">
-
+                                <a class="d-flex flex-column align-items-center text-decoration-none position-relative">
+                                    <div class="image-wrapper position-relative" style="cursor: pointer;"
+                                        onclick="document.getElementById('image_grandmother_mother').click()"
+                                        title="Загрузить фото">
+                                        <img id="preview_grandmother_mother"
+                                            src="{{ $grandmotherMother->photo ? asset('memorial/' . $grandmotherMother->photo) : asset('avatar/avatar-woman.png') }}"
+                                            
+                                            class="img-fluid rounded-circle" width="90" height="90"
+                                            alt="Фото">
+                                        <i class="fa-solid fa-camera camera-icon p-1 shadow"></i>
+                                    </div>
+                                    <input type="file" name="images[grandmother_mother]" id="image_grandmother_mother"
+                                        class="d-none" accept="image/*"
+                                        onchange="previewImage(this, 'preview_grandmother_mother')">
                                     <input type="text" class="form-control mt-2 text-center"
-                                        name="names[grandmother_mother]"
-                                        value="{{ $grandmotherMother->name ?? '' }}" placeholder="Nagymama">
+                                        name="names[grandmother_mother]" value="{{ $grandmotherMother->name ?? '' }}"
+                                        placeholder="Nagymama">
                                 </a>
                             </li>
-
                         </ul>
-                        <ul class="down">
-                            <!-- My Children -->
 
+                        <ul class="down">
+                            <!-- Father -->
                             <li class="down">
                                 <ul class="apa">
-                                    <a>
-                                        <img src="{{ asset('avatar/avatar-man.png') }}"
-                                            class="img-fluid rounded-circle" width="90" height="90">
-
-                                        <input type="text" value="{{ $father->name }}" class="form-control mt-3">
-
+                                    <a
+                                        class="d-flex flex-column align-items-center text-decoration-none position-relative">
+                                        <div class="image-wrapper position-relative" style="cursor: pointer;"
+                                            onclick="document.getElementById('image_father').click()"
+                                            title="Загрузить фото">
+                                            <img id="preview_father"
+                                                src="{{ $father->photo ? asset('memorial/' . $father->photo) : asset('avatar/avatar-man.png') }}"
+                                                class="img-fluid rounded-circle" width="90" height="90"
+                                                alt="Фото">
+                                            <i class="fa-solid fa-camera camera-icon p-1 shadow"></i>
+                                        </div>
+                                        <input type="file" name="images[father]" id="image_father" class="d-none"
+                                            accept="image/*" onchange="previewImage(this, 'preview_father')">
+                                        <input type="text" class="form-control mt-3 text-center" name="names[father]"
+                                            value="{{ $father->name }}" placeholder="Apa">
                                     </a>
                                 </ul>
                             </li>
 
+                            <!-- Mother -->
                             <li class="up mom">
                                 <ul class="apa">
-                                    <a>
-                                        <img src="{{ asset('avatar/avatar-woman-3.png') }}"
-                                            class="img-fluid rounded-circle" width="90" height="90">
+                                    <a
+                                        class="d-flex flex-column align-items-center text-decoration-none position-relative">
+                                        <div class="image-wrapper position-relative" style="cursor: pointer;"
+                                            onclick="document.getElementById('image_mother').click()"
+                                            title="Загрузить фото">
+                                            <img id="preview_mother"
+                                                src="{{ $mother->photo ? asset('memorial/' . $mother->photo) : asset('aavatar/avatar-woman-3.png') }}"
 
-                                        <input type="text" value="{{ $mother->name }}" class="form-control mt-3">
+                                                class="img-fluid rounded-circle" width="90" height="90"
+                                                alt="Фото">
+                                            <i class="fa-solid fa-camera camera-icon p-1 shadow"></i>
+                                        </div>
+                                        <input type="file" name="images[mother]" id="image_mother" class="d-none"
+                                            accept="image/*" onchange="previewImage(this, 'preview_mother')">
+                                        <input type="text" class="form-control mt-3 text-center" name="names[mother]"
+                                            value="{{ $mother->name }}" placeholder="Anya">
                                     </a>
                                 </ul>
                             </li>
@@ -734,89 +809,107 @@
 
 
                         <ul>
-
                             <ul>
-
-
-
                                 <li>
                                     <a>
-                                        {{-- <img src="https://randomuser.me/api/portraits/women/26.jpg"
-                                            class="img-fluid rounded-circle" width="90" height="90"> --}}
-
-                                            <i class="fa-solid fa-plus rounded-circle fs-5 mt-3 mb-3"></i> <br>
+                                        <i class="fa-solid fa-plus rounded-circle fs-5 mt-3 mb-3"></i> <br>
                                         add partner
-
                                     </a>
 
-
-                                    @foreach ($familyMembers['partner'] ?? [] as $member)
+                                    <!-- Partner -->
+                                    @foreach ($familyMembers['partner'] ?? [] as $index => $member)
                                         <a>
-                                            <img src="{{ $member->image_url ?? asset('avatar/avatar-girl.png') }}"
-                                                class="img-fluid rounded-circle" width="90" height="90">
-
+                                            <div class="image-wrapper" style="cursor: pointer;"
+                                                onclick="document.getElementById('image_partner_{{ $index }}').click()"
+                                                title="Загрузить фото">
+                                                <img id="preview_partner_{{ $index }}"
+                                                    src="{{ $member->photo ? asset('memorial/' . $member->photo) : asset('avatar/avatar-girl.png') }}"
+                                                    {{-- src="{{ $member->image_url ?? asset('avatar/avatar-girl.png') }}" --}}
+                                                    class="img-fluid rounded-circle" width="90" height="90">
+                                                <i class="fa-solid fa-camera camera-icon p-1 shadow"></i>
+                                            </div>
+                                            <input type="file" name="images[partner_{{ $index }}]"
+                                                id="image_partner_{{ $index }}" class="d-none" accept="image/*"
+                                                onchange="previewImage(this, 'preview_partner_{{ $index }}')">
                                             <input class="form-control mt-3" type="text"
                                                 name="names[{{ $member->id }}]" value="{{ $member->name }}"
                                                 placeholder="Feleség" required>
-
                                         </a>
                                     @endforeach
 
-
-
+                                    <!-- Main Person -->
                                     <a>
-                                        <img src="{{ asset('memorial/' . $memorial->slug . '/' . $memorial->photo) }}"
-                                            class="img-fluid rounded-circle" width="90" height="90">
-
-                                        <input class="form-control  mt-3" type="text" name=""
+                                        <div class="image-wrapper" style="cursor: pointer;"
+                                            onclick="document.getElementById('image_main_person').click()"
+                                            title="Загрузить фото">
+                                            <img id="preview_main_person"
+                                                src="{{ asset('memorial/' . $memorial->slug . '/' . $memorial->photo) }}"
+                                                class="img-fluid rounded-circle" width="90" height="90">
+                                            <i class="fa-solid fa-camera camera-icon p-1 shadow"></i>
+                                        </div>
+                                        <input type="file" name="images[main_person]" id="image_main_person"
+                                            class="d-none" accept="image/*"
+                                            onchange="previewImage(this, 'preview_main_person')">
+                                        <input class="form-control mt-3" type="text" name="names[main_person]"
                                             value="{{ $memorial->name }}" placeholder="{{ $memorial->name }}">
                                     </a>
-                                    {{-- <a >
-                                <img src="https://randomuser.me/api/portraits/women/26.jpg"
-                                    class="img-fluid rounded-circle" width="90" height="90"><br>
-                                Feleség
-                            </a> --}}
+
                                     <ul>
-                                        <!-- My Children -->
-                                        @foreach ($familyMembers['children'] ?? [] as $child)
+                                        <!-- Children -->
+                                        @foreach ($familyMembers['children'] ?? [] as $index => $child)
                                             <li class="mb-3">
                                                 <a class="d-flex flex-column align-items-center text-decoration-none">
-                                                    <img src="{{ $child->image_url ?? asset('avatar/avatar-boy.png') }}"
-                                                        class="img-fluid rounded-circle" width="90"
-                                                        height="90"><br>
+                                                    <div class="image-wrapper" style="cursor: pointer;"
+                                                        onclick="document.getElementById('image_child_{{ $index }}').click()"
+                                                        title="Загрузить фото">
+                                                        <img id="preview_child_{{ $index }}"
+                                                            src="{{ $child->image_url ?? asset('avatar/avatar-boy.png') }}"
+                                                            class="img-fluid rounded-circle" width="90"
+                                                            height="90">
+                                                        <i class="fa-solid fa-camera camera-icon p-1 shadow"></i>
+                                                    </div>
+                                                    <input type="file" name="images[child_{{ $index }}]"
+                                                        id="image_child_{{ $index }}" class="d-none"
+                                                        accept="image/*"
+                                                        onchange="previewImage(this, 'preview_child_{{ $index }}')">
+                                                    {{-- <input class="form-control mt-2 text-center" type="text"
+                                                        name="children[{{ $child->id }}]" value="{{ $child->name }}"
+                                                        placeholder="Gyermek" required> --}}
+
 
                                                     <input class="form-control mt-2 text-center" type="text"
-                                                        name="children[{{ $child->id }}]" value="{{ $child->name }}"
+                                                        name="names[{{ $child->id }}]" value="{{ $child->name }}"
                                                         placeholder="Gyermek" required>
                                                 </a>
-
-
                                             </li>
                                         @endforeach
-
-
                                     </ul>
                                 </li>
-                                @foreach ($familyMembers['siblings'] ?? [] as $sibling)
+
+                                <!-- Siblings -->
+                                @foreach ($familyMembers['siblings'] ?? [] as $index => $sibling)
                                     <li class="mb-3">
                                         <a class="d-flex flex-column align-items-center text-decoration-none">
-                                            <img src="{{ asset('avatar/avatar-man.png') }}"
-                                                class="img-fluid rounded-circle" width="90" height="90">
-
+                                            <div class="image-wrapper" style="cursor: pointer;"
+                                                onclick="document.getElementById('image_sibling_{{ $index }}').click()"
+                                                title="Загрузить фото">
+                                                <img id="preview_sibling_{{ $index }}"
+                                                    src="{{ $sibling->image_url ?? asset('avatar/avatar-man.png') }}"
+                                                    class="img-fluid rounded-circle" width="90" height="90">
+                                                <i class="fa-solid fa-camera camera-icon p-1 shadow"></i>
+                                            </div>
+                                            <input type="file" name="images[sibling_{{ $index }}]"
+                                                id="image_sibling_{{ $index }}" class="d-none" accept="image/*"
+                                                onchange="previewImage(this, 'preview_sibling_{{ $index }}')">
                                             <input class="form-control mt-2 text-center" type="text"
-                                                name="siblings[{{ $sibling->id }}]" value="{{ $sibling->name }}"
-                                                placeholder="{{ $sibling->gender === 'male' ? 'Testvér' : 'Nővér' }}"
+                                                name="names[{{ $sibling->id }}]" value="{{ $sibling->name }}"
+                                                placeholder="Testvér"
                                                 required>
                                         </a>
                                     </li>
                                 @endforeach
-
-                                </li>
                             </ul>
-
-
                         </ul>
-
                     </div>
                 </div>
 
