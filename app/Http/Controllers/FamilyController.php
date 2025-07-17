@@ -96,23 +96,26 @@ class FamilyController extends Controller
             foreach ($request->file('images') as $key => $imageFile) {
                 if (!$imageFile) continue;
 
-                // Генерация имени файла, например:
                 $filename = $memorial->slug . '/' . $key . '-' . time() . '.webp';
-
-                // Обработка изображения через Intervention/Image (как у тебя в коде)
-                $image = Image::read($imageFile)
-                    ->scale(width: 800)
-                    ->toWebp(90);
-
-                // Сохраняем в disk('memorial'), нужно чтобы в config/filesystems.php был диск 'memorial'
+                $image = Image::read($imageFile)->scale(width: 800)->toWebp(90);
                 Storage::disk('memorial')->put($filename, $image);
 
-                // Теперь обновим запись family
-                if (is_numeric($key)) {
-                    // Ключ — это id
+                $member = null;
+
+                // Пример: partner_0, child_1, etc.
+                if (preg_match('/^([a-z_]+)_(\d+)$/', $key, $matches)) {
+                    $group = $matches[1]; // partner
+                    $index = $matches[2]; // 0
+
+                    $groupData = $request->input($group . 's', []); // partners, children, etc.
+                    $memberId = $groupData[$index]['id'] ?? null;
+
+                    if ($memberId) {
+                        $member = Family::find($memberId);
+                    }
+                } elseif (is_numeric($key)) {
                     $member = Family::find($key);
                 } else {
-                    // Ключ — это роль (grandfather_father, father и т.д.)
                     $member = Family::where('memorial_id', $memorial->id)->where('role', $key)->first();
                 }
 
@@ -122,6 +125,7 @@ class FamilyController extends Controller
                 }
             }
         }
+
 
 
         return redirect()->back()->with('success', 'Семья сохранена');

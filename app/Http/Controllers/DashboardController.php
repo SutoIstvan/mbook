@@ -102,6 +102,7 @@ class DashboardController extends Controller
                 ->where('role', 'father')
                 ->first();
 
+                
         $grandfatherFather = Family::where('memorial_id', $memorial->id)->where('role', 'grandfather_father')->first();
         $grandmotherFather = Family::where('memorial_id', $memorial->id)->where('role', 'grandmother_father')->first();
         $grandfatherMother = Family::where('memorial_id', $memorial->id)->where('role', 'grandfather_mother')->first();
