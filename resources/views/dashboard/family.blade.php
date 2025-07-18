@@ -176,7 +176,7 @@
             right: 50%;
             border-top: 1px solid #ccc;
             width: 50%;
-            height: 178px;
+            height: 196px;
             z-index: -1;
         }
 
@@ -240,7 +240,7 @@
             transition: all 0.5s;
             width: 120px;
             text-align: center;
-
+            height: 175px;
         }
 
         /* Adjust image size and alignment */
@@ -437,6 +437,7 @@
         .image-wrapper:hover .camera-icon {
             display: block;
         }
+
     </style>
 @endsection
 
@@ -798,7 +799,7 @@
                                         <input type="file" name="images[father]" id="image_father" class="d-none"
                                             accept="image/*" onchange="previewImage(this, 'preview_father')">
                                         <input type="text" class="form-control mt-3 text-center" name="names[father]"
-                                            value="{{ optional($father)->name ?? 'Apa' }}" placeholder="Apa">
+                                            value="{{ optional($father)->name }}" placeholder="Apa">
                                     </a>
                                 </ul>
                             </li>
@@ -821,7 +822,7 @@
                                         <input type="file" name="images[mother]" id="image_mother" class="d-none"
                                             accept="image/*" onchange="previewImage(this, 'preview_mother')">
                                         <input type="text" class="form-control mt-3 text-center" name="names[mother]"
-                                            value="{{ optional($mother)->name ?? 'Anya' }}"
+                                            value="{{ optional($mother)->name }}"
                                             placeholder="Anya">
                                     </a>
                                 </ul>
@@ -832,13 +833,8 @@
                         <ul>
                             <ul>
                                 <li>
-                                    <a href="#" onclick="event.preventDefault(); document.getElementById('add-partner-form').submit();" style="height: 170px; margin-top: 20px;">
+                                    {{-- <a href="#" onclick="event.preventDefault(); document.getElementById('add-partner-form').submit();" style="height: 170px;">
                                         <i class="fa-solid fa-plus rounded-circle fs-5 mt-3 mb-3"></i><br>
-                                        add partner
-                                    </a>
-
-                                    {{-- <a>
-                                        <i class="fa-solid fa-plus rounded-circle fs-5 mt-3 mb-3"></i> <br>
                                         add partner
                                     </a> --}}
 
@@ -861,11 +857,12 @@
                                             {{-- Поле имени --}}
                                             <input class="form-control mt-3" type="text"
                                                 name="partners[{{ $index }}][name]" value="{{ $member->name }}"
-                                                placeholder="Feleség" required>
+                                                placeholder="Partner">
                                         </a>
                                     @endforeach
+                                    
 
-
+                                    
                                     <!-- Main Person -->
                                     <a>
                                         <div class="image-wrapper" style="cursor: pointer;"
@@ -881,6 +878,11 @@
                                             onchange="previewImage(this, 'preview_main_person')">
                                         <input class="form-control mt-3" type="text" name="names[main_person]"
                                             value="{{ $memorial->name }}" placeholder="{{ $memorial->name }}">
+                                    </a>
+
+                                    <a href="#" onclick="event.preventDefault(); document.getElementById('add-partner-form').submit();" style="height: 170px; padding-top: 88px; !important;">
+                                        <i class="fa-solid fa-plus rounded-circle fs-5"></i><br><br>
+                                        add partner
                                     </a>
 
                                     <ul>
@@ -928,14 +930,16 @@
                                                     {{-- Поле имени --}}
                                                     <input class="form-control mt-3" type="text"
                                                         name="childrens[{{ $index }}][name]" value="{{ $member->name }}"
-                                                        placeholder="Feleség" required>
+                                                        placeholder="children">
                                                 </a>
                                             </li>
                                         @endforeach
-                                                <a href="#" onclick="event.preventDefault(); document.getElementById('add-children-form').submit();" style="height: 170px; margin-top: 20px;">
+                                            <li class="mb-3">
+                                                <a href="#" onclick="event.preventDefault(); document.getElementById('add-children-form').submit();" style="height: 175px;">
                                                     <br><br><i class="fa-solid fa-plus rounded-circle fs-5 mt-3 mb-3"></i><br>
                                                     add children
                                                 </a>
+                                            </li>
                                     </ul>
                                 </li>
 
@@ -960,17 +964,18 @@
                                             {{-- Поле имени --}}
                                             <input class="form-control mt-3" type="text"
                                                 name="siblings[{{ $index }}][name]" value="{{ $member->name }}"
-                                                placeholder="Feleség" required>
+                                                placeholder="sibling">
                                         </a>
 
 
                                     </li>
                                 @endforeach
-                                            <a href="#" onclick="event.preventDefault(); document.getElementById('add-siblings-form').submit();">
+                                    <li class="mb-3">
+                                            <a href="#" onclick="event.preventDefault(); document.getElementById('add-siblings-form').submit();" style="height: 175px;">
                                                 <i class="fa-solid fa-plus rounded-circle fs-5 mt-3 mb-3"></i><br>
                                                 add siblings
                                             </a>
-
+                                    </li>
                             </ul>
                         </ul>
                     </div>
