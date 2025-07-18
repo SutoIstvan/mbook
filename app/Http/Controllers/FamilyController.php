@@ -45,11 +45,17 @@ class FamilyController extends Controller
         // dd($request);
         $validated = $request->validate([
             'memorial_id' => 'required|exists:memorials,id',
-            'name' => 'required|string',
             'role' => 'required|string',
+            'name' => 'nullable|string|max:255',
         ]);
 
-        Family::create($validated);
+        Family::create([
+            'memorial_id' => $validated['memorial_id'],
+            'role' => $validated['role'],
+            'name' => $validated['name'] ?? '',
+        ]);
+
+        // Family::create($validated);
 
         return redirect()->route('dashboard.family', $request->memorial_id)->with('success', 'Family member added successfully.');
     }

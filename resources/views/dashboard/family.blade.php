@@ -476,20 +476,46 @@
                 </div>
             </section> --}}
             <!-- ==================== End Intro-vid ==================== -->
+<!-- Форма для добавления партнера -->
+<form action="{{ route('dashboard.family.store') }}" id="add-partner-form" method="POST">
+    @csrf
+    <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
+    <input type="hidden" name="role" value="partner">
 
+
+</form>
+
+<!-- Форма для добавления детей -->
+<form action="{{ route('dashboard.family.store') }}" id="add-children-form" method="POST">
+    @csrf
+    <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
+    <input type="hidden" name="role" value="children">
+
+
+</form>
+
+<!-- Форма для добавления братьев/сестер -->
+<form action="{{ route('dashboard.family.store') }}" id="add-siblings-form" method="POST">
+    @csrf
+    <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
+    <input type="hidden" name="role" value="siblings">
+
+
+</form>
 
             <div class="">
-                <div class="row d-flex justify-content-center">
+
+                {{-- <div class="row d-flex justify-content-center">
                     <div class="col-12 col-md-12 p-3">
                         <div class="">
                             <div class="row">
-                                <form action="{{ route('dashboard.family.store') }}" method="POST">
+                                <form action="{{ route('dashboard.family.store') }}" id="add-partner-form" method="POST">
                                     @csrf
                                     <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
-
+                                    <input type="hidden" name="role1" value="partner">
+                                    
                                     <div class="row mb-3">
                                         <div class="form-group col-12 col-md-5 mt-1">
-                                            {{-- <label>{{ __('My loved ones') }}</label> --}}
                                             <select name="role" class="form-select" required>
                                                 <option value="">{{ __('Select my loved ones') }}</option>
                                                 <option value="father">{{ __('Father') }}</option>
@@ -501,12 +527,10 @@
                                             </select>
                                         </div>
                                         <div class="form-group col-12 col-md-5 mt-1">
-                                            {{-- <label>{{ __('Name') }}</label> --}}
                                             <input type="text" name="name" class="form-control"
                                                 placeholder="{{ __('Name') }}" required>
                                         </div>
 
-                                        {{-- <div class="form-group col-12 col-md-2 mt-30"> --}}
                                         <div class="form-group col-12 col-md-2 mt-1">
                                             <button type="submit" class="btn btn-outline-primary mb-4 w-100">
                                                 <i class="fa fa-plus"></i> {{ __('Add') }}</button>
@@ -516,16 +540,10 @@
 
                                 </form>
 
-                                {{-- <div class="mt-50">
-                                    <label for="video" class="form-label ">Videó egyedi URL</label>
-                                    <input type="text" name="video" id="video" class="form-control py-2"
-                                        value="{{ $memorial->video }}">
-                                    <small class="text-muted">Ha üresen hagyja, akkor a videó nem lesz megjelenítve</small>
-                                </div> --}}
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 <form action="{{ route('family.update', $memorial->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
@@ -814,33 +832,38 @@
                         <ul>
                             <ul>
                                 <li>
-                                    <a>
-                                        <i class="fa-solid fa-plus rounded-circle fs-5 mt-3 mb-3"></i> <br>
+                                    <a href="#" onclick="event.preventDefault(); document.getElementById('add-partner-form').submit();" style="height: 170px; margin-top: 20px;">
+                                        <i class="fa-solid fa-plus rounded-circle fs-5 mt-3 mb-3"></i><br>
                                         add partner
                                     </a>
 
-                                    <!-- Partner -->
-@foreach ($familyMembers['partner'] ?? [] as $index => $member)
-    <a>
-        <div class="image-wrapper" style="cursor: pointer;"
-            onclick="document.getElementById('image_partner_{{ $index }}').click()" title="Загрузить фото">
-            <img id="preview_partner_{{ $index }}"
-                src="{{ isset($member) && $member->photo ? asset('memorial/' . $member->photo) : asset('avatar/avatar-girl.png') }}"
-                class="img-fluid rounded-circle" width="90" height="90">
-            <i class="fa-solid fa-camera camera-icon p-1 shadow"></i>
-        </div>
-        <input type="file" name="images[partner_{{ $index }}]"
-            id="image_partner_{{ $index }}" class="d-none" accept="image/*"
-            onchange="previewImage(this, 'preview_partner_{{ $index }}')">
+                                    {{-- <a>
+                                        <i class="fa-solid fa-plus rounded-circle fs-5 mt-3 mb-3"></i> <br>
+                                        add partner
+                                    </a> --}}
 
-        {{-- Добавляем скрытый id --}}
-        <input type="hidden" name="partners[{{ $index }}][id]" value="{{ $member->id }}">
-        {{-- Поле имени --}}
-        <input class="form-control mt-3" type="text"
-            name="partners[{{ $index }}][name]" value="{{ $member->name }}"
-            placeholder="Feleség" required>
-    </a>
-@endforeach
+                                    <!-- Partner -->
+                                    @foreach ($familyMembers['partner'] ?? [] as $index => $member)
+                                        <a>
+                                            <div class="image-wrapper" style="cursor: pointer;"
+                                                onclick="document.getElementById('image_partner_{{ $index }}').click()" title="Загрузить фото">
+                                                <img id="preview_partner_{{ $index }}"
+                                                    src="{{ isset($member) && $member->photo ? asset('memorial/' . $member->photo) : asset('avatar/avatar-girl.png') }}"
+                                                    class="img-fluid rounded-circle" width="90" height="90">
+                                                <i class="fa-solid fa-camera camera-icon p-1 shadow"></i>
+                                            </div>
+                                            <input type="file" name="images[partner_{{ $index }}]"
+                                                id="image_partner_{{ $index }}" class="d-none" accept="image/*"
+                                                onchange="previewImage(this, 'preview_partner_{{ $index }}')">
+
+                                            {{-- Добавляем скрытый id --}}
+                                            <input type="hidden" name="partners[{{ $index }}][id]" value="{{ $member->id }}">
+                                            {{-- Поле имени --}}
+                                            <input class="form-control mt-3" type="text"
+                                                name="partners[{{ $index }}][name]" value="{{ $member->name }}"
+                                                placeholder="Feleség" required>
+                                        </a>
+                                    @endforeach
 
 
                                     <!-- Main Person -->
@@ -909,7 +932,10 @@
                                                 </a>
                                             </li>
                                         @endforeach
-
+                                                <a href="#" onclick="event.preventDefault(); document.getElementById('add-children-form').submit();" style="height: 170px; margin-top: 20px;">
+                                                    <br><br><i class="fa-solid fa-plus rounded-circle fs-5 mt-3 mb-3"></i><br>
+                                                    add children
+                                                </a>
                                     </ul>
                                 </li>
 
@@ -936,9 +962,14 @@
                                                 name="siblings[{{ $index }}][name]" value="{{ $member->name }}"
                                                 placeholder="Feleség" required>
                                         </a>
+
+
                                     </li>
                                 @endforeach
-
+                                            <a href="#" onclick="event.preventDefault(); document.getElementById('add-siblings-form').submit();">
+                                                <i class="fa-solid fa-plus rounded-circle fs-5 mt-3 mb-3"></i><br>
+                                                add siblings
+                                            </a>
 
                             </ul>
                         </ul>
@@ -994,6 +1025,7 @@
 
 @section('js')
     <script>
+        
         function previewImage(input, previewId) {
             const file = input.files[0];
             if (file) {
