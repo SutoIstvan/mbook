@@ -284,6 +284,13 @@
             height: 40px;
             z-index: -1;
         }
+
+        .img-fluid {
+            height: 90px;
+            width: 90px;
+            object-fit: cover;
+        }
+
     </style>
 
 
@@ -831,7 +838,7 @@
                 </p>
             </div>
         </div>
-
+{{-- @dump($family) --}}
         <div class="tree-container padding_bottom">
             <div class="tree wow fadeIn" data-wow-delay="300ms">
                 <ul class="down">
@@ -871,9 +878,9 @@
                     <li class="down">
                         <ul class="apa">
                             <a href="#">
-                                <img src="https://randomuser.me/api/portraits/men/5.jpg"
+                                <img src="{{ isset($father) && $father->photo ? asset('memorial/' . $father->photo) : asset('avatar/avatar-woman.png') }}"
                                     class="img-fluid rounded-circle" width="90" height="90"><br>
-                                Apa
+                                {{ $father->name ?? 'Father name' }}
                             </a>
                         </ul>
                     </li>
@@ -881,9 +888,9 @@
                     <li class="up mom">
                         <ul class="apa">
                             <a href="#">
-                                <img src="https://randomuser.me/api/portraits/women/3.jpg"
+                                <img src="{{ isset($mother) && $mother->photo ? asset('memorial/' . $mother->photo) : asset('avatar/avatar-woman.png') }}"
                                     class="img-fluid rounded-circle" width="90" height="90"><br>
-                                Anya
+                                {{ $mother->name ?? 'Mother name' }}
                             </a>
                         </ul>
                     </li>
@@ -904,9 +911,9 @@
                             </a>
 
                             <a href="#" style="background: #c8e4f8;">
-                                <img src="https://randomuser.me/api/portraits/men/3.jpg"
+                                <img src="{{ asset('memorial/' . $memorial->slug . '/' . $memorial->photo) }}"
                                     class="img-fluid rounded-circle" width="90" height="90"><br>
-                                Davis Green
+                                {{ $memorial->name }}
                             </a>
                             {{-- <a href="#">
                                 <img src="https://randomuser.me/api/portraits/women/26.jpg"

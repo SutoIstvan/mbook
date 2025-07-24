@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Family;
 use App\Models\Memorial;
 use App\Models\QrCodes;
 use App\Models\Timeline;
@@ -40,11 +41,20 @@ class MemorialController extends Controller
             ->orderBy('date', 'asc')
             ->get();
 
+        $father = Family::where('memorial_id', $memorial->id)
+                ->where('role', 'father')
+                ->first();
+
+        $mother = Family::where('memorial_id', $memorial->id)
+                ->where('role', 'mother')
+                ->first();
+
+        $family = Family::where('memorial_id', $memorial->id)->get();
 
         if ($theme === 'dark') {
             return view('memorial.show', compact('memorial', 'images', 'comments', 'timelines'));
         } else {
-            return view('memorial.white', compact('memorial', 'images', 'comments', 'timelines'));
+            return view('memorial.white', compact('memorial', 'images', 'comments', 'timelines', 'father', 'mother'));
         }
 
         return view('memorial.show', compact('memorial', 'images', 'comments', 'theme'));
