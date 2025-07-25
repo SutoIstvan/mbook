@@ -141,7 +141,7 @@
 
 
         .tree {
-            min-width: 1200px;
+            min-width: 1100px;
         }
 
         .tree-container {
@@ -176,7 +176,7 @@
             right: 50%;
             border-top: 1px solid #ccc;
             width: 50%;
-            height: 196px;
+            height: 178px;
             z-index: -1;
         }
 
@@ -228,7 +228,7 @@
 
         /* Style for <a> elements */
         .tree li a {
-            border: 1px solid #a9a9a9;
+            border: 1px solid #ccc;
             padding: 10px;
             text-decoration: none;
             color: #666;
@@ -240,7 +240,8 @@
             transition: all 0.5s;
             width: 120px;
             text-align: center;
-            height: 175px;
+            filter: drop-shadow(2px 1px 3px rgba(0, 0, 0, 0.1)) drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.01));
+
         }
 
         /* Adjust image size and alignment */
@@ -289,20 +290,20 @@
         }
 
         /* Hover effects */
-        /* .tree li a:hover {
-                            background: #c8e4f8;
-                            color: #000;
-                            border: 1px solid #94a0b4;
-                        } */
+        .tree li a:hover {
+            background: #c8e4f8;
+            color: #000;
+            border: 1px solid #94a0b4;
+        }
 
         /* Connector styles on hover */
         /* .tree li a:hover~ul li::after,
-                        .tree li a:hover~ul li::before,
-                        .tree li a:hover~ul::before,
-                        .tree li a:hover~ul ul::before,
-                        .parent-pair:hover::after {
-                            border-color: #94a0b4;
-                        } */
+        .tree li a:hover~ul li::before,
+        .tree li a:hover~ul::before,
+        .tree li a:hover~ul ul::before,
+        .parent-pair:hover::after {
+            border-color: #94a0b4;
+        } */
 
 
         .tree li.down::after {
@@ -382,7 +383,7 @@
             text-align: center;
             list-style-type: none;
             position: relative;
-            padding: 0px 10px 0 42px;
+            padding: 0px 10px 0 10px;
             transition: all 0.5s;
         }
 
@@ -397,9 +398,10 @@
             z-index: -1;
         }
 
-        ul {
-            margin-top: 0;
-            margin-bottom: 0 !important;
+
+        .name-wrap {
+            max-width: 90px;
+            word-wrap: break-word;
         }
 
         .img-fluid {
