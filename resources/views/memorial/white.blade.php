@@ -291,6 +291,10 @@
             object-fit: cover;
         }
 
+        .name-wrap {
+            max-width: 90px;
+            word-wrap: break-word;
+        }
     </style>
 
 
@@ -806,7 +810,9 @@
             <div class="row align-items-center text-center">
                 <div class="col-lg-3 col-md-3 col-sm-3 bottom10">
                     <div class="counters whitecolor  top10 bottom10">
-                        <span class="count_nums font-light" data-to="{{ \Carbon\Carbon::parse($memorial->birth_date)->locale('hu')->translatedFormat('Y') }}" data-speed="2500"> </span>
+                        <span class="count_nums font-light"
+                            data-to="{{ \Carbon\Carbon::parse($memorial->birth_date)->locale('hu')->translatedFormat('Y') }}"
+                            data-speed="2500"> </span>
                     </div>
                     {{-- <h3 class="font-light whitecolor top20">Since We Started</h3> --}}
                 </div>
@@ -815,7 +821,9 @@
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3 bottom10">
                     <div class="counters whitecolor top10 bottom10">
-                        <span class="count_nums font-light" data-to="{{ \Carbon\Carbon::parse($memorial->death_date)->locale('hu')->translatedFormat('Y') }}" data-speed="2500"> </span>
+                        <span class="count_nums font-light"
+                            data-to="{{ \Carbon\Carbon::parse($memorial->death_date)->locale('hu')->translatedFormat('Y') }}"
+                            data-speed="2500"> </span>
                     </div>
                     {{-- <h3 class="font-light whitecolor top20">Since We Started</h3> --}}
                 </div>
@@ -838,38 +846,50 @@
                 </p>
             </div>
         </div>
-{{-- @dump($family) --}}
+        {{-- @dump($family) --}}
         <div class="tree-container padding_bottom">
             <div class="tree wow fadeIn" data-wow-delay="300ms">
                 <ul class="down">
                     <!-- My Children -->
                     <li class="down">
-                        <a href="#">
-                            <img src="https://randomuser.me/api/portraits/men/75.jpg" class="img-fluid rounded-circle"
-                                width="90" height="90"><br>
-                            Fater
+                        <a>
+                            <img src="{{ isset($grandfatherFather) && $grandfatherFather->photo ? asset('memorial/' . $grandfatherFather->photo) : asset('avatar/avatar-father.png') }}"
+                                class="img-fluid rounded-circle" width="90" height="90"><br>
+                            {{ $grandfatherFather->name ?? __('Grand Father') }}
                         </a>
                     </li>
                     <li class="up">
-                        <a href="#">
-                            <img src="https://randomuser.me/api/portraits/women/72.jpg"
+                        <a>
+                            <img src="{{ isset($grandmotherFather) && $grandmotherFather->photo ? asset('memorial/' . $grandmotherFather->photo) : asset('avatar/avatar-woman.png') }}"
                                 class="img-fluid rounded-circle" width="90" height="90"><br>
-                            Mother
+                            {{ $grandmotherFather->name ?? __('Grand Mother') }}
                         </a>
                     </li>
                     <li class="down">
-                        <a href="#">
-                            <img src="https://randomuser.me/api/portraits/men/21.jpg" class="img-fluid rounded-circle"
-                                width="90" height="90"><br>
-                            Fater
+                        <a>
+                            <img src="{{ isset($grandfatherMother) && $grandfatherMother->photo ? asset('memorial/' . $grandfatherMother->photo) : asset('avatar/avatar-father.png') }}"
+                                class="img-fluid rounded-circle" width="90" height="90"><br>
+                            {{ $grandfatherMother->name ??  __('Grand Father') }}
                         </a>
                     </li>
                     <li class="up">
-                        <a href="#">
-                            <img src="https://randomuser.me/api/portraits/women/49.jpg"
-                                class="img-fluid rounded-circle" width="90" height="90"><br>
-                            Mother
+                        <a>
+                            <img src="{{ $grandmotherMother?->photo ? asset('memorial/' . $grandmotherMother->photo) : asset('avatar/avatar-woman.png') }}"
+                                class="img-fluid rounded-circle" width="90" height="90">
+                            @if (mb_strlen($grandmotherMother?->name ?? '') <= 13)
+                                <br>
+                            @endif
+                            {{ $grandmotherMother->name ?? __('Grand Mother') }}
                         </a>
+
+                        {{-- <a>
+                            <img src="{{ isset($grandmotherMother) && $grandmotherMother->photo ? asset('memorial/' . $grandmotherMother->photo) : asset('avatar/avatar-woman.png') }}"
+                                class="img-fluid rounded-circle" width="90" height="90">
+                            @if (mb_strlen($grandmotherMother->name) <= 13)
+                                <br>
+                            @endif
+                            {{ $grandmotherMother->name ?? 'grand Mother name' }}
+                        </a> --}}
                     </li>
                 </ul>
                 <ul class="down">
@@ -877,20 +897,20 @@
 
                     <li class="down">
                         <ul class="apa">
-                            <a href="#">
-                                <img src="{{ isset($father) && $father->photo ? asset('memorial/' . $father->photo) : asset('avatar/avatar-woman.png') }}"
+                            <a>
+                                <img src="{{ isset($father) && $father->photo ? asset('memorial/' . $father->photo) : asset('avatar/avatar-man.png') }}"
                                     class="img-fluid rounded-circle" width="90" height="90"><br>
-                                {{ $father->name ?? 'Father name' }}
+                                {{ $father->name ?? __('Father') }}
                             </a>
                         </ul>
                     </li>
 
                     <li class="up mom">
                         <ul class="apa">
-                            <a href="#">
-                                <img src="{{ isset($mother) && $mother->photo ? asset('memorial/' . $mother->photo) : asset('avatar/avatar-woman.png') }}"
+                            <a>
+                                <img src="{{ isset($mother) && $mother->photo ? asset('memorial/' . $mother->photo) : asset('avatar/avatar-girl.png') }}"
                                     class="img-fluid rounded-circle" width="90" height="90"><br>
-                                {{ $mother->name ?? 'Mother name' }}
+                                {{ $mother->name ?? __('Mother') }}
                             </a>
                         </ul>
                     </li>
@@ -904,15 +924,24 @@
 
 
                         <li>
-                            <a href="#">
-                                <img src="https://randomuser.me/api/portraits/women/26.jpg"
-                                    class="img-fluid rounded-circle" width="90" height="90"><br>
-                                Feleség
-                            </a>
+                            @foreach ($partners as $partner)
+                                @if ($partner->name || $partner->photo)
+                                    <a>
+                                        <img src="{{ $partner->photo ? asset('memorial/' . $partner->photo) : asset('avatar/avatar-woman.png') }}"
+                                            class="img-fluid rounded-circle" width="90" height="90"><br>
+                                        {{ $partner->name }}
+                                    </a>
+                                @endif
+                            @endforeach
+
+
 
                             <a href="#" style="background: #c8e4f8;">
                                 <img src="{{ asset('memorial/' . $memorial->slug . '/' . $memorial->photo) }}"
-                                    class="img-fluid rounded-circle" width="90" height="90"><br>
+                                    class="img-fluid rounded-circle" width="90" height="90">
+                                @if (mb_strlen($memorial->name) <= 13)
+                                    <br>
+                                @endif
                                 {{ $memorial->name }}
                             </a>
                             {{-- <a href="#">
@@ -920,9 +949,38 @@
                                     class="img-fluid rounded-circle" width="90" height="90"><br>
                                 Feleség
                             </a> --}}
-                            <ul>
-                                <!-- My Children -->
-                                <li>
+
+                            <!-- My Children -->
+@if ($childrens?->isNotEmpty())
+    @php $hasValidChildren = false; @endphp
+    
+    @foreach ($childrens as $children)
+        @if ($children->name || $children->photo)
+            @php $hasValidChildren = true; @endphp
+            @break
+        @endif
+    @endforeach
+    
+    @if ($hasValidChildren)
+    <ul>
+        @foreach ($childrens as $children)
+            @if ($children->name || $children->photo)
+            <li>
+                <a>
+                    <img src="{{ $children->photo ? asset('memorial/' . $children->photo) : asset('avatar/avatar-woman.png') }}" 
+                         class="img-fluid rounded-circle" width="90" height="90"><br>
+                    {{ $children->name }}
+                </a>
+            </li>
+            @endif
+        @endforeach
+    </ul>
+    @endif
+@endif
+
+
+
+                            {{-- <li>
                                     <a href="#">
                                         <img src="https://randomuser.me/api/portraits/men/51.jpg"
                                             class="img-fluid rounded-circle" width="90" height="90"><br>
@@ -935,10 +993,25 @@
                                             class="img-fluid rounded-circle" width="90" height="90"><br>
                                         Gyermek
                                     </a>
-                                </li>
-                            </ul>
+                                </li> --}}
+
                         </li>
-                        <li>
+                        @if ($siblings && $siblings->isNotEmpty())
+
+                            @foreach ($siblings as $sibling)
+                                @if ($sibling->name || $sibling->photo)
+                                    <li>
+                                        <a>
+                                            <img src="{{ $sibling->photo ? asset('memorial/' . $sibling->photo) : asset('avatar/avatar-woman.png') }}"
+                                                class="img-fluid rounded-circle" width="90" height="90"><br>
+                                            {{ $sibling->name }}
+                                        </a>
+                                    </li>
+                                @endif
+                            @endforeach
+                        @endif
+
+                        {{-- <li>
                             <a href="#">
                                 <img src="https://randomuser.me/api/portraits/women/6.jpg"
                                     class="img-fluid rounded-circle" width="90" height="90"><br>
@@ -951,7 +1024,7 @@
                                     class="img-fluid rounded-circle" width="90" height="90"><br>
                                 Testvér
                             </a>
-                        </li>
+                        </li> --}}
                         </li>
                     </ul>
 
@@ -1029,7 +1102,8 @@
         </div>
 
         <div class="container text-center mt-5">
-            <button type="button" class="button gradient-btn" data-bs-toggle="modal" data-bs-target="#contactModal">
+            <button type="button" class="button gradient-btn" data-bs-toggle="modal"
+                data-bs-target="#contactModal">
                 Néhány szó tőled
             </button>
         </div>
@@ -1063,16 +1137,22 @@
                                         </div>
                                         <div class="my-3">
                                             <p id="photo-description" class="bottom10">
-                                                Adj hozzá egy fotót a megjegyzésedhez, és lepd meg a rokonaidat egy egyedi képpel.
+                                                Adj hozzá egy fotót a megjegyzésedhez, és lepd meg a rokonaidat egy
+                                                egyedi képpel.
                                             </p>
 
                                             <div id="preview-container" class="mt-3" style="display: none;">
-                                                <img id="preview-image" src="#" alt="Előnézeti kép" class="img-fluid rounded" style="max-width: 250px; max-height: 170px;">
+                                                <img id="preview-image" src="#" alt="Előnézeti kép"
+                                                    class="img-fluid rounded"
+                                                    style="max-width: 250px; max-height: 170px;">
                                             </div>
 
                                             <div class="mb-3">
-                                                <label for="comment_photo" class="form-label">Fotó kiválasztása</label>
-                                                <input class="form-control" type="file" id="comment_photo" name="comment_photo" accept="image/*" onchange="previewImage(event)">
+                                                <label for="comment_photo" class="form-label">Fotó
+                                                    kiválasztása</label>
+                                                <input class="form-control" type="file" id="comment_photo"
+                                                    name="comment_photo" accept="image/*"
+                                                    onchange="previewImage(event)">
                                             </div>
 
 
@@ -1426,79 +1506,82 @@
     <!--custom functions and script-->
     <script src="white/js/functions.js"></script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const commentForm = document.getElementById('addcomment');
-        if (!commentForm) return;
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const commentForm = document.getElementById('addcomment');
+            if (!commentForm) return;
 
-        commentForm.addEventListener('submit', function (e) {
-            e.preventDefault();
+            commentForm.addEventListener('submit', function(e) {
+                e.preventDefault();
 
-            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            const form = e.target;
-            const memorialId = form.dataset.memorialId;
-            const formData = new FormData(form);
+                const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                const form = e.target;
+                const memorialId = form.dataset.memorialId;
+                const formData = new FormData(form);
 
-            fetch(`/${memorialId}/comments`, {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': csrfToken
-                },
-                body: formData
-            })
-            .then(response => {
-                if (!response.ok) {
-                    return response.json().then(err => { throw err; });
-                }
-                return response.json();
-            })
-            .then(data => {
-                form.reset();
+                fetch(`/${memorialId}/comments`, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': csrfToken
+                        },
+                        body: formData
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            return response.json().then(err => {
+                                throw err;
+                            });
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        form.reset();
 
-                // Close Bootstrap-modal windows
-                const modalEl = document.getElementById('contactModal');
-                const modalInstance = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
-                modalInstance.hide();
+                        // Close Bootstrap-modal windows
+                        const modalEl = document.getElementById('contactModal');
+                        const modalInstance = bootstrap.Modal.getInstance(modalEl) || new bootstrap
+                            .Modal(modalEl);
+                        modalInstance.hide();
 
-                // Scow Bootstrap Toast
-                const toastEl = document.getElementById('successToast');
-                const toast = new bootstrap.Toast(toastEl);
-                toast.show();
+                        // Scow Bootstrap Toast
+                        const toastEl = document.getElementById('successToast');
+                        const toast = new bootstrap.Toast(toastEl);
+                        toast.show();
 
-                // Очистка result блока (если есть)
-                document.getElementById('result1').innerHTML = '';
-            })
-            .catch(error => {
-                console.error(error);
-                document.getElementById('result1').innerHTML =
-                    `<div class="alert alert-danger">Hiba történt: ${error.message ?? 'érvénytelen adatok'}</div>`;
+                        // Очистка result блока (если есть)
+                        document.getElementById('result1').innerHTML = '';
+                    })
+                    .catch(error => {
+                        console.error(error);
+                        document.getElementById('result1').innerHTML =
+                            `<div class="alert alert-danger">Hiba történt: ${error.message ?? 'érvénytelen adatok'}</div>`;
+                    });
             });
         });
-    });
 
-    function previewImage(event) {
-        const input = event.target;
-        const previewContainer = document.getElementById('preview-container');
-        const previewImage = document.getElementById('preview-image');
-        const description = document.getElementById('photo-description');
+        function previewImage(event) {
+            const input = event.target;
+            const previewContainer = document.getElementById('preview-container');
+            const previewImage = document.getElementById('preview-image');
+            const description = document.getElementById('photo-description');
 
-        if (input.files && input.files[0]) {
-            const reader = new FileReader();
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
 
-            reader.onload = function (e) {
-                previewImage.src = e.target.result;
-                previewContainer.style.display = 'block';
-                description.style.display = 'none'; // Скрываем описание
+                reader.onload = function(e) {
+                    previewImage.src = e.target.result;
+                    previewContainer.style.display = 'block';
+                    description.style.display = 'none'; // Скрываем описание
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                previewContainer.style.display = 'none';
+                previewImage.src = '#';
+                description.style.display = 'block'; // Показываем описание обратно, если файл убрали
             }
-
-            reader.readAsDataURL(input.files[0]);
-        } else {
-            previewContainer.style.display = 'none';
-            previewImage.src = '#';
-            description.style.display = 'block'; // Показываем описание обратно, если файл убрали
         }
-    }
-</script>
+    </script>
 
 
 

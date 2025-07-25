@@ -1,5 +1,5 @@
 {
-    "Family": "Családtagok",
+    "Family": "Családfa",
     "Timeline": "Idővonal",
     "Register account": "Fiók regisztrálása",
     "If you have never registred a rememus sing before, please register first.": "Még nincs fiókod a Rememus oldalon, kérlek, regisztrálj itt.",
@@ -17,6 +17,8 @@
     "Partners": "Társak",
     "Partners name": "Társ neve",
     "Children name": "Gyermek neve",
+    "Grand Father": "Nagypapa",
+    "Grand Mother": "Nagymama",
     "Add another partners": "Újabb társ hozzáadása",
     "Add another children": "Újabb gyermek hozzáadása",
     "Select my loved ones": "Szeretteim kiválasztása",

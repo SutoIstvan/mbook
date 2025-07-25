@@ -26,7 +26,7 @@ class MemorialController extends Controller
         // if (request()->segment(2) != $memorial->slug && $memorial->slug) {
         //     return redirect()->route('memorial.show', $memorial->slug);
         // }
-        
+
         $images = $memorial->memorialimages;
 
         $comments = $memorial->comments()
@@ -41,20 +41,48 @@ class MemorialController extends Controller
             ->orderBy('date', 'asc')
             ->get();
 
+        $partners = Family::where('memorial_id', $memorial->id)
+            ->where('role', 'partner')
+            ->get();
+
+        $siblings = Family::where('memorial_id', $memorial->id)
+            ->where('role', 'siblings')
+            ->get();
+
+        $childrens = Family::where('memorial_id', $memorial->id)
+            ->where('role', 'children')
+            ->get();
+
         $father = Family::where('memorial_id', $memorial->id)
-                ->where('role', 'father')
-                ->first();
+            ->where('role', 'father')
+            ->first();
 
         $mother = Family::where('memorial_id', $memorial->id)
-                ->where('role', 'mother')
-                ->first();
+            ->where('role', 'mother')
+            ->first();
+
+        $grandmotherMother = Family::where('memorial_id', $memorial->id)
+            ->where('role', 'grandmother_mother')
+            ->first();
+
+        $grandfatherMother = Family::where('memorial_id', $memorial->id)
+            ->where('role', 'grandfather_mother')
+            ->first();
+
+        $grandmotherFather = Family::where('memorial_id', $memorial->id)
+            ->where('role', 'grandmother_father')
+            ->first();
+
+        $grandfatherFather = Family::where('memorial_id', $memorial->id)
+            ->where('role', 'grandfather_father')
+            ->first();
 
         $family = Family::where('memorial_id', $memorial->id)->get();
 
         if ($theme === 'dark') {
             return view('memorial.show', compact('memorial', 'images', 'comments', 'timelines'));
         } else {
-            return view('memorial.white', compact('memorial', 'images', 'comments', 'timelines', 'father', 'mother'));
+            return view('memorial.white', compact('memorial', 'images', 'comments', 'timelines', 'father', 'mother', 'grandmotherMother', 'grandfatherMother', 'grandmotherFather', 'grandfatherFather', 'partners', 'childrens', 'siblings'));
         }
 
         return view('memorial.show', compact('memorial', 'images', 'comments', 'theme'));
@@ -64,33 +92,33 @@ class MemorialController extends Controller
     {
         // Ищем QR-код по токену
         $qr = QrCodes::where('token', $token)->firstOrFail();
-        
+
         // Если QR-код уже привязан к мемориалу
         if ($qr->memorial_id) {
             // Находим мемориал
             $memorial = Memorial::findOrFail($qr->memorial_id);
-            
+
             // Если у мемориала есть slug, делаем редирект на страницу со slug
             if ($memorial->slug) {
                 // return redirect()->route('memorial.show', $memorial->slug, 301);
 
                 return redirect()->route('memorial.show', $memorial->slug)->setStatusCode(301);
             }
-            
+
             // Если slug нет, редиректим по ID
             return redirect()->route('memorial.show', $qr->memorial_id);
         }
-        
+
         // Если QR-код еще не привязан
         if (!Auth::check()) {
             // Сохраняем токен QR-кода в сессии
             session(['qr_token' => $token]);
-            
+
             return redirect()
                 ->route('login')
                 ->with('message', 'Kérjük, jelentkezzen be a QR-kód összekapcsolásához');
         }
-        
+
         // Показываем форму привязки
         return view('memorial.attach', compact('token'));
     }
@@ -128,7 +156,7 @@ class MemorialController extends Controller
         // Создаем запись QR-кода в БД
         $qrCode = QrCodes::create([
             'token' => $token,
-        ]); 
+        ]);
 
         // Создаем мемориал
         $memorial = new Memorial();
@@ -170,7 +198,7 @@ class MemorialController extends Controller
 
         if ($request->hasFile('photo')) {
             $photo = $request->file('photo');
-            $filename = $slug . '-' . substr(time(), -6) . '-main' . '.webp';// Имя файла: memorial-slug_timestamp.webp
+            $filename = $slug . '-' . substr(time(), -6) . '-main' . '.webp'; // Имя файла: memorial-slug_timestamp.webp
 
             // Загружаем изображение
             $image = Image::read($photo);
@@ -224,9 +252,9 @@ class MemorialController extends Controller
             // Или, например, можно вернуть сообщение:
             // return redirect()->back()->with('error', "QR Code with token {$qrtoken} not found");
         }
-        
+
         // Генерируем и сохраняем QR-код удалить коммент перед пушом на github не будет генерировать картинку qr code
-         $this->generateQRCode($token, $memorial);
+        $this->generateQRCode($token, $memorial);
 
         if ($request->input('action') === 'add_details') {
             // Перенаправление на другую страницу для ввода дополнительных данных
@@ -261,7 +289,7 @@ class MemorialController extends Controller
 
         if ($request->hasFile('photo')) {
             $photo = $request->file('photo');
-            $filename = $memorial->slug . '-' . substr(time(), -6) . '-main' . '.webp';// Имя файла: memorial-slug_timestamp.webp
+            $filename = $memorial->slug . '-' . substr(time(), -6) . '-main' . '.webp'; // Имя файла: memorial-slug_timestamp.webp
 
             // Загружаем изображение
             $image = Image::read($photo);
@@ -298,31 +326,31 @@ class MemorialController extends Controller
     {
         $maxAttempts = 10; // Максимальное количество попыток
         $attempts = 0;
-    
+
         // Получаем текущий год (последние 2 цифры) и неделю
         $year = date('y'); // Например, "25" для 2025
         $week = str_pad(date('W'), 2, '0', STR_PAD_LEFT); // Например, "13" для 13-й недели
         $myNumber = 7;
         // Формируем первые 4 цифры (год + неделя)
         $prefix = $year . $week . $myNumber;
-    
+
         do {
             // Генерируем случайное число для оставшихся 8 цифр (от 0 до 99999999)
             $randomPart = str_pad(rand(1, 9999), 4, '0', STR_PAD_LEFT);
-            
+
             // Собираем полный токен: 2513 + 8 случайных цифр
             $token = $prefix . $randomPart;
-            
+
             $exists = QrCodes::where('token', $token)->exists();
             $attempts++;
         } while ($exists && $attempts < $maxAttempts);
-    
+
         // Если уникальный токен не найден, добавляем timestamp и случайное число
         if ($exists) {
             $randomPart = str_pad(rand(0, 99999999), 7, '0', STR_PAD_LEFT);
             $token = $prefix . $randomPart; // Всё равно используем префикс, но с другой логикой можно добавить time()
         }
-    
+
         return $token;
     }
 
