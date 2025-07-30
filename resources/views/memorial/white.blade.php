@@ -325,7 +325,7 @@
     <header class="site-header" id="header">
         <nav class="navbar navbar-expand-lg transparent-bg static-nav">
             <div class="container">
-                <a class="navbar-brand" href="">
+                <a class="navbar-brand" href="https://rememus.com/">
                     <img src="white/logo-rememus-qr-3.png" alt="logo" class="logo-default">
                     {{-- <img src="white/logo-rememus-qr-3.png" alt="logo" class="logo-scrolled"> --}}
                     <div class="logo-scrolled">
@@ -868,7 +868,7 @@
                             <img src="{{ isset($grandfatherFather) && $grandfatherFather->photo ? asset('memorial/' . $grandfatherFather->photo) : asset('avatar/avatar-father.png') }}"
                                 class="img-fluid rounded-circle" width="90" height="90">
                                     <div class="memorial-name mt-2">
-                                        {{ $grandfatherMother->name ?? __('Grand Father') }}
+                                        {{ $grandfatherFather->name ?? __('Grand Father') }}
                                     </div>
                         </a>
                     </li>
@@ -877,7 +877,7 @@
                             <img src="{{ isset($grandmotherFather) && $grandmotherFather->photo ? asset('memorial/' . $grandmotherFather->photo) : asset('avatar/avatar-woman.png') }}"
                                 class="img-fluid rounded-circle" width="90" height="90">
                                     <div class="memorial-name mt-2">
-                                        {{ $grandmotherMother->name ?? __('Grand Mother') }}
+                                        {{ $grandmotherFather->name ?? __('Grand Mother') }}
                                     </div>
                         </a>
                     </li>
