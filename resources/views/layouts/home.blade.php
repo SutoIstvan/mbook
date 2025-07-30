@@ -47,6 +47,9 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 
+    <!-- Video.js -->
+    <link href="https://vjs.zencdn.net/8.23.3/video-js.css" rel="stylesheet" />
+
     <!-- JavaScript -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
@@ -366,6 +369,9 @@
 
     <!-- custom scripts -->
     <script src="{{ asset('home/js/scripts.js') }}"></script>
+
+    <!-- Video.js -->
+    <script src="https://vjs.zencdn.net/8.23.3/video.min.js"></script>
 
     @yield('js')
 
