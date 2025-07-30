@@ -989,8 +989,10 @@
                                     <li>
                                         <a>
                                             <img src="{{ $sibling->photo ? asset('memorial/' . $sibling->photo) : asset('avatar/avatar-woman.png') }}"
-                                                class="img-fluid rounded-circle" width="90" height="90"><br>
-                                            {{ $sibling->name }}
+                                                class="img-fluid rounded-circle" width="90" height="90">
+                                                            <div class="memorial-name mt-2">
+                                                                {{ $sibling->name ?? __('Sibling') }}
+                                                            </div>
                                         </a>
                                     </li>
                                 @endif
