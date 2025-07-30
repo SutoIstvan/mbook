@@ -295,6 +295,18 @@
             max-width: 90px;
             word-wrap: break-word;
         }
+
+        .memorial-name {
+            height: 2.7em; 
+            line-height: 1.5em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            white-space: normal;
+            word-break: break-word;
+            font-size: 14px;
+        }
     </style>
 
 
@@ -850,57 +862,55 @@
         <div class="tree-container padding_bottom">
             <div class="tree wow fadeIn" data-wow-delay="300ms">
                 <ul class="down">
-                    <!-- My Children -->
+                    <!-- My Grand Parents -->
                     <li class="down">
                         <a>
                             <img src="{{ isset($grandfatherFather) && $grandfatherFather->photo ? asset('memorial/' . $grandfatherFather->photo) : asset('avatar/avatar-father.png') }}"
-                                class="img-fluid rounded-circle" width="90" height="90"><br>
-                            {{ $grandfatherFather->name ?? __('Grand Father') }}
+                                class="img-fluid rounded-circle" width="90" height="90">
+                                    <div class="memorial-name mt-2">
+                                        {{ $grandfatherMother->name ?? __('Grand Father') }}
+                                    </div>
                         </a>
                     </li>
                     <li class="up">
                         <a>
                             <img src="{{ isset($grandmotherFather) && $grandmotherFather->photo ? asset('memorial/' . $grandmotherFather->photo) : asset('avatar/avatar-woman.png') }}"
-                                class="img-fluid rounded-circle" width="90" height="90"><br>
-                            {{ $grandmotherFather->name ?? __('Grand Mother') }}
+                                class="img-fluid rounded-circle" width="90" height="90">
+                                    <div class="memorial-name mt-2">
+                                        {{ $grandmotherMother->name ?? __('Grand Mother') }}
+                                    </div>
                         </a>
                     </li>
                     <li class="down">
                         <a>
                             <img src="{{ isset($grandfatherMother) && $grandfatherMother->photo ? asset('memorial/' . $grandfatherMother->photo) : asset('avatar/avatar-father.png') }}"
-                                class="img-fluid rounded-circle" width="90" height="90"><br>
-                            {{ $grandfatherMother->name ??  __('Grand Father') }}
+                                class="img-fluid rounded-circle" width="90" height="90">
+                                    <div class="memorial-name mt-2">
+                                        {{ $grandfatherMother->name ?? __('Grand Father') }}
+                                    </div>
                         </a>
                     </li>
                     <li class="up">
                         <a>
                             <img src="{{ $grandmotherMother?->photo ? asset('memorial/' . $grandmotherMother->photo) : asset('avatar/avatar-woman.png') }}"
                                 class="img-fluid rounded-circle" width="90" height="90">
-                            @if (mb_strlen($grandmotherMother?->name ?? '') <= 13)
-                                <br>
-                            @endif
-                            {{ $grandmotherMother->name ?? __('Grand Mother') }}
+                                    <div class="memorial-name mt-2">
+                                        {{ $grandmotherMother->name ?? __('Grand Mother') }}
+                                    </div>
                         </a>
-
-                        {{-- <a>
-                            <img src="{{ isset($grandmotherMother) && $grandmotherMother->photo ? asset('memorial/' . $grandmotherMother->photo) : asset('avatar/avatar-woman.png') }}"
-                                class="img-fluid rounded-circle" width="90" height="90">
-                            @if (mb_strlen($grandmotherMother->name) <= 13)
-                                <br>
-                            @endif
-                            {{ $grandmotherMother->name ?? 'grand Mother name' }}
-                        </a> --}}
                     </li>
                 </ul>
                 <ul class="down">
-                    <!-- My Children -->
+                    <!-- My Parents -->
 
                     <li class="down">
                         <ul class="apa">
                             <a>
                                 <img src="{{ isset($father) && $father->photo ? asset('memorial/' . $father->photo) : asset('avatar/avatar-man.png') }}"
-                                    class="img-fluid rounded-circle" width="90" height="90"><br>
-                                {{ $father->name ?? __('Father') }}
+                                    class="img-fluid rounded-circle" width="90" height="90">
+                                    <div class="memorial-name mt-2">
+                                            {{ $father->name ?? __('Father') }}
+                                    </div>
                             </a>
                         </ul>
                     </li>
@@ -909,95 +919,71 @@
                         <ul class="apa">
                             <a>
                                 <img src="{{ isset($mother) && $mother->photo ? asset('memorial/' . $mother->photo) : asset('avatar/avatar-girl.png') }}"
-                                    class="img-fluid rounded-circle" width="90" height="90"><br>
-                                {{ $mother->name ?? __('Mother') }}
+                                    class="img-fluid rounded-circle" width="90" height="90">
+                                        <div class="memorial-name mt-2">
+                                            {{ $mother->name ?? __('Mother') }}
+                                        </div>
                             </a>
                         </ul>
                     </li>
                 </ul>
 
-
                 <ul>
-
                     <ul>
-
-
-
                         <li>
                             @foreach ($partners as $partner)
                                 @if ($partner->name || $partner->photo)
                                     <a>
                                         <img src="{{ $partner->photo ? asset('memorial/' . $partner->photo) : asset('avatar/avatar-woman.png') }}"
-                                            class="img-fluid rounded-circle" width="90" height="90"><br>
-                                        {{ $partner->name }}
+                                            class="img-fluid rounded-circle" width="90" height="90">
+                                        <div class="memorial-name mt-2">
+                                            {{ $partner->name ?? __('Partner') }}
+                                        </div>
                                     </a>
                                 @endif
-                            @endforeach
-
-
+                            @endforeach 
 
                             <a href="#" style="background: #c8e4f8;">
                                 <img src="{{ asset('memorial/' . $memorial->slug . '/' . $memorial->photo) }}"
                                     class="img-fluid rounded-circle" width="90" height="90">
-                                @if (mb_strlen($memorial->name) <= 13)
-                                    <br>
-                                @endif
-                                {{ $memorial->name }}
+                                        <div class="memorial-name mt-2">
+                                            {{ $memorial->name}}
+                                        </div>
                             </a>
-                            {{-- <a href="#">
-                                <img src="https://randomuser.me/api/portraits/women/26.jpg"
-                                    class="img-fluid rounded-circle" width="90" height="90"><br>
-                                Feleség
-                            </a> --}}
 
                             <!-- My Children -->
-@if ($childrens?->isNotEmpty())
-    @php $hasValidChildren = false; @endphp
-    
-    @foreach ($childrens as $children)
-        @if ($children->name || $children->photo)
-            @php $hasValidChildren = true; @endphp
-            @break
-        @endif
-    @endforeach
-    
-    @if ($hasValidChildren)
-    <ul>
-        @foreach ($childrens as $children)
-            @if ($children->name || $children->photo)
-            <li>
-                <a>
-                    <img src="{{ $children->photo ? asset('memorial/' . $children->photo) : asset('avatar/avatar-woman.png') }}" 
-                         class="img-fluid rounded-circle" width="90" height="90"><br>
-                    {{ $children->name }}
-                </a>
-            </li>
-            @endif
-        @endforeach
-    </ul>
-    @endif
-@endif
+                            @if ($childrens?->isNotEmpty())
+                                @php $hasValidChildren = false; @endphp
 
+                                @foreach ($childrens as $children)
+                                    @if ($children->name || $children->photo)
+                                        @php $hasValidChildren = true; @endphp
+                                        @break
+                                    @endif
+                                @endforeach
 
-
-                            {{-- <li>
-                                    <a href="#">
-                                        <img src="https://randomuser.me/api/portraits/men/51.jpg"
-                                            class="img-fluid rounded-circle" width="90" height="90"><br>
-                                        Gyermek
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img src="https://randomuser.me/api/portraits/women/5.jpg"
-                                            class="img-fluid rounded-circle" width="90" height="90"><br>
-                                        Gyermek
-                                    </a>
-                                </li> --}}
+                                @if ($hasValidChildren)
+                                    <ul>
+                                        @foreach ($childrens as $children)
+                                            @if ($children->name || $children->photo)
+                                                <li>
+                                                    <a>
+                                                        <img src="{{ $children->photo ? asset('memorial/' . $children->photo) : asset('avatar/avatar-woman.png') }}"
+                                                            class="img-fluid rounded-circle" width="90"
+                                                            height="90">
+                                                            <div class="memorial-name mt-2">
+                                                                {{ $children->name ?? __('Child') }}
+                                                            </div>
+                                                    </a>
+                                                </li>
+                                            @endif
+                                        @endforeach
+                                    </ul>
+                                @endif
+                            @endif
 
                         </li>
                         @if ($siblings && $siblings->isNotEmpty())
-
                             @foreach ($siblings as $sibling)
                                 @if ($sibling->name || $sibling->photo)
                                     <li>
@@ -1010,34 +996,12 @@
                                 @endif
                             @endforeach
                         @endif
-
-                        {{-- <li>
-                            <a href="#">
-                                <img src="https://randomuser.me/api/portraits/women/6.jpg"
-                                    class="img-fluid rounded-circle" width="90" height="90"><br>
-                                Nővér
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="https://randomuser.me/api/portraits/men/6.jpg"
-                                    class="img-fluid rounded-circle" width="90" height="90"><br>
-                                Testvér
-                            </a>
-                        </li> --}}
                         </li>
                     </ul>
-
-
                 </ul>
-
             </div>
         </div>
-
     </section>
-
-
-
     <!-- Family tree ends -->
 
     <!-- Testimonials -->
@@ -1071,11 +1035,7 @@
                                                     class="comment-time">{{ $comment->created_at->format('Y M d') }}</span>
                                             </div>
                                             <p class="mb-2">“{{ $comment->content }}”</p>
-                                            {{-- <div class="comment-actions">
-                                                <a href="#"><i class="bi bi-heart"></i> Like</a>
-                                                <a href="#"><i class="bi bi-reply"></i> Reply</a>
-                                                <a href="#"><i class="bi bi-share"></i> Share</a>
-                                            </div> --}}
+
                                         </div>
                                     </div>
                                 </div>
@@ -1084,13 +1044,7 @@
                                     <p class="text-gray-500">Még senki sem írt emlékező üzenetet. Légy te az első.
                                     </p>
                                 </div>
-                                {{-- <a href="{{ route('comments.create', $memorial->id) }}"
-                                    class="butn butn-md butn-bord butn-rounded">
-                                    <div class="d-flex align-items-center">
-                                        <span>Néhány szó tőled</span>
-                                        <span class="icon pe-7s-angle-right ml-10 fz-30"></span>
-                                    </div>
-                                </a> --}}
+
                         </div>
                         @endforelse
 
