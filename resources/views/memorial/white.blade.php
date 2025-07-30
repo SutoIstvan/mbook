@@ -300,7 +300,7 @@
             height: 2.7em; 
             line-height: 1.5em;
             display: flex;
-            align-items: center;
+            /* align-items: center; */
             justify-content: center;
             text-align: center;
             white-space: normal;
