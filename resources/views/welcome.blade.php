@@ -36,29 +36,21 @@
             }
         }
 
-        .video-js {
-            width: 100% !important;
-            height: 100% !important;
+.video-js .vjs-tech {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+}
 
-            .vjs-tech {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                min-width: 100%;
-                min-height: 100%;
-                width: auto;
-                height: auto;
-                transform: translate(-50%, -50%);
-                object-fit: cover;
-            }
-
-            .vjs-control-bar,
-            .vjs-big-play-button,
-            .vjs-loading-spinner,
-            .vjs-poster {
-                display: none !important;
-            }
-        }
+/* Убираем все принудительные размеры */
+.video-js {
+    width: 100% !important;
+    height: 100% !important;
+}
 
         .header-overlay {
             position: absolute;

@@ -791,7 +791,11 @@ p {
 
   }
 
-  
+@media screen and (max-width: 1440px) {
+  .header-mst {
+    padding: 100px 0;
+  }
+}
 
 
 @media screen and (max-width: 768px) {
