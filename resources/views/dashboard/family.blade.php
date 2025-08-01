@@ -703,7 +703,7 @@
                     $width = 1000 + max(0, $count - 2) * 180;
                 @endphp
 
-                @dump($count, $width)
+                {{-- @dump($count, $width) --}}
 
                 <div class="tree-container padding_bottom ">
                     <div class="tree wow fadeIn" data-wow-delay="300ms" style="min-width: {{ $width }}px">

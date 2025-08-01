@@ -326,7 +326,7 @@
                     <div class="col-md-12">
                         <label for="motto" class="col-form-label text-md-end">{{ __('Full motto') }}</label>
                         <input id="motto" type="text" class="form-control @error('motto') is-invalid @enderror"
-                            name="motto" value="{{ old('motto', $memorial->motto) }}" required autocomplete="motto">
+                            name="motto" value="{{ old('motto', $memorial->motto) }}" autocomplete="motto">
                         @error('motto')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -338,7 +338,7 @@
 
                 <div class="col-md-12">
                     <label for="biography" class="col-form-label text-md-end">{{ __('Biography') }}</label>
-                    <textarea id="biography" class="form-control @error('biography') is-invalid @enderror" name="biography" rows="10">{{ old('name', $memorial->biography) }}</textarea>
+                    <textarea id="biography" class="form-control @error('biography') is-invalid @enderror" name="biography" rows="10">{{ old('biography', $memorial->biography) }}</textarea>
                     @error('biography')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
