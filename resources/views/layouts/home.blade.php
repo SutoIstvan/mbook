@@ -124,30 +124,30 @@
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('welcome') ? 'active' : '' }}"
-                                href="{{ route('welcome') }}">Címlap</a>
+                                href="{{ route('welcome') }}">{{__('Home page')}}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('price') ? 'active' : '' }}"
-                                href="{{ route('price') }}">Árak</a>
+                                href="{{ route('price') }}">{{__('Prices')}}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link butn-scroll"
-                                href="{{ url('/')}}#howitworks">Hogyan működik</a>
+                                href="{{ url('/')}}#howitworks">{{__('How it works')}}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link butn-q-scroll"
-                                href="{{ url('/')}}#faqs">Kérdések</a>
+                                href="{{ url('/')}}#faqs">{{__('FAQs')}}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}"
-                                href="{{ route('contact') }}">Kapcsolatok</a>
+                                href="{{ route('contact') }}">{{__('Contact')}}</a>
                         </li>
 
                         <li class="nav-item">
                             @auth
-                                <a class="nav-link" href="{{ route('dashboard') }}">Kezelés</a>
+                                <a class="nav-link" href="{{ route('dashboard') }}">{{__('Dashboard')}}</a>
                             @else
-                                <a class="nav-link" href="{{ route('dashboard') }}">Bejelentkezés</a>
+                                <a class="nav-link" href="{{ route('dashboard') }}">{{__('Login')}}</a>
                             @endauth
                         </li>
 

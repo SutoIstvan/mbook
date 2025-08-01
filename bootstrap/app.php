@@ -11,7 +11,18 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        // Добавляем ваш middleware в web группу
+        $middleware->web(append: [
+            \App\Http\Middleware\SetLocale::class,
+        ]);
+        
+        // Или если нужно в API тоже:
+        // $middleware->api(append: [
+        //     \App\Http\Middleware\SetLocale::class,
+        // ]);
+        
+        // Или глобально для всех запросов:
+        // $middleware->append(\App\Http\Middleware\SetLocale::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

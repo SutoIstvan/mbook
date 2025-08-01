@@ -144,21 +144,19 @@
                             Rememus.com
                         </h4> --}}
                         <h4 class="mt-4 mb-2 d-none d-md-block">
-                            Emlékhely, ahol a szeretteink örökké élnek.
+                            {{ __('We live on as long as we are remembered') }}
                         </h4>
 
                         <h7 class="d-none d-md-block">
-                            Hozz létre egy méltó emlékoldalt elhunyt szeretteid számára.
-                            Elmeséljük a történetüket, emléküket megőrizzük az idők végezetéig.
+                            {{ __('Create a worthy memorial page for your deceased loved ones. We will tell their story and preserve their memory for all time.') }}
                         </h7>
 
                         <h5 class="d-block d-md-none">
-                            Emlékhely, ahol a szeretteink örökké élnek.
+                            {{ __('We live on as long as we are remembered') }}
                         </h5>
 
                         <h7 class="d-block d-md-none mt-50">
-                            Hozz létre egy méltó emlékoldalt elhunyt szeretteid számára.
-                            Elmeséljük a történetüket, emléküket megőrizzük az idők végezetéig.
+                            {{ __('Create a worthy memorial page for your deceased loved ones. We will tell their story and preserve their memory for all time.') }}
                         </h7>
                         <!-- <h1>We Invest <br> In Big Ideas</h1> -->
                     </div>
@@ -168,7 +166,7 @@
                 <div class="col-lg-6 order-md-2">
                     <div class="butons">
                         <a href="/create" class="bg">
-                            <span>Emlékoldal <br> létrehozása</span>
+                            <span class="text-center">{{ __('Create a') }} <br> {{ __('memorial page') }}</span>
                         </a>
                         <a href="https://shop.rememus.com/Emlekplakettek" target="_blank" class="bord">
                             <span class="icon invert ml-5 mb-1">
@@ -232,7 +230,7 @@
                     <div class="cont md-mb50">
                         <div class="d-flex align-items-center mb-15 mt-35">
 
-                            <input id="qr-input" type="text" placeholder="QR-kód beváltása"
+                            <input id="qr-input" type="text" placeholder="{{ __('QR code redemption') }}"
                                 class="text-light border placeholder-gray">
 
                             <div>
