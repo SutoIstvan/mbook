@@ -356,4 +356,32 @@ class TimelineController extends Controller
             default => ucfirst($type),
         };
     }
+
+    public function newstore(Request $request)
+    {
+        // dd($request);
+        // Валидация входящих данных
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'year' => 'required|integer|min:1900|max:' . date('Y'),
+
+            // 'description' => 'nullable|string',
+            // 'year' => 'required|date',
+            'type' => 'required|string',
+            'memorial_id' => 'required|exists:memorials,id',
+        ]);
+
+        // Создание новой записи в таймлайне
+        // Timeline::create($validatedData);
+
+        // Создание новой записи в таймлайне
+        Timeline::create([
+            'title' => $validatedData['title'],
+            'year' => $validatedData['year'] . '-01-01', // Преобразуем год в дату
+            'type' => $validatedData['type'],
+            'memorial_id' => $validatedData['memorial_id'],
+        ]);
+
+        return back()->with('success', 'Esemény sikeresen hozzáadva a timeline-hoz.');
+    }
 }

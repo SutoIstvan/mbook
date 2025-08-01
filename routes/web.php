@@ -96,6 +96,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/timelines/add-work', [TimelineController::class, 'addWork'])->name('timelines.addWork');
     Route::post('/timelines/add-hobby', [TimelineController::class, 'addHobby'])->name('timelines.addHobby');
+    Route::post('/timelines/new', [TimelineController::class, 'newstore'])->name('timelines.newstore');
 
 
     Route::get('/dashboard/{memorial}/media', [TimelineController::class, 'gallery'])->name('timeline.gallery');
