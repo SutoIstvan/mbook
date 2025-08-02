@@ -324,7 +324,7 @@
 
                 <div class="row mb-3">
                     <div class="col-md-12">
-                        <label for="motto" class="col-form-label text-md-end">{{ __('Full motto') }}</label>
+                        <label for="motto" class="col-form-label text-md-end">{{ __('Motto') }}</label>
                         <input id="motto" type="text" class="form-control @error('motto') is-invalid @enderror"
                             name="motto" value="{{ old('motto', $memorial->motto) }}" autocomplete="motto">
                         @error('motto')
@@ -351,7 +351,7 @@
 
                         <a class="butn butn-md butn-bord butn-rounded disabled">
                             <span class="text">
-                                {{ __('AI életrajz generator') }}
+                                {{ __('AI biography generator') }}
                             </span>
 
                             <span class="icon ">
@@ -431,7 +431,7 @@
                 </div>
 
                 <div class="container mt-25 col-12 col-lg-4">
-                    <label class="form-label">{{ __('QR-Code letöltése') }}</label>
+                    <label class="form-label">{{ __('Download QR Code') }}</label>
                     <div class="text-center">
                         <img src="{{ asset('storage/qrcodes/' . $memorial->id . '.png') }}"
                             style="height: 293px !important; width: 293px !important; border-radius: 20px;">
@@ -441,7 +441,7 @@
                             <a href="{{ asset('storage/qrcodes/' . $memorial->id . '.png') }}"
                                 download="qrcode_{{ $memorial->id }}.png" class="butn butn-md butn-bord butn-rounded">
                                 <span class="text">
-                                    {{ __('QR-Code letöltése') }}
+                                    {{ __('Download QR Code') }}
                                 </span>
                                 <span class="icon">
                                     <i class="fa-regular fa-save"></i>

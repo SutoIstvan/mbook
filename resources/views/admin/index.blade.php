@@ -7,7 +7,7 @@
                             <div class="sec-head mb-40">
                                 <div class="row">
                                     <div class="col-lg-12 md-mb15 md-mt35">
-                                        <h4>Adatok szerkesztése</h4>
+                                        <h4>Edit data</h4>
                                     </div>
                                     <!-- <div class="col-lg-6">
                                         <div class="text">

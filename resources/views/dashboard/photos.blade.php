@@ -270,7 +270,7 @@
         <div class="sec-head mb-40">
             <div class="row">
                 <div class="col-lg-12 md-mb15 md-mt35">
-                    <h4>{{ __('Képek feltöltése') }}</h4>
+                    <h4>{{ __('Upload images') }}</h4>
                 </div>
             </div>
         </div>
@@ -314,7 +314,7 @@
                                     <div class="mt-40">
                                         <button type="submit" id="submitBtn" class="butn butn-md butn-bord butn-rounded">
                                             <span class="text">
-                                                {{ __('Feltöltés') }}
+                                                {{ __('Upload') }}
                                             </span>
                                             <span id="btnIcon" class="icon">
                                                 <i class="fa-regular fa-save"></i>
@@ -390,7 +390,7 @@
                                                     <h6 class="mt-10">
                                                         <input name="images[{{ $loop->index }}][image_description]"
                                                             type="text" value="{{ $image->image_description }}"
-                                                            class="form-control " placeholder="A fénykép leírása">
+                                                            class="form-control " placeholder="{{ __('Photo description') }}">
                                                     </h6>
 
 

@@ -910,7 +910,7 @@
                                 <div class="col-8 mt-20">
                                     <input type="file" name="images[]" multiple class="form-control" required>
                                     <small class="text-muted">
-                                        Maximum 30 kép tölthető fel egy emlékoldalhoz. Fényképformátum: JPEG, JPG, PNG
+                                        {{ __('A maximum of 30 images can be uploaded to a memorial page. Photo format: JPEG, JPG, PNG') }}
                                     </small>
                                 </div>
                             </div>

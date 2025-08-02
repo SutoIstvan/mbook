@@ -85,7 +85,7 @@
                     <li>
                         <div class="o-hidden">
                             <a href="{{ route('dashboard.edit', $memorial) }}" class="link"><span class="fill-text"
-                                    data-text="{{ __('Adatok szerkesztése') }}">{{ __('Adatok szerkesztése') }}</span></a>
+                                    data-text="{{ __('Edit data') }}">{{ __('Edit data') }}</span></a>
                         </div>
                     </li>
 
@@ -202,7 +202,7 @@
                                     <span class="icon me-2">
                                         <i class="fa-solid fa-pen"></i>
                                     </span>
-                                    <span>{{ __('Adatok szerkesztése') }}</span>
+                                    <span>{{ __('Edit data') }}</span>
                                 </a>
                             
                                 <a href="{{ route('dashboard.photos', ['memorial' => $memorial->slug]) }}" class="butn butn-md butn-bord butn-rounded w-100 text-start {{ Route::currentRouteName() === 'dashboard.photos' ? 'active' : '' }}">

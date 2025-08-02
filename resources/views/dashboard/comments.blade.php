@@ -16,11 +16,11 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 largecase tracking-wider">Dátum</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 largecase tracking-wider">Név</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 largecase tracking-wider">Megjegyzés</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 largecase tracking-wider">Állapot</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 largecase tracking-wider">Műveletek</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 largecase tracking-wider">{{__('Date')}}</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 largecase tracking-wider">{{__('Name')}}</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 largecase tracking-wider">{{__('Comment')}}</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 largecase tracking-wider">{{__('Status')}}</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 largecase tracking-wider">{{__('Operations')}}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,11 +37,17 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     @if($comment->status === 'pending')
-                                        <span class="badge bg-warning text-dark">Moderálás alatt</span>
+                                        <span class="badge bg-warning text-dark">
+                                            {{ __('Under moderation') }}
+                                        </span>
                                     @elseif($comment->status === 'approved')
-                                        <span class="badge bg-success">Jóváhagyva</span>
+                                        <span class="badge bg-success">
+                                            {{ __('Approved') }}
+                                        </span>
                                     @else
-                                        <span class="badge bg-danger">Elutasítva</span>
+                                        <span class="badge bg-danger">
+                                            {{ __('Rejected') }}
+                                        </span>
                                     @endif
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm">
@@ -51,7 +57,7 @@
                                                 @csrf
                                                 @method('PATCH')
                                                 <button type="submit" class="btn btn-sm btn-success">
-                                                    Jóváhagyni
+                                                    {{ __('Approve') }}
                                                 </button>
                                             </form>
                                             {{-- <form action="{{ route('comments.reject', $comment) }}" method="POST" class="d-inline">
@@ -67,7 +73,8 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-outline-secondary">
-                                                Töröl
+                                                {{-- <i class="fa-solid fa-trash"></i> --}}
+                                                {{ __('Delete') }}
                                             </button>
                                         </form>
                                     </div>
@@ -76,7 +83,7 @@
                             @empty
                             <tr>
                                 <td colspan="5" class="px-6 py-4 text-center text-gray-400">
-                                    Még nincsenek hozzászólások
+                                    {{ __('No comments yet') }}
                                 </td>
                             </tr>
                             @endforelse
