@@ -680,8 +680,7 @@
                     </h2>
                     <div class="col-md-8 offset-md-2 bottom40">
                         <p>
-                            Egy család rokonsági kapcsolatait ábrázoló diagram, amely bemutatja az ember felmenőit és
-                            leszármazottait, például szülőket, gyerekeket és nagyszülőket.
+                            {{ __('A diagram depicting the kinship relationships of a family, showing a person\'s ancestors and descendants, such as parents, children, and grandparents.') }}
                         </p>
                     </div>
                 </div>
@@ -726,7 +725,7 @@
                                         onchange="previewImage(this, 'preview_{{ $grandfatherFather->id ?? 'grandfather_father' }}')">
                                     <input type="text" class="form-control mt-2 text-center"
                                         name="{{ $grandfatherFather && $grandfatherFather->id ? 'family_members[' . $grandfatherFather->id . '][name]' : 'names[grandfather_father]' }}"
-                                        value="{{ $grandfatherFather->name ?? '' }}" placeholder="Nagyapa">
+                                        value="{{ $grandfatherFather->name ?? '' }}" placeholder="{{ __('Grandfather') }}">
                                     @if ($grandfatherFather && $grandfatherFather->id)
                                         <input type="hidden" name="family_members[{{ $grandfatherFather->id }}][id]"
                                             value="{{ $grandfatherFather->id }}">
@@ -752,7 +751,7 @@
                                         onchange="previewImage(this, 'preview_{{ $grandmotherFather->id ?? 'grandmother_father' }}')">
                                     <input type="text" class="form-control mt-2 text-center"
                                         name="{{ $grandmotherFather && $grandmotherFather->id ? 'family_members[' . $grandmotherFather->id . '][name]' : 'names[grandmother_father]' }}"
-                                        value="{{ $grandmotherFather->name ?? '' }}" placeholder="Nagymama">
+                                        value="{{ $grandmotherFather->name ?? '' }}" placeholder="{{ __('Grandmother') }}">
                                     @if ($grandmotherFather && $grandmotherFather->id)
                                         <input type="hidden" name="family_members[{{ $grandmotherFather->id }}][id]"
                                             value="{{ $grandmotherFather->id }}">
@@ -779,7 +778,7 @@
                                         onchange="previewImage(this, 'preview_{{ $grandfatherMother->id ?? 'grandfather_mother' }}')">
                                     <input type="text" class="form-control mt-2 text-center"
                                         name="{{ $grandfatherMother && $grandfatherMother->id ? 'family_members[' . $grandfatherMother->id . '][name]' : 'names[grandfather_mother]' }}"
-                                        value="{{ $grandfatherMother->name ?? '' }}" placeholder="Nagyapa">
+                                        value="{{ $grandfatherMother->name ?? '' }}" placeholder="{{ __('Grandfather') }}">
                                     @if ($grandfatherMother && $grandfatherMother->id)
                                         <input type="hidden" name="family_members[{{ $grandfatherMother->id }}][id]"
                                             value="{{ $grandfatherMother->id }}">
@@ -806,7 +805,7 @@
                                         onchange="previewImage(this, 'preview_{{ $grandmotherMother->id ?? 'grandmother_mother' }}')">
                                     <input type="text" class="form-control mt-2 text-center"
                                         name="{{ $grandmotherMother && $grandmotherMother->id ? 'family_members[' . $grandmotherMother->id . '][name]' : 'names[grandmother_mother]' }}"
-                                        value="{{ $grandmotherMother->name ?? '' }}" placeholder="Nagymama">
+                                        value="{{ $grandmotherMother->name ?? '' }}" placeholder="{{ __('Grandmother') }}">
                                     @if ($grandmotherMother && $grandmotherMother->id)
                                         <input type="hidden" name="family_members[{{ $grandmotherMother->id }}][id]"
                                             value="{{ $grandmotherMother->id }}">
@@ -834,7 +833,7 @@
                                             onchange="previewImage(this, 'preview_{{ $father->id ?? 'father' }}')">
                                         <input type="text" class="form-control mt-3 text-center"
                                             name="{{ $father && $father->id ? 'family_members[' . $father->id . '][name]' : 'names[father]' }}"
-                                            value="{{ optional($father)->name }}" placeholder="Apa">
+                                            value="{{ optional($father)->name }}" placeholder="{{ __('Father') }}">
                                         @if ($father && $father->id)
                                             <input type="hidden" name="family_members[{{ $father->id }}][id]"
                                                 value="{{ $father->id }}">
@@ -862,7 +861,7 @@
                                             onchange="previewImage(this, 'preview_{{ $mother->id ?? 'mother' }}')">
                                         <input type="text" class="form-control mt-3 text-center"
                                             name="{{ $mother && $mother->id ? 'family_members[' . $mother->id . '][name]' : 'names[mother]' }}"
-                                            value="{{ optional($mother)->name }}" placeholder="Anya">
+                                            value="{{ optional($mother)->name }}" placeholder="{{ __('Mother') }}">
                                         @if ($mother && $mother->id)
                                             <input type="hidden" name="family_members[{{ $mother->id }}][id]"
                                                 value="{{ $mother->id }}">
@@ -902,7 +901,7 @@
                                             {{-- Поле имени --}}
                                             <input class="form-control mt-3" type="text"
                                                 name="partners[{{ $index }}][name]" value="{{ $member->name }}"
-                                                placeholder="Partner">
+                                                placeholder="{{ __('Partner') }}">
                                         </a>
                                     @endforeach
 
@@ -922,14 +921,14 @@
                                             class="d-none" accept="image/*"
                                             onchange="previewImage(this, 'preview_main_person')">
                                         <input class="form-control mt-3" type="text" name="names[main_person]"
-                                            value="{{ $memorial->name }}" placeholder="{{ $memorial->name }}">
+                                            value="{{ $memorial->name }}" placeholder="{{ $memorial->name }}" readonly>
                                     </a>
 
                                     <a href="#"
                                         onclick="event.preventDefault(); document.getElementById('add-partner-form').submit();"
                                         style="height: 170px; padding-top: 88px; !important;">
                                         <i class="fa-solid fa-plus rounded-circle fs-5"></i><br><br>
-                                        add partner
+                                        {{ __('Add Partner') }}
                                     </a>
 
                                     <ul>
@@ -980,7 +979,7 @@
                                                     {{-- Поле имени --}}
                                                     <input class="form-control mt-3" type="text"
                                                         name="childrens[{{ $index }}][name]"
-                                                        value="{{ $member->name }}" placeholder="children">
+                                                        value="{{ $member->name }}" placeholder="{{ __('Children') }}">
                                                 </a>
                                             </li>
                                         @endforeach
@@ -989,7 +988,7 @@
                                                 onclick="event.preventDefault(); document.getElementById('add-children-form').submit();"
                                                 style="height: 175px;">
                                                 <br><br><i class="fa-solid fa-plus rounded-circle fs-5 mt-3 mb-3"></i><br>
-                                                add children
+                                                {{ __('Add Children') }}
                                             </a>
                                         </li>
                                     </ul>
@@ -1018,7 +1017,7 @@
                                             {{-- Поле имени --}}
                                             <input class="form-control mt-3" type="text"
                                                 name="siblings[{{ $index }}][name]" value="{{ $member->name }}"
-                                                placeholder="sibling">
+                                                placeholder="{{ __('Sibling') }}">
                                         </a>
                                     </li>
                                 @endforeach
@@ -1027,7 +1026,7 @@
                                         onclick="event.preventDefault(); document.getElementById('add-siblings-form').submit();"
                                         style="height: 175px;">
                                         <br><br><br><i class="fa-solid fa-plus rounded-circle fs-5 mt-3 mb-3"></i><br>
-                                        add siblings
+                                        {{ __('Add Siblings') }}
                                     </a>
                                 </li>
                             </ul>

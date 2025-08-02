@@ -256,13 +256,13 @@
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="info-item md-mb30">
-                                <span class="fz-12 text-u sub-color mb-10">Telefon</span>
+                                <span class="fz-12 text-u sub-color mb-10">{{ __('Phone Number') }}</span>
                                 <h6>+36 70 702 1252</h6>
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="info-item md-mb30">
-                                <span class="fz-12 text-u sub-color mb-10">Email</span>
+                                <span class="fz-12 text-u sub-color mb-10">{{ __('Email') }}</span>
                                 <h6>info@rememus.com</h6>
                             </div>
                         </div>
@@ -290,16 +290,16 @@
                         <div class="row">
                             <div class="col-lg-5">
                                 <div class="copy sub-color md-mb30">
-                                    <p>Copyright © 2025 <a href="#0">Paksi Informatika.</a> Minden jog fenntartva.</p>
+                                    <p>Copyright © 2025 <a href="#0">Paksi Informatika.</a> {{ __('All rights reserved.') }}</p>
                                 </div>
                             </div>
                             <div class="col-lg-7 d-flex justify-content-end">
                                 <div class="links sub-color d-flex justify-content-between">
                                 {{-- <a href="#" class="active">Impresszum</a> --}}
-                                <a href="#">Impresszum</a>
-                                <a href="{{ route('aszf') }}">Adatvédelmi tájékoztató</a>
-                                <a href="{{ route('privacy') }}">Általános szerződési feltételek</a>
-                                <a href="#">Cookie beállítások</a>
+                                <a href="#">{{ __('Imprint') }}</a>
+                                <a href="{{ route('aszf') }}">{{ __('Privacy Policy') }}</a>
+                                <a href="{{ route('privacy') }}">{{ __('Terms of Use') }}</a>
+                                <a href="#">{{ __('Cookie settings') }}</a>
                                 </div>
                             </div>
                         </div>

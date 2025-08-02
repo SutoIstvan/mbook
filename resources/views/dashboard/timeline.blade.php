@@ -225,8 +225,7 @@
                     <div class="pt-10">
                         <div class="col-lg-8 mx-auto">
                             <p class="fs-5">
-                                Ezen az oldalon megadhatod a fontos eseményeit az időskálán. Válaszd ki az esemény
-                                típusát, írd be a részleteket és a dátumot, majd kattints a 'Hozzáadás' gombra.
+                                {{ __('On this page you can enter your important events on a timeline. Select the event type, enter the details and date, then click the \'Add\' button.') }}
                             </p>
                         </div>
                     </div>
@@ -481,25 +480,25 @@
                     <div class="border">
                         <div class="tracking-content defaultcolor fs-6">
                             <select name="type" class="form-select">
-                                <option value="">Válaszd ki az esemény típusát</option>
-                                <option value="child_birth">Gyermek születése</option>
-                                <option value="marriage">Házasság</option>
-                                <option value="school">Iskola</option>
-                                <option value="work">Munkahely</option>
-                                <option value="hobby">Hobbija</option>
-                                <option value="other_properties">Egyéb tulajdonságai</option>
+                                <option value="">{{ __('Select event type') }}</option>
+                                <option value="child_birth">{{ __('Child Birth') }}</option>
+                                <option value="marriage">{{ __('Marriage') }}</option>
+                                <option value="school">{{ __('School') }}</option>
+                                <option value="work">{{ __('Work') }}</option>
+                                <option value="hobby">{{ __('Hobby') }}</option>
+                                <option value="other_properties">{{ __('Other Properties') }}</option>
                             </select>
 
                             <span>
                                 <span class="pt-2 fs-6">
                                     <div class="mb-2">
                                         <input type="text" name="title" class="form-control"
-                                            placeholder="írd be az idővonal részleteit" required="">
+                                            placeholder="{{ __('Enter timeline details') }}" required="">
                                     </div>
                                 </span>
                             </span>
 
-                            <button type="submit" class="btn btn-outline-primary mt-2">Hozzáadás</button>
+                            <button type="submit" class="btn btn-outline-primary mt-2">{{ __('Add') }}</button>
 
                         </div>
 
@@ -603,7 +602,7 @@
                                 onsubmit="return confirm('Biztosan törölni szeretnéd ezt az eseményt?');">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-outline-danger">Törlés</button>
+                                <button type="submit" class="btn btn-sm btn-outline-danger">{{ __('Delete') }}</button>
                             </form>
                         </div>
                     </div>

@@ -503,31 +503,23 @@
                     <div class="cont">
 
                         <h4 class="d-none d-md-block mb-3">
-                            Rememus.com – A szeretet örök nyoma, emlék, amely túlél minket
+                            {{ __('Rememus.com – The eternal trace of love, a memory that outlives us') }}
                         </h4>
 
                         <h5 class="d-block d-md-none mb-3">
                             A rememus.com egy <br>QR-kóddal elérhető emlékoldal
                         </h5>
-
-                        <!-- <p>Az Mbook.hu egy QR-kóddal elérhető emlékoldal, amely életrajzokat, fényképeket, videókat és személyes emlékeket tartalmaz. Tökéletes megoldás sírkövekre és urnákra.</p> -->
                         <p>
-
-                            A Rememus emlékoldalai lehetőséget adnak arra, hogy szeretteink története, fényképei, videói és
-                            közös pillanatai méltó módon fennmaradjanak – akár generációkon át.
-                            Az emlékoldal egy diszkréten elhelyezett QR-kóddal válik elérhetővé a sírhelyen vagy urnán, így
-                            egyetlen beolvasással bármikor felidézhetők az emlékek – akár a temetőben, akár otthon.
-
+                            {{ __('Rememus memorial pages allow us to preserve the stories, photos, videos and shared moments of our loved ones in a dignified manner – even for generations. The memorial page is made available with a discreetly placed QR code on the gravesite or urn, so memories can be recalled at any time with a single scan – whether in the cemetery or at home.') }}
                         </p>
                         <br>
                         <p>
-                            A megemlékező oldal QR-kód nélkül is látogatható, megosztható a családtagokkal, barátokkal. Az
-                            adatok időtállóságát és hitelességét blokklánc-technológia biztosítja, így az emlék nemcsak
-                            személyes, hanem megbízható és megőrizhető is – örökre.
+                            {{ __('The memorial page can be visited without a QR code and shared with family and friends. The timelessness and authenticity of the data is ensured by blockchain technology, so the memory is not only personal, but also reliable and can be preserved - forever.') }}
+                            
                         </p>
                         <a href="#" class="butn-scroll butn butn-md butn-rounded bg-light mt-30">
                             <div class="d-flex align-items-center">
-                                <span>Nézze meg, hogyan működik</span>
+                                <span>{{ __('See how it works') }}</span>
                                 <span class="icon ml-10">
                                     <img src="../common/imgs/icons/arrow-top-right.svg" alt="">
                                 </span>
@@ -548,185 +540,13 @@
 
     <!-- ==================== End Intro ==================== -->
 
-
-
-    <!-- ==================== Start Services ==================== -->
-
-    <!-- <section class="services-accord2 section-padding">
-                        <div class="container">
-                            <div class="sec-head mb-80 d-flex align-items-center bord-thin-bottom-light pb-15">
-                                <div>
-                                    <h6 class="text-u">Our Services</h6>
-                                </div>
-                                <div class="ml-auto">
-                                    <a href="../inner_pages/services.html" class="butn butn-md butn-bord butn-rounded">
-                                        <div class="d-flex align-items-center">
-                                            <span>See Our Approach</span>
-                                            <span class="icon ml-10">
-                                                <i class="fa-solid fa-chevron-right"></i>
-                                            </span>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="accordion wow fadeInUp slow" data-wow-delay="0.4s" id="accordionExample">
-                                <div class="accordion-item">
-                                    <div class="accordion-header" id="heading1">
-                                        <div class="accordion-title" data-bs-toggle="collapse" data-bs-target="#collapse1"
-                                            aria-expanded="true" aria-controls="collapse1">
-                                            <div class="d-flex align-items-end">
-                                                <div class="title">
-                                                    <h2>Brand Strategy</h2>
-                                                </div>
-                                                <div class="numb ml-auto">
-                                                    <span>001</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="collapse1" class="accordion-collapse collapse show" aria-labelledby="heading1"
-                                        data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="text">
-                                                        <p>Development and building amazing digital products with best user
-                                                            experiences strategy. Development and building amazing digital
-                                                            products with best user experiences strategy.</p>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-5 offset-lg-1">
-                                                    <div class="sm-hide">
-                                                        <div class="img fit-img">
-                                                            <img src="imgs/services/1.png" alt="">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <div class="accordion-header" id="heading2">
-                                        <div class="accordion-title collapsed" data-bs-toggle="collapse"
-                                            data-bs-target="#collapse2" aria-expanded="true" aria-controls="collapse2">
-                                            <div class="d-flex align-items-end">
-                                                <div class="title">
-                                                    <h2>Web Developments</h2>
-                                                </div>
-                                                <div class="numb ml-auto">
-                                                    <span>002</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="heading2"
-                                        data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="text">
-                                                        <p>Development and building amazing digital products with best user
-                                                            experiences strategy. Development and building amazing digital
-                                                            products with best user experiences strategy.</p>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-5 offset-lg-1">
-                                                    <div class="sm-hide">
-                                                        <div class="img fit-img">
-                                                            <img src="imgs/services/2.jpg" alt="">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <div class="accordion-header" id="heading3">
-                                        <div class="accordion-title collapsed" data-bs-toggle="collapse"
-                                            data-bs-target="#collapse3" aria-expanded="true" aria-controls="collapse3">
-                                            <div class="d-flex align-items-end">
-                                                <div class="title">
-                                                    <h2>Branding</h2>
-                                                </div>
-                                                <div class="numb ml-auto">
-                                                    <span>003</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="heading3"
-                                        data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="text">
-                                                        <p>Development and building amazing digital products with best user
-                                                            experiences strategy. Development and building amazing digital
-                                                            products with best user experiences strategy.</p>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-5 offset-lg-1">
-                                                    <div class="sm-hide">
-                                                        <div class="img fit-img">
-                                                            <img src="imgs/services/3.jpg" alt="">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <div class="accordion-header" id="heading4">
-                                        <div class="accordion-title collapsed" data-bs-toggle="collapse"
-                                            data-bs-target="#collapse4" aria-expanded="true" aria-controls="collapse4">
-                                            <div class="d-flex align-items-end">
-                                                <div class="title">
-                                                    <h2>Design</h2>
-                                                </div>
-                                                <div class="numb ml-auto">
-                                                    <span>004</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="heading4"
-                                        data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="text">
-                                                        <p>Development and building amazing digital products with best user
-                                                            experiences strategy. Development and building amazing digital
-                                                            products with best user experiences strategy.</p>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-5 offset-lg-1">
-                                                    <div class="sm-hide">
-                                                        <div class="img fit-img">
-                                                            <img src="imgs/services/4.jpg" alt="">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section> -->
-
-    <!-- ==================== End Services ==================== -->
-
     <!-- ==================== Start Blog ==================== -->
 
     <section class="testim-sm pb-100 pt-100 bg-gray" style="    background-color: #ffffff;">
         <div class="container">
             <div class="sec-head text-center mb-100">
                 {{-- <h6 class="sub-title main-color mb-15">Testimonials</h6> --}}
-                <h3 class="text-u">Emlékoldalak</h3>
+                <h3 class="text-u">{{ __('Memorial Pages') }}</h3>
             </div>
             <div class="swiper testim-swiper swiper-container">
                 <div class="swiper-wrapper">
@@ -771,7 +591,7 @@
         <div class="container">
             <div class="sec-head text-center mb-100">
                 <!-- <h6 class="sub-title main-color mb-15">Our Blog</h6> -->
-                <h3 class="text-u">Hogyan működik</h3>
+                <h3 class="text-u">{{ __('How it works') }}</h3>
             </div>
 
 
@@ -783,8 +603,8 @@
                         <div class="info d-flex align-items-center">
                             <div class="d-flex align-items-center">
                                 <h6>
-                                    Olvassa be a <br>
-                                    QR kódot
+                                    {{ __('Scan the') }} <br>
+                                    {{ __('QR code') }}
                                 </h6>
                             </div>
                             <div class="date ml-auto">
@@ -798,8 +618,7 @@
                         </div>
                         <div class="cont mt-30">
                             <h7>
-                                Miután kézhez kapta az emlékplakettet, egyszerűen olvassa be a rajta lévő QR-kódot
-                                okostelefonjával vagy rögzítse a számítógépén.
+                                {{ __('Once you receive the commemorative plaque, simply scan the QR code on it with your smartphone or save it on your computer.') }}
                             </h7>
                         </div>
                     </div>
@@ -809,8 +628,8 @@
                         <div class="info d-flex align-items-center">
                             <div class="d-flex align-items-center">
                                 <h6>
-                                    Emlékoldal <br>
-                                    létrehozása
+                                    {{ __('Create a') }} <br>
+                                    {{ __('memorial page') }}
                                 </h6>
                             </div>
                             <div class="date ml-auto">
@@ -824,8 +643,7 @@
                         </div>
                         <div class="cont mt-30">
                             <h7>
-                                Adja meg az elhunyt adatait, töltsön fel képeket, videókat, kedves történeteket – mindezt
-                                okostelefonról vagy számítógépről, a többit elvégzi a mesterséges Intelligencia
+                                {{ __('Enter the deceased’s details, upload pictures, videos, and sweet stories – all from your smartphone or computer, and Artificial Intelligence will do the rest.') }}
                             </h7>
                         </div>
                     </div>
@@ -836,7 +654,8 @@
                         <div class="info d-flex align-items-center">
                             <div class="d-flex align-items-center">
                                 <h6>
-                                    Ossza meg majd <br>rögzítse az emlékpakettet
+                                    {{ __('Share and record') }} <br>
+                                    {{ __('the memory package') }}
                                 </h6>
                             </div>
                             <div class="date ml-auto">
@@ -850,9 +669,7 @@
                         </div>
                         <div class="cont mt-30">
                             <h7>
-                                Ossza meg az oldalt családtagokkal, barátokkal, akik szintén megoszthatják saját
-                                gondolataikat, fotóikat vagy búcsúzó soraikat. Rögzítse a plakettet a sírhelyre, urnára vagy
-                                emlékhelyre, így az emlékoldal bármikor elérhető marad – akár a helyszínen, akár online.
+                                {{ __('Share the page with family and friends, who can also share their own thoughts, photos, or farewell lines. Attach the plaque to the grave, urn, or memorial site so the memorial page remains accessible at any time - whether on site or online.') }}
                             </h7>
                         </div>
                     </div>
@@ -864,71 +681,12 @@
 
     <!-- ==================== End Blog ==================== -->
 
-    <!-- ==================== Start about ==================== -->
-
-    {{-- <section class="about-smt section-padding pb-0">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-7">
-                    <div class="sec-head ">
-                        <!-- <span class="sub-title mb-15">Amit tartalmaz:</span> -->
-                        <h3>Digitális emlékmű</h3>
-                        <p class="mt-30">Hozzon létre egy digitális emlékművet, amely tele van szeretteinek történeteivel
-                            és emlékeivel. Könnyedén rögzíthet egy elegáns, rozsdamentes acél QR-táblát, és készítsen helyet
-                            minden dédelgetett fényképének, videójának és sok másnak. Ez több, mint tisztelgés, szívből jövő
-                            emlékezés, mindig elérhető és örökké kincsként kezelt.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-5 mt-30">
-                    <a href="#" class="butn butn-md butn-rounded bg-light md-mb30">
-                        <div class="d-flex align-items-center">
-                            <span>Tekintse meg a mintaoldalt</span>
-                            <span class="icon ml-10">
-                                <img src="{{ asset('common/imgs/icons/arrow-top-right.svg') }}" alt="">
-                            </span>
-                        </div>
-                    </a>
-                </div>
-                <!-- <div class="col-lg-5">
-                        <div class="text">
-                            <p>Hozzon létre egy digitális emlékművet, amely tele van szeretteinek történeteivel és emlékeivel. Könnyedén rögzíthet egy elegáns, rozsdamentes acél QR-táblát, és készítsen helyet minden dédelgetett fényképének, videójának és sok másnak. Ez több, mint tisztelgés, szívből jövő emlékezés, mindig elérhető és örökké kincsként kezelt.
-                            </p>
-                        </div>
-                    </div> -->
-            </div>
-            <div class="row boxs">
-                <div class="col-lg-7 offset-lg-5">
-                    <div class="d-flex">
-                        <div class="item text-center bg-color"
-                            style="background-image: url('home/imgs/intro/1.png'); background-size: cover; background-position: center; min-height: 260px;">
-                            <!-- <h2>80</h2>
-                                <h6>Project Completed</h6> -->
-                        </div>
-                        <div class="item text-center bg-light"
-                            style="background-image: url('home/imgs/intro/2.png'); background-size: cover; background-position: center;">
-                            <!-- <h2>17k</h2>
-                                <h6>Happy Customers</h6> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="main-img fit-img">
-            <img src="home/imgs/intro/2.jpg" alt="">
-        </div>
-    </section> --}}
-
-    <!-- ==================== End about ==================== -->
-
     <!-- ==================== Start Price ==================== -->
 
     <section class="price section-padding">
         <div class="container">
             <div class="sec-head-lg text-center mb-80">
-                <h2 class="text-u">Árak</h2>
+                <h2 class="text-u">{{ __('Prices') }}</h2>
             </div>
             <div class="row">
                 <div class="col-lg-4">
@@ -941,8 +699,8 @@
                                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                                     <g id="SVGRepo_iconCarrier">
-                                        <title>Book-bookmark</title>
-                                        <desc>Created with Sketch.</desc>
+                                        <title>bookmark</title>
+                                        <desc></desc>
                                         <defs> </defs>
                                         <g id="Page-1" stroke="none" stroke-width="1" fill="none"
                                             fill-rule="evenodd" sketch:type="MSPage">
@@ -965,26 +723,27 @@
                                     </g>
                                 </svg>
                             </span>
-                            <h5 class="mb-10">Alap</h5>
-                            <h6 class="fz-16 fw-400 sub-font">Egyszeri díj, <span class="opacity-7">örökös
-                                    hozzáféréssel</span>
+                            <h5 class="mb-10">{{ __('Basic') }}</h5>
+                            <h6 class="fz-16 fw-400 sub-font">{{ __('One-time fee') }} <span class="opacity-7">
+                                {{ __('with perpetual access') }}
+                            </span>
                             </h6>
                         </div>
                         <div class="feat mb-30 pb-30 bord-thin-bottom">
                             <ul class="rest sub-font">
-                                <li><span class="ti-check icon"></span> 1 <span class="opacity-7">db</span> emlékoldal
+                                <li><span class="ti-check icon"></span> 1 <span class="opacity-7">{{ __('pcs') }}</span> {{ __('memorial page') }}
                                 </li>
-                                <li><span class="ti-check icon"></span> 1 <span class="opacity-7">db</span> QR-kódos lemez
+                                <li><span class="ti-check icon"></span> 1 <span class="opacity-7">{{ __('pcs') }}</span> {{ __('QR code plate') }}
                                 </li>
-                                <li><span class="ti-check icon"></span> 30 fénykép</li>
-                                <li><span class="ti-check icon"></span> Két oldalstílus közül választhat</li>
-                                <li><span class="ti-check icon"></span> Megjegyzések korlátozás nélkül</li>
+                                <li><span class="ti-check icon"></span> 30 {{ __('photos') }}</li>
+                                <li><span class="ti-check icon"></span> {{__('You can choose from many styles')}}</li>
+                                <li><span class="ti-check icon"></span> {{__('Comments without restrictions')}}</li>
                             </ul>
                             <div class="text-center mt-40">
                                 <a href="https://shop.rememus.com/Emlekplakettek" target="_blank"
                                     class="butn butn-md butn-rounded" style="border: 1px solid #2e2e2e !important;">
                                     <div class="d-flex align-items-center">
-                                        <span>Vásárlás</span>
+                                        <span>{{ __('Purchase') }}</span>
                                         <span class="icon invert ml-10 mb-1">
                                             <svg fill="#a4a4a4" version="1.1" id="Capa_1"
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -1072,27 +831,27 @@
                                 </svg>
 
                             </span>
-                            <h5 class="mb-10">Örökség</h5>
-                            <h6 class="fz-16 fw-400 sub-font">Egyszeri díj, <span class="opacity-7">örökös
-                                    hozzáféréssel</span>
+                            <h5 class="mb-10">{{ __('Heritage') }}</h5>
+                            <h6 class="fz-16 fw-400 sub-font">{{ __('One-time fee') }} <span class="opacity-7">
+                                {{ __('with perpetual access') }}
                             </h6>
                         </div>
                         <div class="feat mb-30 pb-30 bord-thin-bottom">
                             <ul class="rest sub-font">
-                                <li><span class="ti-check icon"></span> 5 <span class="opacity-7">db</span> emlékoldal
+                                <li><span class="ti-check icon"></span> 5 <span class="opacity-7">{{ __('pcs') }}</span> {{ __('memorial page') }}
                                 </li>
-                                <li><span class="ti-check icon"></span> 5 <span class="opacity-7">db</span> QR-kódos lemez
+                                <li><span class="ti-check icon"></span> 5 <span class="opacity-7">{{ __('pcs') }}</span> {{ __('QR code plate') }}
                                 </li>
-                                <li><span class="ti-check icon"></span> 30 fénykép / <span class="opacity-7">oldal</span>
+                                <li><span class="ti-check icon"></span> 30 <span class="opacity-7">{{ __('photos') }}</span> / <span class="opacity-7">{{ __('page') }}</span>
                                 </li>
-                                <li><span class="ti-check icon"></span> Két oldalstílus közül választhat</li>
-                                <li><span class="ti-check icon"></span> Megjegyzések korlátozás nélkül</li>
+                                <li><span class="ti-check icon"></span> {{__('You can choose from many styles')}}</li>
+                                <li><span class="ti-check icon"></span> {{ __('Comments without restrictions') }}</li>
                             </ul>
                             <div class="text-center mt-40">
                                 <a href="https://shop.rememus.com/Emlekplakettek" target="_blank"
                                     class="butn butn-md butn-rounded" style="border: 1px solid #2e2e2e !important;">
                                     <div class="d-flex align-items-center">
-                                        <span>Vásárlás</span>
+                                        <span>{{ __('Purchase') }}</span>
                                         <span class="icon invert ml-10 mb-1">
                                             <svg fill="#a4a4a4" version="1.1" id="Capa_1"
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -1139,7 +898,7 @@
                         </div>
                         <div class="amount d-flex align-items-end">
                             <h2> 18 000 <span>ft</span></h2>
-                            <p class="ms-2"> / darab</p>
+                            <p class="ms-2"> / {{ __('pcs') }}</p>
                         </div>
                     </div>
                 </div>
@@ -1149,36 +908,28 @@
                             <span class="icon-img-80 mb-15">
                                 <img src="home/imgs/price/3.svg" alt="">
                             </span>
-                            <h5 class="mb-10">Egyedi ajánlat</h5>
-                            <h6 class="fz-16 fw-400 sub-font">Egyszeri díj, <span class="opacity-7">örökös
-                                    hozzáféréssel</span>
+                            <h5 class="mb-10">{{ __('Custom offer') }}</h5>
+                            <h6 class="fz-16 fw-400 sub-font">{{ __('One-time fee') }} <span class="opacity-7">
+                                {{ __('with perpetual access') }}
                             </h6>
                         </div>
                         <div class="feat mb-30 pb-30 bord-thin-bottom-light">
                             <ul class="rest sub-font">
-                                <li><span class="ti-check icon"></span> 10 <span class="opacity-7">db</span> emlékoldal
+                                <li><span class="ti-check icon"></span> 10 <span class="opacity-7">{{ __('pcs') }}</span> {{ __('memorial page') }}
                                 </li>
-                                <li><span class="ti-check icon"></span> 10 <span class="opacity-7">db</span> QR-kódos
-                                    lemez</li>
-                                <li><span class="ti-check icon"></span> 30 fénykép / <span class="opacity-7">oldal</span>
+                                <li><span class="ti-check icon"></span> 10 <span class="opacity-7">{{ __('pcs') }}</span> {{ __('QR code plate') }}
                                 </li>
-                                <li><span class="ti-check icon"></span> Két oldalstílus közül választhat</li>
-                                <li><span class="ti-check icon"></span> Megjegyzések korlátozás nélkül</li>
+                                <li><span class="ti-check icon"></span> 30 <span class="opacity-7">{{ __('photos') }}</span> / <span class="opacity-7">{{ __('page') }}</span>
+                                </li>
+                                <li><span class="ti-check icon"></span> {{ __('You can choose from many styles') }}</li>
+                                <li><span class="ti-check icon"></span> {{ __('Comments without restrictions') }}</li>
                             </ul>
-                            <!-- <a href="#0" class="view mt-15">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="37" height="36"
-                                                    viewBox="0 0 37 36" fill="none">
-                                                    <path
-                                                        d="M1 35L34.2929 1.70711C34.9229 1.07714 36 1.52331 36 2.41421V21.5H29.5"
-                                                        stroke="#141414" stroke-width="2"></path>
-                                                </svg>
-                                            </a> -->
 
                             <div class="text-center mt-40">
                                 <a href="https://shop.rememus.com/Emlekplakettek" target="_blank"
                                     class="butn butn-md butn-bord butn-rounded">
                                     <div class="d-flex align-items-center">
-                                        <span>Vásárlás</span>
+                                        <span>{{ __('Purchase') }}</span>
                                         <span class="icon invert ml-10 mb-1">
                                             <svg fill="#a4a4a4" version="1.1" id="Capa_1"
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -1225,7 +976,7 @@
                         </div>
                         <div class="amount d-flex align-items-end">
                             <h2> 15 000 <span>ft</span></h2>
-                            <p class="ms-2"> / darab</p>
+                            <p class="ms-2"> / {{ __('pcs') }}</p>
                         </div>
                     </div>
                 </div>
@@ -1241,376 +992,16 @@
                 <!-- <h6 class="sub-title main-color mb-15">Testimonials</h6> -->
                 {{-- <h3 class="text-u">Mit tartalmaz egy emlékoldal?</h3> --}}
                 <h3 class="d-none d-md-block mb-3">
-                    Az emlékoldal fő pillérei
+                    {{ __('The main pillars of the memorial site') }}
                 </h3>
 
                 <h5 class="d-block d-md-none mb-3">
-                    Az emlékoldal fő pillérei
+                    {{ __('The main pillars of the memorial site') }}
                 </h5>
 
             </div>
-
-            <!-- <div class="row">
-                                <div class="col-lg-4">
-                                    <div class="item">
-                                        <div class="mb-20">
-                                            <div class="d-flex align-items-center">
-                                                <div>
-                                                    <h6>Fényképek és videók</h6>
-                                                </div>
-                                                <div class="ml-auto">
-                                                    <div class="">
-                                                        <span class="iconcir pe-7s-photo ml-10 fz-20"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div>
-                                            <div class="mt-15">
-                                                <h6 class="fz-16">
-                                                    Könnyedén feltöltheti saját fényképeit és videóit, hogy örökre megőrzésre kerüljenek az emlékoldalon. Lehetőséget adhat barátoknak és családtagoknak is, hogy megosszák saját emlékeiket.
-
-                                                </h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 mt-lg-0 mt-4">
-                                    <div class="item">
-                                        <div class="mb-20">
-                                            <div class="d-flex align-items-center">
-                                                <div>
-                                                    <h6>Életrajz</h6>
-                                                </div>
-                                                <div class="ml-auto">
-                                                    <div class="">
-                                                        <span class="iconcir pe-7s-notebook ml-10 fz-20"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div>
-                                            <div class="mt-15">
-                                                <h6 class="fz-16">
-                                                    Másolja be a gyászjelentést, élettörténetet vagy bármilyen emléket, amelyet meg szeretne őrizni a jövő generációi számára, hogy megismerhessék és inspirációt meríthessenek belőle.
-                                                </h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 mt-lg-0 mt-4">
-                                    <div class="item">
-                                        <div class="mb-20 ">
-                                            <div class="d-flex align-items-center">
-                                                <div>
-                                                    <h6>Elérhető</h6>
-                                                </div>
-                                                <div class="ml-auto">
-                                                    <div class="">
-                                                        <span class="iconcir pe-7s-diamond ml-10 fz-20"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div>
-                                            <div class="mt-15">
-                                                <h6 class="fz-16">
-                                                    Célunk, hogy szeretteink emlékének megőrzése egyszerű és elérhető legyen mindenki számára. Hiszünk abban, hogy minden sírkövön QR-kódnak kell lennie, hogy senki se merüljön feledésbe.
-                                                
-                                                </h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4">
-                                    <div class="item mt-30">
-                                        <div class="">
-                                            <div class="d-flex align-items-center">
-                                                <div>
-                                                    <h6>Idővonal</h6>
-                                                </div>
-                                                <div class="ml-auto">
-                                                    <div class="">
-                                                        <span class="iconcir pe-7s-timer ml-10 fz-20"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div>
-                                            <div class="">
-                                                <h6 class="fz-16">
-                                                    Hozzon létre egy idővonalat szerette fontos életpillanatairól. Társítsa az eseményekhez fényképeket, hogy még teljesebb képet adjon életútjáról, és örökre megőrizze azokat.
-                                                </h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 mt-lg-0 mt-4">
-                                    <div class="item mt-30">
-                                        <div class="">
-                                            <div class="d-flex align-items-center">
-                                                <div>
-                                                    <h6>Megemlékezések</h6>
-                                                </div>
-                                                <div class="ml-auto">
-                                                    <div class="">
-                                                        <span class="iconcir pe-7s-medal ml-10 fz-20"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div>
-                                            <div class="">
-                                                <h6 class="fz-16">
-                                                    Gyűjtsön össze történeteket és fényképeket családtagoktól vagy barátoktól. Ossza meg szerette emlékoldalának linkjét közösségi médiában, e-mailben vagy üzenetben.
-                                                </h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 mt-lg-0 mt-4">
-                                    <div class="item mt-30">
-                                        <div class="">
-                                            <div class="d-flex align-items-center">
-                                                <div>
-                                                    <h6>Emléktábla a temetésen</h6>
-                                                </div>
-                                                <div class="ml-auto">
-                                                    <div class="">
-                                                        <span class="iconcir pe-7s-id ml-10 fz-20"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div>
-                                            <div class="">
-                                                <h6 class="fz-16">
-                                                    Nyomtassa ki a QR-kódot, és helyezze el a temetésen, ravatalozáson vagy megemlékezési eseményen, hogy a vendégek is megoszthassák emlékeiket és részvétüket.
-                                                </h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div> -->
-
-
-
         </div>
     </section>
-
-    <!-- ==================== Start Testimonials ==================== -->
-
-    <!-- <section class="testim-sm section-padding">
-                        <div class="container">
-                            <div class="sec-head text-center mb-100">
-                                <h6 class="sub-title main-color mb-15">Testimonials</h6>
-                                <h3 class="text-u">What Our Clients Say?</h3>
-                            </div>
-                            <div class="swiper testim-swiper swiper-container">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <div class="item">
-                                            <div class="mb-70">
-                                                <div class="info d-flex align-items-center pt-30 mb-15">
-                                                    <div>
-                                                        <div class="img-author">
-                                                            <img src="imgs/testim/avatar1.jpg" alt="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="info-text">
-                                                        <span>Bradley Gordon</span>
-                                                        <p>CEO & Founder, Archin Studio</p>
-                                                    </div>
-                                                </div>
-                                                <h3>“Excellent</h3>
-                                            </div>
-                                            <div>
-                                                <div class="rate">
-                                                    <h5>5.0
-                                                        <span class="stars">
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                        </span>
-                                                    </h5>
-                                                </div>
-                                                <div class="mt-15">
-                                                    <h6 class="fz-16">A studio with passionate, professional and full
-                                                        creativity. Much
-                                                        more than i’m expect. Great services, high quality products &
-                                                        affordable prices. I’m extremly satisfied!.</h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="item">
-                                            <div class="mb-70">
-                                                <div class="info d-flex align-items-center pt-30 mb-15">
-                                                    <div>
-                                                        <div class="img-author">
-                                                            <img src="imgs/testim/avatar1.jpg" alt="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="info-text">
-                                                        <span>Bradley Gordon</span>
-                                                        <p>CEO & Founder, Archin Studio</p>
-                                                    </div>
-                                                </div>
-                                                <h3>“Excellent</h3>
-                                            </div>
-                                            <div>
-                                                <div class="rate">
-                                                    <h5>5.0
-                                                        <span class="stars">
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                        </span>
-                                                    </h5>
-                                                </div>
-                                                <div class="mt-15">
-                                                    <h6 class="fz-16">A studio with passionate, professional and full
-                                                        creativity. Much
-                                                        more than i’m expect. Great services, high quality products &
-                                                        affordable prices. I’m extremly satisfied!.</h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="item">
-                                            <div class="mb-70">
-                                                <div class="info d-flex align-items-center pt-30 mb-15">
-                                                    <div>
-                                                        <div class="img-author">
-                                                            <img src="imgs/testim/avatar1.jpg" alt="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="info-text">
-                                                        <span>Bradley Gordon</span>
-                                                        <p>CEO & Founder, Archin Studio</p>
-                                                    </div>
-                                                </div>
-                                                <h3>“Excellent</h3>
-                                            </div>
-                                            <div>
-                                                <div class="rate">
-                                                    <h5>5.0
-                                                        <span class="stars">
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                        </span>
-                                                    </h5>
-                                                </div>
-                                                <div class="mt-15">
-                                                    <h6 class="fz-16">A studio with passionate, professional and full
-                                                        creativity. Much
-                                                        more than i’m expect. Great services, high quality products &
-                                                        affordable prices. I’m extremly satisfied!.</h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="item">
-                                            <div class="mb-70">
-                                                <div class="info d-flex align-items-center pt-30 mb-15">
-                                                    <div>
-                                                        <div class="img-author">
-                                                            <img src="imgs/testim/avatar1.jpg" alt="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="info-text">
-                                                        <span>Bradley Gordon</span>
-                                                        <p>CEO & Founder, Archin Studio</p>
-                                                    </div>
-                                                </div>
-                                                <h3>“Excellent</h3>
-                                            </div>
-                                            <div>
-                                                <div class="rate">
-                                                    <h5>5.0
-                                                        <span class="stars">
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                        </span>
-                                                    </h5>
-                                                </div>
-                                                <div class="mt-15">
-                                                    <h6 class="fz-16">A studio with passionate, professional and full
-                                                        creativity. Much
-                                                        more than i’m expect. Great services, high quality products &
-                                                        affordable prices. I’m extremly satisfied!.</h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="item">
-                                            <div class="mb-70">
-                                                <div class="info d-flex align-items-center pt-30 mb-15">
-                                                    <div>
-                                                        <div class="img-author">
-                                                            <img src="imgs/testim/avatar1.jpg" alt="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="info-text">
-                                                        <span>Bradley Gordon</span>
-                                                        <p>CEO & Founder, Archin Studio</p>
-                                                    </div>
-                                                </div>
-                                                <h3>“Excellent</h3>
-                                            </div>
-                                            <div>
-                                                <div class="rate">
-                                                    <h5>5.0
-                                                        <span class="stars">
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                        </span>
-                                                    </h5>
-                                                </div>
-                                                <div class="mt-15">
-                                                    <h6 class="fz-16">A studio with passionate, professional and full
-                                                        creativity. Much
-                                                        more than i’m expect. Great services, high quality products &
-                                                        affordable prices. I’m extremly satisfied!.</h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section> -->
-
-    <!-- ==================== End Testimonials ==================== -->
 
     <div class="testim-sm faqs section-padding">
 
@@ -1625,7 +1016,7 @@
                                     <div class="mb-20">
                                         <div class="d-flex align-items-center">
                                             <div>
-                                                <h6>Életrajz</h6>
+                                                <h6>{{ __('Biography') }}</h6>
                                             </div>
                                             <div class="ml-auto">
                                                 <div class="">
@@ -1638,11 +1029,7 @@
                                     <div>
                                         <div class="mt-15">
                                             <h6 class="fz-16">
-                                                Adja meg a fontos mérföldköveket – legyen az a gyászjelentés, egy részletes
-                                                élettörténet vagy néhány emlékezetes esemény-pont. Mi ezekből automatikusan
-                                                felépítjük a kronológiai idővonalat, majd mesterséges intelligencia
-                                                segítségével gördülékeny, inspiráló történetté szerkesztjük, hogy a jövő
-                                                generációi is megismerhessék és példát meríthessenek belőle.
+                                                {{ __('Enter important milestones – whether it’s an obituary, a detailed life story, or a few memorable events. We’ll automatically build a chronological timeline from data provided, then use artificial intelligence to edit it into a flowing, inspiring story for future generations to learn from and draw inspiration from it.') }}
                                             </h6>
                                         </div>
                                     </div>
@@ -1657,7 +1044,7 @@
                                     <div class=" ">
                                         <div class="d-flex align-items-center">
                                             <div>
-                                                <h6>Elérhető és emlékeztet.</h6>
+                                                <h6>{{ __('It is accessible and memorable.') }}</h6>
                                             </div>
                                             <div class="ml-auto">
                                                 <div class="">
@@ -1670,12 +1057,7 @@
                                     <div>
                                         <div class="mt-15">
                                             <h6 class="fz-16">
-                                                Célunk, hogy szeretteink emlékének megőrzése egyszerű, bárki számára
-                                                hozzáférhető legyen. Hiszünk abban, hogy minden sírkőn helye van egy
-                                                QR-kódnak, hogy senki se merüljön feledésbe. A rendszer emlékeztet a fontos
-                                                évfordulókra – például születésnapra vagy halálozási évfordulóra –, így a
-                                                családtagok és barátok időben értesülnek, és az emlékoldalon virággal,
-                                                jókívánsággal vagy meghitt üzenettel róhatják le tiszteletüket.
+                                                {{ __('Our goal is to make preserving the memory of our loved ones simple and accessible to everyone. We believe that every gravestone deserves a QR code so that no one is forgotten. The system reminds us of important anniversaries – such as birthdays or death anniversaries – so that family and friends are informed in time and can pay their respects on the memorial page with flowers, well-wishes or a heartfelt message.') }}
 
                                             </h6>
                                         </div>
@@ -1689,7 +1071,7 @@
                                     <div class="">
                                         <div class="d-flex align-items-center">
                                             <div>
-                                                <h6>Fényképek és videók</h6>
+                                                <h6>{{ __('Photos and videos') }}</h6>
                                             </div>
                                             <div class="ml-auto">
                                                 <div class="">
@@ -1702,9 +1084,8 @@
                                     <div>
                                         <div class="">
                                             <h6 class="fz-16">
-                                                Töltsön fel kedvenc fotókat és videókat, hogy az emlékek méltó módon örökre
-                                                fennmaradjanak. Barátait és családtagjait is meghívhatja, hogy saját
-                                                felvételeikkel, közös pillanataikkal gazdagítsák az emlékoldalt.
+                                                {{ __('Upload your favorite photos and videos to make your memories last forever. You can also invite friends and family to add their own photos and moments to the memorial page.') }}
+                                                
                                             </h6>
                                         </div>
                                     </div>
@@ -1718,7 +1099,7 @@
                                     <div class="">
                                         <div class="d-flex align-items-center">
                                             <div>
-                                                <h6>Megemlékezések</h6>
+                                                <h6>{{ __('Remembrances') }}</h6>
                                             </div>
                                             <div class="ml-auto">
                                                 <div class="">
@@ -1731,9 +1112,7 @@
                                     <div>
                                         <div class="">
                                             <h6 class="fz-16">
-                                                Gyűjtse össze a családtagok és barátok történeteit, fényképeit és személyes
-                                                üzeneteit. Ossza meg az emlékoldal linkjét közösségi médiában, e-mailben
-                                                vagy üzenetben, hogy bárki könnyedén hozzátehesse saját emlékeit.
+                                                {{ __('Collect stories, photos, and personal messages from family and friends. Share the memorial page link on social media, email, or message so anyone can easily add their own memories.') }}
                                             </h6>
                                         </div>
                                     </div>
@@ -1773,11 +1152,11 @@
                     <div class="sec-head text-center mb-70">
                         {{-- <h2>Gyakran Ismételt Kérdések</h2> --}}
                         <h3 class="d-none d-md-block mb-3">
-                            Gyakran Ismételt Kérdések
+                            {{ __('Frequently Asked Questions') }}
                         </h3>
 
                         <h5 class="d-block d-md-none mb-3">
-                            Gyakran Ismételt Kérdések
+                            {{ __('Frequently Asked Questions') }}
                         </h5>
                     </div>
                     <div class="row justify-content-center">
@@ -1789,19 +1168,14 @@
                                         <button class="accordion-button collapsed fs-5 fs-sm-6 fw-sm-light" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false"
                                             aria-controls="collapse3">
-                                            Van-e folyamatos költsége a weboldal fenntartásának?
+                                            {{ __('Is there an ongoing cost to maintain the website?') }}
                                         </button>
                                     </h2>
                                     <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="heading3"
                                         data-bs-parent="#accordionExample" style="">
                                         <div class="accordion-body">
                                             <p>
-                                                Nem! Elkötelezettek vagyunk a megfizethetőség mellett, egyszeri vásárlást
-                                                kínálunk egy személyre szabható Tisztelgésünk emlékművünkhöz. Ez a
-                                                szolgáltatás akár 50 fénykép, korlátlan számú videó és szöveges tárolást is
-                                                tartalmaz az online tiszteletadáshoz. Azok számára, akik még több emléket
-                                                szeretnének felvenni, éves előfizetéssel extra fotótárhelyet biztosítanak,
-                                                így szerettei digitális emlékhelye átfogó és naprakész.
+                                                {{ __(('No! We are committed to affordability, offering a one-time purchase of a customizable Tribute memorial. This service includes up to 50 photos, unlimited videos, and text storage for your online tribute. For those who want to add even more memories, additional photo storage is available with an annual subscription, so your loved one’s digital memorial is comprehensive and up-to-date.')) }}
                                             </p>
                                         </div>
                                     </div>
@@ -1811,21 +1185,14 @@
                                         <button class="accordion-button collapsed fs-5 fs-sm-6 fw-sm-light" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false"
                                             aria-controls="collapse4">
-                                            Nem váltja fel végül a QR-kódokat egy másik technológia?
+                                            {{ __('Won\'t QR codes eventually be replaced by another technology?') }}
                                         </button>
                                     </h2>
                                     <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="heading4"
                                         data-bs-parent="#accordionExample" style="">
                                         <div class="accordion-body">
                                             <p>
-                                                A szakértők úgy vélik, hogy a QR-kódok még hosszú ideig léteznek, ipari
-                                                gyökereiktől kezdve jelentős szerepük lesz az emlékművekben. Ezek a kódok
-                                                nem tárolják szeretett személyének adatait; ehelyett közvetlen linkként
-                                                működnek a Tributes weboldalunkon található személyes oldalukra. Biztos
-                                                lehet benne, hogy az információkat biztonságosan tároljuk és könnyen
-                                                hozzáférhetők. A QR-kódokat tartós technológiának tekintik, amely
-                                                biztosítja, hogy még az új technológiák megjelenésével is, a digitális
-                                                emlékmű elérhető és biztonságos online maradjon.
+                                                {{ __('Experts believe that QR codes are here to stay, with their industrial roots continuing to play a significant role in memorials. These codes do not store your loved one’s details; instead, they act as a direct link to their personal page on our Tributes website. You can be assured that the information is stored securely and is easily accessible. QR codes are considered a durable technology that ensures that even as new technologies emerge, your digital memorial remains accessible and secure online.') }}
                                             </p>
                                         </div>
                                     </div>
@@ -1835,19 +1202,14 @@
                                         <button class="accordion-button collapsed fs-5 fs-sm-6 fw-sm-light" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false"
                                             aria-controls="collapse5">
-                                            Elajándékozhatom-e a QR kódot családomnak, vagy a barátoknak?
+                                            {{ __('Can I give the QR code to my family or friends as a gift?') }}
                                         </button>
                                     </h2>
                                     <div id="collapse5" class="accordion-collapse collapse" aria-labelledby="heading5"
                                         data-bs-parent="#accordionExample" style="">
                                         <div class="accordion-body">
                                             <p>
-                                                Igen, rugalmasan létrehozhat egy digitális emlékoldalt valakinek, majd
-                                                átruházhatja annak tulajdonjogát egy másik személyre. A címzettnek
-                                                egyszerűen létre kell hoznia egy fiókot a ourtributes.com oldalon. Miután
-                                                fiókjuk aktív lett, küldjön e-mailben egy átviteli kérelmet, amely
-                                                tartalmazza mindkét fél e-mail címét és a szeretett személy nevét. Csapatunk
-                                                hatékonyan kezeli az online tribute oldal átadását.
+                                                {{ __('Yes, you have the flexibility to create a digital memorial page for someone and then transfer ownership of it to another person. The recipient simply needs to create an account on ourtributes.com. Once their account is active, send an email with a transfer request that includes both parties’ email addresses and the name of your loved one. Our team will efficiently handle the transfer of your online tribute page.') }}
                                             </p>
                                         </div>
                                     </div>
@@ -1857,18 +1219,14 @@
                                         <button class="accordion-button collapsed fs-5 fs-sm-6 fw-sm-light" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#collapse6" aria-expanded="false"
                                             aria-controls="collapse6">
-                                            Használható-e egyetlen oldal 2 személyre, például egy párra?
+                                            {{ __('Can a single page be used for 2 people, such as a couple?') }}
                                         </button>
                                     </h2>
                                     <div id="collapse6" class="accordion-collapse collapse" aria-labelledby="heading6"
                                         data-bs-parent="#accordionExample" style="">
                                         <div class="accordion-body">
                                             <p>
-                                                Igen, egy emlékoldal használható egy pár, például egy szülő vagy nagyszülő
-                                                számára. Jelenleg az egyetlen korlátozás az, hogy csak egy hely van a
-                                                születési és halálozási dátumoknak. Ezeket üresen hagyhatja a promptokban,
-                                                és manuálisan beillesztheti az „Életrajz” szakaszba, hogy mindkét dátum
-                                                szerepeljen.
+                                                {{ __('Yes, a memorial page can be used for a pair, such as a parent or grandparent. The only limitation at this time is that there is only one space for the birth and death dates. You can leave these blank in the prompts and manually insert them in the \'Biography\' section to include both dates.') }}
                                             </p>
                                         </div>
                                     </div>
@@ -1878,21 +1236,14 @@
                                         <button class="accordion-button collapsed fs-5 fs-sm-6 fw-sm-light" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#collapse7" aria-expanded="false"
                                             aria-controls="collapse7">
-                                            A tábla megsérti vagy megrongálja a sírkövet? Mi van, ha később el kell
-                                            távolítanom?
+                                            {{ __('Does the plaque damage or harm the gravestone? What if I need to remove it later?') }}
                                         </button>
                                     </h2>
                                     <div id="collapse7" class="accordion-collapse collapse" aria-labelledby="heading7"
                                         data-bs-parent="#accordionExample" style="">
                                         <div class="accordion-body">
                                             <p>
-                                                A Tributes plakettjeink nem sértik meg a kopjafát! A 3M permanens szalag
-                                                tartósan tapad a felülethez súlyos körülmények között, például esőben,
-                                                hóban, erős napsütésben stb. Ennek ellenére, ha szükséges, a lepedéket
-                                                óvatosan el lehet távolítani a sírkőről egy kemény lapos tárggyal, például
-                                                lapos csavarhúzóval, hogy a plakk széleit a tapadási felületről lefeszítse.
-                                                Az eltávolítás után használjon megfelelő sírkőtisztítót a megmaradt ragacsos
-                                                maradékok eltávolítására.
+                                                {{ __('Our Rememus plaques do not damage the headstone! The 3M permanent tape adheres securely to the surface even under harsh conditions such as rain, snow, strong sunlight, etc. However, if necessary, the plaque can be carefully removed from the gravestone using a hard, flat object, such as a flathead screwdriver, to gently pry the edges of the plaque away from the adhesive surface. After removal, use an appropriate gravestone cleaner to remove any remaining sticky residue.') }}
                                             </p>
                                         </div>
                                     </div>
@@ -1900,17 +1251,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="text-center mt-70">
-                                        <a href="../inner_pages/faqs.html"
-                                            class="butn butn-md butn-bord butn-rounded mt-40">
-                                            <div class="d-flex align-items-center">
-                                                <span>See All Questions</span>
-                                                <span class="icon ml-10">
-                                                    <i class="fa-solid fa-chevron-right"></i>
-                                                </span>
-                                            </div>
-                                        </a>
-                                    </div> -->
                 </div>
             </section>
 
@@ -1973,7 +1313,7 @@
         function initVideoBackground() {
             // Проверяем что Video.js загружен
             if (typeof window.videojs === 'undefined') {
-                console.error('Video.js не загружен!');
+                // console.error('Video.js не загружен!');
                 return;
             }
 
@@ -1981,13 +1321,13 @@
             const loadingIndicator = document.getElementById('loadingIndicator');
 
             if (!videoBackground || !loadingIndicator) {
-                console.log('Элементы видео не найдены');
+                // console.log('Элементы видео не найдены');
                 return;
             }
 
             let videoLoaded = false;
 
-            console.log('Инициализируем Video.js плеер...');
+            // console.log('Инициализируем Video.js плеер...');
 
             // Инициализируем Video.js плеер
             const player = window.videojs('background-video', {
@@ -2005,7 +1345,7 @@
             function showVideo() {
                 if (videoLoaded) return;
 
-                console.log('Показываем видео фон...');
+                // console.log('Показываем видео фон...');
                 videoLoaded = true;
                 videoBackground.classList.add('loaded');
                 loadingIndicator.classList.add('hidden');
@@ -2017,31 +1357,31 @@
 
                 // Запускаем воспроизведение
                 player.play().then(function() {
-                    console.log('Автовоспроизведение запущено');
+                    // console.log('Автовоспроизведение запущено');
                 }).catch(function(error) {
-                    console.log('Автовоспроизведение заблокировано:', error);
+                    // console.log('Автовоспроизведение заблокировано:', error);
                 });
             });
 
             player.on('canplay', function() {
-                console.log('Видео готово к воспроизведению');
+                // console.log('Видео готово к воспроизведению');
                 showVideo();
             });
 
             player.on('playing', function() {
-                console.log('Видео воспроизводится');
+                // console.log('Видео воспроизводится');
                 showVideo();
             });
 
             player.on('error', function(error) {
-                console.error('Ошибка Video.js:', error);
+                // console.error('Ошибка Video.js:', error);
                 loadingIndicator.classList.add('hidden');
             });
 
             // Fallback таймер
             setTimeout(function() {
                 if (!videoLoaded) {
-                    console.log('Таймаут загрузки видео');
+                    // console.log('Таймаут загрузки видео');
                     loadingIndicator.classList.add('hidden');
                 }
             }, 10000);
