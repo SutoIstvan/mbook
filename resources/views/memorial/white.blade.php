@@ -297,7 +297,7 @@
         }
 
         .memorial-name {
-            height: 2.7em; 
+            height: 2.7em;
             line-height: 1.5em;
             display: flex;
             /* align-items: center; */
@@ -864,39 +864,96 @@
                 <ul class="down">
                     <!-- My Grand Parents -->
                     <li class="down">
-                        <a>
+                        <a {{ $grandfatherFather?->qr_code ? 'href=' . route('memorial.show', $grandfatherFather->qr_code) : '' }}
+                            target="_blank">
                             <img src="{{ isset($grandfatherFather) && $grandfatherFather->photo ? asset('memorial/' . $grandfatherFather->photo) : asset('avatar/avatar-father.png') }}"
                                 class="img-fluid rounded-circle" width="90" height="90">
-                                    <div class="memorial-name mt-2">
-                                        {{ $grandfatherFather->name ?? __('Grand Father') }}
-                                    </div>
+                            <div class="memorial-name mt-2">
+                                {{ $grandfatherFather->name ?? __('Grand Father') }}
+                            </div>
+
+                            @if(!empty($grandfatherFather->qr_code))
+                                <div class="position-absolute" title="{{ __('Qr code') }}" style="cursor: pointer; top: 0; right: 5px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="15px" height="15px"
+                                        viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1">
+                                        <title />
+                                        <path
+                                            d="M75,15H35A20.06,20.06,0,0,0,15,35V75A20.06,20.06,0,0,0,35,95H75A20.06,20.06,0,0,0,95,75V35A20.06,20.06,0,0,0,75,15Zm0,60H35V35H75Zm0,30H35a20.06,20.06,0,0,0-20,20v40a20.06,20.06,0,0,0,20,20H75a20.06,20.06,0,0,0,20-20V125A20.06,20.06,0,0,0,75,105Zm0,60H35V125H75ZM165,15H125a20.06,20.06,0,0,0-20,20V75a20.06,20.06,0,0,0,20,20h40a20.06,20.06,0,0,0,20-20V35A20.06,20.06,0,0,0,165,15Zm0,60H125V35h40ZM50,65H60a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,50,65Zm0,90H60a5.38,5.38,0,0,0,5-5V140a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5v10A5.38,5.38,0,0,0,50,155Zm90-90h10a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H140a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,140,65Zm-30,80h10a5.38,5.38,0,0,0,5-5V130a5.38,5.38,0,0,1,5-5h10a5.38,5.38,0,0,0,5-5V110a5.38,5.38,0,0,0-5-5H110a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5Zm70-40H170a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V110A5.38,5.38,0,0,0,180,105Zm-60,60H110a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,120,165Zm60,0H170a5.38,5.38,0,0,1-5-5V150a5.38,5.38,0,0,0-5-5H130a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,1,5,5v10a5.38,5.38,0,0,0,5,5h30a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,180,165Z" />
+                                    </svg>
+                                </div>
+                            @endif
+
+
+                            {{-- <div class="position-absolute" title="{{ __('Qr code') }}"
+                                style="cursor: pointer; top: 0; right: 5px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="15px" height="15px"
+                                    viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1">
+                                    <title />
+                                    <path
+                                        d="M75,15H35A20.06,20.06,0,0,0,15,35V75A20.06,20.06,0,0,0,35,95H75A20.06,20.06,0,0,0,95,75V35A20.06,20.06,0,0,0,75,15Zm0,60H35V35H75Zm0,30H35a20.06,20.06,0,0,0-20,20v40a20.06,20.06,0,0,0,20,20H75a20.06,20.06,0,0,0,20-20V125A20.06,20.06,0,0,0,75,105Zm0,60H35V125H75ZM165,15H125a20.06,20.06,0,0,0-20,20V75a20.06,20.06,0,0,0,20,20h40a20.06,20.06,0,0,0,20-20V35A20.06,20.06,0,0,0,165,15Zm0,60H125V35h40ZM50,65H60a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,50,65Zm0,90H60a5.38,5.38,0,0,0,5-5V140a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5v10A5.38,5.38,0,0,0,50,155Zm90-90h10a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H140a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,140,65Zm-30,80h10a5.38,5.38,0,0,0,5-5V130a5.38,5.38,0,0,1,5-5h10a5.38,5.38,0,0,0,5-5V110a5.38,5.38,0,0,0-5-5H110a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5Zm70-40H170a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V110A5.38,5.38,0,0,0,180,105Zm-60,60H110a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,120,165Zm60,0H170a5.38,5.38,0,0,1-5-5V150a5.38,5.38,0,0,0-5-5H130a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,1,5,5v10a5.38,5.38,0,0,0,5,5h30a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,180,165Z" />
+                                </svg>
+                            </div> --}}
+
                         </a>
                     </li>
                     <li class="up">
-                        <a>
+                        <a {{ $grandmotherFather?->qr_code ? 'href=' . route('memorial.show', $grandmotherFather->qr_code) : '' }}
+                            target="_blank">
                             <img src="{{ isset($grandmotherFather) && $grandmotherFather->photo ? asset('memorial/' . $grandmotherFather->photo) : asset('avatar/avatar-woman.png') }}"
                                 class="img-fluid rounded-circle" width="90" height="90">
-                                    <div class="memorial-name mt-2">
-                                        {{ $grandmotherFather->name ?? __('Grand Mother') }}
-                                    </div>
+                            <div class="memorial-name mt-2">
+                                {{ $grandmotherFather->name ?? __('Grand Mother') }}
+                            </div>
+                            @if(!empty($grandmotherFather->qr_code))
+                                <div class="position-absolute" title="{{ __('Qr code') }}" style="cursor: pointer; top: 0; right: 5px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="15px" height="15px"
+                                        viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1">
+                                        <title />
+                                        <path
+                                            d="M75,15H35A20.06,20.06,0,0,0,15,35V75A20.06,20.06,0,0,0,35,95H75A20.06,20.06,0,0,0,95,75V35A20.06,20.06,0,0,0,75,15Zm0,60H35V35H75Zm0,30H35a20.06,20.06,0,0,0-20,20v40a20.06,20.06,0,0,0,20,20H75a20.06,20.06,0,0,0,20-20V125A20.06,20.06,0,0,0,75,105Zm0,60H35V125H75ZM165,15H125a20.06,20.06,0,0,0-20,20V75a20.06,20.06,0,0,0,20,20h40a20.06,20.06,0,0,0,20-20V35A20.06,20.06,0,0,0,165,15Zm0,60H125V35h40ZM50,65H60a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,50,65Zm0,90H60a5.38,5.38,0,0,0,5-5V140a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5v10A5.38,5.38,0,0,0,50,155Zm90-90h10a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H140a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,140,65Zm-30,80h10a5.38,5.38,0,0,0,5-5V130a5.38,5.38,0,0,1,5-5h10a5.38,5.38,0,0,0,5-5V110a5.38,5.38,0,0,0-5-5H110a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5Zm70-40H170a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V110A5.38,5.38,0,0,0,180,105Zm-60,60H110a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,120,165Zm60,0H170a5.38,5.38,0,0,1-5-5V150a5.38,5.38,0,0,0-5-5H130a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,1,5,5v10a5.38,5.38,0,0,0,5,5h30a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,180,165Z" />
+                                    </svg>
+                                </div>
+                            @endif
                         </a>
                     </li>
                     <li class="down">
-                        <a>
+                        <a {{ $grandfatherMother?->qr_code ? 'href=' . route('memorial.show', $grandfatherMother->qr_code) : '' }}
+                            target="_blank">
                             <img src="{{ isset($grandfatherMother) && $grandfatherMother->photo ? asset('memorial/' . $grandfatherMother->photo) : asset('avatar/avatar-father.png') }}"
                                 class="img-fluid rounded-circle" width="90" height="90">
-                                    <div class="memorial-name mt-2">
-                                        {{ $grandfatherMother->name ?? __('Grand Father') }}
-                                    </div>
+                            <div class="memorial-name mt-2">
+                                {{ $grandfatherMother->name ?? __('Grand Father') }}
+                            </div>
+                            @if(!empty($grandfatherMother->qr_code))
+                                <div class="position-absolute" title="{{ __('Qr code') }}" style="cursor: pointer; top: 0; right: 5px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="15px" height="15px"
+                                        viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1">
+                                        <title />
+                                        <path
+                                            d="M75,15H35A20.06,20.06,0,0,0,15,35V75A20.06,20.06,0,0,0,35,95H75A20.06,20.06,0,0,0,95,75V35A20.06,20.06,0,0,0,75,15Zm0,60H35V35H75Zm0,30H35a20.06,20.06,0,0,0-20,20v40a20.06,20.06,0,0,0,20,20H75a20.06,20.06,0,0,0,20-20V125A20.06,20.06,0,0,0,75,105Zm0,60H35V125H75ZM165,15H125a20.06,20.06,0,0,0-20,20V75a20.06,20.06,0,0,0,20,20h40a20.06,20.06,0,0,0,20-20V35A20.06,20.06,0,0,0,165,15Zm0,60H125V35h40ZM50,65H60a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,50,65Zm0,90H60a5.38,5.38,0,0,0,5-5V140a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5v10A5.38,5.38,0,0,0,50,155Zm90-90h10a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H140a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,140,65Zm-30,80h10a5.38,5.38,0,0,0,5-5V130a5.38,5.38,0,0,1,5-5h10a5.38,5.38,0,0,0,5-5V110a5.38,5.38,0,0,0-5-5H110a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5Zm70-40H170a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V110A5.38,5.38,0,0,0,180,105Zm-60,60H110a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,120,165Zm60,0H170a5.38,5.38,0,0,1-5-5V150a5.38,5.38,0,0,0-5-5H130a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,1,5,5v10a5.38,5.38,0,0,0,5,5h30a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,180,165Z" />
+                                    </svg>
+                                </div>
+                            @endif
                         </a>
                     </li>
                     <li class="up">
-                        <a>
+                        <a {{ $grandmotherMother?->qr_code ? 'href=' . route('memorial.show', $grandmotherMother->qr_code) : '' }}
+                            target="_blank">
                             <img src="{{ $grandmotherMother?->photo ? asset('memorial/' . $grandmotherMother->photo) : asset('avatar/avatar-woman.png') }}"
                                 class="img-fluid rounded-circle" width="90" height="90">
-                                    <div class="memorial-name mt-2">
-                                        {{ $grandmotherMother->name ?? __('Grand Mother') }}
-                                    </div>
+                            <div class="memorial-name mt-2">
+                                {{ $grandmotherMother->name ?? __('Grand Mother') }}
+                            </div>
+                            @if(!empty($grandmotherMother->qr_code))
+                                <div class="position-absolute" title="{{ __('Qr code') }}" style="cursor: pointer; top: 0; right: 5px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="15px" height="15px"
+                                        viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1">
+                                        <title />
+                                        <path
+                                            d="M75,15H35A20.06,20.06,0,0,0,15,35V75A20.06,20.06,0,0,0,35,95H75A20.06,20.06,0,0,0,95,75V35A20.06,20.06,0,0,0,75,15Zm0,60H35V35H75Zm0,30H35a20.06,20.06,0,0,0-20,20v40a20.06,20.06,0,0,0,20,20H75a20.06,20.06,0,0,0,20-20V125A20.06,20.06,0,0,0,75,105Zm0,60H35V125H75ZM165,15H125a20.06,20.06,0,0,0-20,20V75a20.06,20.06,0,0,0,20,20h40a20.06,20.06,0,0,0,20-20V35A20.06,20.06,0,0,0,165,15Zm0,60H125V35h40ZM50,65H60a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,50,65Zm0,90H60a5.38,5.38,0,0,0,5-5V140a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5v10A5.38,5.38,0,0,0,50,155Zm90-90h10a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H140a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,140,65Zm-30,80h10a5.38,5.38,0,0,0,5-5V130a5.38,5.38,0,0,1,5-5h10a5.38,5.38,0,0,0,5-5V110a5.38,5.38,0,0,0-5-5H110a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5Zm70-40H170a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V110A5.38,5.38,0,0,0,180,105Zm-60,60H110a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,120,165Zm60,0H170a5.38,5.38,0,0,1-5-5V150a5.38,5.38,0,0,0-5-5H130a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,1,5,5v10a5.38,5.38,0,0,0,5,5h30a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,180,165Z" />
+                                    </svg>
+                                </div>
+                            @endif
                         </a>
                     </li>
                 </ul>
@@ -905,24 +962,46 @@
 
                     <li class="down">
                         <ul class="apa">
-                            <a>
+                        <a {{ $father?->qr_code ? 'href=' . route('memorial.show', $father->qr_code) : '' }}
+                            target="_blank">
                                 <img src="{{ isset($father) && $father->photo ? asset('memorial/' . $father->photo) : asset('avatar/avatar-man.png') }}"
                                     class="img-fluid rounded-circle" width="90" height="90">
-                                    <div class="memorial-name mt-2">
-                                            {{ $father->name ?? __('Father') }}
+                                <div class="memorial-name mt-2">
+                                    {{ $father->name ?? __('Father') }}
+                                </div>
+                                @if(!empty($father->qr_code))
+                                    <div class="position-absolute" title="{{ __('Qr code') }}" style="cursor: pointer; top: 0; right: 5px;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="15px" height="15px"
+                                            viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1">
+                                            <title />
+                                            <path
+                                                d="M75,15H35A20.06,20.06,0,0,0,15,35V75A20.06,20.06,0,0,0,35,95H75A20.06,20.06,0,0,0,95,75V35A20.06,20.06,0,0,0,75,15Zm0,60H35V35H75Zm0,30H35a20.06,20.06,0,0,0-20,20v40a20.06,20.06,0,0,0,20,20H75a20.06,20.06,0,0,0,20-20V125A20.06,20.06,0,0,0,75,105Zm0,60H35V125H75ZM165,15H125a20.06,20.06,0,0,0-20,20V75a20.06,20.06,0,0,0,20,20h40a20.06,20.06,0,0,0,20-20V35A20.06,20.06,0,0,0,165,15Zm0,60H125V35h40ZM50,65H60a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,50,65Zm0,90H60a5.38,5.38,0,0,0,5-5V140a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5v10A5.38,5.38,0,0,0,50,155Zm90-90h10a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H140a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,140,65Zm-30,80h10a5.38,5.38,0,0,0,5-5V130a5.38,5.38,0,0,1,5-5h10a5.38,5.38,0,0,0,5-5V110a5.38,5.38,0,0,0-5-5H110a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5Zm70-40H170a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V110A5.38,5.38,0,0,0,180,105Zm-60,60H110a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,120,165Zm60,0H170a5.38,5.38,0,0,1-5-5V150a5.38,5.38,0,0,0-5-5H130a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,1,5,5v10a5.38,5.38,0,0,0,5,5h30a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,180,165Z" />
+                                        </svg>
                                     </div>
+                                @endif
                             </a>
                         </ul>
                     </li>
 
                     <li class="up mom">
                         <ul class="apa">
-                            <a>
+                        <a {{ $mother?->qr_code ? 'href=' . route('memorial.show', $mother->qr_code) : '' }}
+                            target="_blank">
                                 <img src="{{ isset($mother) && $mother->photo ? asset('memorial/' . $mother->photo) : asset('avatar/avatar-girl.png') }}"
                                     class="img-fluid rounded-circle" width="90" height="90">
-                                        <div class="memorial-name mt-2">
-                                            {{ $mother->name ?? __('Mother') }}
-                                        </div>
+                                <div class="memorial-name mt-2">
+                                    {{ $mother->name ?? __('Mother') }}
+                                </div>
+                                @if(!empty($mother->qr_code))
+                                    <div class="position-absolute" title="{{ __('Qr code') }}" style="cursor: pointer; top: 0; right: 5px;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="15px" height="15px"
+                                            viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1">
+                                            <title />
+                                            <path
+                                                d="M75,15H35A20.06,20.06,0,0,0,15,35V75A20.06,20.06,0,0,0,35,95H75A20.06,20.06,0,0,0,95,75V35A20.06,20.06,0,0,0,75,15Zm0,60H35V35H75Zm0,30H35a20.06,20.06,0,0,0-20,20v40a20.06,20.06,0,0,0,20,20H75a20.06,20.06,0,0,0,20-20V125A20.06,20.06,0,0,0,75,105Zm0,60H35V125H75ZM165,15H125a20.06,20.06,0,0,0-20,20V75a20.06,20.06,0,0,0,20,20h40a20.06,20.06,0,0,0,20-20V35A20.06,20.06,0,0,0,165,15Zm0,60H125V35h40ZM50,65H60a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,50,65Zm0,90H60a5.38,5.38,0,0,0,5-5V140a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5v10A5.38,5.38,0,0,0,50,155Zm90-90h10a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H140a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,140,65Zm-30,80h10a5.38,5.38,0,0,0,5-5V130a5.38,5.38,0,0,1,5-5h10a5.38,5.38,0,0,0,5-5V110a5.38,5.38,0,0,0-5-5H110a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5Zm70-40H170a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V110A5.38,5.38,0,0,0,180,105Zm-60,60H110a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,120,165Zm60,0H170a5.38,5.38,0,0,1-5-5V150a5.38,5.38,0,0,0-5-5H130a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,1,5,5v10a5.38,5.38,0,0,0,5,5h30a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,180,165Z" />
+                                        </svg>
+                                    </div>
+                                @endif
                             </a>
                         </ul>
                     </li>
@@ -933,22 +1012,33 @@
                         <li>
                             @foreach ($partners as $partner)
                                 @if ($partner->name || $partner->photo)
-                                    <a>
+                                    <a {{ $partner?->qr_code ? 'href=' . route('memorial.show', $partner->qr_code) : '' }}
+                                        target="_blank">
                                         <img src="{{ $partner->photo ? asset('memorial/' . $partner->photo) : asset('avatar/avatar-woman.png') }}"
                                             class="img-fluid rounded-circle" width="90" height="90">
                                         <div class="memorial-name mt-2">
                                             {{ $partner->name ?? __('Partner') }}
                                         </div>
+                                        @if(!empty($partner->qr_code))
+                                            <div class="position-absolute" title="{{ __('Qr code') }}" style="cursor: pointer; top: 0; right: 5px;">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="15px" height="15px"
+                                                    viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1">
+                                                    <title />
+                                                    <path
+                                                        d="M75,15H35A20.06,20.06,0,0,0,15,35V75A20.06,20.06,0,0,0,35,95H75A20.06,20.06,0,0,0,95,75V35A20.06,20.06,0,0,0,75,15Zm0,60H35V35H75Zm0,30H35a20.06,20.06,0,0,0-20,20v40a20.06,20.06,0,0,0,20,20H75a20.06,20.06,0,0,0,20-20V125A20.06,20.06,0,0,0,75,105Zm0,60H35V125H75ZM165,15H125a20.06,20.06,0,0,0-20,20V75a20.06,20.06,0,0,0,20,20h40a20.06,20.06,0,0,0,20-20V35A20.06,20.06,0,0,0,165,15Zm0,60H125V35h40ZM50,65H60a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,50,65Zm0,90H60a5.38,5.38,0,0,0,5-5V140a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5v10A5.38,5.38,0,0,0,50,155Zm90-90h10a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H140a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,140,65Zm-30,80h10a5.38,5.38,0,0,0,5-5V130a5.38,5.38,0,0,1,5-5h10a5.38,5.38,0,0,0,5-5V110a5.38,5.38,0,0,0-5-5H110a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5Zm70-40H170a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V110A5.38,5.38,0,0,0,180,105Zm-60,60H110a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,120,165Zm60,0H170a5.38,5.38,0,0,1-5-5V150a5.38,5.38,0,0,0-5-5H130a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,1,5,5v10a5.38,5.38,0,0,0,5,5h30a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,180,165Z" />
+                                                </svg>
+                                            </div>
+                                        @endif
                                     </a>
                                 @endif
-                            @endforeach 
+                            @endforeach
 
-                            <a href="#" style="background: #c8e4f8;">
+                            <a style="background: #c8e4f8;">
                                 <img src="{{ asset('memorial/' . $memorial->slug . '/' . $memorial->photo) }}"
                                     class="img-fluid rounded-circle" width="90" height="90">
-                                        <div class="memorial-name mt-2">
-                                            {{ $memorial->name}}
-                                        </div>
+                                <div class="memorial-name mt-2">
+                                    {{ $memorial->name }}
+                                </div>
                             </a>
 
                             <!-- My Children -->
@@ -967,13 +1057,24 @@
                                         @foreach ($childrens as $children)
                                             @if ($children->name || $children->photo)
                                                 <li>
-                                                    <a>
+                                                    <a {{ $children?->qr_code ? 'href=' . route('memorial.show', $children->qr_code) : '' }}
+                                                        target="_blank">
                                                         <img src="{{ $children->photo ? asset('memorial/' . $children->photo) : asset('avatar/avatar-woman.png') }}"
                                                             class="img-fluid rounded-circle" width="90"
                                                             height="90">
-                                                            <div class="memorial-name mt-2">
-                                                                {{ $children->name ?? __('Child') }}
+                                                        <div class="memorial-name mt-2">
+                                                            {{ $children->name ?? __('Child') }}
+                                                        </div>
+                                                        @if(!empty($children->qr_code))
+                                                            <div class="position-absolute" title="{{ __('Qr code') }}" style="cursor: pointer; top: 0; right: 5px;">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="15px" height="15px"
+                                                                    viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1">
+                                                                    <title />
+                                                                    <path
+                                                                        d="M75,15H35A20.06,20.06,0,0,0,15,35V75A20.06,20.06,0,0,0,35,95H75A20.06,20.06,0,0,0,95,75V35A20.06,20.06,0,0,0,75,15Zm0,60H35V35H75Zm0,30H35a20.06,20.06,0,0,0-20,20v40a20.06,20.06,0,0,0,20,20H75a20.06,20.06,0,0,0,20-20V125A20.06,20.06,0,0,0,75,105Zm0,60H35V125H75ZM165,15H125a20.06,20.06,0,0,0-20,20V75a20.06,20.06,0,0,0,20,20h40a20.06,20.06,0,0,0,20-20V35A20.06,20.06,0,0,0,165,15Zm0,60H125V35h40ZM50,65H60a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,50,65Zm0,90H60a5.38,5.38,0,0,0,5-5V140a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5v10A5.38,5.38,0,0,0,50,155Zm90-90h10a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H140a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,140,65Zm-30,80h10a5.38,5.38,0,0,0,5-5V130a5.38,5.38,0,0,1,5-5h10a5.38,5.38,0,0,0,5-5V110a5.38,5.38,0,0,0-5-5H110a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5Zm70-40H170a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V110A5.38,5.38,0,0,0,180,105Zm-60,60H110a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,120,165Zm60,0H170a5.38,5.38,0,0,1-5-5V150a5.38,5.38,0,0,0-5-5H130a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,1,5,5v10a5.38,5.38,0,0,0,5,5h30a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,180,165Z" />
+                                                                </svg>
                                                             </div>
+                                                        @endif
                                                     </a>
                                                 </li>
                                             @endif
@@ -987,12 +1088,23 @@
                             @foreach ($siblings as $sibling)
                                 @if ($sibling->name || $sibling->photo)
                                     <li>
-                                        <a>
+                                        <a {{ $sibling?->qr_code ? 'href=' . route('memorial.show', $sibling->qr_code) : '' }}
+                                            target="_blank">
                                             <img src="{{ $sibling->photo ? asset('memorial/' . $sibling->photo) : asset('avatar/avatar-woman.png') }}"
                                                 class="img-fluid rounded-circle" width="90" height="90">
-                                                            <div class="memorial-name mt-2">
-                                                                {{ $sibling->name ?? __('Sibling') }}
-                                                            </div>
+                                            <div class="memorial-name mt-2">
+                                                {{ $sibling->name ?? __('Sibling') }}
+                                            </div>
+                                            @if(!empty($sibling->qr_code))
+                                                <div class="position-absolute" title="{{ __('Qr code') }}" style="cursor: pointer; top: 0; right: 5px;">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="15px" height="15px"
+                                                        viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1">
+                                                        <title />
+                                                        <path
+                                                            d="M75,15H35A20.06,20.06,0,0,0,15,35V75A20.06,20.06,0,0,0,35,95H75A20.06,20.06,0,0,0,95,75V35A20.06,20.06,0,0,0,75,15Zm0,60H35V35H75Zm0,30H35a20.06,20.06,0,0,0-20,20v40a20.06,20.06,0,0,0,20,20H75a20.06,20.06,0,0,0,20-20V125A20.06,20.06,0,0,0,75,105Zm0,60H35V125H75ZM165,15H125a20.06,20.06,0,0,0-20,20V75a20.06,20.06,0,0,0,20,20h40a20.06,20.06,0,0,0,20-20V35A20.06,20.06,0,0,0,165,15Zm0,60H125V35h40ZM50,65H60a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,50,65Zm0,90H60a5.38,5.38,0,0,0,5-5V140a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5v10A5.38,5.38,0,0,0,50,155Zm90-90h10a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H140a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,140,65Zm-30,80h10a5.38,5.38,0,0,0,5-5V130a5.38,5.38,0,0,1,5-5h10a5.38,5.38,0,0,0,5-5V110a5.38,5.38,0,0,0-5-5H110a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5Zm70-40H170a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V110A5.38,5.38,0,0,0,180,105Zm-60,60H110a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,120,165Zm60,0H170a5.38,5.38,0,0,1-5-5V150a5.38,5.38,0,0,0-5-5H130a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,1,5,5v10a5.38,5.38,0,0,0,5,5h30a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,180,165Z" />
+                                                    </svg>
+                                                </div>
+                                            @endif
                                         </a>
                                     </li>
                                 @endif

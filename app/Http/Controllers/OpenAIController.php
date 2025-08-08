@@ -71,7 +71,7 @@ class OpenAIController extends Controller
 
         // dd($prompt);
 
-        // Отправка запроса в OpenAI
+        // Отправка запроса в OpenAI 'model' => 'gpt-5-mini',
         if ($memorial->generation_attempts_left > 0) {
 
             $response = \Http::withHeaders([

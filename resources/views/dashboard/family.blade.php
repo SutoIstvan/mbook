@@ -240,7 +240,7 @@
             transition: all 0.5s;
             width: 120px;
             text-align: center;
-            height: 175px;
+            height: 185px;
         }
 
         /* Adjust image size and alignment */
@@ -287,23 +287,6 @@
             height: 20px;
             z-index: -1;
         }
-
-        /* Hover effects */
-        /* .tree li a:hover {
-                                                background: #c8e4f8;
-                                                color: #000;
-                                                border: 1px solid #94a0b4;
-                                            } */
-
-        /* Connector styles on hover */
-        /* .tree li a:hover~ul li::after,
-                                            .tree li a:hover~ul li::before,
-                                            .tree li a:hover~ul::before,
-                                            .tree li a:hover~ul ul::before,
-                                            .parent-pair:hover::after {
-                                                border-color: #94a0b4;
-                                            } */
-
 
         .tree li.down::after {
             content: '';
@@ -555,6 +538,16 @@
                                 {{-- Дедушка по отцовской линии --}}
                                 <li class="down">
                                     <a class="d-flex flex-column align-items-center text-decoration-none position-relative">
+                                        {{-- Кнопка удалить в углу --}}
+                                        @if ($grandfatherFather)
+                                            <button type="button"
+                                                    title="{{ __('Delete') }}"
+                                                    class="btn btn-sm position-absolute"
+                                                    style="transform: translate(160%, -20%); background: transparent; border: none;"
+                                                    onclick="event.stopPropagation(); document.getElementById('delete-form-{{ $grandfatherFather->id }}').submit();">
+                                                <i class="fa-solid fa-trash text-danger"></i>
+                                            </button>
+                                        @endif
                                         <div class="image-wrapper position-relative" style="cursor: pointer;"
                                             onclick="document.getElementById('image_{{ $grandfatherFather->id ?? 'grandfather_father' }}').click()"
                                             title="Загрузить фото">
@@ -569,10 +562,15 @@
                                             id="image_{{ $grandfatherFather->id ?? 'grandfather_father' }}" class="d-none"
                                             accept="image/*"
                                             onchange="previewImage(this, 'preview_{{ $grandfatherFather->id ?? 'grandfather_father' }}')">
-                                        <input type="text" class="form-control mt-2 text-center"
+                                        <input type="text" class="form-control form-control-sm mt-1"
                                             name="{{ $grandfatherFather && $grandfatherFather->id ? 'family_members[' . $grandfatherFather->id . '][name]' : 'names[grandfather_father]' }}"
                                             value="{{ $grandfatherFather->name ?? '' }}"
                                             placeholder="{{ __('Grandfather') }}">
+                                        {{-- Поле QR Code --}}
+                                        <input class="form-control form-control-sm mt-1" type="text"
+                                            name="{{ $grandfatherFather && $grandfatherFather->id ? 'family_members[' . $grandfatherFather->id . '][qr_code]' : 'qr_codes[grandfather_father]' }}"
+                                            value="{{ $grandfatherFather->qr_code ?? '' }}"
+                                            placeholder="{{ __('QR Code') }}">
                                         @if ($grandfatherFather && $grandfatherFather->id)
                                             <input type="hidden" name="family_members[{{ $grandfatherFather->id }}][id]"
                                                 value="{{ $grandfatherFather->id }}">
@@ -583,6 +581,16 @@
                                 {{-- Бабушка по отцовской линии --}}
                                 <li class="up">
                                     <a class="d-flex flex-column align-items-center text-decoration-none position-relative">
+                                        {{-- Кнопка удалить в углу --}}
+                                        @if ($grandmotherFather)
+                                            <button type="button"
+                                                    title="{{ __('Delete') }}"
+                                                    class="btn btn-sm position-absolute"
+                                                    style="transform: translate(160%, -20%); background: transparent; border: none;"
+                                                    onclick="event.stopPropagation(); document.getElementById('delete-form-{{ $grandmotherFather->id }}').submit();">
+                                                <i class="fa-solid fa-trash text-danger"></i>
+                                            </button>
+                                        @endif
                                         <div class="image-wrapper position-relative" style="cursor: pointer;"
                                             onclick="document.getElementById('image_{{ $grandmotherFather->id ?? 'grandmother_father' }}').click()"
                                             title="Загрузить фото">
@@ -597,10 +605,15 @@
                                             id="image_{{ $grandmotherFather->id ?? 'grandmother_father' }}" class="d-none"
                                             accept="image/*"
                                             onchange="previewImage(this, 'preview_{{ $grandmotherFather->id ?? 'grandmother_father' }}')">
-                                        <input type="text" class="form-control mt-2 text-center"
+                                        <input type="text" class="form-control form-control-sm mt-1"
                                             name="{{ $grandmotherFather && $grandmotherFather->id ? 'family_members[' . $grandmotherFather->id . '][name]' : 'names[grandmother_father]' }}"
                                             value="{{ $grandmotherFather->name ?? '' }}"
                                             placeholder="{{ __('Grandmother') }}">
+                                        {{-- Поле QR Code --}}
+                                        <input class="form-control form-control-sm mt-1" type="text"
+                                            name="{{ $grandmotherFather && $grandmotherFather->id ? 'family_members[' . $grandmotherFather->id . '][qr_code]' : 'qr_codes[grandmother_father]' }}"
+                                            value="{{ $grandmotherFather->qr_code ?? '' }}"
+                                            placeholder="{{ __('QR Code') }}">
                                         @if ($grandmotherFather && $grandmotherFather->id)
                                             <input type="hidden" name="family_members[{{ $grandmotherFather->id }}][id]"
                                                 value="{{ $grandmotherFather->id }}">
@@ -612,6 +625,16 @@
                                 <li class="down">
                                     <a
                                         class="d-flex flex-column align-items-center text-decoration-none position-relative">
+                                        {{-- Кнопка удалить в углу --}}
+                                        @if ($grandfatherMother)
+                                            <button type="button"
+                                                    title="{{ __('Delete') }}"
+                                                    class="btn btn-sm position-absolute"
+                                                    style="transform: translate(160%, -20%); background: transparent; border: none;"
+                                                    onclick="event.stopPropagation(); document.getElementById('delete-form-{{ $grandfatherMother->id }}').submit();">
+                                                <i class="fa-solid fa-trash text-danger"></i>
+                                            </button>
+                                        @endif
                                         <div class="image-wrapper position-relative" style="cursor: pointer;"
                                             onclick="document.getElementById('image_{{ $grandfatherMother->id ?? 'grandfather_mother' }}').click()"
                                             title="Загрузить фото">
@@ -626,10 +649,15 @@
                                             id="image_{{ $grandfatherMother->id ?? 'grandfather_mother' }}"
                                             class="d-none" accept="image/*"
                                             onchange="previewImage(this, 'preview_{{ $grandfatherMother->id ?? 'grandfather_mother' }}')">
-                                        <input type="text" class="form-control mt-2 text-center"
+                                        <input type="text" class="form-control form-control-sm mt-1"
                                             name="{{ $grandfatherMother && $grandfatherMother->id ? 'family_members[' . $grandfatherMother->id . '][name]' : 'names[grandfather_mother]' }}"
                                             value="{{ $grandfatherMother->name ?? '' }}"
                                             placeholder="{{ __('Grandfather') }}">
+                                        {{-- Поле QR Code --}}
+                                        <input class="form-control form-control-sm mt-1" type="text"
+                                            name="{{ $grandfatherMother && $grandfatherMother->id ? 'family_members[' . $grandfatherMother->id . '][qr_code]' : 'qr_codes[grandfather_mother]' }}"
+                                            value="{{ $grandfatherMother->qr_code ?? '' }}"
+                                            placeholder="{{ __('QR Code') }}">
                                         @if ($grandfatherMother && $grandfatherMother->id)
                                             <input type="hidden" name="family_members[{{ $grandfatherMother->id }}][id]"
                                                 value="{{ $grandfatherMother->id }}">
@@ -641,6 +669,16 @@
                                 <li class="up">
                                     <a
                                         class="d-flex flex-column align-items-center text-decoration-none position-relative">
+                                        {{-- Кнопка удалить в углу --}}
+                                        @if ($grandmotherMother)
+                                            <button type="button"
+                                                    title="{{ __('Delete') }}"
+                                                    class="btn btn-sm position-absolute"
+                                                    style="transform: translate(160%, -20%); background: transparent; border: none;"
+                                                    onclick="event.stopPropagation(); document.getElementById('delete-form-{{ $grandmotherMother->id }}').submit();">
+                                                <i class="fa-solid fa-trash text-danger"></i>
+                                            </button>
+                                        @endif
                                         <div class="image-wrapper position-relative" style="cursor: pointer;"
                                             onclick="document.getElementById('image_{{ $grandmotherMother->id ?? 'grandmother_mother' }}').click()"
                                             title="Загрузить фото">
@@ -655,10 +693,15 @@
                                             id="image_{{ $grandmotherMother->id ?? 'grandmother_mother' }}"
                                             class="d-none" accept="image/*"
                                             onchange="previewImage(this, 'preview_{{ $grandmotherMother->id ?? 'grandmother_mother' }}')">
-                                        <input type="text" class="form-control mt-2 text-center"
+                                        <input type="text" class="form-control form-control-sm mt-1"
                                             name="{{ $grandmotherMother && $grandmotherMother->id ? 'family_members[' . $grandmotherMother->id . '][name]' : 'names[grandmother_mother]' }}"
                                             value="{{ $grandmotherMother->name ?? '' }}"
                                             placeholder="{{ __('Grandmother') }}">
+                                        {{-- Поле QR Code --}}
+                                        <input class="form-control form-control-sm mt-1" type="text"
+                                            name="{{ $grandmotherMother && $grandmotherMother->id ? 'family_members[' . $grandmotherMother->id . '][qr_code]' : 'qr_codes[grandmother_mother]' }}"
+                                            value="{{ $grandmotherMother->qr_code ?? '' }}"
+                                            placeholder="{{ __('QR Code') }}">
                                         @if ($grandmotherMother && $grandmotherMother->id)
                                             <input type="hidden" name="family_members[{{ $grandmotherMother->id }}][id]"
                                                 value="{{ $grandmotherMother->id }}">
@@ -672,6 +715,16 @@
                                     <ul class="apa">
                                         <a
                                             class="d-flex flex-column align-items-center text-decoration-none position-relative">
+                                            {{-- Кнопка удалить в углу --}}
+                                            @if ($father)
+                                                <button type="button"
+                                                        title="{{ __('Delete') }}"
+                                                        class="btn btn-sm position-absolute"
+                                                        style="transform: translate(160%, -20%); background: transparent; border: none;"
+                                                        onclick="event.stopPropagation(); document.getElementById('delete-form-{{ $father->id }}').submit();">
+                                                    <i class="fa-solid fa-trash text-danger"></i>
+                                                </button>
+                                            @endif
                                             <div class="image-wrapper position-relative" style="cursor: pointer;"
                                                 onclick="document.getElementById('image_{{ $father->id ?? 'father' }}').click()"
                                                 title="Загрузить фото">
@@ -684,9 +737,14 @@
                                             <input type="file" name="images[{{ $father->id ?? 'father' }}]"
                                                 id="image_{{ $father->id ?? 'father' }}" class="d-none" accept="image/*"
                                                 onchange="previewImage(this, 'preview_{{ $father->id ?? 'father' }}')">
-                                            <input type="text" class="form-control mt-3 text-center"
+                                            <input type="text" class="form-control form-control-sm mt-1"
                                                 name="{{ $father && $father->id ? 'family_members[' . $father->id . '][name]' : 'names[father]' }}"
                                                 value="{{ optional($father)->name }}" placeholder="{{ __('Father') }}">
+                                            {{-- Поле QR Code --}}
+                                            <input class="form-control form-control-sm mt-1" type="text"
+                                                name="{{ $father && $father->id ? 'family_members[' . $father->id . '][qr_code]' : 'qr_codes[father]' }}"
+                                                value="{{ $father->qr_code ?? '' }}"
+                                                placeholder="{{ __('QR Code') }}">
                                             @if ($father && $father->id)
                                                 <input type="hidden" name="family_members[{{ $father->id }}][id]"
                                                     value="{{ $father->id }}">
@@ -700,6 +758,18 @@
                                     <ul class="apa">
                                         <a
                                             class="d-flex flex-column align-items-center text-decoration-none position-relative">
+
+                                            {{-- Кнопка удалить в углу --}}
+                                            @if ($mother)
+                                                <button type="button"
+                                                        title="{{ __('Delete') }}"
+                                                        class="btn btn-sm position-absolute"
+                                                        style="transform: translate(160%, -20%); background: transparent; border: none;"
+                                                        onclick="event.stopPropagation(); document.getElementById('delete-form-{{ $mother->id }}').submit();">
+                                                    <i class="fa-solid fa-trash text-danger"></i>
+                                                </button>
+                                            @endif
+
                                             <div class="image-wrapper position-relative" style="cursor: pointer;"
                                                 onclick="document.getElementById('image_{{ $mother->id ?? 'mother' }}').click()"
                                                 title="Загрузить фото">
@@ -712,9 +782,14 @@
                                             <input type="file" name="images[{{ $mother->id ?? 'mother' }}]"
                                                 id="image_{{ $mother->id ?? 'mother' }}" class="d-none" accept="image/*"
                                                 onchange="previewImage(this, 'preview_{{ $mother->id ?? 'mother' }}')">
-                                            <input type="text" class="form-control mt-3 text-center"
+                                            <input type="text" class="form-control form-control-sm mt-1"
                                                 name="{{ $mother && $mother->id ? 'family_members[' . $mother->id . '][name]' : 'names[mother]' }}"
                                                 value="{{ optional($mother)->name }}" placeholder="{{ __('Mother') }}">
+                                            {{-- Поле QR Code --}}
+                                            <input class="form-control form-control-sm mt-1" type="text"
+                                                name="{{ $mother && $mother->id ? 'family_members[' . $mother->id . '][qr_code]' : 'qr_codes[mother]' }}"
+                                                value="{{ $mother->qr_code ?? '' }}"
+                                                placeholder="{{ __('QR Code') }}">
                                             @if ($mother && $mother->id)
                                                 <input type="hidden" name="family_members[{{ $mother->id }}][id]"
                                                     value="{{ $mother->id }}">
@@ -736,6 +811,14 @@
                                         <!-- Partner -->
                                         @foreach ($familyMembers['partner'] ?? [] as $index => $member)
                                             <a>
+                                                {{-- Кнопка удалить в углу --}}
+                                                <button type="button"
+                                                        title="{{ __('Delete') }}"
+                                                        class="btn btn-sm btn-danger position-absolute"
+                                                        style="transform: translate(260%, -20%); background: transparent; border: none; "
+                                                        onclick="event.stopPropagation(); document.getElementById('delete-form-{{ $member->id }}').submit();">
+                                                    <i class="fa-solid fa-trash text-danger"></i>
+                                                </button>
                                                 <div class="image-wrapper" style="cursor: pointer;"
                                                     onclick="document.getElementById('image_{{ $member->id }}').click()"
                                                     title="Загрузить фото">
@@ -752,9 +835,14 @@
                                                 <input type="hidden" name="partners[{{ $index }}][id]"
                                                     value="{{ $member->id }}">
                                                 {{-- Поле имени --}}
-                                                <input class="form-control mt-3" type="text"
+                                                <input class="form-control form-control-sm mt-0" type="text"
                                                     name="partners[{{ $index }}][name]"
                                                     value="{{ $member->name }}" placeholder="{{ __('Partner') }}">
+                                                {{-- Поле QR Code --}}
+                                                <input class="form-control form-control-sm mt-1" type="text"
+                                                            name="partners[{{ $index }}][qr_code]"
+                                                            value="{{ $member->qr_code }}"
+                                                            placeholder="{{ __('QR Code') }}">
                                             </a>
                                         @endforeach
 
@@ -768,14 +856,17 @@
                                                 <img id="preview_main_person"
                                                     src="{{ asset('memorial/' . $memorial->slug . '/' . $memorial->photo) }}"
                                                     class="img-fluid rounded-circle" width="90" height="90">
-                                                <i class="fa-solid fa-camera camera-icon p-1 shadow"></i>
                                             </div>
                                             <input type="file" name="images[main_person]" id="image_main_person"
                                                 class="d-none" accept="image/*"
                                                 onchange="previewImage(this, 'preview_main_person')">
-                                            <input class="form-control mt-3" type="text" name="names[main_person]"
+                                            <input class="form-control form-control-sm mt-0" type="text" name="names[main_person]"
                                                 value="{{ $memorial->name }}" placeholder="{{ $memorial->name }}"
                                                 readonly>
+                                            <input class="form-control form-control-sm mt-1" type="text"
+                                                name="partners[{{ $index }}][qr_code]"
+                                                value="{{ $memorial->qr_code }}"
+                                                placeholder="{{ __('QR Code') }}" readonly>
                                         </a>
 
 
@@ -821,6 +912,15 @@
                                             @foreach ($familyMembers['children'] ?? [] as $index => $member)
                                                 <li class="mb-3">
                                                     <a class="d-flex flex-column align-items-center text-decoration-none">
+                                                        {{-- Кнопка удалить в углу --}}
+                                                        <button type="button"
+                                                                title="{{ __('Delete') }}"
+                                                                class="btn btn-sm btn-danger position-absolute"
+                                                                style="transform: translate(155%, -20%); background: transparent; border: none; "
+                                                                onclick="event.stopPropagation(); document.getElementById('delete-form-{{ $member->id }}').submit();">
+                                                            <i class="fa-solid fa-trash text-danger"></i>
+                                                        </button>
+                                                        {{-- Картинка и загрузка фото --}}
                                                         <div class="image-wrapper" style="cursor: pointer;"
                                                             onclick="document.getElementById('image_{{ $member->id }}').click()"
                                                             title="Загрузить фото">
@@ -839,14 +939,14 @@
                                                         <input type="hidden" name="childrens[{{ $index }}][id]"
                                                             value="{{ $member->id }}">
                                                         {{-- Поле имени --}}
-                                                        <input class="form-control mt-3" type="text"
+                                                        <input class="form-control form-control-sm mt-1" type="text"
                                                             name="childrens[{{ $index }}][name]"
                                                             value="{{ $member->name }}"
                                                             placeholder="{{ __('Children') }}">
-                                                        {{-- <input class="form-control mt-3" type="text"
+                                                        <input class="form-control form-control-sm mt-1" type="text"
                                                             name="childrens[{{ $index }}][qr_code]"
                                                             value="{{ $member->qr_code }}"
-                                                            placeholder="{{ __('QR Code') }}"> --}}
+                                                            placeholder="{{ __('QR Code') }}">
                                                     </a>
                                                 </li>
                                             @endforeach
@@ -877,13 +977,14 @@
                                     @foreach ($familyMembers['siblings'] ?? [] as $index => $member)
                                         <li class="mb-3">
                                             <a class="d-flex flex-column align-items-center text-decoration-none">
-                                                    {{-- Кнопка удалить в углу --}}
-    <button type="button"
-            class="btn btn-sm btn-danger position-absolute top-0 end-0 rounded-circle p-1"
-            style="transform: translate(30%, -30%);"
-            onclick="event.stopPropagation(); if(confirm('Удалить этого брата?')) document.getElementById('delete-form-{{ $member->id }}').submit();">
-        <i class="fa-solid fa-trash fa-xs"></i>
-    </button>
+                                                {{-- Кнопка удалить в углу --}}
+                                                <button type="button"
+                                                        title="{{ __('Delete') }}"
+                                                        class="btn btn-sm btn-danger position-absolute"
+                                                        style="transform: translate(155%, -20%); background: transparent; border: none; "
+                                                        onclick="event.stopPropagation(); document.getElementById('delete-form-{{ $member->id }}').submit();">
+                                                    <i class="fa-solid fa-trash text-danger"></i>
+                                                </button>
                                                 <div class="image-wrapper" style="cursor: pointer;"
                                                     onclick="document.getElementById('image_{{ $member->id }}').click()"
                                                     title="Загрузить фото">
@@ -900,9 +1001,14 @@
                                                 <input type="hidden" name="siblings[{{ $index }}][id]"
                                                     value="{{ $member->id }}">
                                                 {{-- Поле имени --}}
-                                                <input class="form-control mt-3" type="text"
+                                                <input class="form-control form-control-sm mt-1" type="text"
                                                     name="siblings[{{ $index }}][name]"
                                                     value="{{ $member->name }}" placeholder="{{ __('Sibling') }}">
+                                                {{-- Поле QR Code --}}
+                                                <input class="form-control form-control-sm mt-1" type="text"
+                                                            name="siblings[{{ $index }}][qr_code]"
+                                                            value="{{ $member->qr_code }}"
+                                                            placeholder="{{ __('QR Code') }}">
 
                                                 {{-- Кнопка удалить --}}
                                                 {{-- <button type="button" class="btn btn-danger btn-sm mt-2"

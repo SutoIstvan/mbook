@@ -79,7 +79,7 @@ public function update(Request $request, Memorial $memorial)
         'siblings.*.name' => 'nullable|string|max:255',
         'siblings.*.id' => 'required|exists:family,id',
         'images' => 'array',
-        'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+        'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:35120',
     ]);
 
     // Обработка массива names (для основных ролей)
@@ -116,6 +116,7 @@ public function update(Request $request, Memorial $memorial)
         $member = Family::find($childData['id']);
         if ($member && $member->memorial_id === $memorial->id) {
             $member->name = $childData['name'];
+            $member->qr_code = $childData['qr_code'] ?? '';
             $member->save();
         }
     }
@@ -129,6 +130,7 @@ public function update(Request $request, Memorial $memorial)
         $member = Family::find($partnerData['id']);
         if ($member && $member->memorial_id === $memorial->id) {
             $member->name = $partnerData['name'];
+            $member->qr_code = $partnerData['qr_code'] ?? '';
             $member->save();
         }
     }
@@ -142,6 +144,7 @@ public function update(Request $request, Memorial $memorial)
         $member = Family::find($siblingData['id']);
         if ($member && $member->memorial_id === $memorial->id) {
             $member->name = $siblingData['name'];
+            $member->qr_code = $siblingData['qr_code'] ?? '';
             $member->save();
         }
     }
@@ -155,39 +158,74 @@ public function update(Request $request, Memorial $memorial)
         $member = Family::find($memberId);
         if ($member && $member->memorial_id === $memorial->id) {
             $member->name = $memberData['name'];
+            $member->qr_code = $memberData['qr_code'] ?? '';
             $member->save();
         }
     }
 
     // Обработка изображений
+    // if ($request->hasFile('images')) {
+    //     foreach ($request->file('images') as $memberId => $imageFile) {
+    //         if (!$imageFile) continue;
+
+    //         $member = Family::find($memberId);
+            
+    //         // Проверяем, что запись существует и принадлежит этому мемориалу
+    //         if (!$member || $member->memorial_id !== $memorial->id) {
+    //             continue;
+    //         }
+
+    //         $filename = $memorial->slug . '/' . $memberId . '-' . time() . '.webp';
+    //         $image = Image::read($imageFile)->scale(width: 800)->toWebp(90);
+    //         Storage::disk('memorial')->put($filename, $image);
+
+    //         // Удаляем старое фото если оно есть
+    //         if ($member->photo && Storage::disk('memorial')->exists($member->photo)) {
+    //             Storage::disk('memorial')->delete($member->photo);
+    //         }
+            
+    //         $member->photo = $filename;
+    //         $member->save();
+    //     }
+    // }
+
     if ($request->hasFile('images')) {
-        foreach ($request->file('images') as $memberId => $imageFile) {
-            if (!$imageFile) continue;
+    foreach ($request->file('images') as $key => $imageFile) {
+        if (!$imageFile) continue;
 
-            $member = Family::find($memberId);
-            
-            // Проверяем, что запись существует и принадлежит этому мемориалу
-            if (!$member || $member->memorial_id !== $memorial->id) {
-                continue;
-            }
-
-            $filename = $memorial->slug . '/' . $memberId . '-' . time() . '.webp';
-            $image = Image::read($imageFile)->scale(width: 800)->toWebp(90);
-            Storage::disk('memorial')->put($filename, $image);
-
-            // Удаляем старое фото если оно есть
-            if ($member->photo && Storage::disk('memorial')->exists($member->photo)) {
-                Storage::disk('memorial')->delete($member->photo);
-            }
-            
-            $member->photo = $filename;
-            $member->save();
+        // Определяем, что такое ключ: ID или строка
+        if (is_numeric($key)) {
+            $member = Family::find($key);
+        } else {
+            $member = Family::where('relation_key', $key)
+                            ->where('memorial_id', $memorial->id)
+                            ->first();
         }
+
+        // Пропускаем, если не найдено или не принадлежит мемориалу
+        if (!$member || $member->memorial_id !== $memorial->id) {
+            continue;
+        }
+
+        // Сохраняем изображение
+        $filename = $memorial->slug . '/' . $member->id . '-' . time() . '.webp';
+        $image = Image::read($imageFile)->scale(width: 800)->toWebp(90);
+        Storage::disk('memorial')->put($filename, $image);
+
+        // Удаляем старое фото, если есть
+        if ($member->photo && Storage::disk('memorial')->exists($member->photo)) {
+            Storage::disk('memorial')->delete($member->photo);
+        }
+
+        $member->photo = $filename;
+        $member->save();
     }
+}
+
 
     // ПРОВЕРЯЕМ ДЕЙСТВИЕ И ДОБАВЛЯЕМ НОВОГО ЧЛЕНА СЕМЬИ ЕСЛИ НУЖНО
     $action = $request->input('action');
-    $message = 'Семья сохранена';
+    $message = __('Family saved successfully');
 
     switch ($action) {
         case 'add_partner':
@@ -196,7 +234,7 @@ public function update(Request $request, Memorial $memorial)
                 'role' => 'partner',
                 'name' => '',
             ]);
-            $message = 'Семья сохранена и добавлен новый партнер';
+            $message = __('Family saved and new partner added');
             break;
             
         case 'add_children':
@@ -205,7 +243,7 @@ public function update(Request $request, Memorial $memorial)
                 'role' => 'children',
                 'name' => '',
             ]);
-            $message = 'Семья сохранена и добавлен новый ребенок';
+            $message = __('Family saved and new child added');
             break;
             
         case 'add_siblings':
@@ -214,7 +252,7 @@ public function update(Request $request, Memorial $memorial)
                 'role' => 'siblings',
                 'name' => '',
             ]);
-            $message = 'Семья сохранена и добавлен новый брат/сестра';
+            $message = __('Family saved and new sibling added');
             break;
             
         case 'save':

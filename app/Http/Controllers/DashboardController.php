@@ -93,15 +93,15 @@ class DashboardController extends Controller
     {
         // Определяем все необходимые роли для членов семьи
         $requiredRoles = [
-            // 'mother',
-            // 'father',
+            'mother',
+            'father',
             'partner',
             'children',
             'siblings',
-            // 'grandfather_father',
-            // 'grandmother_father',
-            // 'grandfather_mother',
-            // 'grandmother_mother'
+            'grandfather_father',
+            'grandmother_father',
+            'grandfather_mother',
+            'grandmother_mother'
         ];
 
         // Создаем отсутствующих членов семьи с пустыми именами
