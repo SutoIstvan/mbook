@@ -31,7 +31,7 @@ class SetLocale
         // Устанавливаем локаль
         App::setLocale($locale);
         
-        // App::setLocale('sk');
+        // App::setLocale('hu');
         
         return $next($request);
     }

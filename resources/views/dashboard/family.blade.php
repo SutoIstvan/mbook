@@ -841,7 +841,7 @@
                                                 {{-- Поле QR Code --}}
                                                 <input class="form-control form-control-sm mt-1" type="text"
                                                             name="partners[{{ $index }}][qr_code]"
-                                                            value="{{ $member->qr_code }}"
+                                                            value="{{ old("partners.$index.qr_code", $member->qr_code) }}"
                                                             placeholder="{{ __('QR Code') }}">
                                             </a>
                                         @endforeach
@@ -864,7 +864,7 @@
                                                 value="{{ $memorial->name }}" placeholder="{{ $memorial->name }}"
                                                 readonly>
                                             <input class="form-control form-control-sm mt-1" type="text"
-                                                name="partners[{{ $index }}][qr_code]"
+                                                name="main"
                                                 value="{{ $memorial->qr_code }}"
                                                 placeholder="{{ __('QR Code') }}" readonly>
                                         </a>
@@ -872,10 +872,11 @@
 
                                         <a href="#"
                                             onclick="event.preventDefault(); setActionAndSubmit('add_partner');"
-                                            style="">
-                                            <div class="" style="cursor: pointer;">
+                                            class="image-wrapper">
+                                            <div class="" style="cursor: pointer; min-height: 120px;">
                                                 <img src="{{ asset('avatar/avatar-girl.png') }}" class=" rounded-circle"
                                                     width="90" height="90">
+                                                    
                                             </div>
                                             {{ __('Add Partner') }}
                                         </a>
