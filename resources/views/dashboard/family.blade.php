@@ -874,7 +874,7 @@
                                             onclick="event.preventDefault(); setActionAndSubmit('add_partner');"
                                             class="image-wrapper">
                                             <div class="" style="cursor: pointer; min-height: 120px;">
-                                                <img src="{{ asset('avatar/avatar-girl.png') }}" class=" rounded-circle"
+                                                <img src="{{ asset('avatar/avatar-add-2.png') }}" class=" rounded-circle"
                                                     width="90" height="90">
                                                     
                                             </div>
@@ -956,7 +956,7 @@
                                                     onclick="event.preventDefault(); setActionAndSubmit('add_children');"
                                                     style="">
                                                     <div class="" style="cursor: pointer;">
-                                                        <img src="{{ asset('avatar/avatar-girl.png') }}"
+                                                        <img src="{{ asset('avatar/avatar-add-2.png') }}"
                                                             class=" rounded-circle" width="90" height="90">
                                                     </div>
                                                     {{ __('Add Children') }}
@@ -1023,7 +1023,7 @@
                                         <a href="#"
                                             onclick="event.preventDefault(); setActionAndSubmit('add_siblings');">
                                             <div style="cursor: pointer;">
-                                                <img src="{{ asset('avatar/avatar-girl.png') }}" class="rounded-circle"
+                                                <img src="{{ asset('avatar/avatar-add-2.png') }}" class="rounded-circle"
                                                     width="90" height="90">
                                             </div>
                                             {{ __('Add Siblings') }}

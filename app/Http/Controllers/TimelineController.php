@@ -384,4 +384,35 @@ class TimelineController extends Controller
 
         return back()->with('success', 'Esemény sikeresen hozzáadva a timeline-hoz.');
     }
+
+    public function updateAll(Request $request)
+    {
+        $validatedData = $request->validate([
+            'timelines' => 'required|array',
+            'timelines.*.id' => 'required|exists:timelines,id',
+            'timelines.*.title' => 'required|string|max:255',
+            'timelines.*.year' => 'required|integer|min:1900|max:' . date('Y'),
+            'timelines.*.type' => 'required|string',
+            'timelines.*.delete' => 'nullable|boolean',
+        ]);
+
+        foreach ($validatedData['timelines'] as $timelineData) {
+            $timeline = Timeline::find($timelineData['id']);
+            if (!$timeline) continue;
+
+            if (!empty($timelineData['delete'])) {
+                // Если стоит флаг удаления — удаляем запись
+                $timeline->delete();
+                continue;
+            }
+
+            // Обновляем поля
+            $timeline->title = $timelineData['title'];
+            $timeline->date = $timelineData['year'] . '-01-01'; // преобразуем в дату
+            $timeline->type = $timelineData['type'];
+            $timeline->save();
+        }
+
+        return back()->with('success', 'Таймлайны успешно обновлены');
+    }
 }

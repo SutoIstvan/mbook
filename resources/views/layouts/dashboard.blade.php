@@ -230,12 +230,12 @@
                                     <span class="icon mr-10">
                                         <i class="fa-solid fa-users"></i>
                                     </span>
-                                    <span>{{ __('Family') }}</span>
+                                    <span>{{ __('Family Tree') }}</span>
                                 </a>
                             
                                 <a href="{{ route('dashboard.timeline', ['memorial' => $memorial->slug]) }}" class="butn butn-md butn-bord butn-rounded w-100 text-start {{ Route::currentRouteName() === 'dashboard.timeline' ? 'active' : '' }}">
                                     <span class="icon mr-10">
-                                        <i class="fa-solid fa-users"></i>
+                                        <i class="fa-solid fa-clock"></i>
                                     </span>
                                     <span>{{ __('Timeline') }}</span>
                                 </a>
