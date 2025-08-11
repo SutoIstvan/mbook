@@ -81,6 +81,8 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/dashboard/{memorial}/family/create', [FamilyController::class, 'create'])->name('family.create');
+    Route::post('/memorials/{memorial}/family/treeupdate', [FamilyController::class, 'treeupdate'])->name('family.treeupdate');
+
     Route::post('/dashboard/family/store', [FamilyController::class, 'store'])->name('family.store');
     Route::post('/dashboard/family/stores', [FamilyController::class, 'dashboardstore'])->name('dashboard.family.store');
     Route::delete('/dashboard/family/delete/{id}', [FamilyController::class, 'delete'])->name('family.delete');
@@ -98,7 +100,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/timelines/add-hobby', [TimelineController::class, 'addHobby'])->name('timelines.addHobby');
     Route::post('/timelines/new', [TimelineController::class, 'newstore'])->name('timelines.newstore');
     Route::post('/timelines/update', [TimelineController::class, 'updateAll'])->name('timelines.updateAll');
-
+    Route::post('/timelines/update-next', [TimelineController::class, 'updateNext'])->name('timelines.updateNext');
     Route::get('/dashboard/{memorial}/media', [TimelineController::class, 'gallery'])->name('timeline.gallery');
 
     Route::post('/video', [LinkController::class, 'storevideo'])->name('video.store');

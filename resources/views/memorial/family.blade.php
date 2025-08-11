@@ -576,11 +576,11 @@
         .step-vertical:not(:last-child)::after {
             content: '';
             /* position: absolute;
-             left: 25px;
-             top: 60px;
-             bottom: 0;
-             width: 2px;
-             background: #e9ecef; */
+                     left: 25px;
+                     top: 60px;
+                     bottom: 0;
+                     width: 2px;
+                     background: #e9ecef; */
         }
 
         .step-vertical-icon {
@@ -624,6 +624,420 @@
         /* Interactive buttons */
         .controls {
             text-align: center;
+        }
+
+        .custom-input {
+            border: none;
+            /* Убираем все бордеры */
+            border-bottom: 1px solid black;
+            /* Добавляем бордер только снизу */
+            background-color: transparent;
+            /* Прозрачный фон */
+            outline: none;
+            /* Убираем обводку при фокусе (опционально) */
+            padding: 5px;
+            /* Для удобства ввода */
+        }
+
+        .item .img {
+            border-radius: 15px;
+            height: 255px;
+            overflow: hidden;
+        }
+
+        .fit-img img {
+            width: 100%;
+            height: 100%;
+            -o-object-fit: cover;
+            object-fit: cover;
+            -o-object-position: center center;
+            object-position: center center;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+
+
+        .search-container {
+            position: relative;
+        }
+
+        .search-input {
+
+            padding-left: 44px;
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+            font-size: 16px;
+
+        }
+
+        .search-icon {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            color: #888;
+        }
+
+        /* --------------- Awards --------------- */
+        .intro-vid .bg-img {
+            height: 580px;
+            border-radius: 30px;
+            margin-top: -140px;
+            position: relative;
+        }
+
+        .intro-vid .bg-img .states {
+            position: absolute;
+            top: -120px;
+            left: 30px;
+            background: var(--theme-color);
+            padding: 60px 40px;
+            border-radius: 30%;
+            max-width: 300px;
+            z-index: 3;
+        }
+
+        .intro-vid .bg-img .states .imgs {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+        }
+
+        .intro-vid .bg-img .states .imgs .img {
+            width: 47px;
+            height: 47px;
+            border-radius: 50%;
+            border: 2px solid var(--bg-color);
+        }
+
+        .intro-vid .bg-img .states .imgs .icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--main-color);
+            text-align: center;
+            line-height: 40px;
+            margin-left: -10px;
+            z-index: -1;
+            -webkit-transition: all .5s;
+            -o-transition: all .5s;
+            transition: all .5s;
+        }
+
+        .intro-vid .bg-img .states .imgs .icon img {
+            width: 15px;
+            -webkit-transition: all .5s;
+            -o-transition: all .5s;
+            transition: all .5s;
+        }
+
+        .intro-vid .bg-img .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translateX(-50%) translateY(-50%);
+            -ms-transform: translateX(-50%) translateY(-50%);
+            transform: translateX(-50%) translateY(-50%);
+        }
+
+        .intro-vid .bg-img .play-button a {
+            width: 120px;
+            height: 120px;
+            line-height: 120px;
+            font-size: 40px;
+            text-align: center;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+
+
+
+
+
+        /* .tree {
+                                min-width: 1200px;
+                            } */
+
+        .tree-container {
+            overflow-x: auto;
+            width: 100%;
+
+        }
+
+        .tree ul {
+            padding-top: 20px;
+            position: relative;
+            transition: all 0.5s;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .tree li {
+            text-align: center;
+            list-style-type: none;
+            position: relative;
+            padding: 20px 30px 0 30px;
+            transition: all 0.5s;
+        }
+
+        /* Connectors */
+        .tree li::before,
+        .tree li::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 50%;
+            border-top: 1px solid #ccc;
+            width: 50%;
+            height: 196px;
+            z-index: -1;
+        }
+
+        .tree li::after {
+            right: auto;
+            left: 50%;
+            border-left: 1px solid #ccc;
+        }
+
+        /* Remove connectors for elements without siblings */
+        .tree li:only-child::after,
+        .tree li:only-child::before {
+            display: none;
+        }
+
+        /* Remove space from the top of single children */
+        .tree li:only-child {
+            padding-top: 0;
+        }
+
+        /* Remove left connector from first child and right connector from last child */
+        .tree li:first-child::before,
+        .tree li:last-child::after {
+            border: 0 none;
+        }
+
+        /* Add back the vertical connector to the last nodes */
+        .tree li:last-child::before {
+            border-right: 1px solid #ccc;
+            border-radius: 0 5px 0 0;
+            transform: translateX(1px);
+        }
+
+        .tree li:first-child::after {
+            border-radius: 5px 0 0 0;
+        }
+
+        /* Downward connectors from parents */
+        .tree ul ul::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            border-left: 1px solid #ccc;
+            width: 0;
+            height: 20px;
+            z-index: -1;
+        }
+
+        /* Style for <a> elements */
+        .tree li a {
+            border: 1px solid #a9a9a9;
+            padding: 10px;
+            text-decoration: none;
+            color: #666;
+            font-family: arial, verdana, tahoma;
+            font-size: 14px;
+            display: inline-block;
+            background: white;
+            border-radius: 5px;
+            transition: all 0.5s;
+            width: 120px;
+            text-align: center;
+            height: 185px;
+        }
+
+        /* Adjust image size and alignment */
+        .tree li a img {
+            display: block;
+            margin: 0 auto 5px;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0rem 0.4rem 0.6rem 0rem rgba(32, 46, 66, 0.08);
+        }
+
+        /* Parent pair styling */
+        .parent-pair {
+            display: flex;
+            justify-content: center;
+            position: relative;
+            padding-top: 0 !important;
+            margin-bottom: 20px;
+        }
+
+        .parent-pair li {
+            padding: 0 10px;
+        }
+
+        /* Connector between parents */
+        .parent-pair li:first-child a::after {
+            content: '';
+            position: absolute;
+            border-top: 1px solid #ccc;
+            top: 50%;
+            left: 100%;
+            width: 20px;
+            z-index: -1;
+        }
+
+        /* Connector from parents to children */
+        .parent-pair::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            border-left: 1px solid #ccc;
+            width: 0;
+            height: 20px;
+            z-index: -1;
+        }
+
+        .tree li.down::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            top: auto;
+            border-top: none;
+            border-bottom: 1px solid #ccc;
+            width: 50%;
+            height: 20px;
+            z-index: -1;
+        }
+
+        .tree li.up::before {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            top: auto;
+            border-top: none;
+            border-bottom: 1px solid #ccc;
+            width: 50%;
+            height: 20px;
+            z-index: -1;
+        }
+
+        .tree li.down::before {
+            right: 50%;
+        }
+
+        .tree li.up::before {
+            border-right: 1px solid #ccc;
+            border-radius: 0 0 5px 0;
+            transform: translateX(1px);
+        }
+
+        .tree li.down::after {
+            left: 50%;
+            right: auto;
+            border-left: 1px solid #ccc;
+            border-radius: 0 0 0 5px;
+
+        }
+
+        .tree li a+a {
+            margin-left: 20px;
+            position: relative;
+        }
+
+        .tree li a+a::before {
+            content: '';
+            position: absolute;
+            border-top: 1px solid #ccc;
+            top: 50%;
+            left: -25px;
+            width: 25px;
+        }
+
+
+
+        li.up::after {
+            content: none !important;
+            /* Отменяет содержимое псевдоэлемента */
+            display: none !important;
+            /* Скрывает псевдоэлемент */
+        }
+
+        li.down::before {
+            content: none !important;
+            /* Отменяет содержимое псевдоэлемента */
+            display: none !important;
+            /* Скрывает псевдоэлемент */
+        }
+
+
+        .tree ul.down {
+            text-align: center;
+            list-style-type: none;
+            position: relative;
+            padding: 0px 10px 0 42px;
+            transition: all 0.5s;
+        }
+
+        .tree ul ul.apa::before {
+            content: '';
+            position: absolute;
+            top: 0px;
+            left: 50%;
+            border-left: 1px solid #ccc;
+            width: 0;
+            height: 20px;
+            z-index: -1;
+        }
+
+        ul {
+            margin-top: 0;
+            margin-bottom: 0 !important;
+        }
+
+        .img-fluid {
+            height: 90px;
+            width: 90px;
+            object-fit: cover;
+        }
+
+        .icon-hover {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        label:hover .icon-hover {
+            opacity: 1;
+        }
+
+        .image-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .image-wrapper .camera-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            padding: 5px;
+            display: none;
+            cursor: pointer;
+        }
+
+        .image-wrapper:hover .camera-icon {
+            display: block;
         }
     </style>
 @endsection
@@ -708,32 +1122,32 @@
                     <div class="step-icon">
                         {{-- <i class="fas fa-user"></i> --}}
 
-                        <i class="fas fa-user"></i>
+                        <i class="fas fa-users"></i>
                     </div>
-                    <div class="step-title">Step 1</div>
-                    <div class="step-description">Személyes adatok</div>
+                    <div class="step-title">{{ __('Step 1') }}</div>
+                    <div class="step-description">{{ __('Family Tree') }}</div>
                 </div>
 
                 <div class="step-horizontal">
                     <div class="step-icon">
                         <i class="fas fa-clock"></i>
                     </div>
-                    <div class="step-title">Step 2</div>
-                    <div class="step-description">Életesemények időpontjai</div>
+                    <div class="step-title">{{ __('Step 2') }}</div>
+                    <div class="step-description">{{ __('Life Events Timeline') }}</div>
                 </div>
                 <div class="step-horizontal">
                     <div class="step-icon">
                         <i class="fas fa-image"></i>
                     </div>
-                    <div class="step-title">Step 3</div>
-                    <div class="step-description">Média feltöltése</div>
+                    <div class="step-title">{{ __('Step 3') }}</div>
+                    <div class="step-description">{{ __('Media Upload') }}</div>
                 </div>
                 <div class="step-horizontal">
                     <div class="step-icon">
                         <i class="fas fa-location-dot"></i>
                     </div>
-                    <div class="step-title">Step 4</div>
-                    <div class="step-description">Nyughely adatok</div>
+                    <div class="step-title">{{ __('Step 4') }}</div>
+                    <div class="step-description">{{ __('Burial Information') }}</div>
                 </div>
             </div>
         </div>
@@ -823,42 +1237,595 @@
                 {{-- <h1 class="display-5 fw-bold text-white mt-15">Fogadja őszinte részvétünket a veszteségért.</h1> --}}
                 <div class="col-lg-8 mx-auto">
                     <p class="fs-5 mt-4 ">
-                        Ezen az oldalon megadhatod a közeli hozzátartozóid nevét, hogy
-                        segítsenek az életrajz elkészítésében. Válaszd ki a hozzátartozó 
-                        típusát, írd be a nevét, majd kattints a "Hozzáadás" gombra.
+                        {{ __('A diagram depicting the kinship relationships of a family, showing a person\'s ancestors and descendants, such as parents, children, and grandparents.') }}
+
                     </p>
                 </div>
             </div>
         </div>
     </div>
 
-    {{-- <div class="container">
-        <div class="d-flex justify-content-center">
-            <div class="col-12 col-md-8 mt-80">
-                <p class="text-center mt-2">
-                    Ezen az oldalon megadhatod a közeli hozzátartozóid nevét, hogy
-                    segítsenek az életrajz elkészítésében. Válaszd ki a hozzátartozó 
-                    típusát, írd be a nevét, majd kattints a "Hozzáadás" gombra.
-                </p>
-            </div>
-        </div>
-    </div> --}}
-
-
-
     <div class="container">
         <div class="row d-flex justify-content-center">
             <div class="col-12 col-md-10 p-4 mt-30">
 
-                <div class="container">
+                <!-- Форма для добавления партнера -->
+                <form action="{{ route('dashboard.family.store') }}" id="add-partner-form" method="POST">
+                    @csrf
+                    <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
+                    <input type="hidden" name="role" value="partner">
+                </form>
 
-                    <form action="{{ route('family.store') }}" method="POST">
+                <!-- Форма для добавления детей -->
+                <form action="{{ route('dashboard.family.store') }}" id="add-children-form" method="POST">
+                    @csrf
+                    <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
+                    <input type="hidden" name="role" value="children">
+                </form>
+
+                <!-- Форма для добавления братьев/сестер -->
+                <form action="{{ route('dashboard.family.store') }}" id="add-siblings-form" method="POST">
+                    @csrf
+                    <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
+                    <input type="hidden" name="role" value="siblings">
+                </form>
+
+
+                <form id="family-form" action="{{ route('family.treeupdate', $memorial->id) }}" method="POST"
+                    enctype="multipart/form-data">
+                    @csrf
+                    <div class="">
+
+                        <!-- Family tree -->
+                        <section id="family-tree" class="position-relative padding_top">
+
+
+                            <input type="hidden" name="action" id="action-input" value="">
+
+                            @php
+                                // Берём только нужные группы из коллекции
+                                $selectedGroups = collect([
+                                    'partner' => $familyMembers['partner'] ?? collect(),
+                                    'siblings' => $familyMembers['siblings'] ?? collect(),
+                                    'children' => $familyMembers['children'] ?? collect(),
+                                ]);
+
+                                // Считаем общее количество элементов из выбранных групп
+                                $count = $selectedGroups->reduce(function ($carry, $group) {
+                                    return $carry + $group->count();
+                                }, 0);
+
+                                // Формула ширины: базовая 1000 + 180 за каждого сверх 2
+                                $width = 1000 + max(0, $count - 2) * 130;
+                            @endphp
+
+                            {{-- @dump($count, $width) --}}
+
+                            <div class="tree-container padding_bottom" id="tree-container">
+                                <div class="tree wow" style="min-width: {{ $width }}px">
+                                    <ul class="down">
+                                        {{-- Дедушка по отцовской линии --}}
+                                        <li class="down">
+                                            <a
+                                                class="d-flex flex-column align-items-center text-decoration-none position-relative">
+                                                {{-- Кнопка удалить в углу --}}
+                                                @if ($grandfatherFather)
+                                                    <button type="button" title="{{ __('Delete') }}"
+                                                        class="btn btn-sm position-absolute"
+                                                        style="transform: translate(160%, -20%); background: transparent; border: none;"
+                                                        onclick="event.stopPropagation(); document.getElementById('delete-form-{{ $grandfatherFather->id }}').submit();">
+                                                        <i class="fa-solid fa-trash text-danger"></i>
+                                                    </button>
+                                                @endif
+                                                <div class="image-wrapper position-relative" style="cursor: pointer;"
+                                                    onclick="document.getElementById('image_{{ $grandfatherFather->id ?? 'grandfather_father' }}').click()"
+                                                    title="Загрузить фото">
+                                                    <img id="preview_{{ $grandfatherFather->id ?? 'grandfather_father' }}"
+                                                        src="{{ isset($grandfatherFather) && $grandfatherFather->photo ? asset('memorial/' . $grandfatherFather->photo) : asset('avatar/avatar-father.png') }}"
+                                                        class="img-fluid rounded-circle" width="90" height="90"
+                                                        alt="Фото">
+                                                    <i class="fa-solid fa-camera camera-icon p-1 shadow"></i>
+                                                </div>
+                                                <input type="file"
+                                                    name="images[{{ $grandfatherFather->id ?? 'grandfather_father' }}]"
+                                                    id="image_{{ $grandfatherFather->id ?? 'grandfather_father' }}"
+                                                    class="d-none" accept="image/*"
+                                                    onchange="previewImage(this, 'preview_{{ $grandfatherFather->id ?? 'grandfather_father' }}')">
+                                                <input type="text" class="form-control form-control-sm mt-1"
+                                                    name="{{ $grandfatherFather && $grandfatherFather->id ? 'family_members[' . $grandfatherFather->id . '][name]' : 'names[grandfather_father]' }}"
+                                                    value="{{ $grandfatherFather->name ?? '' }}"
+                                                    placeholder="{{ __('Grandfather') }}">
+                                                {{-- Поле QR Code --}}
+                                                <input class="form-control form-control-sm mt-1" type="text"
+                                                    name="{{ $grandfatherFather && $grandfatherFather->id ? 'family_members[' . $grandfatherFather->id . '][qr_code]' : 'qr_codes[grandfather_father]' }}"
+                                                    value="{{ $grandfatherFather->qr_code ?? '' }}"
+                                                    placeholder="{{ __('QR Code') }}">
+                                                @if ($grandfatherFather && $grandfatherFather->id)
+                                                    <input type="hidden"
+                                                        name="family_members[{{ $grandfatherFather->id }}][id]"
+                                                        value="{{ $grandfatherFather->id }}">
+                                                @endif
+                                            </a>
+                                        </li>
+
+                                        {{-- Бабушка по отцовской линии --}}
+                                        <li class="up">
+                                            <a
+                                                class="d-flex flex-column align-items-center text-decoration-none position-relative">
+                                                {{-- Кнопка удалить в углу --}}
+                                                @if ($grandmotherFather)
+                                                    <button type="button" title="{{ __('Delete') }}"
+                                                        class="btn btn-sm position-absolute"
+                                                        style="transform: translate(160%, -20%); background: transparent; border: none;"
+                                                        onclick="event.stopPropagation(); document.getElementById('delete-form-{{ $grandmotherFather->id }}').submit();">
+                                                        <i class="fa-solid fa-trash text-danger"></i>
+                                                    </button>
+                                                @endif
+                                                <div class="image-wrapper position-relative" style="cursor: pointer;"
+                                                    onclick="document.getElementById('image_{{ $grandmotherFather->id ?? 'grandmother_father' }}').click()"
+                                                    title="Загрузить фото">
+                                                    <img id="preview_{{ $grandmotherFather->id ?? 'grandmother_father' }}"
+                                                        src="{{ isset($grandmotherFather) && $grandmotherFather->photo ? asset('memorial/' . $grandmotherFather->photo) : asset('avatar/avatar-woman.png') }}"
+                                                        class="img-fluid rounded-circle" width="90" height="90"
+                                                        alt="Фото">
+                                                    <i class="fa-solid fa-camera camera-icon p-1 shadow"></i>
+                                                </div>
+                                                <input type="file"
+                                                    name="images[{{ $grandmotherFather->id ?? 'grandmother_father' }}]"
+                                                    id="image_{{ $grandmotherFather->id ?? 'grandmother_father' }}"
+                                                    class="d-none" accept="image/*"
+                                                    onchange="previewImage(this, 'preview_{{ $grandmotherFather->id ?? 'grandmother_father' }}')">
+                                                <input type="text" class="form-control form-control-sm mt-1"
+                                                    name="{{ $grandmotherFather && $grandmotherFather->id ? 'family_members[' . $grandmotherFather->id . '][name]' : 'names[grandmother_father]' }}"
+                                                    value="{{ $grandmotherFather->name ?? '' }}"
+                                                    placeholder="{{ __('Grandmother') }}">
+                                                {{-- Поле QR Code --}}
+                                                <input class="form-control form-control-sm mt-1" type="text"
+                                                    name="{{ $grandmotherFather && $grandmotherFather->id ? 'family_members[' . $grandmotherFather->id . '][qr_code]' : 'qr_codes[grandmother_father]' }}"
+                                                    value="{{ $grandmotherFather->qr_code ?? '' }}"
+                                                    placeholder="{{ __('QR Code') }}">
+                                                @if ($grandmotherFather && $grandmotherFather->id)
+                                                    <input type="hidden"
+                                                        name="family_members[{{ $grandmotherFather->id }}][id]"
+                                                        value="{{ $grandmotherFather->id }}">
+                                                @endif
+                                            </a>
+                                        </li>
+
+                                        {{-- Дедушка по материнской линии --}}
+                                        <li class="down">
+                                            <a
+                                                class="d-flex flex-column align-items-center text-decoration-none position-relative">
+                                                {{-- Кнопка удалить в углу --}}
+                                                @if ($grandfatherMother)
+                                                    <button type="button" title="{{ __('Delete') }}"
+                                                        class="btn btn-sm position-absolute"
+                                                        style="transform: translate(160%, -20%); background: transparent; border: none;"
+                                                        onclick="event.stopPropagation(); document.getElementById('delete-form-{{ $grandfatherMother->id }}').submit();">
+                                                        <i class="fa-solid fa-trash text-danger"></i>
+                                                    </button>
+                                                @endif
+                                                <div class="image-wrapper position-relative" style="cursor: pointer;"
+                                                    onclick="document.getElementById('image_{{ $grandfatherMother->id ?? 'grandfather_mother' }}').click()"
+                                                    title="Загрузить фото">
+                                                    <img id="preview_{{ $grandfatherMother->id ?? 'grandfather_mother' }}"
+                                                        src="{{ isset($grandfatherMother) && $grandfatherMother->photo ? asset('memorial/' . $grandfatherMother->photo) : asset('avatar/avatar-father.png') }}"
+                                                        class="img-fluid rounded-circle" width="90" height="90"
+                                                        alt="Фото">
+                                                    <i class="fa-solid fa-camera camera-icon p-1 shadow"></i>
+                                                </div>
+                                                <input type="file"
+                                                    name="images[{{ $grandfatherMother->id ?? 'grandfather_mother' }}]"
+                                                    id="image_{{ $grandfatherMother->id ?? 'grandfather_mother' }}"
+                                                    class="d-none" accept="image/*"
+                                                    onchange="previewImage(this, 'preview_{{ $grandfatherMother->id ?? 'grandfather_mother' }}')">
+                                                <input type="text" class="form-control form-control-sm mt-1"
+                                                    name="{{ $grandfatherMother && $grandfatherMother->id ? 'family_members[' . $grandfatherMother->id . '][name]' : 'names[grandfather_mother]' }}"
+                                                    value="{{ $grandfatherMother->name ?? '' }}"
+                                                    placeholder="{{ __('Grandfather') }}">
+                                                {{-- Поле QR Code --}}
+                                                <input class="form-control form-control-sm mt-1" type="text"
+                                                    name="{{ $grandfatherMother && $grandfatherMother->id ? 'family_members[' . $grandfatherMother->id . '][qr_code]' : 'qr_codes[grandfather_mother]' }}"
+                                                    value="{{ $grandfatherMother->qr_code ?? '' }}"
+                                                    placeholder="{{ __('QR Code') }}">
+                                                @if ($grandfatherMother && $grandfatherMother->id)
+                                                    <input type="hidden"
+                                                        name="family_members[{{ $grandfatherMother->id }}][id]"
+                                                        value="{{ $grandfatherMother->id }}">
+                                                @endif
+                                            </a>
+                                        </li>
+
+                                        {{-- Бабушка по материнской линии --}}
+                                        <li class="up">
+                                            <a
+                                                class="d-flex flex-column align-items-center text-decoration-none position-relative">
+                                                {{-- Кнопка удалить в углу --}}
+                                                @if ($grandmotherMother)
+                                                    <button type="button" title="{{ __('Delete') }}"
+                                                        class="btn btn-sm position-absolute"
+                                                        style="transform: translate(160%, -20%); background: transparent; border: none;"
+                                                        onclick="event.stopPropagation(); document.getElementById('delete-form-{{ $grandmotherMother->id }}').submit();">
+                                                        <i class="fa-solid fa-trash text-danger"></i>
+                                                    </button>
+                                                @endif
+                                                <div class="image-wrapper position-relative" style="cursor: pointer;"
+                                                    onclick="document.getElementById('image_{{ $grandmotherMother->id ?? 'grandmother_mother' }}').click()"
+                                                    title="Загрузить фото">
+                                                    <img id="preview_{{ $grandmotherMother->id ?? 'grandmother_mother' }}"
+                                                        src="{{ isset($grandmotherMother) && $grandmotherMother->photo ? asset('memorial/' . $grandmotherMother->photo) : asset('avatar/avatar-woman.png') }}"
+                                                        class="img-fluid rounded-circle" width="90" height="90"
+                                                        alt="Фото">
+                                                    <i class="fa-solid fa-camera camera-icon p-1 shadow"></i>
+                                                </div>
+                                                <input type="file"
+                                                    name="images[{{ $grandmotherMother->id ?? 'grandmother_mother' }}]"
+                                                    id="image_{{ $grandmotherMother->id ?? 'grandmother_mother' }}"
+                                                    class="d-none" accept="image/*"
+                                                    onchange="previewImage(this, 'preview_{{ $grandmotherMother->id ?? 'grandmother_mother' }}')">
+                                                <input type="text" class="form-control form-control-sm mt-1"
+                                                    name="{{ $grandmotherMother && $grandmotherMother->id ? 'family_members[' . $grandmotherMother->id . '][name]' : 'names[grandmother_mother]' }}"
+                                                    value="{{ $grandmotherMother->name ?? '' }}"
+                                                    placeholder="{{ __('Grandmother') }}">
+                                                {{-- Поле QR Code --}}
+                                                <input class="form-control form-control-sm mt-1" type="text"
+                                                    name="{{ $grandmotherMother && $grandmotherMother->id ? 'family_members[' . $grandmotherMother->id . '][qr_code]' : 'qr_codes[grandmother_mother]' }}"
+                                                    value="{{ $grandmotherMother->qr_code ?? '' }}"
+                                                    placeholder="{{ __('QR Code') }}">
+                                                @if ($grandmotherMother && $grandmotherMother->id)
+                                                    <input type="hidden"
+                                                        name="family_members[{{ $grandmotherMother->id }}][id]"
+                                                        value="{{ $grandmotherMother->id }}">
+                                                @endif
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <ul class="down">
+                                        <!-- Father -->
+                                        <li class="down">
+                                            <ul class="apa">
+                                                <a
+                                                    class="d-flex flex-column align-items-center text-decoration-none position-relative">
+                                                    {{-- Кнопка удалить в углу --}}
+                                                    @if ($father)
+                                                        <button type="button" title="{{ __('Delete') }}"
+                                                            class="btn btn-sm position-absolute"
+                                                            style="transform: translate(160%, -20%); background: transparent; border: none;"
+                                                            onclick="event.stopPropagation(); document.getElementById('delete-form-{{ $father->id }}').submit();">
+                                                            <i class="fa-solid fa-trash text-danger"></i>
+                                                        </button>
+                                                    @endif
+                                                    <div class="image-wrapper position-relative" style="cursor: pointer;"
+                                                        onclick="document.getElementById('image_{{ $father->id ?? 'father' }}').click()"
+                                                        title="Загрузить фото">
+                                                        <img id="preview_{{ $father->id ?? 'father' }}"
+                                                            src="{{ isset($father) && $father->photo ? asset('memorial/' . $father->photo) : asset('avatar/avatar-man.png') }}"
+                                                            class="img-fluid rounded-circle" width="90"
+                                                            height="90" alt="Фото">
+                                                        <i class="fa-solid fa-camera camera-icon p-1 shadow"></i>
+                                                    </div>
+                                                    <input type="file" name="images[{{ $father->id ?? 'father' }}]"
+                                                        id="image_{{ $father->id ?? 'father' }}" class="d-none"
+                                                        accept="image/*"
+                                                        onchange="previewImage(this, 'preview_{{ $father->id ?? 'father' }}')">
+                                                    <input type="text" class="form-control form-control-sm mt-1"
+                                                        name="{{ $father && $father->id ? 'family_members[' . $father->id . '][name]' : 'names[father]' }}"
+                                                        value="{{ optional($father)->name }}"
+                                                        placeholder="{{ __('Father') }}">
+                                                    {{-- Поле QR Code --}}
+                                                    <input class="form-control form-control-sm mt-1" type="text"
+                                                        name="{{ $father && $father->id ? 'family_members[' . $father->id . '][qr_code]' : 'qr_codes[father]' }}"
+                                                        value="{{ $father->qr_code ?? '' }}"
+                                                        placeholder="{{ __('QR Code') }}">
+                                                    @if ($father && $father->id)
+                                                        <input type="hidden"
+                                                            name="family_members[{{ $father->id }}][id]"
+                                                            value="{{ $father->id }}">
+                                                    @endif
+                                                </a>
+                                            </ul>
+                                        </li>
+
+                                        <!-- Mother -->
+                                        <li class="up mom">
+                                            <ul class="apa">
+                                                <a
+                                                    class="d-flex flex-column align-items-center text-decoration-none position-relative">
+
+                                                    {{-- Кнопка удалить в углу --}}
+                                                    @if ($mother)
+                                                        <button type="button" title="{{ __('Delete') }}"
+                                                            class="btn btn-sm position-absolute"
+                                                            style="transform: translate(160%, -20%); background: transparent; border: none;"
+                                                            onclick="event.stopPropagation(); document.getElementById('delete-form-{{ $mother->id }}').submit();">
+                                                            <i class="fa-solid fa-trash text-danger"></i>
+                                                        </button>
+                                                    @endif
+
+                                                    <div class="image-wrapper position-relative" style="cursor: pointer;"
+                                                        onclick="document.getElementById('image_{{ $mother->id ?? 'mother' }}').click()"
+                                                        title="Загрузить фото">
+                                                        <img id="preview_{{ $mother->id ?? 'mother' }}"
+                                                            src="{{ isset($mother) && $mother->photo ? asset('memorial/' . $mother->photo) : asset('avatar/avatar-woman-3.png') }}"
+                                                            class="img-fluid rounded-circle" width="90"
+                                                            height="90" alt="Фото">
+                                                        <i class="fa-solid fa-camera camera-icon p-1 shadow"></i>
+                                                    </div>
+                                                    <input type="file" name="images[{{ $mother->id ?? 'mother' }}]"
+                                                        id="image_{{ $mother->id ?? 'mother' }}" class="d-none"
+                                                        accept="image/*"
+                                                        onchange="previewImage(this, 'preview_{{ $mother->id ?? 'mother' }}')">
+                                                    <input type="text" class="form-control form-control-sm mt-1"
+                                                        name="{{ $mother && $mother->id ? 'family_members[' . $mother->id . '][name]' : 'names[mother]' }}"
+                                                        value="{{ optional($mother)->name }}"
+                                                        placeholder="{{ __('Mother') }}">
+                                                    {{-- Поле QR Code --}}
+                                                    <input class="form-control form-control-sm mt-1" type="text"
+                                                        name="{{ $mother && $mother->id ? 'family_members[' . $mother->id . '][qr_code]' : 'qr_codes[mother]' }}"
+                                                        value="{{ $mother->qr_code ?? '' }}"
+                                                        placeholder="{{ __('QR Code') }}">
+                                                    @if ($mother && $mother->id)
+                                                        <input type="hidden"
+                                                            name="family_members[{{ $mother->id }}][id]"
+                                                            value="{{ $mother->id }}">
+                                                    @endif
+                                                </a>
+                                            </ul>
+                                        </li>
+                                    </ul>
+
+
+                                    <ul>
+                                        <ul>
+                                            <li>
+                                                {{-- <a href="#" onclick="event.preventDefault(); document.getElementById('add-partner-form').submit();" style="height: 170px;">
+                                        <i class="fa-solid fa-plus rounded-circle fs-5 mt-3 mb-3"></i><br>
+                                        add partner
+                                    </a> --}}
+
+                                                <!-- Partner -->
+                                                @foreach ($familyMembers['partner'] ?? [] as $index => $member)
+                                                    <a>
+                                                        {{-- Кнопка удалить в углу --}}
+                                                        <button type="button" title="{{ __('Delete') }}"
+                                                            class="btn btn-sm btn-danger position-absolute"
+                                                            style="transform: translate(260%, -20%); background: transparent; border: none; "
+                                                            onclick="event.stopPropagation(); document.getElementById('delete-form-{{ $member->id }}').submit();">
+                                                            <i class="fa-solid fa-trash text-danger"></i>
+                                                        </button>
+                                                        <div class="image-wrapper" style="cursor: pointer;"
+                                                            onclick="document.getElementById('image_{{ $member->id }}').click()"
+                                                            title="Загрузить фото">
+                                                            <img id="preview_{{ $member->id }}"
+                                                                src="{{ isset($member) && $member->photo ? asset('memorial/' . $member->photo) : asset('avatar/avatar-girl.png') }}"
+                                                                class="img-fluid rounded-circle" width="90"
+                                                                height="90">
+                                                            <i class="fa-solid fa-camera camera-icon p-1 shadow"></i>
+                                                        </div>
+                                                        <input type="file" name="images[{{ $member->id }}]"
+                                                            id="image_{{ $member->id }}" class="d-none"
+                                                            accept="image/*"
+                                                            onchange="previewImage(this, 'preview_{{ $member->id }}')">
+
+                                                        {{-- Скрытый id --}}
+                                                        <input type="hidden" name="partners[{{ $index }}][id]"
+                                                            value="{{ $member->id }}">
+                                                        {{-- Поле имени --}}
+                                                        <input class="form-control form-control-sm mt-0" type="text"
+                                                            name="partners[{{ $index }}][name]"
+                                                            value="{{ $member->name }}"
+                                                            placeholder="{{ __('Partner') }}">
+                                                        {{-- Поле QR Code --}}
+                                                        <input class="form-control form-control-sm mt-1" type="text"
+                                                            name="partners[{{ $index }}][qr_code]"
+                                                            value="{{ old("partners.$index.qr_code", $member->qr_code) }}"
+                                                            placeholder="{{ __('QR Code') }}">
+                                                    </a>
+                                                @endforeach
+
+
+
+                                                <!-- Main Person -->
+                                                <a>
+                                                    <div class="image-wrapper" style="cursor: pointer;"
+                                                        onclick="document.getElementById('image_main_person').click()"
+                                                        title="Загрузить фото">
+                                                        <img id="preview_main_person"
+                                                            src="{{ asset('memorial/' . $memorial->slug . '/' . $memorial->photo) }}"
+                                                            class="img-fluid rounded-circle" width="90"
+                                                            height="90">
+                                                    </div>
+                                                    <input type="file" name="images[main_person]"
+                                                        id="image_main_person" class="d-none" accept="image/*"
+                                                        onchange="previewImage(this, 'preview_main_person')">
+                                                    <input class="form-control form-control-sm mt-0" type="text"
+                                                        name="names[main_person]" value="{{ $memorial->name }}"
+                                                        placeholder="{{ $memorial->name }}" readonly>
+                                                    <input class="form-control form-control-sm mt-1" type="text"
+                                                        name="main" value="{{ $memorial->qr_code }}"
+                                                        placeholder="{{ __('QR Code') }}" readonly>
+                                                </a>
+
+
+                                                <a href="#"
+                                                    onclick="event.preventDefault(); setActionAndSubmit('add_partner');"
+                                                    class="image-wrapper">
+                                                    <div class="" style="cursor: pointer; min-height: 120px;">
+                                                        <img src="{{ asset('avatar/avatar-add-2.png') }}"
+                                                            class=" rounded-circle" width="90" height="90">
+
+                                                    </div>
+                                                    {{ __('Add Partner') }}
+                                                </a>
+
+                                                {{-- <button type="submit" name="action" value="add_partner">Добавить партнера</button> --}}
+
+
+                                                <ul>
+                                                    <!-- Children -->
+                                                    {{-- @foreach ($familyMembers['children'] ?? [] as $index => $child)
+                                            <li class="mb-3">
+                                                <a class="d-flex flex-column align-items-center text-decoration-none">
+                                                    <div class="image-wrapper" style="cursor: pointer;"
+                                                        onclick="document.getElementById('image_child_{{ $index }}').click()"
+                                                        title="Загрузить фото">
+                                                        <img id="preview_child_{{ $index }}"
+                                                            src="{{ $child->image_url ?? asset('avatar/avatar-boy.png') }}"
+                                                            class="img-fluid rounded-circle" width="90"
+                                                            height="90">
+                                                        <i class="fa-solid fa-camera camera-icon p-1 shadow"></i>
+                                                    </div>
+                                                    <input type="file" name="images[child_{{ $index }}]"
+                                                        id="image_child_{{ $index }}" class="d-none"
+                                                        accept="image/*"
+                                                        onchange="previewImage(this, 'preview_child_{{ $index }}')">
+
+                                                    <input class="form-control mt-2 text-center" type="text"
+                                                        name="names[{{ $child->id }}]" value="{{ $child->name }}"
+                                                        placeholder="Gyermek" required>
+                                                </a>
+                                            </li>
+                                        @endforeach --}}
+
+                                                    @foreach ($familyMembers['children'] ?? [] as $index => $member)
+                                                        <li class="mb-3">
+                                                            <a
+                                                                class="d-flex flex-column align-items-center text-decoration-none">
+                                                                {{-- Кнопка удалить в углу --}}
+                                                                <button type="button" title="{{ __('Delete') }}"
+                                                                    class="btn btn-sm btn-danger position-absolute"
+                                                                    style="transform: translate(155%, -20%); background: transparent; border: none; "
+                                                                    onclick="event.stopPropagation(); document.getElementById('delete-form-{{ $member->id }}').submit();">
+                                                                    <i class="fa-solid fa-trash text-danger"></i>
+                                                                </button>
+                                                                {{-- Картинка и загрузка фото --}}
+                                                                <div class="image-wrapper" style="cursor: pointer;"
+                                                                    onclick="document.getElementById('image_{{ $member->id }}').click()"
+                                                                    title="Загрузить фото">
+                                                                    <img id="preview_{{ $member->id }}"
+                                                                        src="{{ isset($member) && $member->photo ? asset('memorial/' . $member->photo) : asset('avatar/avatar-girl.png') }}"
+                                                                        class="img-fluid rounded-circle" width="90"
+                                                                        height="90">
+                                                                    <i
+                                                                        class="fa-solid fa-camera camera-icon p-1 shadow"></i>
+                                                                </div>
+                                                                <input type="file" name="images[{{ $member->id }}]"
+                                                                    id="image_{{ $member->id }}" class="d-none"
+                                                                    accept="image/*"
+                                                                    onchange="previewImage(this, 'preview_{{ $member->id }}')">
+
+                                                                {{-- Скрытый id --}}
+                                                                <input type="hidden"
+                                                                    name="childrens[{{ $index }}][id]"
+                                                                    value="{{ $member->id }}">
+                                                                {{-- Поле имени --}}
+                                                                <input class="form-control form-control-sm mt-1"
+                                                                    type="text"
+                                                                    name="childrens[{{ $index }}][name]"
+                                                                    value="{{ $member->name }}"
+                                                                    placeholder="{{ __('Children') }}">
+                                                                <input class="form-control form-control-sm mt-1"
+                                                                    type="text"
+                                                                    name="childrens[{{ $index }}][qr_code]"
+                                                                    value="{{ $member->qr_code }}"
+                                                                    placeholder="{{ __('QR Code') }}">
+                                                            </a>
+                                                        </li>
+                                                    @endforeach
+                                                    <li class="mb-3">
+                                                        <a href="#"
+                                                            onclick="event.preventDefault(); setActionAndSubmit('add_children');"
+                                                            style="">
+                                                            <div class="" style="cursor: pointer;">
+                                                                <img src="{{ asset('avatar/avatar-add-2.png') }}"
+                                                                    class=" rounded-circle" width="90"
+                                                                    height="90">
+                                                            </div>
+                                                            {{ __('Add Children') }}
+                                                        </a>
+
+                                                        {{-- <a href="#"
+                                                    onclick="event.preventDefault(); document.getElementById('add-children-form').submit();"
+                                                    style="height: 175px;">
+                                                    <br><br><i
+                                                        class="fa-solid fa-plus rounded-circle fs-5 mt-3 mb-3"></i><br>
+                                                    {{ __('Add Children') }}
+                                                </a> --}}
+                                                    </li>
+                                                </ul>
+                                            </li>
+
+                                            <!-- Siblings -->
+
+                                            @foreach ($familyMembers['siblings'] ?? [] as $index => $member)
+                                                <li class="mb-3">
+                                                    <a class="d-flex flex-column align-items-center text-decoration-none">
+                                                        {{-- Кнопка удалить в углу --}}
+                                                        <button type="button" title="{{ __('Delete') }}"
+                                                            class="btn btn-sm btn-danger position-absolute"
+                                                            style="transform: translate(155%, -20%); background: transparent; border: none; "
+                                                            onclick="event.stopPropagation(); document.getElementById('delete-form-{{ $member->id }}').submit();">
+                                                            <i class="fa-solid fa-trash text-danger"></i>
+                                                        </button>
+                                                        <div class="image-wrapper" style="cursor: pointer;"
+                                                            onclick="document.getElementById('image_{{ $member->id }}').click()"
+                                                            title="Загрузить фото">
+                                                            <img id="preview_{{ $member->id }}"
+                                                                src="{{ isset($member) && $member->photo ? asset('memorial/' . $member->photo) : asset('avatar/avatar-girl.png') }}"
+                                                                class="img-fluid rounded-circle" width="90"
+                                                                height="90">
+                                                            <i class="fa-solid fa-camera camera-icon p-1 shadow"></i>
+                                                        </div>
+                                                        <input type="file" name="images[{{ $member->id }}]"
+                                                            id="image_{{ $member->id }}" class="d-none"
+                                                            accept="image/*"
+                                                            onchange="previewImage(this, 'preview_{{ $member->id }}')">
+
+                                                        {{-- Скрытый id --}}
+                                                        <input type="hidden" name="siblings[{{ $index }}][id]"
+                                                            value="{{ $member->id }}">
+                                                        {{-- Поле имени --}}
+                                                        <input class="form-control form-control-sm mt-1" type="text"
+                                                            name="siblings[{{ $index }}][name]"
+                                                            value="{{ $member->name }}"
+                                                            placeholder="{{ __('Sibling') }}">
+                                                        {{-- Поле QR Code --}}
+                                                        <input class="form-control form-control-sm mt-1" type="text"
+                                                            name="siblings[{{ $index }}][qr_code]"
+                                                            value="{{ $member->qr_code }}"
+                                                            placeholder="{{ __('QR Code') }}">
+
+                                                        {{-- Кнопка удалить --}}
+                                                        {{-- <button type="button" class="btn btn-danger btn-sm mt-2"
+                                                    onclick="if(confirm('Удалить этого брата?')) document.getElementById('delete-form-{{ $member->id }}').submit();">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button> --}}
+                                                    </a>
+                                                </li>
+                                            @endforeach
+                                            <li class="mb-3">
+                                                <a href="#"
+                                                    onclick="event.preventDefault(); setActionAndSubmit('add_siblings');">
+                                                    <div style="cursor: pointer;">
+                                                        <img src="{{ asset('avatar/avatar-add-2.png') }}"
+                                                            class="rounded-circle" width="90" height="90">
+                                                    </div>
+                                                    {{ __('Add Siblings') }}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </section>
+
+                        {{-- <form action="{{ route('family.store') }}" method="POST">
                         @csrf
                         <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
 
                         <div class="row mb-3">
                             <div class="form-group col-12 col-md-5 mt-1">
-                                {{-- <label>{{ __('My loved ones') }}</label> --}}
                                 <select name="role" class="form-select" required>
                                     <option value="">{{ __('Select my loved ones') }}</option>
                                     <option value="father">{{ __('Father') }}</option>
@@ -870,12 +1837,10 @@
                                 </select>
                             </div>
                             <div class="form-group col-12 col-md-5 mt-1">
-                                {{-- <label>{{ __('Name') }}</label> --}}
                                 <input type="text" name="name" class="form-control" placeholder="{{ __('Name') }}"
                                     required>
                             </div>
 
-                            {{-- <div class="form-group col-12 col-md-2 mt-30"> --}}
                                 <div class="form-group col-12 col-md-2 mt-1">
                                     <button type="submit" class="btn btn-outline-primary mb-4 w-100">
                                         <i class="fa fa-plus"></i> {{ __('Add') }}</button>
@@ -883,10 +1848,10 @@
 
                         </div>
 
-                    </form>
+                    </form> --}}
 
-                    <!-- Row 1 -->
-                    <div class="row mb-4 mt-40">
+                        <!-- Row 1 -->
+                        {{-- <div class="row mb-4 mt-40">
                         <div class="col-md-6 d-flex flex-column">
                             <h6 class="text-secondary border-bottom pb-2 text-center fs-6">
                                 {{ __('Father') }}</h6>
@@ -928,10 +1893,10 @@
                         </div>
 
 
-                    </div>
+                    </div> --}}
 
-                    <!-- Row 2 -->
-                    <div class="row mb-4">
+                        <!-- Row 2 -->
+                        {{-- <div class="row mb-4">
                         <div class="col-md-6 d-flex flex-column">
                             <h6 class="text-secondary border-bottom pb-2 text-center fs-6">
                                 {{ __('Partner') }}</h6>
@@ -949,10 +1914,6 @@
                                         </form>
                                     </li>
                                 @endforeach
-
-                                {{-- @if ($familyMembers['child']->isEmpty())
-                                    <li class="mt-2 ms-1 text-muted">{{ __('No family members added') }}</li>
-                                @endif --}}
                             </ul>
                         </div>
 
@@ -973,20 +1934,16 @@
                                         </form>
                                     </li>
                                 @endforeach
-
-                                {{-- @if ($familyMembers['spouse']->isEmpty())
-                                    <li class="mt-2 ms-1 text-muted">{{ __('No family members added') }}</li>
-                                @endif --}}
                             </ul>
                         </div>
 
 
-                    </div>
+                    </div> --}}
 
 
 
-                    <!-- Row 3 -->
-                    <div class="row mb-4">
+                        <!-- Row 3 -->
+                        {{-- <div class="row mb-4">
                         <div class="col-md-6 d-flex flex-column">
                             <h6 class="text-secondary border-bottom pb-2 text-center fs-6">
                                 {{ __('Siblings') }}</h6>
@@ -1005,9 +1962,6 @@
                                     </li>
                                 @endforeach
 
-                                {{-- @if ($familyMembers['cousins']->isEmpty())
-                                    <li class="mt-2 ms-1 text-muted">{{ __('No family members added') }}</li>
-                                @endif --}}
                             </ul>
                         </div>
 
@@ -1029,27 +1983,63 @@
                                     </li>
                                 @endforeach
 
-                                {{-- @if ($familyMembers['pets']->isEmpty())
-                                    <li class="list-group-item text-muted">{{ __('No family members added') }}</li>
-                                @endif --}}
                             </ul>
                         </div>
+                    </div> --}}
+
+                        <div class="d-flex justify-content-between mt-50">
+                            <a href="{{ route('timeline.create', $memorial) }}" class="btn btn-secondary">{{ __('Skip') }}</a>
+                            <a href="#" class="btn btn-primary" onclick="this.closest('form').submit();">
+                                <i class="fa fa-save"></i> {{ __('Next') }}
+                            </a>
+
+                        </div>
+
                     </div>
-
-                    <div class="d-flex justify-content-between mt-50">
-                        <button href="#" class="btn btn-secondary">{{ __('Skip') }}</button>
-                        <a href="{{ route('timeline.create', $memorial) }}" class="btn btn-primary">
-                            <i class="fa fa-save"></i> {{ __('Next') }}
-                        </a>
-                        
-                    </div>
-
-                </div>
-
-            @endsection
-
-            @section('js')
+                </form>
 
 
+                <!-- Формы удаления -->
+                @foreach ($familyMembers as $role => $members)
+                    @foreach ($members as $member)
+                        <form id="delete-form-{{ $member->id }}" action="{{ route('family.delete', $member->id) }}"
+                            method="POST" style="display: none;">
+                            @csrf
+                            @method('DELETE')
+                        </form>
+                    @endforeach
+                @endforeach
+            </div>
+        </div>
+    </div>
 
-            @endsection
+@endsection
+
+@section('js')
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let container = document.getElementById('tree-container');
+            container.scrollLeft = (container.scrollWidth - container.clientWidth) / 2;
+        });
+
+        function previewImage(input, previewId) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    document.getElementById(previewId).src = e.target.result;
+                };
+
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function setActionAndSubmit(actionValue) {
+            document.getElementById('action-input').value = actionValue;
+            document.getElementById('family-form').submit();
+        }
+    </script>
+
+@endsection

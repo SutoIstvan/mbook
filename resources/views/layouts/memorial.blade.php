@@ -15,7 +15,7 @@
     <title>Admin</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
@@ -217,7 +217,7 @@
             <div class="cont-info valign">
                 <div class="text-center full-width">
                     <div class="logo">
-                        <img src="../common/imgs/Logo-light.svg" alt="">
+                        <img src="{{ asset('common/imgs/Logo-light.svg') }}" alt="">
                     </div>
                     <div class="social-icon mt-40">
                         <a href="#"> <i class="fab fa-facebook-f"></i> </a>

@@ -9,27 +9,95 @@ use App\Models\Timeline;
 use App\Models\Image;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Ramsey\Uuid\Type\Time;
 
 class TimelineController extends Controller
 {
     public function create(Memorial $memorial)
     {
+        $exists = Timeline::where('memorial_id', $memorial->id)
+            ->where('title', $memorial->name . ' ' . Carbon::parse($memorial->birth_date)->format('Y.d.m') . ' ' . __('birth'))
+            ->where('date', $memorial->birth_date)
+            ->where('type', 'birth')
+            ->exists();
+
+        if (!$exists) {
+            Timeline::create([
+                'memorial_id' => $memorial->id,
+                'title' => $memorial->name . ' ' . Carbon::parse($memorial->birth_date)->format('Y.d.m') . ' ' . __('birth'),
+                'description' => '',
+                'date' => $memorial->birth_date,
+                'type' => 'birth',
+                'order' => 1,
+            ]);
+        }
+
         $familyMembers = Family::where('memorial_id', $memorial->id)->get()->groupBy('role');
+        //  dd($familyMembers);
+
+        // --- Рождение детей ---
+        if (!empty($familyMembers['children'])) {
+            foreach ($familyMembers['children'] as $child) {
+                $title = $child->name;
+
+                // Проверяем, есть ли уже такая запись
+                $exists = Timeline::where('memorial_id', $memorial->id)
+                    ->where('title', $title)
+                    ->where('type', 'child_birth')
+                    ->exists();
+
+                if (!$exists) {
+                    Timeline::create([
+                        'memorial_id' => $memorial->id,
+                        'title' => $title,
+                        'description' => '',
+                        'date' => Carbon::now(),
+                        'type' => 'child_birth',
+                        'order' => 1,
+                    ]);
+                }
+            }
+        }
+
+        // --- Брак ---
+        if (!empty($familyMembers['partner'])) {
+            foreach ($familyMembers['partner'] as $partner) {
+                $title = $memorial->name . ' ' . __('and') . ' ' . $partner->name; // Имя + партнёр + marriage
+
+                $exists = Timeline::where('memorial_id', $memorial->id)
+                    ->where('title', $title)
+                    ->where('type', 'marriage')
+                    ->exists();
+
+                if (!$exists) {
+                    Timeline::create([
+                        'memorial_id' => $memorial->id,
+                        'title' => $title,
+                        'description' => '',
+                        'date' => Carbon::now(),
+                        'type' => 'marriage',
+                        'order' => 1,
+                    ]);
+                }
+            }
+        }
+
+        // dd($memorial->name);
 
         // $timelines = Timeline::where('memorial_id', $memorial->id)->get();
         $timelines = Timeline::where('memorial_id', $memorial->id)
-            ->orderBy('date', 'asc')
+            ->orderBy('date', 'desc')
             ->get();
 
-        $children = Family::where('memorial_id', $memorial->id)
-            ->where('role', 'children')
-            ->get();
+        // $children = Family::where('memorial_id', $memorial->id)
+        //     ->where('role', 'children')
+        //     ->get();
 
-        $partners = Family::where('memorial_id', $memorial->id)
-            ->where('role', 'partner')
-            ->get();
+        // $partners = Family::where('memorial_id', $memorial->id)
+        //     ->where('role', 'partner')
+        //     ->get();
 
-        return view('memorial.timeline', compact('memorial', 'familyMembers', 'children', 'timelines', 'partners'));
+        return view('memorial.timeline', compact('memorial', 'familyMembers', 'timelines'));
     }
 
 
@@ -414,5 +482,37 @@ class TimelineController extends Controller
         }
 
         return back()->with('success', 'Таймлайны успешно обновлены');
+    }
+
+    public function updateNext(Request $request)
+    {
+        $validatedData = $request->validate([
+            'timelines' => 'required|array',
+            'timelines.*.id' => 'required|exists:timelines,id',
+            'timelines.*.title' => 'required|string|max:255',
+            'timelines.*.year' => 'required|integer|min:1900|max:' . date('Y'),
+            'timelines.*.type' => 'required|string',
+            'timelines.*.delete' => 'nullable|boolean',
+        ]);
+
+        foreach ($validatedData['timelines'] as $timelineData) {
+            $timeline = Timeline::find($timelineData['id']);
+            if (!$timeline) continue;
+
+            if (!empty($timelineData['delete'])) {
+                // Если стоит флаг удаления — удаляем запись
+                $timeline->delete();
+                continue;
+            }
+
+            // Обновляем поля
+            $timeline->title = $timelineData['title'];
+            $timeline->date = $timelineData['year'] . '-01-01'; // преобразуем в дату
+            $timeline->type = $timelineData['type'];
+            $timeline->save();
+        }
+
+        $memorial = Memorial::findOrFail($request->memorial_id);
+        return redirect()->route('timeline.gallery', $memorial);
     }
 }

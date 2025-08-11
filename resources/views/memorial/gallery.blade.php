@@ -1,7 +1,7 @@
 @extends('layouts.memorial')
 
 @section('css')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/formstone/dist/css/upload.css">
+    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/formstone/dist/css/upload.css"> --}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet">
     <style>
 
@@ -731,30 +731,30 @@
 
                         <i class="fas fa-user"></i>
                     </div>
-                    <div class="step-title">Step 1</div>
-                    <div class="step-description">Személyes adatok</div>
+                    <div class="step-title">{{ __('Step 1') }}</div>
+                    <div class="step-description">{{ __('Family Tree') }}</div>
                 </div>
 
                 <div class="step-horizontal complete">
                     <div class="step-icon">
                         <i class="fas fa-clock"></i>
                     </div>
-                    <div class="step-title">Step 2</div>
-                    <div class="step-description">Életesemények időpontjai</div>
+                    <div class="step-title">{{ __('Step 2') }}</div>
+                    <div class="step-description">{{ __('Life Events Timeline') }}</div>
                 </div>
                 <div class="step-horizontal active">
                     <div class="step-icon">
                         <i class="fas fa-image"></i>
                     </div>
-                    <div class="step-title">Step 3</div>
-                    <div class="step-description">Média feltöltése</div>
+                    <div class="step-title">{{ __('Step 3') }}</div>
+                    <div class="step-description">{{ __('Media Upload') }}</div>
                 </div>
                 <div class="step-horizontal">
                     <div class="step-icon">
                         <i class="fas fa-location-dot"></i>
                     </div>
-                    <div class="step-title">Step 4</div>
-                    <div class="step-description">Nyughely adatok</div>
+                    <div class="step-title">{{ __('Step 4') }}</div>
+                    <div class="step-description">{{ __('Burial Information') }}</div>
                 </div>
             </div>
         </div>
@@ -844,9 +844,7 @@
                 {{-- <h1 class="display-5 fw-bold text-white mt-15">Fogadja őszinte részvétünket a veszteségért.</h1> --}}
                 <div class="col-lg-8 mx-auto">
                     <p class="fs-5 mt-4 ">
-                        Válaszd ki a megfelelő fület (Képek, Videók vagy Linkek), majd töltsd fel vagy illeszd be a kívánt
-                        tartalmat. A feltöltött anyagok segítenek megőrizni az emlékeket és bemutatni az elhunyt életének
-                        fontos pillanatait.
+                        {{ __('Choose the appropriate tab (Images, Videos or Links), then upload or paste the desired content. The uploaded materials help preserve memories and showcase important moments in the life of the deceased.') }}
                     </p>
                 </div>
             </div>
@@ -864,19 +862,19 @@
         <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home"
-                    type="button" role="tab" aria-controls="pills-home" aria-selected="true">Images</button>
+                    type="button" role="tab" aria-controls="pills-home" aria-selected="true">{{ __('Images') }}</button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="pills-videos-tab" data-bs-toggle="pill" data-bs-target="#pills-videos"
-                    type="button" role="tab" aria-controls="pills-videos" aria-selected="false">Video</button>
+                    type="button" role="tab" aria-controls="pills-videos" aria-selected="false">{{ __('Videos') }}</button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="pills-music-tab" data-bs-toggle="pill" data-bs-target="#pills-music"
-                    type="button" role="tab" aria-controls="pills-music" aria-selected="false">Music</button>
+                    type="button" role="tab" aria-controls="pills-music" aria-selected="false">{{ __('Music') }}</button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="pills-link-tab" data-bs-toggle="pill" data-bs-target="#pills-link"
-                    type="button" role="tab" aria-controls="pills-link" aria-selected="false">Link</button>
+                    type="button" role="tab" aria-controls="pills-link" aria-selected="false">{{ __('Links') }}</button>
             </li>
         </ul>
         <div class="tab-content" id="pills-tabContent">
@@ -924,7 +922,7 @@
                                         <div class="mt-30 mb-20">
                                             <button type="submit" id="submitBtn" class="butn butn-md butn-bord butn-rounded">
                                                 <span class="text">
-                                                    {{ __('Feltöltés') }}
+                                                    {{ __('Upload') }}
                                                 </span>
                                                 <span id="btnIcon" class="icon">
                                                     <i class="fa-regular fa-save"></i>
@@ -944,10 +942,10 @@
                 @if ($memorial->memorialimages->isNotEmpty())
                 <form action="{{ route('memorial.images.update', $memorial->id) }}" method="POST">
                     @csrf
-                    <section class="process-ca bg-light radius-20 ontop">
+                    <section class="process-ca radius-20 ontop">
                         <div class="sec-head">
                             <div class="row">
-                                <div class="col-lg-12 md-mb15 md-mt35 ms-3">
+                                <div class="col-lg-12 md-mb15 md-mt35">
                                     <h6>{{ __('Photos') }} <small>{{ $photoCount = $memorial->memorialimages()->count() }} /
                                             30</small></h6>
         
@@ -996,7 +994,7 @@
                                                             <h6 class="mt-10">
                                                                 <input name="images[{{ $loop->index }}][image_description]"
                                                                     type="text" value="{{ $image->image_description }}"
-                                                                    class="form-control " placeholder="A fénykép leírása">
+                                                                    class="form-control " placeholder="{{ __('Image description') }}">
                                                             </h6>
         
         
