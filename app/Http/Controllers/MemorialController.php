@@ -191,7 +191,8 @@ class MemorialController extends Controller
         $memorial->grave_coordinates = $request->grave_coordinates;
         $memorial->qr_code = $token;
         $memorial->admin_id = $admin_id;
-        $memorial->theme = 'dark';
+        $memorial->theme = 'light';
+        $memorial->generation_attempts_left = 5;
         $memorial->save();
 
 

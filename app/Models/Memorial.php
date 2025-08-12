@@ -32,7 +32,8 @@ class Memorial extends Model
         'grave_line',
         'grave_number',
         'virtual_code',
-        'admin_id'
+        'admin_id',
+        'generation_attempts_left',
     ];
 
     // Указываем, что для маршрутов используется slug
