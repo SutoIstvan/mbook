@@ -1,10 +1,8 @@
 @extends('layouts.memorial')
 
 @section('css')
-    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/formstone/dist/css/upload.css"> --}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet">
     <style>
-
         .item .img {
             border-radius: 15px;
             height: 175px;
@@ -597,11 +595,11 @@
         .step-vertical:not(:last-child)::after {
             content: '';
             /* position: absolute;
-                     left: 25px;
-                     top: 60px;
-                     bottom: 0;
-                     width: 2px;
-                     background: #e9ecef; */
+                             left: 25px;
+                             top: 60px;
+                             bottom: 0;
+                             width: 2px;
+                             background: #e9ecef; */
         }
 
         .step-vertical-icon {
@@ -653,9 +651,6 @@
 
 @section('content')
 
-
-
-
     <div class="info md-hide about-ca pt-30">
         <div class="d-flex justify-content-center">
             <img src="{{ asset('memorial/' . $memorial->slug . '/' . $memorial->photo) }}"
@@ -664,62 +659,12 @@
         </div>
 
         <div class="cont text-center pt-10">
-            {{-- <ul class="rest">
-                <li>{{ $memorial->name }}</li>
-            </ul> --}}
             <h6>
                 <span class="sub-color inline">{{ $memorial->name }}</span>
             </h6>
         </div>
     </div>
-    {{-- 
-    <div class="container mt-80">
-        <div class="row d-flex justify-content-center">
-            <div class="steps-horizontal">
-                <div class="step-vertical complete">
-                    <div class="step-vertical-icon">
-                        <i class="fas fa-check"></i>
-                    </div>
-                    <div class="step-vertical-content">
-                        <p><bold>Step 1<bold></p>
-                        <p><small>Személyes adatok</small></p>
-                    </div>
-                </div>
 
-                <div class="step-vertical active">
-                    <div class="step-vertical-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <div class="step-vertical-content">
-                        <p><bold>Step 2<bold></p>
-                        <p><small>Életesemények időpontjai</small></p>
-                    </div>
-                </div>
-
-                <div class="step-vertical">
-                    <div class="step-vertical-icon">
-                        <i class="fas fa-image"></i>
-                    </div>
-                    <div class="step-vertical-content">
-                        <p><bold>Step 2<bold></p>
-                        <p><small>Média feltöltése</small></p>
-                    </div>
-                </div>
-
-                <div class="step-vertical">
-                    <div class="step-vertical-icon">
-                        <i class="fas fa-location-dot"></i>
-                    </div>
-                    <div class="step-vertical-content">
-                        <p><bold>Step 4<bold></p>
-                        <p><small>Nyughely adatok</small></p>
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
-    </div> --}}
 
 
     <div class="container mt-70">
@@ -727,8 +672,6 @@
             <div class="steps-horizontal">
                 <div class="step-horizontal complete">
                     <div class="step-icon">
-                        {{-- <i class="fas fa-user"></i> --}}
-
                         <i class="fas fa-user"></i>
                     </div>
                     <div class="step-title">{{ __('Step 1') }}</div>
@@ -762,63 +705,6 @@
 
     </div>
 
-    {{-- <div class="container pt-50">
-        <div class="stepper__row">
-            <div class="stepper--horizontal ms-4">
-                <div class="stepper--horizontal__circle ms-4">
-                    <span class="stepper--horizontal__circle__text">
-                        1
-                    </span>
-                </div>
-                <div class="stepper--horizontal__details">
-                    <p class="paragraph d-none d-md-block">
-                        {{ __('Personal Data Entry') }}
-                    </p>
-                </div>
-            </div>
-            <div class="stepper--horizontal stepper--horizontal--disabled">
-                <div class="stepper--horizontal__circle">
-                    <span class="stepper--horizontal__circle__text">
-                        2
-                    </span>
-                </div>
-                <div class="stepper--horizontal__details">
-                    <p class="paragraph d-none d-md-block">
-                        {{ __('Dates of precious moments') }}
-                    </p>
-                </div>
-            </div>
-            <div class="stepper--horizontal stepper--horizontal--disabled">
-                <div class="stepper--horizontal__circle">
-                    <span class="stepper--horizontal__circle__text">
-                        3
-                    </span>
-                </div>
-                <div class="stepper--horizontal__details">
-                    <h3 class="heading__three">
-                    </h3>
-                    <p class="paragraph d-none d-md-block">
-                        {{ __('Upload media to the memorial page') }}
-                    </p>
-                </div>
-            </div>
-            <div class="stepper--horizontal stepper--horizontal--disabled">
-                <div class="stepper--horizontal__circle">
-                    <span class="stepper--horizontal__circle__text">
-                        4
-                    </span>
-                </div>
-                <div class="stepper--horizontal__details">
-                    <h3 class="heading__three">
-                    </h3>
-                    <p class="paragraph d-none d-md-block">
-                        {{ __('Nyughely adatok megadása') }}
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
     @if ($errors->any())
         <div class="container">
             <div class="row d-flex justify-content-center">
@@ -835,13 +721,9 @@
         </div>
     @endif
 
-
     <div class="container">
         <div class=" text-secondary text-center">
-
             <div class="pt-30">
-
-                {{-- <h1 class="display-5 fw-bold text-white mt-15">Fogadja őszinte részvétünket a veszteségért.</h1> --}}
                 <div class="col-lg-8 mx-auto">
                     <p class="fs-5 mt-4 ">
                         {{ __('Choose the appropriate tab (Images, Videos or Links), then upload or paste the desired content. The uploaded materials help preserve memories and showcase important moments in the life of the deceased.') }}
@@ -851,371 +733,321 @@
         </div>
     </div>
 
-
-
-
-
-
     <div class="container mt-30">
-    <div class="col-9 mx-auto text-center">
+        <div class="col-12 col-lg-8 mx-auto text-center">
 
-        <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home"
-                    type="button" role="tab" aria-controls="pills-home" aria-selected="true">{{ __('Images') }}</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="pills-videos-tab" data-bs-toggle="pill" data-bs-target="#pills-videos"
-                    type="button" role="tab" aria-controls="pills-videos" aria-selected="false">{{ __('Videos') }}</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="pills-music-tab" data-bs-toggle="pill" data-bs-target="#pills-music"
-                    type="button" role="tab" aria-controls="pills-music" aria-selected="false">{{ __('Music') }}</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="pills-link-tab" data-bs-toggle="pill" data-bs-target="#pills-link"
-                    type="button" role="tab" aria-controls="pills-link" aria-selected="false">{{ __('Links') }}</button>
-            </li>
-        </ul>
-        <div class="tab-content" id="pills-tabContent">
-            <!-- Images Tab -->
-            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
-                {{-- <form action="" method="POST" enctype="multipart/form-data" class="mt-3">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="imageFile" class="form-label">Fénykép feltöltése</label>
-                        <input class="form-control" type="file" name="image" id="imageFile" accept="image/*" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="imageDescription" class="form-label">Leírás (nem kötelező)</label>
-                        <input class="form-control" type="text" name="description" id="imageDescription" placeholder="Pl. családi nyaralás 1998-ban">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Feltöltés</button>
-                </form> --}}
+            <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home"
+                        type="button" role="tab" aria-controls="pills-home"
+                        aria-selected="true">{{ __('Images') }}</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-videos-tab" data-bs-toggle="pill" data-bs-target="#pills-videos"
+                        type="button" role="tab" aria-controls="pills-videos"
+                        aria-selected="false">{{ __('Videos') }}</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-music-tab" data-bs-toggle="pill" data-bs-target="#pills-music"
+                        type="button" role="tab" aria-controls="pills-music"
+                        aria-selected="false">{{ __('Music') }}</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-link-tab" data-bs-toggle="pill" data-bs-target="#pills-link"
+                        type="button" role="tab" aria-controls="pills-link"
+                        aria-selected="false">{{ __('Links') }}</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                <!-- Images Tab -->
+                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"
+                    tabindex="0">
 
-
-
-                
-
-
-                <div class="mt-30">
-                    <div class="row d-flex justify-content-center">
-                        <form id="form" action="{{ route('memorial.images.upload', $memorial->id) }}" method="POST"
-                            enctype="multipart/form-data" class="px-3 rounded">
-                            @csrf
-                            {{-- <label for="images" class="form-label ">Képek feltöltése</label> --}}
-                            <div class="d-flex justify-content-center">
-                                <div class="col-8 mt-20">
-                                    <input type="file" name="images[]" multiple class="form-control" required>
-                                    <small class="text-muted">
-                                        {{ __('A maximum of 30 images can be uploaded to a memorial page. Photo format: JPEG, JPG, PNG') }}
-                                    </small>
+                    <div class="mt-30">
+                        <div class="row d-flex justify-content-center">
+                            <form id="form" action="{{ route('memorial.images.upload', $memorial->id) }}"
+                                method="POST" enctype="multipart/form-data" class="px-3 rounded">
+                                @csrf
+                                <div class="d-flex justify-content-center">
+                                    <div class="col-12 col-lg-8 mt-20">
+                                        <input type="file" name="images[]" multiple class="form-control" required>
+                                        <small class="text-muted">
+                                            {{ __('A maximum of 30 images can be uploaded to a memorial page. Photo format: JPEG, JPG, PNG') }}
+                                        </small>
+                                    </div>
                                 </div>
-                            </div>
-                            
 
-    
-                            {{-- <button type="submit" class="btn btn-secondary mt-3 w-100">Feltöltés</button> --}}
-                            <section class="text-center">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="mt-30 mb-20">
-                                            <button type="submit" id="submitBtn" class="butn butn-md butn-bord butn-rounded">
-                                                <span class="text">
-                                                    {{ __('Upload') }}
-                                                </span>
-                                                <span id="btnIcon" class="icon">
-                                                    <i class="fa-regular fa-save"></i>
-                                                </span>
-                                                <span id="btnSpinner" class="icon d-none">
-                                                    <i class="fa-solid fa-spinner fa-spin"></i>
-                                                </span>
-                                            </button>
+                                <section class="text-center">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="mt-30 mb-20">
+                                                <button type="submit" id="submitBtn"
+                                                    class="butn butn-md butn-bord butn-rounded">
+                                                    <span class="text">
+                                                        {{ __('Upload') }}
+                                                    </span>
+                                                    <span id="btnIcon" class="icon">
+                                                        <i class="fa-regular fa-save"></i>
+                                                    </span>
+                                                    <span id="btnSpinner" class="icon d-none">
+                                                        <i class="fa-solid fa-spinner fa-spin"></i>
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </form>
+                        </div>
+                    </div>
+                    @if ($memorial->memorialimages->isNotEmpty())
+                        <form action="{{ route('memorial.images.update', $memorial->id) }}" method="POST">
+                            @csrf
+                            <section class="process-ca radius-20 ontop">
+                                <div class="sec-head">
+                                    <div class="row">
+                                        <div class="col-lg-12 md-mb15 md-mt35">
+                                            <h6>{{ __('Photos') }}
+                                                <small>{{ $photoCount = $memorial->memorialimages()->count() }} /
+                                                    30</small>
+                                            </h6>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="">
+                                    <div class="container">
+                                        <div class="row d-flex justify-content-center">
+                                            <div class="">
+                                                <div class="row">
+                                                    @foreach ($memorial->memorialimages as $image)
+                                                        <input type="hidden" name="images[{{ $loop->index }}][id]"
+                                                            value="{{ $image->id }}">
+                                                        <div class="col-lg-3 bord mt-20">
+                                                            <div class="item">
+
+                                                                <div class="img fit-img mt-10 position-relative">
+                                                                    <img src="{{ asset('memorial/' . $image->image_path) }}"
+                                                                        alt="">
+                                                                    <button type="button"
+                                                                        class="btn btn-danger btn-sm delete-btn position-absolute"
+                                                                        style="top: 10px; right: 10px;"
+                                                                        data-url="{{ route('memorial.images.destroy', [$memorial, $image]) }}">
+                                                                        <span class="icon ">
+                                                                            <i class="fa fa-trash"></i>
+                                                                        </span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="cont mt-10">
+                                                                    <div class="">
+                                                                        <input id="death_date" type="date"
+                                                                            class="form-control @error('death_date') is-invalid @enderror"
+                                                                            name="images[{{ $loop->index }}][image_date]"
+                                                                            value="{{ old('name', $image->image_date) }}">
+                                                                    </div>
+                                                                    <h6 class="mt-10">
+                                                                        <input
+                                                                            name="images[{{ $loop->index }}][image_description]"
+                                                                            type="text"
+                                                                            value="{{ $image->image_description }}"
+                                                                            class="form-control "
+                                                                            placeholder="{{ __('Image description') }}">
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </section>
-    
                         </form>
-                    </div>
+                    @endif
                 </div>
-                @if ($memorial->memorialimages->isNotEmpty())
-                <form action="{{ route('memorial.images.update', $memorial->id) }}" method="POST">
-                    @csrf
-                    <section class="process-ca radius-20 ontop">
-                        <div class="sec-head">
-                            <div class="row">
-                                <div class="col-lg-12 md-mb15 md-mt35">
-                                    <h6>{{ __('Photos') }} <small>{{ $photoCount = $memorial->memorialimages()->count() }} /
-                                            30</small></h6>
-        
-                                </div>
-                            </div>
-                        </div>
-        
-        
-        
-                        <div class="">
-        
-                            <div class="container">
-                                <div class="row d-flex justify-content-center">
-        
-                                    <div class="">
-                                        <div class="row">
-        
-                                            @foreach ($memorial->memorialimages as $image)
-                                                <input type="hidden" name="images[{{ $loop->index }}][id]"
-                                                    value="{{ $image->id }}">
-                                                <div class="col-lg-3 bord mt-20">
-                                                    <div class="item">
-        
-                                                        <div class="img fit-img mt-10 position-relative">
-                                                            <img src="{{ asset('memorial/' . $image->image_path) }}"
-                                                                alt="">
-        
-                                                            <button type="button"
-                                                                class="btn btn-danger btn-sm delete-btn position-absolute"
-                                                                style="top: 10px; right: 10px;"
-                                                                data-url="{{ route('memorial.images.destroy', [$memorial, $image]) }}">
-                                                                <span class="icon ">
-                                                                    <i class="fa fa-trash"></i>
-                                                                </span>
-                                                            </button>
-                                                        </div>
-        
-                                                        <div class="cont mt-10">
-                                                            <div class="">
-                                                                <input id="death_date" type="date"
-                                                                    class="form-control @error('death_date') is-invalid @enderror"
-                                                                    name="images[{{ $loop->index }}][image_date]"
-                                                                    value="{{ old('name', $image->image_date) }}">
-                                                            </div>
-        
-                                                            <h6 class="mt-10">
-                                                                <input name="images[{{ $loop->index }}][image_description]"
-                                                                    type="text" value="{{ $image->image_description }}"
-                                                                    class="form-control " placeholder="{{ __('Image description') }}">
-                                                            </h6>
-        
-        
-        
-        
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-        
-                                        </div>
-                                    </div>
-        
-        
-                                </div>
-                            </div>
-        
-                        </div>
-        
-        
-                    </section>
-        
 
-        
-                </form>
-            @endif
-                
-
-            </div>
-        
-            <!-- Video Tab (YouTube link) -->
-            <div class="tab-pane fade" id="pills-videos" role="tabpanel" aria-labelledby="pills-videos-tab" tabindex="0">
-                <form action="{{ route('video.store') }}" method="POST" class="mt-3">
-                    @csrf
-                    <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
-                    
-                    <div class="mb-3">
-                        <label for="youtubeLink" class="form-label">YouTube videó linkje</label>
-                        <input class="form-control" type="url" name="youtube_link" id="youtubeLink" placeholder="https://www.youtube.com/watch?v=..." required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="videoDescription" class="form-label">Leírás (nem kötelező)</label>
-                        <input class="form-control" type="text" name="description" id="videoDescription" placeholder="Pl. születésnapi videó 2005-ből">
-                    </div>
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Hozzáadás</button>
-                    </div>
-                </form>
-
-                @if($videos->isEmpty())
-                <p>Nincsenek videók.</p>
-                @else
-                    <div class="row mt-50">
-                        @foreach($videos as $video)
-                            <div class="col-md-4 mb-4">
-                                <div class="card">
-                                    <div class="ratio ratio-16x9">
-                                        <iframe 
-                                        src="{{ $video['url'] }}" 
-                                        title="YouTube video player" 
-                                        frameborder="0"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                        referrerpolicy="strict-origin-when-cross-origin"
-                                        allowfullscreen>
-                                    </iframe>
-
-                                </div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ $video['title'] }}</h5>
-                                        @if($video['description'])
-                                            <p class="card-text text-muted">{{ $video['description'] }}</p>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                @endif
-
-            </div>
-        
-            <!-- Music Tab – You can customize later -->
-            <div class="tab-pane fade" id="pills-music" role="tabpanel" aria-labelledby="pills-music-tab" tabindex="0">
-                <form action="{{ route('music.store') }}" method="POST" class="mt-3">
-                    @csrf
-                    <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
-                    
-                    <div class="mb-3">
-                        <label for="youtubeLink" class="form-label">YouTube videó linkje</label>
-                        <input class="form-control" type="url" name="youtube_link" id="youtubeLink" placeholder="https://www.youtube.com/watch?v=..." required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="videoDescription" class="form-label">Leírás (nem kötelező)</label>
-                        <input class="form-control" type="text" name="description" id="videoDescription" placeholder="Pl. születésnapi videó 2005-ből">
-                    </div>
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Hozzáadás</button>
-                    </div>
-                </form>
-
-                @if($music->isEmpty())
-                <p>Nincsenek videók.</p>
-                @else
-                    <div class="row mt-50">
-                        @foreach($music as $video)
-                            <div class="col-md-4 mb-4">
-                                <div class="card">
-                                    <div class="ratio ratio-16x9">
-                                        <iframe 
-                                        src="{{ $video['url'] }}" 
-                                        title="YouTube video player" 
-                                        frameborder="0"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                        referrerpolicy="strict-origin-when-cross-origin"
-                                        allowfullscreen>
-                                    </iframe>
-
-                                </div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ $video['title'] }}</h5>
-                                        @if($video['description'])
-                                            <p class="card-text text-muted">{{ $video['description'] }}</p>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                @endif
-
-            </div>
-        
-            <!-- Link Tab (Other site links) -->
-            <div class="tab-pane fade" id="pills-link" role="tabpanel" aria-labelledby="pills-link-tab" tabindex="0">
-
-                    <form action="{{ route('link.store') }}" method="POST" class="mt-3">
+                <!-- Video Tab (YouTube link) -->
+                <div class="tab-pane fade" id="pills-videos" role="tabpanel" aria-labelledby="pills-videos-tab"
+                    tabindex="0">
+                    <form action="{{ route('video.store') }}" method="POST" class="mt-3">
                         @csrf
                         <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
-                        
+
                         <div class="mb-3">
-                            <label for="youtubeLink" class="form-label">Weboldal linkje</label>
-                            <input class="form-control" type="url" name="youtube_link" id="youtubeLink" placeholder="https://www ..." required>
+                            <label for="youtubeLink" class="form-label">{{ __('YouTube video link') }}</label>
+                            <input class="form-control" type="url" name="youtube_link" id="youtubeLink"
+                                placeholder="https://www.youtube.com/watch?v=..." required>
                         </div>
                         <div class="mb-3">
-                            <label for="videoDescription" class="form-label">Leírás (nem kötelező)</label>
-                            <input class="form-control" type="text" name="description" id="videoDescription" placeholder="Pl. életrajz másik oldalról">
+                            <label for="videoDescription" class="form-label">{{ __('Description (optional)') }}</label>
+                            <input class="form-control" type="text" name="description" id="videoDescription"
+                                placeholder="{{ __('E.g. Birthday video from 2005') }}">
                         </div>
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Link hozzáadása</button>
+                            <button type="submit" class="btn btn-primary">{{ __('Add') }}</button>
                         </div>
                     </form>
-                    @if($link->isEmpty())
-                    <p>Nincsenek videók.</p>
+
+                    @if ($videos->isEmpty())
+                        <p>{{ __('No videos found.') }}</p>
                     @else
                         <div class="row mt-50">
-                            @foreach($link as $video)
-                                <div class="col-md-6 mb-4">
+                            @foreach ($videos as $video)
+                                <div class="col-md-4 mb-4">
                                     <div class="card">
+                                        <div class="ratio ratio-16x9">
+                                            <iframe src="{{ $video['url'] }}" title="YouTube video player"
+                                                frameborder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                                            </iframe>
 
+                                        </div>
                                         <div class="card-body">
-                                            <h5 class="card-title">{{ $video['description'] }}</h5>
-
-                                            <a href="{{ $video['url'] }}">
-                                                {{ Str::limit(parse_url($video['url'], PHP_URL_HOST), 20) }}
-                                            </a>
-                                            {{-- @if($video['description'])
+                                            <h6 class="card-title">{{ __('YouTube video') }}</h6>
+                                            @if ($video['description'])
                                                 <p class="card-text text-muted">{{ $video['description'] }}</p>
-                                            @endif --}}
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
                     @endif
+
+                </div>
+
+                <!-- Music Tab -->
+                <div class="tab-pane fade" id="pills-music" role="tabpanel" aria-labelledby="pills-music-tab"
+                    tabindex="0">
+                    <form action="{{ route('music.store') }}" method="POST" class="mt-3">
+                        @csrf
+                        <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
+
+                        <div class="mb-3">
+                            <label for="youtubeLink" class="form-label">{{ __('YouTube music link') }}</label>
+                            <input class="form-control" type="url" name="youtube_link" id="youtubeLink"
+                                placeholder="https://www.youtube.com/watch?v=..." required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="videoDescription" class="form-label">{{ __('Description (optional)') }}</label>
+                            <input class="form-control" type="text" name="description" id="videoDescription"
+                                placeholder="{{ __('Favorite song') }}">
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">{{ __('Add') }}</button>
+                        </div>
+                    </form>
+
+                    @if ($music->isEmpty())
+                        <p>{{ __('No music found.') }}</p>
+                    @else
+                        <div class="row mt-50">
+                            @foreach ($music as $video)
+                                <div class="col-md-4 mb-4">
+                                    <div class="card">
+                                        <div class="ratio ratio-16x9">
+                                            <iframe src="{{ $video['url'] }}" title="YouTube video player"
+                                                frameborder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                                            </iframe>
+
+                                        </div>
+                                        <div class="card-body">
+                                            <h6 class="card-title">{{ __('Youtube song') }}</h6>
+                                            @if ($video['description'])
+                                                <p class="card-text text-muted">{{ $video['description'] }}</p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
+
+                </div>
+
+                <!-- Link Tab (Other site links) -->
+                <div class="tab-pane fade" id="pills-link" role="tabpanel" aria-labelledby="pills-link-tab"
+                    tabindex="0">
+
+                    <form action="{{ route('link.store') }}" method="POST" class="mt-3">
+                        @csrf
+                        <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
+
+                        <div class="mb-3">
+                            <label for="youtubeLink" class="form-label">{{ __('Webpage link') }}</label>
+                            <input class="form-control" type="url" name="youtube_link" id="youtubeLink"
+                                placeholder="https://www ..." required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="videoDescription" class="form-label">{{ __('Description (optional)') }}</label>
+                            <input class="form-control" type="text" name="description" id="videoDescription"
+                                placeholder="{{ __('E.g. biography from another site or wikipedia') }}">
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">{{ __('Add') }}</button>
+                        </div>
+                    </form>
+                    @if ($link->isEmpty())
+                        <p>{{ __('No links found.') }}</p>
+                    @else
+                        <div class="row mt-50">
+                            @foreach ($link as $video)
+                                <div class="col-md-6 mb-4">
+                                    <div class="card">
+                                        <a href="{{ $video['url'] }}">
+                                            <div class="card-body">
+                                                <h6 class="card-title">{{ __('Webpage link') }}</h6>
+
+                                                {{ Str::limit(parse_url($video['url'], PHP_URL_HOST), 20) }}
+                                            </div>
+                                        </a>
+
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between mt-50 pb-50">
+                <a href="{{ route('timeline.create', $memorial) }}" class="btn btn-secondary">{{ __('Back') }}</a>
+                <a href="{{ route('place', $memorial) }}" class="btn btn-primary">
+                    <i class="fa fa-save"></i> {{ __('Next') }}
+                </a>
             </div>
         </div>
-        
-
-        {{-- <nav>
-            <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
-              <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Home</button>
-              <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</button>
-              <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
-              <button class="nav-link" id="nav-disabled-tab" data-bs-toggle="tab" data-bs-target="#nav-disabled" type="button" role="tab" aria-controls="nav-disabled" aria-selected="false" disabled>Disabled</button>
-            </div>
-          </nav>
-          <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">...</div>
-            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">...</div>
-            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">...</div>
-            <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">...</div>
-          </div> --}}
-
-
-
-
-        <div class="d-flex justify-content-between mt-50 pb-50">
-            <a href="{{ route('timeline.create', $memorial) }}" class="btn btn-secondary">{{ __('Back') }}</a>
-            <a href="{{ route('place', $memorial) }}" class="btn btn-primary">
-                <i class="fa fa-save"></i> {{ __('Next') }}
-            </a>
-
-        </div>
     </div>
-
-    </div>
-
 @endsection
 
 @section('js')
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const activeTab = "{{ session('tab') }}";
-        if (activeTab) {
-            const tabTrigger = document.querySelector(`[data-bs-target="#pills-${activeTab}"]`);
-            if (tabTrigger) {
-                const tab = new bootstrap.Tab(tabTrigger);
-                tab.show();
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const activeTab = "{{ session('tab') }}";
+            if (activeTab) {
+                const tabTrigger = document.querySelector(`[data-bs-target="#pills-${activeTab}"]`);
+                if (tabTrigger) {
+                    const tab = new bootstrap.Tab(tabTrigger);
+                    tab.show();
+                }
             }
-        }
-    });
-</script>
+        });
+        
+        document.getElementById("form").addEventListener("submit", function(event) {
+            let button = document.getElementById("submitBtn");
+            let btnIcon = document.getElementById("btnIcon");
+            let btnSpinner = document.getElementById("btnSpinner");
 
+            // Отключаем кнопку
+            button.disabled = true;
+
+            // Скрываем иконку сохранения, показываем спиннер
+            btnIcon.classList.add("d-none");
+            btnSpinner.classList.remove("d-none");
+        });
+    </script>
 @endsection

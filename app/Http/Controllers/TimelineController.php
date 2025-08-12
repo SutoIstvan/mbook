@@ -15,25 +15,21 @@ class TimelineController extends Controller
 {
     public function create(Memorial $memorial)
     {
-        $exists = Timeline::where('memorial_id', $memorial->id)
-            ->where('title', $memorial->name . ' ' . Carbon::parse($memorial->birth_date)->format('Y.d.m') . ' ' . __('birth'))
-            ->where('date', $memorial->birth_date)
-            ->where('type', 'birth')
-            ->exists();
 
-        if (!$exists) {
-            Timeline::create([
+        Timeline::firstOrCreate(
+            [
                 'memorial_id' => $memorial->id,
-                'title' => $memorial->name . ' ' . Carbon::parse($memorial->birth_date)->format('Y.d.m') . ' ' . __('birth'),
-                'description' => '',
                 'date' => $memorial->birth_date,
-                'type' => 'birth',
+                'description' => 'birth',
+                'type' => __('Birth'),
+            ],
+            [
+                'title' => $memorial->name,
                 'order' => 1,
-            ]);
-        }
+            ]
+        );
 
         $familyMembers = Family::where('memorial_id', $memorial->id)->get()->groupBy('role');
-        //  dd($familyMembers);
 
         // --- Рождение детей ---
         if (!empty($familyMembers['children'])) {
@@ -82,20 +78,9 @@ class TimelineController extends Controller
             }
         }
 
-        // dd($memorial->name);
-
-        // $timelines = Timeline::where('memorial_id', $memorial->id)->get();
         $timelines = Timeline::where('memorial_id', $memorial->id)
             ->orderBy('date', 'desc')
             ->get();
-
-        // $children = Family::where('memorial_id', $memorial->id)
-        //     ->where('role', 'children')
-        //     ->get();
-
-        // $partners = Family::where('memorial_id', $memorial->id)
-        //     ->where('role', 'partner')
-        //     ->get();
 
         return view('memorial.timeline', compact('memorial', 'familyMembers', 'timelines'));
     }
@@ -143,7 +128,6 @@ class TimelineController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request);
         // Валидация входящих данных
         $validatedData = $request->validate([
             'children.*.id' => 'nullable|integer|exists:family,id',
@@ -151,8 +135,8 @@ class TimelineController extends Controller
             'children.*.birth_date' => 'nullable|date',
             'new_children.*.name' => 'nullable|string|max:255',
             'new_children.*.birth_date' => 'nullable|date',
-            'event_type' => 'nullable|string', // Добавляем тип события
-            'date' => 'nullable|date', // Дата события
+            'event_type' => 'nullable|string',
+            'date' => 'nullable|date',
         ]);
 
         // Создание записи в таймлайне для каждого существующего ребенка
@@ -212,144 +196,144 @@ class TimelineController extends Controller
         return back()->with('success', 'Dátumok sikeresen mentve!');
     }
 
-    public function storeMarriage(Request $request)
-    {
-        //  dd($request);
-        // Валидация входящих данных
-        $validatedData = $request->validate([
-            'marriages.*.id' => 'nullable|integer|exists:family,id',
-            'marriages.*.name' => 'nullable|string|max:255',
-            'marriages.*.marriage_date' => 'nullable|date',
-            'new_marriages.*.partner_name' => 'nullable|string|max:255',
-            'new_marriages.*.marriage_date' => 'nullable|date',
-            'event_type' => 'nullable|string', // Добавляем тип события
-            'date' => 'nullable|date', // Дата события
-        ]);
+    // public function storeMarriage(Request $request)
+    // {
+    //     //  dd($request);
+    //     // Валидация входящих данных
+    //     $validatedData = $request->validate([
+    //         'marriages.*.id' => 'nullable|integer|exists:family,id',
+    //         'marriages.*.name' => 'nullable|string|max:255',
+    //         'marriages.*.marriage_date' => 'nullable|date',
+    //         'new_marriages.*.partner_name' => 'nullable|string|max:255',
+    //         'new_marriages.*.marriage_date' => 'nullable|date',
+    //         'event_type' => 'nullable|string', // Добавляем тип события
+    //         'date' => 'nullable|date', // Дата события
+    //     ]);
 
-        // dd($validatedData);
-        // Создание записи в таймлайне для каждого существующего ребенка
-        foreach ($validatedData['marriages'] as $marriage) {
-            // Обновим ребёнка по ID
-            $partner = Family::find($marriage['id']);
-            // dd($partner);
-            if ($partner) {
-                $partner->update([
-                    'birth_date' => $marriage['marriage_date'],
-                ]);
+    //     // dd($validatedData);
+    //     // Создание записи в таймлайне для каждого существующего ребенка
+    //     foreach ($validatedData['marriages'] as $marriage) {
+    //         // Обновим ребёнка по ID
+    //         $partner = Family::find($marriage['id']);
+    //         // dd($partner);
+    //         if ($partner) {
+    //             $partner->update([
+    //                 'birth_date' => $marriage['marriage_date'],
+    //             ]);
 
-                Timeline::updateOrCreate(
-                    [
-                        'memorial_id' => $request->memorial_id,
-                        'type' => 'marriage',
-                        'related_person' => $partner->name, // можно привязать по имени
-                    ],
-                    [
-                        'title' => $partner->name,
-                        'date' => $marriage['marriage_date'],
-                        'order' => 1,
-                    ]
-                );
-            }
-        }
+    //             Timeline::updateOrCreate(
+    //                 [
+    //                     'memorial_id' => $request->memorial_id,
+    //                     'type' => 'marriage',
+    //                     'related_person' => $partner->name, // можно привязать по имени
+    //                 ],
+    //                 [
+    //                     'title' => $partner->name,
+    //                     'date' => $marriage['marriage_date'],
+    //                     'order' => 1,
+    //                 ]
+    //             );
+    //         }
+    //     }
 
-        // Создание записи в таймлайне для каждого нового ребенка
-        if (!empty($validatedData['new_marriages'])) {
-            foreach ($validatedData['new_marriages'] as $newMarriagesData) {
-                // Создаём запись в Timeline
-                // dd($newMarriagesData);
-                Timeline::create([
-                    'memorial_id' => $request->memorial_id,
-                    'title' => $newMarriagesData['partner_name'],
-                    'description' => $newMarriagesData['partner_name'],
-                    'type' => 'marriage',
-                    'date' => $newMarriagesData['marriage_date'],
-                    'order' => 1,
-                ]);
+    //     // Создание записи в таймлайне для каждого нового ребенка
+    //     if (!empty($validatedData['new_marriages'])) {
+    //         foreach ($validatedData['new_marriages'] as $newMarriagesData) {
+    //             // Создаём запись в Timeline
+    //             // dd($newMarriagesData);
+    //             Timeline::create([
+    //                 'memorial_id' => $request->memorial_id,
+    //                 'title' => $newMarriagesData['partner_name'],
+    //                 'description' => $newMarriagesData['partner_name'],
+    //                 'type' => 'marriage',
+    //                 'date' => $newMarriagesData['marriage_date'],
+    //                 'order' => 1,
+    //             ]);
 
-                // Создаём или обновляем запись в Family
-                Family::updateOrCreate(
-                    [
-                        'memorial_id' => $request->memorial_id,
-                        'name' => $newMarriagesData['partner_name']
-                    ],
-                    [
-                        'birth_date' => $newMarriagesData['marriage_date'],
-                        'role' => 'partner'
-                    ]
-                );
-            }
-        }
+    //             // Создаём или обновляем запись в Family
+    //             Family::updateOrCreate(
+    //                 [
+    //                     'memorial_id' => $request->memorial_id,
+    //                     'name' => $newMarriagesData['partner_name']
+    //                 ],
+    //                 [
+    //                     'birth_date' => $newMarriagesData['marriage_date'],
+    //                     'role' => 'partner'
+    //                 ]
+    //             );
+    //         }
+    //     }
 
-        return back()->with('success', 'Dátumok sikeresen mentve!');
-    }
+    //     return back()->with('success', 'Dátumok sikeresen mentve!');
+    // }
 
-    public function addSchool(Request $request)
-    {
-        $validated = $request->validate([
-            'memorial_id' => 'required|exists:memorials,id',
-            'school_name' => 'required|string|max:255',
-            'school_date' => 'required|date',
-            'school_date_to' => 'required|date',
-        ]);
+    // public function addSchool(Request $request)
+    // {
+    //     $validated = $request->validate([
+    //         'memorial_id' => 'required|exists:memorials,id',
+    //         'school_name' => 'required|string|max:255',
+    //         'school_date' => 'required|date',
+    //         'school_date_to' => 'required|date',
+    //     ]);
 
-        Timeline::create([
-            'memorial_id' => $validated['memorial_id'],
-            'title' => $validated['school_name'],
-            'description' => $validated['school_name'],
-            'type' => 'school',
-            'date' => $validated['school_date'],
-            'date_to' => $validated['school_date_to'],
-            'order' => 1,
-        ]);
+    //     Timeline::create([
+    //         'memorial_id' => $validated['memorial_id'],
+    //         'title' => $validated['school_name'],
+    //         'description' => $validated['school_name'],
+    //         'type' => 'school',
+    //         'date' => $validated['school_date'],
+    //         'date_to' => $validated['school_date_to'],
+    //         'order' => 1,
+    //     ]);
 
-        return back()->with('success', 'Iskola sikeresen hozzáadva a timeline-hoz.');
-    }
+    //     return back()->with('success', 'Iskola sikeresen hozzáadva a timeline-hoz.');
+    // }
 
-    public function addWork(Request $request)
-    {
-        // dd($request);
-        $validated = $request->validate([
-            'memorial_id' => 'required|exists:memorials,id',
-            'work_name' => 'required|string|max:255',
-            'work_date' => 'required|date',
-            'work_date_to' => 'required|date',
-        ]);
+    // public function addWork(Request $request)
+    // {
+    //     // dd($request);
+    //     $validated = $request->validate([
+    //         'memorial_id' => 'required|exists:memorials,id',
+    //         'work_name' => 'required|string|max:255',
+    //         'work_date' => 'required|date',
+    //         'work_date_to' => 'required|date',
+    //     ]);
 
-        Timeline::create([
-            'memorial_id' => $validated['memorial_id'],
-            'title' => $validated['work_name'],
-            'description' => $validated['work_name'],
-            'type' => 'work',
-            'date' => $validated['work_date'],
-            'date_to' => $validated['work_date_to'],
-            'order' => 1,
-        ]);
+    //     Timeline::create([
+    //         'memorial_id' => $validated['memorial_id'],
+    //         'title' => $validated['work_name'],
+    //         'description' => $validated['work_name'],
+    //         'type' => 'work',
+    //         'date' => $validated['work_date'],
+    //         'date_to' => $validated['work_date_to'],
+    //         'order' => 1,
+    //     ]);
 
-        return back()->with('success', 'Iskola sikeresen hozzáadva a timeline-hoz.');
-    }
+    //     return back()->with('success', 'Iskola sikeresen hozzáadva a timeline-hoz.');
+    // }
 
-    public function addHobby(Request $request)
-    {
-        // dd($request);
-        $validated = $request->validate([
-            'memorial_id' => 'required|exists:memorials,id',
-            'hobby_name' => 'required|string|max:255',
-            // 'hobby_date' => 'required|date',
-            // 'hobby_date_to' => 'required|date',
-        ]);
+    // public function addHobby(Request $request)
+    // {
+    //     // dd($request);
+    //     $validated = $request->validate([
+    //         'memorial_id' => 'required|exists:memorials,id',
+    //         'hobby_name' => 'required|string|max:255',
+    //         // 'hobby_date' => 'required|date',
+    //         // 'hobby_date_to' => 'required|date',
+    //     ]);
 
-        Timeline::create([
-            'memorial_id' => $validated['memorial_id'],
-            'title' => $validated['hobby_name'],
-            'description' => $validated['hobby_name'],
-            'type' => 'hobby',
-            // 'date' => $validated['hobby_date'],
-            // 'date_to' => $validated['hobby_date_to'],
-            'order' => 1,
-        ]);
+    //     Timeline::create([
+    //         'memorial_id' => $validated['memorial_id'],
+    //         'title' => $validated['hobby_name'],
+    //         'description' => $validated['hobby_name'],
+    //         'type' => 'hobby',
+    //         // 'date' => $validated['hobby_date'],
+    //         // 'date_to' => $validated['hobby_date_to'],
+    //         'order' => 1,
+    //     ]);
 
-        return back()->with('success', 'Iskola sikeresen hozzáadva a timeline-hoz.');
-    }
+    //     return back()->with('success', 'Iskola sikeresen hozzáadva a timeline-hoz.');
+    // }
 
     public function destroy($id)
     {
@@ -428,24 +412,16 @@ class TimelineController extends Controller
     public function newstore(Request $request)
     {
         // dd($request);
-        // Валидация входящих данных
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
-            'year' => 'required|integer|min:1900|max:' . date('Y'),
-
-            // 'description' => 'nullable|string',
-            // 'year' => 'required|date',
+            'year' => 'nullable|integer|min:1900|max:' . date('Y'),
             'type' => 'required|string',
             'memorial_id' => 'required|exists:memorials,id',
         ]);
 
-        // Создание новой записи в таймлайне
-        // Timeline::create($validatedData);
-
-        // Создание новой записи в таймлайне
         Timeline::create([
             'title' => $validatedData['title'],
-            'year' => $validatedData['year'] . '-01-01', // Преобразуем год в дату
+            'date' => $validatedData['year'] . '-01-01',
             'type' => $validatedData['type'],
             'memorial_id' => $validatedData['memorial_id'],
         ]);
@@ -453,58 +429,58 @@ class TimelineController extends Controller
         return back()->with('success', 'Esemény sikeresen hozzáadva a timeline-hoz.');
     }
 
-public function updateAll(Request $request)
-{
-    // Валидация существующих таймлайнов
-    $validatedData = $request->validate([
-        'timelines' => 'required|array',
-        'timelines.*.id' => 'required|exists:timelines,id',
-        'timelines.*.title' => 'required|string|max:255',
-        'timelines.*.year' => 'required|integer|min:1900|max:' . date('Y'),
-        'timelines.*.type' => 'required|string',
-        'timelines.*.delete' => 'nullable|boolean',
+    public function updateAll(Request $request)
+    {
+        // Валидация существующих таймлайнов
+        $validatedData = $request->validate([
+            'timelines' => 'required|array',
+            'timelines.*.id' => 'required|exists:timelines,id',
+            'timelines.*.title' => 'required|string|max:255',
+            'timelines.*.year' => 'required|integer|min:1900|max:' . date('Y'),
+            'timelines.*.type' => 'required|string',
+            'timelines.*.delete' => 'nullable|boolean',
 
-        // Валидация новой записи
-        'title' => 'nullable|string|max:255',
-        'year' => 'nullable|integer|min:1900|max:' . date('Y'),
-        'type' => 'nullable|string',
-        'custom_type' => 'nullable|string|max:255',
-        'memorial_id' => 'required|integer|exists:memorials,id',
-    ]);
-
-    // Обновляем существующие
-    foreach ($validatedData['timelines'] as $timelineData) {
-        $timeline = Timeline::find($timelineData['id']);
-        if (!$timeline) continue;
-
-        if (!empty($timelineData['delete'])) {
-            $timeline->delete();
-            continue;
-        }
-
-        $timeline->title = $timelineData['title'];
-        $timeline->date = $timelineData['year'] . '-01-01';
-        $timeline->type = $timelineData['type'];
-        $timeline->save();
-    }
-
-    // Создаём новую запись, если передан title
-    if (!empty($validatedData['title'])) {
-        $type = $validatedData['type'];
-        if ($type === 'other_properties' && !empty($validatedData['custom_type'])) {
-            $type = $validatedData['custom_type'];
-        }
-
-        Timeline::create([
-            'title' => $validatedData['title'],
-            'date' => $validatedData['year'] . '-01-01',
-            'type' => $type,
-            'memorial_id' => $validatedData['memorial_id'],
+            // Валидация новой записи
+            'title' => 'nullable|string|max:255',
+            'year' => 'nullable|integer|min:1900|max:' . date('Y'),
+            'type' => 'nullable|string',
+            'custom_type' => 'nullable|string|max:255',
+            'memorial_id' => 'required|integer|exists:memorials,id',
         ]);
-    }
 
-    return back()->with('success', 'Таймлайны успешно обновлены');
-}
+        // Обновляем существующие
+        foreach ($validatedData['timelines'] as $timelineData) {
+            $timeline = Timeline::find($timelineData['id']);
+            if (!$timeline) continue;
+
+            if (!empty($timelineData['delete'])) {
+                $timeline->delete();
+                continue;
+            }
+
+            $timeline->title = $timelineData['title'];
+            $timeline->date = $timelineData['year'] . '-01-01';
+            $timeline->type = $timelineData['type'];
+            $timeline->save();
+        }
+
+        // Создаём новую запись, если передан title
+        if (!empty($validatedData['title'])) {
+            $type = $validatedData['type'];
+            if ($type === 'other_properties' && !empty($validatedData['custom_type'])) {
+                $type = $validatedData['custom_type'];
+            }
+
+            Timeline::create([
+                'title' => $validatedData['title'],
+                'date' => $validatedData['year'] . '-01-01',
+                'type' => $type,
+                'memorial_id' => $validatedData['memorial_id'],
+            ]);
+        }
+
+        return back()->with('success', 'Таймлайны успешно обновлены');
+    }
 
 
     public function updateNext(Request $request)
@@ -522,20 +498,33 @@ public function updateAll(Request $request)
             $timeline = Timeline::find($timelineData['id']);
             if (!$timeline) continue;
 
-            // if (!empty($timelineData['delete'])) {
-            //     // Если стоит флаг удаления — удаляем запись
-            //     $timeline->delete();
-            //     continue;
-            // }
+            // Пропускаем, если это запись о рождении
+            if ($timeline->description === 'birth') {
+                continue;
+            }
 
-            // Обновляем поля
+            $newDate = $timelineData['year'] . '-01-01';
+            $newType = $timelineData['type'];
+
+            $duplicateExists = Timeline::where('memorial_id', $timeline->memorial_id)
+                ->where('date', $newDate)
+                ->where('type', $newType)
+                ->where('id', '!=', $timeline->id)
+                ->exists();
+
+            if ($duplicateExists) {
+                continue;
+            }
+
             $timeline->title = $timelineData['title'];
-            $timeline->date = $timelineData['year'] . '-01-01'; // преобразуем в дату
-            $timeline->type = $timelineData['type'];
+            $timeline->date = $newDate;
+            $timeline->type = $newType;
             $timeline->save();
         }
 
+
         $memorial = Memorial::findOrFail($request->memorial_id);
+
         return redirect()->route('timeline.gallery', $memorial);
     }
 }

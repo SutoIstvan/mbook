@@ -762,11 +762,11 @@
         .step-vertical:not(:last-child)::after {
             content: '';
             /* position: absolute;
-                                                     left: 25px;
-                                                     top: 60px;
-                                                     bottom: 0;
-                                                     width: 2px;
-                                                     background: #e9ecef; */
+                                                         left: 25px;
+                                                         top: 60px;
+                                                         bottom: 0;
+                                                         width: 2px;
+                                                         background: #e9ecef; */
         }
 
         .step-vertical-icon {
@@ -1058,7 +1058,7 @@
 
                 <div class="">
 
-                    <form action="{{ route('timelines.updateNext') }}" method="POST">
+                    <form action="{{ route('timelines.newstore', $memorial) }}" method="POST">
                         @csrf
                         <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
 
@@ -1096,33 +1096,38 @@
                             </div>
                             <div class="border mt-1">
                                 <div class="tracking-content defaultcolor fs-6">
-                                    <select name="type" class="form-select">
+                                    <select name="type" class="form-select" id="typeSelect">
                                         <option value="">{{ __('Select event type') }}</option>
                                         <option value="child_birth">{{ __('Child Birth') }}</option>
                                         <option value="marriage">{{ __('Marriage') }}</option>
                                         <option value="school">{{ __('School') }}</option>
                                         <option value="work">{{ __('Work') }}</option>
                                         <option value="hobby">{{ __('Hobby') }}</option>
-                                        <option value="birth">{{ __('Birth') }}</option>
                                         <option value="other_properties">{{ __('Other Properties') }}</option>
                                     </select>
 
-                                    <span>
-                                        <span class="pt-2 fs-6">
-                                            <div class="mb-2">
-                                                <input type="text" name="title" class="form-control"
-                                                    placeholder="{{ __('Enter timeline details') }}">
-                                            </div>
-                                        </span>
-                                    </span>
+                                    <!-- Поле для своего значения -->
+                                    <div id="customTypeWrapper" class="mt-2" style="display: none;">
+                                        <input type="text" name="type" class="form-control"
+                                            placeholder="{{ __('Enter a name for the timeline') }}">
+                                    </div>
+
+                                    <div class="mt-2">
+                                        <input type="text" name="title" class="form-control"
+                                            placeholder="{{ __('Enter timeline details') }}">
+                                    </div>
 
                                     <button type="submit"
                                         class="btn btn-outline-primary mt-2">{{ __('Add') }}</button>
-
                                 </div>
-
                             </div>
                         </div>
+                    </form>
+
+
+                    <form action="{{ route('timelines.updateNext') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
 
                         {{-- Список существующих событий для редактирования --}}
                         @foreach ($timelines as $timeline)
@@ -1169,15 +1174,6 @@
                                         </svg>
                                     @endif
 
-                                    @if ($timeline->type == 'birth')
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px"
-                                            viewBox="0 0 24 24" fill="none">
-                                            <path
-                                                d="M17.8928 14V15.5403C17.8928 16.2412 17.8928 16.5917 17.772 16.9159C17.6512 17.2402 17.4187 17.5138 16.9537 18.0611L14.5722 20.8641C14.098 21.4222 13.8609 21.7013 13.5309 21.8506C13.2009 22 12.8213 22 12.0623 22H11.9377C11.1787 22 10.7991 22 10.4691 21.8506C10.1391 21.7013 9.902 21.4222 9.42782 20.8641L7.04634 18.0611C6.58132 17.5138 6.34881 17.2402 6.22802 16.9159C6.10722 16.5917 6.10722 16.2412 6.10722 15.5403V10.2771C6.10722 9.59221 6.10722 9.24977 5.96019 8.94876C5.81316 8.64776 5.53703 8.4249 4.98478 7.97919L4.77744 7.81185C3.59546 6.85789 3.00447 6.38092 3.00003 5.69048C2.99558 5.00004 3.51976 4.5665 4.56811 3.6994C4.7268 3.56815 4.88401 3.44537 5.03581 3.33647C5.60851 2.92561 6.43826 2.47259 7.02213 2.1703C7.45452 1.94644 7.97468 1.94578 8.41603 2.15357L8.68001 2.27785C8.74931 2.31047 8.80836 2.35956 8.85134 2.42026C10.3492 4.53585 13.6508 4.53585 15.1487 2.42026C15.1916 2.35956 15.2507 2.31047 15.32 2.27785L15.584 2.15357C16.0253 1.94578 16.5455 1.94644 16.9779 2.1703C17.5617 2.47259 18.3915 2.92561 18.9642 3.33647C19.116 3.44537 19.2732 3.56815 19.4319 3.69941C20.4802 4.5665 21.0044 5.00004 21 5.69048C20.9955 6.38092 20.4045 6.85789 19.2226 7.81185L19.0152 7.97919C18.463 8.4249 18.1868 8.64776 18.0398 8.94876C17.9141 9.20615 17.8959 9.49383 17.8932 10"
-                                                stroke="#24cdd5" stroke-width="1.5" stroke-linecap="round" />
-                                        </svg>
-                                    @endif
-
                                     @if ($timeline->type == 'work')
                                         <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px"
                                             viewBox="0 0 24 24" fill="none">
@@ -1207,8 +1203,26 @@
                                         </svg>
                                     @endif
 
+                                    @if (
+                                        $timeline->type != 'marriage' &&
+                                            $timeline->type != 'hobby' &&
+                                            $timeline->type != 'school' &&
+                                            $timeline->type != 'work' &&
+                                            $timeline->type != 'child_birth')
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px"
+                                            viewBox="0 0 24 24" fill="none">
+                                            <path
+                                                d="M7.43361 9.90622C5.34288 10.3793 4.29751 10.6158 4.04881 11.4156C3.8001 12.2153 4.51276 13.0487 5.93808 14.7154L6.30683 15.1466C6.71186 15.6203 6.91438 15.8571 7.00548 16.1501C7.09659 16.443 7.06597 16.759 7.00474 17.3909L6.94899 17.9662C6.7335 20.19 6.62575 21.3019 7.27688 21.7962C7.928 22.2905 8.90677 21.8398 10.8643 20.9385L11.3708 20.7053C11.927 20.4492 12.2052 20.3211 12.5 20.3211C12.7948 20.3211 13.073 20.4492 13.6292 20.7053L14.1357 20.9385C16.0932 21.8398 17.072 22.2905 17.7231 21.7962C18.3742 21.3019 18.2665 20.19 18.051 17.9662M19.0619 14.7154C20.4872 13.0487 21.1999 12.2153 20.9512 11.4156C20.7025 10.6158 19.6571 10.3793 17.5664 9.90622L17.0255 9.78384C16.4314 9.64942 16.1343 9.5822 15.8958 9.40114C15.6573 9.22007 15.5043 8.94564 15.1984 8.3968L14.9198 7.89712C13.8432 5.96571 13.3048 5 12.5 5C11.6952 5 11.1568 5.96571 10.0802 7.89712"
+                                                stroke="#24cdd5" stroke-width="1.5" stroke-linecap="round"></path>
+                                            <path
+                                                d="M4.98987 2C4.98987 2 5.2778 3.45771 5.90909 4.08475C6.54037 4.71179 8 4.98987 8 4.98987C8 4.98987 6.54229 5.2778 5.91525 5.90909C5.28821 6.54037 5.01013 8 5.01013 8C5.01013 8 4.7222 6.54229 4.09091 5.91525C3.45963 5.28821 2 5.01013 2 5.01013C2 5.01013 3.45771 4.7222 4.08475 4.09091C4.71179 3.45963 4.98987 2 4.98987 2Z"
+                                                stroke="#24cdd5" stroke-linejoin="round"></path>
+                                            <path d="M18 5H20M19 6L19 4" stroke="#24cdd5" stroke-width="1.5"
+                                                stroke-linecap="round"></path>
+                                        </svg>
+                                    @endif
 
-                                    <!-- <i class="fas fa-circle"></i> -->
+
                                 </div>
 
                                 <div class="tracking-date defaultcolor fs-4 wow fadeIn d-flex justify-content-end mt-1"
@@ -1222,53 +1236,54 @@
                                             </option>
                                         @endfor
                                     </select>
-
-                                    <div class="ms-3 d-block d-md-none">
-                                        <button type="button" class="btn btn-sm btn-outline-danger"
-                                            onclick="deleteTimeline({{ $timeline->id }})">
-                                            {{ __('Delete') }}
-                                        </button>
-                                    </div>
-
                                 </div>
 
                                 <div class="border p-3">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="tracking-content defaultcolor fs-6 w-100">
-                                            <select name="timelines[{{ $timeline->id }}][type]" class="form-select">
-                                                <option value="child_birth"
-                                                    {{ $timeline->type == 'child_birth' ? 'selected' : '' }}>
-                                                    {{ __('Child Birth') }}</option>
-                                                <option value="marriage"
-                                                    {{ $timeline->type == 'marriage' ? 'selected' : '' }}>
-                                                    {{ __('Marriage') }}</option>
-                                                <option value="school"
-                                                    {{ $timeline->type == 'school' ? 'selected' : '' }}>
-                                                    {{ __('School') }}</option>
-                                                <option value="work" {{ $timeline->type == 'work' ? 'selected' : '' }}>
-                                                    {{ __('Work') }}</option>
-                                                <option value="hobby" {{ $timeline->type == 'hobby' ? 'selected' : '' }}>
-                                                    {{ __('Hobby') }}</option>
-                                                <option value="birth" {{ $timeline->type == 'birth' ? 'selected' : '' }}>
-                                                    {{ __('Birth') }}</option>
-                                                <option value="other_properties"
-                                                    {{ $timeline->type == 'other_properties' ? 'selected' : '' }}>
-                                                    {{ __('Other Properties') }}</option>
-                                            </select>
+                                            @if (in_array($timeline->type, ['child_birth', 'marriage', 'school', 'work', 'hobby']))
+                                                <select name="timelines[{{ $timeline->id }}][type]" class="form-select">
+                                                    <option value="child_birth"
+                                                        {{ $timeline->type == 'child_birth' ? 'selected' : '' }}>
+                                                        {{ __('Child Birth') }}
+                                                    </option>
+                                                    <option value="marriage"
+                                                        {{ $timeline->type == 'marriage' ? 'selected' : '' }}>
+                                                        {{ __('Marriage') }}
+                                                    </option>
+                                                    <option value="school"
+                                                        {{ $timeline->type == 'school' ? 'selected' : '' }}>
+                                                        {{ __('School') }}
+                                                    </option>
+                                                    <option value="work"
+                                                        {{ $timeline->type == 'work' ? 'selected' : '' }}>
+                                                        {{ __('Work') }}
+                                                    </option>
+                                                    <option value="hobby"
+                                                        {{ $timeline->type == 'hobby' ? 'selected' : '' }}>
+                                                        {{ __('Hobby') }}
+                                                    </option>
+                                                </select>
+                                            @else
+                                                {{-- Кастомный тип --}}
+                                                <input type="text" name="timelines[{{ $timeline->id }}][type]"
+                                                    class="form-control" value="{{ $timeline->type }}"
+                                                    placeholder="{{ __('Enter custom type') }}">
+                                            @endif
 
                                             <input type="text" name="timelines[{{ $timeline->id }}][title]"
                                                 class="form-control mt-2" value="{{ $timeline->title }}"
                                                 placeholder="{{ __('Enter timeline details') }}">
                                         </div>
 
-                                        {{-- Кнопка удаления можно либо через JS, либо чекбокс --}}
-                                        <div class="ms-3 d-none d-md-block">
+
+                                        {{-- Кнопка удаления можно либо через JS --}}
+                                        <div class="ms-3">
                                             <button type="button" class="btn btn-sm btn-outline-danger"
                                                 onclick="deleteTimeline({{ $timeline->id }})">
                                                 {{ __('Delete') }}
                                             </button>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -1277,7 +1292,7 @@
                             <button type="submit" class="btn btn-primary mt-3">{{ __('Save changes') }}</button>
                         </div> --}}
 
-                    
+
 
 
                 </div>
@@ -1285,12 +1300,14 @@
 
             <div class="container col-12 col-md-10">
                 <div class="d-flex justify-content-between mt-50 pb-50">
-                    <a href="{{ route('family.create', $memorial) }}" class="btn btn-secondary ms-3">{{ __('Back') }}</a>
+                    <a href="{{ route('family.create', $memorial) }}"
+                        class="btn btn-secondary ms-3">{{ __('Back') }}</a>
 
-                    <button type="submit" class="btn btn-primary"> <i class="fa fa-save"></i> {{ __('Next') }}</button>
+                    <button type="submit" class="btn btn-primary"> <i class="fa fa-save"></i>
+                        {{ __('Next') }}</button>
                 </div>
             </div>
-        </form>
+            </form>
 
         @endsection
 
@@ -1325,6 +1342,15 @@
                     document.body.appendChild(form);
                     form.submit();
                 }
+
+                document.getElementById('typeSelect').addEventListener('change', function() {
+                    const customTypeWrapper = document.getElementById('customTypeWrapper');
+                    if (this.value === 'other_properties') {
+                        customTypeWrapper.style.display = 'block';
+                    } else {
+                        customTypeWrapper.style.display = 'none';
+                    }
+                });
             </script>
             {{-- <script>
                 document.addEventListener('DOMContentLoaded', function() {
