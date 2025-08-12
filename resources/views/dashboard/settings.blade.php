@@ -160,7 +160,7 @@
         <form action="{{ route('dashboard.destroy', $memorial) }}" method="POST" onsubmit="return confirm('{{ __('Are you sure you want to delete this page?') }}')">
             @csrf
             @method('DELETE')
-            <button type="submit" class="btn btn-danger w-100">{{ __('Delete Page') }}</button>
+            <button type="submit" class="butn btn-danger butn-md butn-bord butn-rounded w-100">{{ __('Delete Page') }}</button>
         </form>
     </div>
 </div>

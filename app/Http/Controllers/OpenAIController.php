@@ -113,108 +113,123 @@ class OpenAIController extends Controller
     }
 
 
-    public function suggestBiography(Memorial $memorial)
-    {
+public function suggestBiography(Memorial $memorial, Request $request)
+{ 
+    $memorial = Memorial::findOrFail($memorial->id);
+    
+    // Получаем биографию из тела запроса (JSON), а не из query параметров
+    $requestData = $request->json()->all();
+    $memorial->biography = $requestData['biography'] ?? '';
+    $memorial->save();
 
-        $prompt = __("aigenerate.prompt");
+    $prompt = __("aigenerate.prompt");
 
-        // Добавляем имя умершего
-        $prompt .= __("aigenerate.name") . ": {$memorial->name}\n";
+    // Добавляем имя умершего
+    $prompt .= __("aigenerate.name") . ": {$memorial->name}\n";
 
-        $prompt .= __("aigenerate.birth_date") . ": {$memorial->birth_date}\n";
-        $prompt .= __("aigenerate.death_date") . ": {$memorial->death_date}\n";
+    $prompt .= __("aigenerate.birth_date") . ": {$memorial->birth_date}\n";
+    $prompt .= __("aigenerate.death_date") . ": {$memorial->death_date}\n";
 
-        if (!empty($memorial->biography)) {
-            $prompt .= __("aigenerate.biography") . ": {$memorial->biography}\n";
-        }
-
-        // Получаем членов семьи и их роли
-        $familyMembers = $memorial->family;
-
-        if ($familyMembers->isNotEmpty()) {
-            $prompt .= "\n" . __("aigenerate.family_members") . "\n";
-
-            foreach ($familyMembers as $member) {
-                // Переводим роль на нужный язык
-                $role = __('aigenerate.' . $member->role);  // Например: 'father', 'mother', и т.д.
-                $prompt .= "- {$role}: {$member->name}\n";
-            }
-        }
-
-        $timelines = $memorial->timeline()->orderBy('date_from')->get();
-
-        if ($timelines->isNotEmpty()) {
-            $prompt .= "\n" . __("aigenerate.timeline_title") . "\n";
-
-            foreach ($timelines as $event) {
-                // Перевод типа события
-                $eventType = __('aigenerate.timeline_types.' . $event->type);
-
-                // Строка события
-                $eventLine = "- {$eventType}";
-
-                if ($event->date_from) {
-                    $eventLine .= " ({$event->date_from})";
-                } elseif ($event->date) {
-                    $eventLine .= " ({$event->date})";
-                }
-
-                if ($event->title) {
-                    $eventLine .= ": {$event->title}";
-                }
-
-                if ($event->location) {
-                    $eventLine .= " ({$event->location})";
-                }
-
-                $prompt .= $eventLine . "\n";
-            }
-        }
-
-        $prompt .= "\n" . __("aigenerate.motto_request") . "\n";
-
-        // dd($prompt);
-
-        // Отправка запроса в OpenAI 'model' => 'gpt-5-mini',
-        if ($memorial->generation_attempts_left > 0) {
-
-            $response = \Http::withHeaders([
-                'Authorization' => 'Bearer ' . env('OPENAI_API_KEY'),
-                'Content-Type' => 'application/json',
-            ])->post('https://api.openai.com/v1/chat/completions', [
-                'model' => 'gpt-4.1-mini',
-                'messages' => [
-                    ['role' => 'user', 'content' => $prompt],
-                ],
-                'temperature' => 0.7,
-            ]);
-
-            if ($response->successful()) {
-                $biography = $response['choices'][0]['message']['content'];
-
-                preg_match('/\[MOTTO\](.*?)\[\/MOTTO\]/s', $biography, $matches);
-
-                $motto = isset($matches[1]) ? trim($matches[1]) : null;
-
-                // Убираем тег девиза из биографии, если надо
-                $biographyCleaned = preg_replace('/\[MOTTO\].*?\[\/MOTTO\]/s', '', $biography);
-
-                // Сохраняем в модель
-                $memorial->biography = trim($biographyCleaned);
-                $memorial->motto = $motto;
-                $memorial->generation_attempts_left = max(0, $memorial->generation_attempts_left - 1);
-                $memorial->save();
-
-                return back()->with('success', __('aigenerate.biography_generated')); // или просто строка типа "A biográfia sikeresen generálva."
-            } else {
-                return back()->with('error', 'Hiba történt a biográfia generálása közben. Próbáld újra később.');
-            }
-        } else {
-            return back()->with('error', __('aigenerate.limit_reached')); // или просто строка типа "A generálási lehetőségek elfogytak."
-        }
-
-        return back()->with('success', __('aigenerate.biography_generated')); // или просто строка типа "A biográfia sikeresen generálva."
+    if (!empty($memorial->biography)) {
+        $prompt .= __("aigenerate.biography") . ": {$memorial->biography}\n";
     }
+
+    // Получаем членов семьи и их роли
+    $familyMembers = $memorial->family;
+
+    if ($familyMembers->isNotEmpty()) {
+        $prompt .= "\n" . __("aigenerate.family_members") . "\n";
+
+        foreach ($familyMembers as $member) {
+            // Переводим роль на нужный язык
+            $role = __('aigenerate.' . $member->role);  // Например: 'father', 'mother', и т.д.
+            $prompt .= "- {$role}: {$member->name}\n";
+        }
+    }
+
+    $timelines = $memorial->timeline()->orderBy('date_from')->get();
+
+    if ($timelines->isNotEmpty()) {
+        $prompt .= "\n" . __("aigenerate.timeline_title") . "\n";
+
+        foreach ($timelines as $event) {
+            // Перевод типа события
+            $eventType = __('aigenerate.timeline_types.' . $event->type);
+
+            // Строка события
+            $eventLine = "- {$eventType}";
+
+            if ($event->date_from) {
+                $eventLine .= " ({$event->date_from})";
+            } elseif ($event->date) {
+                $eventLine .= " ({$event->date})";
+            }
+
+            if ($event->title) {
+                $eventLine .= ": {$event->title}";
+            }
+
+            if ($event->location) {
+                $eventLine .= " ({$event->location})";
+            }
+
+            $prompt .= $eventLine . "\n";
+        }
+    }
+
+    $prompt .= "\n" . __("aigenerate.motto_request") . "\n";
+
+    // Отправка запроса в OpenAI
+    if ($memorial->generation_attempts_left > 0) {
+
+        $response = \Http::withHeaders([
+            'Authorization' => 'Bearer ' . env('OPENAI_API_KEY'),
+            'Content-Type' => 'application/json',
+        ])->post('https://api.openai.com/v1/chat/completions', [
+            'model' => 'gpt-4o-mini', // Исправлена модель
+            'messages' => [
+                ['role' => 'user', 'content' => $prompt],
+            ],
+            'temperature' => 0.7,
+        ]);
+
+        if ($response->successful()) {
+            $biography = $response['choices'][0]['message']['content'];
+
+            preg_match('/\[MOTTO\](.*?)\[\/MOTTO\]/s', $biography, $matches);
+
+            $motto = isset($matches[1]) ? trim($matches[1]) : null;
+
+            // Убираем тег девиза из биографии, если надо
+            $biographyCleaned = preg_replace('/\[MOTTO\].*?\[\/MOTTO\]/s', '', $biography);
+
+            // Сохраняем в модель
+            $memorial->biography = trim($biographyCleaned);
+            $memorial->motto = $motto;
+            $memorial->generation_attempts_left = max(0, $memorial->generation_attempts_left - 1);
+            $memorial->save();
+
+            // Возвращаем JSON ответ вместо редиректа
+            return response()->json([
+                'success' => true,
+                'biography' => trim($biographyCleaned),
+                'motto' => $motto,
+                'message' => __('aigenerate.biography_generated')
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'error' => __('aigenerate.error'),
+                'details' => $response->body()
+            ], 500);
+        }
+    } else {
+        return response()->json([
+            'success' => false,
+            'error' => __('aigenerate.limit_reached')
+        ], 429);
+    }
+}
 
 
 }

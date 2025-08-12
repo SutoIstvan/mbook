@@ -112,7 +112,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/{memorial}/preview', [LinkController::class, 'preview'])->name('createpreview');
 
     Route::get('/dashboard/{memorial}/generate-biography', [OpenAIController::class, 'generateBiography'])->name('generate.biography');
-    Route::get('/dashboard/{memorial}/suggest-biography', [OpenAIController::class, 'suggestBiography'])->name('suggest.biography');
+    Route::post('/dashboard/{memorial}/suggest-biography', [OpenAIController::class, 'suggestBiography'])->name('suggest.biography');
 
 });
 

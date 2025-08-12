@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'biography_generated' => 'A biográfia sikeresen generálva.',
+    'limit_reached' => 'A generálási lehetőségek elfogytak.',
+    'error' => 'Hiba történt a biográfia generálása közben. Próbáld újra később.',
     'prompt' => 'Kérlek, írj egy részletes, megható és személyes hangvételű életrajzot az alábbi információk alapján. Használj természetes, emberi stílust.',
     'motto_request' => 'Kérlek, írj egy megható és személyes mottót, amely legalább 15, de legfeljebb 20 szóból áll, és jól tükrözi az elhunyt életének szellemét. idézőjelek („”) vagy más jelölés nélkül. Kérlek, írd ezt külön sorban, így: [MOTTO] a mottó itt [/MOTTO]',
     'family_members' => 'Családtagok:',
@@ -16,6 +19,10 @@ return [
     'children' => 'Gyermekek',
     'siblings' => 'Testvérek',
     'pets' => 'Háziállatok',
+    'grandfather_father' => 'Nagyapa (Apa)',
+    'grandmother_father' => 'Nagymama (Apa)',
+    'grandfather_mother' => 'Nagyapa (Anya)',
+    'grandmother_mother' => 'Nagymama (Anya)',
     'timeline_title' => 'Életesemények',
     'timeline_types' => [
         'child_birth' => 'Gyermek születése:',

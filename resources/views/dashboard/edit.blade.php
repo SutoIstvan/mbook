@@ -1,6 +1,8 @@
 @extends('layouts.dashboard')
 
 @section('css')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     {{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.0/min/dropzone.min.css">
@@ -37,6 +39,11 @@
             height: 400px;
             position: relative;
         }
+
+        .butn .icon:hover {
+            color: white;
+        }
+
 
         .holder *,
         .holder *:before,
@@ -223,25 +230,27 @@
         }
 
         /* .deleteBtn {
-                    position: absolute;
-                    top: 10px;
-                    right: 10px;
-                    background: rgba(255, 0, 0, 0.7);
-                    color: white;
-                    border: none;
-                    padding: 5px 10px;
-                    font-size: 14px;
-                    border-radius: 50%;
-                    cursor: pointer;
-                    transition: background 0.3s;
-                } */
+                                position: absolute;
+                                top: 10px;
+                                right: 10px;
+                                background: rgba(255, 0, 0, 0.7);
+                                color: white;
+                                border: none;
+                                padding: 5px 10px;
+                                font-size: 14px;
+                                border-radius: 50%;
+                                cursor: pointer;
+                                transition: background 0.3s;
+                            } */
 
-                .deleteBtn {
-                    background-color: #f8f9fa; /* Установить одинаковый цвет фона */
-                    border: 1px solid #adaeaf; /* Убедиться, что граница установлена */
-                    box-shadow: none; /* Удалить тень */
-                }
-
+        .deleteBtn {
+            background-color: #f8f9fa;
+            /* Установить одинаковый цвет фона */
+            border: 1px solid #adaeaf;
+            /* Убедиться, что граница установлена */
+            box-shadow: none;
+            /* Удалить тень */
+        }
     </style>
 @endsection
 
@@ -259,12 +268,12 @@
                         <h4>{{ __('Edit data') }}</h4>
                     </div>
                     <!-- <div class="col-lg-6">
-                                                            <div class="text">
-                                                                <p>Business challenges are tough but we.
+                                                                        <div class="text">
+                                                                            <p>Business challenges are tough but we.
 
-                                                                </p>
-                                                            </div>
-                                                        </div> -->
+                                                                            </p>
+                                                                        </div>
+                                                                    </div> -->
                 </div>
             </div>
 
@@ -346,18 +355,24 @@
                     @enderror
                 </div>
 
+
+
                 <div class="col-lg-12 text-end">
                     <div class="mt-15">
-                        <a href="{{ route('suggest.biography', $memorial ) }}" class="butn butn-md butn-bord butn-rounded disabled">
-                            <span class="text">
-                                {{ __('AI biography generator') }}
-                            </span>
+                        <a href="{{ route('suggest.biography', $memorial) }}" class="butn butn-md butn-bord butn-rounded"
+                            id="ai-btn" > 
+                            <span class="text">{{ __('AI biography generator') }}</span>
 
-                            <span class="icon ">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320">
+                            <span id="btnIcon" class="icon ">
+                                {{-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320">
                                     <path
                                         d="m297.06 130.97c7.26-21.79 4.76-45.66-6.85-65.48-17.46-30.4-52.56-46.04-86.84-38.68-15.25-17.18-37.16-26.95-60.13-26.81-35.04-.08-66.13 22.48-76.91 55.82-22.51 4.61-41.94 18.7-53.31 38.67-17.59 30.32-13.58 68.54 9.92 94.54-7.26 21.79-4.76 45.66 6.85 65.48 17.46 30.4 52.56 46.04 86.84 38.68 15.24 17.18 37.16 26.95 60.13 26.8 35.06.09 66.16-22.49 76.94-55.86 22.51-4.61 41.94-18.7 53.31-38.67 17.57-30.32 13.55-68.51-9.94-94.51zm-120.28 168.11c-14.03.02-27.62-4.89-38.39-13.88.49-.26 1.34-.73 1.89-1.07l63.72-36.8c3.26-1.85 5.26-5.32 5.24-9.07v-89.83l26.93 15.55c.29.14.48.42.52.74v74.39c-.04 33.08-26.83 59.9-59.91 59.97zm-128.84-55.03c-7.03-12.14-9.56-26.37-7.15-40.18.47.28 1.3.79 1.89 1.13l63.72 36.8c3.23 1.89 7.23 1.89 10.47 0l77.79-44.92v31.1c.02.32-.13.63-.38.83l-64.41 37.19c-28.69 16.52-65.33 6.7-81.92-21.95zm-16.77-139.09c7-12.16 18.05-21.46 31.21-26.29 0 .55-.03 1.52-.03 2.2v73.61c-.02 3.74 1.98 7.21 5.23 9.06l77.79 44.91-26.93 15.55c-.27.18-.61.21-.91.08l-64.42-37.22c-28.63-16.58-38.45-53.21-21.95-81.89zm221.26 51.49-77.79-44.92 26.93-15.54c.27-.18.61-.21.91-.08l64.42 37.19c28.68 16.57 38.51 53.26 21.94 81.94-7.01 12.14-18.05 21.44-31.2 26.28v-75.81c.03-3.74-1.96-7.2-5.2-9.06zm26.8-40.34c-.47-.29-1.3-.79-1.89-1.13l-63.72-36.8c-3.23-1.89-7.23-1.89-10.47 0l-77.79 44.92v-31.1c-.02-.32.13-.63.38-.83l64.41-37.16c28.69-16.55 65.37-6.7 81.91 22 6.99 12.12 9.52 26.31 7.15 40.1zm-168.51 55.43-26.94-15.55c-.29-.14-.48-.42-.52-.74v-74.39c.02-33.12 26.89-59.96 60.01-59.94 14.01 0 27.57 4.92 38.34 13.88-.49.26-1.33.73-1.89 1.07l-63.72 36.8c-3.26 1.85-5.26 5.31-5.24 9.06l-.04 89.79zm14.63-31.54 34.65-20.01 34.65 20v40.01l-34.65 20-34.65-20z" />
-                                </svg>
+                                </svg> --}}
+                                <i class="fa-regular fa-lightbulb"></i>
+                            </span>
+
+                            <span id="btnSpinner" class="icon d-none">
+                                <i class="fa-solid fa-spinner fa-spin"></i>
                             </span>
                         </a>
                     </div>
@@ -373,11 +388,11 @@
                                     <img src="{{ asset('memorial/' . $memorial->slug . '/' . $memorial->photo) }}"
                                         alt="Фото" style="max-width: 100%;">
 
-                                        
+
 
                                 </div>
                                 <div class="col-lg-12 mt-15 text-end">
-                                    <button type="button" class="deleteBtn butn butn-md butn-danger butn-rounded mt-1" >
+                                    <button type="button" class="deleteBtn butn butn-md butn-danger butn-rounded mt-1">
                                         <span class="text">
                                             {{ __('Delete image') }}
                                         </span>
@@ -404,7 +419,8 @@
                                 </div>
                                 <span class="support">{{ __('Photo formats: JPEG, JPG, PNG') }}</span>
                             </div>
-                            <img id="image" src="" alt="Photo to crop" style="max-width: 100%; display: none;">
+                            <img id="image" src="" alt="Photo to crop"
+                                style="max-width: 100%; display: none;">
                             <input id="photoInput" name="photo" type="file" hidden
                                 accept="image/jpeg, image/jpg, image/png" />
                             <input type="hidden" name="crop_x" id="cropX">
@@ -476,342 +492,8 @@
                         </button>
                     </div>
                 </div>
-
-                {{-- <div class="col-lg-6">
-                                    <div class="mt-60">
-                                        <button type="submit" class="butn butn-md butn-bord butn-rounded disabled">
-                                            <span class="text">Cancel</span>
-                                            <span class="icon invert ml-10">
-                                                <img src="common/imgs/icons/arrow-top-right.svg" alt="">
-                                            </span>
-                                        </button>
-                                    </div>
-                                </div> --}}
             </div>
         </section>
-
-        <!-- ==================== End Numbers ==================== -->
-
-
-
-        <!-- ==================== Start Testimonials ==================== -->
-
-        {{-- <section class="testimonials-ca section-padding radius-20 mt-15">
-                            <div class="sec-head mb-80">
-                                <div class="row">
-                                    <div class="col-lg-6 md-mb15">
-                                        <h2>Reviews</h2>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="d-flex">
-                                            <div class="gl-rate d-flex align-items-center ml-auto">
-                                                <div class="icon">
-                                                    <img src="admin/imgs/header/logo-clutch.svg" alt="">
-                                                </div>
-                                                <div class="cont">
-                                                    <h6>4.9/5 <span>Rating on <a href="#0">Clutch</a></span></h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item wow fadeInUp slow" data-wow-delay="0.2s">
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <div class="info d-flex align-items-center">
-                                            <div class="md-mb30">
-                                                <div class="img fit-img">
-                                                    <img src="admin/imgs/testim/1.jpg" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="cont">
-                                                <h6>CEO at Archin Co.</h6>
-                                                <span>Brian Lee</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-7 offset-lg-1">
-                                        <div class="text">
-                                            <h6>“Their services aren’t cookie-cutter and are truly specific to us.”</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item wow fadeInUp slow" data-wow-delay="0.2s">
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <div class="info d-flex align-items-center">
-                                            <div class="md-mb30">
-                                                <div class="img fit-img">
-                                                    <img src="admin/imgs/testim/2.jpg" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="cont">
-                                                <h6>President, Newz JSC.</h6>
-                                                <span>Aaron Beck</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-7 offset-lg-1">
-                                        <div class="text">
-                                            <h6>“A rebrand is not typically done in a chaotic, archaic industry like
-                                                ours, so their work has really set us apart."</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item wow fadeInUp slow" data-wow-delay="0.2s">
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <div class="info d-flex align-items-center">
-                                            <div class="md-mb30">
-                                                <div class="img fit-img">
-                                                    <img src="admin/imgs/testim/3.jpg" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="cont">
-                                                <h6>Marketing Manager, OKG</h6>
-                                                <span>Tim Morthy</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-7 offset-lg-1">
-                                        <div class="text">
-                                            <h6>"The Hubfolio team truly amplified our messaging through their expert
-                                                use of visuals."</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item wow fadeInUp slow" data-wow-delay="0.2s">
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <div class="info d-flex align-items-center">
-                                            <div class="md-mb30">
-                                                <div class="img fit-img">
-                                                    <img src="admin/imgs/testim/4.jpg" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="cont">
-                                                <h6>Director, ZumarCons</h6>
-                                                <span>Lewis Cook</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-7 offset-lg-1">
-                                        <div class="text">
-                                            <h6>"Our experience with Hubfolio was really good."</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item wow fadeInUp slow" data-wow-delay="0.2s">
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <div class="info d-flex align-items-center">
-                                            <div class="md-mb30">
-                                                <div class="img fit-img">
-                                                    <img src="admin/imgs/testim/5.jpg" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="cont">
-                                                <h6>CTO, Itech Co.</h6>
-                                                <span>Mohamed Moussa</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-7 offset-lg-1">
-                                        <div class="text">
-                                            <h6>"They have been excellent at leveraging the wealth of knowledge and
-                                                expertise that Hubfolio has across their team members."</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-center">
-                                <a href="#0" class="butn butn-md butn-bord butn-rounded mt-40">
-                                    <div class="d-flex align-items-center">
-                                        <span>See All Reviews on Clutch</span>
-                                        <span class="icon ml-20">
-                                            <i class="fa-solid fa-chevron-right"></i>
-                                        </span>
-                                    </div>
-                                </a>
-                            </div>
-                        </section> --}}
-
-        <!-- ==================== End Testimonials ==================== -->
-
-
-        <!-- ==================== Start Blog ==================== -->
-
-        {{-- <section class="blog-ca section-padding bg-light radius-20 mt-15">
-                            <div class="sec-head mb-80">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <h2>News</h2>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="d-flex">
-                                            <a href="../inner_pages/blog-grid.html" class="butn butn-md butn-bord butn-rounded ml-auto">
-                                                <div class="d-flex align-items-center">
-                                                    <span>All Articles</span>
-                                                    <span class="icon ml-20">
-                                                        <i class="fa-solid fa-chevron-right"></i>
-                                                    </span>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row xlg-marg row-bord">
-                                <div class="col-lg-6">
-                                    <div class="mitem md-mb50 wow fadeInUp slow" data-wow-delay="0.2s">
-                                        <div class="info d-flex align-items-center">
-                                            <div class="d-flex align-items-center">
-                                                <div>
-                                                    <div class="author-img fit-img">
-                                                        <img src="admin/imgs/blog/avatar.jpg" alt="">
-                                                    </div>
-                                                </div>
-                                                <div class="author-info ml-10">
-                                                    <span>M Moussa</span>
-                                                    <span class="sub-color">editor</span>
-                                                </div>
-                                            </div>
-                                            <div class="date ml-auto">
-                                                <span class="sub-color"><i
-                                                        class="fa-regular fa-clock mr-15 opacity-7"></i> 12 hours
-                                                    ago</span>
-                                            </div>
-                                        </div>
-                                        <div class="img fit-img mt-30">
-                                            <img src="admin/imgs/blog/1.jpg" alt="">
-                                        </div>
-                                        <div class="cont mt-30">
-                                            <h5>
-                                                <a href="#0">We’re winner SOTY at CSS Award 2023</a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 wow fadeInUp slow" data-wow-delay="0.2s">
-                                    <div class="item pb-20 mb-20 bord-thin-bottom">
-                                        <span class="date sub-color"><i
-                                                class="fa-regular fa-clock mr-15 opacity-7"></i>2 days ago</span>
-                                        <h6 class="sub-head">
-                                            <a href="#0">Rebrand vs Reresh: 10 Minutes on Brand <br> with Hubfolio</a>
-                                        </h6>
-                                    </div>
-                                    <div class="item pb-20 mb-20 bord-thin-bottom">
-                                        <span class="date sub-color"><i
-                                                class="fa-regular fa-clock mr-15 opacity-7"></i>15 days ago</span>
-                                        <h6 class="sub-head">
-                                            <a href="#0">How to build culture for young office?</a>
-                                        </h6>
-                                    </div>
-                                    <div class="item pb-20 mb-20 bord-thin-bottom">
-                                        <span class="date sub-color"><i
-                                                class="fa-regular fa-clock mr-15 opacity-7"></i>1 month ago</span>
-                                        <h6 class="sub-head">
-                                            <a href="#0">Case Study: Crafting a UX Strategy for Compelling Messaging</a>
-                                        </h6>
-                                    </div>
-                                    <div class="item pb-20 bord-thin-bottom">
-                                        <span class="date sub-color"><i
-                                                class="fa-regular fa-clock mr-15 opacity-7"></i>2 month ago</span>
-                                        <h6 class="sub-head">
-                                            <a href="#0">UI & UX: What is important?</a>
-                                        </h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </section> --}}
-
-        <!-- ==================== End Blog ==================== -->
-
-
-
-        <!-- ==================== Start Contact ==================== -->
-
-        {{-- <section class="contact-ca section-padding radius-20 mt-15 mb-15">
-                            <div class="sec-head mb-80">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <h2>Let’s Chat!</h2>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="text">
-                                            <p>We will ask the right questions, discuss possibilities and make an action
-                                                plan.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="contact-form">
-                                <form id="contact-form" method="post" action="contact.php">
-
-                                    <div class="messages"></div>
-
-                                    <div class="controls row">
-
-                                        <div class="col-lg-6">
-                                            <div class="form-group mb-30">
-                                                <label for="form_name">Full Name <span class="star">*</span></label>
-                                                <input id="form_name" type="text" name="name"
-                                                    placeholder="Your full name" required="required">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6">
-                                            <div class="form-group mb-30">
-                                                <label for="form_email">Email Address <span
-                                                        class="star">*</span></label>
-                                                <input id="form_email" type="email" name="email"
-                                                    placeholder="Your email address" required="required">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6">
-                                            <div class="form-group mb-30">
-                                                <label for="form_subject">Subject <span class="star">*</span></label>
-                                                <input id="form_subject" type="text" name="subject"
-                                                    placeholder="subject" required="required">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6">
-                                            <div class="form-group mb-30">
-                                                <label for="form_budget">Your Budget <span
-                                                        class="opt sub-color">(Optional)</span></label>
-                                                <input id="form_budget" type="text" name="budget"
-                                                    placeholder="A range of budget for project" required="required">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label for="form_message">Message</label>
-                                                <textarea id="form_message" name="message"
-                                                    placeholder="Write your message here..." rows="4"
-                                                    required="required"></textarea>
-                                            </div>
-                                            <div class="mt-60">
-                                                <button type="submit" class="butn butn-md butn-bord butn-rounded">
-                                                    <span class="text">Send Your Message</span>
-                                                    <span class="icon invert ml-10">
-                                                        <img src="common/imgs/icons/arrow-top-right.svg" alt="">
-                                                    </span>
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </form>
-                            </div>
-                        </section> --}}
     </form>
     <!-- ==================== End Contact ==================== -->
 @endsection
@@ -959,5 +641,48 @@
         //         cropHeight.value = Math.round(cropData.height);
         //     }
         // });
+
+        // передача биографии в AI генератор
+        document.addEventListener('DOMContentLoaded', function() {
+    let aiBtn = document.getElementById('ai-btn');
+    if (!aiBtn) return; // если элемента нет — не запускаем
+
+    let aiIcon = aiBtn.querySelector('.icon');
+    let aiText = aiBtn.querySelector('.text');
+
+    aiBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        aiBtn.classList.add('disabled');
+        aiBtn.style.pointerEvents = 'none';
+
+        aiIcon.innerHTML = '<i class="fa fa-spinner fa-spin"></i>';
+        // aiText.textContent = 'Generating...';
+
+        fetch("{{ route('suggest.biography', $memorial) }}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]')
+                        .getAttribute('content')
+                },
+                body: JSON.stringify({
+                    biography: document.getElementById('biography').value
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('biography').value = data.biography;
+                // Обновляем страницу после успешной генерации
+                location.reload();
+            })
+            // .finally(() => {
+            //     aiBtn.classList.remove('disabled');
+            //     aiBtn.style.pointerEvents = 'auto';
+            //     aiIcon.innerHTML = '<i class="fa fa-magic"></i>';
+            //     aiText.textContent = '{{ __('AI biography generator') }}';
+            // });
+    });
+});
     </script>
 @endsection
