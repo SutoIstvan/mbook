@@ -634,12 +634,11 @@
 
                     <div class="tracking-date defaultcolor fs-4 wow fadeIn d-flex justify-content-end mt-1"
                         data-wow-delay="300ms">
-                        <select id="eventYear" name="year" class="form-select"
-                            style="max-width: 90px; overflow-y: auto;" required>
+                        <select id="eventYear" name="year" class="form-select" style="max-width: 90px; overflow-y: auto;"
+                            required>
                             <option value=""></option>
                             @for ($year = date('Y'); $year >= 1900; $year--)
-                                <option value="{{ $year }}"
-                                    {{ old('year', date('Y')) == $year ? 'selected' : '' }}>
+                                <option value="{{ $year }}" {{ old('year', date('Y')) == $year ? 'selected' : '' }}>
                                     {{ $year }}
                                 </option>
                             @endfor
@@ -647,7 +646,7 @@
                     </div>
                     <div class="border mt-1">
                         <div class="tracking-content defaultcolor fs-6">
-                            <select name="type" class="form-select">
+                            <select name="type" class="form-select" id="typeSelect">
                                 <option value="">{{ __('Select event type') }}</option>
                                 <option value="child_birth">{{ __('Child Birth') }}</option>
                                 <option value="marriage">{{ __('Marriage') }}</option>
@@ -657,19 +656,19 @@
                                 <option value="other_properties">{{ __('Other Properties') }}</option>
                             </select>
 
-                            <span>
-                                <span class="pt-2 fs-6">
-                                    <div class="mb-2">
-                                        <input type="text" name="title" class="form-control"
-                                            placeholder="{{ __('Enter timeline details') }}">
-                                    </div>
-                                </span>
-                            </span>
+                            <!-- Поле для своего значения -->
+                            <div id="customTypeWrapper" class="mt-2" style="display: none;">
+                                <input type="text" name="custom_type" class="form-control"
+                                    placeholder="{{ __('Enter your custom type') }}">
+                            </div>
+
+                            <div class="mt-2">
+                                <input type="text" name="title" class="form-control"
+                                    placeholder="{{ __('Enter timeline details') }}">
+                            </div>
 
                             <button type="submit" class="btn btn-outline-primary mt-2">{{ __('Add') }}</button>
-
                         </div>
-
                     </div>
                 </div>
 
@@ -681,8 +680,8 @@
                         <div class="tracking-icon status-intransit">
 
                             @if ($timeline->type == 'marriage')
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px"
-                                    viewBox="0 0 24 24" fill="none">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 24 24"
+                                    fill="none">
                                     <path
                                         d="M8.96173 18.9109L9.42605 18.3219L8.96173 18.9109ZM12 5.50063L11.4596 6.02073C11.601 6.16763 11.7961 6.25063 12 6.25063C12.2039 6.25063 12.399 6.16763 12.5404 6.02073L12 5.50063ZM15.0383 18.9109L15.5026 19.4999L15.0383 18.9109ZM7.00061 16.4209C6.68078 16.1577 6.20813 16.2036 5.94491 16.5234C5.68169 16.8432 5.72758 17.3159 6.04741 17.5791L7.00061 16.4209ZM2.34199 13.4115C2.54074 13.7749 2.99647 13.9084 3.35988 13.7096C3.7233 13.5108 3.85677 13.0551 3.65801 12.6917L2.34199 13.4115ZM2.75 9.1371C2.75 6.98623 3.96537 5.18252 5.62436 4.42419C7.23607 3.68748 9.40166 3.88258 11.4596 6.02073L12.5404 4.98053C10.0985 2.44352 7.26409 2.02539 5.00076 3.05996C2.78471 4.07292 1.25 6.42503 1.25 9.1371H2.75ZM8.49742 19.4999C9.00965 19.9037 9.55954 20.3343 10.1168 20.6599C10.6739 20.9854 11.3096 21.25 12 21.25V19.75C11.6904 19.75 11.3261 19.6293 10.8736 19.3648C10.4213 19.1005 9.95208 18.7366 9.42605 18.3219L8.49742 19.4999ZM15.5026 19.4999C16.9292 18.3752 18.7528 17.0866 20.1833 15.4758C21.6395 13.8361 22.75 11.8026 22.75 9.1371H21.25C21.25 11.3345 20.3508 13.0282 19.0617 14.4798C17.7469 15.9603 16.0896 17.1271 14.574 18.3219L15.5026 19.4999ZM22.75 9.1371C22.75 6.42503 21.2153 4.07292 18.9992 3.05996C16.7359 2.02539 13.9015 2.44352 11.4596 4.98053L12.5404 6.02073C14.5983 3.88258 16.7639 3.68748 18.3756 4.42419C20.0346 5.18252 21.25 6.98623 21.25 9.1371H22.75ZM14.574 18.3219C14.0479 18.7366 13.5787 19.1005 13.1264 19.3648C12.6739 19.6293 12.3096 19.75 12 19.75V21.25C12.6904 21.25 13.3261 20.9854 13.8832 20.6599C14.4405 20.3343 14.9903 19.9037 15.5026 19.4999L14.574 18.3219ZM9.42605 18.3219C8.63014 17.6945 7.82129 17.0963 7.00061 16.4209L6.04741 17.5791C6.87768 18.2624 7.75472 18.9144 8.49742 19.4999L9.42605 18.3219ZM3.65801 12.6917C3.0968 11.6656 2.75 10.5033 2.75 9.1371H1.25C1.25 10.7746 1.66995 12.1827 2.34199 13.4115L3.65801 12.6917Z"
                                         fill="#24cdd5" />
@@ -690,8 +689,8 @@
                             @endif
 
                             @if ($timeline->type == 'school')
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px"
-                                    viewBox="0 0 24 24" fill="none">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 24 24"
+                                    fill="none">
                                     <path
                                         d="M9.78272 3.49965C11.2037 2.83345 12.7962 2.83345 14.2172 3.49965L20.9084 6.63664C22.3639 7.31899 22.3639 9.68105 20.9084 10.3634L14.2173 13.5003C12.7963 14.1665 11.2038 14.1665 9.78281 13.5003L3.0916 10.3634C1.63613 9.68101 1.63614 7.31895 3.0916 6.63659L6 5.27307"
                                         stroke="#24cdd5" stroke-width="1.5" stroke-linecap="round" />
@@ -703,8 +702,8 @@
                             @endif
 
                             @if ($timeline->type == 'child_birth')
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px"
-                                    viewBox="0 0 24 24" fill="none">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 24 24"
+                                    fill="none">
                                     <path
                                         d="M8.00012 16.6066C9.1493 17.4664 10.5185 17.9874 12 17.9998C16.142 18.0343 19.5937 14.0798 19.5603 9.8043C19.5268 5.52875 16.142 2.03476 12 2.00026C7.858 1.96576 4.52734 5.4038 4.56077 9.67936C4.56976 10.8295 4.81252 11.9605 5.24326 13"
                                         stroke="#24cdd5" stroke-width="1.5" stroke-linecap="round" />
@@ -744,8 +743,15 @@
                                 </svg>
                             @endif
 
+                            @if ($timeline->type != 'marriage' && $timeline->type != 'hobby' && $timeline->type != 'school' && $timeline->type != 'work' && $timeline->type != 'child_birth')
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 24 24" fill="none">
+                                    <path d="M7.43361 9.90622C5.34288 10.3793 4.29751 10.6158 4.04881 11.4156C3.8001 12.2153 4.51276 13.0487 5.93808 14.7154L6.30683 15.1466C6.71186 15.6203 6.91438 15.8571 7.00548 16.1501C7.09659 16.443 7.06597 16.759 7.00474 17.3909L6.94899 17.9662C6.7335 20.19 6.62575 21.3019 7.27688 21.7962C7.928 22.2905 8.90677 21.8398 10.8643 20.9385L11.3708 20.7053C11.927 20.4492 12.2052 20.3211 12.5 20.3211C12.7948 20.3211 13.073 20.4492 13.6292 20.7053L14.1357 20.9385C16.0932 21.8398 17.072 22.2905 17.7231 21.7962C18.3742 21.3019 18.2665 20.19 18.051 17.9662M19.0619 14.7154C20.4872 13.0487 21.1999 12.2153 20.9512 11.4156C20.7025 10.6158 19.6571 10.3793 17.5664 9.90622L17.0255 9.78384C16.4314 9.64942 16.1343 9.5822 15.8958 9.40114C15.6573 9.22007 15.5043 8.94564 15.1984 8.3968L14.9198 7.89712C13.8432 5.96571 13.3048 5 12.5 5C11.6952 5 11.1568 5.96571 10.0802 7.89712" stroke="#24cdd5" stroke-width="1.5" stroke-linecap="round"></path>
+                                    <path d="M4.98987 2C4.98987 2 5.2778 3.45771 5.90909 4.08475C6.54037 4.71179 8 4.98987 8 4.98987C8 4.98987 6.54229 5.2778 5.91525 5.90909C5.28821 6.54037 5.01013 8 5.01013 8C5.01013 8 4.7222 6.54229 4.09091 5.91525C3.45963 5.28821 2 5.01013 2 5.01013C2 5.01013 3.45771 4.7222 4.08475 4.09091C4.71179 3.45963 4.98987 2 4.98987 2Z" stroke="#24cdd5" stroke-linejoin="round"></path>
+                                    <path d="M18 5H20M19 6L19 4" stroke="#24cdd5" stroke-width="1.5" stroke-linecap="round"></path>
+                                </svg>
+                            @endif
 
-                            <!-- <i class="fas fa-circle"></i> -->
+
                         </div>
 
                         <div class="tracking-date defaultcolor fs-4 wow fadeIn d-flex justify-content-end mt-1"
@@ -764,27 +770,42 @@
                         <div class="border p-3">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="tracking-content defaultcolor fs-6 w-100">
-                                    <select name="timelines[{{ $timeline->id }}][type]" class="form-select">
-                                        <option value="child_birth"
-                                            {{ $timeline->type == 'child_birth' ? 'selected' : '' }}>
-                                            {{ __('Child Birth') }}</option>
-                                        <option value="marriage" {{ $timeline->type == 'marriage' ? 'selected' : '' }}>
-                                            {{ __('Marriage') }}</option>
-                                        <option value="school" {{ $timeline->type == 'school' ? 'selected' : '' }}>
-                                            {{ __('School') }}</option>
-                                        <option value="work" {{ $timeline->type == 'work' ? 'selected' : '' }}>
-                                            {{ __('Work') }}</option>
-                                        <option value="hobby" {{ $timeline->type == 'hobby' ? 'selected' : '' }}>
-                                            {{ __('Hobby') }}</option>
-                                        <option value="other_properties"
-                                            {{ $timeline->type == 'other_properties' ? 'selected' : '' }}>
-                                            {{ __('Other Properties') }}</option>
-                                    </select>
+                                    @if (in_array($timeline->type, ['child_birth', 'marriage', 'school', 'work', 'hobby', 'other_properties']))
+                                        <select name="timelines[{{ $timeline->id }}][type]" class="form-select">
+                                            <option value="child_birth"
+                                                {{ $timeline->type == 'child_birth' ? 'selected' : '' }}>
+                                                {{ __('Child Birth') }}
+                                            </option>
+                                            <option value="marriage"
+                                                {{ $timeline->type == 'marriage' ? 'selected' : '' }}>
+                                                {{ __('Marriage') }}
+                                            </option>
+                                            <option value="school" {{ $timeline->type == 'school' ? 'selected' : '' }}>
+                                                {{ __('School') }}
+                                            </option>
+                                            <option value="work" {{ $timeline->type == 'work' ? 'selected' : '' }}>
+                                                {{ __('Work') }}
+                                            </option>
+                                            <option value="hobby" {{ $timeline->type == 'hobby' ? 'selected' : '' }}>
+                                                {{ __('Hobby') }}
+                                            </option>
+                                            <option value="other_properties"
+                                                {{ $timeline->type == 'other_properties' ? 'selected' : '' }}>
+                                                {{ __('Other Properties') }}
+                                            </option>
+                                        </select>
+                                    @else
+                                        {{-- Кастомный тип --}}
+                                        <input type="text" name="timelines[{{ $timeline->id }}][type]"
+                                            class="form-control" value="{{ $timeline->type }}"
+                                            placeholder="{{ __('Enter custom type') }}">
+                                    @endif
 
                                     <input type="text" name="timelines[{{ $timeline->id }}][title]"
                                         class="form-control mt-2" value="{{ $timeline->title }}"
                                         placeholder="{{ __('Enter timeline details') }}">
                                 </div>
+
 
                                 {{-- Кнопка удаления можно либо через JS, либо чекбокс --}}
                                 <div class="ms-3">
@@ -801,7 +822,7 @@
                     {{-- Кнопка сохранения изменений --}}
                     <button type="submit" class="btn btn-primary mt-3">{{ __('Save changes') }}</button>
                 </div>
-                
+
             </form>
 
 
@@ -866,6 +887,15 @@
             form.submit();
         }
 
+        document.getElementById('typeSelect').addEventListener('change', function() {
+            const customTypeWrapper = document.getElementById('customTypeWrapper');
+            if (this.value === 'other_properties') {
+                customTypeWrapper.style.display = 'block';
+            } else {
+                customTypeWrapper.style.display = 'none';
+            }
+        });
+
         // document.addEventListener('DOMContentLoaded', function() {
         //     const eventType = document.getElementById('eventType');
         //     const childrenInputs = document.getElementById('childrenInputs');
@@ -919,13 +949,13 @@
         //         const row = document.createElement('div');
         //         row.classList.add('row', 'mb-2');
         //         row.innerHTML = `
-        //                 <div class="col-md-6">
-        //                     <input type="text" class="form-control" name="new_children[${newChildIndex}][name]" placeholder="Gyermek neve">
-        //                 </div>
-        //                 <div class="col-md-6">
-        //                     <input type="date" class="form-control" name="new_children[${newChildIndex}][birth_date]">
-        //                 </div>
-        //             `;
+    //                 <div class="col-md-6">
+    //                     <input type="text" class="form-control" name="new_children[${newChildIndex}][name]" placeholder="Gyermek neve">
+    //                 </div>
+    //                 <div class="col-md-6">
+    //                     <input type="date" class="form-control" name="new_children[${newChildIndex}][birth_date]">
+    //                 </div>
+    //             `;
         //         newChildrenContainer.appendChild(row);
         //         newChildIndex++;
         //     });
@@ -936,13 +966,13 @@
         //             const row = document.createElement('div');
         //             row.classList.add('row', 'mb-2');
         //             row.innerHTML = `
-        //                     <div class="col-md-6">
-        //                         <input type="text" class="form-control" name="new_marriages[${marriageIndex}][partner_name]" placeholder="Partner neve">
-        //                     </div>
-        //                     <div class="col-md-6">
-        //                         <input type="date" class="form-control" name="new_marriages[${marriageIndex}][marriage_date]">
-        //                     </div>
-        //                 `;
+    //                     <div class="col-md-6">
+    //                         <input type="text" class="form-control" name="new_marriages[${marriageIndex}][partner_name]" placeholder="Partner neve">
+    //                     </div>
+    //                     <div class="col-md-6">
+    //                         <input type="date" class="form-control" name="new_marriages[${marriageIndex}][marriage_date]">
+    //                     </div>
+    //                 `;
         //             newMarriagesContainer.appendChild(row);
         //             marriageIndex++;
         //         });
@@ -954,13 +984,13 @@
         //             const row = document.createElement('div');
         //             row.classList.add('row', 'mb-2');
         //             row.innerHTML = `
-        //                     <div class="col-md-6">
-        //                         <input type="text" class="form-control" name="new_schools[${schoolIndex}][school_name]" placeholder="Iskola neve">
-        //                     </div>
-        //                     <div class="col-md-6">
-        //                         <input type="date" class="form-control" name="new_schools[${schoolIndex}][start_date]">
-        //                     </div>
-        //                 `;
+    //                     <div class="col-md-6">
+    //                         <input type="text" class="form-control" name="new_schools[${schoolIndex}][school_name]" placeholder="Iskola neve">
+    //                     </div>
+    //                     <div class="col-md-6">
+    //                         <input type="date" class="form-control" name="new_schools[${schoolIndex}][start_date]">
+    //                     </div>
+    //                 `;
         //             newSchoolContainer.appendChild(row);
         //             schoolIndex++;
         //         });
@@ -972,13 +1002,13 @@
         //             const row = document.createElement('div');
         //             row.classList.add('row', 'mb-2');
         //             row.innerHTML = `
-        //                     <div class="col-md-6">
-        //                         <input type="text" class="form-control" name="new_hobbies[${hobbyIndex}][hobby_name]" placeholder="Hobbi neve">
-        //                     </div>
-        //                     <div class="col-md-6">
-        //                         <input type="date" class="form-control" name="new_hobbies[${hobbyIndex}][start_date]">
-        //                     </div>
-        //                 `;
+    //                     <div class="col-md-6">
+    //                         <input type="text" class="form-control" name="new_hobbies[${hobbyIndex}][hobby_name]" placeholder="Hobbi neve">
+    //                     </div>
+    //                     <div class="col-md-6">
+    //                         <input type="date" class="form-control" name="new_hobbies[${hobbyIndex}][start_date]">
+    //                     </div>
+    //                 `;
         //             newHobbyContainer.appendChild(row);
         //             hobbyIndex++;
         //         });

@@ -453,36 +453,59 @@ class TimelineController extends Controller
         return back()->with('success', 'Esemény sikeresen hozzáadva a timeline-hoz.');
     }
 
-    public function updateAll(Request $request)
-    {
-        $validatedData = $request->validate([
-            'timelines' => 'required|array',
-            'timelines.*.id' => 'required|exists:timelines,id',
-            'timelines.*.title' => 'required|string|max:255',
-            'timelines.*.year' => 'required|integer|min:1900|max:' . date('Y'),
-            'timelines.*.type' => 'required|string',
-            'timelines.*.delete' => 'nullable|boolean',
-        ]);
+public function updateAll(Request $request)
+{
+    // Валидация существующих таймлайнов
+    $validatedData = $request->validate([
+        'timelines' => 'required|array',
+        'timelines.*.id' => 'required|exists:timelines,id',
+        'timelines.*.title' => 'required|string|max:255',
+        'timelines.*.year' => 'required|integer|min:1900|max:' . date('Y'),
+        'timelines.*.type' => 'required|string',
+        'timelines.*.delete' => 'nullable|boolean',
 
-        foreach ($validatedData['timelines'] as $timelineData) {
-            $timeline = Timeline::find($timelineData['id']);
-            if (!$timeline) continue;
+        // Валидация новой записи
+        'title' => 'nullable|string|max:255',
+        'year' => 'nullable|integer|min:1900|max:' . date('Y'),
+        'type' => 'nullable|string',
+        'custom_type' => 'nullable|string|max:255',
+        'memorial_id' => 'required|integer|exists:memorials,id',
+    ]);
 
-            if (!empty($timelineData['delete'])) {
-                // Если стоит флаг удаления — удаляем запись
-                $timeline->delete();
-                continue;
-            }
+    // Обновляем существующие
+    foreach ($validatedData['timelines'] as $timelineData) {
+        $timeline = Timeline::find($timelineData['id']);
+        if (!$timeline) continue;
 
-            // Обновляем поля
-            $timeline->title = $timelineData['title'];
-            $timeline->date = $timelineData['year'] . '-01-01'; // преобразуем в дату
-            $timeline->type = $timelineData['type'];
-            $timeline->save();
+        if (!empty($timelineData['delete'])) {
+            $timeline->delete();
+            continue;
         }
 
-        return back()->with('success', 'Таймлайны успешно обновлены');
+        $timeline->title = $timelineData['title'];
+        $timeline->date = $timelineData['year'] . '-01-01';
+        $timeline->type = $timelineData['type'];
+        $timeline->save();
     }
+
+    // Создаём новую запись, если передан title
+    if (!empty($validatedData['title'])) {
+        $type = $validatedData['type'];
+        if ($type === 'other_properties' && !empty($validatedData['custom_type'])) {
+            $type = $validatedData['custom_type'];
+        }
+
+        Timeline::create([
+            'title' => $validatedData['title'],
+            'date' => $validatedData['year'] . '-01-01',
+            'type' => $type,
+            'memorial_id' => $validatedData['memorial_id'],
+        ]);
+    }
+
+    return back()->with('success', 'Таймлайны успешно обновлены');
+}
+
 
     public function updateNext(Request $request)
     {
@@ -499,11 +522,11 @@ class TimelineController extends Controller
             $timeline = Timeline::find($timelineData['id']);
             if (!$timeline) continue;
 
-            if (!empty($timelineData['delete'])) {
-                // Если стоит флаг удаления — удаляем запись
-                $timeline->delete();
-                continue;
-            }
+            // if (!empty($timelineData['delete'])) {
+            //     // Если стоит флаг удаления — удаляем запись
+            //     $timeline->delete();
+            //     continue;
+            // }
 
             // Обновляем поля
             $timeline->title = $timelineData['title'];
