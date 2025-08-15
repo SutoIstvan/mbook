@@ -448,15 +448,13 @@
                     </div>
                 </div>
                 <h4>
-                    <span class="sub-color inline">Új emlékoldal hozzáadása.</span>
+                    <span class="sub-color inline">{{ __("New memorial page added.") }}</span>
                 </h4>
 
                 {{-- <h1 class="display-5 fw-bold text-white mt-15">Fogadja őszinte részvétünket a veszteségért.</h1> --}}
                 <div class="col-lg-6 mx-auto">
                     <p class="fs-5 mt-4 mb-4">
-                        Az alábbiakban rögzítheti az elhunyt adatait, amelyeket később bármikor módosíthat vagy
-                        kiegészíthet.
-                        Töltse fel a fő fotót és néhány emlékezetes fényképét.
+                        {{ __('Below you can record the deceased\'s details, which you can change or add to at any time later. Upload the main photo and some memorable photos.') }}
                     </p>
                 </div>
             </div>
@@ -488,9 +486,10 @@
 
 
                 <div class="col-12 col-md-3 p-4">
-                    <h3>Elhunyt adatai</h3>
-                    <p class="mt-2">Kérjük, tüntesd fel a következő információkat: Teljes név, Születési dátum,
-                        Elhalálozás dátum.</p>
+                    <h3>{{ __('Deceased data') }}</h3>
+                    <p class="mt-2">
+                        {{ __('Please provide the following information: Full name, Date of birth, Date of death.') }}
+                    </p>
                 </div>
 
                 <div class="col-12 col-md-7 p-3">
@@ -511,24 +510,103 @@
                                 </div>
                             </div>
 
-                            <div class="col-12 col-md-6 mb-3">
-                                <label for="birth_date" class="col-form-label text-md-end">{{ __('Date of Birth') }}</label>
-                                <input id="birth_date" type="date"
-                                    class="form-control @error('birth_date') is-invalid @enderror" name="birth_date"
-                                    value="{{ old('birth_date') }}" required>
-                                @error('birth_date')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+<div class="col-12 col-md-7 mb-3">
+    <label class="col-form-label text-md-end">{{ __('Date of Birth') }}</label>
+    <div class="row small-gutter mt-0">
+        <!-- Год -->
+        <div class="col-4">
+            <select id="birth_year" name="birth_year" 
+                    class="form-select @error('birth_date') is-invalid @enderror @error('birth_year') is-invalid @enderror" 
+                    required>
+                <option value="">{{ __('Year') }}</option>
+                @for($year = date('Y'); $year >= 1900; $year--)
+                    <option value="{{ $year }}" 
+                            {{ old('birth_year', date('Y', strtotime(old('birth_date', '')))) == $year ? 'selected' : '' }}>
+                        {{ $year }}
+                    </option>
+                @endfor
+            </select>
+        </div>
+        
+        <!-- Месяц -->
+        <div class="col-4">
+            <select id="birth_month" name="birth_month" 
+                    class="form-select @error('birth_date') is-invalid @enderror @error('birth_month') is-invalid @enderror" 
+                    required>
+                <option value="">{{ __('Month') }}</option>
+                @php
+                    $months = [
+                        1 => __('January'),
+                        2 => __('February'),
+                        3 => __('March'),
+                        4 => __('April'),
+                        5 => __('May'),
+                        6 => __('June'),
+                        7 => __('July'),
+                        8 => __('August'),
+                        9 => __('September'),
+                        10 => __('October'),
+                        11 => __('November'),
+                        12 => __('December')
+                    ];
+                @endphp
+                @foreach($months as $monthNum => $monthName)
+                    <option value="{{ sprintf('%02d', $monthNum) }}" 
+                            {{ old('birth_month', date('m', strtotime(old('birth_date', '')))) == sprintf('%02d', $monthNum) ? 'selected' : '' }}>
+                        {{ $monthName }}
+                    </option>
+                @endforeach
 
-                            <div class="col-12 col-md-6 mb-3">
+            </select>
+        </div>
+        
+        <!-- День -->
+        <div class="col-4">
+            <select id="birth_day" name="birth_day" 
+                    class="form-select @error('birth_date') is-invalid @enderror @error('birth_day') is-invalid @enderror" 
+                    required>
+                <option value="">{{ __('Day') }}</option>
+                @for($day = 1; $day <= 31; $day++)
+                    <option value="{{ sprintf('%02d', $day) }}" 
+                            {{ old('birth_day', date('d', strtotime(old('birth_date', '')))) == sprintf('%02d', $day) ? 'selected' : '' }}>
+                        {{ $day }}
+                    </option>
+                @endfor
+            </select>
+        </div>
+    </div>
+    
+    <!-- Скрытое поле для отправки объединенной даты -->
+    <input type="hidden" id="birth_date" name="birth_date" value="{{ old('birth_date') }}">
+    
+    @error('birth_date')
+        <span class="invalid-feedback d-block" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+    @enderror
+    @error('birth_year')
+        <span class="invalid-feedback d-block" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+    @enderror
+    @error('birth_month')
+        <span class="invalid-feedback d-block" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+    @enderror
+    @error('birth_day')
+        <span class="invalid-feedback d-block" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+    @enderror
+</div>
+
+                            <div class="col-12 col-md-5 mb-3">
                                 <label for="birth_place"
-                                    class="col-form-label text-md-end">{{ __('Születés helye') }}</label>
+                                    class="col-form-label text-md-end">{{ __('Birth place') }}</label>
                                 <input id="birth_place" type="text"
                                     class="form-control @error('birth_place') is-invalid @enderror" name="birth_place"
-                                    value="{{ old('birth_place') }}" placeholder="Város">
+                                    value="{{ old('birth_place') }}" placeholder="{{ __('Enter the sity name') }}">
                                 @error('birth_place')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -536,26 +614,101 @@
                                 @enderror
                             </div>
 
-                            <div class="col-12 col-md-6 mb-3">
-                                <label for="death_date"
-                                    class="col-form-label text-md-end">{{ __('Date of Death') }}</label>
-                                <input id="death_date" type="date"
-                                    class="form-control @error('death_date') is-invalid @enderror" name="death_date"
-                                    value="{{ old('death_date') }}">
-                                @error('death_date')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+<div class="col-12 col-md-7 mb-3">
+    <label class="col-form-label text-md-end">{{ __('Date of Death') }}</label>
+    <div class="row small-gutter mt-0">
+        <!-- Год -->
+        <div class="col-4">
+            <select id="death_year" name="death_year" 
+                    class="form-select @error('death_date') is-invalid @enderror @error('death_year') is-invalid @enderror">
+                <option value="">{{ __('Year') }}</option>
+                @for($year = date('Y'); $year >= 1900; $year--)
+                    <option value="{{ $year }}" 
+                            {{ old('death_year', date('Y', strtotime(old('death_date', '')))) == $year ? 'selected' : '' }}>
+                        {{ $year }}
+                    </option>
+                @endfor
+            </select>
+        </div>
+        
+        <!-- Месяц -->
+        <div class="col-4">
+            <select id="death_month" name="death_month" 
+                    class="form-select @error('death_date') is-invalid @enderror @error('death_month') is-invalid @enderror">
+                <option value="">{{ __('Month') }}</option>
+                @php
+                    $months = [
+                        1 => __('January'),
+                        2 => __('February'),
+                        3 => __('March'),
+                        4 => __('April'),
+                        5 => __('May'),
+                        6 => __('June'),
+                        7 => __('July'),
+                        8 => __('August'),
+                        9 => __('September'),
+                        10 => __('October'),
+                        11 => __('November'),
+                        12 => __('December')
+                    ];
+                @endphp
+                @foreach($months as $monthNum => $monthName)
+                    <option value="{{ sprintf('%02d', $monthNum) }}" 
+                            {{ old('death_month', date('m', strtotime(old('death_date', '')))) == sprintf('%02d', $monthNum) ? 'selected' : '' }}>
+                        {{ $monthName }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+        
+        <!-- День -->
+        <div class="col-4">
+            <select id="death_day" name="death_day" 
+                    class="form-select @error('death_date') is-invalid @enderror @error('death_day') is-invalid @enderror">
+                <option value="">{{ __('Day') }}</option>
+                @for($day = 1; $day <= 31; $day++)
+                    <option value="{{ sprintf('%02d', $day) }}" 
+                            {{ old('death_day', date('d', strtotime(old('death_date', '')))) == sprintf('%02d', $day) ? 'selected' : '' }}>
+                        {{ $day }}
+                    </option>
+                @endfor
+            </select>
+        </div>
+    </div>
+    
+    <!-- Скрытое поле для отправки объединенной даты -->
+    <input type="hidden" id="death_date" name="death_date" value="{{ old('death_date') }}">
+    
+    @error('death_date')
+        <span class="invalid-feedback d-block" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+    @enderror
+    @error('death_year')
+        <span class="invalid-feedback d-block" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+    @enderror
+    @error('death_month')
+        <span class="invalid-feedback d-block" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+    @enderror
+    @error('death_day')
+        <span class="invalid-feedback d-block" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+    @enderror
+</div>
 
-                            <div class="col-12 col-md-6 mb-3">
+
+                            <div class="col-12 col-md-5 mb-3">
                                 <label for="grave_location"
-                                    class="col-form-label text-md-end">{{ __('Elhalálozás helye') }}</label>
+                                    class="col-form-label text-md-end">{{ __('Place of death') }}</label>
 
                                 <input type="text" id="grave_location" value="{{ old('grave_location') }}"
                                     class="form-control @error('grave_location') is-invalid @enderror"
-                                    placeholder="Adja meg a hely nevét (pl. „Budapest Budafoki temető”)"
+                                    placeholder="{{ __('Enter the place name') }}"
                                     name="grave_location">
 
                                 <input type="hidden" name="grave_coordinates" id="grave_coordinates">
@@ -609,8 +762,8 @@
             <div class="row d-flex justify-content-center">
 
                 <div class="col-12 col-md-3 p-4 mt-50">
-                    <h3>Fő emlékkép</h3>
-                    <p class="mt-2">Ez a fénykép fog elsőként megjelenni az emlékoldalon.</p>
+                    <h3>{{ __('Main Image') }}</h3>
+                    <p class="mt-2">{{ __('This photo will be displayed first on the memorial page.') }}</p>
                 </div>
 
                 <div class="col-12 col-md-7 p-3 mt-50">
@@ -666,9 +819,8 @@
 
 
                 <div class="col-12 col-md-3 p-4 mt-50">
-                    <h3>Életrajz</h3>
-                    <p class="mt-2">Oszd meg velünk kedves emlékeidet, a számára fontos pillanatokat vagy azt, amit
-                        szerettél benne a legjobban.</p>
+                    <h3>{{ __('Biography') }}</h3>
+                    <p class="mt-2">{{ __('Share with us your fond memories, important moments for them, or what you loved most about them.') }}</p>
                 </div>
 
                 <div class="col-12 col-md-7 p-3">
@@ -698,7 +850,7 @@
 
             <button type="submit" id="submitBtn" class="butn butn-md butn-bord butn-rounded">
                 <span class="text">
-                    {{ __('Adatok mentése') }}
+                    {{ __('Save data') }}
                 </span>
                 <span id="btnIcon" class="icon">
                     <i class="fa-regular fa-save text-secondary"></i>
@@ -923,6 +1075,65 @@
         // Чтобы сразу показать актуальное значение при загрузке страницы
         document.addEventListener('DOMContentLoaded', updateCharCount);
 
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Функция для инициализации селектов даты
+    function initializeDateSelects(prefix) {
+        const yearSelect = document.getElementById(prefix + '_year');
+        const monthSelect = document.getElementById(prefix + '_month');
+        const daySelect = document.getElementById(prefix + '_day');
+        const hiddenInput = document.getElementById(prefix + '_date');
+        
+        if (!yearSelect || !monthSelect || !daySelect || !hiddenInput) return;
+        
+        function updateHiddenField() {
+            const year = yearSelect.value;
+            const month = monthSelect.value;
+            const day = daySelect.value;
+            
+            if (year && month && day) {
+                hiddenInput.value = `${year}-${month}-${day}`;
+            } else {
+                hiddenInput.value = '';
+            }
+            updateDaysInMonth();
+        }
+        
+        function updateDaysInMonth() {
+            const year = parseInt(yearSelect.value);
+            const month = parseInt(monthSelect.value);
+            const currentDay = daySelect.value;
+            
+            if (year && month) {
+                const daysInMonth = new Date(year, month, 0).getDate();
+                daySelect.innerHTML = '<option value="">{{ __("Day") }}</option>';
+                
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const dayFormatted = day.toString().padStart(2, '0');
+                    const option = document.createElement('option');
+                    option.value = dayFormatted;
+                    option.textContent = day;
+                    
+                    if (currentDay === dayFormatted && day <= daysInMonth) {
+                        option.selected = true;
+                    }
+                    
+                    daySelect.appendChild(option);
+                }
+            }
+        }
+        
+        yearSelect.addEventListener('change', updateHiddenField);
+        monthSelect.addEventListener('change', updateHiddenField);
+        daySelect.addEventListener('change', updateHiddenField);
+        
+        updateHiddenField();
+    }
+    
+    // Инициализируем оба набора селектов
+    initializeDateSelects('birth');
+    initializeDateSelects('death');
+});
 
     </script>
 
