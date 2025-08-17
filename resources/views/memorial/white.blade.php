@@ -1169,8 +1169,8 @@
                                             </div>
 
                                             @if ($comment->hasPhoto())
-                                                <div class="comment-photo mt-3">
-                                                    <div class="cbp-item brand graphics position-relative d-inline-block"
+                                                <div class="comment-photo">
+                                                    <div class="brand graphics position-relative d-inline-block"
                                                         style="border-radius: 4px;">
                                                         <img src="{{ $comment->photo_url }}"
                                                             alt="Фото от {{ $comment->name }}" class="img-fluid"
