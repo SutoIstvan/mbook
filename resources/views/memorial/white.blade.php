@@ -307,6 +307,8 @@
             word-break: break-word;
             font-size: 14px;
         }
+
+        
     </style>
 
 
@@ -579,16 +581,14 @@
                             <div class="cbp-item brand graphics" style="border-radius: 4px;">
                                 <img src="{{ asset('memorial/' . $image->image_path) }}"
                                     alt="{{ $image->image_description ?? 'Gallery Image' }}">
-                                <div class="gallery-hvr whitecolor">
+                                <a href="{{ asset('memorial/' . $image->image_path) }}"
+                                    class="gallery-hvr whitecolor opens glightbox text-decoration-none"
+                                    data-fancybox="gallery" title="{{ $image->image_description ?? __('Zoom in') }}">
                                     <div class="center-box">
-                                        <a href="{{ asset('memorial/' . $image->image_path) }}"
-                                            class="opens glightbox" data-fancybox="gallery"
-                                            title="{{ $image->image_description ?? 'Zoom In' }}">
-                                            <i class="fa fa-search-plus"></i>
-                                        </a>
+                                        <i class="fa fa-search-plus text-white fs-5"></i>
                                         <h4 class="w-100">{{ $image->image_description ?? '' }}</h4>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         @endforeach
                     </div>
@@ -872,10 +872,11 @@
                                 {{ $grandfatherFather->name ?? __('Grand Father') }}
                             </div>
 
-                            @if(!empty($grandfatherFather->qr_code))
-                                <div class="position-absolute" title="{{ __('Qr code') }}" style="cursor: pointer; top: 0; right: 5px;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="15px" height="15px"
-                                        viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1">
+                            @if (!empty($grandfatherFather->qr_code))
+                                <div class="position-absolute" title="{{ __('Qr code') }}"
+                                    style="cursor: pointer; top: 0; right: 5px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="15px"
+                                        height="15px" viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1">
                                         <title />
                                         <path
                                             d="M75,15H35A20.06,20.06,0,0,0,15,35V75A20.06,20.06,0,0,0,35,95H75A20.06,20.06,0,0,0,95,75V35A20.06,20.06,0,0,0,75,15Zm0,60H35V35H75Zm0,30H35a20.06,20.06,0,0,0-20,20v40a20.06,20.06,0,0,0,20,20H75a20.06,20.06,0,0,0,20-20V125A20.06,20.06,0,0,0,75,105Zm0,60H35V125H75ZM165,15H125a20.06,20.06,0,0,0-20,20V75a20.06,20.06,0,0,0,20,20h40a20.06,20.06,0,0,0,20-20V35A20.06,20.06,0,0,0,165,15Zm0,60H125V35h40ZM50,65H60a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,50,65Zm0,90H60a5.38,5.38,0,0,0,5-5V140a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5v10A5.38,5.38,0,0,0,50,155Zm90-90h10a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H140a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,140,65Zm-30,80h10a5.38,5.38,0,0,0,5-5V130a5.38,5.38,0,0,1,5-5h10a5.38,5.38,0,0,0,5-5V110a5.38,5.38,0,0,0-5-5H110a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5Zm70-40H170a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V110A5.38,5.38,0,0,0,180,105Zm-60,60H110a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,120,165Zm60,0H170a5.38,5.38,0,0,1-5-5V150a5.38,5.38,0,0,0-5-5H130a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,1,5,5v10a5.38,5.38,0,0,0,5,5h30a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,180,165Z" />
@@ -904,10 +905,11 @@
                             <div class="memorial-name mt-2">
                                 {{ $grandmotherFather->name ?? __('Grand Mother') }}
                             </div>
-                            @if(!empty($grandmotherFather->qr_code))
-                                <div class="position-absolute" title="{{ __('Qr code') }}" style="cursor: pointer; top: 0; right: 5px;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="15px" height="15px"
-                                        viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1">
+                            @if (!empty($grandmotherFather->qr_code))
+                                <div class="position-absolute" title="{{ __('Qr code') }}"
+                                    style="cursor: pointer; top: 0; right: 5px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="15px"
+                                        height="15px" viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1">
                                         <title />
                                         <path
                                             d="M75,15H35A20.06,20.06,0,0,0,15,35V75A20.06,20.06,0,0,0,35,95H75A20.06,20.06,0,0,0,95,75V35A20.06,20.06,0,0,0,75,15Zm0,60H35V35H75Zm0,30H35a20.06,20.06,0,0,0-20,20v40a20.06,20.06,0,0,0,20,20H75a20.06,20.06,0,0,0,20-20V125A20.06,20.06,0,0,0,75,105Zm0,60H35V125H75ZM165,15H125a20.06,20.06,0,0,0-20,20V75a20.06,20.06,0,0,0,20,20h40a20.06,20.06,0,0,0,20-20V35A20.06,20.06,0,0,0,165,15Zm0,60H125V35h40ZM50,65H60a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,50,65Zm0,90H60a5.38,5.38,0,0,0,5-5V140a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5v10A5.38,5.38,0,0,0,50,155Zm90-90h10a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H140a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,140,65Zm-30,80h10a5.38,5.38,0,0,0,5-5V130a5.38,5.38,0,0,1,5-5h10a5.38,5.38,0,0,0,5-5V110a5.38,5.38,0,0,0-5-5H110a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5Zm70-40H170a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V110A5.38,5.38,0,0,0,180,105Zm-60,60H110a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,120,165Zm60,0H170a5.38,5.38,0,0,1-5-5V150a5.38,5.38,0,0,0-5-5H130a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,1,5,5v10a5.38,5.38,0,0,0,5,5h30a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,180,165Z" />
@@ -924,10 +926,11 @@
                             <div class="memorial-name mt-2">
                                 {{ $grandfatherMother->name ?? __('Grand Father') }}
                             </div>
-                            @if(!empty($grandfatherMother->qr_code))
-                                <div class="position-absolute" title="{{ __('Qr code') }}" style="cursor: pointer; top: 0; right: 5px;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="15px" height="15px"
-                                        viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1">
+                            @if (!empty($grandfatherMother->qr_code))
+                                <div class="position-absolute" title="{{ __('Qr code') }}"
+                                    style="cursor: pointer; top: 0; right: 5px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="15px"
+                                        height="15px" viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1">
                                         <title />
                                         <path
                                             d="M75,15H35A20.06,20.06,0,0,0,15,35V75A20.06,20.06,0,0,0,35,95H75A20.06,20.06,0,0,0,95,75V35A20.06,20.06,0,0,0,75,15Zm0,60H35V35H75Zm0,30H35a20.06,20.06,0,0,0-20,20v40a20.06,20.06,0,0,0,20,20H75a20.06,20.06,0,0,0,20-20V125A20.06,20.06,0,0,0,75,105Zm0,60H35V125H75ZM165,15H125a20.06,20.06,0,0,0-20,20V75a20.06,20.06,0,0,0,20,20h40a20.06,20.06,0,0,0,20-20V35A20.06,20.06,0,0,0,165,15Zm0,60H125V35h40ZM50,65H60a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,50,65Zm0,90H60a5.38,5.38,0,0,0,5-5V140a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5v10A5.38,5.38,0,0,0,50,155Zm90-90h10a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H140a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,140,65Zm-30,80h10a5.38,5.38,0,0,0,5-5V130a5.38,5.38,0,0,1,5-5h10a5.38,5.38,0,0,0,5-5V110a5.38,5.38,0,0,0-5-5H110a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5Zm70-40H170a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V110A5.38,5.38,0,0,0,180,105Zm-60,60H110a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,120,165Zm60,0H170a5.38,5.38,0,0,1-5-5V150a5.38,5.38,0,0,0-5-5H130a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,1,5,5v10a5.38,5.38,0,0,0,5,5h30a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,180,165Z" />
@@ -944,10 +947,11 @@
                             <div class="memorial-name mt-2">
                                 {{ $grandmotherMother->name ?? __('Grand Mother') }}
                             </div>
-                            @if(!empty($grandmotherMother->qr_code))
-                                <div class="position-absolute" title="{{ __('Qr code') }}" style="cursor: pointer; top: 0; right: 5px;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="15px" height="15px"
-                                        viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1">
+                            @if (!empty($grandmotherMother->qr_code))
+                                <div class="position-absolute" title="{{ __('Qr code') }}"
+                                    style="cursor: pointer; top: 0; right: 5px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="15px"
+                                        height="15px" viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1">
                                         <title />
                                         <path
                                             d="M75,15H35A20.06,20.06,0,0,0,15,35V75A20.06,20.06,0,0,0,35,95H75A20.06,20.06,0,0,0,95,75V35A20.06,20.06,0,0,0,75,15Zm0,60H35V35H75Zm0,30H35a20.06,20.06,0,0,0-20,20v40a20.06,20.06,0,0,0,20,20H75a20.06,20.06,0,0,0,20-20V125A20.06,20.06,0,0,0,75,105Zm0,60H35V125H75ZM165,15H125a20.06,20.06,0,0,0-20,20V75a20.06,20.06,0,0,0,20,20h40a20.06,20.06,0,0,0,20-20V35A20.06,20.06,0,0,0,165,15Zm0,60H125V35h40ZM50,65H60a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,50,65Zm0,90H60a5.38,5.38,0,0,0,5-5V140a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5v10A5.38,5.38,0,0,0,50,155Zm90-90h10a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H140a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,140,65Zm-30,80h10a5.38,5.38,0,0,0,5-5V130a5.38,5.38,0,0,1,5-5h10a5.38,5.38,0,0,0,5-5V110a5.38,5.38,0,0,0-5-5H110a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5Zm70-40H170a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V110A5.38,5.38,0,0,0,180,105Zm-60,60H110a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,120,165Zm60,0H170a5.38,5.38,0,0,1-5-5V150a5.38,5.38,0,0,0-5-5H130a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,1,5,5v10a5.38,5.38,0,0,0,5,5h30a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,180,165Z" />
@@ -962,17 +966,18 @@
 
                     <li class="down">
                         <ul class="apa">
-                        <a {{ $father?->qr_code ? 'href=' . route('memorial.show', $father->qr_code) : '' }}
-                            target="_blank">
+                            <a {{ $father?->qr_code ? 'href=' . route('memorial.show', $father->qr_code) : '' }}
+                                target="_blank">
                                 <img src="{{ isset($father) && $father->photo ? asset('memorial/' . $father->photo) : asset('avatar/avatar-man.png') }}"
                                     class="img-fluid rounded-circle" width="90" height="90">
                                 <div class="memorial-name mt-2">
                                     {{ $father->name ?? __('Father') }}
                                 </div>
-                                @if(!empty($father->qr_code))
-                                    <div class="position-absolute" title="{{ __('Qr code') }}" style="cursor: pointer; top: 0; right: 5px;">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="15px" height="15px"
-                                            viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1">
+                                @if (!empty($father->qr_code))
+                                    <div class="position-absolute" title="{{ __('Qr code') }}"
+                                        style="cursor: pointer; top: 0; right: 5px;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="15px"
+                                            height="15px" viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1">
                                             <title />
                                             <path
                                                 d="M75,15H35A20.06,20.06,0,0,0,15,35V75A20.06,20.06,0,0,0,35,95H75A20.06,20.06,0,0,0,95,75V35A20.06,20.06,0,0,0,75,15Zm0,60H35V35H75Zm0,30H35a20.06,20.06,0,0,0-20,20v40a20.06,20.06,0,0,0,20,20H75a20.06,20.06,0,0,0,20-20V125A20.06,20.06,0,0,0,75,105Zm0,60H35V125H75ZM165,15H125a20.06,20.06,0,0,0-20,20V75a20.06,20.06,0,0,0,20,20h40a20.06,20.06,0,0,0,20-20V35A20.06,20.06,0,0,0,165,15Zm0,60H125V35h40ZM50,65H60a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,50,65Zm0,90H60a5.38,5.38,0,0,0,5-5V140a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5v10A5.38,5.38,0,0,0,50,155Zm90-90h10a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H140a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,140,65Zm-30,80h10a5.38,5.38,0,0,0,5-5V130a5.38,5.38,0,0,1,5-5h10a5.38,5.38,0,0,0,5-5V110a5.38,5.38,0,0,0-5-5H110a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5Zm70-40H170a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V110A5.38,5.38,0,0,0,180,105Zm-60,60H110a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,120,165Zm60,0H170a5.38,5.38,0,0,1-5-5V150a5.38,5.38,0,0,0-5-5H130a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,1,5,5v10a5.38,5.38,0,0,0,5,5h30a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,180,165Z" />
@@ -985,17 +990,18 @@
 
                     <li class="up mom">
                         <ul class="apa">
-                        <a {{ $mother?->qr_code ? 'href=' . route('memorial.show', $mother->qr_code) : '' }}
-                            target="_blank">
+                            <a {{ $mother?->qr_code ? 'href=' . route('memorial.show', $mother->qr_code) : '' }}
+                                target="_blank">
                                 <img src="{{ isset($mother) && $mother->photo ? asset('memorial/' . $mother->photo) : asset('avatar/avatar-girl.png') }}"
                                     class="img-fluid rounded-circle" width="90" height="90">
                                 <div class="memorial-name mt-2">
                                     {{ $mother->name ?? __('Mother') }}
                                 </div>
-                                @if(!empty($mother->qr_code))
-                                    <div class="position-absolute" title="{{ __('Qr code') }}" style="cursor: pointer; top: 0; right: 5px;">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="15px" height="15px"
-                                            viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1">
+                                @if (!empty($mother->qr_code))
+                                    <div class="position-absolute" title="{{ __('Qr code') }}"
+                                        style="cursor: pointer; top: 0; right: 5px;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="15px"
+                                            height="15px" viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1">
                                             <title />
                                             <path
                                                 d="M75,15H35A20.06,20.06,0,0,0,15,35V75A20.06,20.06,0,0,0,35,95H75A20.06,20.06,0,0,0,95,75V35A20.06,20.06,0,0,0,75,15Zm0,60H35V35H75Zm0,30H35a20.06,20.06,0,0,0-20,20v40a20.06,20.06,0,0,0,20,20H75a20.06,20.06,0,0,0,20-20V125A20.06,20.06,0,0,0,75,105Zm0,60H35V125H75ZM165,15H125a20.06,20.06,0,0,0-20,20V75a20.06,20.06,0,0,0,20,20h40a20.06,20.06,0,0,0,20-20V35A20.06,20.06,0,0,0,165,15Zm0,60H125V35h40ZM50,65H60a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,50,65Zm0,90H60a5.38,5.38,0,0,0,5-5V140a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5v10A5.38,5.38,0,0,0,50,155Zm90-90h10a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H140a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,140,65Zm-30,80h10a5.38,5.38,0,0,0,5-5V130a5.38,5.38,0,0,1,5-5h10a5.38,5.38,0,0,0,5-5V110a5.38,5.38,0,0,0-5-5H110a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5Zm70-40H170a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V110A5.38,5.38,0,0,0,180,105Zm-60,60H110a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,120,165Zm60,0H170a5.38,5.38,0,0,1-5-5V150a5.38,5.38,0,0,0-5-5H130a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,1,5,5v10a5.38,5.38,0,0,0,5,5h30a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,180,165Z" />
@@ -1019,10 +1025,12 @@
                                         <div class="memorial-name mt-2">
                                             {{ $partner->name ?? __('Partner') }}
                                         </div>
-                                        @if(!empty($partner->qr_code))
-                                            <div class="position-absolute" title="{{ __('Qr code') }}" style="cursor: pointer; top: 0; right: 5px;">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="15px" height="15px"
-                                                    viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1">
+                                        @if (!empty($partner->qr_code))
+                                            <div class="position-absolute" title="{{ __('Qr code') }}"
+                                                style="cursor: pointer; top: 0; right: 5px;">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="15px"
+                                                    height="15px" viewBox="0 0 200 200" data-name="Layer 1"
+                                                    id="Layer_1">
                                                     <title />
                                                     <path
                                                         d="M75,15H35A20.06,20.06,0,0,0,15,35V75A20.06,20.06,0,0,0,35,95H75A20.06,20.06,0,0,0,95,75V35A20.06,20.06,0,0,0,75,15Zm0,60H35V35H75Zm0,30H35a20.06,20.06,0,0,0-20,20v40a20.06,20.06,0,0,0,20,20H75a20.06,20.06,0,0,0,20-20V125A20.06,20.06,0,0,0,75,105Zm0,60H35V125H75ZM165,15H125a20.06,20.06,0,0,0-20,20V75a20.06,20.06,0,0,0,20,20h40a20.06,20.06,0,0,0,20-20V35A20.06,20.06,0,0,0,165,15Zm0,60H125V35h40ZM50,65H60a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,50,65Zm0,90H60a5.38,5.38,0,0,0,5-5V140a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5v10A5.38,5.38,0,0,0,50,155Zm90-90h10a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H140a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,140,65Zm-30,80h10a5.38,5.38,0,0,0,5-5V130a5.38,5.38,0,0,1,5-5h10a5.38,5.38,0,0,0,5-5V110a5.38,5.38,0,0,0-5-5H110a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5Zm70-40H170a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V110A5.38,5.38,0,0,0,180,105Zm-60,60H110a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,120,165Zm60,0H170a5.38,5.38,0,0,1-5-5V150a5.38,5.38,0,0,0-5-5H130a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,1,5,5v10a5.38,5.38,0,0,0,5,5h30a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,180,165Z" />
@@ -1065,10 +1073,14 @@
                                                         <div class="memorial-name mt-2">
                                                             {{ $children->name ?? __('Child') }}
                                                         </div>
-                                                        @if(!empty($children->qr_code))
-                                                            <div class="position-absolute" title="{{ __('Qr code') }}" style="cursor: pointer; top: 0; right: 5px;">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="15px" height="15px"
-                                                                    viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1">
+                                                        @if (!empty($children->qr_code))
+                                                            <div class="position-absolute"
+                                                                title="{{ __('Qr code') }}"
+                                                                style="cursor: pointer; top: 0; right: 5px;">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#666666"
+                                                                    width="15px" height="15px"
+                                                                    viewBox="0 0 200 200" data-name="Layer 1"
+                                                                    id="Layer_1">
                                                                     <title />
                                                                     <path
                                                                         d="M75,15H35A20.06,20.06,0,0,0,15,35V75A20.06,20.06,0,0,0,35,95H75A20.06,20.06,0,0,0,95,75V35A20.06,20.06,0,0,0,75,15Zm0,60H35V35H75Zm0,30H35a20.06,20.06,0,0,0-20,20v40a20.06,20.06,0,0,0,20,20H75a20.06,20.06,0,0,0,20-20V125A20.06,20.06,0,0,0,75,105Zm0,60H35V125H75ZM165,15H125a20.06,20.06,0,0,0-20,20V75a20.06,20.06,0,0,0,20,20h40a20.06,20.06,0,0,0,20-20V35A20.06,20.06,0,0,0,165,15Zm0,60H125V35h40ZM50,65H60a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,50,65Zm0,90H60a5.38,5.38,0,0,0,5-5V140a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5v10A5.38,5.38,0,0,0,50,155Zm90-90h10a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H140a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,140,65Zm-30,80h10a5.38,5.38,0,0,0,5-5V130a5.38,5.38,0,0,1,5-5h10a5.38,5.38,0,0,0,5-5V110a5.38,5.38,0,0,0-5-5H110a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5Zm70-40H170a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V110A5.38,5.38,0,0,0,180,105Zm-60,60H110a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,120,165Zm60,0H170a5.38,5.38,0,0,1-5-5V150a5.38,5.38,0,0,0-5-5H130a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,1,5,5v10a5.38,5.38,0,0,0,5,5h30a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,180,165Z" />
@@ -1095,10 +1107,12 @@
                                             <div class="memorial-name mt-2">
                                                 {{ $sibling->name ?? __('Sibling') }}
                                             </div>
-                                            @if(!empty($sibling->qr_code))
-                                                <div class="position-absolute" title="{{ __('Qr code') }}" style="cursor: pointer; top: 0; right: 5px;">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="15px" height="15px"
-                                                        viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1">
+                                            @if (!empty($sibling->qr_code))
+                                                <div class="position-absolute" title="{{ __('Qr code') }}"
+                                                    style="cursor: pointer; top: 0; right: 5px;">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#666666"
+                                                        width="15px" height="15px" viewBox="0 0 200 200"
+                                                        data-name="Layer 1" id="Layer_1">
                                                         <title />
                                                         <path
                                                             d="M75,15H35A20.06,20.06,0,0,0,15,35V75A20.06,20.06,0,0,0,35,95H75A20.06,20.06,0,0,0,95,75V35A20.06,20.06,0,0,0,75,15Zm0,60H35V35H75Zm0,30H35a20.06,20.06,0,0,0-20,20v40a20.06,20.06,0,0,0,20,20H75a20.06,20.06,0,0,0,20-20V125A20.06,20.06,0,0,0,75,105Zm0,60H35V125H75ZM165,15H125a20.06,20.06,0,0,0-20,20V75a20.06,20.06,0,0,0,20,20h40a20.06,20.06,0,0,0,20-20V35A20.06,20.06,0,0,0,165,15Zm0,60H125V35h40ZM50,65H60a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,50,65Zm0,90H60a5.38,5.38,0,0,0,5-5V140a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5v10A5.38,5.38,0,0,0,50,155Zm90-90h10a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H140a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,140,65Zm-30,80h10a5.38,5.38,0,0,0,5-5V130a5.38,5.38,0,0,1,5-5h10a5.38,5.38,0,0,0,5-5V110a5.38,5.38,0,0,0-5-5H110a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5Zm70-40H170a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V110A5.38,5.38,0,0,0,180,105Zm-60,60H110a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,120,165Zm60,0H170a5.38,5.38,0,0,1-5-5V150a5.38,5.38,0,0,0-5-5H130a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,1,5,5v10a5.38,5.38,0,0,0,5,5h30a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,180,165Z" />
@@ -1134,34 +1148,56 @@
                                 <p>Oszd meg Te is a közös pillanatokat, érzéseket, gondolatokat</p>
                             </div>
                         </div>
-                        <div class="comments-list">
+                        <div class="comments-list row justify-content-center">
+                            <div class="col-md-10 col-sm-12 col-lg-8">
 
-                            @forelse($comments as $comment)
-                                <div class="comment-box wow fadeIn mb-3" data-wow-delay="300ms">
 
-                                    <div class="d-flex gap-3">
-                                        <img src="{{ asset('dark/imgs/header/circle-badge4.png') }}"
-                                            alt="User Avatar" class="user-avatar">
-                                        <div class="flex-grow-1">
-                                            <div class="mb-2">
-                                                <h6 class="mb-0 defaultcolor fs-4">{{ $comment->name }}</h6>
-                                                <span
-                                                    class="comment-time">{{ $comment->created_at->format('Y M d') }}</span>
+                                @forelse($comments as $comment)
+                                    <div class="comment-box wow fadeIn mb-3" data-wow-delay="300ms">
+
+                                        <div class="d-flex gap-3">
+                                            <img src="{{ asset('dark/imgs/header/circle-badge4.png') }}"
+                                                alt="User Avatar" class="user-avatar">
+                                            <div class="flex-grow-1">
+                                                <div class="mb-2">
+                                                    <h6 class="mb-0 defaultcolor fs-4">{{ $comment->name }}</h6>
+                                                    <span
+                                                        class="comment-time">{{ $comment->created_at->format('Y M d') }}</span>
+                                                </div>
+                                                <p class="mb-2">“{{ $comment->content }}”</p>
+
                                             </div>
-                                            <p class="mb-2">“{{ $comment->content }}”</p>
 
+                                            @if ($comment->hasPhoto())
+                                                <div class="comment-photo mt-3">
+                                                    <div class="cbp-item brand graphics position-relative d-inline-block"
+                                                        style="border-radius: 4px;">
+                                                        <img src="{{ $comment->photo_url }}"
+                                                            alt="Фото от {{ $comment->name }}" class="img-fluid"
+                                                            style="max-width: 300px;">
+                                                        <a href="{{ $comment->photo_url }}"
+                                                            class="gallery-hvr whitecolor glightbox text-decoration-none"
+                                                            data-fancybox="comment-gallery"
+                                                            title="Фотография от {{ $comment->name }}"
+                                                            style="cursor: pointer;">
+                                                            <div class="center-box">
+                                                                <i class="fa fa-search-plus mb-2 text-white"></i>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
-                                </div>
-                            @empty
-                                <div class="text-center">
-                                    <p class="text-gray-500">Még senki sem írt emlékező üzenetet. Légy te az első.
-                                    </p>
-                                </div>
+                                @empty
+                                    <div class="text-center">
+                                        <p class="text-gray-500">Még senki sem írt emlékező üzenetet. Légy te az első.
+                                        </p>
+                                    </div>
 
+                            </div>
+                            @endforelse
                         </div>
-                        @endforelse
-
 
                     </div>
                 </div>
@@ -1181,10 +1217,6 @@
             aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
-                    {{-- <div class="modal-header">
-                    <h5 class="modal-title darkcolor" id="contactModalLabel">Contact Us</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div> --}}
                     <div class="modal-body">
                         <div class="container-fluid">
                             <div class="row">
@@ -1225,19 +1257,6 @@
 
 
                                         </div>
-                                        {{-- <ul class="social-icons no-border mb-4 mb-md-0">
-                                            <li><a href="javascript:void(0)" class="facebook"><i
-                                                        class="fab fa-facebook-f"></i></a></li>
-                                            <li><a href="javascript:void(0)" class="twitter"><i
-                                                        class="fab fa-twitter"></i></a></li>
-                                            <li><a href="javascript:void(0)" class="linkedin"><i
-                                                        class="fab fa-linkedin-in"></i></a></li>
-                                            <li><a href="javascript:void(0)" class="insta"><i
-                                                        class="fab fa-instagram"></i></a></li>
-                                            <li><a href="javascript:void(0)" class="whatsapp"><i
-                                                        class="fab fa-whatsapp"></i></a></li>
-                                            <li><a href="javascript:void(0)"><i class="far fa-envelope"></i></a></li>
-                                        </ul> --}}
                                     </div>
                                 </div>
                                 <div class="col-md-8 col-sm-12">
@@ -1553,7 +1572,7 @@
     <!--Cubefolio Gallery-->
     <script src="white/js/jquery.cubeportfolio.min.js"></script>
     <!--Fancybox js-->
-    <script src="white/js/jquery.fancybox.min.js"></script>
+    {{-- <script src="white/js/jquery.fancybox.min.js"></script> --}}
     <!--tooltip js-->
     <script src="white/js/tooltipster.min.js"></script>
     <!--wow js-->
@@ -1575,6 +1594,28 @@
     <script src="white/js/functions.js"></script>
 
     <script>
+        // Функция для предварительного просмотра изображения
+        function previewImage(event) {
+            const file = event.target.files[0];
+            const previewContainer = document.getElementById('preview-container');
+            const previewImage = document.getElementById('preview-image');
+            const photoDescription = document.getElementById('photo-description');
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImage.src = e.target.result;
+                    previewContainer.style.display = 'block';
+                    photoDescription.textContent = 'Kiválasztott kép előnézete:';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                previewContainer.style.display = 'none';
+                photoDescription.textContent =
+                    'Adj hozzá egy fotót a megjegyzésedhez, és lepd meg a rokonaidat egy egyedi képpel.';
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             const commentForm = document.getElementById('addcomment');
             if (!commentForm) return;
@@ -1586,6 +1627,18 @@
                 const form = e.target;
                 const memorialId = form.dataset.memorialId;
                 const formData = new FormData(form);
+
+                // Добавляем фото в FormData (если выбрано)
+                const photoInput = document.getElementById('comment_photo');
+                if (photoInput && photoInput.files[0]) {
+                    formData.append('comment_photo', photoInput.files[0]);
+                }
+
+                // Блокируем кнопку отправки
+                const submitBtn = document.getElementById('submit_btn1');
+                const originalText = submitBtn.textContent;
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Küldés...';
 
                 fetch(`/${memorialId}/comments`, {
                         method: 'POST',
@@ -1605,53 +1658,121 @@
                     .then(data => {
                         form.reset();
 
-                        // Close Bootstrap-modal windows
+                        // Скрываем предварительный просмотр
+                        document.getElementById('preview-container').style.display = 'none';
+                        document.getElementById('photo-description').textContent =
+                            'Adj hozzá egy fotót a megjegyzésedhez, és lepd meg a rokonaidat egy egyedi képpel.';
+
+                        // Закрываем Bootstrap модальное окно
                         const modalEl = document.getElementById('contactModal');
                         const modalInstance = bootstrap.Modal.getInstance(modalEl) || new bootstrap
                             .Modal(modalEl);
                         modalInstance.hide();
 
-                        // Scow Bootstrap Toast
+                        // Показываем Bootstrap Toast
                         const toastEl = document.getElementById('successToast');
                         const toast = new bootstrap.Toast(toastEl);
                         toast.show();
 
-                        // Очистка result блока (если есть)
+                        // Очищаем result блок (если есть)
                         document.getElementById('result1').innerHTML = '';
                     })
                     .catch(error => {
                         console.error(error);
+                        let errorMessage = 'Érvénytelen adatok';
+
+                        if (error.errors) {
+                            // Laravel validation errors
+                            const firstError = Object.values(error.errors)[0];
+                            if (firstError && firstError[0]) {
+                                errorMessage = firstError[0];
+                            }
+                        } else if (error.message) {
+                            errorMessage = error.message;
+                        }
+
                         document.getElementById('result1').innerHTML =
-                            `<div class="alert alert-danger">Hiba történt: ${error.message ?? 'érvénytelen adatok'}</div>`;
+                            `<div class="alert alert-danger">Hiba történt: ${errorMessage}</div>`;
+                    })
+                    .finally(() => {
+                        // Восстанавливаем кнопку
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = originalText;
                     });
             });
         });
 
-        function previewImage(event) {
-            const input = event.target;
-            const previewContainer = document.getElementById('preview-container');
-            const previewImage = document.getElementById('preview-image');
-            const description = document.getElementById('photo-description');
+        
+// $(document).ready(function() {
+//     // Переопределяем все кнопки с переводами и правильными иконками
+//     $.fancybox.defaults.btnTpl.close = 
+//         '<button data-fancybox-close class="fancybox-button fancybox-button--close" title="{{ __('Bezárás') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.71 12 5.29-5.29a.5.5 0 0 0-.71-.71L12 10.29 6.71 5.29a.5.5 0 0 0-.71.71L10.29 12 5.29 17.29a.5.5 0 0 0 .71.71L12 13.41l5.29 5.29a.5.5 0 0 0 .71-.71z"/></svg></button>';
+    
+//     $.fancybox.defaults.btnTpl.arrowLeft = 
+//         '<button data-fancybox-prev class="fancybox-button fancybox-button--arrow_left" title="{{ __('Előző') }}"><div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.28 15.7l-1.34 1.37L5 12l4.94-5.07 1.34 1.36-2.68 2.72H19v1.98H8.6l2.68 2.71z"/></svg></div></button>';
+    
+//     $.fancybox.defaults.btnTpl.arrowRight = 
+//         '<button data-fancybox-next class="fancybox-button fancybox-button--arrow_right" title="{{ __('Következő') }}"><div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.72 8.3l1.34-1.37L19 12l-4.94 5.07-1.34-1.36 2.68-2.72H5v-1.98h10.4l-2.68-2.71z"/></svg></div></button>';
+    
+//     $.fancybox.defaults.btnTpl.smallBtn = 
+//         '<button type="button" data-fancybox-close class="fancybox-button fancybox-close-small" title="{{ __('Bezárás') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="m10,10 L22,22 M22,10 L10,22"></path></svg></button>';
+    
+//     $.fancybox.defaults.btnTpl.zoom = 
+//         '<button data-fancybox-zoom class="fancybox-button fancybox-button--zoom" title="{{ __('Nagyítás') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.7 17.3l-3-3a5.9 5.9 0 0 0-.6-7.6 5.9 5.9 0 0 0-8.4 0 5.9 5.9 0 0 0 0 8.4 5.9 5.9 0 0 0 7.7.7l3 3a1 1 0 0 0 1.3 0c.4-.5.4-1 0-1.5zM8.1 13.8a4 4 0 0 1 0-5.7 4 4 0 0 1 5.7 0 4 4 0 0 1 0 5.7 4 4 0 0 1-5.7 0z"/></svg></button>';
+    
+//     $.fancybox.defaults.btnTpl.slideShow = 
+//         '<button data-fancybox-play class="fancybox-button fancybox-button--play" title="{{ __('Diavetítés indítása') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.5 5.4v13.2l11-6.6z"/></svg></button>';
+    
+//     $.fancybox.defaults.btnTpl.fullScreen = 
+//         '<button data-fancybox-fullscreen class="fancybox-button fancybox-button--fsenter" title="{{ __('Teljes képernyő') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg></button>';
+    
+//     $.fancybox.defaults.btnTpl.thumbs = 
+//         '<button data-fancybox-thumbs class="fancybox-button fancybox-button--thumbs" title="{{ __('Miniatűrök') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.59 14.59h3.76v3.76h-3.76v-3.76zm-4.47 0h3.76v3.76h-3.76v-3.76zm-4.47 0h3.76v3.76H5.65v-3.76zm8.94-4.47h3.76v3.76h-3.76v-3.76zm-4.47 0h3.76v3.76h-3.76v-3.76zm-4.47 0h3.76v3.76H5.65v-3.76zm8.94-4.47h3.76v3.76h-3.76V5.65zm-4.47 0h3.76v3.76h-3.76V5.65zm-4.47 0h3.76v3.76H5.65V5.65z"/></svg></button>';
+    
+//     $.fancybox.defaults.btnTpl.download = 
+//         '<button data-fancybox-download class="fancybox-button fancybox-button--download" title="{{ __('Letöltés') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.62 17.09V19H5.38v-1.91zm-2.97-6.96L17 11.45l-5 4.87-5-4.87 1.36-1.32 2.68 2.64V5h1.92v7.77l2.69-2.64z"/></svg></button>';
+    
+//     $.fancybox.defaults.btnTpl.share = 
+//         '<button data-fancybox-share class="fancybox-button fancybox-button--share" title="{{ __('Megosztás') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2.55 19c1.4-8.4 9.1-9.8 11.9-9.8V5l7 7-7 6.3v-3.5c-2.8 0-10.5 2.1-11.9 4.2z"/></svg></button>';
+// });
 
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
+$(document).ready(function() {
+    // Переопределяем все кнопки с переводами и правильными иконками
+    $.fancybox.defaults.btnTpl.close = 
+        '<button data-fancybox-close class="fancybox-button fancybox-button--close" title="{{ __('Close') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.71 12 5.29-5.29a.5.5 0 0 0-.71-.71L12 10.29 6.71 5.29a.5.5 0 0 0-.71.71L10.29 12 5.29 17.29a.5.5 0 0 0 .71.71L12 13.41l5.29 5.29a.5.5 0 0 0 .71-.71z"/></svg></button>';
+    
+    $.fancybox.defaults.btnTpl.arrowLeft = 
+        '<button data-fancybox-prev class="fancybox-button fancybox-button--arrow_left" title="{{ __('Previous') }}"><div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.28 15.7l-1.34 1.37L5 12l4.94-5.07 1.34 1.36-2.68 2.72H19v1.98H8.6l2.68 2.71z"/></svg></div></button>';
+    
+    $.fancybox.defaults.btnTpl.arrowRight = 
+        '<button data-fancybox-next class="fancybox-button fancybox-button--arrow_right" title="{{ __('Next') }}"><div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.72 8.3l1.34-1.37L19 12l-4.94 5.07-1.34-1.36 2.68-2.72H5v-1.98h10.4l-2.68-2.71z"/></svg></div></button>';
+    
+    $.fancybox.defaults.btnTpl.smallBtn = 
+        '<button type="button" data-fancybox-close class="fancybox-button fancybox-close-small" title="{{ __('Close') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="m10,10 L22,22 M22,10 L10,22"></path></svg></button>';
+    
+    $.fancybox.defaults.btnTpl.zoom = 
+        '<button data-fancybox-zoom class="fancybox-button fancybox-button--zoom" title="{{ __('Zoom In') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.7 17.3l-3-3a5.9 5.9 0 0 0-.6-7.6 5.9 5.9 0 0 0-8.4 0 5.9 5.9 0 0 0 0 8.4 5.9 5.9 0 0 0 7.7.7l3 3a1 1 0 0 0 1.3 0c.4-.5.4-1 0-1.5zM8.1 13.8a4 4 0 0 1 0-5.7 4 4 0 0 1 5.7 0 4 4 0 0 1 0 5.7 4 4 0 0 1-5.7 0z"/></svg></button>';
+    
+    $.fancybox.defaults.btnTpl.slideShow = 
+        '<button data-fancybox-play class="fancybox-button fancybox-button--play" title="{{ __('Start Slideshow') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.5 5.4v13.2l11-6.6z"/></svg></button>';
+    
+    $.fancybox.defaults.btnTpl.fullScreen = 
+        '<button data-fancybox-fullscreen class="fancybox-button fancybox-button--fsenter" title="{{ __('Fullscreen') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg></button>';
+    
+    $.fancybox.defaults.btnTpl.thumbs = 
+        '<button data-fancybox-thumbs class="fancybox-button fancybox-button--thumbs" title="{{ __('Thumbnails') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.59 14.59h3.76v3.76h-3.76v-3.76zm-4.47 0h3.76v3.76h-3.76v-3.76zm-4.47 0h3.76v3.76H5.65v-3.76zm8.94-4.47h3.76v3.76h-3.76v-3.76zm-4.47 0h3.76v3.76h-3.76v-3.76zm-4.47 0h3.76v3.76H5.65v-3.76zm8.94-4.47h3.76v3.76h-3.76V5.65zm-4.47 0h3.76v3.76h-3.76V5.65zm-4.47 0h3.76v3.76H5.65V5.65z"/></svg></button>';
+    
+    $.fancybox.defaults.btnTpl.download = 
+        '<button data-fancybox-download class="fancybox-button fancybox-button--download" title="{{ __('Download') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.62 17.09V19H5.38v-1.91zm-2.97-6.96L17 11.45l-5 4.87-5-4.87 1.36-1.32 2.68 2.64V5h1.92v7.77l2.69-2.64z"/></svg></button>';
+    
+    $.fancybox.defaults.btnTpl.share = 
+        '<button data-fancybox-share class="fancybox-button fancybox-button--share" title="{{ __('Share') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2.55 19c1.4-8.4 9.1-9.8 11.9-9.8V5l7 7-7 6.3v-3.5c-2.8 0-10.5 2.1-11.9 4.2z"/></svg></button>';
+});
 
-                reader.onload = function(e) {
-                    previewImage.src = e.target.result;
-                    previewContainer.style.display = 'block';
-                    description.style.display = 'none'; // Скрываем описание
-                }
-
-                reader.readAsDataURL(input.files[0]);
-            } else {
-                previewContainer.style.display = 'none';
-                previewImage.src = '#';
-                description.style.display = 'block'; // Показываем описание обратно, если файл убрали
-            }
-        }
     </script>
 
 
+    <script src="white/js/jquery.fancybox.min.js"></script>
 
 
 </body>
