@@ -1285,8 +1285,7 @@
                                                 </div>
                                                 <div class="col-12">
                                                     <button type="submit" id="submit_btn1"
-                                                        class="button gradient-btn w-100">{{ __("Add Commemoration") }}</button>
-                                                        <i class="fa fa-comment"></i>
+                                                        class="button gradient-btn w-100">{{ __('Send message') }}</button>
 
                                                 </div>
                                             </div>
