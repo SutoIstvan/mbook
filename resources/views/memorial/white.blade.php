@@ -845,7 +845,7 @@
     <section id="family-tree" class="position-relative padding_top">
 
         <div class="col-md-12 text-center wow fadeIn top15" data-wow-delay="300ms">
-            <h2 class="heading bottom45 darkcolor font-light2">{{ __('Timeline') }}<span class="font-normal"></span>
+            <h2 class="heading bottom45 darkcolor font-light2">{{ __('Family Tree') }}<span class="font-normal"></span>
 
             </h2>
             <div class="col-md-8 offset-md-2 bottom40">
