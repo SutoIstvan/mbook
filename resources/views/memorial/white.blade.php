@@ -345,27 +345,27 @@
                         <a class="nav-link active pagescroll" href="#home">Home</a>
                     </li> --}}
                         <li class="nav-item">
-                            <a class="nav-link pagescroll scrollupto" href="#home">Története</a>
+                            <a class="nav-link pagescroll scrollupto" href="#home">{{ __('History') }}</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link pagescroll" href="#gallery">Galéria</a>
+                            <a class="nav-link pagescroll" href="#gallery">{{ __('Gallery') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link pagescroll" href="#timeline">Idővonal</a>
+                            <a class="nav-link pagescroll" href="#timeline">{{ __('Timeline') }}</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link pagescroll" href="#family-tree">Családfa</a>
+                            <a class="nav-link pagescroll" href="#family-tree">{{ __('Family Tree') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link pagescroll" href="#testimonials">Megemlékezések</a>
+                            <a class="nav-link pagescroll" href="#testimonials">{{ __('Commemorations') }}</a>
                         </li>
                         <li class="nav-item">
                             @auth
-                                <a class="nav-link" href="{{ route('dashboard') }}">Kezelés</a>
+                                <a class="nav-link" href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a>
                             @else
-                                <a class="nav-link" href="{{ route('login') }}">Belépés</a>
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Log In') }}</a>
                             @endauth
                         </li>
                     </ul>
@@ -384,27 +384,27 @@
                 <nav class="side-nav w-100">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link pagescroll scrollupto" href="#home">Története</a>
+                            <a class="nav-link pagescroll scrollupto" href="#home">{{ __('History') }}</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link pagescroll" href="#gallery">Galéria</a>
+                            <a class="nav-link pagescroll" href="#gallery">{{ __("Gallery") }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link pagescroll" href="#timeline">Idővonal</a>
+                            <a class="nav-link pagescroll" href="#timeline">{{ __('Timeline') }}</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link pagescroll" href="#family-tree">Családfa</a>
+                            <a class="nav-link pagescroll" href="#family-tree">{{ __('Family Tree') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link pagescroll" href="#testimonials">Megemlékezések</a>
+                            <a class="nav-link pagescroll" href="#testimonials">{{ __('Commemorations') }}</a>
                         </li>
                         <li class="nav-item">
                             @auth
-                                <a class="nav-link" href="{{ route('dashboard') }}">Kezelés</a>
+                                <a class="nav-link" href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a>
                             @else
-                                <a class="nav-link" href="{{ route('login') }}">Belépés</a>
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Log In') }}</a>
                             @endauth
                         </li>
                     </ul>
@@ -549,14 +549,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center wow fadeIn top15" data-wow-delay="300ms">
-                    <h2 class="heading bottom45 darkcolor font-light2">Galéria <span class="font-normal"></span>
+                    <h2 class="heading bottom45 darkcolor font-light2">{{ __('Gallery') }}<span class="font-normal"></span>
                         <span class="divider-center"></span>
                     </h2>
                     <div class="col-md-8 offset-md-2 bottom40">
                         <p>
-                            A galéria egy gyűjtemény, amely {{ $memorial->name }} fotóit, videóit és egyéb vizuális
-                            emlékeit mutatja be. Lehetővé teszi a fontos pillanatok, események és családi történetek
-                            vizuális megőrzését és megosztását.
+                            {{ __('A gallery is a collection of photos, videos, and other visual memories. It allows you to visually preserve and share important moments, events, and family stories.') }}
                         </p>
                     </div>
                 </div>
@@ -667,20 +665,19 @@
     <section id="timeline" class="padding">
         <div class="container">
             <div class="row">
-                <h2 class="d-none">Partners Carousel</h2>
+                <h2 class="d-none"></h2>
                 <div class="col-md-12 col-sm-12">
                     <div id=""></div>
                     <div id="tracking">
                         <div class="col-md-12 text-center wow fadeIn top15" data-wow-delay="300ms">
-                            <h2 class="heading bottom45 darkcolor font-light2">Idővonal <span
+                            <h2 class="heading bottom45 darkcolor font-light2">{{ __('Timeline') }}<span
                                     class="font-normal"></span>
 
                             </h2>
                             <div class="col-md-8 offset-md-2 bottom40">
-                                <p>Az idővonal {{ $memorial->name }} fontos életeseményeit ábrázolja időrendi
-                                    sorrendben. Dátumokkal és leírásokkal mutatja be a kulcsfontosságú mozzanatokat,
-                                    mint születések, házasságok vagy jelentős eredmények, segítve a családtörténet
-                                    áttekintését</p>
+                                <p>
+                                    {{ __('A timeline depicts important life events in chronological order. It presents key moments, such as births, marriages, or significant achievements, with dates and descriptions, helping you to review your family history.') }}
+                                </p>
                             </div>
                         </div>
                         <div class="">
@@ -848,13 +845,12 @@
     <section id="family-tree" class="position-relative padding_top">
 
         <div class="col-md-12 text-center wow fadeIn top15" data-wow-delay="300ms">
-            <h2 class="heading bottom45 darkcolor font-light2"> Családfa<span class="font-normal"></span>
+            <h2 class="heading bottom45 darkcolor font-light2">{{ __('Timeline') }}<span class="font-normal"></span>
 
             </h2>
             <div class="col-md-8 offset-md-2 bottom40">
                 <p>
-                    Egy család rokonsági kapcsolatait ábrázoló diagram, amely bemutatja az ember felmenőit és
-                    leszármazottait, például szülőket, gyerekeket és nagyszülőket.
+                    {{ __('A diagram showing family kinship relationships, including a person`s ancestors and descendants such as parents, children, and grandparents.') }}
                 </p>
             </div>
         </div>
@@ -1136,16 +1132,16 @@
     <section id="testimonials" class="padding bglight">
         <div class="container">
             <div class="row">
-                <h2 class="d-none">Partners Carousel</h2>
+                <h2 class="d-none"></h2>
                 <div class="col-md-12 col-sm-12">
                     <div id=""></div>
                     <div id="tracking">
                         <div class="col-md-12 text-center wow fadeIn top15" data-wow-delay="300ms">
-                            <h2 class="heading bottom45 darkcolor font-light2">Megemlékezések
-
+                            <h2 class="heading bottom45 darkcolor font-light2">
+                                {{ __('Commemorations') }}
                             </h2>
                             <div class="col-md-8 offset-md-2 bottom40">
-                                <p>Oszd meg Te is a közös pillanatokat, érzéseket, gondolatokat</p>
+                                <p>{{ __('Share your common moments, feelings, and thoughts.') }}</p>
                             </div>
                         </div>
                         <div class="comments-list row justify-content-center">
@@ -1170,7 +1166,7 @@
 
                                             @if ($comment->hasPhoto())
                                                 <div class="comment-photo">
-                                                    <div class="brand graphics position-relative d-inline-block"
+                                                    <div class="cbp-item mb-0 me-0 brand graphics position-relative d-inline-block"
                                                         style="border-radius: 4px;">
                                                         <img src="{{ $comment->photo_url }}"
                                                             alt="Фото от {{ $comment->name }}" class="img-fluid"
@@ -1178,7 +1174,7 @@
                                                         <a href="{{ $comment->photo_url }}"
                                                             class="gallery-hvr whitecolor glightbox text-decoration-none"
                                                             data-fancybox="comment-gallery"
-                                                            title="Фотография от {{ $comment->name }}"
+                                                            title="{{ __('Zoom in') }}"
                                                             style="cursor: pointer;">
                                                             <div class="center-box">
                                                                 <i class="fa fa-search-plus mb-2 text-white"></i>
@@ -1191,7 +1187,8 @@
                                     </div>
                                 @empty
                                     <div class="text-center">
-                                        <p class="text-gray-500">Még senki sem írt emlékező üzenetet. Légy te az első.
+                                        <p class="text-gray-500">
+                                            {{ __('No commemorations yet. Be the first to share your thoughts and memories.') }}
                                         </p>
                                     </div>
 
@@ -1208,7 +1205,9 @@
         <div class="container text-center mt-5">
             <button type="button" class="button gradient-btn" data-bs-toggle="modal"
                 data-bs-target="#contactModal">
-                Néhány szó tőled
+                {{ __('Add Commemoration') }}
+                <i class="far fa-comment ms-2"></i>
+
             </button>
         </div>
 
@@ -1223,22 +1222,25 @@
                                 <div class="col-12 text-center">
                                     {{-- <span class="defaultcolor">Quisque tellus risus</span> --}}
                                     <div class="heading-title bottom25 darkcolor">
-                                        <h2 class="font-normal darkcolor">Néhány szó tőled</h2>
+                                        <h2 class="font-normal darkcolor">{{ __('Add Commemoration') }}</h2>
                                     </div>
                                     <div class="col-md-6 offset-md-3 pb-3">
-                                        <p>Oszd meg Te is a közös pillanatokat, érzéseket, gondolatokat.</p>
+                                        <p>
+                                            {{ __('Share your common moments, feelings, and thoughts.') }}
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-sm-12 text-center text-md-start">
                                     <div class="contact-meta pl-0 pl-sm-5">
                                         <div class="heading-title heading_small">
                                             {{-- <span class="defaultcolor mb-2">Fotó a Megemlékezéshez:</span> --}}
-                                            <h4 class="darkcolor font-normal">Fotó a Megemlékezéshez:</h4>
+                                            <h4 class="darkcolor font-normal">
+                                                {{ __('Photo for Commemoration:') }}
+                                            </h4>
                                         </div>
                                         <div class="my-3">
                                             <p id="photo-description" class="bottom10">
-                                                Adj hozzá egy fotót a megjegyzésedhez, és lepd meg a rokonaidat egy
-                                                egyedi képpel.
+                                                {{ __('You can add a photo to your commemoration. The photo will be displayed alongside your message.') }}
                                             </p>
 
                                             <div id="preview-container" class="mt-3" style="display: none;">
@@ -1248,8 +1250,9 @@
                                             </div>
 
                                             <div class="mb-3">
-                                                <label for="comment_photo" class="form-label">Fotó
-                                                    kiválasztása</label>
+                                                <label for="comment_photo" class="form-label">
+                                                    {{ __('Select Photo') }}
+                                                </label>
                                                 <input class="form-control" type="file" id="comment_photo"
                                                     name="comment_photo" accept="image/*"
                                                     onchange="previewImage(event)">
@@ -1282,7 +1285,9 @@
                                                 </div>
                                                 <div class="col-12">
                                                     <button type="submit" id="submit_btn1"
-                                                        class="button gradient-btn w-100">Küldés</button>
+                                                        class="button gradient-btn w-100">{{ __("Add Commemoration") }}</button>
+                                                        <i class="fa fa-comment"></i>
+
                                                 </div>
                                             </div>
                                         </form>
@@ -1303,7 +1308,7 @@
             <div id="successToast" class="toast align-items-center text-white bg-success border-0" role="alert">
                 <div class="d-flex">
                     <div class="toast-body">
-                        Megemlékezésed sikeresen hozzáadtuk, és moderálásra vár.
+                        {{ __('Commemoration added successfully!') }}
                     </div>
                     <button type="button" class="btn-close btn-close-white me-2 m-auto"
                         data-bs-dismiss="toast"></button>
@@ -1515,27 +1520,27 @@
                         <h3 class="whitecolor bottom25"></h3>
                         <ul class="links nav nav-pills">
                             <li class="nav-item">
-                                <a class="nav-link pagescroll scrollupto" href="#home">Története</a>
+                                <a class="nav-link pagescroll scrollupto" href="#home">{{ __('History') }}</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link pagescroll" href="#gallery">Galéria</a>
+                                <a class="nav-link pagescroll" href="#gallery">{{ __('Gallery') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link pagescroll" href="#timeline">Idővonal</a>
+                                <a class="nav-link pagescroll" href="#timeline">{{ __('Timeline') }}</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link pagescroll" href="#family-tree">Családfa</a>
+                                <a class="nav-link pagescroll" href="#family-tree">{{ __('Family Tree') }}</a>
                             </li>
                             {{-- <li class="nav-item">
                                 <a class="nav-link pagescroll" href="#testimonials">Megemlékezések</a>
                             </li> --}}
                             <li class="nav-item">
                                 @auth
-                                    <a class="nav-link" href="{{ route('dashboard') }}">Kezelés</a>
+                                    <a class="nav-link" href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a>
                                 @else
-                                    <a class="nav-link" href="{{ route('login') }}">Belépés</a>
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Log In') }}</a>
                                 @endauth
                             </li>
                         </ul>
