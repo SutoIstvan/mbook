@@ -431,9 +431,10 @@ class TimelineController extends Controller
 
     public function updateAll(Request $request)
     {
+        // dd($request);
         // Валидация существующих таймлайнов
         $validatedData = $request->validate([
-            'timelines' => 'required|array',
+            'timelines' => 'nullable|array',
             'timelines.*.id' => 'required|exists:timelines,id',
             'timelines.*.title' => 'required|string|max:255',
             'timelines.*.year' => 'required|integer|min:1900|max:' . date('Y'),
@@ -449,20 +450,24 @@ class TimelineController extends Controller
         ]);
 
         // Обновляем существующие
-        foreach ($validatedData['timelines'] as $timelineData) {
-            $timeline = Timeline::find($timelineData['id']);
-            if (!$timeline) continue;
+        if (!empty($validatedData['timelines'])) {
+            foreach ($validatedData['timelines'] as $timelineData) {
+                $timeline = Timeline::find($timelineData['id']);
 
-            if (!empty($timelineData['delete'])) {
-                $timeline->delete();
-                continue;
+                if (!$timeline) continue;
+
+                if (!empty($timelineData['delete'])) {
+                    $timeline->delete();
+                    continue;
+                }
+
+                $timeline->title = $timelineData['title'];
+                $timeline->date = $timelineData['year'] . '-01-01';
+                $timeline->type = $timelineData['type'];
+                $timeline->save();
             }
-
-            $timeline->title = $timelineData['title'];
-            $timeline->date = $timelineData['year'] . '-01-01';
-            $timeline->type = $timelineData['type'];
-            $timeline->save();
         }
+
 
         // Создаём новую запись, если передан title
         if (!empty($validatedData['title'])) {
@@ -485,6 +490,7 @@ class TimelineController extends Controller
 
     public function updateNext(Request $request)
     {
+        // dd($request);
         $validatedData = $request->validate([
             'timelines' => 'required|array',
             'timelines.*.id' => 'required|exists:timelines,id',

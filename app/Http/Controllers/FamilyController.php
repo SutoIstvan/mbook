@@ -107,7 +107,7 @@ class FamilyController extends Controller
 
     public function dashboardstore(Request $request)
     {
-        // dd($request);
+        //  dd($request);
         $validated = $request->validate([
             'memorial_id' => 'required|exists:memorials,id',
             'role' => 'required|string',
@@ -337,7 +337,7 @@ class FamilyController extends Controller
 
     public function treeupdate(Request $request, Memorial $memorial)
     {
-        // dd($request);
+        dd($request);
 
         $request->validate([
             'names' => 'array',
