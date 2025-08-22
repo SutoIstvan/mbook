@@ -1268,12 +1268,12 @@
                                                 {{-- Кастомный тип --}}
                                                 <input type="text" name="timelines[{{ $timeline->id }}][type]"
                                                     class="form-control" value="{{ $timeline->type }}"
-                                                    placeholder="{{ __('Enter custom type') }}">
+                                                    placeholder="{{ __('Enter a name for the timeline') }}" required>
                                             @endif
 
                                             <input type="text" name="timelines[{{ $timeline->id }}][title]"
                                                 class="form-control mt-2" value="{{ $timeline->title }}"
-                                                placeholder="{{ __('Enter timeline details') }}">
+                                                placeholder="{{ __('Enter timeline details') }}" required>
                                         </div>
 
 

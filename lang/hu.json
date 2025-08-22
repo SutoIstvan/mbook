@@ -1,4 +1,5 @@
 {
+    "Enter custom name": "Egyedi név megadása",
     "Commemoration added successfully!": "Megemlékezésed sikeresen hozzáadtuk, és moderálásra vár.",
     "Select Photo": "Fotó kiválasztása",
     "You can add a photo to your commemoration. The photo will be displayed alongside your message.": "Adj hozzá egy fotót a megjegyzésedhez, és lepd meg a rokonokat egy egyedi képpel.",
@@ -47,7 +48,7 @@
     "No videos found.": "Nincsenek videók.",
     "Description (optional)": "Leírás (nem kötelező)",
     "YouTube video link": "YouTube videó linkje",
-    "Enter a name for the timeline": "Adjon nevet az idővonalnak",
+    "Enter a name for the timeline": "Adj nevet az idővonalnak",
     "Step 1": "1. lépés",
     "Step 2": "2. lépés",
     "Step 3": "3. lépés",

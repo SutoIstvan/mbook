@@ -518,7 +518,7 @@
             <select id="birth_year" name="birth_year" 
                     class="form-select @error('birth_date') is-invalid @enderror @error('birth_year') is-invalid @enderror" 
                     required>
-                <option value="">{{ __('Year') }}</option>
+                {{-- <option value="">{{ __('Year') }}</option> --}}
                 @for($year = date('Y'); $year >= 1900; $year--)
                     <option value="{{ $year }}" 
                             {{ old('birth_year', date('Y', strtotime(old('birth_date', '')))) == $year ? 'selected' : '' }}>
@@ -619,16 +619,16 @@
     <div class="row small-gutter mt-0">
         <!-- Год -->
         <div class="col-4">
-            <select id="death_year" name="death_year" 
-                    class="form-select @error('death_date') is-invalid @enderror @error('death_year') is-invalid @enderror">
-                <option value="">{{ __('Year') }}</option>
-                @for($year = date('Y'); $year >= 1900; $year--)
-                    <option value="{{ $year }}" 
-                            {{ old('death_year', date('Y', strtotime(old('death_date', '')))) == $year ? 'selected' : '' }}>
-                        {{ $year }}
-                    </option>
-                @endfor
-            </select>
+<select id="death_year" name="death_year" 
+        class="form-select @error('death_date') is-invalid @enderror @error('death_year') is-invalid @enderror">
+    {{-- <option value="">{{ __('Year') }}</option> --}}
+    @for($year = date('Y'); $year >= 1900; $year--)
+        <option value="{{ $year }}" 
+                {{ old('death_year', date('Y')) == $year ? 'selected' : '' }}>
+            {{ $year }}
+        </option>
+    @endfor
+</select>
         </div>
         
         <!-- Месяц -->
