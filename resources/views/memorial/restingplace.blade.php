@@ -5,6 +5,35 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet">
     <style>
+        #loadingOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         .cropper-modal {
             background-color: rgb(0, 0, 0) !important;
             opacity: 1 !important;
@@ -669,171 +698,56 @@
 
 @section('content')
 
-
-
-
     <div class="info md-hide about-ca pt-30">
         <div class="d-flex justify-content-center">
             <img src="{{ asset('memorial/' . $memorial->slug . '/' . $memorial->photo) }}"
                 style="height: 150px; width: 150px; border-radius: 50%; object-fit: cover;" alt=""
                 class="img-fluid">
         </div>
-
         <div class="cont text-center pt-10">
-            {{-- <ul class="rest">
-                <li>{{ $memorial->name }}</li>
-            </ul> --}}
             <h6>
                 <span class="sub-color inline">{{ $memorial->name }}</span>
             </h6>
         </div>
     </div>
-    {{-- 
-    <div class="container mt-80">
-        <div class="row d-flex justify-content-center">
-            <div class="steps-horizontal">
-                <div class="step-vertical complete">
-                    <div class="step-vertical-icon">
-                        <i class="fas fa-check"></i>
-                    </div>
-                    <div class="step-vertical-content">
-                        <p><bold>Step 1<bold></p>
-                        <p><small>Személyes adatok</small></p>
-                    </div>
-                </div>
-
-                <div class="step-vertical active">
-                    <div class="step-vertical-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <div class="step-vertical-content">
-                        <p><bold>Step 2<bold></p>
-                        <p><small>Életesemények időpontjai</small></p>
-                    </div>
-                </div>
-
-                <div class="step-vertical">
-                    <div class="step-vertical-icon">
-                        <i class="fas fa-image"></i>
-                    </div>
-                    <div class="step-vertical-content">
-                        <p><bold>Step 2<bold></p>
-                        <p><small>Média feltöltése</small></p>
-                    </div>
-                </div>
-
-                <div class="step-vertical">
-                    <div class="step-vertical-icon">
-                        <i class="fas fa-location-dot"></i>
-                    </div>
-                    <div class="step-vertical-content">
-                        <p><bold>Step 4<bold></p>
-                        <p><small>Nyughely adatok</small></p>
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
-    </div> --}}
-
 
     <div class="container mt-70">
         <div class="row d-flex justify-content-center">
             <div class="steps-horizontal">
                 <div class="step-horizontal complete">
                     <div class="step-icon">
-                        {{-- <i class="fas fa-user"></i> --}}
-
                         <i class="fas fa-check"></i>
                     </div>
-                    <div class="step-title">Step 1</div>
-                    <div class="step-description">Személyes adatok</div>
+                    <div class="step-title">{{ __('Step 1') }}</div>
+                    <div class="step-description">{{ __('Family Tree') }}</div>
                 </div>
 
                 <div class="step-horizontal complete">
                     <div class="step-icon">
                         <i class="fas fa-clock"></i>
                     </div>
-                    <div class="step-title">Step 2</div>
-                    <div class="step-description">Életesemények időpontjai</div>
+                    <div class="step-title">{{ __('Step 2') }}</div>
+                    <div class="step-description">{{ __('Life Events Timeline') }}</div>
                 </div>
                 <div class="step-horizontal complete">
                     <div class="step-icon">
                         <i class="fas fa-image"></i>
                     </div>
-                    <div class="step-title">Step 3</div>
-                    <div class="step-description">Média feltöltése</div>
+                    <div class="step-title">{{ __('Step 3') }}</div>
+                    <div class="step-description">{{ __('Media Upload') }}</div>
                 </div>
                 <div class="step-horizontal active">
                     <div class="step-icon">
                         <i class="fas fa-location-dot"></i>
                     </div>
-                    <div class="step-title">Step 4</div>
-                    <div class="step-description">Nyughely adatok</div>
+                    <div class="step-title">{{ __('Step 4') }}</div>
+                    <div class="step-description">{{ __('Burial Information') }}</div>
                 </div>
             </div>
         </div>
 
 
     </div>
-
-    {{-- <div class="container pt-50">
-        <div class="stepper__row">
-            <div class="stepper--horizontal ms-4">
-                <div class="stepper--horizontal__circle ms-4">
-                    <span class="stepper--horizontal__circle__text">
-                        1
-                    </span>
-                </div>
-                <div class="stepper--horizontal__details">
-                    <p class="paragraph d-none d-md-block">
-                        {{ __('Personal Data Entry') }}
-                    </p>
-                </div>
-            </div>
-            <div class="stepper--horizontal stepper--horizontal--disabled">
-                <div class="stepper--horizontal__circle">
-                    <span class="stepper--horizontal__circle__text">
-                        2
-                    </span>
-                </div>
-                <div class="stepper--horizontal__details">
-                    <p class="paragraph d-none d-md-block">
-                        {{ __('Dates of precious moments') }}
-                    </p>
-                </div>
-            </div>
-            <div class="stepper--horizontal stepper--horizontal--disabled">
-                <div class="stepper--horizontal__circle">
-                    <span class="stepper--horizontal__circle__text">
-                        3
-                    </span>
-                </div>
-                <div class="stepper--horizontal__details">
-                    <h3 class="heading__three">
-                    </h3>
-                    <p class="paragraph d-none d-md-block">
-                        {{ __('Upload media to the memorial page') }}
-                    </p>
-                </div>
-            </div>
-            <div class="stepper--horizontal stepper--horizontal--disabled">
-                <div class="stepper--horizontal__circle">
-                    <span class="stepper--horizontal__circle__text">
-                        4
-                    </span>
-                </div>
-                <div class="stepper--horizontal__details">
-                    <h3 class="heading__three">
-                    </h3>
-                    <p class="paragraph d-none d-md-block">
-                        {{ __('Nyughely adatok megadása') }}
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div> --}}
 
     @if ($errors->any())
         <div class="container">
@@ -857,9 +771,7 @@
             <div class="pt-30">
                 <div class="col-lg-8 mx-auto">
                     <p class="fs-5 mt-4 ">
-                        Itt megadhatod a temető címét és a pontos koordinátákat, hogy a hozzátartozók könnyebben megtalálják
-                        a nyughelyet. Ez a funkció segít abban, hogy szeretteid gyorsan és egyszerűen eljuthassanak a
-                        megadott helyszínre, tisztelegve az emlék előtt.
+                        {{ __('Here you can enter the cemetery address and exact coordinates to make it easier for relatives to find the resting place. This feature helps your loved ones get to the specified location quickly and easily, paying tribute to the memory.') }}
                     </p>
                 </div>
             </div>
@@ -879,62 +791,41 @@
                             @csrf
                             <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
 
-                            {{-- <input type="hidden" name="latitude" id="latitude">
-                            <input type="hidden" name="grave_coordinates" id="grave_coordinates"> --}}
-
-
-                            {{-- <div class="container mt-5">
-                                <div class="row">
-                                    <div class="col-md-12">
-
-                                        <div class="form-group mt-3">
-                                            <label for="autocomplete">Temető címe:</label>
-                                            <input type="text" id="autocomplete" class="form-control" placeholder="Adja meg a hely nevét (pl. „Budapest Budafoki temető”)" name="place">
-                                        </div>
-                                        
-                                        <!-- Добавляем дополнительный div для советов -->
-                                        <div class="mt-2 text-muted small">
-                                            Tipp: Egy temető kereséséhez kezdje el beírni a „temető” szót, és adja hozzá a nevét.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
-
                             <div class="mb-3">
-                                <label for="grave_location" class="form-label">Temető címe</label>
+                                <label for="grave_location" class="form-label">{{ __('Cemetery Address') }}</label>
                                 <input type="text" class="form-control" id="grave_location" name="grave_location"
-                                    placeholder="Pl. Kossuth Lajos utca 1, Budapest" value="{{ $memorial->grave_location }}" required>
+                                    placeholder="{{ __('E.g. Cemetery Address') }}" value="{{ $memorial->grave_location }}" required>
                             </div>
 
                             <div class="row">
 
                                 <div class="mb-3 col-12 col-md-4">
-                                    <label for="grave_parcel" class="form-label">Parcella</label>
+                                    <label for="grave_parcel" class="form-label">{{ __('Parcel') }}</label>
                                     <input type="text" class="form-control" id="grave_parcel" name="grave_parcel"
-                                        placeholder="Parcella" value="{{ $memorial->grave_parcel }}" required>
+                                        placeholder="{{ __('Parcel') }}" value="{{ $memorial->grave_parcel }}" required>
                                 </div>
                                 <div class="mb-3 col-12 col-md-4">
-                                    <label for="grave_line" class="form-label">Sor</label>
+                                    <label for="grave_line" class="form-label">{{ __('Row') }}</label>
                                     <input type="text" class="form-control" id="grave_line" name="grave_line"
-                                        placeholder="Sor" value="{{ $memorial->grave_line }}" required>
+                                        placeholder="{{ __('Row') }}" value="{{ $memorial->grave_line }}" required>
                                 </div>
                                 <div class="mb-3 col-12 col-md-4">
-                                    <label for="grave_number" class="form-label">Sorszám</label>
+                                    <label for="grave_number" class="form-label">{{ __('Number') }}</label>
                                     <input type="text" class="form-control" id="grave_number" name="grave_number"
-                                        placeholder="Sorszám" value="{{ $memorial->grave_number }}" required>
+                                        placeholder="{{ __('Number') }}" value="{{ $memorial->grave_number }}" required>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-12 mb-3">
-                                    <label for="coordinates" class="form-label">Coordinates</label>
+                                    <label for="coordinates" class="form-label">{{ __('Coordinates') }}</label>
                                     <input type="text" step="any" class="form-control" id="coordinates" name="coordinates"
-                                        placeholder="Pl. 47.497912, 42.458989" value="{{ $memorial->coordinates }}" required>
+                                        placeholder="47.497912, 42.458989" value="{{ $memorial->coordinates }}">
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center mt-3">
 
-                                <button type="submit" class="btn btn-primary">Adatok Mentése</button>
+                                <button type="submit" class="btn btn-primary">{{ __('Save data') }}</button>
                             </div>
                         </form>
 
@@ -946,20 +837,45 @@
 
 
         </div>
+
+
+        
         <div class="container col-9">
-            <div class="d-flex justify-content-between mt-30">
+            <div class="d-flex justify-content-between mt-30 pb-50">
                 <a href="{{ route('timeline.gallery', $memorial) }}" class="btn btn-secondary">{{ __('Back') }}</a>
-                <a href="{{ route('generate.biography', $memorial) }}" class="btn btn-primary">
+                <a href="{{ route('generate.biography', $memorial) }}" class="btn btn-primary" id="nextButton">
                     <i class="fa fa-save"></i> {{ __('Next') }}
                 </a>
             </div>
         </div>
     </div>
+
+        <!-- Overlay for loading spinner -->
+    <div id="loadingOverlay" style="display: none;">
+        <div class="spinner"></div>
+        <p>{{ __('Please wait, generating biography') }}</p>
+    </div>
+
 @endsection
 
 @section('js')
 
 <script>
+
+    document.getElementById('nextButton').addEventListener('click', function(event) {
+        // Prevent default navigation immediately
+        event.preventDefault();
+
+        // Show the overlay
+        const overlay = document.getElementById('loadingOverlay');
+        overlay.style.display = 'flex';
+
+        // Navigate to the next page after a short delay to ensure overlay is visible
+        setTimeout(() => {
+            window.location.href = this.href;
+        }, 300); // 300ms delay to allow overlay to appear
+    });
+
     // Глобальная функция, которая будет вызвана после загрузки API
     function initMap() {
         initAutocomplete();

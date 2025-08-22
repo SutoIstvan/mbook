@@ -434,9 +434,7 @@
                 {{-- <h1 class="display-5 fw-bold text-white mt-15">Fogadja őszinte részvétünket a veszteségért.</h1> --}}
                 <div class="col-lg-8 mx-auto">
                     <p class="fs-5 mt-4 mb-4">
-                        Sikeresen hozzáadtad a szerettedről szóló további adatokat. A megadott információk alapján
-                        elkészítettünk számodra egy életrajzot, amely segíthet az emlékek megőrzésében. Ezt most szabadon
-                        kiegészítheted és szerkesztheted, hogy még személyesebbé tedd.
+                        {{ __('You have successfully added additional information about your loved one. Based on the information you provided, we have created a biography for you that can help preserve memories. You can now freely add to and edit it to make it even more personal.') }}
                     </p>
                 </div>
             </div>
@@ -470,9 +468,10 @@
 
 
                 <div class="col-12 col-md-3 p-4">
-                    <h3>Elhunyt adatai</h3>
-                    <p class="mt-2">Kérjük, tüntesd fel a következő információkat: Teljes név, Születési dátum,
-                        Elhalálozás dátum.</p>
+                    <h3>{{ __('Deceased data') }}</h3>
+                    <p class="mt-2">
+                        {{ __('Please provide the following information: Full name, Date of birth, Date of death.') }}
+                    </p>
                 </div>
 
                 <div class="col-12 col-md-7 p-3">
@@ -495,9 +494,8 @@
 
                             <div class="col-12 col-md-6 mb-3">
                                 <label for="birth_date" class="col-form-label text-md-end">{{ __('Date of Birth') }}</label>
-                                <input id="birth_date" type="date"
-                                    class="form-control @error('birth_date') is-invalid @enderror" name="birth_date"
-                                    value="{{ $memorial->birth_date }}" required>
+                                <input id="birth_date" type="date" class="form-control @error('birth_date') is-invalid @enderror"
+                                    name="birth_date" value="{{ old('name', $memorial->birth_date) }}" required>
                                 @error('birth_date')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -507,7 +505,7 @@
 
                             <div class="col-12 col-md-6 mb-3">
                                 <label for="birth_place"
-                                    class="col-form-label text-md-end">{{ __('Születés helye') }}</label>
+                                    class="col-form-label text-md-end">{{ __('Birth Place') }}</label>
                                 <input id="birth_place" type="text"
                                     class="form-control @error('birth_place') is-invalid @enderror" name="birth_place"
                                     value="{{ $memorial->birth_place }}">
@@ -533,7 +531,7 @@
 
                             <div class="col-12 col-md-6 mb-3">
                                 <label for="grave_location"
-                                    class="col-form-label text-md-end">{{ __('Elhalálozás helye') }}</label>
+                                    class="col-form-label text-md-end">{{ __('Grave Location') }}</label>
                                 <input id="grave_location" type="text"
                                     class="form-control @error('grave_location') is-invalid @enderror" name="grave_location"
                                     value="{{ $memorial->grave_location }}">
@@ -549,90 +547,37 @@
 
                         <div class="text-end pb-8 mt-8">
 
-
-                            <button type="submit" name="action" value="add_details" id="additionalDetails"
-                                class="butn butn-md butn-bord butn-rounded">
-                                <span class="text">
-                                    {{ __('Add Additional Details') }}
-                                </span>
-                                <span id="btnIcon" class="icon">
-                                    <i class="fa-regular fa-plus"></i>
-                                </span>
-                            </button>
-
-                            {{-- <button type="button" class="butn butn-md butn-bord butn-rounded" onclick="window.location.href=''">
-                                <span class="text">
-                                    {{ __('További adatok megadása') }}
-                                </span>
-                                <span id="btnIcon" class="icon">
-                                    <i class="fa-regular fa-save"></i>
-                                </span>
-                                <span id="btnSpinner" class="icon d-none">
-                                    <i class="fa-solid fa-spinner fa-spin"></i>
-                                </span>
-                            </button> --}}
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-
-        {{-- <div class="container">
+        <div class="container">
             <div class="row d-flex justify-content-center">
 
-                <div class="col-12 col-md-3 p-4 mt-50">
-                    <h3>Fő emlékkép</h3>
-                    <p class="mt-2">Ez a fénykép fog elsőként megjelenni az emlékoldalon.</p>
+
+                <div class="col-12 col-md-3 p-4 mt-20">
+                    <h3>{{ __('Motto') }}</h3>
+                    <p class="mt-2">{{ __('Please write your favorite quote or motto here.') }}</p>
                 </div>
 
-                <div class="col-12 col-md-7 p-3 mt-50">
-                    <div class="container">
-                        <div class="row">
-                            <div class="container">
-                                <label class="form-label">{{ __('Main Memory Image Upload') }}</label>
-                                <div class="drag-area text-white border-secondary" id="imageContainer">
-                                    <div class="default-content text-center">
-                                        <div class="icon">
-                                            <i class="fas fa-images"></i>
-                                        </div>
-                                        <span class="header">{{ __('Drag your photo here') }}</span>
-                                        <span class="header">{{ __('or open it in') }}</span>
-                                        <div class="text-center mb-10 mt-10">
-                                            <span class="button butn butn-md butn-bord butn-rounded"
-                                                id="fileTrigger">{{ __('browser') }}</span>
-                                        </div>
-                                        <span class="support">{{ __('Photo formats: JPEG, JPG, PNG') }}</span>
-                                    </div>
-                                    <img id="image" src="" alt="Photo to crop"
-                                        style="max-width: 100%; display: none;">
-                                    <input id="photoInput" name="photo" type="file" hidden
-                                        accept="image/jpeg, image/jpg, image/png" />
-                                    <input type="hidden" name="crop_x" id="cropX">
-                                    <input type="hidden" name="crop_y" id="cropY">
-                                    <input type="hidden" name="crop_width" id="cropWidth">
-                                    <input type="hidden" name="crop_height" id="cropHeight">
-                                </div>
-                                <!-- Контейнер для описания и кнопки -->
-                                <div class="crop-controls mt-2" style="display: none;">
-                                    <span class="crop-instruction text-dark me-2">
-                                        <small>
-                                            {{ __('Drag the crop area to adjust the selection') }}
-                                        </small>
-                                    </span>
-                                    <button type="button" id="removePhoto" class="btn btn-danger btn-sm">
-                                        {{ __('Remove Photo') }}
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                <div class="col-12 col-md-7 p-3">
+
+                    <div class="container mt-20">
+                        <label for="motto" class="col-form-label text-md-end">{{ __('Motto') }}</label>
+                        <textarea id="motto" class="form-control @error('motto') is-invalid @enderror" name="motto"
+                            rows="3">{{ $memorial->motto }}</textarea>
+                        @error('motto')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
+
                 </div>
-
             </div>
-        </div> --}}
-
+        </div>
 
 
         <div class="container">
@@ -640,9 +585,10 @@
 
 
                 <div class="col-12 col-md-3 p-4 mt-20">
-                    <h3>Életrajz</h3>
-                    <p class="mt-2">Oszd meg velünk kedves emlékeidet, a számára fontos pillanatokat vagy azt, amit
-                        szerettél benne a legjobban.</p>
+                    <h3>{{ __('Biography') }}</h3>
+                    <p class="mt-2">
+                        {{ __('Share with us your fond memories, important moments for them, or what you loved most about them.') }}
+                    </p>
                 </div>
 
                 <div class="col-12 col-md-7 p-3">
@@ -679,7 +625,7 @@
 
             <a href="{{ url('/' . $memorial->slug) }}" class="butn butn-md butn-bord butn-rounded">
                 <span class="text">
-                    {{ __('Adatok mentése') }}
+                    {{ __('Save data') }}
                 </span>
                 <span class="icon">
                     <i class="fa-regular fa-save"></i>
