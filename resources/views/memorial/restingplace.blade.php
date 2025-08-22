@@ -1,7 +1,8 @@
 @extends('layouts.memorial')
 
 @section('css')
-<script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google.maps_key') }}&libraries=places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google.maps_key') }}&libraries=places">
+    </script>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet">
     <style>
@@ -30,8 +31,13 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .cropper-modal {
@@ -606,11 +612,11 @@
         .step-vertical:not(:last-child)::after {
             content: '';
             /* position: absolute;
-                                                     left: 25px;
-                                                     top: 60px;
-                                                     bottom: 0;
-                                                     width: 2px;
-                                                     background: #e9ecef; */
+                                                                             left: 25px;
+                                                                             top: 60px;
+                                                                             bottom: 0;
+                                                                             width: 2px;
+                                                                             background: #e9ecef; */
         }
 
         .step-vertical-icon {
@@ -794,7 +800,8 @@
                             <div class="mb-3">
                                 <label for="grave_location" class="form-label">{{ __('Cemetery Address') }}</label>
                                 <input type="text" class="form-control" id="grave_location" name="grave_location"
-                                    placeholder="{{ __('E.g. Cemetery Address') }}" value="{{ $memorial->grave_location }}" required>
+                                    placeholder="{{ __('E.g. Cemetery Address') }}"
+                                    value="{{ $memorial->grave_location }}" required>
                             </div>
 
                             <div class="row">
@@ -816,13 +823,14 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                            {{-- <div class="row">
                                 <div class="col-md-12 mb-3">
                                     <label for="coordinates" class="form-label">{{ __('Coordinates') }}</label>
-                                    <input type="text" step="any" class="form-control" id="coordinates" name="coordinates"
-                                        placeholder="47.497912, 42.458989" value="{{ $memorial->coordinates }}">
+                                    <input type="text" step="any" class="form-control" id="coordinates"
+                                        name="coordinates" placeholder="47.497912, 42.458989"
+                                        value="{{ $memorial->coordinates }}">
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="d-flex justify-content-center mt-3">
 
                                 <button type="submit" class="btn btn-primary">{{ __('Save data') }}</button>
@@ -839,94 +847,172 @@
         </div>
 
 
-        
-        <div class="container col-9">
-            <div class="d-flex justify-content-between mt-30 pb-50">
-                <a href="{{ route('timeline.gallery', $memorial) }}" class="btn btn-secondary">{{ __('Back') }}</a>
-                <a href="{{ route('generate.biography', $memorial) }}" class="btn btn-primary" id="nextButton">
-                    <i class="fa fa-save"></i> {{ __('Next') }}
-                </a>
+
+        <div class="container">
+            <div class=" text-secondary text-center">
+                <div class="pt-30">
+                    <div class="col-lg-8 mx-auto">
+                        <p class="fs-5 mt-4 ">
+                            Emlékhely koordinátái
+                            <br><br>
+                            Itt megadhatja a síremlék pontos koordinátáit a temetőben, vagy feltölthet egy olyan fotót,
+                            amelyet a temetőben készített a síremlékről, bekapcsolt helymeghatározással.
+                            <br><br>
+                            Itt talál egy linket, amely megmutatja, hogyan lehet ezt megtenni különböző telefonokon:
+                            Útmutató
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="container col-9">
+                <div class="row">
+                    <div class="card-body p-4">
+
+                        <div class="row">
+
+                            <div class="col-8">
+
+                                {{-- Поле координат --}}
+                                <div class="mb-4">
+                                    <label for="coordinates" class="form-label fw-semibold">
+                                        {{ __('Coordinates') }}
+                                    </label>
+                                    <input type="text" step="any" class="form-control" id="coordinates"
+                                        name="coordinates" placeholder="47.497912, 42.458989"
+                                        value="{{ $memorial->coordinates }}">
+                                    <small class="form-text text-muted">
+                                        {{ __('Введите координаты вручную.') }}
+                                    </small>
+                                </div>
+
+                                {{-- Форма загрузки фото --}}
+                                <div>
+                                    <form action="{{ route('memorial.uploadImage', $memorial->id) }}" method="POST"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="input-group">
+                                            <input class="form-control" type="file" name="image" accept="image/*"
+                                                required>
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="bi bi-upload"></i> {{ __('Upload') }}
+                                            </button>
+                                        </div>
+                                        <small class="form-text text-muted">
+                                            {{ __('Допустимые форматы: JPG, JPEG, PNG, WEBP. Максимальный размер: 20 МБ.') }}
+                                        </small>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                {{-- Превью фото --}}
+                                <div class="mb-4 text-center">
+                                    <div class="border rounded p-2 bg-light d-inline-block">
+                                        <img src="{{ $memorial->grave_coordinates
+                                            ? asset('memorial/' . $memorial->grave_coordinates)
+                                            : asset('images/no-photo.webp') }}"
+                                            alt="Фото мемориала" class="img-fluid rounded shadow"
+                                            style="max-height: 200px; width: 200px; object-fit: cover;" />
+                                    </div>
+                                    <p class="mt-2 text-muted mb-0">
+                                        {{ $memorial->grave_coordinates ? __('Загруженное фото') : __('Фото отсутствует') }}
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="container col-9">
+                <div class="d-flex justify-content-between mt-30 pb-50">
+                    <a href="{{ route('timeline.gallery', $memorial) }}"
+                        class="btn btn-secondary">{{ __('Back') }}</a>
+                    <a href="{{ route('generate.biography', $memorial) }}" class="btn btn-primary" id="nextButton">
+                        <i class="fa fa-save"></i> {{ __('Next') }}
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
 
         <!-- Overlay for loading spinner -->
-    <div id="loadingOverlay" style="display: none;">
-        <div class="spinner"></div>
-        <p>{{ __('Please wait, generating biography') }}</p>
-    </div>
+        <div id="loadingOverlay" style="display: none;">
+            <div class="spinner"></div>
+            <p>{{ __('Please wait, generating biography') }}</p>
+        </div>
 
-@endsection
+    @endsection
 
-@section('js')
+    @section('js')
 
-<script>
+        <script>
+            document.getElementById('nextButton').addEventListener('click', function(event) {
+                // Prevent default navigation immediately
+                event.preventDefault();
 
-    document.getElementById('nextButton').addEventListener('click', function(event) {
-        // Prevent default navigation immediately
-        event.preventDefault();
+                // Show the overlay
+                const overlay = document.getElementById('loadingOverlay');
+                overlay.style.display = 'flex';
 
-        // Show the overlay
-        const overlay = document.getElementById('loadingOverlay');
-        overlay.style.display = 'flex';
+                // Navigate to the next page after a short delay to ensure overlay is visible
+                setTimeout(() => {
+                    window.location.href = this.href;
+                }, 300); // 300ms delay to allow overlay to appear
+            });
 
-        // Navigate to the next page after a short delay to ensure overlay is visible
-        setTimeout(() => {
-            window.location.href = this.href;
-        }, 300); // 300ms delay to allow overlay to appear
-    });
-
-    // Глобальная функция, которая будет вызвана после загрузки API
-    function initMap() {
-        initAutocomplete();
-    }
-    
-    // Инициализация автозаполнения мест
-    function initAutocomplete() {
-        const input = document.getElementById('autocomplete');
-        
-        // Используем только один тип для предотвращения ошибки "establishment cannot be mixed with other types"
-        // 'establishment' подходит для разных учреждений и мест, включая кладбища
-        const options = {
-            types: ['establishment'], 
-            language: 'hu',
-            // Можно добавить ограничение по стране, если нужно
-            // componentRestrictions: {country: 'ru'}
-        };
-        
-        // Создаем экземпляр Autocomplete
-        const autocomplete = new google.maps.places.Autocomplete(input, options);
-        
-        // Слушатель события выбора места
-        autocomplete.addListener('place_changed', function() {
-            const place = autocomplete.getPlace();
-            
-            if (!place.geometry) {
-                console.log("The selected location does not contain geometric information");
-                return;
+            // Глобальная функция, которая будет вызвана после загрузки API
+            function initMap() {
+                initAutocomplete();
             }
-            
-            // Сохраняем типы места
+
+            // Инициализация автозаполнения мест
+            function initAutocomplete() {
+                const input = document.getElementById('autocomplete');
+
+                // Используем только один тип для предотвращения ошибки "establishment cannot be mixed with other types"
+                // 'establishment' подходит для разных учреждений и мест, включая кладбища
+                const options = {
+                    types: ['establishment'],
+                    language: 'hu',
+                    // Можно добавить ограничение по стране, если нужно
+                    // componentRestrictions: {country: 'ru'}
+                };
+
+                // Создаем экземпляр Autocomplete
+                const autocomplete = new google.maps.places.Autocomplete(input, options);
+
+                // Слушатель события выбора места
+                autocomplete.addListener('place_changed', function() {
+                    const place = autocomplete.getPlace();
+
+                    if (!place.geometry) {
+                        console.log("The selected location does not contain geometric information");
+                        return;
+                    }
+
+                    // Сохраняем типы места
 
 
-        });
-        
-        // Добавляем обработчик для фокуса, чтобы подсказать пользователю
-        input.addEventListener('focus', function() {
-            if (!this.value.toLowerCase().includes('cementry')) {
-                // Можно оставить поле пустым или предложить подсказку
-                // this.value = 'кладбище ';
+                });
+
+                // Добавляем обработчик для фокуса, чтобы подсказать пользователю
+                input.addEventListener('focus', function() {
+                    if (!this.value.toLowerCase().includes('cementry')) {
+                        // Можно оставить поле пустым или предложить подсказку
+                        // this.value = 'кладбище ';
+                    }
+                });
             }
-        });
-    }
-    
-    // Если API загружен до того, как DOM будет готов, мы обрабатываем это
-    if (window.google && window.google.maps) {
-        document.addEventListener('DOMContentLoaded', initMap);
-    }
-</script>
 
-@endsection
+            // Если API загружен до того, как DOM будет готов, мы обрабатываем это
+            if (window.google && window.google.maps) {
+                document.addEventListener('DOMContentLoaded', initMap);
+            }
+        </script>
 
-
-
+    @endsection

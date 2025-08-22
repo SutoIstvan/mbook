@@ -73,6 +73,8 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/dashboard/{memorial}/photos/{image}', [ImageController::class, 'destroy'])->name('memorial.images.destroy');
     Route::delete('/dashboard/{memorial}/photos', [ImageController::class, 'destroyAllImages'])->name('memorials.images.destroyAll');
 
+    Route::post('/memorial/{id}/upload-image', [ImageController::class, 'uploadImage'])->name('memorial.uploadImage');
+
     Route::get('/dashboard/{memorial}/help', [DashboardController::class, 'help'])->name('dashboard.help');
     
     Route::delete('/dashboard/delete/{memorial}', [DashboardController::class, 'destroy'])->name('dashboard.destroy')->middleware('auth');
