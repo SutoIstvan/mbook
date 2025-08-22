@@ -32,28 +32,32 @@ class TimelineController extends Controller
         $familyMembers = Family::where('memorial_id', $memorial->id)->get()->groupBy('role');
 
         // --- Рождение детей ---
-        if (!empty($familyMembers['children'])) {
-            foreach ($familyMembers['children'] as $child) {
-                $title = $child->name;
+if (!empty($familyMembers['children'])) {
+    foreach ($familyMembers['children'] as $child) {
+        $title = trim((string) $child->name);
 
-                // Проверяем, есть ли уже такая запись
-                $exists = Timeline::where('memorial_id', $memorial->id)
-                    ->where('title', $title)
-                    ->where('type', 'child_birth')
-                    ->exists();
-
-                if (!$exists) {
-                    Timeline::create([
-                        'memorial_id' => $memorial->id,
-                        'title' => $title,
-                        'description' => '',
-                        'date' => Carbon::now(),
-                        'type' => 'child_birth',
-                        'order' => 1,
-                    ]);
-                }
-            }
+        if ($title === '') {
+            continue; // не создаём события без имени
         }
+
+        $exists = Timeline::where('memorial_id', $memorial->id)
+            ->where('title', $title)
+            ->where('type', 'child_birth')
+            ->exists();
+
+        if (!$exists) {
+            Timeline::create([
+                'memorial_id' => $memorial->id,
+                'title' => $title,
+                'description' => '',
+                'date' => null,
+                'type' => 'child_birth',
+                'order' => 1,
+            ]);
+        }
+    }
+}
+
 
         // --- Брак ---
         if (!empty($familyMembers['partner'])) {
@@ -70,7 +74,7 @@ class TimelineController extends Controller
                         'memorial_id' => $memorial->id,
                         'title' => $title,
                         'description' => '',
-                        'date' => Carbon::now(),
+                        'date' => null,
                         'type' => 'marriage',
                         'order' => 1,
                     ]);
@@ -337,6 +341,7 @@ class TimelineController extends Controller
 
     public function destroy($id)
     {
+        // dd($id);
         $timeline = Timeline::findOrFail($id);
         $timeline->delete();
 
@@ -409,25 +414,35 @@ class TimelineController extends Controller
         };
     }
 
-    public function newstore(Request $request)
-    {
-        // dd($request);
-        $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'year' => 'nullable|integer|min:1900|max:' . date('Y'),
-            'type' => 'required|string',
-            'memorial_id' => 'required|exists:memorials,id',
-        ]);
+public function newstore(Request $request)
+{
+    // dd($request);
+    $validatedData = $request->validate([
+        'title'       => 'required|string|max:255',
+        'year'        => 'nullable|integer|min:1900|max:' . date('Y'),
+        'type'        => 'required|string',
+        'custom_type' => 'nullable|string|max:255',
+        'memorial_id' => 'required|exists:memorials,id',
+    ]);
 
-        Timeline::create([
-            'title' => $validatedData['title'],
-            'date' => $validatedData['year'] . '-01-01',
-            'type' => $validatedData['type'],
-            'memorial_id' => $validatedData['memorial_id'],
-        ]);
-
-        return back()->with('success', 'Esemény sikeresen hozzáadva a timeline-hoz.');
+    // Если выбрали "custom" → заменяем на значение из custom_type
+    $type = $validatedData['type'];
+    if ($type === 'other_properties' && !empty($validatedData['custom_type'])) {
+        $type = $validatedData['custom_type'];
     }
+
+    Timeline::create([
+        'title'       => $validatedData['title'],
+        'date'        => $validatedData['year'] 
+                           ? $validatedData['year'] . '-01-01' 
+                           : null,
+        'type'        => $type,
+        'memorial_id' => $validatedData['memorial_id'],
+    ]);
+
+    return back()->with('success', __('Event successfully added to the timeline.'));
+}
+
 
     public function updateAll(Request $request)
     {
@@ -490,12 +505,12 @@ class TimelineController extends Controller
 
     public function updateNext(Request $request)
     {
-        // dd($request);
+        //  dd($request);
         $validatedData = $request->validate([
             'timelines' => 'required|array',
             'timelines.*.id' => 'required|exists:timelines,id',
             'timelines.*.title' => 'required|string|max:255',
-            'timelines.*.year' => 'required|integer|min:1900|max:' . date('Y'),
+            'timelines.*.date' => 'required|integer|min:1900|max:' . date('Y'),
             'timelines.*.type' => 'required|string',
             'timelines.*.delete' => 'nullable|boolean',
         ]);
@@ -509,7 +524,7 @@ class TimelineController extends Controller
                 continue;
             }
 
-            $newDate = $timelineData['year'] . '-01-01';
+            $newDate = $timelineData['date'] . '-01-01';
             $newType = $timelineData['type'];
 
             $duplicateExists = Timeline::where('memorial_id', $timeline->memorial_id)

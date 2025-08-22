@@ -1108,7 +1108,7 @@
 
                                     <!-- Поле для своего значения -->
                                     <div id="customTypeWrapper" class="mt-2" style="display: none;">
-                                        <input type="text" name="type" class="form-control"
+                                        <input type="text" name="custom_type" class="form-control"
                                             placeholder="{{ __('Enter a name for the timeline') }}">
                                     </div>
 
@@ -1227,15 +1227,15 @@
 
                                 <div class="tracking-date defaultcolor fs-4 wow fadeIn d-flex justify-content-end mt-1"
                                     data-wow-delay="300ms">
-                                    <select name="timelines[{{ $timeline->id }}][year]" class="form-select"
-                                        style="max-width: 90px;">
-                                        @for ($year = date('Y'); $year >= 1900; $year--)
-                                            <option value="{{ $year }}"
-                                                {{ \Carbon\Carbon::parse($timeline->date)->format('Y') == $year ? 'selected' : '' }}>
-                                                {{ $year }}
-                                            </option>
-                                        @endfor
-                                    </select>
+<select name="timelines[{{ $timeline->id }}][date]" class="form-select" style="max-width: 90px;" required>
+    <option value=""></option>
+    @for ($date = date('Y'); $date >= 1900; $date--)
+        <option value="{{ $date }}" 
+            {{ $timeline->date && \Carbon\Carbon::parse($timeline->date)->format('Y') == $date ? 'selected' : '' }}>
+            {{ $date }}
+        </option>
+    @endfor
+</select>
                                 </div>
 
                                 <div class="border p-3">

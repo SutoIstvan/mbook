@@ -337,7 +337,7 @@ class FamilyController extends Controller
 
     public function treeupdate(Request $request, Memorial $memorial)
     {
-        dd($request);
+        // dd($request);
 
         $request->validate([
             'names' => 'array',
@@ -482,7 +482,7 @@ class FamilyController extends Controller
                     'name' => '',
                 ]);
                 $message = __('Family saved and new partner added');
-                break;
+                return back()->with('success', $message);
 
             case 'add_children':
                 Family::create([
@@ -491,7 +491,7 @@ class FamilyController extends Controller
                     'name' => '',
                 ]);
                 $message = __('Family saved and new child added');
-                break;
+                return back()->with('success', $message);
 
             case 'add_siblings':
                 Family::create([
@@ -500,12 +500,13 @@ class FamilyController extends Controller
                     'name' => '',
                 ]);
                 $message = __('Family saved and new sibling added');
-                break;
+                return back()->with('success', $message);
 
             case 'save':
             default:
-                // Просто сохраняем без добавления
-                break;
+                // Просто сохраняем и идём дальше
+                return redirect()->route('timeline.create', $memorial)
+                    ->with('success', $message);
         }
 
         return redirect()->route('timeline.create', $memorial);
