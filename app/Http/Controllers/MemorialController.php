@@ -77,12 +77,15 @@ class MemorialController extends Controller
             ->where('role', 'grandfather_father')
             ->first();
 
+        $hasGrandparents = $grandmotherMother->name || $grandfatherMother->name || 
+                   $grandmotherFather->name || $grandfatherFather->name;
+
         $family = Family::where('memorial_id', $memorial->id)->get();
 
         if ($theme === 'dark') {
             return view('memorial.show', compact('memorial', 'images', 'comments', 'timelines'));
         } else {
-            return view('memorial.white', compact('memorial', 'images', 'comments', 'timelines', 'father', 'mother', 'grandmotherMother', 'grandfatherMother', 'grandmotherFather', 'grandfatherFather', 'partners', 'childrens', 'siblings'));
+            return view('memorial.white', compact('memorial', 'images', 'comments', 'timelines', 'father', 'mother', 'grandmotherMother', 'grandfatherMother', 'grandmotherFather', 'grandfatherFather', 'partners', 'childrens', 'siblings', 'hasGrandparents'));
         }
 
         return view('memorial.show', compact('memorial', 'images', 'comments', 'theme'));

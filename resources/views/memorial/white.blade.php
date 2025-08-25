@@ -26,6 +26,10 @@
     <link rel="stylesheet" href="white/css/revolution/settings.css">
     <link rel="stylesheet" href="white/css/style.css">
 
+@prepend('styles')
+
+@endprepend
+
     <style type="text/css" media="screen">
         .tree {
             min-width: 1100px;
@@ -283,6 +287,10 @@
             width: 0;
             height: 40px;
             z-index: -1;
+        }
+
+        .tree ul ul.apa.no-lines::before {
+            display: none;
         }
 
         .img-fluid {
@@ -552,11 +560,11 @@
                     <h2 class="heading bottom45 darkcolor font-light2">{{ __('Gallery') }}<span class="font-normal"></span>
                         <span class="divider-center"></span>
                     </h2>
-                    <div class="col-md-8 offset-md-2 bottom40">
+                    {{-- <div class="col-md-8 offset-md-2 bottom40">
                         <p>
                             {{ __('A gallery is a collection of photos, videos, and other visual memories. It allows you to visually preserve and share important moments, events, and family stories.') }}
                         </p>
-                    </div>
+                    </div> --}}
                 </div>
                 {{-- <div class="col-lg-12">
                     <div id="mosaic-filter" class="cbp-l-filters bottom30 wow fadeIn text-center"
@@ -662,6 +670,7 @@
 
 
     <!-- Timeline -->
+    @if ($timelines->count() > 0)
     <section id="timeline" class="padding">
         <div class="container">
             <div class="row">
@@ -674,11 +683,11 @@
                                     class="font-normal"></span>
 
                             </h2>
-                            <div class="col-md-8 offset-md-2 bottom40">
+                            {{-- <div class="col-md-8 offset-md-2 bottom40">
                                 <p>
                                     {{ __('A timeline depicts important life events in chronological order. It presents key moments, such as births, marriages, or significant achievements, with dates and descriptions, helping you to review your family history.') }}
                                 </p>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="">
 
@@ -811,6 +820,7 @@
             </div>
         </div>
     </section>
+    @endif
     <!-- Timeline -->
 
     <!-- Counters -->
@@ -848,15 +858,20 @@
             <h2 class="heading bottom45 darkcolor font-light2">{{ __('Family Tree') }}<span class="font-normal"></span>
 
             </h2>
-            <div class="col-md-8 offset-md-2 bottom40">
+            {{-- <div class="col-md-8 offset-md-2 bottom40">
                 <p>
                     {{ __('A diagram showing family kinship relationships, including a person`s ancestors and descendants such as parents, children, and grandparents.') }}
                 </p>
-            </div>
+            </div> --}}
         </div>
         {{-- @dump($family) --}}
         <div class="tree-container padding_bottom">
             <div class="tree wow fadeIn" data-wow-delay="300ms">
+
+
+@if($hasGrandparents)
+
+
                 <ul class="down">
                     <!-- My Grand Parents -->
                     <li class="down">
@@ -957,11 +972,12 @@
                         </a>
                     </li>
                 </ul>
+                @endif
                 <ul class="down">
                     <!-- My Parents -->
 
                     <li class="down">
-                        <ul class="apa">
+                        <ul class="{{ $hasGrandparents ? 'apa' : 'apa no-lines' }}">
                             <a {{ $father?->qr_code ? 'href=' . route('memorial.show', $father->qr_code) : '' }}
                                 target="_blank">
                                 <img src="{{ isset($father) && $father->photo ? asset('memorial/' . $father->photo) : asset('avatar/avatar-man.png') }}"
@@ -985,7 +1001,7 @@
                     </li>
 
                     <li class="up mom">
-                        <ul class="apa">
+                        <ul class="{{ $hasGrandparents ? 'apa' : 'apa no-lines' }}">
                             <a {{ $mother?->qr_code ? 'href=' . route('memorial.show', $mother->qr_code) : '' }}
                                 target="_blank">
                                 <img src="{{ isset($mother) && $mother->photo ? asset('memorial/' . $mother->photo) : asset('avatar/avatar-girl.png') }}"
