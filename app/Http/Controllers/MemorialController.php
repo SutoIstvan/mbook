@@ -77,8 +77,13 @@ class MemorialController extends Controller
             ->where('role', 'grandfather_father')
             ->first();
 
-        $hasGrandparents = $grandmotherMother->name || $grandfatherMother->name || 
-                   $grandmotherFather->name || $grandfatherFather->name;
+        // $hasGrandparents = $grandmotherMother->name || $grandfatherMother->name || 
+        //            $grandmotherFather->name || $grandfatherFather->name;
+
+        $hasGrandparents = ($grandmotherMother->name ?? null) || 
+                   ($grandfatherMother->name ?? null) || 
+                   ($grandmotherFather->name ?? null) || 
+                   ($grandfatherFather->name ?? null);
 
         $family = Family::where('memorial_id', $memorial->id)->get();
 
