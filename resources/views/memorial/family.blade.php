@@ -857,7 +857,7 @@
             background: white;
             border-radius: 5px;
             transition: all 0.5s;
-            width: 120px;
+            width: 130px;
             text-align: center;
             height: 185px;
         }
@@ -1039,7 +1039,24 @@
         .image-wrapper:hover .camera-icon {
             display: block;
         }
-    </style>
+
+        /* Предотвращаем автоматический скролл при загрузке */
+        html {
+            scroll-behavior: auto !important;
+        }
+
+        /* Скрываем страницу до восстановления позиции */
+        .scroll-loading {
+            opacity: 0;
+            transition: opacity 0.1s;
+        }
+
+        .scroll-ready {
+            opacity: 1;
+        }
+</style>
+
+
 @endsection
 
 @section('title', 'Adat mentés - mbook.hu')
@@ -1250,30 +1267,32 @@
             <div class="col-12 col-md-10 p-4 mt-30">
 
                 <!-- Форма для добавления партнера -->
-                <form action="{{ route('dashboard.family.store') }}" id="add-partner-form" method="POST">
+                {{-- <form action="{{ route('dashboard.family.store') }}" id="add-partner-form" method="POST">
                     @csrf
                     <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
                     <input type="hidden" name="role" value="partner">
-                </form>
+                </form> --}}
 
                 <!-- Форма для добавления детей -->
-                <form action="{{ route('dashboard.family.store') }}" id="add-children-form" method="POST">
+                {{-- <form action="{{ route('dashboard.family.store') }}" id="add-children-form" method="POST">
                     @csrf
                     <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
                     <input type="hidden" name="role" value="children">
-                </form>
+                </form> --}}
 
                 <!-- Форма для добавления братьев/сестер -->
-                <form action="{{ route('dashboard.family.store') }}" id="add-siblings-form" method="POST">
+                {{-- <form action="{{ route('dashboard.family.store') }}" id="add-siblings-form" method="POST">
                     @csrf
                     <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
                     <input type="hidden" name="role" value="siblings">
-                </form>
+                </form> --}}
 
 
                 <form id="family-form" action="{{ route('family.treeupdate', $memorial->id) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" name="scroll_position" value="0">
+
                     <div class="">
 
                         <!-- Family tree -->
@@ -1312,8 +1331,8 @@
                                                 @if ($grandfatherFather)
                                                     <button type="button" title="{{ __('Delete') }}"
                                                         class="btn btn-sm position-absolute"
-                                                        style="transform: translate(160%, -20%); background: transparent; border: none;"
-                                                        onclick="event.stopPropagation(); document.getElementById('delete-form-{{ $grandfatherFather->id }}').submit();">
+                                                        style="transform: translate(180%, -30%); background: transparent; border: none;"
+                                                        onclick="handleDelete(event, 'delete-form-{{ $grandfatherFather->id }}')">
                                                         <i class="fa-solid fa-trash text-danger"></i>
                                                     </button>
                                                 @endif
@@ -1356,8 +1375,8 @@
                                                 @if ($grandmotherFather)
                                                     <button type="button" title="{{ __('Delete') }}"
                                                         class="btn btn-sm position-absolute"
-                                                        style="transform: translate(160%, -20%); background: transparent; border: none;"
-                                                        onclick="event.stopPropagation(); document.getElementById('delete-form-{{ $grandmotherFather->id }}').submit();">
+                                                        style="transform: translate(180%, -30%); background: transparent; border: none;"
+                                                        onclick="handleDelete(event, 'delete-form-{{ $grandmotherFather->id }}')">
                                                         <i class="fa-solid fa-trash text-danger"></i>
                                                     </button>
                                                 @endif
@@ -1400,8 +1419,8 @@
                                                 @if ($grandfatherMother)
                                                     <button type="button" title="{{ __('Delete') }}"
                                                         class="btn btn-sm position-absolute"
-                                                        style="transform: translate(160%, -20%); background: transparent; border: none;"
-                                                        onclick="event.stopPropagation(); document.getElementById('delete-form-{{ $grandfatherMother->id }}').submit();">
+                                                        style="transform: translate(180%, -30%); background: transparent; border: none;"
+                                                        onclick="handleDelete(event, 'delete-form-{{ $grandfatherMother->id }}')">
                                                         <i class="fa-solid fa-trash text-danger"></i>
                                                     </button>
                                                 @endif
@@ -1444,8 +1463,8 @@
                                                 @if ($grandmotherMother)
                                                     <button type="button" title="{{ __('Delete') }}"
                                                         class="btn btn-sm position-absolute"
-                                                        style="transform: translate(160%, -20%); background: transparent; border: none;"
-                                                        onclick="event.stopPropagation(); document.getElementById('delete-form-{{ $grandmotherMother->id }}').submit();">
+                                                        style="transform: translate(180%, -30%); background: transparent; border: none;"
+                                                        onclick="handleDelete(event, 'delete-form-{{ $grandmotherMother->id }}')">
                                                         <i class="fa-solid fa-trash text-danger"></i>
                                                     </button>
                                                 @endif
@@ -1490,7 +1509,7 @@
                                                     @if ($father)
                                                         <button type="button" title="{{ __('Delete') }}"
                                                             class="btn btn-sm position-absolute"
-                                                            style="transform: translate(160%, -20%); background: transparent; border: none;"
+                                                            style="transform: translate(180%, -30%); background: transparent; border: none;"
                                                             onclick="event.stopPropagation(); document.getElementById('delete-form-{{ $father->id }}').submit();">
                                                             <i class="fa-solid fa-trash text-danger"></i>
                                                         </button>
@@ -1536,7 +1555,7 @@
                                                     @if ($mother)
                                                         <button type="button" title="{{ __('Delete') }}"
                                                             class="btn btn-sm position-absolute"
-                                                            style="transform: translate(160%, -20%); background: transparent; border: none;"
+                                                            style="transform: translate(180%, -30%); background: transparent; border: none;"
                                                             onclick="event.stopPropagation(); document.getElementById('delete-form-{{ $mother->id }}').submit();">
                                                             <i class="fa-solid fa-trash text-danger"></i>
                                                         </button>
@@ -1589,8 +1608,8 @@
                                                         {{-- Кнопка удалить в углу --}}
                                                         <button type="button" title="{{ __('Delete') }}"
                                                             class="btn btn-sm btn-danger position-absolute"
-                                                            style="transform: translate(260%, -20%); background: transparent; border: none; "
-                                                            onclick="event.stopPropagation(); document.getElementById('delete-form-{{ $member->id }}').submit();">
+                                                            style="transform: translate(290%, -30%); background: transparent; border: none; "
+                                                            onclick="handleDelete(event, 'delete-form-{{ $member->id }}')">
                                                             <i class="fa-solid fa-trash text-danger"></i>
                                                         </button>
                                                         <div class="image-wrapper" style="cursor: pointer;"
@@ -1650,7 +1669,7 @@
                                                 <a href="#"
                                                     onclick="event.preventDefault(); setActionAndSubmit('add_partner');"
                                                     class="image-wrapper">
-                                                    <div class="" style="cursor: pointer; min-height: 120px;">
+                                                    <div class="my-2 mx-2" style="cursor: pointer; min-height: 125px;">
                                                         <img src="{{ asset('avatar/avatar-add-2.png') }}"
                                                             class=" rounded-circle" width="90" height="90">
 
@@ -1694,8 +1713,8 @@
                                                                 {{-- Кнопка удалить в углу --}}
                                                                 <button type="button" title="{{ __('Delete') }}"
                                                                     class="btn btn-sm btn-danger position-absolute"
-                                                                    style="transform: translate(155%, -20%); background: transparent; border: none; "
-                                                                    onclick="event.stopPropagation(); document.getElementById('delete-form-{{ $member->id }}').submit();">
+                                                                    style="transform: translate(180%, -30%); background: transparent; border: none; "
+                                                                    onclick="handleDelete(event, 'delete-form-{{ $member->id }}')">
                                                                     <i class="fa-solid fa-trash text-danger"></i>
                                                                 </button>
                                                                 {{-- Картинка и загрузка фото --}}
@@ -1736,7 +1755,7 @@
                                                         <a href="#"
                                                             onclick="event.preventDefault(); setActionAndSubmit('add_children');"
                                                             style="">
-                                                            <div class="" style="cursor: pointer;">
+                                                            <div class="my-2 mx-2" style="cursor: pointer;">
                                                                 <img src="{{ asset('avatar/avatar-add-2.png') }}"
                                                                     class=" rounded-circle" width="90"
                                                                     height="90">
@@ -1763,8 +1782,8 @@
                                                         {{-- Кнопка удалить в углу --}}
                                                         <button type="button" title="{{ __('Delete') }}"
                                                             class="btn btn-sm btn-danger position-absolute"
-                                                            style="transform: translate(155%, -20%); background: transparent; border: none; "
-                                                            onclick="event.stopPropagation(); document.getElementById('delete-form-{{ $member->id }}').submit();">
+                                                            style="transform: translate(180%, -30%); background: transparent; border: none; "
+                                                            onclick="handleDelete(event, 'delete-form-{{ $member->id }}')">
                                                             <i class="fa-solid fa-trash text-danger"></i>
                                                         </button>
                                                         <div class="image-wrapper" style="cursor: pointer;"
@@ -1806,7 +1825,7 @@
                                             <li class="mb-3">
                                                 <a href="#"
                                                     onclick="event.preventDefault(); setActionAndSubmit('add_siblings');">
-                                                    <div style="cursor: pointer;">
+                                                    <div class="my-2 mx-2" style="cursor: pointer;">
                                                         <img src="{{ asset('avatar/avatar-add-2.png') }}"
                                                             class="rounded-circle" width="90" height="90">
                                                     </div>
@@ -2017,29 +2036,66 @@
 
 @section('js')
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            let container = document.getElementById('tree-container');
-            container.scrollLeft = (container.scrollWidth - container.clientWidth) / 2;
-        });
+<script>
+function handleDelete(event, formId) {
+    event.stopPropagation();
 
-        function previewImage(input, previewId) {
-            const file = input.files[0];
-            if (file) {
-                const reader = new FileReader();
+    // Сохраняем текущую позицию скролла
+    const scrollPosition = window.pageYOffset;
+    localStorage.setItem('scroll_position_temp', scrollPosition);
 
-                reader.onload = function(e) {
-                    document.getElementById(previewId).src = e.target.result;
-                };
+    // Отправляем конкретную форму удаления
+    const form = document.getElementById(formId);
+    if (form) {
+        form.submit();
+    } else {
+        console.error('Форма удаления не найдена: ' + formId);
+    }
+}
 
-                reader.readAsDataURL(file);
-            }
-        }
 
-        function setActionAndSubmit(actionValue) {
-            document.getElementById('action-input').value = actionValue;
-            document.getElementById('family-form').submit();
-        }
-    </script>
+// Добавляем класс для скрытия контента
+document.documentElement.className += ' scroll-loading';
 
+// Восстанавливаем позицию максимально рано
+window.addEventListener('DOMContentLoaded', function() {
+    const savedPosition = localStorage.getItem('scroll_position_temp');
+    
+    if (savedPosition && savedPosition > 0) {
+        // Немедленно устанавливаем позицию
+        window.scrollTo(0, parseInt(savedPosition));
+        localStorage.removeItem('scroll_position_temp');
+    }
+    
+    // Показываем контент
+    setTimeout(function() {
+        document.documentElement.className = document.documentElement.className.replace('scroll-loading', 'scroll-ready');
+    }, 50);
+    
+    // Ваш код для tree-container
+    let container = document.getElementById('tree-container');
+    if (container) {
+        container.scrollLeft = (container.scrollWidth - container.clientWidth) / 2;
+    }
+});
+
+function setActionAndSubmit(actionValue) {
+    const scrollPosition = window.pageYOffset;
+    localStorage.setItem('scroll_position_temp', scrollPosition);
+    
+    document.getElementById('action-input').value = actionValue;
+    document.getElementById('family-form').submit();
+}
+
+function previewImage(input, previewId) {
+    const file = input.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById(previewId).src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+}
+</script>
 @endsection

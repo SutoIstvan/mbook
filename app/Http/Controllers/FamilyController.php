@@ -355,6 +355,9 @@ class FamilyController extends Controller
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:35120',
         ]);
 
+        // $scrollPosition = $request->input('scroll_position', 0);
+        // dd($scrollPosition);
+
         // Обработка массива names (для основных ролей)
         foreach ($request->input('names', []) as $key => $name) {
             if (trim($name) === '') {
