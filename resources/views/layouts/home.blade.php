@@ -134,10 +134,10 @@
                             <a class="nav-link butn-scroll"
                                 href="{{ url('/')}}#howitworks">{{__('How it works')}}</a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link butn-q-scroll"
                                 href="{{ url('/')}}#faqs">{{__('FAQs')}}</a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}"
                                 href="{{ route('contact') }}">{{__('Contact')}}</a>
@@ -155,6 +155,50 @@
                             <a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}"
                                 href="https://shop.rememus.com" target="_blank">Shop</a>
                         </li>
+                        
+<li class="nav-item dropdown" >
+    <a class="nav-link dropdown-toggle {{ in_array(app()->getLocale(), ['en','hu','cz','fi','ru']) ? '' : '' }}"
+       href="#" id="languageDropdown"
+       role="button"
+       data-bs-toggle="dropdown"
+       aria-expanded="false">
+        {{ strtoupper(app()->getLocale()) }}
+    </a>
+
+    <ul class="dropdown-menu" style="min-width: 50px;" aria-labelledby="languageDropdown">
+        <li>
+            <a class="dropdown-item {{ app()->getLocale() === 'en' ? 'active' : '' }}"
+               href="{{ route('set.language', ['lang' => 'en']) }}">
+                EN
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item {{ app()->getLocale() === 'hu' ? 'active' : '' }}"
+               href="{{ route('set.language', ['lang' => 'hu']) }}">
+                HU
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item {{ app()->getLocale() === 'sk' ? 'active' : '' }}"
+               href="{{ route('set.language', ['lang' => 'sk']) }}">
+                SK
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item {{ app()->getLocale() === 'fi' ? 'active' : '' }}"
+               href="{{ route('set.language', ['lang' => 'fi']) }}">
+                FI
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item {{ app()->getLocale() === 'ru' ? 'active' : '' }}"
+               href="{{ route('set.language', ['lang' => 'ru']) }}">
+                RU
+            </a>
+        </li>
+    </ul>
+</li>
+
                     </ul>
                 </div>
 

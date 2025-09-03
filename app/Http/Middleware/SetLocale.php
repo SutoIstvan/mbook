@@ -32,7 +32,7 @@ class SetLocale
         App::setLocale($locale);
 
         // === 7. Для теста: раскомментируй строку ниже, чтобы всегда был финский ===
-        App::setLocale('en');
+        // App::setLocale('en');
 
         return $next($request);
     }

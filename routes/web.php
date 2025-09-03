@@ -157,3 +157,11 @@ Route::get('/{memorial}/timeline', [TimelineController::class, 'showTimeline'])-
 Route::get('/{memorial}/comments/create', [CommentController::class, 'create'])->name('comments.create');
 Route::post('/{memorial}/comments', [CommentController::class, 'store'])->name('comments.store');
 Route::post('/{memorial}/comments', [CommentController::class, 'storejs'])->name('comments.storejs');
+
+Route::get('/set-language/{lang}', function ($lang) {
+    if (in_array($lang, ['en', 'hu', 'sk', 'fi', 'ru'])) {
+        session(['locale' => $lang]);
+        app()->setLocale($lang);
+    }
+    return back();
+})->name('set.language');
