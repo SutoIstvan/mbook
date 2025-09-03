@@ -853,25 +853,20 @@
                 <div class="pt-30">
                     <div class="col-lg-8 mx-auto">
                         <p class="fs-5 mt-4 ">
-                            Emlékhely koordinátái
-                            <br><br>
-                            Itt megadhatja a síremlék pontos koordinátáit a temetőben, vagy feltölthet egy olyan fotót,
-                            amelyet a temetőben készített a síremlékről, bekapcsolt helymeghatározással.
-                            <br><br>
-                            Itt talál egy linket, amely megmutatja, hogyan lehet ezt megtenni különböző telefonokon:
-                            Útmutató
-
+                            {{__('Here you can enter the exact coordinates of the grave in the cemetery or upload a photo you took of the grave in the cemetery with location tracking turned on.')}}
                     </div>
                 </div>
             </div>
 
-            <div class="container col-9">
+            <div class="container col-12 col-md-9">
                 <div class="row">
                     <div class="card-body p-4">
 
                         <div class="row">
 
-                            <div class="col-8">
+                            <div class="col-12 col-md-8">
+
+                                {{-- Поле автозаполнения адреса --}}
 
                                 {{-- Поле координат --}}
                                 <div class="mb-4">
@@ -882,12 +877,12 @@
                                         name="coordinates" placeholder="47.497912, 42.458989"
                                         value="{{ $memorial->coordinates }}">
                                     <small class="form-text text-muted">
-                                        {{ __('Введите координаты вручную.') }}
+                                        {{ __('Enter coordinates manually.') }}
                                     </small>
                                 </div>
 
                                 {{-- Форма загрузки фото --}}
-                                <div>
+                                <div class="">
                                     <form action="{{ route('memorial.uploadImage', $memorial->id) }}" method="POST"
                                         enctype="multipart/form-data">
                                         @csrf
@@ -899,23 +894,23 @@
                                             </button>
                                         </div>
                                         <small class="form-text text-muted">
-                                            {{ __('Допустимые форматы: JPG, JPEG, PNG, WEBP. Максимальный размер: 20 МБ.') }}
+                                            {{ __('Accepted formats: JPG, JPEG, PNG, WEBP. Maximum size: 20 MB.') }}
                                         </small>
                                     </form>
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-12 col-md-4">
                                 {{-- Превью фото --}}
-                                <div class="mb-4 text-center">
+                                <div class="pt-3 pt-md-0 mb-3 mb-md-0 text-center">
                                     <div class="border rounded p-2 bg-light d-inline-block">
                                         <img src="{{ $memorial->grave_coordinates
                                             ? asset('memorial/' . $memorial->grave_coordinates)
-                                            : asset('images/no-photo.webp') }}"
-                                            alt="Фото мемориала" class="img-fluid rounded shadow"
+                                            : asset('/home/imgs/no-photo.webp') }}"
+                                            alt="{{ __('Photo of the memorial') }}" class="img-fluid rounded shadow"
                                             style="max-height: 200px; width: 200px; object-fit: cover;" />
                                     </div>
                                     <p class="mt-2 text-muted mb-0">
-                                        {{ $memorial->grave_coordinates ? __('Загруженное фото') : __('Фото отсутствует') }}
+                                        {{ $memorial->grave_coordinates ? __('Uploaded photo') : __('Photo missing') }}
                                     </p>
                                 </div>
                             </div>
@@ -929,7 +924,7 @@
 
 
 
-            <div class="container col-9">
+            <div class="container col-9 pb-55">
                 <div class="d-flex justify-content-between mt-30 pb-50">
                     <a href="{{ route('timeline.gallery', $memorial) }}"
                         class="btn btn-secondary">{{ __('Back') }}</a>
