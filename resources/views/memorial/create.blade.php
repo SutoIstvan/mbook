@@ -519,7 +519,7 @@
                                             class="form-select @error('birth_date') is-invalid @enderror @error('birth_year') is-invalid @enderror"
                                             required>
                                             {{-- <option value="">{{ __('Year') }}</option> --}}
-                                            @for ($year = date('Y'); $year >= 1900; $year--)
+                                            @for ($year = date('Y'); $year >= 1800; $year--)
                                                 <option value="{{ $year }}"
                                                     {{ old('birth_year', date('Y', strtotime(old('birth_date', '')))) == $year ? 'selected' : '' }}>
                                                     {{ $year }}
