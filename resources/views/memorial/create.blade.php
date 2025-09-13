@@ -486,7 +486,7 @@
 
 
                 <div class="col-12 col-md-3 p-4">
-                    <h3>{{ __('Deceased data') }}</h3>
+                    {{-- <h3>{{ __('Deceased data') }}</h3> --}}
                     <p class="mt-2">
                         {{ __('Please provide the following information: Full name, Date of birth, Date of death.') }}
                     </p>
@@ -602,10 +602,10 @@
                             </div>
 
                             <div class="col-12 col-md-5 mb-3">
-                                <label for="birth_place" class="col-form-label text-md-end">{{ __('Birth place') }}</label>
+                                <label for="birth_place" class="col-form-label text-md-end"></label>
                                 <input id="birth_place" type="text"
-                                    class="form-control @error('birth_place') is-invalid @enderror" name="birth_place"
-                                    value="{{ old('birth_place') }}" placeholder="{{ __('Enter the sity name') }}">
+                                    class="mt-3 form-control @error('birth_place') is-invalid @enderror" name="birth_place"
+                                    value="{{ old('birth_place') }}" placeholder="{{ __('Birth place') }}">
                                 @error('birth_place')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -703,7 +703,7 @@
 
 
                             <div class="col-12 col-md-5 mb-3">
-                                <label for="grave_location"
+                                {{-- <label for="grave_location"
                                     class="col-form-label text-md-end">{{ __('Place of death') }}</label>
 
                                 <input type="text" id="grave_location" value="{{ old('grave_location') }}"
@@ -716,41 +716,13 @@
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
+                                @enderror --}}
                             </div>
 
                         </div>
 
 
-                        <div class="text-end pb-8 mt-8">
 
-
-                            <button type="submit" name="action" value="add_details" id="additionalDetails"
-                                class="butn butn-md butn-bord butn-rounded mt-15">
-                                <span class="text">
-                                    {{ __('Add Additional Details') }}
-                                </span>
-                                <span id="btnIcon2" class="icon">
-                                    <i class="fa-regular fa-plus text-secondary"></i>
-                                </span>
-                                <span id="btnSpinner2" class="icon d-none">
-                                    <i class="fa-solid fa-spinner fa-spin text-secondary"></i>
-                                </span>
-                            </button>
-
-                            {{-- <button type="button" class="butn butn-md butn-bord butn-rounded" onclick="window.location.href=''">
-                                <span class="text">
-                                    {{ __('További adatok megadása') }}
-                                </span>
-                                <span id="btnIcon" class="icon">
-                                    <i class="fa-regular fa-save"></i>
-                                </span>
-                                <span id="btnSpinner" class="icon d-none">
-                                    <i class="fa-solid fa-spinner fa-spin"></i>
-                                </span>
-                            </button> --}}
-
-                        </div>
                     </div>
                 </div>
             </div>
@@ -761,7 +733,7 @@
             <div class="row d-flex justify-content-center">
 
                 <div class="col-12 col-md-3 p-4 mt-50">
-                    <h3>{{ __('Main Image') }}</h3>
+                    {{-- <h3>{{ __('Main Image') }}</h3> --}}
                     <p class="mt-2">{{ __('This photo will be displayed first on the memorial page.') }}</p>
                 </div>
 
@@ -813,7 +785,7 @@
 
 
 
-        <div class="container">
+        {{-- <div class="container">
             <div class="row d-flex justify-content-center">
 
 
@@ -844,12 +816,41 @@
 
 
             </div>
-        </div>
+        </div> --}}
+                        {{-- <div class="text-end pb-8 mt-8">
 
+
+                            <button type="submit" name="action" value="add_details" id="additionalDetails"
+                                class="butn butn-md butn-bord butn-rounded mt-15">
+                                <span class="text">
+                                    {{ __('Add Additional Details') }}
+                                </span>
+                                <span id="btnIcon2" class="icon">
+                                    <i class="fa-regular fa-plus text-secondary"></i>
+                                </span>
+                                <span id="btnSpinner2" class="icon d-none">
+                                    <i class="fa-solid fa-spinner fa-spin text-secondary"></i>
+                                </span>
+                            </button>
+
+
+
+                        </div> --}}
         <div class="text-center pb-55 mt-40">
+                            <button type="submit" name="action" value="add_details" id="additionalDetails"
+                                class="butn butn-md butn-bord butn-rounded mt-15">
+                                <span class="text">
+                                    {{ __('Add Additional Details') }}
+                                </span>
+                                <span id="btnIcon2" class="icon">
+                                    <i class="fa-regular fa-plus text-secondary"></i>
+                                </span>
+                                <span id="btnSpinner2" class="icon d-none">
+                                    <i class="fa-solid fa-spinner fa-spin text-secondary"></i>
+                                </span>
+                            </button>
 
-
-            <button type="submit" id="submitBtn" class="butn butn-md butn-bord butn-rounded">
+            {{-- <button type="submit" id="submitBtn" class="butn butn-md butn-bord butn-rounded">
                 <span class="text">
                     {{ __('Save data') }}
                 </span>
@@ -859,7 +860,7 @@
                 <span id="btnSpinner" class="icon d-none">
                     <i class="fa-solid fa-spinner fa-spin text-secondary"></i>
                 </span>
-            </button>
+            </button> --}}
 
         </div>
 
