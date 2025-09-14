@@ -774,200 +774,174 @@
     <body class="bg-light">
     <div class="container my-5">
         <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <div class="card shadow">
-                    <div class="card-header bg-primary text-white text-center">
-                        <h1 class="mb-0">Biográfia Készítő</h1>
-                        <p class="mb-0 mt-2">Töltse ki az alábbi információkat a személyes biográfia elkészítéséhez</p>
-                    </div>
-                    <div class="card-body">
+            <div class="col-12 col-md-9">
+                <div class="">
+
+                    <div class="">
                         <form id="biographyForm">
-                            <!-- Alapadatok -->
-                            <div class="form-section">
-                                <h3 class="section-title">Alapadatok</h3>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label for="fullName" class="form-label">Teljes név *</label>
-                                        <input type="text" class="form-control" id="fullName" required>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label for="birthYear" class="form-label">Születési év</label>
-                                        <input type="number" class="form-control" id="birthYear" min="1900" max="2024">
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label for="deathYear" class="form-label">Elhalálozás éve</label>
-                                        <input type="number" class="form-control" id="deathYear" min="1900" max="2024">
-                                    </div>
-                                </div>
-                            </div>
 
                             <!-- Jellemzők és Emlékek -->
                             <div class="form-section">
-                                <h3 class="section-title">Jellemzők és Emlékek</h3>
-                                <h5 class="mb-3">Előre definiált személyiségjegyek:</h5>
-                                <div class="checkbox-group">
-                                    <div class="form-check custom-checkbox">
+                                <h6 class="section-title mb-3">Jellemzők, Értékek és Életelvek</h6>
+                                
+                                <div class="checkbox-group row ms-3">
+                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
                                         <input class="form-check-input" type="checkbox" id="cheerful">
                                         <label class="form-check-label" for="cheerful">Vidám</label>
                                     </div>
-                                    <div class="form-check custom-checkbox">
+                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
                                         <input class="form-check-input" type="checkbox" id="kind">
                                         <label class="form-check-label" for="kind">Kedves</label>
                                     </div>
-                                    <div class="form-check custom-checkbox">
+                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
                                         <input class="form-check-input" type="checkbox" id="helpful">
                                         <label class="form-check-label" for="helpful">Segítőkész</label>
                                     </div>
-                                    <div class="form-check custom-checkbox">
+                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
                                         <input class="form-check-input" type="checkbox" id="family-centered">
                                         <label class="form-check-label" for="family-centered">Családcentrikus</label>
                                     </div>
-                                    <div class="form-check custom-checkbox">
+                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
                                         <input class="form-check-input" type="checkbox" id="wise">
                                         <label class="form-check-label" for="wise">Bölcs / megfontolt</label>
                                     </div>
-                                    <div class="form-check custom-checkbox">
+                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
                                         <input class="form-check-input" type="checkbox" id="humorous">
                                         <label class="form-check-label" for="humorous">Humorérzéke legendás volt</label>
                                     </div>
-                                    <div class="form-check custom-checkbox">
+                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
                                         <input class="form-check-input" type="checkbox" id="strict-fair">
                                         <label class="form-check-label" for="strict-fair">Szigorú, de igazságos</label>
                                     </div>
-                                    <div class="form-check custom-checkbox">
+                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
                                         <input class="form-check-input" type="checkbox" id="creative">
                                         <label class="form-check-label" for="creative">Kreatív / művészlélek</label>
                                     </div>
-                                    <div class="form-check custom-checkbox">
+                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
                                         <input class="form-check-input" type="checkbox" id="precise">
                                         <label class="form-check-label" for="precise">Precíz / rendszerető</label>
                                     </div>
-                                    <div class="form-check custom-checkbox">
+                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
                                         <input class="form-check-input" type="checkbox" id="brave">
                                         <label class="form-check-label" for="brave">Bátor</label>
                                     </div>
-                                    <div class="form-check custom-checkbox">
+                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
                                         <input class="form-check-input" type="checkbox" id="religious">
                                         <label class="form-check-label" for="religious">Vallásos / hívő</label>
                                     </div>
-                                    <div class="form-check custom-checkbox">
+                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
                                         <input class="form-check-input" type="checkbox" id="calm">
                                         <label class="form-check-label" for="calm">Nyugodt</label>
                                     </div>
-                                    <div class="form-check custom-checkbox">
+                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
                                         <input class="form-check-input" type="checkbox" id="energetic">
                                         <label class="form-check-label" for="energetic">Energiával teli</label>
                                     </div>
                                 </div>
                                 
-                                <div class="mb-3">
-                                    <label for="customTraits" class="form-label">Egyéb személyiségjegyek (szabadon írt):</label>
-                                    <input type="text" class="form-control" id="customTraits" placeholder="További jellemzők...">
+                                <div class="mb-3 mt-3">
+                                    <label for="customTraits" class="form-label">Egyéb személyiségjegyek, milyen értékeket képviselt, mit tartott a legfontosabbnak?:</label>
+                                    <input type="text" class="form-control" id="customTraits" placeholder="pl: Barátság,  hivatás, Tudás, tanulás, Becsület, tisztesség, Segítőkészség, jótékonyság, Hazaszeretet">
                                 </div>
                             </div>
 
                             <!-- Hobbik és Szenvedélyek -->
                             <div class="form-section">
-                                <h3 class="section-title">Hobbik és Szenvedélyek</h3>
-                                <h5 class="mb-3">Előre definiált opciók:</h5>
-                                <div class="checkbox-group">
-                                    <div class="form-check custom-checkbox">
+                                <h6 class="section-title mb-3 mt-4">{{ __('Hobbies and Passions') }}</h6>
+
+                                <div class="checkbox-group row ms-3">
+                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
                                         <input class="form-check-input" type="checkbox" id="gardening">
-                                        <label class="form-check-label" for="gardening">Kertészkedés</label>
+                                        <label class="form-check-label" for="gardening">{{ __('Gardening') }}</label>
                                     </div>
-                                    <div class="form-check custom-checkbox">
+                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
                                         <input class="form-check-input" type="checkbox" id="fishing">
-                                        <label class="form-check-label" for="fishing">Horgászat</label>
+                                        <label class="form-check-label" for="fishing">{{ __('Fishing') }}</label>
                                     </div>
-                                    <div class="form-check custom-checkbox">
+                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
                                         <input class="form-check-input" type="checkbox" id="crafting">
-                                        <label class="form-check-label" for="crafting">Barkácsolás / kézműveskedés</label>
+                                        <label class="form-check-label" for="crafting">{{ __('Crafting / DIY') }}</label>
                                     </div>
-                                    <div class="form-check custom-checkbox">
+                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
                                         <input class="form-check-input" type="checkbox" id="traveling">
-                                        <label class="form-check-label" for="traveling">Utazás</label>
+                                        <label class="form-check-label" for="traveling">{{ __('Traveling') }}</label>
                                     </div>
-                                    <div class="form-check custom-checkbox">
+                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
                                         <input class="form-check-input" type="checkbox" id="cooking">
-                                        <label class="form-check-label" for="cooking">Főzés / sütés</label>
+                                        <label class="form-check-label" for="cooking">{{ __('Cooking / baking') }}</label>
                                     </div>
-                                    <div class="form-check custom-checkbox">
+                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
                                         <input class="form-check-input" type="checkbox" id="music">
-                                        <label class="form-check-label" for="music">Zene (ének, hangszer)</label>
+                                        <label class="form-check-label" for="music">{{ __('Music (singing, instrument)') }}</label>
                                     </div>
-                                    <div class="form-check custom-checkbox">
+                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
                                         <input class="form-check-input" type="checkbox" id="reading">
-                                        <label class="form-check-label" for="reading">Olvasás</label>
+                                        <label class="form-check-label" for="reading">{{ __('Reading') }}</label>
                                     </div>
-                                    <div class="form-check custom-checkbox">
+                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
                                         <input class="form-check-input" type="checkbox" id="sports">
-                                        <label class="form-check-label" for="sports">Sport (futás, úszás, kerékpár, stb.)</label>
+                                        <label class="form-check-label" for="sports">{{ __('Sports (running, swimming, boxing)') }}</label>
                                     </div>
-                                    <div class="form-check custom-checkbox">
+                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
                                         <input class="form-check-input" type="checkbox" id="dancing">
-                                        <label class="form-check-label" for="dancing">Tánc</label>
+                                        <label class="form-check-label" for="dancing">{{ __('Dancing') }}</label>
                                     </div>
-                                    <div class="form-check custom-checkbox">
+                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
                                         <input class="form-check-input" type="checkbox" id="animal-care">
-                                        <label class="form-check-label" for="animal-care">Állatok gondozása</label>
+                                        <label class="form-check-label" for="animal-care">{{ __('Animal care') }}</label>
                                     </div>
-                                    <div class="form-check custom-checkbox">
+                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
                                         <input class="form-check-input" type="checkbox" id="collecting">
-                                        <label class="form-check-label" for="collecting">Gyűjtés (bélyeg, érme, stb.)</label>
+                                        <label class="form-check-label" for="collecting">{{ __('Collecting (stamps, coins, etc.)') }}</label>
                                     </div>
-                                    <div class="form-check custom-checkbox">
+                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
                                         <input class="form-check-input" type="checkbox" id="volunteering">
-                                        <label class="form-check-label" for="volunteering">Önkénteskedés</label>
+                                        <label class="form-check-label" for="volunteering">{{ __('Volunteering') }}</label>
                                     </div>
                                 </div>
                                 
-                                <div class="mb-3">
+                                <div class="mb-3 mt-3">
                                     <label for="customHobbies" class="form-label">Egyéb hobbi / szenvedély (szabadon írt):</label>
                                     <input type="text" class="form-control" id="customHobbies" placeholder="További hobbik...">
                                 </div>
                             </div>
 
                             <!-- Értékek, Életelvek -->
-                            <div class="form-section">
-                                <h3 class="section-title">Értékek, Életelvek</h3>
-                                <div class="mb-3">
-                                    <label for="values" class="form-label">Milyen értékeket képviselt, mi volt számára a legfontosabb az életben?</label>
+                            {{-- <div class="form-section">
+                                <h6 class="section-title mt-4">Értékek, Életelvek <span class="text-muted ms-0 ms-lg-2 fs-6">Milyen értékeket képviselt, mi volt számára a legfontosabb az életben?</span></h6>
+                                <div class="mb-3 mt-2">
                                     <textarea class="form-control" id="values" rows="4" placeholder="pl: Család, Barátság, Munka, hivatás, Vallás, hit, Tudás, tanulás, Becsület, tisztesség, Segítőkészség, jótékonyság, Hazaszeretet"></textarea>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <!-- Nyugdíjas évek -->
                             <div class="form-section">
-                                <h3 class="section-title">Nyugdíjas évek</h3>
-                                <div class="mb-3">
-                                    <label for="retirement" class="form-label">Hogyan töltötte a nyugdíjas éveit? Mivel foglalkozott ekkor? Utazott? Volt kedvenc helye, ahol szívesen pihent?</label>
-                                    <textarea class="form-control" id="retirement" rows="4" placeholder="Példa: Nyugdíjas éveit a kertjében töltötte, szeretett rózsákat metszeni, és minden nyáron a Balatonnál nyaralt a családdal."></textarea>
+                                <h6 class="section-title mt-4">Nyugdíjas évek <span class="text-muted ms-0 ms-lg-2 fs-6">Hogyan töltötte a nyugdíjas éveit? Mivel foglalkozott ekkor? Utazott? Volt kedvenc helye, ahol szívesen pihent?</span></h6>
+                                <div class="mb-3 mt-2">
+                                    <textarea class="form-control" id="retirement" rows="3" placeholder="Példa: Nyugdíjas éveit a kertjében töltötte, szeretett rózsákat metszeni, és minden nyáron a Balatonnál nyaralt a családdal."></textarea>
                                 </div>
                             </div>
 
                             <!-- Apró szokások -->
                             <div class="form-section">
-                                <h3 class="section-title">Emlékezetes szokások</h3>
-                                <div class="mb-3">
-                                    <label for="habits" class="form-label">Volt olyan apró szokása, amire mindenki emlékszik?</label>
+                                <h6 class="section-title mt-4">Emlékezetes szokások <span class="text-muted ms-0 ms-lg-2 fs-6">Volt olyan apró szokása, amire mindenki emlékszik?</span></h6>
+                                <div class="mb-3 mt-2">
                                     <textarea class="form-control" id="habits" rows="3" placeholder="Példák: Mindig a konyhaasztalnál kávézott reggelente. / Minden vasárnap friss kalácsot sütött. / Minden születésnapra saját készítésű képeslappal lepett meg mindenkit."></textarea>
                                 </div>
                             </div>
 
                             <!-- Vidám történetek -->
                             <div class="form-section">
-                                <h3 class="section-title">Vidám emlékek</h3>
-                                <div class="mb-3">
-                                    <label for="stories" class="form-label">Ossz meg egy vagy több vidám történetet, amit jó szívvel idéz fel a család!</label>
-                                    <textarea class="form-control" id="stories" rows="4" placeholder="Példák: Egyszer a kerti locsolót véletlenül magára fordította, és mindenki nevetett. / Minden karácsonykor vicces sapkában ajándékozott."></textarea>
+                                <h6 class="section-title mt-4">Emlékek <span class="text-muted ms-0 ms-lg-2 fs-6">Olyan történet, esemény vagy jellemző amire mindig emlékezzünk</span></h6>
+                                <div class="mb-3 mt-2">
+                                    <textarea class="form-control" id="stories" rows="3" placeholder="Példák: Egyszer a kerti locsolót véletlenül magára fordította, és mindenki nevetett. / Minden karácsonykor vicces sapkában ajándékozott."></textarea>
                                 </div>
                             </div>
 
                             <!-- Életbölcsesség -->
                             <div class="form-section">
-                                <h3 class="section-title">Életbölcsesség</h3>
-                                <div class="mb-3">
-                                    <label for="wisdom" class="form-label">Mi volt az az életbölcsesség, amit hátrahagyott számunkra?</label>
+                                <h6 class="section-title mt-4">Életbölcsesség <span class="text-muted ms-0 ms-lg-2 fs-6">Mi volt az az életbölcsesség, amit hátrahagyott számunkra?</span></h6>
+                                <div class="mb-3 mt-2">
                                     <textarea class="form-control" id="wisdom" rows="3" placeholder="Milyen tanácsokat, bölcsességeket osztott meg az életben?"></textarea>
                                 </div>
                             </div>
@@ -993,156 +967,16 @@
         </div>
     </div>
 
-    <div class="container">
-        <div class=" text-secondary text-center">
-            <div class="pt-30">
-                <div class="col-lg-8 mx-auto">
-                    <p class="fs-5 mt-4 ">
-                        {{ __('Here you can enter the cemetery address and exact coordinates to make it easier for relatives to find the resting place. This feature helps your loved ones get to the specified location quickly and easily, paying tribute to the memory.') }}
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
 
 
     <div class="container">
-        <div class="row d-flex justify-content-center">
-            <div class="col-12 col-md-9 p-4 mt-30">
 
-                <div class="">
-
-                    <div class="row mb-3">
-                        <form action="{{ route('place.store') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="memorial_id" value="{{ $memorial->id }}">
-
-                            <div class="mb-3">
-                                <label for="grave_location" class="form-label">{{ __('Cemetery Address') }}</label>
-                                <input type="text" class="form-control" id="grave_location" name="grave_location"
-                                    placeholder="{{ __('E.g. Cemetery Address') }}"
-                                    value="{{ $memorial->grave_location }}" required>
-                            </div>
-
-                            <div class="row">
-
-                                <div class="mb-3 col-12 col-md-4">
-                                    <label for="grave_parcel" class="form-label">{{ __('Parcel') }}</label>
-                                    <input type="text" class="form-control" id="grave_parcel" name="grave_parcel"
-                                        placeholder="{{ __('Parcel') }}" value="{{ $memorial->grave_parcel }}" required>
-                                </div>
-                                <div class="mb-3 col-12 col-md-4">
-                                    <label for="grave_line" class="form-label">{{ __('Row') }}</label>
-                                    <input type="text" class="form-control" id="grave_line" name="grave_line"
-                                        placeholder="{{ __('Row') }}" value="{{ $memorial->grave_line }}" required>
-                                </div>
-                                <div class="mb-3 col-12 col-md-4">
-                                    <label for="grave_number" class="form-label">{{ __('Number') }}</label>
-                                    <input type="text" class="form-control" id="grave_number" name="grave_number"
-                                        placeholder="{{ __('Number') }}" value="{{ $memorial->grave_number }}" required>
-                                </div>
-                            </div>
-
-                            {{-- <div class="row">
-                                <div class="col-md-12 mb-3">
-                                    <label for="coordinates" class="form-label">{{ __('Coordinates') }}</label>
-                                    <input type="text" step="any" class="form-control" id="coordinates"
-                                        name="coordinates" placeholder="47.497912, 42.458989"
-                                        value="{{ $memorial->coordinates }}">
-                                </div>
-                            </div> --}}
-                            <div class="d-flex justify-content-center mt-3">
-
-                                <button type="submit" class="btn btn-primary">{{ __('Save data') }}</button>
-                            </div>
-                        </form>
-
-                    </div>
-
-                </div>
-            </div>
-
-
-
-        </div>
 
 
 
         <div class="container">
-            <div class=" text-secondary text-center">
-                <div class="pt-30">
-                    <div class="col-lg-8 mx-auto">
-                        <p class="fs-5 mt-4 ">
-                            {{__('Here you can enter the exact coordinates of the grave in the cemetery or upload a photo you took of the grave in the cemetery with location tracking turned on.')}}
-                    </div>
-                </div>
-            </div>
-
-            <div class="container col-12 col-md-9">
-                <div class="row">
-                    <div class="card-body p-4">
-
-                        <div class="row">
-
-                            <div class="col-12 col-md-8">
-
-                                {{-- Поле автозаполнения адреса --}}
-
-                                {{-- Поле координат --}}
-                                <div class="mb-4">
-                                    <label for="coordinates" class="form-label fw-semibold">
-                                        {{ __('Coordinates') }}
-                                    </label>
-                                    <input type="text" step="any" class="form-control" id="coordinates"
-                                        name="coordinates" placeholder="47.497912, 42.458989"
-                                        value="{{ $memorial->coordinates }}">
-                                    <small class="form-text text-muted">
-                                        {{ __('Enter coordinates manually.') }}
-                                    </small>
-                                </div>
-
-                                {{-- Форма загрузки фото --}}
-                                <div class="">
-                                    <form action="{{ route('memorial.uploadImage', $memorial->id) }}" method="POST"
-                                        enctype="multipart/form-data">
-                                        @csrf
-                                        <div class="input-group">
-                                            <input class="form-control" type="file" name="image" accept="image/*"
-                                                required>
-                                            <button type="submit" class="btn btn-primary">
-                                                <i class="bi bi-upload"></i> {{ __('Upload') }}
-                                            </button>
-                                        </div>
-                                        <small class="form-text text-muted">
-                                            {{ __('Accepted formats: JPG, JPEG, PNG, WEBP. Maximum size: 20 MB.') }}
-                                        </small>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-4">
-                                {{-- Превью фото --}}
-                                <div class="pt-3 pt-md-0 mb-3 mb-md-0 text-center">
-                                    <div class="border rounded p-2 bg-light d-inline-block">
-                                        <img src="{{ $memorial->grave_coordinates
-                                            ? asset('memorial/' . $memorial->grave_coordinates)
-                                            : asset('/home/imgs/no-photo.webp') }}"
-                                            alt="{{ __('Photo of the memorial') }}" class="img-fluid rounded shadow"
-                                            style="max-height: 200px; width: 200px; object-fit: cover;" />
-                                    </div>
-                                    <p class="mt-2 text-muted mb-0">
-                                        {{ $memorial->grave_coordinates ? __('Uploaded photo') : __('Photo missing') }}
-                                    </p>
-                                </div>
-                            </div>
-
-                        </div>
-
-
-                    </div>
-                </div>
-            </div>
-
 
 
             <div class="container col-9 pb-55">
