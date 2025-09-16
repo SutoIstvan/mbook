@@ -612,11 +612,11 @@
         .step-vertical:not(:last-child)::after {
             content: '';
             /* position: absolute;
-                                                                             left: 25px;
-                                                                             top: 60px;
-                                                                             bottom: 0;
-                                                                             width: 2px;
-                                                                             background: #e9ecef; */
+                                                                                     left: 25px;
+                                                                                     top: 60px;
+                                                                                     bottom: 0;
+                                                                                     width: 2px;
+                                                                                     background: #e9ecef; */
         }
 
         .step-vertical-icon {
@@ -733,33 +733,31 @@
                         <i class="fas fa-clock"></i>
                     </div>
                     <div class="step-title">{{ __('Step 2') }}</div>
-                    <div class="step-description">{{ __('Life Events Timeline') }}</div>
-                </div>
-                <div class="step-horizontal complete">
-                    <div class="step-icon">
-                        <i class="fas fa-image"></i>
-                    </div>
-                    <div class="step-title">{{ __('Step 3') }}</div>
-                    <div class="step-description">{{ __('Media Upload') }}</div>
+                    <div class="step-description">{{ __('Timeline') }}</div>
                 </div>
                 <div class="step-horizontal active">
                     <div class="step-icon">
-                        <i class="fas fa-location-dot"></i>
+                        <i class="fas fa-user"></i>
                     </div>
-                    <div class="step-title">{{ __('Step 4') }}</div>
-                    <div class="step-description">{{ __('Burial Information') }}</div>
+                    <div class="step-title">{{ __('Step 3') }}</div>
+                    <div class="step-description">{{ __('Features, events') }}</div>
                 </div>
-                <div class="step-horizontal complete">
+                <div class="step-horizontal">
                     <div class="step-icon">
                         <i class="fas fa-image"></i>
                     </div>
-                    <div class="step-title">{{ __('Step 3') }}</div>
+                    <div class="step-title">{{ __('Step 4') }}</div>
                     <div class="step-description">{{ __('Media Upload') }}</div>
+                </div>
+                <div class="step-horizontal">
+                    <div class="step-icon">
+                        <i class="fas fa-location-dot"></i>
+                    </div>
+                    <div class="step-title">{{ __('Step 5') }}</div>
+                    <div class="step-description">{{ __('Burial Information') }}</div>
                 </div>
             </div>
         </div>
-
-
     </div>
 
     @if ($errors->any())
@@ -779,228 +777,289 @@
     @endif
 
     <body class="bg-light">
-    <div class="container my-5">
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-9">
+        <div class="container my-5">
+            <div class="">
                 <div class="">
-
                     <div class="">
-                        <form id="biographyForm">
 
-                            <!-- Jellemzők és Emlékek -->
-                            <div class="form-section">
-                                <h6 id="section-characteristics" class="section-title mb-3">{{ __('Characteristics, Values, and Principles') }}</h6>
-                                
-                                <div class="checkbox-group row ms-3">
-                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
-                                        <input class="form-check-input" type="checkbox" id="cheerful">
-                                        <label class="form-check-label" for="cheerful">{{ __('Funny') }}</label>
-                                    </div>
-                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
-                                        <input class="form-check-input" type="checkbox" id="kind">
-                                        <label class="form-check-label" for="kind">{{ __('Kind') }}</label>
-                                    </div>
-                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
-                                        <input class="form-check-input" type="checkbox" id="helpful">
-                                        <label class="form-check-label" for="helpful">{{ __('Helpful') }}</label>
-                                    </div>
-                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
-                                        <input class="form-check-input" type="checkbox" id="family-centered">
-                                        <label class="form-check-label" for="family-centered">{{ __('Family-centered') }}</label>
-                                    </div>
-                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
-                                        <input class="form-check-input" type="checkbox" id="wise">
-                                        <label class="form-check-label" for="wise">{{ __('Wise / thoughtful') }}</label>
-                                    </div>
-                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
-                                        <input class="form-check-input" type="checkbox" id="humorous">
-                                        <label class="form-check-label" for="humorous">{{ __('Humorous') }}</label>
-                                    </div>
-                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
-                                        <input class="form-check-input" type="checkbox" id="strict-fair">
-                                        <label class="form-check-label" for="strict-fair">{{ __('Strict but fair') }}</label>
-                                    </div>
-                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
-                                        <input class="form-check-input" type="checkbox" id="creative">
-                                        <label class="form-check-label" for="creative">{{ __('Creative / artistic') }}</label>
-                                    </div>
-                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
-                                        <input class="form-check-input" type="checkbox" id="precise">
-                                        <label class="form-check-label" for="precise">{{ __('Precise / orderly') }}</label>
-                                    </div>
-                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
-                                        <input class="form-check-input" type="checkbox" id="brave">
-                                        <label class="form-check-label" for="brave">{{ __('Brave') }}</label>
-                                    </div>
-                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
-                                        <input class="form-check-input" type="checkbox" id="religious">
-                                        <label class="form-check-label" for="religious">{{ __('Religious / devout') }}</label>
-                                    </div>
-                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
-                                        <input class="form-check-input" type="checkbox" id="calm">
-                                        <label class="form-check-label" for="calm">{{ __('Calm') }}</label>
-                                    </div>
-                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
-                                        <input class="form-check-input" type="checkbox" id="energetic">
-                                        <label class="form-check-label" for="energetic">{{ __('Energetic') }}</label>
+                        <div class="">
+                            <form id="biographyForm" method="POST" action="{{ route('biography.store', $memorial) }}">
+                                @csrf
+
+
+                                <div class="row justify-content-center">
+                                <div class="col-12 col-md-9">
+
+                                <!-- Jellemzők és Emlékek -->
+
+                                <input type="hidden" id="biography_text" name="biography_text" value="">
+
+                                <div class="form-section">
+                                    <h6 id="section-characteristics" class="section-title mb-3">
+                                        {{ __('Characteristics, Values, and Principles') }}</h6>
+
+                                    <div class="checkbox-group row ms-3">
+                                        <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
+                                            <input class="form-check-input" type="checkbox" id="cheerful">
+                                            <label class="form-check-label" for="cheerful">{{ __('Funny') }}</label>
+                                        </div>
+                                        <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
+                                            <input class="form-check-input" type="checkbox" id="kind">
+                                            <label class="form-check-label" for="kind">{{ __('Kind') }}</label>
+                                        </div>
+                                        <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
+                                            <input class="form-check-input" type="checkbox" id="helpful">
+                                            <label class="form-check-label" for="helpful">{{ __('Helpful') }}</label>
+                                        </div>
+                                        <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
+                                            <input class="form-check-input" type="checkbox" id="family-centered">
+                                            <label class="form-check-label"
+                                                for="family-centered">{{ __('Family-centered') }}</label>
+                                        </div>
+                                        <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
+                                            <input class="form-check-input" type="checkbox" id="wise">
+                                            <label class="form-check-label"
+                                                for="wise">{{ __('Wise / thoughtful') }}</label>
+                                        </div>
+                                        <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
+                                            <input class="form-check-input" type="checkbox" id="humorous">
+                                            <label class="form-check-label" for="humorous">{{ __('Humorous') }}</label>
+                                        </div>
+                                        <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
+                                            <input class="form-check-input" type="checkbox" id="strict-fair">
+                                            <label class="form-check-label"
+                                                for="strict-fair">{{ __('Strict but fair') }}</label>
+                                        </div>
+                                        <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
+                                            <input class="form-check-input" type="checkbox" id="creative">
+                                            <label class="form-check-label"
+                                                for="creative">{{ __('Creative / artistic') }}</label>
+                                        </div>
+                                        <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
+                                            <input class="form-check-input" type="checkbox" id="precise">
+                                            <label class="form-check-label"
+                                                for="precise">{{ __('Precise / orderly') }}</label>
+                                        </div>
+                                        <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
+                                            <input class="form-check-input" type="checkbox" id="brave">
+                                            <label class="form-check-label" for="brave">{{ __('Brave') }}</label>
+                                        </div>
+                                        <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
+                                            <input class="form-check-input" type="checkbox" id="religious">
+                                            <label class="form-check-label"
+                                                for="religious">{{ __('Religious / devout') }}</label>
+                                        </div>
+                                        <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
+                                            <input class="form-check-input" type="checkbox" id="calm">
+                                            <label class="form-check-label" for="calm">{{ __('Calm') }}</label>
+                                        </div>
+                                        <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
+                                            <input class="form-check-input" type="checkbox" id="energetic">
+                                            <label class="form-check-label" for="energetic">{{ __('Energetic') }}</label>
+                                        </div>
+
+                                        <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
+                                            <input class="form-check-input" type="checkbox" id="charitable">
+                                            <label class="form-check-label"
+                                                for="charitable">{{ __('Charitable') }}</label>
+                                        </div>
+
+                                        <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
+                                            <input class="form-check-input" type="checkbox" id="patriotic">
+                                            <label class="form-check-label" for="patriotic">{{ __('Patriotic') }}</label>
+                                        </div>
                                     </div>
 
-                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
-                                        <input class="form-check-input" type="checkbox" id="charitable">
-                                        <label class="form-check-label" for="charitable">{{ __('Charitable') }}</label>
-                                    </div>
-
-                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
-                                        <input class="form-check-input" type="checkbox" id="patriotic">
-                                        <label class="form-check-label" for="patriotic">{{ __('Patriotic') }}</label>
+                                    <div class="mb-3 mt-3">
+                                        <label for="customTraits"
+                                            class="form-label">{{ __('Other personality traits, values they represented, what they considered most important:') }}</label>
+                                        <input type="text" class="form-control" id="customTraits"
+                                            placeholder="{{ __('e.g. Friendship, profession, knowledge, learning, integrity') }}">
                                     </div>
                                 </div>
-                                
-                                <div class="mb-3 mt-3">
-                                    <label for="customTraits" class="form-label">{{ __('Other personality traits, values they represented, what they considered most important:') }}</label>
-                                    <input type="text" class="form-control" id="customTraits" placeholder="{{ __('e.g. Friendship, profession, knowledge, learning, integrity') }}">
+
+                                <!-- Hobbik és Szenvedélyek -->
+                                <div class="form-section">
+                                    <h6 id="section-hobbies" class="section-title mb-3 mt-4">
+                                        {{ __('Hobbies and Passions') }}</h6>
+
+                                    <div class="checkbox-group row ms-3">
+                                        <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
+                                            <input class="form-check-input" type="checkbox" id="gardening">
+                                            <label class="form-check-label" for="gardening">{{ __('Gardening') }}</label>
+                                        </div>
+                                        <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
+                                            <input class="form-check-input" type="checkbox" id="fishing">
+                                            <label class="form-check-label" for="fishing">{{ __('Fishing') }}</label>
+                                        </div>
+                                        <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
+                                            <input class="form-check-input" type="checkbox" id="crafting">
+                                            <label class="form-check-label"
+                                                for="crafting">{{ __('Crafting / DIY') }}</label>
+                                        </div>
+                                        <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
+                                            <input class="form-check-input" type="checkbox" id="traveling">
+                                            <label class="form-check-label" for="traveling">{{ __('Traveling') }}</label>
+                                        </div>
+                                        <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
+                                            <input class="form-check-input" type="checkbox" id="cooking">
+                                            <label class="form-check-label"
+                                                for="cooking">{{ __('Cooking / baking') }}</label>
+                                        </div>
+                                        <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
+                                            <input class="form-check-input" type="checkbox" id="music">
+                                            <label class="form-check-label"
+                                                for="music">{{ __('Music (singing, instrument)') }}</label>
+                                        </div>
+                                        <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
+                                            <input class="form-check-input" type="checkbox" id="reading">
+                                            <label class="form-check-label" for="reading">{{ __('Reading') }}</label>
+                                        </div>
+                                        <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
+                                            <input class="form-check-input" type="checkbox" id="sports">
+                                            <label class="form-check-label"
+                                                for="sports">{{ __('Sports (running, swimming)') }}</label>
+                                        </div>
+                                        <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
+                                            <input class="form-check-input" type="checkbox" id="dancing">
+                                            <label class="form-check-label" for="dancing">{{ __('Dancing') }}</label>
+                                        </div>
+                                        <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
+                                            <input class="form-check-input" type="checkbox" id="animal-care">
+                                            <label class="form-check-label"
+                                                for="animal-care">{{ __('Animal care') }}</label>
+                                        </div>
+                                        <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
+                                            <input class="form-check-input" type="checkbox" id="collecting">
+                                            <label class="form-check-label"
+                                                for="collecting">{{ __('Collecting (stamps, coins)') }}</label>
+                                        </div>
+                                        <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
+                                            <input class="form-check-input" type="checkbox" id="volunteering">
+                                            <label class="form-check-label"
+                                                for="volunteering">{{ __('Volunteering') }}</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 mt-3">
+                                        <label for="customHobbies"
+                                            class="form-label">{{ __('Other hobbies / passions (free text):') }}</label>
+                                        <input type="text" class="form-control" id="customHobbies"
+                                            placeholder="{{ __('Additional hobbies...') }}">
+                                    </div>
                                 </div>
+
+
+                                <!-- Nyugdíjas évek -->
+                                <div class="form-section">
+                                    <h6 id="section-retirement" style="display: none;">{{ __('Retirement years') }}</h6>
+                                    <h6 class="section-title mt-4">{{ __('Retirement years') }} <span
+                                            class="text-muted ms-0 ms-lg-2 fs-6">{{ __('How did they spend their retirement years? What did they do during this time? Did they travel? Was there a favorite place where they liked to relax?') }}</span>
+                                    </h6>
+                                    <div class="mb-3 mt-2">
+                                        <textarea class="form-control" id="retirement" rows="3"
+                                            placeholder="{{ __('Example: They spent their retirement years in their garden, loved pruning roses, and every summer vacationed at Lake Balaton with the family.') }}"></textarea>
+                                    </div>
+                                </div>
+
+                                <!-- Apró szokások -->
+                                <div class="form-section">
+                                    <h6 id="section-habits" style="display: none;">{{ __('Memorable habits') }}</h6>
+
+                                    <h6 class="section-title mt-4">{{ __('Memorable habits') }} <span
+                                            class="text-muted ms-0 ms-lg-2 fs-6">{{ __('Was there a small habit that everyone remembers?') }}</span>
+                                    </h6>
+                                    <div class="mb-3 mt-2">
+                                        <textarea class="form-control" id="habits" rows="3"
+                                            placeholder="{{ __('Examples: Always drank coffee at the kitchen table in the mornings. / Baked fresh brioche every Sunday. / Surprised everyone with handmade cards for every birthday.') }}"></textarea>
+                                    </div>
+                                </div>
+
+                                <!-- Vidám történetek -->
+                                <div class="form-section">
+                                    <h6 id="section-stories" style="display: none;">{{ __('Memorable stories') }}</h6>
+                                    <h6 class="section-title mt-4">{{ __('Memorable stories') }} <span
+                                            class="text-muted ms-0 ms-lg-2 fs-6">{{ __('A story, event, or characteristic that we will always remember') }}</span>
+                                    </h6>
+                                    <div class="mb-3 mt-2">
+                                        <textarea class="form-control" id="stories" rows="3"
+                                            placeholder="{{ __('Examples: Once accidentally turned the garden hose on himself, and everyone laughed. / Gave gifts every Christmas wearing a funny hat.') }}"></textarea>
+                                    </div>
+                                </div>
+
+                                <!-- Életbölcsesség -->
+                                <div class="form-section">
+                                    <h6 id="section-wisdom" style="display: none;">{{ __('Wisdom') }}</h6>
+                                    <h6 class="section-title mt-4">{{ __('Wisdom') }} <span
+                                            class="text-muted ms-0 ms-lg-2 fs-6">{{ __('What was the life wisdom they left behind for us?') }}</span>
+                                    </h6>
+                                    <div class="mb-3 mt-2">
+                                        <textarea class="form-control" id="wisdom" rows="3"
+                                            placeholder="{{ __('What advice or wisdom did they share in life?') }}"></textarea>
+                                    </div>
+                                </div>
+
+                                <!-- Submit gomb -->
+                                {{-- <div class="text-center">
+                                    <button type="submit" class="btn btn-primary btn-submit">
+                                        📝 Biográfia generálása
+                                    </button>
+                                </div> --}}
+
+                                </div>
+                                </div>
+                                <div class="">
+
+
+                                    <div class="container col-9 pb-55">
+                                        <div class="d-flex justify-content-between mt-30 pb-50">
+                                            <a href="{{ route('timeline.create', $memorial) }}"
+                                                class="btn btn-secondary">{{ __('Back') }}</a>
+                                            <button type="submit" class="btn btn-primary" id="nextButton">
+                                                <i class="fa fa-save"></i> {{ __('Next') }}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+
+                            <!-- Eredmény terület -->
+                            <div id="result" class="mt-4" style="">
+
                             </div>
 
-                            <!-- Hobbik és Szenvedélyek -->
-                            <div class="form-section">
-                                <h6 id="section-hobbies" class="section-title mb-3 mt-4">{{ __('Hobbies and Passions') }}</h6>
-
-                                <div class="checkbox-group row ms-3">
-                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
-                                        <input class="form-check-input" type="checkbox" id="gardening">
-                                        <label class="form-check-label" for="gardening">{{ __('Gardening') }}</label>
-                                    </div>
-                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
-                                        <input class="form-check-input" type="checkbox" id="fishing">
-                                        <label class="form-check-label" for="fishing">{{ __('Fishing') }}</label>
-                                    </div>
-                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
-                                        <input class="form-check-input" type="checkbox" id="crafting">
-                                        <label class="form-check-label" for="crafting">{{ __('Crafting / DIY') }}</label>
-                                    </div>
-                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
-                                        <input class="form-check-input" type="checkbox" id="traveling">
-                                        <label class="form-check-label" for="traveling">{{ __('Traveling') }}</label>
-                                    </div>
-                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
-                                        <input class="form-check-input" type="checkbox" id="cooking">
-                                        <label class="form-check-label" for="cooking">{{ __('Cooking / baking') }}</label>
-                                    </div>
-                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
-                                        <input class="form-check-input" type="checkbox" id="music">
-                                        <label class="form-check-label" for="music">{{ __('Music (singing, instrument)') }}</label>
-                                    </div>
-                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
-                                        <input class="form-check-input" type="checkbox" id="reading">
-                                        <label class="form-check-label" for="reading">{{ __('Reading') }}</label>
-                                    </div>
-                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
-                                        <input class="form-check-input" type="checkbox" id="sports">
-                                        <label class="form-check-label" for="sports">{{ __('Sports (running, swimming)') }}</label>
-                                    </div>
-                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
-                                        <input class="form-check-input" type="checkbox" id="dancing">
-                                        <label class="form-check-label" for="dancing">{{ __('Dancing') }}</label>
-                                    </div>
-                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
-                                        <input class="form-check-input" type="checkbox" id="animal-care">
-                                        <label class="form-check-label" for="animal-care">{{ __('Animal care') }}</label>
-                                    </div>
-                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
-                                        <input class="form-check-input" type="checkbox" id="collecting">
-                                        <label class="form-check-label" for="collecting">{{ __('Collecting (stamps, coins)') }}</label>
-                                    </div>
-                                    <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
-                                        <input class="form-check-input" type="checkbox" id="volunteering">
-                                        <label class="form-check-label" for="volunteering">{{ __('Volunteering') }}</label>
-                                    </div>
-                                </div>
-                                
-                                <div class="mb-3 mt-3">
-                                    <label for="customHobbies" class="form-label">{{ __('Other hobbies / passions (free text):') }}</label>
-                                    <input type="text" class="form-control" id="customHobbies" placeholder="{{ __('Additional hobbies...') }}">
-                                </div>
-                            </div>
 
 
-                            <!-- Nyugdíjas évek -->
-                            <div class="form-section">
-                                <h6 id="section-retirement" style="display: none;">{{ __('Retirement years') }}</h6>
-                                <h6 class="section-title mt-4">{{ __('Retirement years') }} <span class="text-muted ms-0 ms-lg-2 fs-6">{{ __('How did they spend their retirement years? What did they do during this time? Did they travel? Was there a favorite place where they liked to relax?') }}</span></h6>
-                                <div class="mb-3 mt-2">
-                                    <textarea class="form-control" id="retirement" rows="3" placeholder="{{ __('Example: They spent their retirement years in their garden, loved pruning roses, and every summer vacationed at Lake Balaton with the family.') }}"></textarea>
-                                </div>
-                            </div>
-
-                            <!-- Apró szokások -->
-                            <div class="form-section">
-                                <h6 id="section-habits" style="display: none;">{{ __('Memorable habits') }}</h6>
-
-                                <h6 class="section-title mt-4">{{ __('Memorable habits') }} <span class="text-muted ms-0 ms-lg-2 fs-6">{{ __('Was there a small habit that everyone remembers?') }}</span></h6>
-                                <div class="mb-3 mt-2">
-                                    <textarea class="form-control" id="habits" rows="3" placeholder="{{ __('Examples: Always drank coffee at the kitchen table in the mornings. / Baked fresh brioche every Sunday. / Surprised everyone with handmade cards for every birthday.') }}"></textarea>
-                                </div>
-                            </div>
-
-                            <!-- Vidám történetek -->
-                            <div class="form-section">
-                                <h6 id="section-stories" style="display: none;">{{ __('Memorable stories') }}</h6>
-                                <h6 class="section-title mt-4">{{ __('Memorable stories') }} <span class="text-muted ms-0 ms-lg-2 fs-6">{{ __('A story, event, or characteristic that we will always remember') }}</span></h6>
-                                <div class="mb-3 mt-2">
-                                    <textarea class="form-control" id="stories" rows="3" placeholder="{{ __('Examples: Once accidentally turned the garden hose on himself, and everyone laughed. / Gave gifts every Christmas wearing a funny hat.') }}"></textarea>
-                                </div>
-                            </div>
-
-                            <!-- Életbölcsesség -->
-                            <div class="form-section">
-                                <h6 id="section-wisdom" style="display: none;">{{ __('Wisdom') }}</h6>
-                                <h6 class="section-title mt-4">{{ __('Wisdom') }} <span class="text-muted ms-0 ms-lg-2 fs-6">{{ __('What was the life wisdom they left behind for us?') }}</span></h6>
-                                <div class="mb-3 mt-2">
-                                    <textarea class="form-control" id="wisdom" rows="3" placeholder="{{ __('What advice or wisdom did they share in life?') }}"></textarea>
-                                </div>
-                            </div>
-
-                            <!-- Submit gomb -->
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-primary btn-submit">
-                                    📝 Biográfia generálása
-                                </button>
-                            </div>
-                        </form>
-
-                        <!-- Eredmény terület -->
-                        <div id="result" class="mt-4" style="">
 
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
 
 
 
-    <div class="container">
+        {{-- <div class="container"> --}}
 
 
 
 
-        <div class="container">
+        {{-- <div class="container">
 
 
-            <div class="container col-9 pb-55">
-                <div class="d-flex justify-content-between mt-30 pb-50">
-                    <a href="{{ route('timeline.gallery', $memorial) }}"
-                        class="btn btn-secondary">{{ __('Back') }}</a>
-                    <a href="{{ route('generate.biography', $memorial) }}" class="btn btn-primary" id="nextButton">
-                        <i class="fa fa-save"></i> {{ __('Next') }}
-                    </a>
+                <div class="container col-9 pb-55">
+                    <div class="d-flex justify-content-between mt-30 pb-50">
+                        <a href="{{ route('timeline.gallery', $memorial) }}"
+                            class="btn btn-secondary">{{ __('Back') }}</a>
+                        <a href="{{ route('generate.biography', $memorial) }}" class="btn btn-primary" id="nextButton">
+                            <i class="fa fa-save"></i> {{ __('Next') }}
+                        </a>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </div> --}}
 
         <!-- Overlay for loading spinner -->
         {{-- <div id="loadingOverlay" style="display: none;">
@@ -1012,16 +1071,17 @@
 
     @section('js')
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const button = document.querySelector(".btn-submit");
-    console.log("Button found:", button);
-
-    button.addEventListener("click", function (e) {
-        e.preventDefault();
-        console.log("Button clicked");
-
-        // список секций
+        <script>
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById("biographyForm");
+    
+    // Привязываем обработчик к форме, а не к кнопке
+    form.addEventListener("submit", function(e) {
+        e.preventDefault(); // Предотвращаем стандартную отправку
+        
+        console.log("Form submit intercepted"); // Для отладки
+        
+        // Список секций
         const sectionIds = [
             "section-characteristics",
             "section-hobbies", 
@@ -1032,27 +1092,25 @@ document.addEventListener("DOMContentLoaded", function () {
         ];
 
         function getSectionContent(sectionId) {
-            console.log(`\n=== Processing section: ${sectionId} ===`);
-            
             const titleElement = document.getElementById(sectionId);
-            if (!titleElement) {
-                console.log(`Title element not found for ${sectionId}`);
-                return null;
-            }
-            
-            console.log(`Found title element:`, titleElement.innerText);
+            if (!titleElement) return null;
 
             let contentParts = [];
-            
-            // Маппинг секций к их элементам формы
+
             const sectionMapping = {
                 'section-characteristics': {
-                    checkboxes: ['cheerful', 'kind', 'helpful', 'family-centered', 'wise', 'humorous', 'strict-fair', 'creative', 'precise', 'brave', 'religious', 'calm', 'energetic', 'charitable', 'patriotic'],
+                    checkboxes: ['cheerful', 'kind', 'helpful', 'family-centered', 'wise',
+                        'humorous', 'strict-fair', 'creative', 'precise', 'brave',
+                        'religious', 'calm', 'energetic', 'charitable', 'patriotic'
+                    ],
                     textInputs: ['customTraits'],
                     textareas: []
                 },
                 'section-hobbies': {
-                    checkboxes: ['gardening', 'fishing', 'crafting', 'traveling', 'cooking', 'music', 'reading', 'sports', 'dancing', 'animal-care', 'collecting', 'volunteering'],
+                    checkboxes: ['gardening', 'fishing', 'crafting', 'traveling', 'cooking',
+                        'music', 'reading', 'sports', 'dancing', 'animal-care',
+                        'collecting', 'volunteering'
+                    ],
                     textInputs: ['customHobbies'],
                     textareas: []
                 },
@@ -1079,10 +1137,7 @@ document.addEventListener("DOMContentLoaded", function () {
             };
 
             const mapping = sectionMapping[sectionId];
-            if (!mapping) {
-                console.log(`No mapping found for section ${sectionId}`);
-                return null;
-            }
+            if (!mapping) return null;
 
             // Обработка чекбоксов
             const checkedTexts = [];
@@ -1090,41 +1145,27 @@ document.addEventListener("DOMContentLoaded", function () {
                 const checkbox = document.getElementById(id);
                 if (checkbox && checkbox.checked) {
                     const label = checkbox.nextElementSibling;
-                    if (label) {
-                        checkedTexts.push(label.innerText.trim());
-                        console.log(`Found checked: ${id} = ${label.innerText.trim()}`);
-                    }
+                    if (label) checkedTexts.push(label.innerText.trim());
                 }
             });
-            
-            if (checkedTexts.length > 0) {
-                contentParts.push(checkedTexts.join(", "));
-            }
+            if (checkedTexts.length > 0) contentParts.push(checkedTexts.join(", "));
 
             // Обработка текстовых input
             mapping.textInputs.forEach(id => {
                 const input = document.getElementById(id);
-                if (input && input.value.trim()) {
-                    contentParts.push(input.value.trim());
-                    console.log(`Found text input: ${id} = ${input.value.trim()}`);
-                }
+                if (input && input.value.trim()) contentParts.push(input.value.trim());
             });
 
             // Обработка textarea
             mapping.textareas.forEach(id => {
                 const textarea = document.getElementById(id);
-                if (textarea && textarea.value.trim()) {
-                    contentParts.push(textarea.value.trim());
-                    console.log(`Found textarea: ${id} = ${textarea.value.trim()}`);
-                }
+                if (textarea && textarea.value.trim()) contentParts.push(textarea.value.trim());
             });
-
-            console.log(`Total content parts for ${sectionId}:`, contentParts);
 
             if (contentParts.length > 0) {
                 return {
                     title: titleElement.innerText.trim(),
-                    text: contentParts.join("\n") + "\n"
+                    text: contentParts.join(", ") + "\n"
                 };
             }
             return null;
@@ -1135,32 +1176,42 @@ document.addEventListener("DOMContentLoaded", function () {
         sectionIds.forEach(id => {
             const section = getSectionContent(id);
             if (section) {
-                console.log(`Section ${id} result:`, section);
                 // Пропускаем пустые "Nyugdíjas évek"
-                if (id === "section-retirement" && !section.text.trim()) {
-                    console.log(`Skipping empty retirement section`);
-                    return;
-                }
-                textOutput += " " + section.title + ":\n" + section.text + "\n";
-            } else {
-                console.log(`No content for section ${id}`);
+                if (id === "section-retirement" && !section.text.trim()) return;
+                textOutput += section.title + ": " + section.text + "\n";
             }
         });
 
-        console.log("Final output:", textOutput);
+        console.log("Generated biography text:", textOutput); // Для отладки
 
-        // вывод
+        // Записываем в скрытое поле
+        const hiddenInput = document.getElementById("biography_text");
+        if (hiddenInput) {
+            hiddenInput.value = textOutput.trim();
+            console.log("Hidden input value set:", hiddenInput.value); // Для отладки
+        } else {
+            console.error("Hidden input field not found!"); // Для отладки
+        }
+
+        // Показываем результат для проверки (опционально)
         let outputBlock = document.getElementById("bioOutput");
         if (!outputBlock) {
             outputBlock = document.createElement("pre");
             outputBlock.id = "bioOutput";
             outputBlock.style = "margin-top:20px; text-align:left; background:#f8f9fa; padding:15px; border-radius:8px;";
-            button.parentNode.appendChild(outputBlock);
+            form.appendChild(outputBlock);
         }
         outputBlock.textContent = textOutput || "Nincs megadva adat.";
+
+        // Теперь отправляем форму
+        console.log("Submitting form..."); // Для отладки
+        
+        // Убираем обработчик, чтобы избежать бесконечного цикла
+        form.removeEventListener("submit", arguments.callee);
+        form.submit();
     });
 });
-</script>
+        </script>
 
 
 

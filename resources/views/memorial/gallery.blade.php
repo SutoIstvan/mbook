@@ -672,7 +672,7 @@
             <div class="steps-horizontal">
                 <div class="step-horizontal complete">
                     <div class="step-icon">
-                        <i class="fas fa-user"></i>
+                        <i class="fas fa-check"></i>
                     </div>
                     <div class="step-title">{{ __('Step 1') }}</div>
                     <div class="step-description">{{ __('Family Tree') }}</div>
@@ -683,26 +683,31 @@
                         <i class="fas fa-clock"></i>
                     </div>
                     <div class="step-title">{{ __('Step 2') }}</div>
-                    <div class="step-description">{{ __('Life Events Timeline') }}</div>
+                    <div class="step-description">{{ __('Timeline') }}</div>
+                </div>
+                <div class="step-horizontal complete">
+                    <div class="step-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="step-title">{{ __('Step 3') }}</div>
+                    <div class="step-description">{{ __('Features, events') }}</div>
                 </div>
                 <div class="step-horizontal active">
                     <div class="step-icon">
                         <i class="fas fa-image"></i>
                     </div>
-                    <div class="step-title">{{ __('Step 3') }}</div>
+                    <div class="step-title">{{ __('Step 4') }}</div>
                     <div class="step-description">{{ __('Media Upload') }}</div>
                 </div>
                 <div class="step-horizontal">
                     <div class="step-icon">
                         <i class="fas fa-location-dot"></i>
                     </div>
-                    <div class="step-title">{{ __('Step 4') }}</div>
+                    <div class="step-title">{{ __('Step 5') }}</div>
                     <div class="step-description">{{ __('Burial Information') }}</div>
                 </div>
             </div>
         </div>
-
-
     </div>
 
     @if ($errors->any())
@@ -1015,7 +1020,7 @@
             </div>
 
             <div class="d-flex justify-content-between mt-50 pb-50">
-                <a href="{{ route('timeline.create', $memorial) }}" class="btn btn-secondary">{{ __('Back') }}</a>
+                <a href="{{ route('biography.create', $memorial) }}" class="btn btn-secondary">{{ __('Back') }}</a>
                 <a href="{{ route('place', $memorial) }}" class="btn btn-primary">
                     <i class="fa fa-save"></i> {{ __('Next') }}
                 </a>

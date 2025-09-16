@@ -14,7 +14,7 @@ class FamilyController extends Controller
 
     public function create(Memorial $memorial)
     {
-        return view('memorial.aibiography', compact('memorial'));
+        // return view('memorial.aibiography', compact('memorial'));
         // $familyMembers = Family::where('memorial_id', $memorial->id)->get()->groupBy('role');
 
         // Определяем все необходимые роли для членов семьи

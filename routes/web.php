@@ -10,6 +10,7 @@ use App\Http\Controllers\ImageController;
 use App\Http\Controllers\LinkController;
 use App\Http\Controllers\OpenAIController;
 use App\Http\Controllers\TimelineController;
+use App\Http\Controllers\BiographyController;
 use App\Http\Controllers\Auth\GoogleController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -104,6 +105,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/timelines/update', [TimelineController::class, 'updateAll'])->name('timelines.updateAll');
     Route::post('/timelines/update-next', [TimelineController::class, 'updateNext'])->name('timelines.updateNext');
     Route::get('/dashboard/{memorial}/media', [TimelineController::class, 'gallery'])->name('timeline.gallery');
+
+    Route::get('/dashboard/{memorial}/biography/create', [BiographyController::class, 'create'])->name('biography.create');
+    Route::post('/dashboard/{memorial}/biography/store', [BiographyController::class, 'store'])->name('biography.store');
 
     Route::post('/video', [LinkController::class, 'storevideo'])->name('video.store');
     Route::post('/music', [LinkController::class, 'storemusic'])->name('music.store');

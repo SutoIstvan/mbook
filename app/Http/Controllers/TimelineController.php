@@ -32,37 +32,43 @@ class TimelineController extends Controller
         $familyMembers = Family::where('memorial_id', $memorial->id)->get()->groupBy('role');
 
         // --- Рождение детей ---
-if (!empty($familyMembers['children'])) {
-    foreach ($familyMembers['children'] as $child) {
-        $title = trim((string) $child->name);
+        if (!empty($familyMembers['children'])) {
+            foreach ($familyMembers['children'] as $child) {
+                $title = trim((string) $child->name);
 
-        if ($title === '') {
-            continue; // не создаём события без имени
+                if ($title === '') {
+                    continue; // не создаём события без имени
+                }
+
+                $exists = Timeline::where('memorial_id', $memorial->id)
+                    ->where('title', $title)
+                    ->where('type', 'child_birth')
+                    ->exists();
+
+                if (!$exists) {
+                    Timeline::create([
+                        'memorial_id' => $memorial->id,
+                        'title' => $title,
+                        'description' => '',
+                        'date' => null,
+                        'type' => 'child_birth',
+                        'order' => 1,
+                    ]);
+                }
+            }
         }
 
-        $exists = Timeline::where('memorial_id', $memorial->id)
-            ->where('title', $title)
-            ->where('type', 'child_birth')
-            ->exists();
-
-        if (!$exists) {
-            Timeline::create([
-                'memorial_id' => $memorial->id,
-                'title' => $title,
-                'description' => '',
-                'date' => null,
-                'type' => 'child_birth',
-                'order' => 1,
-            ]);
-        }
-    }
-}
-
-
+        // dd($familyMembers['partner']);
+        // --- Брак ---
         // --- Брак ---
         if (!empty($familyMembers['partner'])) {
             foreach ($familyMembers['partner'] as $partner) {
-                $title = $memorial->name . ' ' . __('and') . ' ' . $partner->name; // Имя + партнёр + marriage
+                // Проверяем, что у партнера есть непустое имя
+                if (!isset($partner->name) || trim($partner->name) === '') {
+                    continue; // пропускаем партнеров без имени
+                }
+                
+                $title = $memorial->name . ' ' . __('and') . ' ' . $partner->name;
 
                 $exists = Timeline::where('memorial_id', $memorial->id)
                     ->where('title', $title)
@@ -81,6 +87,27 @@ if (!empty($familyMembers['children'])) {
                 }
             }
         }
+        // if (!empty($familyMembers['partner'])) {
+        //     foreach ($familyMembers['partner'] as $partner) {
+        //         $title = $memorial->name . ' ' . __('and') . ' ' . $partner->name; // Имя + партнёр + marriage
+
+        //         $exists = Timeline::where('memorial_id', $memorial->id)
+        //             ->where('title', $title)
+        //             ->where('type', 'marriage')
+        //             ->exists();
+
+        //         if (!$exists) {
+        //             Timeline::create([
+        //                 'memorial_id' => $memorial->id,
+        //                 'title' => $title,
+        //                 'description' => '',
+        //                 'date' => null,
+        //                 'type' => 'marriage',
+        //                 'order' => 1,
+        //             ]);
+        //         }
+        //     }
+        // }
 
         $timelines = Timeline::where('memorial_id', $memorial->id)
             ->orderBy('date', 'desc')
@@ -546,6 +573,10 @@ public function newstore(Request $request)
 
         $memorial = Memorial::findOrFail($request->memorial_id);
 
-        return redirect()->route('timeline.gallery', $memorial);
+        return redirect()->route('biography.create', $memorial);
+
+        // return view('memorial.aibiography', compact('memorial'));
+        
+        // return redirect()->route('timeline.gallery', $memorial);
     }
 }
