@@ -801,7 +801,7 @@
                                     <div class="checkbox-group row ms-3">
                                         <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
                                             <input class="form-check-input" type="checkbox" id="cheerful">
-                                            <label class="form-check-label" for="cheerful">{{ __('Funny') }}</label>
+                                            <label class="form-check-label" for="cheerful">{{ __('Humorous') }}</label>
                                         </div>
                                         <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
                                             <input class="form-check-input" type="checkbox" id="kind">
@@ -822,8 +822,8 @@
                                                 for="wise">{{ __('Wise / thoughtful') }}</label>
                                         </div>
                                         <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
-                                            <input class="form-check-input" type="checkbox" id="humorous">
-                                            <label class="form-check-label" for="humorous">{{ __('Humorous') }}</label>
+                                            <input class="form-check-input" type="checkbox" id="moody">
+                                            <label class="form-check-label" for="moody">{{ __('Moody') }}</label>
                                         </div>
                                         <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
                                             <input class="form-check-input" type="checkbox" id="strict-fair">
@@ -865,8 +865,8 @@
                                         </div>
 
                                         <div class="form-check custom-checkbox col-12 col-md-6 col-lg-4 mb-2">
-                                            <input class="form-check-input" type="checkbox" id="patriotic">
-                                            <label class="form-check-label" for="patriotic">{{ __('Patriotic') }}</label>
+                                            <input class="form-check-input" type="checkbox" id="stubborn">
+                                            <label class="form-check-label" for="stubborn">{{ __('Stubborn') }}</label>
                                         </div>
                                     </div>
 
