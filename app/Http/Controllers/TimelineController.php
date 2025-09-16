@@ -447,6 +447,7 @@ public function newstore(Request $request)
     $validatedData = $request->validate([
         'title'       => 'required|string|max:255',
         'year'        => 'nullable|integer|min:1900|max:' . date('Y'),
+        'date_to'     => 'nullable|integer|min:1900|max:' . date('Y'),
         'type'        => 'required|string',
         'custom_type' => 'nullable|string|max:255',
         'memorial_id' => 'required|exists:memorials,id',
@@ -463,6 +464,9 @@ public function newstore(Request $request)
         'date'        => $validatedData['year'] 
                            ? $validatedData['year'] . '-01-01' 
                            : null,
+        'date_to'    => $validatedData['date_to'] 
+                    ? $validatedData['date_to'] . '-01-01' 
+                    : null,
         'type'        => $type,
         'memorial_id' => $validatedData['memorial_id'],
     ]);

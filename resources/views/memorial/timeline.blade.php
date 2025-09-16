@@ -762,11 +762,11 @@
         .step-vertical:not(:last-child)::after {
             content: '';
             /* position: absolute;
-                                                         left: 25px;
-                                                         top: 60px;
-                                                         bottom: 0;
-                                                         width: 2px;
-                                                         background: #e9ecef; */
+                                                             left: 25px;
+                                                             top: 60px;
+                                                             bottom: 0;
+                                                             width: 2px;
+                                                             background: #e9ecef; */
         }
 
         .step-vertical-icon {
@@ -1068,8 +1068,6 @@
                         {{-- Форма добавления нового события --}}
                         <div class="tracking-item mt-4">
                             <div class="tracking-icon status-intransit">
-
-
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 24 24"
                                     fill="none">
                                     <path
@@ -1081,12 +1079,11 @@
                                     <path d="M18 5H20M19 6L19 4" stroke="#24cdd5" stroke-width="1.5"
                                         stroke-linecap="round" />
                                 </svg>
-
                             </div>
 
                             <div class="tracking-date defaultcolor fs-4 wow fadeIn d-flex justify-content-end mt-1"
                                 data-wow-delay="300ms">
-                                <select id="eventYear" name="year" class="form-select"
+                                {{-- <select id="eventYear" name="year" class="form-select"
                                     style="max-width: 90px; overflow-y: auto;" required>
                                     <option value=""></option>
                                     @for ($year = date('Y'); $year >= 1900; $year--)
@@ -1095,33 +1092,61 @@
                                             {{ $year }}
                                         </option>
                                     @endfor
-                                </select>
+                                </select> --}}
                             </div>
                             <div class="border mt-1">
                                 <div class="tracking-content defaultcolor fs-6">
-                                    <select name="type" class="form-select" id="typeSelect">
-                                        <option value="">{{ __('Select event type') }}</option>
-                                        <option value="child_birth">{{ __('Child Birth') }}</option>
-                                        <option value="marriage">{{ __('Marriage') }}</option>
-                                        <option value="school">{{ __('School') }}</option>
-                                        <option value="work">{{ __('Work') }}</option>
-                                        <option value="hobby">{{ __('Hobby') }}</option>
-                                        <option value="other_properties">{{ __('Other Properties') }}</option>
-                                    </select>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <select name="type" class="form-select" id="typeSelect">
+                                                <option value="">{{ __('Select event type') }}</option>
+                                                <option value="child_birth">{{ __('Child Birth') }}</option>
+                                                <option value="marriage">{{ __('Marriage') }}</option>
+                                                <option value="school">{{ __('School') }}</option>
+                                                <option value="work">{{ __('Work') }}</option>
+                                                {{-- <option value="hobby">{{ __('Hobby') }}</option> --}}
+                                                <option value="other_properties">{{ __('Other Properties') }}</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12 mt-2" id="yearFromWrapper">
+                                            <select id="eventYear" name="year" class="form-select" required>
+                                                <option value="">{{ __('From Year') }}</option>
+                                                @for ($year = date('Y'); $year >= 1900; $year--)
+                                                    <option value="{{ $year }}"
+                                                        {{ old('year', date('Y')) == $year ? 'selected' : '' }}>
+                                                        {{ $year }}
+                                                    </option>
+                                                @endfor
+                                            </select>
+                                        </div>
+                                        <div class="col-6 mt-2" id="dateToWrapper" style="display: none;">
+                                            <select id="eventYearTo" name="date_to" class="form-select">
+                                                <option value="">{{ __('To Year') }}</option>
+                                                @for ($year = date('Y'); $year >= 1900; $year--)
+                                                    <option value="{{ $year }}"
+                                                        {{ old('date_to') == $year ? 'selected' : '' }}>
+                                                        {{ $year }}
+                                                    </option>
+                                                @endfor
+                                            </select>
+                                        </div>
 
-                                    <!-- Поле для своего значения -->
-                                    <div id="customTypeWrapper" class="mt-2" style="display: none;">
-                                        <input type="text" name="custom_type" class="form-control"
-                                            placeholder="{{ __('Enter a name for the timeline') }}">
+                                        <!-- Поле для своего значения -->
+                                        <div id="customTypeWrapper" class="mt-2" style="display: none;">
+                                            <input type="text" name="custom_type" class="form-control"
+                                                placeholder="{{ __('Enter a name for the timeline') }}">
+                                        </div>
+
+                                        <div class="mt-2">
+                                            <input type="text" name="title" class="form-control"
+                                                placeholder="{{ __('Enter timeline details') }}">
+                                        </div>
+                                        <div class="col-12 mt-2">
+
+                                            <button type="submit"
+                                                class="btn btn-outline-primary mt-2 w-100">{{ __('Add') }}</button>
+                                        </div>
                                     </div>
-
-                                    <div class="mt-2">
-                                        <input type="text" name="title" class="form-control"
-                                            placeholder="{{ __('Enter timeline details') }}">
-                                    </div>
-
-                                    <button type="submit"
-                                        class="btn btn-outline-primary mt-2">{{ __('Add') }}</button>
                                 </div>
                             </div>
                         </div>
@@ -1230,15 +1255,16 @@
 
                                 <div class="tracking-date defaultcolor fs-4 wow fadeIn d-flex justify-content-end mt-1"
                                     data-wow-delay="300ms">
-<select name="timelines[{{ $timeline->id }}][date]" class="form-select" style="max-width: 90px;" required>
-    <option value=""></option>
-    @for ($date = date('Y'); $date >= 1900; $date--)
-        <option value="{{ $date }}" 
-            {{ $timeline->date && \Carbon\Carbon::parse($timeline->date)->format('Y') == $date ? 'selected' : '' }}>
-            {{ $date }}
-        </option>
-    @endfor
-</select>
+                                    <select name="timelines[{{ $timeline->id }}][date]" class="form-select"
+                                        style="max-width: 90px;" required>
+                                        <option value=""></option>
+                                        @for ($date = date('Y'); $date >= 1900; $date--)
+                                            <option value="{{ $date }}"
+                                                {{ $timeline->date && \Carbon\Carbon::parse($timeline->date)->format('Y') == $date ? 'selected' : '' }}>
+                                                {{ $date }}
+                                            </option>
+                                        @endfor
+                                    </select>
                                 </div>
 
                                 <div class="border p-3">
@@ -1347,11 +1373,55 @@
                 }
 
                 document.getElementById('typeSelect').addEventListener('change', function() {
+                    const selectedType = this.value;
                     const customTypeWrapper = document.getElementById('customTypeWrapper');
-                    if (this.value === 'other_properties') {
+                    const dateToWrapper = document.getElementById('dateToWrapper');
+
+                    // Управление полем для своего типа
+                    if (selectedType === 'other_properties') {
                         customTypeWrapper.style.display = 'block';
                     } else {
                         customTypeWrapper.style.display = 'none';
+                    }
+
+                    // Управление второй датой - показываем только для школы и работы
+                    if (selectedType === 'school' || selectedType === 'work') {
+                        dateToWrapper.style.display = 'block';
+                    } else {
+                        dateToWrapper.style.display = 'none';
+                        // Очищаем значение второй даты, если скрываем
+                        const dateToSelect = document.getElementById('eventYearTo');
+                        if (dateToSelect) {
+                            dateToSelect.value = '';
+                        }
+                    }
+                });
+
+                document.getElementById('typeSelect').addEventListener('change', function() {
+                    const selectedType = this.value;
+                    const customTypeWrapper = document.getElementById('customTypeWrapper');
+                    const dateToWrapper = document.getElementById('dateToWrapper');
+                    const yearFromWrapper = document.getElementById('yearFromWrapper');
+
+                    // Управление полем для своего типа
+                    if (selectedType === 'other_properties') {
+                        customTypeWrapper.style.display = 'block';
+                    } else {
+                        customTypeWrapper.style.display = 'none';
+                    }
+
+                    // Управление второй датой и шириной первой
+                    if (selectedType === 'school' || selectedType === 'work') {
+                        dateToWrapper.style.display = 'block';
+                        yearFromWrapper.className = 'col-6 mt-2'; // половина ширины
+                    } else {
+                        dateToWrapper.style.display = 'none';
+                        yearFromWrapper.className = 'col-12 mt-2'; // вся ширина
+                        // Очищаем значение второй даты
+                        const dateToSelect = document.getElementById('eventYearTo');
+                        if (dateToSelect) {
+                            dateToSelect.value = '';
+                        }
                     }
                 });
             </script>
