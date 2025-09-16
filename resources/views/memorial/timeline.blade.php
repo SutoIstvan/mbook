@@ -1104,7 +1104,7 @@
                                                 <option value="marriage">{{ __('Marriage') }}</option>
                                                 <option value="school">{{ __('School') }}</option>
                                                 <option value="work">{{ __('Work') }}</option>
-                                                {{-- <option value="hobby">{{ __('Hobby') }}</option> --}}
+                                                <option value="hobby">{{ __('Hobby') }}</option>
                                                 <option value="other_properties">{{ __('Other Properties') }}</option>
                                             </select>
                                         </div>

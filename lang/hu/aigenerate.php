@@ -29,7 +29,7 @@ return [
         'marriage' => 'Párkapcsolat:',
         'school' => 'Iskolák:',
         'work' => 'Foglalkozás:',
-        'hobby' => 'Hobbi:',
+        'hobby' => 'Események:',
         'other_properties' => 'Egyéb események:',
         'Születés' => 'Megszület',
     ],
