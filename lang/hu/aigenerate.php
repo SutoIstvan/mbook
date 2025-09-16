@@ -25,11 +25,12 @@ return [
     'grandmother_mother' => 'Nagymama (Anya)',
     'timeline_title' => 'Életesemények',
     'timeline_types' => [
-        'child_birth' => 'Gyermek születése:',
-        'marriage' => 'Házasság:',
-        'school' => 'Iskola:',
-        'work' => 'Munka:',
+        'child_birth' => 'Család:',
+        'marriage' => 'Párkapcsolat:',
+        'school' => 'Iskolák:',
+        'work' => 'Foglalkozás:',
         'hobby' => 'Hobbi:',
         'other_properties' => 'Egyéb események:',
+        'Születés' => 'Megszület',
     ],
 ];
