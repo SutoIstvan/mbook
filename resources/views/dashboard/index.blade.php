@@ -275,11 +275,11 @@
             <div class="">
 
                 <h4>
-                    <span class="sub-color inline">Az irányítópultban</span>
+                    <span class="sub-color inline">{{ __('In the dashboard') }}</span>
                 </h4>
                 <div class="col-lg-6 mx-auto">
                     <p class="fs-5 mt-4 mb-4">
-                        szerkesztheti a meglévő emlékoldalakat és új oldalakat adhat hozzá elhunyt szeretteinek.
+                        {{ __('you can edit existing memorial pages and add new pages for your deceased loved ones.') }}
                     </p>
                 </div>
             </div>
@@ -304,7 +304,7 @@
                                 <a href="{{ route('dashboard.edit', $memorial) }}"
                                     class="butn butn-md butn-bord butn-rounded me-3 mt-30 mb-10">
                                     <div class="d-flex align-items-center">
-                                        <span>Szerkesztes</span>
+                                        <span>{{ __('Edit') }}</span>
                                         <span class="icon ms-2">
                                             <i class="fa-solid fa-pen text-secondary"></i>
                                         </span>
@@ -347,10 +347,10 @@
                                 </div>
 
                                 <div class="text-center mt-70">
-                                    <a href="{{ route('memorial.create') }}"
+                                    <a href="https://shop.rememus.com/"
                                         class="butn butn-md butn-bord butn-rounded mt-30 mb-10">
                                         <div class="d-flex align-items-center">
-                                            <span>Új emlékoldal vásárlása</span>
+                                            <span>{{ __('New memorial page purchase') }}</span>
                                             <span class="icon ms-2">
                                                 <i class="fa-solid fa-basket-shopping text-secondary"></i>
                                             </span>
@@ -371,10 +371,10 @@
 
                             <div class="text-center mt-70">
 
-                                <a href="{{ route('memorial.create') }}"
+                                <a href="https://shop.rememus.com/"
                                     class="butn butn-md butn-bord butn-rounded mt-30 mb-10">
                                     <div class="d-flex align-items-center">
-                                        <span>Új emlékoldal vásárlása</span>
+                                        <span>{{ __('New memorial page purchase') }}</span>
                                         <span class="icon ms-2">
                                             <i class="fa-solid fa-basket-shopping text-secondary"></i>
                                         </span>

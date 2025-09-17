@@ -854,6 +854,9 @@
             width:11.5rem !important;
             text-align:right
         }
+
+
+        
     </style>
 
 @endsection
