@@ -246,7 +246,6 @@
 
                             </div>
                         </div>
-                        {{-- <p class="ms-3">Itt válthatod be a QR-kódot.</p> --}}
                     </div>
                 </div>
 
@@ -371,21 +370,20 @@
                         </h3>
 
                         <h4 class="mt-4 mb-2 d-none d-md-block">
-                            Emlékhely, ahol a szeretteink örökké élnek.
+                            {{ __('We live on as long as we are remembered') }}
                         </h4>
 
                         <h7 class="d-none d-md-block">
-                            Hozz létre egy méltó emlékoldalt elhunyt szeretteid számára.
-                            Elmeséljük a történetüket, emléküket megőrizzük az idők végezetéig.
+                            {{ __('Create a worthy memorial page for your deceased loved ones. We will tell their story and preserve their memory for all time.') }}
+
                         </h7>
 
                         <h5 class="d-block d-md-none">
-                            Emlékhely, ahol a szeretteink örökké élnek.
+                            {{ __('We live on as long as we are remembered') }}
                         </h5>
 
                         <h7 class="d-block d-md-none mt-50">
-                            Hozz létre egy méltó emlékoldalt elhunyt szeretteid számára.
-                            Elmeséljük a történetüket, emléküket megőrizzük az idők végezetéig.
+                            {{ __('Create a worthy memorial page for your deceased loved ones. We will tell their story and preserve their memory for all time.') }}
                         </h7>
                         <!-- <h1>We Invest <br> In Big Ideas</h1> -->
                     </div>
@@ -395,7 +393,7 @@
                 <div class="col-lg-6 order-md-2">
                     <div class="butons">
                         <a href="/create" class="bg">
-                            <span>Emlékoldal <br> létrehozása</span>
+                            <span>{{ __('Create a') }} <br>  {{ __('memorial page') }}</span>
                         </a>
                         <a href="https://shop.rememus.com/Emlekplakettek" target="_blank" class="bord">
                             <span class="icon invert ml-5 mb-1">
@@ -507,7 +505,7 @@
                         </h4>
 
                         <h5 class="d-block d-md-none mb-3">
-                            A rememus.com egy <br>QR-kóddal elérhető emlékoldal
+                            {{ __('Rememus.com – The eternal trace of love, a memory that outlives us') }}
                         </h5>
                         <p>
                             {{ __('Rememus memorial pages allow us to preserve the stories, photos, videos and shared moments of our loved ones in a dignified manner – even for generations. The memorial page is made available with a discreetly placed QR code on the gravesite or urn, so memories can be recalled at any time with a single scan – whether in the cemetery or at home.') }}
