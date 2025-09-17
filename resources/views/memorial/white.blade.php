@@ -26,9 +26,8 @@
     <link rel="stylesheet" href="white/css/revolution/settings.css">
     <link rel="stylesheet" href="white/css/style.css">
 
-@prepend('styles')
-
-@endprepend
+    @prepend('styles')
+    @endprepend
 
     <style type="text/css" media="screen">
         .tree {
@@ -315,8 +314,6 @@
             word-break: break-word;
             font-size: 14px;
         }
-
-        
     </style>
 
 
@@ -396,7 +393,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link pagescroll" href="#gallery">{{ __("Gallery") }}</a>
+                            <a class="nav-link pagescroll" href="#gallery">{{ __('Gallery') }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link pagescroll" href="#timeline">{{ __('Timeline') }}</a>
@@ -557,7 +554,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center wow fadeIn top15" data-wow-delay="300ms">
-                    <h2 class="heading bottom45 darkcolor font-light2">{{ __('Gallery') }}<span class="font-normal"></span>
+                    <h2 class="heading bottom45 darkcolor font-light2">{{ __('Gallery') }}<span
+                            class="font-normal"></span>
                         <span class="divider-center"></span>
                     </h2>
                     {{-- <div class="col-md-8 offset-md-2 bottom40">
@@ -671,129 +669,147 @@
 
     <!-- Timeline -->
     @if ($timelines->count() > 0)
-    <section id="timeline" class="padding">
-        <div class="container">
-            <div class="row">
-                <h2 class="d-none"></h2>
-                <div class="col-md-12 col-sm-12">
-                    <div id=""></div>
-                    <div id="tracking">
-                        <div class="col-md-12 text-center wow fadeIn top15" data-wow-delay="300ms">
-                            <h2 class="heading bottom45 darkcolor font-light2">{{ __('Timeline') }}<span
-                                    class="font-normal"></span>
+        <section id="timeline" class="padding">
+            <div class="container">
+                <div class="row">
+                    <h2 class="d-none"></h2>
+                    <div class="col-md-12 col-sm-12">
+                        <div id=""></div>
+                        <div id="tracking">
+                            <div class="col-md-12 text-center wow fadeIn top15" data-wow-delay="300ms">
+                                <h2 class="heading bottom45 darkcolor font-light2">{{ __('Timeline') }}<span
+                                        class="font-normal"></span>
 
-                            </h2>
-                            {{-- <div class="col-md-8 offset-md-2 bottom40">
+                                </h2>
+                                {{-- <div class="col-md-8 offset-md-2 bottom40">
                                 <p>
                                     {{ __('A timeline depicts important life events in chronological order. It presents key moments, such as births, marriages, or significant achievements, with dates and descriptions, helping you to review your family history.') }}
                                 </p>
                             </div> --}}
-                        </div>
-                        <div class="">
+                            </div>
+                            <div class="">
 
 
-                            @foreach ($timelines->take(6) as $timeline)
-                                <div class="tracking-item ">
+                                @foreach ($timelines->take(6) as $timeline)
+                                    <div class="tracking-item ">
 
-                                    <div class="tracking-icon status-intransit">
+                                        <div class="tracking-icon status-intransit">
 
-                                        @if ($timeline->type == 'marriage')
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px"
-                                                viewBox="0 0 24 24" fill="none">
-                                                <path
-                                                    d="M8.96173 18.9109L9.42605 18.3219L8.96173 18.9109ZM12 5.50063L11.4596 6.02073C11.601 6.16763 11.7961 6.25063 12 6.25063C12.2039 6.25063 12.399 6.16763 12.5404 6.02073L12 5.50063ZM15.0383 18.9109L15.5026 19.4999L15.0383 18.9109ZM7.00061 16.4209C6.68078 16.1577 6.20813 16.2036 5.94491 16.5234C5.68169 16.8432 5.72758 17.3159 6.04741 17.5791L7.00061 16.4209ZM2.34199 13.4115C2.54074 13.7749 2.99647 13.9084 3.35988 13.7096C3.7233 13.5108 3.85677 13.0551 3.65801 12.6917L2.34199 13.4115ZM2.75 9.1371C2.75 6.98623 3.96537 5.18252 5.62436 4.42419C7.23607 3.68748 9.40166 3.88258 11.4596 6.02073L12.5404 4.98053C10.0985 2.44352 7.26409 2.02539 5.00076 3.05996C2.78471 4.07292 1.25 6.42503 1.25 9.1371H2.75ZM8.49742 19.4999C9.00965 19.9037 9.55954 20.3343 10.1168 20.6599C10.6739 20.9854 11.3096 21.25 12 21.25V19.75C11.6904 19.75 11.3261 19.6293 10.8736 19.3648C10.4213 19.1005 9.95208 18.7366 9.42605 18.3219L8.49742 19.4999ZM15.5026 19.4999C16.9292 18.3752 18.7528 17.0866 20.1833 15.4758C21.6395 13.8361 22.75 11.8026 22.75 9.1371H21.25C21.25 11.3345 20.3508 13.0282 19.0617 14.4798C17.7469 15.9603 16.0896 17.1271 14.574 18.3219L15.5026 19.4999ZM22.75 9.1371C22.75 6.42503 21.2153 4.07292 18.9992 3.05996C16.7359 2.02539 13.9015 2.44352 11.4596 4.98053L12.5404 6.02073C14.5983 3.88258 16.7639 3.68748 18.3756 4.42419C20.0346 5.18252 21.25 6.98623 21.25 9.1371H22.75ZM14.574 18.3219C14.0479 18.7366 13.5787 19.1005 13.1264 19.3648C12.6739 19.6293 12.3096 19.75 12 19.75V21.25C12.6904 21.25 13.3261 20.9854 13.8832 20.6599C14.4405 20.3343 14.9903 19.9037 15.5026 19.4999L14.574 18.3219ZM9.42605 18.3219C8.63014 17.6945 7.82129 17.0963 7.00061 16.4209L6.04741 17.5791C6.87768 18.2624 7.75472 18.9144 8.49742 19.4999L9.42605 18.3219ZM3.65801 12.6917C3.0968 11.6656 2.75 10.5033 2.75 9.1371H1.25C1.25 10.7746 1.66995 12.1827 2.34199 13.4115L3.65801 12.6917Z"
-                                                    fill="#24cdd5" />
-                                            </svg>
-                                        @endif
+                                            @if ($timeline->type == 'marriage')
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px"
+                                                    viewBox="0 0 24 24" fill="none">
+                                                    <path
+                                                        d="M8.96173 18.9109L9.42605 18.3219L8.96173 18.9109ZM12 5.50063L11.4596 6.02073C11.601 6.16763 11.7961 6.25063 12 6.25063C12.2039 6.25063 12.399 6.16763 12.5404 6.02073L12 5.50063ZM15.0383 18.9109L15.5026 19.4999L15.0383 18.9109ZM7.00061 16.4209C6.68078 16.1577 6.20813 16.2036 5.94491 16.5234C5.68169 16.8432 5.72758 17.3159 6.04741 17.5791L7.00061 16.4209ZM2.34199 13.4115C2.54074 13.7749 2.99647 13.9084 3.35988 13.7096C3.7233 13.5108 3.85677 13.0551 3.65801 12.6917L2.34199 13.4115ZM2.75 9.1371C2.75 6.98623 3.96537 5.18252 5.62436 4.42419C7.23607 3.68748 9.40166 3.88258 11.4596 6.02073L12.5404 4.98053C10.0985 2.44352 7.26409 2.02539 5.00076 3.05996C2.78471 4.07292 1.25 6.42503 1.25 9.1371H2.75ZM8.49742 19.4999C9.00965 19.9037 9.55954 20.3343 10.1168 20.6599C10.6739 20.9854 11.3096 21.25 12 21.25V19.75C11.6904 19.75 11.3261 19.6293 10.8736 19.3648C10.4213 19.1005 9.95208 18.7366 9.42605 18.3219L8.49742 19.4999ZM15.5026 19.4999C16.9292 18.3752 18.7528 17.0866 20.1833 15.4758C21.6395 13.8361 22.75 11.8026 22.75 9.1371H21.25C21.25 11.3345 20.3508 13.0282 19.0617 14.4798C17.7469 15.9603 16.0896 17.1271 14.574 18.3219L15.5026 19.4999ZM22.75 9.1371C22.75 6.42503 21.2153 4.07292 18.9992 3.05996C16.7359 2.02539 13.9015 2.44352 11.4596 4.98053L12.5404 6.02073C14.5983 3.88258 16.7639 3.68748 18.3756 4.42419C20.0346 5.18252 21.25 6.98623 21.25 9.1371H22.75ZM14.574 18.3219C14.0479 18.7366 13.5787 19.1005 13.1264 19.3648C12.6739 19.6293 12.3096 19.75 12 19.75V21.25C12.6904 21.25 13.3261 20.9854 13.8832 20.6599C14.4405 20.3343 14.9903 19.9037 15.5026 19.4999L14.574 18.3219ZM9.42605 18.3219C8.63014 17.6945 7.82129 17.0963 7.00061 16.4209L6.04741 17.5791C6.87768 18.2624 7.75472 18.9144 8.49742 19.4999L9.42605 18.3219ZM3.65801 12.6917C3.0968 11.6656 2.75 10.5033 2.75 9.1371H1.25C1.25 10.7746 1.66995 12.1827 2.34199 13.4115L3.65801 12.6917Z"
+                                                        fill="#24cdd5" />
+                                                </svg>
+                                            @endif
 
-                                        @if ($timeline->type == 'school')
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px"
-                                                viewBox="0 0 24 24" fill="none">
-                                                <path
-                                                    d="M9.78272 3.49965C11.2037 2.83345 12.7962 2.83345 14.2172 3.49965L20.9084 6.63664C22.3639 7.31899 22.3639 9.68105 20.9084 10.3634L14.2173 13.5003C12.7963 14.1665 11.2038 14.1665 9.78281 13.5003L3.0916 10.3634C1.63613 9.68101 1.63614 7.31895 3.0916 6.63659L6 5.27307"
-                                                    stroke="#24cdd5" stroke-width="1.5" stroke-linecap="round" />
-                                                <path d="M2 8.5V14" stroke="#24cdd5" stroke-width="1.5"
-                                                    stroke-linecap="round" />
-                                                <path
-                                                    d="M12 21C10.204 21 7.8537 19.8787 6.38533 19.0656C5.5035 18.5772 5 17.6334 5 16.6254V11.5M19 11.5V16.6254C19 17.6334 18.4965 18.5772 17.6147 19.0656C17.0843 19.3593 16.4388 19.6932 15.7459 20"
-                                                    stroke="#24cdd5" stroke-width="1.5" stroke-linecap="round" />
-                                            </svg>
-                                        @endif
+                                            @if ($timeline->type == 'school')
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px"
+                                                    viewBox="0 0 24 24" fill="none">
+                                                    <path
+                                                        d="M9.78272 3.49965C11.2037 2.83345 12.7962 2.83345 14.2172 3.49965L20.9084 6.63664C22.3639 7.31899 22.3639 9.68105 20.9084 10.3634L14.2173 13.5003C12.7963 14.1665 11.2038 14.1665 9.78281 13.5003L3.0916 10.3634C1.63613 9.68101 1.63614 7.31895 3.0916 6.63659L6 5.27307"
+                                                        stroke="#24cdd5" stroke-width="1.5" stroke-linecap="round" />
+                                                    <path d="M2 8.5V14" stroke="#24cdd5" stroke-width="1.5"
+                                                        stroke-linecap="round" />
+                                                    <path
+                                                        d="M12 21C10.204 21 7.8537 19.8787 6.38533 19.0656C5.5035 18.5772 5 17.6334 5 16.6254V11.5M19 11.5V16.6254C19 17.6334 18.4965 18.5772 17.6147 19.0656C17.0843 19.3593 16.4388 19.6932 15.7459 20"
+                                                        stroke="#24cdd5" stroke-width="1.5" stroke-linecap="round" />
+                                                </svg>
+                                            @endif
 
-                                        @if ($timeline->type == 'child_birth')
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px"
-                                                viewBox="0 0 24 24" fill="none">
-                                                <path
-                                                    d="M8.00012 16.6066C9.1493 17.4664 10.5185 17.9874 12 17.9998C16.142 18.0343 19.5937 14.0798 19.5603 9.8043C19.5268 5.52875 16.142 2.03476 12 2.00026C7.858 1.96576 4.52734 5.4038 4.56077 9.67936C4.56976 10.8295 4.81252 11.9605 5.24326 13"
-                                                    stroke="#24cdd5" stroke-width="1.5" stroke-linecap="round" />
-                                                <path d="M15.5 9C15.4867 7.35641 14.1436 6.01326 12.5 6"
-                                                    stroke="#24cdd5" stroke-width="1.5" stroke-linecap="round" />
-                                                <path
-                                                    d="M12 20.3502C12.3212 20.3502 12.4818 20.3502 12.5933 20.3283C13.2466 20.1999 13.6441 19.5557 13.4511 18.9384C13.4181 18.833 13.342 18.6962 13.1896 18.4227M12 20.3502C11.6788 20.3502 11.5182 20.3502 11.4067 20.3283C10.7534 20.1999 10.3559 19.5557 10.5489 18.9384C10.5819 18.833 10.658 18.6962 10.8104 18.4227M12 20.3502V22.5"
-                                                    stroke="#24cdd5" stroke-width="1.5" stroke-linecap="round" />
-                                            </svg>
-                                        @endif
- 
-                                        @if ($timeline->type == 'work')
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px"
-                                                viewBox="0 0 24 24" fill="none">
-                                                <path
-                                                    d="M2 14C2 10.2288 2 8.34315 3.17157 7.17157C4.34315 6 6.22876 6 10 6H14C17.7712 6 19.6569 6 20.8284 7.17157C21.4816 7.82475 21.7706 8.69989 21.8985 10M22 14C22 17.7712 22 19.6569 20.8284 20.8284C19.6569 22 17.7712 22 14 22H10C6.22878 22 4.34314 22 3.17157 20.8284C2.51839 20.1752 2.22937 19.3001 2.10149 18"
-                                                    stroke="#24cdd5" stroke-width="1.5" stroke-linecap="round" />
-                                                <path
-                                                    d="M16 6C16 4.11438 16 3.17157 15.4142 2.58579C14.8284 2 13.8856 2 12 2C10.1144 2 9.17157 2 8.58579 2.58579C8 3.17157 8 4.11438 8 6"
-                                                    stroke="#24cdd5" stroke-width="1.5" />
-                                                <path
-                                                    d="M17 9C17 9.55228 16.5523 10 16 10C15.4477 10 15 9.55228 15 9C15 8.44772 15.4477 8 16 8C16.5523 8 17 8.44772 17 9Z"
-                                                    fill="#24cdd5" />
-                                                <path
-                                                    d="M9 9C9 9.55228 8.55228 10 8 10C7.44772 10 7 9.55228 7 9C7 8.44772 7.44772 8 8 8C8.55228 8 9 8.44772 9 9Z"
-                                                    fill="#24cdd5" />
-                                            </svg>
-                                        @endif
+                                            @if ($timeline->type == 'child_birth')
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px"
+                                                    viewBox="0 0 24 24" fill="none">
+                                                    <path
+                                                        d="M8.00012 16.6066C9.1493 17.4664 10.5185 17.9874 12 17.9998C16.142 18.0343 19.5937 14.0798 19.5603 9.8043C19.5268 5.52875 16.142 2.03476 12 2.00026C7.858 1.96576 4.52734 5.4038 4.56077 9.67936C4.56976 10.8295 4.81252 11.9605 5.24326 13"
+                                                        stroke="#24cdd5" stroke-width="1.5" stroke-linecap="round" />
+                                                    <path d="M15.5 9C15.4867 7.35641 14.1436 6.01326 12.5 6"
+                                                        stroke="#24cdd5" stroke-width="1.5" stroke-linecap="round" />
+                                                    <path
+                                                        d="M12 20.3502C12.3212 20.3502 12.4818 20.3502 12.5933 20.3283C13.2466 20.1999 13.6441 19.5557 13.4511 18.9384C13.4181 18.833 13.342 18.6962 13.1896 18.4227M12 20.3502C11.6788 20.3502 11.5182 20.3502 11.4067 20.3283C10.7534 20.1999 10.3559 19.5557 10.5489 18.9384C10.5819 18.833 10.658 18.6962 10.8104 18.4227M12 20.3502V22.5"
+                                                        stroke="#24cdd5" stroke-width="1.5" stroke-linecap="round" />
+                                                </svg>
+                                            @endif
 
-                                        @if (
-                                            $timeline->type != 'marriage' &&
-                                                $timeline->type != 'hobby' &&
-                                                $timeline->type != 'school' &&
-                                                $timeline->type != 'work' &&
-                                                $timeline->type != 'child_birth')
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px"
-                                                viewBox="0 0 24 24" fill="none">
-                                                <path
-                                                    d="M7.43361 9.90622C5.34288 10.3793 4.29751 10.6158 4.04881 11.4156C3.8001 12.2153 4.51276 13.0487 5.93808 14.7154L6.30683 15.1466C6.71186 15.6203 6.91438 15.8571 7.00548 16.1501C7.09659 16.443 7.06597 16.759 7.00474 17.3909L6.94899 17.9662C6.7335 20.19 6.62575 21.3019 7.27688 21.7962C7.928 22.2905 8.90677 21.8398 10.8643 20.9385L11.3708 20.7053C11.927 20.4492 12.2052 20.3211 12.5 20.3211C12.7948 20.3211 13.073 20.4492 13.6292 20.7053L14.1357 20.9385C16.0932 21.8398 17.072 22.2905 17.7231 21.7962C18.3742 21.3019 18.2665 20.19 18.051 17.9662M19.0619 14.7154C20.4872 13.0487 21.1999 12.2153 20.9512 11.4156C20.7025 10.6158 19.6571 10.3793 17.5664 9.90622L17.0255 9.78384C16.4314 9.64942 16.1343 9.5822 15.8958 9.40114C15.6573 9.22007 15.5043 8.94564 15.1984 8.3968L14.9198 7.89712C13.8432 5.96571 13.3048 5 12.5 5C11.6952 5 11.1568 5.96571 10.0802 7.89712"
-                                                    stroke="#24cdd5" stroke-width="1.5" stroke-linecap="round"></path>
-                                                <path
-                                                    d="M4.98987 2C4.98987 2 5.2778 3.45771 5.90909 4.08475C6.54037 4.71179 8 4.98987 8 4.98987C8 4.98987 6.54229 5.2778 5.91525 5.90909C5.28821 6.54037 5.01013 8 5.01013 8C5.01013 8 4.7222 6.54229 4.09091 5.91525C3.45963 5.28821 2 5.01013 2 5.01013C2 5.01013 3.45771 4.7222 4.08475 4.09091C4.71179 3.45963 4.98987 2 4.98987 2Z"
-                                                    stroke="#24cdd5" stroke-linejoin="round"></path>
-                                                <path d="M18 5H20M19 6L19 4" stroke="#24cdd5" stroke-width="1.5"
-                                                    stroke-linecap="round"></path>
-                                            </svg>
-                                        @endif
+                                            @if ($timeline->type == 'work')
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px"
+                                                    viewBox="0 0 24 24" fill="none">
+                                                    <path
+                                                        d="M2 14C2 10.2288 2 8.34315 3.17157 7.17157C4.34315 6 6.22876 6 10 6H14C17.7712 6 19.6569 6 20.8284 7.17157C21.4816 7.82475 21.7706 8.69989 21.8985 10M22 14C22 17.7712 22 19.6569 20.8284 20.8284C19.6569 22 17.7712 22 14 22H10C6.22878 22 4.34314 22 3.17157 20.8284C2.51839 20.1752 2.22937 19.3001 2.10149 18"
+                                                        stroke="#24cdd5" stroke-width="1.5" stroke-linecap="round" />
+                                                    <path
+                                                        d="M16 6C16 4.11438 16 3.17157 15.4142 2.58579C14.8284 2 13.8856 2 12 2C10.1144 2 9.17157 2 8.58579 2.58579C8 3.17157 8 4.11438 8 6"
+                                                        stroke="#24cdd5" stroke-width="1.5" />
+                                                    <path
+                                                        d="M17 9C17 9.55228 16.5523 10 16 10C15.4477 10 15 9.55228 15 9C15 8.44772 15.4477 8 16 8C16.5523 8 17 8.44772 17 9Z"
+                                                        fill="#24cdd5" />
+                                                    <path
+                                                        d="M9 9C9 9.55228 8.55228 10 8 10C7.44772 10 7 9.55228 7 9C7 8.44772 7.44772 8 8 8C8.55228 8 9 8.44772 9 9Z"
+                                                        fill="#24cdd5" />
+                                                </svg>
+                                            @endif
 
-                                        <!-- <i class="fas fa-circle"></i> -->
+                                            @if ($timeline->type == 'hobby')
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px"
+                                                    viewBox="0 0 24 24" fill="none">
+                                                    <path
+                                                        d="M7.43361 9.90622C5.34288 10.3793 4.29751 10.6158 4.04881 11.4156C3.8001 12.2153 4.51276 13.0487 5.93808 14.7154L6.30683 15.1466C6.71186 15.6203 6.91438 15.8571 7.00548 16.1501C7.09659 16.443 7.06597 16.759 7.00474 17.3909L6.94899 17.9662C6.7335 20.19 6.62575 21.3019 7.27688 21.7962C7.928 22.2905 8.90677 21.8398 10.8643 20.9385L11.3708 20.7053C11.927 20.4492 12.2052 20.3211 12.5 20.3211C12.7948 20.3211 13.073 20.4492 13.6292 20.7053L14.1357 20.9385C16.0932 21.8398 17.072 22.2905 17.7231 21.7962C18.3742 21.3019 18.2665 20.19 18.051 17.9662M19.0619 14.7154C20.4872 13.0487 21.1999 12.2153 20.9512 11.4156C20.7025 10.6158 19.6571 10.3793 17.5664 9.90622L17.0255 9.78384C16.4314 9.64942 16.1343 9.5822 15.8958 9.40114C15.6573 9.22007 15.5043 8.94564 15.1984 8.3968L14.9198 7.89712C13.8432 5.96571 13.3048 5 12.5 5C11.6952 5 11.1568 5.96571 10.0802 7.89712"
+                                                        stroke="#24cdd5" stroke-width="1.5" stroke-linecap="round">
+                                                    </path>
+                                                    <path
+                                                        d="M4.98987 2C4.98987 2 5.2778 3.45771 5.90909 4.08475C6.54037 4.71179 8 4.98987 8 4.98987C8 4.98987 6.54229 5.2778 5.91525 5.90909C5.28821 6.54037 5.01013 8 5.01013 8C5.01013 8 4.7222 6.54229 4.09091 5.91525C3.45963 5.28821 2 5.01013 2 5.01013C2 5.01013 3.45771 4.7222 4.08475 4.09091C4.71179 3.45963 4.98987 2 4.98987 2Z"
+                                                        stroke="#24cdd5" stroke-linejoin="round"></path>
+                                                    <path d="M18 5H20M19 6L19 4" stroke="#24cdd5" stroke-width="1.5"
+                                                        stroke-linecap="round"></path>
+                                                </svg>
+                                            @endif
+
+                                            @if (
+                                                $timeline->type != 'marriage' &&
+                                                    $timeline->type != 'hobby' &&
+                                                    $timeline->type != 'school' &&
+                                                    $timeline->type != 'work' &&
+                                                    $timeline->type != 'child_birth')
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px"
+                                                    viewBox="0 0 24 24" fill="none">
+                                                    <path
+                                                        d="M7.43361 9.90622C5.34288 10.3793 4.29751 10.6158 4.04881 11.4156C3.8001 12.2153 4.51276 13.0487 5.93808 14.7154L6.30683 15.1466C6.71186 15.6203 6.91438 15.8571 7.00548 16.1501C7.09659 16.443 7.06597 16.759 7.00474 17.3909L6.94899 17.9662C6.7335 20.19 6.62575 21.3019 7.27688 21.7962C7.928 22.2905 8.90677 21.8398 10.8643 20.9385L11.3708 20.7053C11.927 20.4492 12.2052 20.3211 12.5 20.3211C12.7948 20.3211 13.073 20.4492 13.6292 20.7053L14.1357 20.9385C16.0932 21.8398 17.072 22.2905 17.7231 21.7962C18.3742 21.3019 18.2665 20.19 18.051 17.9662M19.0619 14.7154C20.4872 13.0487 21.1999 12.2153 20.9512 11.4156C20.7025 10.6158 19.6571 10.3793 17.5664 9.90622L17.0255 9.78384C16.4314 9.64942 16.1343 9.5822 15.8958 9.40114C15.6573 9.22007 15.5043 8.94564 15.1984 8.3968L14.9198 7.89712C13.8432 5.96571 13.3048 5 12.5 5C11.6952 5 11.1568 5.96571 10.0802 7.89712"
+                                                        stroke="#24cdd5" stroke-width="1.5" stroke-linecap="round">
+                                                    </path>
+                                                    <path
+                                                        d="M4.98987 2C4.98987 2 5.2778 3.45771 5.90909 4.08475C6.54037 4.71179 8 4.98987 8 4.98987C8 4.98987 6.54229 5.2778 5.91525 5.90909C5.28821 6.54037 5.01013 8 5.01013 8C5.01013 8 4.7222 6.54229 4.09091 5.91525C3.45963 5.28821 2 5.01013 2 5.01013C2 5.01013 3.45771 4.7222 4.08475 4.09091C4.71179 3.45963 4.98987 2 4.98987 2Z"
+                                                        stroke="#24cdd5" stroke-linejoin="round"></path>
+                                                    <path d="M18 5H20M19 6L19 4" stroke="#24cdd5" stroke-width="1.5"
+                                                        stroke-linecap="round"></path>
+                                                </svg>
+                                            @endif
+
+                                            <!-- <i class="fas fa-circle"></i> -->
+                                        </div>
+
+                                        <div class="tracking-date defaultcolor fs-4 wow fadeIn mt-1 pe-1"
+                                            data-wow-delay="300ms">
+                                            {{ \Carbon\Carbon::parse($timeline->date)->format('Y') }}
+                                                
+                                            {{ $timeline->date_to ? '- ' . \Carbon\Carbon::parse($timeline->date_to)->format('Y') : '' }}
+                                        </div>
+                                        <div class="border">
+                                            <div class="tracking-content defaultcolor fs-6">
+                                                {{ __($timeline->type) }}<span>
+                                                    @if ($timeline->type)
+                                                        <span class="pt-2 fs-6">
+                                                            {{ $timeline->title }}
+                                                        </span>
+                                                    @endif
+                                                </span></div>
+
+                                        </div>
                                     </div>
-
-                                    <div class="tracking-date defaultcolor fs-4 wow fadeIn" data-wow-delay="300ms">
-                                        {{ \Carbon\Carbon::parse($timeline->date)->format('Y') }}<span
-                                            class="fs-6">{{ \Carbon\Carbon::parse($timeline->date)->format('M d') }}</span>
-                                    </div>
-                                    <div class="border">
-                                        <div class="tracking-content defaultcolor fs-6">
-                                            {{ __('aigenerate.timeline_types.' . $timeline->type) }}<span>
-                                                @if ($timeline->type)
-                                                    <span class="pt-2 fs-6">
-                                                        {{ $timeline->title }}
-                                                    </span>
-                                                @endif
-                                            </span></div>
-
-                                    </div>
-                                </div>
-                            @endforeach
+                                @endforeach
 
 
-                            {{-- <div class="tracking-item ">
+                                {{-- <div class="tracking-item ">
 
                                 <div class="tracking-icon status-intransit">
                                     <svg class="svg-inline--fa fa-circle fa-w-16" aria-hidden="true"
@@ -814,7 +830,7 @@
                                 </div>
                             </div> --}}
 
-                            {{-- <div class="tracking-item">
+                                {{-- <div class="tracking-item">
                                 <div class="tracking-icon status-outfordelivery">
                                     <svg class="svg-inline--fa fa-shipping-fast fa-w-20" aria-hidden="true"
                                         data-prefix="fas" data-icon="shipping-fast" role="img"
@@ -832,12 +848,12 @@
                                 </div>
                             </div> --}}
 
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
     @endif
     <!-- Timeline -->
 
@@ -873,7 +889,8 @@
     <section id="family-tree" class="position-relative padding_top">
 
         <div class="col-md-12 text-center wow fadeIn top15" data-wow-delay="300ms">
-            <h2 class="heading bottom45 darkcolor font-light2">{{ __('Family Tree') }}<span class="font-normal"></span>
+            <h2 class="heading bottom45 darkcolor font-light2">{{ __('Family Tree') }}<span
+                    class="font-normal"></span>
 
             </h2>
             {{-- <div class="col-md-8 offset-md-2 bottom40">
@@ -887,34 +904,34 @@
             <div class="tree wow fadeIn" data-wow-delay="300ms">
 
 
-@if($hasGrandparents)
+                @if ($hasGrandparents)
 
 
-                <ul class="down">
-                    <!-- My Grand Parents -->
-                    <li class="down">
-                        <a {{ $grandfatherFather?->qr_code ? 'href=' . route('memorial.show', $grandfatherFather->qr_code) : '' }}
-                            target="_blank">
-                            <img src="{{ isset($grandfatherFather) && $grandfatherFather->photo ? asset('memorial/' . $grandfatherFather->photo) : asset('avatar/avatar-father.png') }}"
-                                class="img-fluid rounded-circle" width="90" height="90">
-                            <div class="memorial-name mt-2">
-                                {{ $grandfatherFather->name ?? __('Grand Father') }}
-                            </div>
-
-                            @if (!empty($grandfatherFather->qr_code))
-                                <div class="position-absolute" title="{{ __('Qr code') }}"
-                                    style="cursor: pointer; top: 0; right: 5px;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="15px"
-                                        height="15px" viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1">
-                                        <title />
-                                        <path
-                                            d="M75,15H35A20.06,20.06,0,0,0,15,35V75A20.06,20.06,0,0,0,35,95H75A20.06,20.06,0,0,0,95,75V35A20.06,20.06,0,0,0,75,15Zm0,60H35V35H75Zm0,30H35a20.06,20.06,0,0,0-20,20v40a20.06,20.06,0,0,0,20,20H75a20.06,20.06,0,0,0,20-20V125A20.06,20.06,0,0,0,75,105Zm0,60H35V125H75ZM165,15H125a20.06,20.06,0,0,0-20,20V75a20.06,20.06,0,0,0,20,20h40a20.06,20.06,0,0,0,20-20V35A20.06,20.06,0,0,0,165,15Zm0,60H125V35h40ZM50,65H60a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,50,65Zm0,90H60a5.38,5.38,0,0,0,5-5V140a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5v10A5.38,5.38,0,0,0,50,155Zm90-90h10a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H140a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,140,65Zm-30,80h10a5.38,5.38,0,0,0,5-5V130a5.38,5.38,0,0,1,5-5h10a5.38,5.38,0,0,0,5-5V110a5.38,5.38,0,0,0-5-5H110a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5Zm70-40H170a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V110A5.38,5.38,0,0,0,180,105Zm-60,60H110a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,120,165Zm60,0H170a5.38,5.38,0,0,1-5-5V150a5.38,5.38,0,0,0-5-5H130a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,1,5,5v10a5.38,5.38,0,0,0,5,5h30a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,180,165Z" />
-                                    </svg>
+                    <ul class="down">
+                        <!-- My Grand Parents -->
+                        <li class="down">
+                            <a {{ $grandfatherFather?->qr_code ? 'href=' . route('memorial.show', $grandfatherFather->qr_code) : '' }}
+                                target="_blank">
+                                <img src="{{ isset($grandfatherFather) && $grandfatherFather->photo ? asset('memorial/' . $grandfatherFather->photo) : asset('avatar/avatar-father.png') }}"
+                                    class="img-fluid rounded-circle" width="90" height="90">
+                                <div class="memorial-name mt-2">
+                                    {{ $grandfatherFather->name ?? __('Grand Father') }}
                                 </div>
-                            @endif
+
+                                @if (!empty($grandfatherFather->qr_code))
+                                    <div class="position-absolute" title="{{ __('Qr code') }}"
+                                        style="cursor: pointer; top: 0; right: 5px;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="15px"
+                                            height="15px" viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1">
+                                            <title />
+                                            <path
+                                                d="M75,15H35A20.06,20.06,0,0,0,15,35V75A20.06,20.06,0,0,0,35,95H75A20.06,20.06,0,0,0,95,75V35A20.06,20.06,0,0,0,75,15Zm0,60H35V35H75Zm0,30H35a20.06,20.06,0,0,0-20,20v40a20.06,20.06,0,0,0,20,20H75a20.06,20.06,0,0,0,20-20V125A20.06,20.06,0,0,0,75,105Zm0,60H35V125H75ZM165,15H125a20.06,20.06,0,0,0-20,20V75a20.06,20.06,0,0,0,20,20h40a20.06,20.06,0,0,0,20-20V35A20.06,20.06,0,0,0,165,15Zm0,60H125V35h40ZM50,65H60a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,50,65Zm0,90H60a5.38,5.38,0,0,0,5-5V140a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5v10A5.38,5.38,0,0,0,50,155Zm90-90h10a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H140a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,140,65Zm-30,80h10a5.38,5.38,0,0,0,5-5V130a5.38,5.38,0,0,1,5-5h10a5.38,5.38,0,0,0,5-5V110a5.38,5.38,0,0,0-5-5H110a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5Zm70-40H170a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V110A5.38,5.38,0,0,0,180,105Zm-60,60H110a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,120,165Zm60,0H170a5.38,5.38,0,0,1-5-5V150a5.38,5.38,0,0,0-5-5H130a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,1,5,5v10a5.38,5.38,0,0,0,5,5h30a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,180,165Z" />
+                                        </svg>
+                                    </div>
+                                @endif
 
 
-                            {{-- <div class="position-absolute" title="{{ __('Qr code') }}"
+                                {{-- <div class="position-absolute" title="{{ __('Qr code') }}"
                                 style="cursor: pointer; top: 0; right: 5px;">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="15px" height="15px"
                                     viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1">
@@ -924,72 +941,72 @@
                                 </svg>
                             </div> --}}
 
-                        </a>
-                    </li>
-                    <li class="up">
-                        <a {{ $grandmotherFather?->qr_code ? 'href=' . route('memorial.show', $grandmotherFather->qr_code) : '' }}
-                            target="_blank">
-                            <img src="{{ isset($grandmotherFather) && $grandmotherFather->photo ? asset('memorial/' . $grandmotherFather->photo) : asset('avatar/avatar-woman.png') }}"
-                                class="img-fluid rounded-circle" width="90" height="90">
-                            <div class="memorial-name mt-2">
-                                {{ $grandmotherFather->name ?? __('Grand Mother') }}
-                            </div>
-                            @if (!empty($grandmotherFather->qr_code))
-                                <div class="position-absolute" title="{{ __('Qr code') }}"
-                                    style="cursor: pointer; top: 0; right: 5px;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="15px"
-                                        height="15px" viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1">
-                                        <title />
-                                        <path
-                                            d="M75,15H35A20.06,20.06,0,0,0,15,35V75A20.06,20.06,0,0,0,35,95H75A20.06,20.06,0,0,0,95,75V35A20.06,20.06,0,0,0,75,15Zm0,60H35V35H75Zm0,30H35a20.06,20.06,0,0,0-20,20v40a20.06,20.06,0,0,0,20,20H75a20.06,20.06,0,0,0,20-20V125A20.06,20.06,0,0,0,75,105Zm0,60H35V125H75ZM165,15H125a20.06,20.06,0,0,0-20,20V75a20.06,20.06,0,0,0,20,20h40a20.06,20.06,0,0,0,20-20V35A20.06,20.06,0,0,0,165,15Zm0,60H125V35h40ZM50,65H60a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,50,65Zm0,90H60a5.38,5.38,0,0,0,5-5V140a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5v10A5.38,5.38,0,0,0,50,155Zm90-90h10a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H140a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,140,65Zm-30,80h10a5.38,5.38,0,0,0,5-5V130a5.38,5.38,0,0,1,5-5h10a5.38,5.38,0,0,0,5-5V110a5.38,5.38,0,0,0-5-5H110a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5Zm70-40H170a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V110A5.38,5.38,0,0,0,180,105Zm-60,60H110a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,120,165Zm60,0H170a5.38,5.38,0,0,1-5-5V150a5.38,5.38,0,0,0-5-5H130a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,1,5,5v10a5.38,5.38,0,0,0,5,5h30a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,180,165Z" />
-                                    </svg>
+                            </a>
+                        </li>
+                        <li class="up">
+                            <a {{ $grandmotherFather?->qr_code ? 'href=' . route('memorial.show', $grandmotherFather->qr_code) : '' }}
+                                target="_blank">
+                                <img src="{{ isset($grandmotherFather) && $grandmotherFather->photo ? asset('memorial/' . $grandmotherFather->photo) : asset('avatar/avatar-woman.png') }}"
+                                    class="img-fluid rounded-circle" width="90" height="90">
+                                <div class="memorial-name mt-2">
+                                    {{ $grandmotherFather->name ?? __('Grand Mother') }}
                                 </div>
-                            @endif
-                        </a>
-                    </li>
-                    <li class="down">
-                        <a {{ $grandfatherMother?->qr_code ? 'href=' . route('memorial.show', $grandfatherMother->qr_code) : '' }}
-                            target="_blank">
-                            <img src="{{ isset($grandfatherMother) && $grandfatherMother->photo ? asset('memorial/' . $grandfatherMother->photo) : asset('avatar/avatar-father.png') }}"
-                                class="img-fluid rounded-circle" width="90" height="90">
-                            <div class="memorial-name mt-2">
-                                {{ $grandfatherMother->name ?? __('Grand Father') }}
-                            </div>
-                            @if (!empty($grandfatherMother->qr_code))
-                                <div class="position-absolute" title="{{ __('Qr code') }}"
-                                    style="cursor: pointer; top: 0; right: 5px;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="15px"
-                                        height="15px" viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1">
-                                        <title />
-                                        <path
-                                            d="M75,15H35A20.06,20.06,0,0,0,15,35V75A20.06,20.06,0,0,0,35,95H75A20.06,20.06,0,0,0,95,75V35A20.06,20.06,0,0,0,75,15Zm0,60H35V35H75Zm0,30H35a20.06,20.06,0,0,0-20,20v40a20.06,20.06,0,0,0,20,20H75a20.06,20.06,0,0,0,20-20V125A20.06,20.06,0,0,0,75,105Zm0,60H35V125H75ZM165,15H125a20.06,20.06,0,0,0-20,20V75a20.06,20.06,0,0,0,20,20h40a20.06,20.06,0,0,0,20-20V35A20.06,20.06,0,0,0,165,15Zm0,60H125V35h40ZM50,65H60a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,50,65Zm0,90H60a5.38,5.38,0,0,0,5-5V140a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5v10A5.38,5.38,0,0,0,50,155Zm90-90h10a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H140a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,140,65Zm-30,80h10a5.38,5.38,0,0,0,5-5V130a5.38,5.38,0,0,1,5-5h10a5.38,5.38,0,0,0,5-5V110a5.38,5.38,0,0,0-5-5H110a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5Zm70-40H170a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V110A5.38,5.38,0,0,0,180,105Zm-60,60H110a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,120,165Zm60,0H170a5.38,5.38,0,0,1-5-5V150a5.38,5.38,0,0,0-5-5H130a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,1,5,5v10a5.38,5.38,0,0,0,5,5h30a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,180,165Z" />
-                                    </svg>
+                                @if (!empty($grandmotherFather->qr_code))
+                                    <div class="position-absolute" title="{{ __('Qr code') }}"
+                                        style="cursor: pointer; top: 0; right: 5px;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="15px"
+                                            height="15px" viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1">
+                                            <title />
+                                            <path
+                                                d="M75,15H35A20.06,20.06,0,0,0,15,35V75A20.06,20.06,0,0,0,35,95H75A20.06,20.06,0,0,0,95,75V35A20.06,20.06,0,0,0,75,15Zm0,60H35V35H75Zm0,30H35a20.06,20.06,0,0,0-20,20v40a20.06,20.06,0,0,0,20,20H75a20.06,20.06,0,0,0,20-20V125A20.06,20.06,0,0,0,75,105Zm0,60H35V125H75ZM165,15H125a20.06,20.06,0,0,0-20,20V75a20.06,20.06,0,0,0,20,20h40a20.06,20.06,0,0,0,20-20V35A20.06,20.06,0,0,0,165,15Zm0,60H125V35h40ZM50,65H60a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,50,65Zm0,90H60a5.38,5.38,0,0,0,5-5V140a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5v10A5.38,5.38,0,0,0,50,155Zm90-90h10a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H140a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,140,65Zm-30,80h10a5.38,5.38,0,0,0,5-5V130a5.38,5.38,0,0,1,5-5h10a5.38,5.38,0,0,0,5-5V110a5.38,5.38,0,0,0-5-5H110a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5Zm70-40H170a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V110A5.38,5.38,0,0,0,180,105Zm-60,60H110a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,120,165Zm60,0H170a5.38,5.38,0,0,1-5-5V150a5.38,5.38,0,0,0-5-5H130a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,1,5,5v10a5.38,5.38,0,0,0,5,5h30a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,180,165Z" />
+                                        </svg>
+                                    </div>
+                                @endif
+                            </a>
+                        </li>
+                        <li class="down">
+                            <a {{ $grandfatherMother?->qr_code ? 'href=' . route('memorial.show', $grandfatherMother->qr_code) : '' }}
+                                target="_blank">
+                                <img src="{{ isset($grandfatherMother) && $grandfatherMother->photo ? asset('memorial/' . $grandfatherMother->photo) : asset('avatar/avatar-father.png') }}"
+                                    class="img-fluid rounded-circle" width="90" height="90">
+                                <div class="memorial-name mt-2">
+                                    {{ $grandfatherMother->name ?? __('Grand Father') }}
                                 </div>
-                            @endif
-                        </a>
-                    </li>
-                    <li class="up">
-                        <a {{ $grandmotherMother?->qr_code ? 'href=' . route('memorial.show', $grandmotherMother->qr_code) : '' }}
-                            target="_blank">
-                            <img src="{{ $grandmotherMother?->photo ? asset('memorial/' . $grandmotherMother->photo) : asset('avatar/avatar-woman.png') }}"
-                                class="img-fluid rounded-circle" width="90" height="90">
-                            <div class="memorial-name mt-2">
-                                {{ $grandmotherMother->name ?? __('Grand Mother') }}
-                            </div>
-                            @if (!empty($grandmotherMother->qr_code))
-                                <div class="position-absolute" title="{{ __('Qr code') }}"
-                                    style="cursor: pointer; top: 0; right: 5px;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="15px"
-                                        height="15px" viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1">
-                                        <title />
-                                        <path
-                                            d="M75,15H35A20.06,20.06,0,0,0,15,35V75A20.06,20.06,0,0,0,35,95H75A20.06,20.06,0,0,0,95,75V35A20.06,20.06,0,0,0,75,15Zm0,60H35V35H75Zm0,30H35a20.06,20.06,0,0,0-20,20v40a20.06,20.06,0,0,0,20,20H75a20.06,20.06,0,0,0,20-20V125A20.06,20.06,0,0,0,75,105Zm0,60H35V125H75ZM165,15H125a20.06,20.06,0,0,0-20,20V75a20.06,20.06,0,0,0,20,20h40a20.06,20.06,0,0,0,20-20V35A20.06,20.06,0,0,0,165,15Zm0,60H125V35h40ZM50,65H60a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,50,65Zm0,90H60a5.38,5.38,0,0,0,5-5V140a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5v10A5.38,5.38,0,0,0,50,155Zm90-90h10a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H140a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,140,65Zm-30,80h10a5.38,5.38,0,0,0,5-5V130a5.38,5.38,0,0,1,5-5h10a5.38,5.38,0,0,0,5-5V110a5.38,5.38,0,0,0-5-5H110a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5Zm70-40H170a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V110A5.38,5.38,0,0,0,180,105Zm-60,60H110a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,120,165Zm60,0H170a5.38,5.38,0,0,1-5-5V150a5.38,5.38,0,0,0-5-5H130a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,1,5,5v10a5.38,5.38,0,0,0,5,5h30a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,180,165Z" />
-                                    </svg>
+                                @if (!empty($grandfatherMother->qr_code))
+                                    <div class="position-absolute" title="{{ __('Qr code') }}"
+                                        style="cursor: pointer; top: 0; right: 5px;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="15px"
+                                            height="15px" viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1">
+                                            <title />
+                                            <path
+                                                d="M75,15H35A20.06,20.06,0,0,0,15,35V75A20.06,20.06,0,0,0,35,95H75A20.06,20.06,0,0,0,95,75V35A20.06,20.06,0,0,0,75,15Zm0,60H35V35H75Zm0,30H35a20.06,20.06,0,0,0-20,20v40a20.06,20.06,0,0,0,20,20H75a20.06,20.06,0,0,0,20-20V125A20.06,20.06,0,0,0,75,105Zm0,60H35V125H75ZM165,15H125a20.06,20.06,0,0,0-20,20V75a20.06,20.06,0,0,0,20,20h40a20.06,20.06,0,0,0,20-20V35A20.06,20.06,0,0,0,165,15Zm0,60H125V35h40ZM50,65H60a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,50,65Zm0,90H60a5.38,5.38,0,0,0,5-5V140a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5v10A5.38,5.38,0,0,0,50,155Zm90-90h10a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H140a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,140,65Zm-30,80h10a5.38,5.38,0,0,0,5-5V130a5.38,5.38,0,0,1,5-5h10a5.38,5.38,0,0,0,5-5V110a5.38,5.38,0,0,0-5-5H110a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5Zm70-40H170a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V110A5.38,5.38,0,0,0,180,105Zm-60,60H110a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,120,165Zm60,0H170a5.38,5.38,0,0,1-5-5V150a5.38,5.38,0,0,0-5-5H130a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,1,5,5v10a5.38,5.38,0,0,0,5,5h30a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,180,165Z" />
+                                        </svg>
+                                    </div>
+                                @endif
+                            </a>
+                        </li>
+                        <li class="up">
+                            <a {{ $grandmotherMother?->qr_code ? 'href=' . route('memorial.show', $grandmotherMother->qr_code) : '' }}
+                                target="_blank">
+                                <img src="{{ $grandmotherMother?->photo ? asset('memorial/' . $grandmotherMother->photo) : asset('avatar/avatar-woman.png') }}"
+                                    class="img-fluid rounded-circle" width="90" height="90">
+                                <div class="memorial-name mt-2">
+                                    {{ $grandmotherMother->name ?? __('Grand Mother') }}
                                 </div>
-                            @endif
-                        </a>
-                    </li>
-                </ul>
+                                @if (!empty($grandmotherMother->qr_code))
+                                    <div class="position-absolute" title="{{ __('Qr code') }}"
+                                        style="cursor: pointer; top: 0; right: 5px;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="15px"
+                                            height="15px" viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1">
+                                            <title />
+                                            <path
+                                                d="M75,15H35A20.06,20.06,0,0,0,15,35V75A20.06,20.06,0,0,0,35,95H75A20.06,20.06,0,0,0,95,75V35A20.06,20.06,0,0,0,75,15Zm0,60H35V35H75Zm0,30H35a20.06,20.06,0,0,0-20,20v40a20.06,20.06,0,0,0,20,20H75a20.06,20.06,0,0,0,20-20V125A20.06,20.06,0,0,0,75,105Zm0,60H35V125H75ZM165,15H125a20.06,20.06,0,0,0-20,20V75a20.06,20.06,0,0,0,20,20h40a20.06,20.06,0,0,0,20-20V35A20.06,20.06,0,0,0,165,15Zm0,60H125V35h40ZM50,65H60a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,50,65Zm0,90H60a5.38,5.38,0,0,0,5-5V140a5.38,5.38,0,0,0-5-5H50a5.38,5.38,0,0,0-5,5v10A5.38,5.38,0,0,0,50,155Zm90-90h10a5.38,5.38,0,0,0,5-5V50a5.38,5.38,0,0,0-5-5H140a5.38,5.38,0,0,0-5,5V60A5.38,5.38,0,0,0,140,65Zm-30,80h10a5.38,5.38,0,0,0,5-5V130a5.38,5.38,0,0,1,5-5h10a5.38,5.38,0,0,0,5-5V110a5.38,5.38,0,0,0-5-5H110a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5Zm70-40H170a5.38,5.38,0,0,0-5,5v30a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V110A5.38,5.38,0,0,0,180,105Zm-60,60H110a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,120,165Zm60,0H170a5.38,5.38,0,0,1-5-5V150a5.38,5.38,0,0,0-5-5H130a5.38,5.38,0,0,0-5,5v10a5.38,5.38,0,0,0,5,5h10a5.38,5.38,0,0,1,5,5v10a5.38,5.38,0,0,0,5,5h30a5.38,5.38,0,0,0,5-5V170A5.38,5.38,0,0,0,180,165Z" />
+                                        </svg>
+                                    </div>
+                                @endif
+                            </a>
+                        </li>
+                    </ul>
                 @endif
                 <ul class="down">
                     <!-- My Parents -->
@@ -1208,8 +1225,7 @@
                                                         <a href="{{ $comment->photo_url }}"
                                                             class="gallery-hvr whitecolor glightbox text-decoration-none"
                                                             data-fancybox="comment-gallery"
-                                                            title="{{ __('Zoom in') }}"
-                                                            style="cursor: pointer;">
+                                                            title="{{ __('Zoom in') }}" style="cursor: pointer;">
                                                             <div class="center-box">
                                                                 <i class="fa fa-search-plus mb-2 text-white"></i>
                                                             </div>
@@ -1740,73 +1756,72 @@
             });
         });
 
-        
-// $(document).ready(function() {
-//     // Переопределяем все кнопки с переводами и правильными иконками
-//     $.fancybox.defaults.btnTpl.close = 
-//         '<button data-fancybox-close class="fancybox-button fancybox-button--close" title="{{ __('Bezárás') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.71 12 5.29-5.29a.5.5 0 0 0-.71-.71L12 10.29 6.71 5.29a.5.5 0 0 0-.71.71L10.29 12 5.29 17.29a.5.5 0 0 0 .71.71L12 13.41l5.29 5.29a.5.5 0 0 0 .71-.71z"/></svg></button>';
-    
-//     $.fancybox.defaults.btnTpl.arrowLeft = 
-//         '<button data-fancybox-prev class="fancybox-button fancybox-button--arrow_left" title="{{ __('Előző') }}"><div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.28 15.7l-1.34 1.37L5 12l4.94-5.07 1.34 1.36-2.68 2.72H19v1.98H8.6l2.68 2.71z"/></svg></div></button>';
-    
-//     $.fancybox.defaults.btnTpl.arrowRight = 
-//         '<button data-fancybox-next class="fancybox-button fancybox-button--arrow_right" title="{{ __('Következő') }}"><div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.72 8.3l1.34-1.37L19 12l-4.94 5.07-1.34-1.36 2.68-2.72H5v-1.98h10.4l-2.68-2.71z"/></svg></div></button>';
-    
-//     $.fancybox.defaults.btnTpl.smallBtn = 
-//         '<button type="button" data-fancybox-close class="fancybox-button fancybox-close-small" title="{{ __('Bezárás') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="m10,10 L22,22 M22,10 L10,22"></path></svg></button>';
-    
-//     $.fancybox.defaults.btnTpl.zoom = 
-//         '<button data-fancybox-zoom class="fancybox-button fancybox-button--zoom" title="{{ __('Nagyítás') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.7 17.3l-3-3a5.9 5.9 0 0 0-.6-7.6 5.9 5.9 0 0 0-8.4 0 5.9 5.9 0 0 0 0 8.4 5.9 5.9 0 0 0 7.7.7l3 3a1 1 0 0 0 1.3 0c.4-.5.4-1 0-1.5zM8.1 13.8a4 4 0 0 1 0-5.7 4 4 0 0 1 5.7 0 4 4 0 0 1 0 5.7 4 4 0 0 1-5.7 0z"/></svg></button>';
-    
-//     $.fancybox.defaults.btnTpl.slideShow = 
-//         '<button data-fancybox-play class="fancybox-button fancybox-button--play" title="{{ __('Diavetítés indítása') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.5 5.4v13.2l11-6.6z"/></svg></button>';
-    
-//     $.fancybox.defaults.btnTpl.fullScreen = 
-//         '<button data-fancybox-fullscreen class="fancybox-button fancybox-button--fsenter" title="{{ __('Teljes képernyő') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg></button>';
-    
-//     $.fancybox.defaults.btnTpl.thumbs = 
-//         '<button data-fancybox-thumbs class="fancybox-button fancybox-button--thumbs" title="{{ __('Miniatűrök') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.59 14.59h3.76v3.76h-3.76v-3.76zm-4.47 0h3.76v3.76h-3.76v-3.76zm-4.47 0h3.76v3.76H5.65v-3.76zm8.94-4.47h3.76v3.76h-3.76v-3.76zm-4.47 0h3.76v3.76h-3.76v-3.76zm-4.47 0h3.76v3.76H5.65v-3.76zm8.94-4.47h3.76v3.76h-3.76V5.65zm-4.47 0h3.76v3.76h-3.76V5.65zm-4.47 0h3.76v3.76H5.65V5.65z"/></svg></button>';
-    
-//     $.fancybox.defaults.btnTpl.download = 
-//         '<button data-fancybox-download class="fancybox-button fancybox-button--download" title="{{ __('Letöltés') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.62 17.09V19H5.38v-1.91zm-2.97-6.96L17 11.45l-5 4.87-5-4.87 1.36-1.32 2.68 2.64V5h1.92v7.77l2.69-2.64z"/></svg></button>';
-    
-//     $.fancybox.defaults.btnTpl.share = 
-//         '<button data-fancybox-share class="fancybox-button fancybox-button--share" title="{{ __('Megosztás') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2.55 19c1.4-8.4 9.1-9.8 11.9-9.8V5l7 7-7 6.3v-3.5c-2.8 0-10.5 2.1-11.9 4.2z"/></svg></button>';
-// });
 
-$(document).ready(function() {
-    // Переопределяем все кнопки с переводами и правильными иконками
-    $.fancybox.defaults.btnTpl.close = 
-        '<button data-fancybox-close class="fancybox-button fancybox-button--close" title="{{ __('Close') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.71 12 5.29-5.29a.5.5 0 0 0-.71-.71L12 10.29 6.71 5.29a.5.5 0 0 0-.71.71L10.29 12 5.29 17.29a.5.5 0 0 0 .71.71L12 13.41l5.29 5.29a.5.5 0 0 0 .71-.71z"/></svg></button>';
-    
-    $.fancybox.defaults.btnTpl.arrowLeft = 
-        '<button data-fancybox-prev class="fancybox-button fancybox-button--arrow_left" title="{{ __('Previous') }}"><div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.28 15.7l-1.34 1.37L5 12l4.94-5.07 1.34 1.36-2.68 2.72H19v1.98H8.6l2.68 2.71z"/></svg></div></button>';
-    
-    $.fancybox.defaults.btnTpl.arrowRight = 
-        '<button data-fancybox-next class="fancybox-button fancybox-button--arrow_right" title="{{ __('Next') }}"><div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.72 8.3l1.34-1.37L19 12l-4.94 5.07-1.34-1.36 2.68-2.72H5v-1.98h10.4l-2.68-2.71z"/></svg></div></button>';
-    
-    $.fancybox.defaults.btnTpl.smallBtn = 
-        '<button type="button" data-fancybox-close class="fancybox-button fancybox-close-small" title="{{ __('Close') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="m10,10 L22,22 M22,10 L10,22"></path></svg></button>';
-    
-    $.fancybox.defaults.btnTpl.zoom = 
-        '<button data-fancybox-zoom class="fancybox-button fancybox-button--zoom" title="{{ __('Zoom In') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.7 17.3l-3-3a5.9 5.9 0 0 0-.6-7.6 5.9 5.9 0 0 0-8.4 0 5.9 5.9 0 0 0 0 8.4 5.9 5.9 0 0 0 7.7.7l3 3a1 1 0 0 0 1.3 0c.4-.5.4-1 0-1.5zM8.1 13.8a4 4 0 0 1 0-5.7 4 4 0 0 1 5.7 0 4 4 0 0 1 0 5.7 4 4 0 0 1-5.7 0z"/></svg></button>';
-    
-    $.fancybox.defaults.btnTpl.slideShow = 
-        '<button data-fancybox-play class="fancybox-button fancybox-button--play" title="{{ __('Start Slideshow') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.5 5.4v13.2l11-6.6z"/></svg></button>';
-    
-    $.fancybox.defaults.btnTpl.fullScreen = 
-        '<button data-fancybox-fullscreen class="fancybox-button fancybox-button--fsenter" title="{{ __('Fullscreen') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg></button>';
-    
-    $.fancybox.defaults.btnTpl.thumbs = 
-        '<button data-fancybox-thumbs class="fancybox-button fancybox-button--thumbs" title="{{ __('Thumbnails') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.59 14.59h3.76v3.76h-3.76v-3.76zm-4.47 0h3.76v3.76h-3.76v-3.76zm-4.47 0h3.76v3.76H5.65v-3.76zm8.94-4.47h3.76v3.76h-3.76v-3.76zm-4.47 0h3.76v3.76h-3.76v-3.76zm-4.47 0h3.76v3.76H5.65v-3.76zm8.94-4.47h3.76v3.76h-3.76V5.65zm-4.47 0h3.76v3.76h-3.76V5.65zm-4.47 0h3.76v3.76H5.65V5.65z"/></svg></button>';
-    
-    $.fancybox.defaults.btnTpl.download = 
-        '<button data-fancybox-download class="fancybox-button fancybox-button--download" title="{{ __('Download') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.62 17.09V19H5.38v-1.91zm-2.97-6.96L17 11.45l-5 4.87-5-4.87 1.36-1.32 2.68 2.64V5h1.92v7.77l2.69-2.64z"/></svg></button>';
-    
-    $.fancybox.defaults.btnTpl.share = 
-        '<button data-fancybox-share class="fancybox-button fancybox-button--share" title="{{ __('Share') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2.55 19c1.4-8.4 9.1-9.8 11.9-9.8V5l7 7-7 6.3v-3.5c-2.8 0-10.5 2.1-11.9 4.2z"/></svg></button>';
-});
+        // $(document).ready(function() {
+        //     // Переопределяем все кнопки с переводами и правильными иконками
+        //     $.fancybox.defaults.btnTpl.close = 
+        //         '<button data-fancybox-close class="fancybox-button fancybox-button--close" title="{{ __('Bezárás') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.71 12 5.29-5.29a.5.5 0 0 0-.71-.71L12 10.29 6.71 5.29a.5.5 0 0 0-.71.71L10.29 12 5.29 17.29a.5.5 0 0 0 .71.71L12 13.41l5.29 5.29a.5.5 0 0 0 .71-.71z"/></svg></button>';
 
+        //     $.fancybox.defaults.btnTpl.arrowLeft = 
+        //         '<button data-fancybox-prev class="fancybox-button fancybox-button--arrow_left" title="{{ __('Előző') }}"><div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.28 15.7l-1.34 1.37L5 12l4.94-5.07 1.34 1.36-2.68 2.72H19v1.98H8.6l2.68 2.71z"/></svg></div></button>';
+
+        //     $.fancybox.defaults.btnTpl.arrowRight = 
+        //         '<button data-fancybox-next class="fancybox-button fancybox-button--arrow_right" title="{{ __('Következő') }}"><div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.72 8.3l1.34-1.37L19 12l-4.94 5.07-1.34-1.36 2.68-2.72H5v-1.98h10.4l-2.68-2.71z"/></svg></div></button>';
+
+        //     $.fancybox.defaults.btnTpl.smallBtn = 
+        //         '<button type="button" data-fancybox-close class="fancybox-button fancybox-close-small" title="{{ __('Bezárás') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="m10,10 L22,22 M22,10 L10,22"></path></svg></button>';
+
+        //     $.fancybox.defaults.btnTpl.zoom = 
+        //         '<button data-fancybox-zoom class="fancybox-button fancybox-button--zoom" title="{{ __('Nagyítás') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.7 17.3l-3-3a5.9 5.9 0 0 0-.6-7.6 5.9 5.9 0 0 0-8.4 0 5.9 5.9 0 0 0 0 8.4 5.9 5.9 0 0 0 7.7.7l3 3a1 1 0 0 0 1.3 0c.4-.5.4-1 0-1.5zM8.1 13.8a4 4 0 0 1 0-5.7 4 4 0 0 1 5.7 0 4 4 0 0 1 0 5.7 4 4 0 0 1-5.7 0z"/></svg></button>';
+
+        //     $.fancybox.defaults.btnTpl.slideShow = 
+        //         '<button data-fancybox-play class="fancybox-button fancybox-button--play" title="{{ __('Diavetítés indítása') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.5 5.4v13.2l11-6.6z"/></svg></button>';
+
+        //     $.fancybox.defaults.btnTpl.fullScreen = 
+        //         '<button data-fancybox-fullscreen class="fancybox-button fancybox-button--fsenter" title="{{ __('Teljes képernyő') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg></button>';
+
+        //     $.fancybox.defaults.btnTpl.thumbs = 
+        //         '<button data-fancybox-thumbs class="fancybox-button fancybox-button--thumbs" title="{{ __('Miniatűrök') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.59 14.59h3.76v3.76h-3.76v-3.76zm-4.47 0h3.76v3.76h-3.76v-3.76zm-4.47 0h3.76v3.76H5.65v-3.76zm8.94-4.47h3.76v3.76h-3.76v-3.76zm-4.47 0h3.76v3.76h-3.76v-3.76zm-4.47 0h3.76v3.76H5.65v-3.76zm8.94-4.47h3.76v3.76h-3.76V5.65zm-4.47 0h3.76v3.76h-3.76V5.65zm-4.47 0h3.76v3.76H5.65V5.65z"/></svg></button>';
+
+        //     $.fancybox.defaults.btnTpl.download = 
+        //         '<button data-fancybox-download class="fancybox-button fancybox-button--download" title="{{ __('Letöltés') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.62 17.09V19H5.38v-1.91zm-2.97-6.96L17 11.45l-5 4.87-5-4.87 1.36-1.32 2.68 2.64V5h1.92v7.77l2.69-2.64z"/></svg></button>';
+
+        //     $.fancybox.defaults.btnTpl.share = 
+        //         '<button data-fancybox-share class="fancybox-button fancybox-button--share" title="{{ __('Megosztás') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2.55 19c1.4-8.4 9.1-9.8 11.9-9.8V5l7 7-7 6.3v-3.5c-2.8 0-10.5 2.1-11.9 4.2z"/></svg></button>';
+        // });
+
+        $(document).ready(function() {
+            // Переопределяем все кнопки с переводами и правильными иконками
+            $.fancybox.defaults.btnTpl.close =
+                '<button data-fancybox-close class="fancybox-button fancybox-button--close" title="{{ __('Close') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.71 12 5.29-5.29a.5.5 0 0 0-.71-.71L12 10.29 6.71 5.29a.5.5 0 0 0-.71.71L10.29 12 5.29 17.29a.5.5 0 0 0 .71.71L12 13.41l5.29 5.29a.5.5 0 0 0 .71-.71z"/></svg></button>';
+
+            $.fancybox.defaults.btnTpl.arrowLeft =
+                '<button data-fancybox-prev class="fancybox-button fancybox-button--arrow_left" title="{{ __('Previous') }}"><div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.28 15.7l-1.34 1.37L5 12l4.94-5.07 1.34 1.36-2.68 2.72H19v1.98H8.6l2.68 2.71z"/></svg></div></button>';
+
+            $.fancybox.defaults.btnTpl.arrowRight =
+                '<button data-fancybox-next class="fancybox-button fancybox-button--arrow_right" title="{{ __('Next') }}"><div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.72 8.3l1.34-1.37L19 12l-4.94 5.07-1.34-1.36 2.68-2.72H5v-1.98h10.4l-2.68-2.71z"/></svg></div></button>';
+
+            $.fancybox.defaults.btnTpl.smallBtn =
+                '<button type="button" data-fancybox-close class="fancybox-button fancybox-close-small" title="{{ __('Close') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="m10,10 L22,22 M22,10 L10,22"></path></svg></button>';
+
+            $.fancybox.defaults.btnTpl.zoom =
+                '<button data-fancybox-zoom class="fancybox-button fancybox-button--zoom" title="{{ __('Zoom In') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.7 17.3l-3-3a5.9 5.9 0 0 0-.6-7.6 5.9 5.9 0 0 0-8.4 0 5.9 5.9 0 0 0 0 8.4 5.9 5.9 0 0 0 7.7.7l3 3a1 1 0 0 0 1.3 0c.4-.5.4-1 0-1.5zM8.1 13.8a4 4 0 0 1 0-5.7 4 4 0 0 1 5.7 0 4 4 0 0 1 0 5.7 4 4 0 0 1-5.7 0z"/></svg></button>';
+
+            $.fancybox.defaults.btnTpl.slideShow =
+                '<button data-fancybox-play class="fancybox-button fancybox-button--play" title="{{ __('Start Slideshow') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.5 5.4v13.2l11-6.6z"/></svg></button>';
+
+            $.fancybox.defaults.btnTpl.fullScreen =
+                '<button data-fancybox-fullscreen class="fancybox-button fancybox-button--fsenter" title="{{ __('Fullscreen') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg></button>';
+
+            $.fancybox.defaults.btnTpl.thumbs =
+                '<button data-fancybox-thumbs class="fancybox-button fancybox-button--thumbs" title="{{ __('Thumbnails') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.59 14.59h3.76v3.76h-3.76v-3.76zm-4.47 0h3.76v3.76h-3.76v-3.76zm-4.47 0h3.76v3.76H5.65v-3.76zm8.94-4.47h3.76v3.76h-3.76v-3.76zm-4.47 0h3.76v3.76h-3.76v-3.76zm-4.47 0h3.76v3.76H5.65v-3.76zm8.94-4.47h3.76v3.76h-3.76V5.65zm-4.47 0h3.76v3.76h-3.76V5.65zm-4.47 0h3.76v3.76H5.65V5.65z"/></svg></button>';
+
+            $.fancybox.defaults.btnTpl.download =
+                '<button data-fancybox-download class="fancybox-button fancybox-button--download" title="{{ __('Download') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.62 17.09V19H5.38v-1.91zm-2.97-6.96L17 11.45l-5 4.87-5-4.87 1.36-1.32 2.68 2.64V5h1.92v7.77l2.69-2.64z"/></svg></button>';
+
+            $.fancybox.defaults.btnTpl.share =
+                '<button data-fancybox-share class="fancybox-button fancybox-button--share" title="{{ __('Share') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2.55 19c1.4-8.4 9.1-9.8 11.9-9.8V5l7 7-7 6.3v-3.5c-2.8 0-10.5 2.1-11.9 4.2z"/></svg></button>';
+        });
     </script>
 
 

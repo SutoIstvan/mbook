@@ -31,6 +31,6 @@ return [
         'work' => 'Foglalkozás:',
         'hobby' => 'Események:',
         'other_properties' => 'Egyéb események:',
-        'Születés' => 'Megszület',
+        'Születés' => 'Életét kezdte',
     ],
 ];

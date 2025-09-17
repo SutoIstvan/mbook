@@ -31,5 +31,6 @@ return [
         'work' => 'Työ:',
         'hobby' => 'Harrastus:',
         'other_properties' => 'Muut tapahtumat:',
+        'Syntymä' => 'Syntymäpäivä',
     ],
 ];

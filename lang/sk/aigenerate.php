@@ -24,5 +24,6 @@ return [
         'work' => 'Práca:',
         'hobby' => 'Záľuby:',
         'other_properties' => 'Iné udalosti:',
+        'Narodenie' => 'Dátum narodenia',
     ],
 ];

@@ -176,7 +176,7 @@
             .tracking-item .tracking-date {
                 position: absolute;
                 left: -9.5rem;
-                width: 7.5rem;
+                width: 8rem;
                 text-align: right
             }
 
@@ -847,6 +847,13 @@
             margin-top: 5px;
             z-index: 400;
         }
+
+         .tracking-item .tracking-date {
+            position:absolute;
+            left:-14rem;
+            width:11.5rem !important;
+            text-align:right
+        }
     </style>
 
 @endsection
@@ -1111,20 +1118,26 @@
                                         <div class="col-12 mt-2" id="yearFromWrapper">
                                             <select id="eventYear" name="year" class="form-select" required>
                                                 <option value="">{{ __('From Year') }}</option>
-                                                @for ($year = date('Y'); $year >= 1900; $year--)
+                                                @php
+                                                    $birthYear = $memorial->birth_date ? \Carbon\Carbon::parse($memorial->birth_date)->year : 1900;
+                                                @endphp
+
+                                                @for ($year = date('Y'); $year >= $birthYear; $year--)
                                                     <option value="{{ $year }}"
-                                                        {{ old('year', date('Y')) == $year ? 'selected' : '' }}>
+                                                        {{ old('year', $birthYear) == $year ? 'selected' : '' }}>
                                                         {{ $year }}
                                                     </option>
                                                 @endfor
+
+
                                             </select>
                                         </div>
                                         <div class="col-6 mt-2" id="dateToWrapper" style="display: none;">
                                             <select id="eventYearTo" name="date_to" class="form-select">
                                                 <option value="">{{ __('To Year') }}</option>
-                                                @for ($year = date('Y'); $year >= 1900; $year--)
+                                                @for ($year = date('Y'); $year >= $birthYear; $year--)
                                                     <option value="{{ $year }}"
-                                                        {{ old('date_to') == $year ? 'selected' : '' }}>
+                                                        {{ old('year', $birthYear) == $year ? 'selected' : '' }}>
                                                         {{ $year }}
                                                     </option>
                                                 @endfor
@@ -1253,19 +1266,54 @@
 
                                 </div>
 
-                                <div class="tracking-date defaultcolor fs-4 wow fadeIn d-flex justify-content-end mt-1"
-                                    data-wow-delay="300ms">
-                                    <select name="timelines[{{ $timeline->id }}][date]" class="form-select"
-                                        style="max-width: 90px;" required>
-                                        <option value=""></option>
-                                        @for ($date = date('Y'); $date >= 1900; $date--)
-                                            <option value="{{ $date }}"
-                                                {{ $timeline->date && \Carbon\Carbon::parse($timeline->date)->format('Y') == $date ? 'selected' : '' }}>
-                                                {{ $date }}
-                                            </option>
-                                        @endfor
-                                    </select>
-                                </div>
+@php
+    // минимальный год (год рождения мемориала) — fallback 1900
+    $birthYear = $memorial->birth_date ? \Carbon\Carbon::parse($memorial->birth_date)->year : 1900;
+
+    // сырые значения: сначала old(), иначе из модели
+    $rawStart = old("timelines.{$timeline->id}.date", $timeline->date);
+    $rawEnd   = old("timelines.{$timeline->id}.date_to", $timeline->date_to);
+
+    // helper: получить год из значения (если это Y-m-d -> извлечь год, если уже год -> вернуть как есть)
+    $getYear = function ($value) {
+        if (!$value) return '';
+        if (is_numeric($value) && strlen((string)$value) === 4) return (string)$value;
+        try {
+            return \Carbon\Carbon::parse($value)->format('Y');
+        } catch (\Exception $e) {
+            return (string)$value;
+        }
+    };
+
+    $selectedStart = $getYear($rawStart);
+    $selectedEnd   = $getYear($rawEnd);
+@endphp
+
+<div class="tracking-date defaultcolor fs-4 wow fadeIn d-flex justify-content-end mt-1" data-wow-delay="300ms">
+    {{-- Start year --}}
+    <select name="timelines[{{ $timeline->id }}][date]" class="form-select" style="max-width: 90px;" required>
+        <option value="" {{ $selectedStart === '' ? 'selected' : '' }}></option>
+        @for ($year = date('Y'); $year >= $birthYear; $year--)
+            <option value="{{ $year }}" {{ ((string)$selectedStart === (string)$year) ? 'selected' : '' }}>
+                {{ $year }}
+            </option>
+        @endfor
+    </select>
+
+    {{-- End year: показываем, если есть сохранённый date_to или была предыдущая отправка --}}
+    @if (!empty($timeline->date_to) || $selectedEnd !== '')
+        <select name="timelines[{{ $timeline->id }}][date_to]" class="form-select ms-2" style="max-width: 90px;">
+            <option value="" {{ $selectedEnd === '' ? 'selected' : '' }}></option>
+            @for ($year = date('Y'); $year >= $birthYear; $year--)
+                <option value="{{ $year }}" {{ ((string)$selectedEnd === (string)$year) ? 'selected' : '' }}>
+                    {{ $year }}
+                </option>
+            @endfor
+        </select>
+    @endif
+</div>
+
+
 
                                 <div class="border p-3">
                                     <div class="d-flex justify-content-between align-items-center">
