@@ -18,4 +18,5 @@ return [
         'photo' => 'emlékkép',
     ],
 
+    'confirmed' => 'A(z) :attribute megerősítése nem egyezik.',
 ];
