@@ -170,6 +170,27 @@ class MemorialController extends Controller
         $memorial = new Memorial();
         $memorial->id = $token;
         $memorial->name = $request->name;
+
+// Генерируем начальный slug
+$slug = Str::slug($request->name);
+$originalSlug = $slug; // Сохраняем оригинальный slug
+$count = 1;
+
+// Проверяем все записи, включая мягко удалённые
+while (Memorial::withTrashed()->where('slug', $slug)->exists()) {
+    \Log::info("Слаг {$slug} уже существует, пробуем {$originalSlug}-{$count}");
+    $slug = "{$originalSlug}-{$count}";
+    $count++;
+
+    // Защита от бесконечного цикла
+    if ($count > 100) {
+        \Log::error("Достигнут лимит попыток создания уникального слага");
+        throw new \Exception("Не удалось сгенерировать уникальный slug");
+    }
+}
+
+
+        $memorial->slug = $slug;
         $memorial->birth_date = $request->birth_date;
         $memorial->death_date = $request->death_date;
         $memorial->biography = $request->biography;
@@ -180,20 +201,8 @@ class MemorialController extends Controller
         $memorial->admin_id = $admin_id;
         $memorial->theme = 'light';
         $memorial->generation_attempts_left = 5;
-
-        // Генерация уникального slug с защитой от дубликатов
-        $slug = Str::slug($request->name);
-
-        $originalSlug = Str::slug($request->name);
-        $slug = $originalSlug;
-        $count = 1;
-
-        while (Memorial::where('slug', $slug)->exists()) {
-            $slug = "{$originalSlug}-{$count}";
-            $count++;
-        }
-        $memorial->slug = $slug;
         $memorial->save();
+
 
 
         if ($request->hasFile('photo')) {
