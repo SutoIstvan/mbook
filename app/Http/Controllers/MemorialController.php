@@ -186,7 +186,7 @@ class MemorialController extends Controller
         $originalSlug = $slug;
         $count = 1;
 
-        while (Memorial::where('slug', $slug)->exists()) {
+        while (Memorial::where('slug', $slug)->lockForUpdate()->exists()) {
             $slug = "{$originalSlug}-{$count}";
             $count++;
             if ($count > 100) {
