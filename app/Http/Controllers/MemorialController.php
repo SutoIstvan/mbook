@@ -183,21 +183,17 @@ class MemorialController extends Controller
 
         // Генерация уникального slug с защитой от дубликатов
         $slug = Str::slug($request->name);
-        $originalSlug = $slug;
+
+        $originalSlug = Str::slug($request->name);
+        $slug = $originalSlug;
         $count = 1;
 
-        while (Memorial::where('slug', $slug)->lockForUpdate()->exists()) {
+        while (Memorial::where('slug', $slug)->exists()) {
             $slug = "{$originalSlug}-{$count}";
             $count++;
-            if ($count > 100) {
-                throw new \Exception("Failed to generate unique slug");
-            }
         }
-
         $memorial->slug = $slug;
-
         $memorial->save();
-
 
 
         if ($request->hasFile('photo')) {
