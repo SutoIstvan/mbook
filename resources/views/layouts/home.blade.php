@@ -126,10 +126,10 @@
                             <a class="nav-link {{ request()->routeIs('welcome') ? 'active' : '' }}"
                                 href="{{ route('welcome') }}">{{__('Home page')}}</a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('price') ? 'active' : '' }}"
                                 href="{{ route('price') }}">{{__('Prices')}}</a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
                             <a class="nav-link butn-scroll"
                                 href="{{ url('/')}}#howitworks">{{__('How it works')}}</a>
@@ -221,12 +221,12 @@
                         </div>
                     </li>
 
-                    <li>
+                    {{-- <li>
                         <div class="o-hidden">
                             <a href="{{ route('price') }}" class="link"><span class="fill-text" data-text="Árak">Árak</span>
                             </a>
                         </div>
-                    </li>
+                    </li> --}}
 
                     <li>
                         <div class="o-hidden">
