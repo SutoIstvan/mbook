@@ -82,9 +82,9 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="amount d-flex align-items-end">
+                        {{-- <div class="amount d-flex align-items-end">
                             <h2> 20 000 <span>ft</span></h2>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -145,10 +145,10 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="amount d-flex align-items-end">
+                        {{-- <div class="amount d-flex align-items-end">
                             <h2> 18 000 <span>ft</span></h2>
                             <p class="ms-2"> / darab</p>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -217,10 +217,10 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="amount d-flex align-items-end">
+                        {{-- <div class="amount d-flex align-items-end">
                             <h2> 15 000 <span>ft</span></h2>
                             <p class="ms-2"> / darab</p>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
